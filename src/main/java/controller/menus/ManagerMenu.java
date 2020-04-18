@@ -1,6 +1,5 @@
 package controller.menus;
 
-
 import controller.request.Request;
 import model.accounts.Account;
 import model.off.DiscountCode;
