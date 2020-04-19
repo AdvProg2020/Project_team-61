@@ -77,7 +77,19 @@ public class DiscountCode {
         allDiscountCodes.remove(getDiscountWithId(id));
 
     }
- /*   public void viewDiscountCodes(){
+
+    @Override
+    public String toString() {
+        return "DiscountCode{" +
+                "discountId=" + discountId +
+                ", startOfDiscountPeriod=" + startOfDiscountPeriod +
+                ", endOfDiscountPeriod=" + endOfDiscountPeriod +
+                ", maxDiscountAmount=" + maxDiscountAmount +
+                ", totalTimesOfUse=" + totalTimesOfUse +
+                ", allCustomersWithDiscountCode=" + allCustomersWithDiscountCode +
+                '}';
+    }
+    /*   public void viewDiscountCodes(){
         for (DiscountCode discountCode:allDiscountCodes){
             di
         }
