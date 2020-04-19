@@ -11,12 +11,6 @@ public class Manager extends Account {
         role = "manager";
     }
 
-
-    public void removeProductID(String productID){
-
-    }
-
-
     public int compareTo(Account o) {
         return 0;
     }

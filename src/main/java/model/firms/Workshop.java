@@ -2,11 +2,11 @@ package model.firms;
 
 import java.util.ArrayList;
 
-public class Factory extends Firm {
+public class Workshop extends Firm {
 
-    private ArrayList<Factory> allFactories;
+    private ArrayList<Workshop> allWorkshops;
 
-    public Factory(String ID) {
+    public Workshop(String ID) {
         super(ID);
     }
 

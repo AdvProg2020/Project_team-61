@@ -15,12 +15,9 @@ public class Seller extends Account {
         role = "seller";
     }
 
-    public String viewCompanyInformation(){
-        return null;
-    }
-
 
     public int compareTo(Account o) {
         return 0;
     }
+
 }

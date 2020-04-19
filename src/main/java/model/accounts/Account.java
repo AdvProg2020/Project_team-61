@@ -27,14 +27,26 @@ public abstract class Account implements Comparable<Account> {
     }
 
     public void setDetailAccount(String name, String lastname, String password, String email, int phoneNo) {
-
+        this.name = name;
+        this.lastname= lastname;
+        this.email = email;
+        this.password=password;
+        this.phoneNo = phoneNo;
     }
 
     public boolean isThereAccountWithUsername(String username) {
+
+        for(Account account : allAccounts){
+            if (account.username.equalsIgnoreCase(username)) return true;
+        }
         return false;
     }
 
     public Account getAccountWithUsername(String username) {
+
+        for(Account account : allAccounts){
+            if (account.username.equalsIgnoreCase(username)) return account;
+        }
         return null;
     }
 
@@ -43,9 +55,14 @@ public abstract class Account implements Comparable<Account> {
     }
 
     public boolean isThereAccountWithUsernameAndPassword(String username, String password) {
+
+        for(Account account : allAccounts){
+            if (account.username.equalsIgnoreCase(username) && account.password.equals(password)) return true;
+        }
         return false;
+
     }
-/////
+
     public Account listUsers(){
         Iterator iterator = allAccounts.iterator();
         while(iterator.hasNext()){
@@ -54,7 +71,6 @@ public abstract class Account implements Comparable<Account> {
         }
         return null;
     }
-
 
     public int compareTO(Account account) {
         return  0;
