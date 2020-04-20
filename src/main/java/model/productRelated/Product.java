@@ -1,6 +1,7 @@
 package model.productRelated;
-
+import model.accounts.Account;
 import model.accounts.Seller;
+import model.log.BuyLog;
 import model.log.Log;
 
 import java.util.*;
@@ -31,9 +32,10 @@ public class Product implements Comparable{
     //finish
     public Product(String productId) {
         this.productId = productId;
+        allProduct.add(this);
     }
 
-    //finish//doubt
+    //finish
     public void setDetailProduct (String name , String companiesName , double price , Seller seller , int numberOfProducts) {
         this.productName = name;
         this.companiesName=companiesName;
@@ -61,9 +63,9 @@ public class Product implements Comparable{
         return productId;
     }
 
-    //should be input
-    public void setAdditionalDetail ( String detail) {
-
+    //finish
+    public void setAdditionalDetail(String additionalDetail) {
+        this.additionalDetail = additionalDetail;
     }
 
     //finish
@@ -77,8 +79,8 @@ public class Product implements Comparable{
     }
 
     //finish
-    public void setProductStatus ( ProductStatus amount ){
-        productStatus = amount ;
+    public void setProductStatus ( ProductStatus status ){
+        productStatus = status ;
     }
 
     //finish
@@ -91,8 +93,9 @@ public class Product implements Comparable{
         return 0;
     }
 
-    public void setAverageScore ( int averageScore ) {
-
+    //finish
+    public void setAverageScore(double averageScore) {
+        this.averageScore = averageScore;
     }
 
     //finish
@@ -105,11 +108,17 @@ public class Product implements Comparable{
         return null;
     }
 
-    //its wrong
-    public ArrayList<Seller> getListOfSellers (Product product ) {
-        return listOfSellers;
+    //finish
+    public ArrayList<Seller> getListOfSellers (String productId) {
+        for (Product product : allProduct) {
+            if (product.getId().equals(productId)){
+                return listOfSellers;
+            }
+        }
+        return null;
     }
 
+    //finish//doubt
     public  void deleteProduct ( String productId ){
         for (Product product : allProduct) {
             if (product.getId().equals(productId)){
@@ -122,10 +131,6 @@ public class Product implements Comparable{
                 }
             }
         }
-    }
-
-    public void changeProductStatus ( String productId ){
-
     }
 
     //finish
@@ -157,10 +162,6 @@ public class Product implements Comparable{
         return false;
     }
 
-    public void viewProduct (Product product){
-
-    }
-
     //finish
     public void viewAllAdditionalProductStatus ( String productId){
         for (Product product : allProduct) {
@@ -170,9 +171,26 @@ public class Product implements Comparable{
         }
     }
 
+    //finish
     public void addTotalNumberOfBuyers() {
+        if (BuyLog.isBought(productId)){
+            totalNumberOfBuyers++;
+        }
+    }
+
+    public ArrayList<Product> productList(){
+        return allProduct;
+    }
+
+    public int getProductLListSize (){
+        return allProduct.size();
+    }
+
+
+    public void deleteCustomerCommentOnProduct (Account account , String productId ){
 
     }
+
 
     public int compareTo(Object o) {
         return 0;

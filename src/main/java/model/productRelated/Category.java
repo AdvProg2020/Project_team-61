@@ -1,19 +1,18 @@
-package main.java.model.productRelated;
+package model.productRelated;
+
 import java.util.ArrayList;
 
 
 public class Category{
     private String name;
     private String traits;
-    private ArrayList <Category>subCategories;
-    private ArrayList <model.productRelated.Product> allProducts;
+    private ArrayList <Category>subCategories = new ArrayList<Category>();
+    private ArrayList <model.productRelated.Product> allProducts = new ArrayList<Product>();
     private static ArrayList <Category> allCategories;
 
     public Category(String name, String traits) {
         this.name = name;
         this.traits = traits;
-        subCategories =new ArrayList<>();
-        allProducts = new ArrayList <>();
         allCategories.add(this);
     }
 
@@ -44,6 +43,7 @@ public class Category{
     public void setSubCategories(ArrayList<Category> subCategories) {
         this.subCategories = subCategories;
     }
+
     public Category getCategoryWithName(String name){
         for( Category category:allCategories){
             if (category.getName().equalsIgnoreCase(name)){
@@ -52,6 +52,7 @@ public class Category{
         }
         return null;
     }
+
     public boolean isThereCategoryWithName(String name){
         for ( Category category:allCategories){
             if (category.getName().equalsIgnoreCase(name))
@@ -60,9 +61,11 @@ public class Category{
         return true;
 
     }
+
     public void deleteCategory(String name){
         allCategories.remove(getCategoryWithName(name));
     }
+
     public int getCategoryListSize(){
         return allCategories.size();
     }

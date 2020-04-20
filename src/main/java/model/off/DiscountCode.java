@@ -1,4 +1,6 @@
-package main.java.model.off;
+package model.off;
+import model.accounts.Account;
+
 import java.util.*;
 import java.util.ArrayList;
 
@@ -8,7 +10,7 @@ public class DiscountCode {
     private Date endOfDiscountPeriod;
     private double maxDiscountAmount;
     private int totalTimesOfUse;
-    private ArrayList<model.accounts.Account> allCustomersWithDiscountCode;
+    private ArrayList<Account> allCustomersWithDiscountCode = new ArrayList<Account>();
     private static ArrayList<DiscountCode> allDiscountCodes;
 
     public DiscountCode(int discountId, Date startOfDiscountPeriod, Date endOfDiscountPeriod, double maxDiscountAmount, int totalTimesOfUse, ArrayList<model.accounts.Account> allCustomersWithDiscountCode) {
@@ -17,7 +19,6 @@ public class DiscountCode {
         this.endOfDiscountPeriod = endOfDiscountPeriod;
         this.maxDiscountAmount = maxDiscountAmount;
         this.totalTimesOfUse = totalTimesOfUse;
-        this.allCustomersWithDiscountCode =new ArrayList <>();
         allDiscountCodes.add(this);
     }
 
@@ -65,6 +66,7 @@ public class DiscountCode {
         }
         return false;
     }
+
     public DiscountCode getDiscountWithId(int id){
         for ( DiscountCode discountcode:allDiscountCodes){
             if (discountcode.getDiscountId()==id){
@@ -73,6 +75,7 @@ public class DiscountCode {
         }
         return null;
     }
+
     public void deleteDiscount(int id){
         allDiscountCodes.remove(getDiscountWithId(id));
 

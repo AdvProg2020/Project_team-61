@@ -18,6 +18,7 @@ public class SaleLog extends Log{
     ArrayList<Product> allSoldProduct = new ArrayList<Product>();
     ArrayList<SaleLog> allSellersLog = new ArrayList<SaleLog>();
 
+    //finish
     public boolean isSold (String productId){
         for (Product product : allSoldProduct) {
             if (product.getId().equals(productId)){
