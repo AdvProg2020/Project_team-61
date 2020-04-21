@@ -1,4 +1,7 @@
-package main.java.model.productRelated;
+package model.productRelated;
+
+import model.productRelated.Product;
+
 import java.util.ArrayList;
 
 
@@ -12,8 +15,8 @@ public class Category{
     public Category(String name, String traits) {
         this.name = name;
         this.traits = traits;
-        subCategories =new ArrayList<>();
-        allProducts = new ArrayList <>();
+        subCategories =new ArrayList<Category>();
+        allProducts = new ArrayList<Product>();
         allCategories.add(this);
     }
 

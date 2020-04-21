@@ -1,5 +1,7 @@
 package model.off;
 
+import model.productRelated.Product;
+
 import java.util.ArrayList;
 import java.util.*;
 public class Sale {
@@ -19,7 +21,7 @@ public class Sale {
         this.endOfSalePeriod = endOfSalePeriod;
         this.saleAmount = saleAmount;
         this.seller = seller;
-        allProducts=new ArrayList<>();
+        allProducts=new ArrayList<Product>();
         allSales.add(this);
 
     }
@@ -53,7 +55,7 @@ public class Sale {
     }
 
     public  Sale getSaleWithId(String id){
-        for (main.java.model.off.Sale sale : allSales) {
+        for (Sale sale : allSales) {
             if (sale.getOffId().equals(id)) {
                 return sale;
             }
