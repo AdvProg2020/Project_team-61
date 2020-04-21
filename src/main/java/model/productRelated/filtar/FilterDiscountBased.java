@@ -1,4 +1,7 @@
 package model.productRelated.filtar;
 
-public class FilterDiscountBased {
+import java.util.logging.LogRecord;
+
+public class FilterDiscountBased extends Filter {
+
 }

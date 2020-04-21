@@ -11,6 +11,7 @@ public class Score implements Comparable{
     int score;
     double averageScore;
     ArrayList<Integer> allScores=new ArrayList<Integer>();
+
     public Score(Account personToScore, Product productTOScore, int score) {
         this.personToScore = personToScore;
         this.productTOScore = productTOScore;

@@ -1,4 +1,4 @@
 package model.productRelated.filtar;
 
-public class Filter {
+public abstract class Filter {
 }

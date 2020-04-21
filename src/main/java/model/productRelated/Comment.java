@@ -10,7 +10,7 @@ public class Comment {
     private Product productToComment;
     private Account personToVote;
     private ArrayList<Comment> allComments = new ArrayList<Comment>();
-    public Product product;
+    private String commentContent;
 
     public Comment(boolean isSold, CommentStatus commentStatus, Product productToCommit, Account personToVote) {
         this.isSold = isSold;
@@ -20,16 +20,17 @@ public class Comment {
         allComments.add(this);
     }
 
-
-    public void setCommentOnCommentSection (String comment){
-
+    public void setCommentContent(String commentContent) {
+        this.commentContent = commentContent;
     }
 
     //its wrong
     public static ArrayList<String> allCommentsOnProduct ( String productId){
-        ArrayList<String> list = new ArrayList<String>();
-        return list;
+        product=null;
+       Product product = product.getProductById();
     }
 
-    public void deleteCustomerCommentOnProduct ( Account account , Product product ){}
+    public void deleteCustomerCommentOnProduct ( String accountId , String productId ){
+
+    }
 }
