@@ -1,4 +1,5 @@
-package main.java.model.off;
+package model.off;
+
 import java.util.ArrayList;
 import java.util.*;
 public class Sale {

@@ -1,14 +1,15 @@
 package controller.menus;
 
 
-import view.OutputHandler;
+import model.accounts.Account;
+
 
 public class CustomerMenu {
     private int inputNo;
     private int outputNo;
+    private Account account;
 
     public void processViewCart() {
-        // OutputHandler.showObjectOutput(account.listUsers(), account.getAccountListSize(),1);
 
     }
 

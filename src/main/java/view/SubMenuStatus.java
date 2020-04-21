@@ -27,7 +27,10 @@ public enum SubMenuStatus {
     NAME,
     LASTNAME,
     EMAIL,
-    PHONENO;
+    PHONENO,
+    //
+    COMPANYINFORMATION,
+    ADDPRODUCT;
 
 
 }
