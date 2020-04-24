@@ -2,6 +2,7 @@ package view;
 
 import controller.menus.*;
 
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,7 +19,7 @@ public class CommandProcessor {
     private RegisterMenu registerMenu;
     private MenuSituation menuSituation;
     private SubMenuStatus subMenuStatus;
-
+    private OutputHandler outputHandler;
 
     private String[] regex = {"(?i)createaccount\\s+(\\S+)\\s+(\\S+)",
             "(?i)login\\s+(\\S+)",//1
@@ -59,6 +60,10 @@ public class CommandProcessor {
         return matcher;
     }
 
+    public SubMenuStatus getSubMenuStatus() {
+        return subMenuStatus;
+    }
+
     public void setSubMenuStatus(SubMenuStatus subMenuStatus) {
         this.subMenuStatus = subMenuStatus;
     }
@@ -67,15 +72,11 @@ public class CommandProcessor {
         this.menuStatus = menuStatus;
     }
 
-    public void setSubMenuStatusToMainMenu() {
-        this.subMenuStatus = SubMenuStatus.MAINMENU;
-    }
-
     public MenuStatus getMenuStatus() {
         return menuStatus;
     }
 
-    public void run() {
+    public void run() throws ParseException {
         Scanner scanner = new Scanner(System.in);
         String input;
         while (!(input = scanner.nextLine()).trim().equals("exit")) {
@@ -84,22 +85,30 @@ public class CommandProcessor {
             } else if (input.equalsIgnoreCase("help")) {
                 menuSituation.processHelp();
             }
-            if (menuStatus == MenuStatus.REGISTERMENUE) {
+            if (menuStatus == MenuStatus.USERMENU || menuStatus == MenuStatus.MAINMENU) {
                 if (input.matches(regex[0])) {
                     registerMenu.processRegister(getMatcher(input, regex[0]).group(1), getMatcher(input, regex[0]).group(2));
                 }
                 if (menuStatus == MenuStatus.LOGINMENU) {
-                    if (input.matches(regex[1]))
-                        loginMenu.processLogin(getMatcher(input, regex[1]).group(1));
+                    if (input.matches(regex[1])){
+                        loginMenu.processLogin(getMatcher(input, regex[1]).group(1));}
                 }
                 if (loginMenu.isLogin()) {
                     if (input.equalsIgnoreCase("logout"))
                         loginMenu.processLogout();
                 }
                 //*****
-                if (input.matches(regex[27])){
-                    registerMenu.completeRegisterProcess(getMatcher(input, regex[27]).group(1));
+                if(subMenuStatus == subMenuStatus.REGISTERATIONDETAILS) {
+                    if (input.matches(regex[27])) {
+                        registerMenu.completeRegisterProcess(getMatcher(input, regex[27]).group(1));
+                    }
                 }
+                if(subMenuStatus == subMenuStatus.PASSWORD) {
+                    if (input.matches(regex[27])) {
+                        loginMenu.checkPassword(getMatcher(input, regex[27]).group(1));
+                    }
+                }
+
                 if (input.matches(regex[27])){
                     loginMenu.processEdit(getMatcher(input, regex[27]).group(1));
                 }
@@ -160,6 +169,14 @@ public class CommandProcessor {
                 } else if (input.matches(regex[17])) {
                     managerMenu.removeCategory(getMatcher(input, regex[17]).group(1));
                 }
+                //
+                if(subMenuStatus.equals(SubMenuStatus.DISCOUNTCODEFIELD)){
+                    managerMenu.setField(getMatcher(input, regex[27]).group(1));
+                    subMenuStatus = SubMenuStatus.EDITDISCOUNTCODE;
+                }
+                if(subMenuStatus.equals(SubMenuStatus.EDITDISCOUNTCODE)){
+                    managerMenu.editDiscountCodeField(getMatcher(input, regex[27]).group(1));
+                }
             } else if (menuStatus == MenuStatus.SELLERMENU) {
                 // SellerMenu
                 if (input.equalsIgnoreCase("view personal info")) {
@@ -201,6 +218,26 @@ public class CommandProcessor {
                 } else if (input.equalsIgnoreCase("add off")) {
                     sellerMenu.addOff();
                 }
+                if(subMenuStatus.equals(SubMenuStatus.PRODUCTFIELD)){
+                    sellerMenu.setField(getMatcher(input, regex[27]).group(1));
+                    subMenuStatus = SubMenuStatus.EDITPRODUCT;
+                }
+                if(subMenuStatus.equals(SubMenuStatus.EDITPRODUCT)){
+                    sellerMenu.editProductField(getMatcher(input, regex[27]).group(1));
+                }
+                if(subMenuStatus.equals(SubMenuStatus.ADDPRODUCT)){
+                    sellerMenu.addProduct(getMatcher(input, regex[27]).group(1));
+                }
+                if(subMenuStatus.equals(SubMenuStatus.SALEFIELD)){
+                    sellerMenu.setField(getMatcher(input, regex[27]).group(1));
+                    subMenuStatus = SubMenuStatus.EDITSALE;
+                }
+                if(subMenuStatus.equals(SubMenuStatus.EDITSALE)){
+                    sellerMenu.editProductField(getMatcher(input, regex[27]).group(1));
+                }
+                if(subMenuStatus.equals(SubMenuStatus.ADDSALE)){
+                    sellerMenu.setDetailsToSale(getMatcher(input, regex[27]).group(1));
+                }
             } else if (menuStatus == MenuStatus.CUSTOMERMENU) {
                 //CustomerMenu
                 if (input.equalsIgnoreCase("view personal info")) {
@@ -241,7 +278,7 @@ public class CommandProcessor {
                 } else if (input.matches(regex[22])) {
                     customerMenu.rateProduct(getMatcher(input, regex[22]).group(1), Integer.parseInt(getMatcher(input, regex[22]).group(2)));
                 }
-            } else if (menuStatus == MenuStatus.PRODUCTMENU) {
+            } else if (menuStatus == MenuStatus.PRODUCTMENU ||menuStatus == MenuStatus.MAINMENU) {
                 //ProductsMenu
                 if (input.equalsIgnoreCase("products")) {
                     productsMenu.processProducts();
@@ -307,12 +344,12 @@ public class CommandProcessor {
                     saleMenu.processShowProductsID(getMatcher(input, regex[4]).group(1));
                 }
             } else {
-                OutputHandler.showOutput(0);
+                outputHandler.showOutput(0);
             }
 
         }
         if (input.equals("exit")) {
-            OutputHandler.showOutput(1);
+            outputHandler.showOutput(1);
         }
 
     }

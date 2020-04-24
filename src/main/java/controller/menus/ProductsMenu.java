@@ -13,26 +13,30 @@ public class ProductsMenu {
     private Product product;
     private Category category;
     private CommandProcessor commandProcessor;
+    private OutputHandler outputHandler;
     private Filter filter;
 
+    //array
     public void processProducts() {
-        OutputHandler.showObjectOutput(product.listProduct(), product.li(), 1);
+
     }
 
+    //array
     public void processViewCategories() {
-        OutputHandler.showObjectOutput(category.ca(), category.getCategoryListSize(), 1);
+
     }
 
     public void processFiltering() {
         commandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
     }
 
+    //array
     public void showAvailableFilters() {
-        OutputHandler.showObjectOutput(filter.list(),filter., 1);
+
     }
 
     public void filter(String filterID) {
-        OutputHandler.showObjectOutput(filter.getFileterWithID(filterID), 1, 1);
+
     }
 
     public void currentFilters() {
@@ -65,12 +69,12 @@ public class ProductsMenu {
 
     }
 
-
+    //array
     public void processShowProducts() {
-        OutputHandler.showObjectOutput(product.listProduct(), product.li(), 1);
+
     }
 
     public void processShowProductsID(String id) {
-        OutputHandler.showObjectOutput(product.getProductById(id), 1, 1);
+       outputHandler.showProduct(product.getProductById(id));
     }
 }

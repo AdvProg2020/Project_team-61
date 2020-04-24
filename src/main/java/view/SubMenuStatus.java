@@ -21,16 +21,23 @@ public enum SubMenuStatus {
     DIGEST,
     COMMENTS,
     //
-    SETDETAILS,
+    REGISTERATIONDETAILS,
     EDITACCOUNT,
     PASSWORD,
-    NAME,
-    LASTNAME,
-    EMAIL,
-    PHONENO,
     //
     COMPANYINFORMATION,
-    ADDPRODUCT;
+    //
+    ADDPRODUCT,
+    PRODUCTFIELD,
+    EDITPRODUCT,
+    //
+    ADDSALE,
+    EDITSALE,
+    SALEFIELD,
+    //
+    ADDDISCOUNTCODE,
+    EDITDISCOUNTCODE,
+    DISCOUNTCODEFIELD;
 
 
 }

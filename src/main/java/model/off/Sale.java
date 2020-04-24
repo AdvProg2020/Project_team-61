@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.*;
 public class Sale {
     private String offId;
-    private model.off.SaleStatus saleStatus;
+    private SaleStatus saleStatus;
     private Date startOfSalePeriod;
     private Date endOfSalePeriod;
     private int saleAmount;

@@ -1,5 +1,6 @@
 package controller.request;
 
+import model.accounts.Account;
 import model.accounts.Seller;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ public class Request {
     private String requestText;
     private Date requestDate;
     private Seller seller;
-    private ArrayList<String> allRequests;
+    private ArrayList<Request> allRequests;
     private boolean isRequested;
     private boolean requestAccepted;
 
@@ -19,16 +20,22 @@ public class Request {
         this.requestID = requestID;
     }
 
-    public void getRequestFromID(String requestID){
-
+    public Request getRequestFromID(String requestID){
+        for(Request request : allRequests){
+            if (request.requestID.equalsIgnoreCase(requestID)) return request;
+        }
+        return null;
     }
 
-    public boolean getIsRequested() {
+    public boolean isRequested() {
         return isRequested;
     }
 
     public boolean isThereRequestFromID(String requestID){
-        return true;
+        for(Request request : allRequests){
+            if (request.requestID.equalsIgnoreCase(requestID)) return true;
+        }
+        return false;
     }
 
     public boolean getIsRequestAccepted() {
@@ -54,5 +61,17 @@ public class Request {
 
     public int getRequestListSize(){
         return allRequests.size();
+    }
+
+    public String getRequestText() {
+        return requestText;
+    }
+
+    public Date getRequestDate() {
+        return requestDate;
+    }
+
+    public Seller getSeller() {
+        return seller;
     }
 }

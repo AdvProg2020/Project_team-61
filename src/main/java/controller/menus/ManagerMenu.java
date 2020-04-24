@@ -8,6 +8,10 @@ import model.productRelated.Product;
 import view.CommandProcessor;
 import view.MenuStatus;
 import view.OutputHandler;
+import view.SubMenuStatus;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class ManagerMenu {
     private int outputNo;
@@ -18,73 +22,177 @@ public class ManagerMenu {
     private Category category;
     private Request request;
     private CommandProcessor commandProcessor;
+    private RegisterMenu registerMenu;
+    private DiscountCode editableDiscountCode;
+    private String field;
+    private OutputHandler outputHandler;
 
+    public void setField(String field) {
+        this.field = field;
+    }
+
+    //array
     public void processManageUsers() {
-        OutputHandler.showObjectOutput(account.listUsers(), account.getAccountListSize(), 1);
+    }
+
+    private boolean checkUsername(String username) {
+        if (username.matches("")) {
+            if (account.isThereAccountWithUsername(username)) {
+                return true;
+            } else inputNo = 2;
+        } else inputNo = 1;
+        return false;
     }
 
     public void view(String username) {
-        OutputHandler.showObjectOutput(account.getAccountWithUsername(username), 1, 1);
+        if (checkUsername(username)) {
+            outputHandler.showAccount(account.getAccountWithUsername(username));
+        }
+        outputHandler.showOutput(inputNo);
     }
 
     public void deleteUser(String username) {
-        account.deleteAccount(username);
+        if (checkUsername(username)) {
+            account.deleteAccount(username);
+            outputHandler.showOutputWithString(username, 1);
+        }
+        outputHandler.showOutput(inputNo);
     }
 
     public void createManagerProfile() {
         commandProcessor.setMenuStatus(MenuStatus.REGISTERMENUE);
+        registerMenu.setManagerWant(true);
     }
 
+    // array
     public void processManageAllProducts() {
-        OutputHandler.showObjectOutput(product.getProductList(), product.getProductListSize(), 1);
+    }
+
+    private boolean checkProduct(String productID) {
+        if (productID.matches("")) {
+            if (product.isThereProductWithId(productID)) {
+                return true;
+            } else inputNo =;
+        } else inputNo =;
+        return false;
     }
 
     public void removeProduct(String productID) {
-        product.deleteProduct(productID);
+        if (checkProduct(productID)) {
+            product.deleteProduct(productID);
+            outputHandler.showOutputWithString(productID, 2);
+        }
+        outputHandler.showOutput(inputNo);
+    }
+
+    private boolean checkDiscountCode(String discountCodeID) {
+        if (discountCodeID.matches("")) {
+            if (discountCode.isThereDiscountWithId(discountCodeID)) {
+                return true;
+            } else inputNo =;
+        } else inputNo =;
+        return false;
     }
 
     public void processCreateDiscountCode() {
         DiscountCode newDiscountCode = new DiscountCode(discountCode);
     }
 
+    // array
     public void processViewDiscountCodes() {
-        OutputHandler.showObjectOutput(discountCode.listDiscountCodes(), discountCode.getDiscountCodeListSize(), 1);
     }
 
-    public void viewDiscountCode(String DiscountCodeID) {
-        OutputHandler.showObjectOutput(discountCode.getDiscountWithID(DiscountCodeID), 1, 1);
+    public void viewDiscountCode(String discountCodeID) {
+        if (checkDiscountCode(discountCodeID)) {
+            outputHandler.showDiscountCode(discountCode.getDiscountWithId(DiscountCodeID));
+        }
+        outputHandler.showOutput(inputNo);
     }
 
-    public void editDiscountCode(String DiscountCodeID) {
-
+    public void editDiscountCode(String discountCodeID) {
+        if (checkDiscountCode(discountCodeID)) {
+            editableDiscountCode = discountCode.getDiscountWithId(discountCodeID);
+            commandProcessor.setSubMenuStatus(SubMenuStatus.SALEFIELD);
+        }
+        outputHandler.showOutput(inputNo);
     }
 
-    public void editDiscountCodeField(String edit) {
-
+    ///????????ParseException
+    public void editDiscountCodeField(String edit) throws ParseException {
+        if (field.equalsIgnoreCase("start Of Discount Period")) {
+            if (field.matches("")) {
+                editableDiscountCode.setStartOfDiscountPeriod(new SimpleDateFormat("dd/MM/yyyy").parse(edit));
+            } else inputNo =;
+        } else if (field.equalsIgnoreCase("end Of Discount Period")) {
+            if (field.equalsIgnoreCase("start Of Discount Period")) {
+                editableDiscountCode.setEndOfDiscountPeriod(new SimpleDateFormat("dd/MM/yyyy").parse(edit));
+            } else inputNo =;
+        } else if (field.equalsIgnoreCase("max Discount Amount")) {
+            if (field.equalsIgnoreCase("start Of Discount Period")) {
+                editableDiscountCode.setMaxDiscountAmount(Double.parseDouble(edit));
+            } else inputNo =;
+        } else if (field.equalsIgnoreCase("total Times Of Use")) {
+            if (field.equalsIgnoreCase("start Of Discount Period")) {
+                editableDiscountCode.setTotalTimesOfUse(Integer.parseInt(edit));
+            } else inputNo =;
+        }
     }
 
-    public void removeDiscountCode(String DiscountCodeID) {
-        discountCode.deleteDiscount(DiscountCodeID);
+    public void removeDiscountCode(String discountCodeID) {
+        if (checkDiscountCode(discountCodeID)) {
+            discountCode.deleteDiscount(discountCodeID);
+        }
+        outputHandler.showOutput(inputNo);
     }
 
+    private boolean checkRequest(String requestID) {
+        if (requestID.matches("")) {
+            if (request.isThereRequestFromID(requestID)) {
+                return true;
+            } else inputNo =;
+        } else inputNo =;
+        return false;
+    }
+
+    /// array
     public void processManageRequests() {
-        OutputHandler.showObjectOutput(request.listRequest(), request.getRequestListSize(), 1);
     }
 
     public void detailsRequest(String requestID) {
-
+        if (checkRequest(requestID)) {
+            outputHandler.showRequest(request.getRequestFromID(requestID));
+        }
+        outputHandler.showOutput(inputNo);
     }
 
     public void acceptRequest(String requestID) {
-        request.setIsRequestAccepted(true);
+        if (checkRequest(requestID)) {
+            request.setIsRequestAccepted(true);
+            inputNo =;
+        }
+        outputHandler.showOutput(inputNo);
     }
 
     public void declineRequest(String requestID) {
-        request.setIsRequestAccepted(false);
+        if (checkRequest(requestID)) {
+            request.setIsRequestAccepted(false);
+            inputNo =;
+        }
+        outputHandler.showOutput(inputNo);
     }
 
+    private boolean checkCategory(String category){
+        if (category.matches("")) {
+           // if (category.isTh(category)) {
+                return true;
+            //} else inputNo =;
+        } else inputNo =;
+        return false;
+    }
+
+    // array
     public void processManageCategories() {
-        OutputHandler.showObjectOutput(category.listCategory(), category.geyListCategorySize(), 1);
+
     }
 
     public void editCategory(String category) {
@@ -96,11 +204,11 @@ public class ManagerMenu {
     }
 
     public void addCategory(String category) {
-        Category newCategory = new Category(category);
+
     }
 
     public void removeCategory(String category) {
-        category.deleteCategory(category);
+
     }
 
 }

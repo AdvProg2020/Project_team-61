@@ -7,27 +7,43 @@ import view.OutputHandler;
 import view.SubMenuStatus;
 
 public class LoginMenu {
-    private boolean Login;
-    private int inputNo;
     private int outputNo;
     private Account account;
     private Account loginAccount;
     private CommandProcessor commandProcessor;
     private String field = null;
+    private String username;
+    private boolean login;
+    private OutputHandler outputHandler;
 
     public boolean isLogin() {
-        return Login;
+        return login;
     }
 
+    public Account getLoginAccount() {
+        return loginAccount;
+    }
 
     public void processLogin(String username) {
         if (username.matches(" ")) {
             if (account.isThereAccountWithUsername(username)) {
-                loginAccount = account.getAccountWithUsername(username);
-                findRole();
-            }
-        }
+                commandProcessor.setSubMenuStatus(SubMenuStatus.PASSWORD);
+                outputNo = 2;
+            } else outputNo = 14;
+        } else outputNo = 0;
+        outputHandler.showOutput(outputNo);
+    }
 
+    public void checkPassword(String password) {
+        if (password.matches(" ")) {
+            if (account.isThereAccountWithUsernameAndPassword(username, password)) {
+                loginAccount = account.getAccountWithUsername(username);
+                login = true;
+                findRole();
+                outputNo = 15;
+            } else outputNo = 14;
+        } else outputNo = 3;
+        outputHandler.showOutput(outputNo);
     }
 
     private void findRole() {
@@ -44,30 +60,48 @@ public class LoginMenu {
     }
 
     public void viewPersonalInfo() {
-        OutputHandler.showObjectOutput(loginAccount,1,1);
+        outputHandler.showAccount(loginAccount);
     }
 
     public void processEdit(String field) {
         commandProcessor.setSubMenuStatus(SubMenuStatus.EDITACCOUNT);
         this.field = field;
+        outputHandler.showOutput(16);
     }
 
     public void editField(String edit) {
         if (this.field.equalsIgnoreCase("password")) {
-            loginAccount.setPassword(edit);
+            if (edit.matches("")) {
+                loginAccount.setPassword(edit);
+                outputNo = 17;
+            } else outputNo = 3;
         } else if (this.field.equalsIgnoreCase("name")) {
-            loginAccount.setName(edit);
+            if (edit.matches("")) {
+                loginAccount.setName(edit);
+                outputNo = 18;
+            } else outputNo = 5;
         } else if (this.field.equalsIgnoreCase("lastname")) {
-            loginAccount.setLastname(edit);
+            if (edit.matches("")) {
+                loginAccount.setLastname(edit);
+                outputNo = 19;
+            } else outputNo = 7;
         } else if (this.field.equalsIgnoreCase("Email")) {
-            loginAccount.setEmail(edit);
+            if (edit.matches("")) {
+                loginAccount.setEmail(edit);
+                outputNo = 20;
+            } else outputNo = 9;
         } else if (this.field.equalsIgnoreCase("Phone number")) {
-            loginAccount.setPhoneNo(Integer.parseInt(edit));
+            if (edit.matches("")) {
+                loginAccount.setPhoneNo(Integer.parseInt(edit));
+                outputNo = 21;
+            } else outputNo = 11;
         }
+        outputHandler.showOutput(outputNo);
     }
 
     public void processLogout() {
         loginAccount = null;
         commandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+        outputHandler.showOutput(22);
     }
 }
