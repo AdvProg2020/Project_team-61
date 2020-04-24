@@ -6,7 +6,7 @@ import model.log.BuyLog;
 import model.log.Log;
 
 import java.util.*;
-public class Product {
+public class Product  {
 
     //productDetail
     private String productId;
@@ -243,7 +243,8 @@ public class Product {
         customer.buyLog.addProductToBuyLog(product);
     }
 
-    public static Comparator<Product> scoreAverage = new Comparator<Product>() {
+    //finish
+    public static Comparator<Product> productComparatorForView = new Comparator<Product>() {
 
         public int compare(Product s1, Product s2) {
 
@@ -254,5 +255,16 @@ public class Product {
         }
     };
 
+    //finish
+    public static Comparator<Product> productComparatorForScore = new Comparator<Product>() {
+
+        public int compare(Product s1, Product s2) {
+
+            double productScore1 = s1.getAverageScore();
+            double productScore2 = s2.getAverageScore();
+            return Double.compare(productScore1,productScore2);
+
+        }
+    };
 
 }
