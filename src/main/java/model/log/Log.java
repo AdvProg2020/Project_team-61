@@ -8,20 +8,32 @@ import java.util.Iterator;
 
 import static model.productRelated.Product.allProduct;
 
-public abstract class Log implements Comparable{
+public abstract class Log{
 
+    //detail
     String logId;
     Date date;
     DeliveryStatus deliveryStatus;
     boolean itsDone;
+    Product product;
+
+    //list
     ArrayList<Log> allLogs = new ArrayList<Log>();
 
-    //finish
+
     public Log(String logId , Date date) {
         this.date = date;
         this.logId=logId;
         allLogs.add(this);
     }
+
+    //setterAndGetters-----------------------------------------------------------------------
+
+    public void setDeliveryStatus(DeliveryStatus deliveryStatus) {
+        this.deliveryStatus = deliveryStatus;
+    }
+
+    //others--------------------------------------------------------------------------------
 
     //finish
     public void deleteLog (String id){
@@ -52,12 +64,6 @@ public abstract class Log implements Comparable{
             }
         }
         return false;
-    }
-
-    public void addProductToLog (String productId){}
-
-    public int compareTo(Object o) {
-        return 0;
     }
 
 }

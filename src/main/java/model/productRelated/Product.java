@@ -35,10 +35,6 @@ public class Product implements Comparable{
         allProduct.add(this);
     }
 
-    public int getNumberOfProducts() {
-        return numberOfProducts;
-    }
-
     //finish
     public void setDetailProduct (String name , String companiesName , double price , Seller seller , int numberOfProducts) {
         this.productName = name;
