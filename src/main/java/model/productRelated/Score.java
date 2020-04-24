@@ -1,50 +1,67 @@
 package model.productRelated;
-
 import model.accounts.Account;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 
-public class Score implements Comparable{
+public abstract class Score implements Comparable {
 
-    Account personToScore;
-    Product productTOScore;
+    //detail
     int score;
     double averageScore;
-    ArrayList<Integer> allScores=new ArrayList<Integer>();
+
+
+    //objectAdded
+    Product productTOScore;
+    Account personToScore;
+
+    //lists
+    ArrayList<Score> allScores=new ArrayList<>();
+
 
     public Score(Account personToScore, Product productTOScore, int score) {
         this.personToScore = personToScore;
         this.productTOScore = productTOScore;
         this.score = score;
-        allScores.add(score);
+        allScores.add(this);
     }
 
-    //finish
+
+
+    //setterAndGetters---------------------------------------------------------
     public void setScore(int score) {
         this.score = score;
         calculateAverageScore(score);
     }
-
-    //finish
     public int getScore() {
         return score;
     }
-
-    //finish
-    public double calculateAverageScore (int score ){
-        double total=0;
-        for(int i=0; i<allScores.size(); i++){
-            total = total + allScores.get(i);
-        }
-        return total;
-    }
-
-    //finish
     public double getAverageScore() {
         return averageScore;
     }
-
-    public int compareTo(Object o) {
-        return 0;
+    public void setAverageScore(double averageScore) {
+        this.averageScore = averageScore;
     }
+    public ArrayList<Score> getAllScores() {
+        return allScores;
+    }
+
+    //others-------------------------------------------------------------------
+
+    //finish
+    public void calculateAverageScore (int score ){
+        double total=0;
+        for(int i=0; i<allScores.size(); i++){
+            total = total + allScores.get(i).getScore();
+        }
+        setAverageScore(total);
+    }
+
+
+
 }

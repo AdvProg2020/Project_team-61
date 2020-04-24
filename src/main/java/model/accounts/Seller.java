@@ -9,6 +9,7 @@ public class Seller extends Account {
     private Firm firm;
     private ArrayList<SaleLog> saleLogsHistory ;
     private ArrayList<Seller> allSellers;
+    public SaleLog saleLog;
 
     public Seller(String username) {
         super(username);

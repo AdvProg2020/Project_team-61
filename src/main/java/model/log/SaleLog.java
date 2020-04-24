@@ -12,11 +12,27 @@ public class SaleLog extends Log{
         super(logId, date);
         allSellersLog.add(this);
     }
-    double recievedAmount;
+
+    //detail
+    double receivedAmount;
     double reducedAmount;
     String customerName;
+
+
+    //list
     ArrayList<Product> allSoldProduct = new ArrayList<Product>();
     ArrayList<SaleLog> allSellersLog = new ArrayList<SaleLog>();
+
+
+    //setterAndGetter--------------------------------------------
+    public void setSaleLogDetail(double receivedAmount,double reducedAmount, String customerName){
+        this.receivedAmount =receivedAmount;
+        this.reducedAmount=reducedAmount;
+        this.customerName=customerName;
+        allSellersLog.add(this);
+    }
+
+    //other-------------------------------------------------------
 
     //finish
     public boolean isSold (String productId){
@@ -27,4 +43,11 @@ public class SaleLog extends Log{
         }
         return false;
     }
+
+    //finish//doubt
+    public void addProductToSaleLog(Product product){
+        allSoldProduct.add(product);
+    }
+
+
 }

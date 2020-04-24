@@ -2,15 +2,25 @@ package model.productRelated;
 import model.accounts.Account;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 
 public class Comment {
 
+    //commentDetail
     private boolean isSold;
+    private String commentContent;
     private CommentStatus commentStatus;
+
+    //objectAdded
     private Product productToComment;
     private Account personToVote;
-    private ArrayList<Comment> allComments = new ArrayList<Comment>();
-    private String commentContent;
+
+
+    //list
+    public ArrayList<Comment> allComments = new ArrayList<Comment>();
+
+
 
     public Comment(boolean isSold, CommentStatus commentStatus, Product productToCommit, Account personToVote) {
         this.isSold = isSold;
@@ -20,17 +30,35 @@ public class Comment {
         allComments.add(this);
     }
 
+
+    //setterAndGetter--------------------------------------------------------------------------------------------
+
     public void setCommentContent(String commentContent) {
         this.commentContent = commentContent;
     }
-
-    //its wrong
-    public static ArrayList<String> allCommentsOnProduct ( String productId){
-        product=null;
-       Product product = product.getProductById();
+    public Account getPersonToVote() {
+        return personToVote;
+    }
+    public void setCommentStatus(CommentStatus commentStatus) {
+        this.commentStatus = commentStatus;
     }
 
-    public void deleteCustomerCommentOnProduct ( String accountId , String productId ){
+    //other------------------------------------------------------------------------------------------------------
 
+    //finish
+    public void deleteCommentOnProduct (Comment comment){
+        for (Comment allComment : allComments) {
+            if (allComment.equals(comment)){
+                Iterator iterator = allComments.iterator();
+                while(iterator.hasNext()) {
+                    Comment comment1 = (Comment) iterator.next();
+                    if(comment1.equals(comment)) {
+                        iterator.remove();
+                    }
+                }
+            }
+        }
     }
+
+
 }
