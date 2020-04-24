@@ -1,4 +1,6 @@
 package model.productRelated.sort;
 
-public class SortTimeBased {
+import model.productRelated.filtar.Filter;
+
+public class SortTimeBased extends Filter {
 }

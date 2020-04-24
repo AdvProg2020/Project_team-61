@@ -1,4 +1,4 @@
 package model.productRelated.sort;
 
-public class Sort {
+public abstract class Sort {
 }

@@ -1,4 +1,6 @@
 package model.productRelated.sort;
 
-public class SortNumberOfViewsBased {
+import model.productRelated.filtar.Filter;
+
+public class SortNumberOfViewsBased extends Filter {
 }

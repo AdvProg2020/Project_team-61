@@ -1,4 +1,6 @@
 package model.productRelated.sort;
 
-public class SortScoreBased {
+import model.productRelated.filtar.Filter;
+
+public class SortScoreBased extends Filter {
 }
