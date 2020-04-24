@@ -1,32 +1,38 @@
-package main.java.model.off;
+package off;
 import java.util.*;
 import java.util.ArrayList;
 
-public class DiscountCode {
+public class DiscountCode implements Comparable{
     private int discountId;
-    private Date startOfDiscountPeriod;
-    private Date endOfDiscountPeriod;
+    private Date startOfPeriod;
+    private Date endOfPeriod;
     private double maxDiscountAmount;
     private int totalTimesOfUse;
-    private ArrayList<model.accounts.Account> allCustomersWithDiscountCode;
+    private ArrayList<Account> allCustomersWithDiscountCode;
     private static ArrayList<DiscountCode> allDiscountCodes;
 
-    public DiscountCode(int discountId, Date startOfDiscountPeriod, Date endOfDiscountPeriod, double maxDiscountAmount, int totalTimesOfUse, ArrayList<model.accounts.Account> allCustomersWithDiscountCode) {
+    public DiscountCode(int discountId, Date startOfPeriod, Date endOfPeriod, double maxDiscountAmount, int totalTimesOfUse, ArrayList<model.accounts.Account> allCustomersWithDiscountCode) {
         this.discountId = discountId;
-        this.startOfDiscountPeriod = startOfDiscountPeriod;
-        this.endOfDiscountPeriod = endOfDiscountPeriod;
+        this.startOfPeriod = startOfPeriod;
+        this.endOfPeriod = endOfPeriod;
         this.maxDiscountAmount = maxDiscountAmount;
         this.totalTimesOfUse = totalTimesOfUse;
         this.allCustomersWithDiscountCode =new ArrayList <>();
         allDiscountCodes.add(this);
     }
 
-    public void setStartOfDiscountPeriod(Date startOfDiscountPeriod) {
-        this.startOfDiscountPeriod = startOfDiscountPeriod;
+    public void setStartOfPeriod(Date startOfPeriod) {
+        this.startOfPeriod = startOfPeriod;
     }
+    public void setDiscountDetail(Date endOfDiscountPeriod,Date startOfPeriod,double maxDiscountAmount,int totalTimesOfUse){
+        this.endOfPeriod = endOfDiscountPeriod;
+        this.startOfPeriod = startOfPeriod;
+        this.maxDiscountAmount = maxDiscountAmount;
+        this.totalTimesOfUse = totalTimesOfUse;
 
-    public void setEndOfDiscountPeriod(Date endOfDiscountPeriod) {
-        this.endOfDiscountPeriod = endOfDiscountPeriod;
+    }
+    public void setEndOfPeriod(Date endOfDiscountPeriod) {
+        this.endOfPeriod = endOfDiscountPeriod;
     }
 
     public void setMaxDiscountAmount(double maxDiscountAmount) {
@@ -38,11 +44,11 @@ public class DiscountCode {
     }
 
     public Date getStartOfDiscountPeriod() {
-        return startOfDiscountPeriod;
+        return startOfPeriod;
     }
 
     public Date getEndOfDiscountPeriod() {
-        return endOfDiscountPeriod;
+        return endOfPeriod;
     }
 
     public double getMaxDiscountAmount() {
@@ -53,7 +59,7 @@ public class DiscountCode {
         return totalTimesOfUse;
     }
 
-    public ArrayList<model.accounts.Account> getAllCustomersWithDiscountCode() {
+    public ArrayList<Account> getAllCustomersWithDiscountCode() {
         return allCustomersWithDiscountCode;
     }
 
@@ -82,16 +88,24 @@ public class DiscountCode {
     public String toString() {
         return "DiscountCode{" +
                 "discountId=" + discountId +
-                ", startOfDiscountPeriod=" + startOfDiscountPeriod +
-                ", endOfDiscountPeriod=" + endOfDiscountPeriod +
+                ", startOfDiscountPeriod=" + startOfPeriod +
+                ", endOfDiscountPeriod=" + endOfPeriod +
                 ", maxDiscountAmount=" + maxDiscountAmount +
                 ", totalTimesOfUse=" + totalTimesOfUse +
                 ", allCustomersWithDiscountCode=" + allCustomersWithDiscountCode +
                 '}';
     }
-    /*   public void viewDiscountCodes(){
-        for (DiscountCode discountCode:allDiscountCodes){
-            di
-        }
-    }*/
+       public ArrayList<DiscountCode>ListDiscountCodes(){
+           return  allDiscountCodes;
+
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
+
+    public int getDiscountCodeListSize(){
+        return allDiscountCodes.size();
+    }
 }

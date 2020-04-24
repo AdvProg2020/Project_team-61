@@ -1,17 +1,17 @@
-package main.java.model.off;
+package off;
 import java.util.ArrayList;
 import java.util.*;
-public class Sale {
+public class Sale  implements Comparable{
     private String offId;
     private model.off.SaleStatus saleStatus;
     private Date startOfSalePeriod;
     private Date endOfSalePeriod;
     private int saleAmount;
     private model.accounts.Seller seller;
-    private ArrayList <model.productRelated.Product>allProducts;
+    private ArrayList <Product>allProducts;
     private static ArrayList <Sale> allSales;
 
-    public Sale(String offId, model.off.SaleStatus saleStatus, Date startOfSalePeriod, Date endOfSalePeriod, int saleAmount, model.accounts.Seller seller) {
+    public Sale(String offId, SaleStatus saleStatus, Date startOfSalePeriod, Date endOfSalePeriod, int saleAmount, Seller seller) {
         this.offId = offId;
         this.saleStatus = saleStatus;
         this.startOfSalePeriod = startOfSalePeriod;
@@ -22,12 +22,19 @@ public class Sale {
         allSales.add(this);
 
     }
+    public void setSaleDetails(SaleStatus saleStatus, Date startOfSalePeriod, Date endOfSalePeriod, int saleAmount, Seller seller){
+        this.saleStatus = saleStatus;
+        this.startOfSalePeriod = startOfSalePeriod;
+        this.endOfSalePeriod = endOfSalePeriod;
+        this.saleAmount = saleAmount;
+        this.seller = seller;
+    }
 
     public String getOffId() {
         return offId;
     }
 
-    public model.off.SaleStatus getSaleStatus() {
+    public SaleStatus getSaleStatus() {
         return saleStatus;
     }
 
@@ -43,16 +50,16 @@ public class Sale {
         return saleAmount;
     }
 
-    public model.accounts.Seller getSeller() {
+    public Seller getSeller() {
         return seller;
     }
 
-    public ArrayList<model.productRelated.Product> getAllProducts() {
+    public ArrayList<Product> getAllProducts() {
         return allProducts;
     }
 
     public  Sale getSaleWithId(String id){
-        for (main.java.model.off.Sale sale : allSales) {
+        for (Sale sale : allSales) {
             if (sale.getOffId().equals(id)) {
                 return sale;
             }
@@ -64,10 +71,10 @@ public class Sale {
     }
 
 
-     public int getAllSalesSize(){
+     public int getSaleListSize(){
             return allSales.size();
     }
-    public Sale getSaleWithSeller(model.accounts.Seller seller){
+    public Sale getSaleWithSeller(Seller seller){
         for (Sale sale:allSales){
             if ((sale.getSeller())==(seller)){
                 return sale;
@@ -76,9 +83,9 @@ public class Sale {
         }
         return null;
     }
-     public Sale getSaleWithProduct(model.productRelated.Product product){
+     public Sale getSaleWithProduct(Product product){
          for (Sale sale : allSales) {
-             for (model.productRelated.Product products : sale.getAllProducts()) {
+             for (Product products : sale.getAllProducts()) {
                  if (products.equals(product)){
                      return sale;
              }
@@ -99,7 +106,7 @@ public class Sale {
         this.saleAmount = saleAmount;
     }
 
-    public boolean isTheProductInAnotherSale(model.productRelated.Product product) {
+    public boolean isTheProductInAnotherSale(Product product) {
         for (Sale sale : allSales) {
             if (sale.getAllProducts().contains(product)) {
                 return true;}
@@ -108,6 +115,17 @@ public class Sale {
 
     }
 
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
+
+    public ArrayList<Sale> listSales(){
+        return allSales;
+    }
+    public ArrayList<Sale> viewSalesList(){
+        return allSales;
+    }
     @Override
     public String toString() {
         return "Sale{" +
