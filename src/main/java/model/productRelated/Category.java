@@ -1,22 +1,19 @@
-package model.productRelated;
-
-import model.productRelated.Product;
-
+package productRelated;
 import java.util.ArrayList;
 
 
-public class Category{
+public class Category implements Comparable{
     private String name;
     private String traits;
     private ArrayList <Category>subCategories;
-    private ArrayList <model.productRelated.Product> allProducts;
+    private ArrayList <Product> allProducts;
     private static ArrayList <Category> allCategories;
 
     public Category(String name, String traits) {
         this.name = name;
         this.traits = traits;
-        subCategories =new ArrayList<Category>();
-        allProducts = new ArrayList<Product>();
+        subCategories =new ArrayList <>();
+        allProducts = new ArrayList <>();
         allCategories.add(this);
     }
 
@@ -32,7 +29,7 @@ public class Category{
         return subCategories;
     }
 
-    public ArrayList<model.productRelated.Product> getAllProducts() {
+    public ArrayList<Product> getAllProducts() {
         return allProducts;
     }
 
@@ -60,7 +57,7 @@ public class Category{
             if (category.getName().equalsIgnoreCase(name))
                 return true;
             }
-        return true;
+        return false;
 
     }
     public void deleteCategory(String name){
@@ -69,6 +66,10 @@ public class Category{
     public int getCategoryListSize(){
         return allCategories.size();
     }
+   public ArrayList<Category> listCategories(){
+       return allCategories;
+
+   }
 
     @Override
     public String toString() {
@@ -80,7 +81,11 @@ public class Category{
                 ;
     }
 
-  /*  public Set<String> viewCategories(){
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
+    /*  public Set<String> viewCategories(){
         for (model.productRelated.Category category : allCategories) {
              category.getName();
         }

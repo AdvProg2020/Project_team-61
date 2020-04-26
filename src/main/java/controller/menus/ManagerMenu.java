@@ -26,6 +26,8 @@ public class ManagerMenu {
     private DiscountCode editableDiscountCode;
     private String field;
     private OutputHandler outputHandler;
+    private int detailMenu = 0;
+    private  DiscountCode newDiscountCode;
 
     public void setField(String field) {
         this.field = field;
@@ -95,7 +97,36 @@ public class ManagerMenu {
     }
 
     public void processCreateDiscountCode() {
+        commandProcessor.setSubMenuStatus(SubMenuStatus.ADDDISCOUNTCODE);
+    }
+
+    public void createNewDiscountCode(String discountCodeId){
         DiscountCode newDiscountCode = new DiscountCode(discountCode);
+        commandProcessor.setSubMenuStatus();
+    }
+
+    public void setDetailToDiscountCode(String detail){
+        if(detailMenu==0){
+            if(detail.matches("")){
+                newDiscountCode.setStartOfDiscountPeriod(detail);
+                inputNo =0;
+            }else inputNo= 0;
+        }else if(detailMenu==0){
+            if(detail.matches("")){
+                newDiscountCode.setEndOfDiscountPeriod(detail);
+                inputNo =0;
+            }else inputNo= 0;
+        }else if(detailMenu==0){
+            if(detail.matches("")){
+                newDiscountCode.setMaxDiscountAmount(detailMenu);
+                inputNo =0;
+            }else inputNo= 0;
+        }else if(detailMenu==0){
+            if(detail.matches("")){
+                newDiscountCode.setTotalTimesOfUse(Integer.parseInt(detail));
+                inputNo =0;
+            }else inputNo= 0;
+        }
     }
 
     // array

@@ -25,12 +25,14 @@ public class LoginMenu {
     }
 
     public void processLogin(String username) {
-        if (username.matches(" ")) {
-            if (account.isThereAccountWithUsername(username)) {
-                commandProcessor.setSubMenuStatus(SubMenuStatus.PASSWORD);
-                outputNo = 2;
-            } else outputNo = 14;
-        } else outputNo = 0;
+        if(!login) {
+            if (username.matches(" ")) {
+                if (account.isThereAccountWithUsername(username)) {
+                    commandProcessor.setSubMenuStatus(SubMenuStatus.PASSWORD);
+                    outputNo = 2;
+                } else outputNo = 14;
+            } else outputNo = 0;
+        }else outputNo = 24;
         outputHandler.showOutput(outputNo);
     }
 
@@ -102,6 +104,7 @@ public class LoginMenu {
     public void processLogout() {
         loginAccount = null;
         commandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+        login = false;
         outputHandler.showOutput(22);
     }
 }

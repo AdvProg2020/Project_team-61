@@ -9,7 +9,7 @@ public enum SubMenuStatus {
     //
     MANAGECATAGORIES,
     VIEWPERSONALINFO,
-   MANAGEPRODUCTS,
+    MANAGEPRODUCTS,
     VIEWOFFS,
     //
     VIEWCART,
@@ -36,6 +36,7 @@ public enum SubMenuStatus {
     SALEFIELD,
     //
     ADDDISCOUNTCODE,
+    
     EDITDISCOUNTCODE,
     DISCOUNTCODEFIELD;
 

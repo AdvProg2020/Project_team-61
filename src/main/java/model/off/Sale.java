@@ -1,36 +1,41 @@
-package model.off;
-
-import model.productRelated.Product;
-
+package off;
 import java.util.ArrayList;
 import java.util.*;
-public class Sale {
+public class Sale  implements Comparable {
     private String offId;
-    private SaleStatus saleStatus;
+    private model.off.SaleStatus saleStatus;
     private Date startOfSalePeriod;
     private Date endOfSalePeriod;
     private int saleAmount;
     private model.accounts.Seller seller;
-    private ArrayList <model.productRelated.Product>allProducts;
-    private static ArrayList <Sale> allSales;
+    private ArrayList<Product> allProducts;
+    private static ArrayList<Sale> allSales;
 
-    public Sale(String offId, model.off.SaleStatus saleStatus, Date startOfSalePeriod, Date endOfSalePeriod, int saleAmount, model.accounts.Seller seller) {
+    public Sale(String offId, SaleStatus saleStatus, Date startOfSalePeriod, Date endOfSalePeriod, int saleAmount, Seller seller) {
         this.offId = offId;
         this.saleStatus = saleStatus;
         this.startOfSalePeriod = startOfSalePeriod;
         this.endOfSalePeriod = endOfSalePeriod;
         this.saleAmount = saleAmount;
         this.seller = seller;
-        allProducts=new ArrayList<Product>();
+        allProducts = new ArrayList<>();
         allSales.add(this);
 
+    }
+
+    public void setSaleDetails(SaleStatus saleStatus, Date startOfSalePeriod, Date endOfSalePeriod, int saleAmount, Seller seller) {
+        this.saleStatus = saleStatus;
+        this.startOfSalePeriod = startOfSalePeriod;
+        this.endOfSalePeriod = endOfSalePeriod;
+        this.saleAmount = saleAmount;
+        this.seller = seller;
     }
 
     public String getOffId() {
         return offId;
     }
 
-    public model.off.SaleStatus getSaleStatus() {
+    public SaleStatus getSaleStatus() {
         return saleStatus;
     }
 
@@ -46,15 +51,15 @@ public class Sale {
         return saleAmount;
     }
 
-    public model.accounts.Seller getSeller() {
+    public Seller getSeller() {
         return seller;
     }
 
-    public ArrayList<model.productRelated.Product> getAllProducts() {
+    public ArrayList<Product> getAllProducts() {
         return allProducts;
     }
 
-    public  Sale getSaleWithId(String id){
+    public Sale getSaleWithId(String id) {
         for (Sale sale : allSales) {
             if (sale.getOffId().equals(id)) {
                 return sale;
@@ -62,33 +67,36 @@ public class Sale {
         }
         return null;
     }
-    public boolean isThereSaleWithId(String id){
-       return allSales.contains(getSaleWithId(id));
+
+    public boolean isThereSaleWithId(String id) {
+        return allSales.contains(getSaleWithId(id));
     }
 
 
-     public int getAllSalesSize(){
-            return allSales.size();
+    public int getSaleListSize() {
+        return allSales.size();
     }
-    public Sale getSaleWithSeller(model.accounts.Seller seller){
-        for (Sale sale:allSales){
-            if ((sale.getSeller())==(seller)){
+
+    public Sale getSaleWithSeller(Seller seller) {
+        for (Sale sale : allSales) {
+            if ((sale.getSeller()) == (seller)) {
                 return sale;
             }
 
         }
         return null;
     }
-     public Sale getSaleWithProduct(model.productRelated.Product product){
-         for (Sale sale : allSales) {
-             for (model.productRelated.Product products : sale.getAllProducts()) {
-                 if (products.equals(product)){
-                     return sale;
-             }
-         }
-         }
-         return null;
-     }
+
+    public Sale getSaleWithProduct(Product product) {
+        for (Sale sale : allSales) {
+            for (Product products : sale.getAllProducts()) {
+                if (products.equals(product)) {
+                    return sale;
+                }
+            }
+        }
+        return null;
+    }
 
     public void setStartOfSalePeriod(Date startOfSalePeriod) {
         this.startOfSalePeriod = startOfSalePeriod;
@@ -102,13 +110,27 @@ public class Sale {
         this.saleAmount = saleAmount;
     }
 
-    public boolean isTheProductInAnotherSale(model.productRelated.Product product) {
+    public boolean isTheProductInAnotherSale(Product product) {
         for (Sale sale : allSales) {
             if (sale.getAllProducts().contains(product)) {
-                return true;}
+                return true;
+            }
         }
         return false;
 
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
+
+    public ArrayList<Sale> listSales() {
+        return allSales;
+    }
+
+    public ArrayList<Sale> viewSalesList() {
+        return allSales;
     }
 
     @Override

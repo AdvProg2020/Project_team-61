@@ -24,10 +24,6 @@ public class DiscountCode {
         allDiscountCodes.add(this);
     }
 
-    public void setTotalTimesOfUse(int totalTimesOfUse) {
-        this.totalTimesOfUse = totalTimesOfUse;
-    }
-
     public void setStartOfDiscountPeriod(Date startOfDiscountPeriod) {
         this.startOfDiscountPeriod = startOfDiscountPeriod;
     }

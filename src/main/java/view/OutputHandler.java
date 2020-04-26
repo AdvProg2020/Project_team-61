@@ -72,6 +72,8 @@ public class OutputHandler {
                 System.out.println("logout");
             } else if (output == 23) {
                 System.out.println("you cannot create manager profile");
+            }else if (output == 24) {
+                System.out.println("You've logged in before");
             }
         }
         if (commandProcessor.getMenuStatus() == MenuStatus.MANAGERMENU) {
@@ -158,4 +160,5 @@ public class OutputHandler {
                 "phone number: " + account.getPhoneNo() + "\n");
     }
 }
+
 
