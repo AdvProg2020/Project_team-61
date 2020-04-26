@@ -1,26 +1,23 @@
-package off;
+package model.off;
+
+import model.accounts.Seller;
+import model.productRelated.Product;
+
 import java.util.ArrayList;
 import java.util.*;
+
 public class Sale  implements Comparable {
     private String offId;
-    private model.off.SaleStatus saleStatus;
+    private SaleStatus saleStatus;
     private Date startOfSalePeriod;
     private Date endOfSalePeriod;
     private int saleAmount;
-    private model.accounts.Seller seller;
+    private Seller seller;
     private ArrayList<Product> allProducts;
     private static ArrayList<Sale> allSales;
 
-    public Sale(String offId, SaleStatus saleStatus, Date startOfSalePeriod, Date endOfSalePeriod, int saleAmount, Seller seller) {
+    public Sale(String offId) {
         this.offId = offId;
-        this.saleStatus = saleStatus;
-        this.startOfSalePeriod = startOfSalePeriod;
-        this.endOfSalePeriod = endOfSalePeriod;
-        this.saleAmount = saleAmount;
-        this.seller = seller;
-        allProducts = new ArrayList<>();
-        allSales.add(this);
-
     }
 
     public void setSaleDetails(SaleStatus saleStatus, Date startOfSalePeriod, Date endOfSalePeriod, int saleAmount, Seller seller) {
@@ -120,7 +117,6 @@ public class Sale  implements Comparable {
 
     }
 
-    @Override
     public int compareTo(Object o) {
         return 0;
     }

@@ -5,10 +5,10 @@ import model.productRelated.Category;
 import model.productRelated.Product;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
+
 
 public abstract class Filter {
-    Product product;
+   /* Product product;
     int numberOfFilter = 0;
     String filterName;
     ArrayList<Product> newArrayOfProductFilter = new ArrayList<>();
@@ -100,6 +100,6 @@ public abstract class Filter {
             }
         }
        return current;
-    }
+    }*/
 
 }

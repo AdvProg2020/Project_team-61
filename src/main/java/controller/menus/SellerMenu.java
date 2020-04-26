@@ -37,8 +37,8 @@ public class SellerMenu {
         if (productID.matches("")) {
             if (product.isThereProductWithId(productID)) {
                 return true;
-            } else inputNo =;
-        } else inputNo =;
+            } else inputNo =0;
+        } else inputNo =0;
         return false;
     }
 
@@ -49,7 +49,7 @@ public class SellerMenu {
 
     public void viewProduct(String productID) {
         if (checkProduct(productID)) {
-            outputHandler.showProduct(product.getProductById(productID);
+            outputHandler.showProduct(product.getProductById(productID));
         }
         outputHandler.showOutput(inputNo);
     }
@@ -99,8 +99,8 @@ public class SellerMenu {
         if (offID.matches("")) {
             if (sale.isThereSaleWithId(offID)) {
                 return true;
-            } else inputNo =;
-        } else inputNo =;
+            } else inputNo =0;
+        } else inputNo =0;
         return false;
     }
 

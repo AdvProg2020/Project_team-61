@@ -1,4 +1,5 @@
-package productRelated;
+package model.productRelated;
+
 import java.util.ArrayList;
 
 
@@ -9,12 +10,8 @@ public class Category implements Comparable{
     private ArrayList <Product> allProducts;
     private static ArrayList <Category> allCategories;
 
-    public Category(String name, String traits) {
+    public Category(String name) {
         this.name = name;
-        this.traits = traits;
-        subCategories =new ArrayList <>();
-        allProducts = new ArrayList <>();
-        allCategories.add(this);
     }
 
     public String getName() {
@@ -81,7 +78,6 @@ public class Category implements Comparable{
                 ;
     }
 
-    @Override
     public int compareTo(Object o) {
         return 0;
     }

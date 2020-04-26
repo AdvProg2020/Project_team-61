@@ -23,8 +23,8 @@ public class CustomerMenu {
         if (productID.matches("")) {
             if (product.isThereProductWithId(productID)) {
                 return true;
-            } else inputNo =;
-        } else inputNo =;
+            } else inputNo =0;
+        } else inputNo =0;
         return false;
     }
 

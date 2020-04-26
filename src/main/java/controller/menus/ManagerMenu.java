@@ -74,8 +74,8 @@ public class ManagerMenu {
         if (productID.matches("")) {
             if (product.isThereProductWithId(productID)) {
                 return true;
-            } else inputNo =;
-        } else inputNo =;
+            } else inputNo =0;
+        } else inputNo =0;
         return false;
     }
 
@@ -91,8 +91,8 @@ public class ManagerMenu {
         if (discountCodeID.matches("")) {
             if (discountCode.isThereDiscountWithId(discountCodeID)) {
                 return true;
-            } else inputNo =;
-        } else inputNo =;
+            } else inputNo =0;
+        } else inputNo =0;
         return false;
     }
 
@@ -101,12 +101,12 @@ public class ManagerMenu {
     }
 
     public void createNewDiscountCode(String discountCodeId){
-        DiscountCode newDiscountCode = new DiscountCode(discountCode);
-        commandProcessor.setSubMenuStatus();
+        DiscountCode newDiscountCode = new DiscountCode(discountCodeId);
+        commandProcessor.setSubMenuStatus(SubMenuStatus.REGISTERATIONDETAILS);
     }
 
     public void setDetailToDiscountCode(String detail){
-        if(detailMenu==0){
+       /* if(detailMenu==0){
             if(detail.matches("")){
                 newDiscountCode.setStartOfDiscountPeriod(detail);
                 inputNo =0;
@@ -126,7 +126,7 @@ public class ManagerMenu {
                 newDiscountCode.setTotalTimesOfUse(Integer.parseInt(detail));
                 inputNo =0;
             }else inputNo= 0;
-        }
+        }*/
     }
 
     // array
@@ -135,7 +135,7 @@ public class ManagerMenu {
 
     public void viewDiscountCode(String discountCodeID) {
         if (checkDiscountCode(discountCodeID)) {
-            outputHandler.showDiscountCode(discountCode.getDiscountWithId(DiscountCodeID));
+            outputHandler.showDiscountCode(discountCode.getDiscountWithId(discountCodeID));
         }
         outputHandler.showOutput(inputNo);
     }
@@ -153,19 +153,19 @@ public class ManagerMenu {
         if (field.equalsIgnoreCase("start Of Discount Period")) {
             if (field.matches("")) {
                 editableDiscountCode.setStartOfDiscountPeriod(new SimpleDateFormat("dd/MM/yyyy").parse(edit));
-            } else inputNo =;
+            } else inputNo =0;
         } else if (field.equalsIgnoreCase("end Of Discount Period")) {
             if (field.equalsIgnoreCase("start Of Discount Period")) {
                 editableDiscountCode.setEndOfDiscountPeriod(new SimpleDateFormat("dd/MM/yyyy").parse(edit));
-            } else inputNo =;
+            } else inputNo =0;
         } else if (field.equalsIgnoreCase("max Discount Amount")) {
             if (field.equalsIgnoreCase("start Of Discount Period")) {
                 editableDiscountCode.setMaxDiscountAmount(Double.parseDouble(edit));
-            } else inputNo =;
+            } else inputNo =0;
         } else if (field.equalsIgnoreCase("total Times Of Use")) {
             if (field.equalsIgnoreCase("start Of Discount Period")) {
                 editableDiscountCode.setTotalTimesOfUse(Integer.parseInt(edit));
-            } else inputNo =;
+            } else inputNo =0;
         }
     }
 
@@ -180,8 +180,8 @@ public class ManagerMenu {
         if (requestID.matches("")) {
             if (request.isThereRequestFromID(requestID)) {
                 return true;
-            } else inputNo =;
-        } else inputNo =;
+            } else inputNo =0;
+        } else inputNo =0;
         return false;
     }
 
@@ -199,7 +199,7 @@ public class ManagerMenu {
     public void acceptRequest(String requestID) {
         if (checkRequest(requestID)) {
             request.setIsRequestAccepted(true);
-            inputNo =;
+            inputNo =0;
         }
         outputHandler.showOutput(inputNo);
     }
@@ -207,7 +207,7 @@ public class ManagerMenu {
     public void declineRequest(String requestID) {
         if (checkRequest(requestID)) {
             request.setIsRequestAccepted(false);
-            inputNo =;
+            inputNo =0;
         }
         outputHandler.showOutput(inputNo);
     }
@@ -217,7 +217,7 @@ public class ManagerMenu {
            // if (category.isTh(category)) {
                 return true;
             //} else inputNo =;
-        } else inputNo =;
+        } else inputNo =0;
         return false;
     }
 
