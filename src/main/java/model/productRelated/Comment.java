@@ -2,7 +2,6 @@ package model.productRelated;
 import model.accounts.Account;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 
 public class Comment {
