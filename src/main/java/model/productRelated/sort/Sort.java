@@ -11,7 +11,7 @@ public abstract class Sort {
     public Score score;
     String sortName;
     int numberOfSort=0;
-    ArrayList<Product> newArrayOfProductSort = product.productList();
+    ArrayList<Product> newArrayOfProductSort = Product.getProductList();
     ArrayList<ArrayList<Product>> listOfSorts = new ArrayList<>();
     ArrayList<ArrayList<Product>> helpSort = new ArrayList<>();
 
@@ -72,7 +72,6 @@ public abstract class Sort {
         }
         return current;
     }
-
 
 
 

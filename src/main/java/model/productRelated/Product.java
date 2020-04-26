@@ -153,6 +153,14 @@ public class Product  {
         return score;
     }
 
+    public int getTotalNumberOfBuyers() {
+        return totalNumberOfBuyers;
+    }
+
+    public static ArrayList<Product> getProductList() {
+        return allProduct;
+    }
+
     //othersTobeHandel-------------------------------------------------------------------------------
 
     //finish
@@ -218,15 +226,9 @@ public class Product  {
     }
 
     //finish
-    public ArrayList<Product> productList(){
-        return allProduct;
-    }
-
-    //finish
-    public int getProductLListSize (){
+    public int getProductListSize (){
         return allProduct.size();
     }
-
 
     //finish
     public static ArrayList<Comment> allCommentsOnProduct ( String productId){

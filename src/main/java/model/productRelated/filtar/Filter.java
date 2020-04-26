@@ -31,28 +31,28 @@ public abstract class Filter {
     //filtering-----------------------------------------------------------------------------
 
     public ArrayList<Product> categoryFilter(Category category) {
-        newArrayOfProductFilter = product.productList().stream().filter(product1 -> product.getCategory().equals(category)).collect(Collectors.toCollection(ArrayList::new));
+        newArrayOfProductFilter = product.getProductList().stream().filter(product1 -> product.getCategory().equals(category)).collect(Collectors.toCollection(ArrayList::new));
         listOfFilters.add(1, newArrayOfProductFilter);
         helpFilter.add(newArrayOfProductFilter);
-        return product.productList();
+        return product.getProductList();
     }
 
     public ArrayList<Product> companiesFilter(String companiesName) {
-        newArrayOfProductFilter = product.productList().stream().filter(product1 -> product.getCompaniesName().equals(companiesName)).collect(Collectors.toCollection(ArrayList::new));
+        newArrayOfProductFilter = Product.getProductList().stream().filter(product1 -> product.getCompaniesName().equals(companiesName)).collect(Collectors.toCollection(ArrayList::new));
         listOfFilters.add(2, newArrayOfProductFilter);
         helpFilter.add(newArrayOfProductFilter);
         return newArrayOfProductFilter;
     }
 
     public ArrayList<Product> discountFilter(DiscountCode discountCode) {
-        newArrayOfProductFilter = product.productList().stream().filter(product1 -> product.getHasDiscount()).collect(Collectors.toCollection(ArrayList::new));
+        newArrayOfProductFilter = Product.getProductList().stream().filter(product1 -> product.getHasDiscount()).collect(Collectors.toCollection(ArrayList::new));
         listOfFilters.add(3, newArrayOfProductFilter);
         helpFilter.add(newArrayOfProductFilter);
         return newArrayOfProductFilter;
     }
 
     public ArrayList<Product> productNameFilter(String productName) {
-        newArrayOfProductFilter = product.productList().stream().filter(product1 -> product.getProductName().equals(productName)).collect(Collectors.toCollection(ArrayList::new));
+        newArrayOfProductFilter = Product.getProductList().stream().filter(product1 -> product.getProductName().equals(productName)).collect(Collectors.toCollection(ArrayList::new));
         listOfFilters.add(4, newArrayOfProductFilter);
         helpFilter.add(newArrayOfProductFilter);
         return newArrayOfProductFilter;
