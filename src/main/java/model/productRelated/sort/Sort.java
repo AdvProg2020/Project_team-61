@@ -33,8 +33,6 @@ public abstract class Sort {
         return newArrayOfProductSort;
     }
 
-    //dateSort
-
     //other---------------------------------------------------------------------------
 
     //finish
@@ -72,7 +70,6 @@ public abstract class Sort {
         }
         return current;
     }
-
 
 
 }

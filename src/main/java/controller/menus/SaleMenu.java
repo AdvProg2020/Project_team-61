@@ -12,7 +12,7 @@ public class SaleMenu {
     private Sale sale;
 
     public void processOffs() {
-          OutputHandler.showObjectOutput(sale.getSaleListSize(), sale.getListSaleSize(),1);
+          OutputHandler.showObjectOutput(sale.getSaleListSize(), sale.getSaleListSize(),1);
     }
 
     public void processShowProductsID(String id) {

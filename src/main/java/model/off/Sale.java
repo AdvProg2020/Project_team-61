@@ -66,8 +66,7 @@ public class Sale {
        return allSales.contains(getSaleWithId(id));
     }
 
-
-     public int getAllSalesSize(){
+     public int getSaleListSize(){
             return allSales.size();
     }
     public Sale getSaleWithSeller(model.accounts.Seller seller){

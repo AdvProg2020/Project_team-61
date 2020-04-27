@@ -33,7 +33,7 @@ public class ProductMenu {
     }
 
     public void addComments(){
-        Comment newComment = new Comment();
+ //       Comment newComment = new Comment();
     }
 
 }
