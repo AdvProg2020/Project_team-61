@@ -9,7 +9,7 @@ public class SaleMenu {
     private int outputNo;
     private int inputNo;
     private Product product;
-    private OutputHandler outputHandler;
+    private OutputHandler outputHandler= new OutputHandler();
     private Sale sale;
 
     //array

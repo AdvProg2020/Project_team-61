@@ -17,7 +17,7 @@ public class SellerMenu {
     private String field;
     private int detailMenu = 0;
     private CommandProcessor commandProcessor;
-    private OutputHandler outputHandler;
+    private OutputHandler outputHandler= new OutputHandler();
     private LoginMenu loginMenu;
     private Product productToEdit;
     private Sale saleToEdit;
@@ -52,7 +52,7 @@ public class SellerMenu {
         if (checkProduct(productID)) {
             outputHandler.showProduct(product.getProductById(productID));
         }
-        outputHandler.showOutput(inputNo);
+        outputHandler.showAccountOutput(inputNo);
     }
 
     //array
@@ -89,7 +89,7 @@ public class SellerMenu {
         if (checkProduct(productID)) {
             product.deleteProduct(productID);
         }
-        outputHandler.showOutput(inputNo);
+        outputHandler.showAccountOutput(inputNo);
     }
 
     public void processShowCategories() {
@@ -114,7 +114,7 @@ public class SellerMenu {
         if (checkSale(offID)) {
             outputHandler.showSale(sale.getSaleWithId(offID));
         }
-        outputHandler.showOutput(inputNo);
+        outputHandler.showAccountOutput(inputNo);
     }
 
     public void editOff(String offID) {

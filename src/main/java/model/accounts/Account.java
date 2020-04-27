@@ -7,7 +7,7 @@ import model.log.SaleLog;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public abstract class Account implements Comparable<Account> {
+public abstract class Account {
     String username;
     String name;
     String lastname;
