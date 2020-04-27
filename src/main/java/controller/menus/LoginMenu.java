@@ -25,14 +25,14 @@ public class LoginMenu {
     }
 
     public void processLogin(String username) {
-        if(!login) {
+        if (!login) {
             if (username.matches(" ")) {
                 if (account.isThereAccountWithUsername(username)) {
                     commandProcessor.setSubMenuStatus(SubMenuStatus.PASSWORD);
                     outputNo = 2;
                 } else outputNo = 14;
             } else outputNo = 0;
-        }else outputNo = 24;
+        } else outputNo = 24;
         outputHandler.showOutput(outputNo);
     }
 
@@ -42,6 +42,7 @@ public class LoginMenu {
                 loginAccount = account.getAccountWithUsername(username);
                 login = true;
                 findRole();
+                commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
                 outputNo = 15;
             } else outputNo = 14;
         } else outputNo = 3;
@@ -62,13 +63,20 @@ public class LoginMenu {
     }
 
     public void viewPersonalInfo() {
-        outputHandler.showAccount(loginAccount);
+        if(login) {
+            outputHandler.showAccount(loginAccount);
+        }outputHandler.showOutput(25);
     }
 
     public void processEdit(String field) {
-        commandProcessor.setSubMenuStatus(SubMenuStatus.EDITACCOUNT);
-        this.field = field;
-        outputHandler.showOutput(16);
+        if(login) {
+            if(!field.matches("")) {
+                commandProcessor.setSubMenuStatus(SubMenuStatus.EDITACCOUNT);
+                this.field = field;
+                outputHandler.showOutputWithString(field, 3);
+            }else outputNo = 16;
+        }else outputNo = 25;
+        outputHandler.showOutput(outputNo);
     }
 
     public void editField(String edit) {
@@ -102,9 +110,12 @@ public class LoginMenu {
     }
 
     public void processLogout() {
-        loginAccount = null;
-        commandProcessor.setMenuStatus(MenuStatus.MAINMENU);
-        login = false;
-        outputHandler.showOutput(22);
+        if (login) {
+            loginAccount = null;
+            commandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+            login = false;
+            outputNo = 22;
+        } else outputNo = 25;
+        outputHandler.showOutput(outputNo);
     }
 }

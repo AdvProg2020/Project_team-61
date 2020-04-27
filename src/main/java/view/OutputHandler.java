@@ -57,7 +57,7 @@ public class OutputHandler {
             } else if (output == 15) {
                 System.out.println("login successful");
             } else if (output == 16) {
-                System.out.println("please enter field you want to change");
+                System.out.println("no field matches with this");
             } else if (output == 17) {
                 System.out.println("password changed");
             } else if (output == 18) {
@@ -74,6 +74,20 @@ public class OutputHandler {
                 System.out.println("you cannot create manager profile");
             }else if (output == 24) {
                 System.out.println("You've logged in before");
+            }else if (output == 25) {
+                System.out.println("You've not logged in before");
+            }else if (output == 26) {
+                System.out.println("no role matches with this");
+            }else if (output == 27) {
+                System.out.println("you have already requested for new account");
+            }else if (output == 28) {
+                System.out.println("you don't have permission for new account");
+            }else if (output == 29) {
+                System.out.println("Your request has not been reviewed");
+            }else if (output == 28) {
+                System.out.println("you don't have permission for new account");
+            }else if (output == 28) {
+                System.out.println("you don't have permission for new account");
             }
         }
         if (commandProcessor.getMenuStatus() == MenuStatus.MANAGERMENU) {
@@ -118,8 +132,8 @@ public class OutputHandler {
         if (output == 2) {
             System.out.println("product " + string + "removed");
         }
-        if (output == 1) {
-            System.out.println("username " + string + "deleted");
+        if (output == 3) {
+            System.out.println("please enter your new  " + string );
         }
     }
     // 1 = view personal info

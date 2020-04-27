@@ -2,9 +2,8 @@ package controller.menus;
 
 import model.productRelated.Category;
 import model.productRelated.Product;
-import model.productRelated.filtar.Filter;
+import model.filtar.Filter;
 import view.CommandProcessor;
-import view.OutputHandler;
 import view.SubMenuStatus;
 
 public class ProductsMenu {
@@ -31,7 +30,7 @@ public class ProductsMenu {
 
     //a
     public void showAvailableFilters() {
-
+        commandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
     }
 
     public void filter(String filterID) {
@@ -48,6 +47,7 @@ public class ProductsMenu {
 
 
     public void processSorting() {
+        commandProcessor.setSubMenuStatus(SubMenuStatus.SORTING);
 
     }
 

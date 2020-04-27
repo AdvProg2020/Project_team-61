@@ -8,7 +8,6 @@ public enum SubMenuStatus {
     MANAGEREQUESTS,
     //
     MANAGECATAGORIES,
-    VIEWPERSONALINFO,
     MANAGEPRODUCTS,
     VIEWOFFS,
     //

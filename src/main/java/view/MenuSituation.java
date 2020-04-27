@@ -10,7 +10,10 @@ public class MenuSituation {
 
     void processHelp() {
        if (commandProcessor.getMenuStatus()==MenuStatus.MAINMENU) {
-            System.out.println("");
+            System.out.println("user menu " +
+                    "products menu" +
+                    "sale menu" +
+                    "");
         } else if (commandProcessor.getMenuStatus()==MenuStatus.REGISTERMENUE) {
            System.out.println("");
        } else if (commandProcessor.getMenuStatus()==MenuStatus.USERMENU) {
@@ -42,6 +45,7 @@ public class MenuSituation {
        }else if (commandProcessor.getMenuStatus()==MenuStatus.SELLERMENU) {
            System.out.println("");
        }
+
 
     }
 }

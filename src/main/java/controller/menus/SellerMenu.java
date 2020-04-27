@@ -44,6 +44,7 @@ public class SellerMenu {
 
     //array
     public void processManageProducts() {
+        commandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEPRODUCTS);
 
     }
 

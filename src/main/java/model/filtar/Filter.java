@@ -1,10 +1,4 @@
-package model.productRelated.filtar;
-
-import model.off.DiscountCode;
-import model.productRelated.Category;
-import model.productRelated.Product;
-
-import java.util.ArrayList;
+package model.filtar;
 
 
 public abstract class Filter {

@@ -3,7 +3,9 @@ package controller.menus;
 
 import model.accounts.Account;
 import model.productRelated.Product;
+import view.CommandProcessor;
 import view.OutputHandler;
+import view.SubMenuStatus;
 
 
 public class CustomerMenu {
@@ -12,10 +14,11 @@ public class CustomerMenu {
     private Account account;
     private OutputHandler outputHandler;
     private Product product;
+    private CommandProcessor commandProcessor;
 
     //array
     public void processViewCart() {
-
+        commandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
     }
 
     // manager // customer // seller
@@ -62,7 +65,7 @@ public class CustomerMenu {
 
     //array
     public void processViewOrders() {
-
+        commandProcessor.setSubMenuStatus(SubMenuStatus.VIEWORDERS);
     }
 
     public void showOrder(String orderID) {

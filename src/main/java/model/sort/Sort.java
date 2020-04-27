@@ -1,4 +1,4 @@
-package model.productRelated.sort;
+package model.sort;
 
 import model.productRelated.Product;
 import model.productRelated.Score;

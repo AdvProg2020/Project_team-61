@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
-import static model.productRelated.Product.allProduct;
 
 public abstract class Log{
 

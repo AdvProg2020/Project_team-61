@@ -1,5 +1,6 @@
 package controller.menus;
 
+import controller.request.Request;
 import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Manager;
@@ -13,6 +14,7 @@ import view.SubMenuStatus;
 public class RegisterMenu {
     private int outputNo;
     private Account account;
+    private Request request;
     private CommandProcessor commandProcessor;
     private int detailMenu = 0;
     private boolean managerWant = false;
@@ -22,14 +24,17 @@ public class RegisterMenu {
     public void processRegister(String role, String username) {
         if (username.matches(" ")) {
             if (!account.isThereAccountWithUsername(username)) {
-                registerByRole(role, username);
-                commandProcessor.setSubMenuStatus(SubMenuStatus.REGISTERATIONDETAILS);
-                outputNo = 2;
+                if (role.matches("")) {
+                    registerByRole(role, username);
+                    commandProcessor.setSubMenuStatus(SubMenuStatus.REGISTERATIONDETAILS);
+                    outputNo = 2;
+                } else outputNo = 26;
             } else outputNo = 1;
         } else outputNo = 0;
         outputHandler.showOutput(outputNo);
     }
 
+    ///////////////// go back to menu for seller request
     private void registerByRole(String role, String username) {
         if (role.equalsIgnoreCase("customer")) {
             Customer newCustomer = new Customer(username);
@@ -44,9 +49,21 @@ public class RegisterMenu {
                 outputNo = 23;
             }
         } else if (role.equalsIgnoreCase("seller")) {
-            Seller newSeller = new Seller(username);
+            String sellerAccountRequest = username + " wants seller account";
+            if (request.isThereRequestFromID(sellerAccountRequest)) {
+                if (request.isRequestViewed()) {
+                    if (request.isRequestAccepted()) {
+                        Seller newSeller = new Seller(username);
+                    }else outputNo = 28;
+                } else outputNo = 29;
+            } else {
+                Request newRequest = new Request(sellerAccountRequest);
+                outputNo = 27;
+            }
+            outputHandler.showOutput(outputNo);
         }
     }
+
 
     public void completeRegisterProcess(String detail) {
         if (detailMenu == 0) {
@@ -77,6 +94,7 @@ public class RegisterMenu {
             if (detail.matches("")) {
                 account.setPhoneNo(detailMenu);
                 detailMenu = 0;
+                commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
                 outputNo = 12;
             } else outputNo = 11;
         }
