@@ -9,15 +9,16 @@ public class SaleMenu {
     private int outputNo;
     private int inputNo;
     private Product product;
+    private OutputHandler outputHandler;
     private Sale sale;
 
+    //array
     public void processOffs() {
-          OutputHandler.showObjectOutput(sale.getSaleListSize(), sale.getSaleListSize(),1);
+
     }
 
     public void processShowProductsID(String id) {
-         OutputHandler.showObjectOutput(product.getProductById (id) , 1,1);
-
+        outputHandler.showProduct(product.getProductById(id));
     }
 
 

@@ -104,6 +104,27 @@ public abstract class Account implements Comparable<Account> {
         this.phoneNo = phoneNo;
     }
 
+    public String getUsername() {
+        return username;
+    }
 
+    public String getName() {
+        return name;
+    }
 
+    public String getLastname() {
+        return lastname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public int getPhoneNo() {
+        return phoneNo;
+    }
+
+    public double getCredit() {
+        return credit;
+    }
 }

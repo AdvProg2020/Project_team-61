@@ -4,55 +4,49 @@ import model.accounts.Seller;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
+
 
 public class Request {
-    private String requestID;
     private String requestText;
     private Date requestDate;
     private Seller seller;
-    private ArrayList<String> allRequests;
-    private boolean isRequested;
-    private boolean requestAccepted;
+    private boolean isRequested = false;
+    private boolean requestAccepted = false;
+    private boolean requestViewed = false;
+    private ArrayList<Request> allRequests;
 
     public Request(String requestID) {
-        this.requestID = requestID;
+        this.requestText = requestID;
+        allRequests.add(this);
     }
 
-    public void getRequestFromID(String requestID){
-
-    }
-
-    public boolean getIsRequested() {
-        return isRequested;
-    }
-
-    public boolean isThereRequestFromID(String requestID){
-        return true;
-    }
-
-    public boolean getIsRequestAccepted() {
-        return requestAccepted;
-    }
-
-    public void setIsRequestAccepted(boolean requestAccepted) {
-        this.requestAccepted = requestAccepted;
-    }
-
-    public void setRequestText(String requestText) {
-        this.requestText = requestText;
-    }
-
-    public Request listRequest(){
-        Iterator iterator = allRequests.iterator();
-        while(iterator.hasNext()){
-            Request selectedRequest = (Request) iterator.next();
-            return selectedRequest;
+    public Request getRequestFromID(String requestID){
+        for(Request request : allRequests){
+            if (request.requestText.equalsIgnoreCase(requestID)) return request;
         }
         return null;
     }
-
-    public int getRequestListSize(){
-        return allRequests.size();
+    public boolean isThereRequestFromID(String requestID){
+        for(Request request : allRequests){
+            if (request.requestText.equalsIgnoreCase(requestID)) return true;
+        }
+        return false;
     }
+
+
+    public boolean isRequestViewed() {
+        return requestViewed;
+    }
+    public void setRequestViewed(boolean requestViewed) {
+        this.requestViewed = requestViewed;
+    }
+
+    public boolean isRequestAccepted() {
+        return requestAccepted;
+    }
+    public void setRequestAccepted(boolean requestAccepted) {
+        this.requestAccepted = requestAccepted;
+    }
+
+
 }

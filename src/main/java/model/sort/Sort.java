@@ -1,4 +1,4 @@
-package model.productRelated.sort;
+package model.sort;
 
 import model.productRelated.Product;
 import model.productRelated.Score;
@@ -32,6 +32,8 @@ public abstract class Sort {
         helpSort.add(newArrayOfProductSort);
         return newArrayOfProductSort;
     }
+
+    //dateSort
 
     //other---------------------------------------------------------------------------
 
@@ -70,6 +72,7 @@ public abstract class Sort {
         }
         return current;
     }
+
 
 
 }

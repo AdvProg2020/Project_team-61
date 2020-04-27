@@ -6,7 +6,7 @@ import model.log.BuyLog;
 import model.log.Log;
 
 import java.util.*;
-public class Product  {
+public class Product {
 
     //productDetail
     private String productId;
@@ -153,14 +153,6 @@ public class Product  {
         return score;
     }
 
-    public int getTotalNumberOfBuyers() {
-        return totalNumberOfBuyers;
-    }
-
-    public static ArrayList<Product> getProductList() {
-        return allProduct;
-    }
-
     //othersTobeHandel-------------------------------------------------------------------------------
 
     //finish
@@ -226,9 +218,15 @@ public class Product  {
     }
 
     //finish
-    public int getProductListSize (){
+    public static ArrayList<Product> getProductList(){
+        return allProduct;
+    }
+
+    //finish
+    public int getProductLListSize (){
         return allProduct.size();
     }
+
 
     //finish
     public static ArrayList<Comment> allCommentsOnProduct ( String productId){
@@ -245,7 +243,6 @@ public class Product  {
         customer.buyLog.addProductToBuyLog(product);
     }
 
-    //finish
     public static Comparator<Product> productComparatorForView = new Comparator<Product>() {
 
         public int compare(Product s1, Product s2) {
@@ -268,5 +265,6 @@ public class Product  {
 
         }
     };
+
 
 }

@@ -1,94 +1,151 @@
-//package controller.menus;
-//
-//
-//import model.firms.Firm;
-//import model.off.Sale;
-//import model.productRelated.Product;
-//import view.CommandProcessor;
-//import view.OutputHandler;
-//import view.SubMenuStatus;
-//
-//public class SellerMenu {
-//    private int outputNo;
-//    private int inputNo;
-//    private Sale sale;
-//    private Product product;
-//    private Firm firm;
-//    private CommandProcessor commandProcessor;
-//
-//
-//    public void processViewCompanyInformation() {
-//        commandProcessor.setSubMenuStatus(SubMenuStatus.COMPANYINFORMATION);
-//    }
-//
-//    public void viewCompanyInformation(String firmID) {
-//        OutputHandler.showObjectOutput(firm.getFirmWithID(firmID) , 1,1);
-//    }
-//
-//    public void processViewSalesHistory() {
-//
-//    }
-//
-//
-//    public void processManageProducts() {
-//         OutputHandler.showObjectOutput(product.getProductList (), product.getProductListSize(),1);
-//
-//    }
-//
-//    public void viewProduct(String productID){
-//         OutputHandler.showObjectOutput(product.getProductById (productID) , 1,1);
-//
-//    }
-//
-//    public void viewBuyersProduct(String productID){
-//
-//    }
-//
-//    public void editProduct(String productID){
-//
-//    }
-//
-//    public void editProductField(String edit){
-//
-//    }
-//
-//    public void processAddProduct() {
-//        commandProcessor.setSubMenuStatus(SubMenuStatus.ADDPRODUCT);
-//    }
-//
-//    public void addProduct(String ID){
-//
-//    }
-//
-//    public void processRemoveProduct(String productID) {
-//        product.deleteProduct(productID);
-//    }
-//
-//    public void processShowCategories() {
-//
-//    }
-//
-//    public void processViewOffs() {
-//         OutputHandler.showObjectOutput(sale.getSaleListSize(), sale.getSaleListSize(),1);
-//    }
-//
-//    public void viewOff(String offID){
-//         OutputHandler.showObjectOutput(sale.getSaleWithId(offID) , 1,1);
-//    }
-//
-//    public void editOff(String offID){
-//
-//    }
-//
-//    public void editOffField(String edit){
-//
-//    }
-//
-//    public void addOff(){
-//
-//    }
-//
-//    public void processViewBalance(){
-//
-//    }
-//}
+package controller.menus;
+
+
+import model.firms.Firm;
+import model.off.Sale;
+import model.productRelated.Product;
+import view.CommandProcessor;
+import view.OutputHandler;
+import view.SubMenuStatus;
+
+public class SellerMenu {
+    private int outputNo;
+    private int inputNo;
+    private Sale sale;
+    private Product product;
+    private Firm firm;
+    private String field;
+    private int detailMenu = 0;
+    private CommandProcessor commandProcessor;
+    private OutputHandler outputHandler;
+    private LoginMenu loginMenu;
+    private Product productToEdit;
+    private Sale saleToEdit;
+
+    //?
+    public void processViewCompanyInformation() {
+       // outputHandler.showFirm(loginMenu.getLoginAccount().getFirm());
+    }
+
+    //array
+    public void processViewSalesHistory() {
+
+    }
+
+    // manager // customer // seller
+    private boolean checkProduct(String productID) {
+        if (productID.matches("")) {
+            if (product.isThereProductWithId(productID)) {
+                return true;
+            } else inputNo =0;
+        } else inputNo =0;
+        return false;
+    }
+
+    //array
+    public void processManageProducts() {
+        commandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEPRODUCTS);
+
+    }
+
+    public void viewProduct(String productID) {
+        if (checkProduct(productID)) {
+            outputHandler.showProduct(product.getProductById(productID));
+        }
+        outputHandler.showOutput(inputNo);
+    }
+
+    //array
+    public void viewBuyersProduct(String productID) {
+
+    }
+
+    public void editProduct(String productID) {
+        productToEdit = product.getProductById(productID);
+        commandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTFIELD);
+    }
+
+
+    public void editProductField(String edit) {
+        if (field.equalsIgnoreCase("")) {
+            if (edit.matches("")) {
+
+            }
+        }
+    }
+
+    public void processAddProduct() {
+        commandProcessor.setSubMenuStatus(SubMenuStatus.ADDPRODUCT);
+    }
+
+    public void addProduct(String detail) {
+        if (detailMenu == 0) {
+            if (detail.matches("")) {
+            }
+        }
+    }
+
+    public void processRemoveProduct(String productID) {
+        if (checkProduct(productID)) {
+            product.deleteProduct(productID);
+        }
+        outputHandler.showOutput(inputNo);
+    }
+
+    public void processShowCategories() {
+
+    }
+
+    private boolean checkSale(String offID) {
+        if (offID.matches("")) {
+            if (sale.isThereSaleWithId(offID)) {
+                return true;
+            } else inputNo =0;
+        } else inputNo =0;
+        return false;
+    }
+
+    //array
+    public void processViewOffs() {
+
+    }
+
+    public void viewOff(String offID) {
+        if (checkSale(offID)) {
+            outputHandler.showSale(sale.getSaleWithId(offID));
+        }
+        outputHandler.showOutput(inputNo);
+    }
+
+    public void editOff(String offID) {
+        saleToEdit = sale.getSaleWithId(offID);
+        commandProcessor.setSubMenuStatus(SubMenuStatus.SALEFIELD);
+    }
+
+    public void editOffField(String edit) {
+        if (field.equalsIgnoreCase("")) {
+            if (edit.matches("")) {
+
+            }
+        }
+    }
+
+    public void addOff() {
+        commandProcessor.setSubMenuStatus(SubMenuStatus.ADDSALE);
+    }
+
+    public void setDetailsToSale(String detail){
+        if (detailMenu == 0) {
+            if (detail.matches("")) {
+            }
+        }
+    }
+
+    public void processViewBalance() {
+
+    }
+
+    public void setField(String field) {
+        this.field = field;
+    }
+}

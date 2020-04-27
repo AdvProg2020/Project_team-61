@@ -3,17 +3,15 @@ package model.productRelated;
 import java.util.ArrayList;
 
 
-public class Category{
+public class Category implements Comparable{
     private String name;
     private String traits;
-    private ArrayList <Category>subCategories = new ArrayList<Category>();
-    private ArrayList <model.productRelated.Product> allProducts = new ArrayList<Product>();
+    private ArrayList <Category>subCategories;
+    private ArrayList <Product> allProducts;
     private static ArrayList <Category> allCategories;
 
-    public Category(String name, String traits) {
+    public Category(String name) {
         this.name = name;
-        this.traits = traits;
-        allCategories.add(this);
     }
 
     public String getName() {
@@ -28,7 +26,7 @@ public class Category{
         return subCategories;
     }
 
-    public ArrayList<model.productRelated.Product> getAllProducts() {
+    public ArrayList<Product> getAllProducts() {
         return allProducts;
     }
 
@@ -43,7 +41,6 @@ public class Category{
     public void setSubCategories(ArrayList<Category> subCategories) {
         this.subCategories = subCategories;
     }
-
     public Category getCategoryWithName(String name){
         for( Category category:allCategories){
             if (category.getName().equalsIgnoreCase(name)){
@@ -52,23 +49,24 @@ public class Category{
         }
         return null;
     }
-
     public boolean isThereCategoryWithName(String name){
         for ( Category category:allCategories){
             if (category.getName().equalsIgnoreCase(name))
                 return true;
             }
-        return true;
+        return false;
 
     }
-
     public void deleteCategory(String name){
         allCategories.remove(getCategoryWithName(name));
     }
-
     public int getCategoryListSize(){
         return allCategories.size();
     }
+   public ArrayList<Category> listCategories(){
+       return allCategories;
+
+   }
 
     @Override
     public String toString() {
@@ -80,7 +78,10 @@ public class Category{
                 ;
     }
 
-  /*  public Set<String> viewCategories(){
+    public int compareTo(Object o) {
+        return 0;
+    }
+    /*  public Set<String> viewCategories(){
         for (model.productRelated.Category category : allCategories) {
              category.getName();
         }

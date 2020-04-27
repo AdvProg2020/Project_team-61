@@ -1,26 +1,23 @@
 package model.off;
+
 import model.accounts.Account;
 
 import java.util.*;
 import java.util.ArrayList;
 
 public class DiscountCode {
-    private int discountId;
+    private String discountId;
     private Date startOfDiscountPeriod;
     private Date endOfDiscountPeriod;
     private double maxDiscountAmount;
     private int totalTimesOfUse;
-    private ArrayList<Account> allCustomersWithDiscountCode = new ArrayList<Account>();
+    private ArrayList<Account> allCustomersWithDiscountCode;
     private static ArrayList<DiscountCode> allDiscountCodes;
 
-    public DiscountCode(int discountId, Date startOfDiscountPeriod, Date endOfDiscountPeriod, double maxDiscountAmount, int totalTimesOfUse, ArrayList<model.accounts.Account> allCustomersWithDiscountCode) {
+    public DiscountCode(String discountId) {
         this.discountId = discountId;
-        this.startOfDiscountPeriod = startOfDiscountPeriod;
-        this.endOfDiscountPeriod = endOfDiscountPeriod;
-        this.maxDiscountAmount = maxDiscountAmount;
-        this.totalTimesOfUse = totalTimesOfUse;
-        allDiscountCodes.add(this);
     }
+
 
     public void setStartOfDiscountPeriod(Date startOfDiscountPeriod) {
         this.startOfDiscountPeriod = startOfDiscountPeriod;
@@ -34,7 +31,7 @@ public class DiscountCode {
         this.maxDiscountAmount = maxDiscountAmount;
     }
 
-    public int getDiscountId() {
+    public String getDiscountId() {
         return discountId;
     }
 
@@ -58,7 +55,7 @@ public class DiscountCode {
         return allCustomersWithDiscountCode;
     }
 
-    public boolean isThereDiscountWithId(int id){
+    public boolean isThereDiscountWithId(String id){
         for (DiscountCode discountCode : allDiscountCodes) {
             if(discountCode.getDiscountId() == id) {
                 return true;
@@ -66,8 +63,7 @@ public class DiscountCode {
         }
         return false;
     }
-
-    public DiscountCode getDiscountWithId(int id){
+    public DiscountCode getDiscountWithId(String id){
         for ( DiscountCode discountcode:allDiscountCodes){
             if (discountcode.getDiscountId()==id){
                 return discountcode;
@@ -75,8 +71,7 @@ public class DiscountCode {
         }
         return null;
     }
-
-    public void deleteDiscount(int id){
+    public void deleteDiscount(String id){
         allDiscountCodes.remove(getDiscountWithId(id));
 
     }
@@ -91,6 +86,9 @@ public class DiscountCode {
                 ", totalTimesOfUse=" + totalTimesOfUse +
                 ", allCustomersWithDiscountCode=" + allCustomersWithDiscountCode +
                 '}';
+    }
+
+    public void setTotalTimesOfUse(int parseInt) {
     }
     /*   public void viewDiscountCodes(){
         for (DiscountCode discountCode:allDiscountCodes){
