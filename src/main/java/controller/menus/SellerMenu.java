@@ -1,6 +1,7 @@
 package controller.menus;
 
 
+import controller.request.Request;
 import model.firms.Firm;
 import model.off.Sale;
 import model.productRelated.Product;
@@ -17,7 +18,7 @@ public class SellerMenu {
     private String field;
     private int detailMenu = 0;
     private CommandProcessor commandProcessor;
-    private OutputHandler outputHandler;
+    private OutputHandler outputHandler= new OutputHandler();
     private LoginMenu loginMenu;
     private Product productToEdit;
     private Sale saleToEdit;
@@ -32,13 +33,15 @@ public class SellerMenu {
 
     }
 
+    //--------------------------------------------------------------------------------------
     // manager // customer // seller
     private boolean checkProduct(String productID) {
         if (productID.matches("")) {
             if (product.isThereProductWithId(productID)) {
                 return true;
-            } else inputNo =0;
-        } else inputNo =0;
+            } else inputNo = 3;
+        } else inputNo = 2;
+        outputHandler.showAccountOutput(inputNo);
         return false;
     }
 
@@ -52,7 +55,7 @@ public class SellerMenu {
         if (checkProduct(productID)) {
             outputHandler.showProduct(product.getProductById(productID));
         }
-        outputHandler.showOutput(inputNo);
+        outputHandler.showAccountOutput(inputNo);
     }
 
     //array
@@ -64,7 +67,6 @@ public class SellerMenu {
         productToEdit = product.getProductById(productID);
         commandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTFIELD);
     }
-
 
     public void editProductField(String edit) {
         if (field.equalsIgnoreCase("")) {
@@ -83,13 +85,14 @@ public class SellerMenu {
             if (detail.matches("")) {
             }
         }
+        Request newRequest = new Request("edit products "+ field +" to "+ detail );
     }
 
     public void processRemoveProduct(String productID) {
         if (checkProduct(productID)) {
             product.deleteProduct(productID);
         }
-        outputHandler.showOutput(inputNo);
+        outputHandler.showAccountOutput(inputNo);
     }
 
     public void processShowCategories() {
@@ -114,7 +117,7 @@ public class SellerMenu {
         if (checkSale(offID)) {
             outputHandler.showSale(sale.getSaleWithId(offID));
         }
-        outputHandler.showOutput(inputNo);
+        outputHandler.showAccountOutput(inputNo);
     }
 
     public void editOff(String offID) {

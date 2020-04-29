@@ -14,7 +14,7 @@ public class LoginMenu {
     private String field = null;
     private String username;
     private boolean login;
-    private OutputHandler outputHandler;
+    private OutputHandler outputHandler= new OutputHandler();
 
     public boolean isLogin() {
         return login;
@@ -33,7 +33,7 @@ public class LoginMenu {
                 } else outputNo = 14;
             } else outputNo = 0;
         } else outputNo = 24;
-        outputHandler.showOutput(outputNo);
+        outputHandler.showAccountOutput(outputNo);
     }
 
     public void checkPassword(String password) {
@@ -46,7 +46,7 @@ public class LoginMenu {
                 outputNo = 15;
             } else outputNo = 14;
         } else outputNo = 3;
-        outputHandler.showOutput(outputNo);
+        outputHandler.showAccountOutput(outputNo);
     }
 
     private void findRole() {
@@ -65,7 +65,7 @@ public class LoginMenu {
     public void viewPersonalInfo() {
         if(login) {
             outputHandler.showAccount(loginAccount);
-        }outputHandler.showOutput(25);
+        }outputHandler.showAccountOutput(25);
     }
 
     public void processEdit(String field) {
@@ -76,7 +76,7 @@ public class LoginMenu {
                 outputHandler.showOutputWithString(field, 3);
             }else outputNo = 16;
         }else outputNo = 25;
-        outputHandler.showOutput(outputNo);
+        outputHandler.showAccountOutput(outputNo);
     }
 
     public void editField(String edit) {
@@ -106,7 +106,7 @@ public class LoginMenu {
                 outputNo = 21;
             } else outputNo = 11;
         }
-        outputHandler.showOutput(outputNo);
+        outputHandler.showAccountOutput(outputNo);
     }
 
     public void processLogout() {
@@ -116,6 +116,6 @@ public class LoginMenu {
             login = false;
             outputNo = 22;
         } else outputNo = 25;
-        outputHandler.showOutput(outputNo);
+        outputHandler.showAccountOutput(outputNo);
     }
 }

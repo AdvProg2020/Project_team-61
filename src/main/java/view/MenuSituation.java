@@ -5,6 +5,50 @@ public class MenuSituation {
 
 
     void processBack() {
+        if (commandProcessor.getMenuStatus()==MenuStatus.MAINMENU) {
+            System.out.println("this is first page");
+        } /*else if (commandProcessor.getMenuStatus()==MenuStatus.REGISTERMENUE) {
+            commandProcessor.setMenuStatus();
+            System.out.println("");
+        } else if (commandProcessor.getMenuStatus()==MenuStatus.USERMENU) {
+            System.out.println("");
+        }*/ else if (commandProcessor.getMenuStatus()==MenuStatus.CUSTOMERMENU) {
+            commandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+            System.out.println("");
+        } else if (commandProcessor.getMenuStatus()==MenuStatus.MANAGERMENU) {
+            commandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+            System.out.println("");
+        } else if (commandProcessor.getMenuStatus()==MenuStatus.SELLERMENU) {
+            commandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+            System.out.println("");
+        }else if (commandProcessor.getMenuStatus()==MenuStatus.PRODUCTSMENU) {
+            commandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+            System.out.println("");
+        }else if (commandProcessor.getMenuStatus()==MenuStatus.PRODUCTMENU) {
+            //commandProcessor.setMenuStatus();
+            System.out.println("");
+        }else if (commandProcessor.getMenuStatus()==MenuStatus.SALEMENU) {
+            commandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+            System.out.println("");
+        }else if (commandProcessor.getMenuStatus()==MenuStatus.CREATIONMENU) {
+            commandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+            System.out.println("");
+        }else if (commandProcessor.getMenuStatus()==MenuStatus.SELLERMENU) {
+            System.out.println("");
+        }else if (commandProcessor.getMenuStatus()==MenuStatus.SELLERMENU) {
+            System.out.println("");
+        }else if (commandProcessor.getMenuStatus()==MenuStatus.SELLERMENU) {
+            System.out.println("");
+        }else if (commandProcessor.getMenuStatus()==MenuStatus.SELLERMENU) {
+            System.out.println("");
+        }else if (commandProcessor.getMenuStatus()==MenuStatus.SELLERMENU) {
+            System.out.println("");
+        }else if (commandProcessor.getMenuStatus()==MenuStatus.SELLERMENU) {
+            System.out.println("");
+        }
+
+
+
 
     }
 

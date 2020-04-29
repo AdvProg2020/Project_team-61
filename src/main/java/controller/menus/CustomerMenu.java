@@ -12,7 +12,7 @@ public class CustomerMenu {
     private int inputNo;
     private int outputNo;
     private Account account;
-    private OutputHandler outputHandler;
+    private OutputHandler outputHandler= new OutputHandler();
     private Product product;
     private CommandProcessor commandProcessor;
 
@@ -23,7 +23,7 @@ public class CustomerMenu {
 
     // manager // customer // seller
     private boolean checkProduct(String productID) {
-        if (productID.matches("")) {
+        if (productID.matches(".+")) {
             if (product.isThereProductWithId(productID)) {
                 return true;
             } else inputNo =0;
@@ -40,7 +40,7 @@ public class CustomerMenu {
         if(checkProduct(productID)) {
             outputHandler.showProduct(product.getProductById(productID));
         }
-        outputHandler.showOutput(inputNo);
+        outputHandler.showAccountOutput(inputNo);
     }
 
     public void increaseProductNumber(String productID) {
