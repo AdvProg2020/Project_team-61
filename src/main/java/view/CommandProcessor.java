@@ -20,34 +20,34 @@ public class CommandProcessor {
     private SubMenuStatus subMenuStatus = SubMenuStatus.MAINMENU;
     private OutputHandler outputHandler = new OutputHandler();
 
-    private String[] regex = {"(?i)create\\s+account\\s+(\\S+)\\s+(\\S+)",
-            "(?i)login\\s+(\\S+)",//1
-            "(?i)edit\\s+(\\S+)",//2
-            "(?i)remove\\s+product\\s+(\\S+)",//3
-            "(?i)show\\s+product\\s+(\\S+)",//4
-            "(?i)compare\\s+(\\S+)",//5
-            "(?i)view\\s+(.+)",//6
-            "(?i)delete\\s+user (.+)",//7
-            "(?i)remove\\s+(.+)",//8
-            "(?i)view\\s+discount\\s+code (.+)",//9
-            "(?i)edit\\s+discount\\s+code (.+)",//10
-            "(?i)remove\\s+discount\\s+code (.+)",//11
-            "(?i)details\\s+(.+)",//12
-            "(?i)accept\\s+(.+)",//13
-            "(?i)decline\\s+(.+)",//14
-            "(?i)edit\\s+(.+)",//15
-            "(?i)add\\s+(.+)",//16
-            "(?i)remove\\s+(.+)",//17
-            "(?i)view\\s+buyers\\s+(.+)",//18
-            "(?i)increase (.+)",//19
-            "(?i)decrease (.+)",//20
-            "(?i)show order (.+)",//21
-            "(?i)rate (.+) (\\d+)",//22
-            "(?i)filter (.+)",//23
-            "(?i)disable filter",//24
-            "(?i)sort (.+)",//25
+    private String[] regex = {"(?i)create\\s+account\\s+((?!^ +$)^.+$)",
+            "(?i)login\\s+((?!^ +$)^.+$)",//1
+            "(?i)edit\\s+((?!^ +$)^.+$)",//2
+            "(?i)remove\\s+product\\s+((?!^ +$)^.+$)",//3
+            "(?i)show\\s+product\\s+((?!^ +$)^.+$)",//4
+            "(?i)compare\\s+((?!^ +$)^.+$)",//5
+            "(?i)view\\s+((?!^ +$)^.+$)",//6
+            "(?i)delete\\s+user((?!^ +$)^.+$)",//7
+            "(?i)remove\\s+((?!^ +$)^.+$)",//8
+            "(?i)view\\s+discount\\s+code((?!^ +$)^.+$)",//9
+            "(?i)edit\\s+discount\\s+code((?!^ +$)^.+$)",//10
+            "(?i)remove\\s+discount\\s+code((?!^ +$)^.+$)",//11
+            "(?i)details\\s+((?!^ +$)^.+$)",//12
+            "(?i)accept\\s+((?!^ +$)^.+$)",//13
+            "(?i)decline\\s+((?!^ +$)^.+$)",//14
+            "(?i)edit\\s+((?!^ +$)^.+$)",//15
+            "(?i)add\\s+((?!^ +$)^.+$)",//16
+            "(?i)remove\\s+((?!^ +$)^.+$)",//17
+            "(?i)view\\s+buyers\\s+((?!^ +$)^.+$)",//18
+            "(?i)increase((?!^ +$)^.+$)",//19
+            "(?i)decrease((?!^ +$)^.+$)",//20
+            "(?i)show\\s+order((?!^ +$)^.+$)",//21
+            "(?i)rate((?!^ +$)^.+$) (\\d+)",//22
+            "(?i)filter((?!^ +$)^.+$)",//23
+            "(?i)disable\\s+filter",//24
+            "(?i)sort((?!^ +$)^.+$)",//25
             "(?i)select seller",//26
-            "(.+)"//27
+            "((?!^ +$)^.+$)"//27
 
 
     };
@@ -79,31 +79,36 @@ public class CommandProcessor {
                 menuSituation.processBack();
             } else if (input.equalsIgnoreCase("help")) {
                 menuSituation.processHelp();
-            } else if (input.matches(regex[1])) {
-                loginMenu.processLogin(getMatcher(input, regex[1]).group(1));
-            } else if (input.equalsIgnoreCase("logout")) {
-                loginMenu.processLogout();
-            } else if (input.matches(regex[2])) {
-                loginMenu.processEdit(getMatcher(input, regex[2]).group(1));
-            } else if (input.equalsIgnoreCase("view personal info")) {
-                loginMenu.viewPersonalInfo();
-            } else if (subMenuStatus == subMenuStatus.EDITACCOUNT) {
-                if (input.matches(regex[27])) {
-                    loginMenu.editField(getMatcher(input, regex[27]).group(1));
+            } else if (!(menuStatus == MenuStatus.CREATIONMENU)) {
+                if (input.matches(regex[1])) {
+                    loginMenu.processLogin(getMatcher(input, regex[1]).group(1));
+                } else if (input.equalsIgnoreCase("logout")) {
+                    loginMenu.processLogout();
+                } else if (input.matches(regex[2])) {
+                    loginMenu.processEdit(getMatcher(input, regex[2]).group(1));
+                } else if (input.equalsIgnoreCase("view personal info")) {
+                    loginMenu.viewPersonalInfo();
+                } else if (subMenuStatus == subMenuStatus.EDITACCOUNT) {
+                    if (input.matches(regex[27])) {
+                        loginMenu.editField(getMatcher(input, regex[27]).group(1));
+                    }
+                } else if (subMenuStatus == subMenuStatus.PASSWORD) {
+                    if (input.matches(regex[27])) {
+                        loginMenu.checkPassword(getMatcher(input, regex[27]).group(1));
+                    }
+                } else if (input.matches(regex[0])) {
+                    registerMenu.processRegister(getMatcher(input, regex[0]).group(1), getMatcher(input, regex[0]).group(2));
                 }
-            } else if (subMenuStatus == subMenuStatus.PASSWORD) {
-                if (input.matches(regex[27])) {
-                    loginMenu.checkPassword(getMatcher(input, regex[27]).group(1));
+                if (subMenuStatus == subMenuStatus.CREATEMANAGERACCOUNT) {
+                    if (input.matches(regex[27])) {
+                        registerMenu.processRegister("manager", getMatcher(input, regex[27]).group(1));
+                    }
                 }
-            } else if (input.matches(regex[0])) {
-                registerMenu.processRegister(getMatcher(input, regex[0]).group(1), getMatcher(input, regex[0]).group(2));
-            } else if (subMenuStatus == subMenuStatus.REGISTERATIONDETAILS) {
-                if (input.matches(regex[27])) {
-                    registerMenu.completeRegisterProcess(getMatcher(input, regex[27]).group(1));
-                }
-            } else if (subMenuStatus == subMenuStatus.CREATEMANAGERACCOUNT) {
-                if (input.matches(regex[27])) {
-                    registerMenu.processRegister("manager", getMatcher(input, regex[27]).group(1));
+            } else if (menuStatus == MenuStatus.CREATIONMENU) {
+                if (subMenuStatus == subMenuStatus.REGISTERATIONDETAILS) {
+                    if (input.matches(regex[27])) {
+                        registerMenu.completeRegisterProcess(getMatcher(input, regex[27]).group(1));
+                    }
                 }
             } else if (menuStatus == MenuStatus.MANAGERMENU) {
                 //ManagerMenu
@@ -161,7 +166,7 @@ public class CommandProcessor {
                 //$$$$$
                 if (subMenuStatus.equals(SubMenuStatus.VIEWDISCOUNTCOD)) {
                     if (input.matches(regex[15])) {
-                    managerMenu.viewDiscountCode(getMatcher(input, regex[16]).group(1));
+                        managerMenu.viewDiscountCode(getMatcher(input, regex[16]).group(1));
                     }
                 }
                 if (subMenuStatus.equals(SubMenuStatus.ADDDISCOUNTCODE)) {
@@ -181,11 +186,14 @@ public class CommandProcessor {
                 if (subMenuStatus.equals(SubMenuStatus.EDITDISCOUNTCODE)) {
                     managerMenu.editDiscountCodeField(getMatcher(input, regex[27]).group(1));
 
-                } if (subMenuStatus.equals(SubMenuStatus.DETAILCATEGORY)) {
+                }
+                if (subMenuStatus.equals(SubMenuStatus.DETAILCATEGORY)) {
                     managerMenu.setDetailToCategory(getMatcher(input, regex[27]).group(1));
-                } if (subMenuStatus.equals(SubMenuStatus.CATEGORYFIELD)) {
+                }
+                if (subMenuStatus.equals(SubMenuStatus.CATEGORYFIELD)) {
                     managerMenu.categoryField(getMatcher(input, regex[27]).group(1));
-                } if (subMenuStatus.equals(SubMenuStatus.EDITCATEGORY)) {
+                }
+                if (subMenuStatus.equals(SubMenuStatus.EDITCATEGORY)) {
                     managerMenu.editCategoryField(getMatcher(input, regex[27]).group(1));
                 }
             } else if (menuStatus == MenuStatus.SELLERMENU) {
@@ -240,8 +248,7 @@ public class CommandProcessor {
                 }
                 if (subMenuStatus.equals(SubMenuStatus.EDITSALE)) {
                     sellerMenu.editProductField(getMatcher(input, regex[27]).group(1));
-                }
-                else if (subMenuStatus.equals(SubMenuStatus.ADDSALE)) {
+                } else if (subMenuStatus.equals(SubMenuStatus.ADDSALE)) {
                     sellerMenu.setDetailsToSale(getMatcher(input, regex[27]).group(1));
                 }
 
@@ -279,7 +286,7 @@ public class CommandProcessor {
                         customerMenu.rateProduct(getMatcher(input, regex[22]).group(1), Integer.parseInt(getMatcher(input, regex[22]).group(2)));
                     }
                 }
-            } else if (menuStatus == MenuStatus.PRODUCTMENU || menuStatus == MenuStatus.MAINMENU) {
+            } else if (menuStatus == MenuStatus.PRODUCTSMENU || menuStatus == MenuStatus.MAINMENU) {
                 //ProductsMenu
                 if (input.equalsIgnoreCase("products")) {
                     productsMenu.processProducts();

@@ -6,9 +6,10 @@ import model.off.DiscountCode;
 import model.productRelated.Category;
 import model.productRelated.Product;
 import view.CommandProcessor;
-import view.MenuStatus;
 import view.OutputHandler;
 import view.SubMenuStatus;
+
+import java.text.SimpleDateFormat;
 
 
 public class ManagerMenu {
@@ -28,7 +29,7 @@ public class ManagerMenu {
     private int detailMenu = 0;
     private DiscountCode newDiscountCode;
 
-
+    //----------------------------------------------------------------------
     //array
     public void processManageUsers() {
         commandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEUSERS);
@@ -62,6 +63,7 @@ public class ManagerMenu {
         registerMenu.setManagerWant(true);
         outputHandler.showManagerMenuOutput(1);
     }
+    //--------------------------------------------------------------------
 
     // array
     public void processManageAllProducts() {
@@ -84,6 +86,7 @@ public class ManagerMenu {
             outputHandler.showOutputWithString(productID, 2);
         }
     }
+    //------------------------------------------------
 
     private boolean checkDiscountCode(String discountCodeID) {
         if (discountCodeID.matches("")) {
@@ -99,7 +102,6 @@ public class ManagerMenu {
         commandProcessor.setSubMenuStatus(SubMenuStatus.ADDDISCOUNTCODE);
         outputHandler.showAccountOutput(6);
     }
-
     public void createNewDiscountCode(String discountCodeId) {
         if (checkDiscountCode(discountCodeId)) {
             DiscountCode newDiscountCode = new DiscountCode(discountCodeId);
@@ -107,7 +109,6 @@ public class ManagerMenu {
             outputHandler.showAccountOutput(7);
         }
     }
-
     public void setDetailToDiscountCode(String detail) {
         /*
         if (detailMenu == 0) {
@@ -155,13 +156,11 @@ public class ManagerMenu {
             outputHandler.showAccountOutput(15);
         }
     }
-
     public void discountCodeField(String field) {
         this.field = field;
         commandProcessor.setSubMenuStatus(SubMenuStatus.EDITDISCOUNTCODE);
         outputHandler.showOutputWithString(field,3);
     }
-
     ///????????ParseException
     public void editDiscountCodeField(String edit) {
         /*
@@ -188,12 +187,14 @@ public class ManagerMenu {
         }*/
     }
 
+
     public void removeDiscountCode(String discountCodeID) {
         if (checkDiscountCode(discountCodeID)) {
             discountCode.deleteDiscount(discountCodeID);
             outputHandler.showOutputWithString(discountCodeID,4);
         }
     }
+    //-------------------------------------------------------------------------------------
 
     private boolean checkRequest(String requestID) {
         if (requestID.matches("")) {
@@ -233,6 +234,7 @@ public class ManagerMenu {
             outputHandler.showOutputWithString(requestID,4);
         }
     }
+    //------------------------------------------------------------------------------
 
     private boolean checkCategory(String category) {
         if (category.matches("")) {
@@ -256,13 +258,11 @@ public class ManagerMenu {
 
         }
     }
-
     public void categoryField(String field) {
         this.field = field;
         commandProcessor.setSubMenuStatus(SubMenuStatus.EDITCATEGORY);
         outputHandler.showOutputWithString(field,3);
     }
-
     public void editCategoryField(String edit) {
 
     }
@@ -274,7 +274,6 @@ public class ManagerMenu {
            // outputHandler.showAccountOutput();
         }
     }
-
     public void setDetailToCategory(String detail){
 
     }

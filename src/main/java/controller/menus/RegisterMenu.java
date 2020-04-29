@@ -13,19 +13,22 @@ import view.SubMenuStatus;
 
 public class RegisterMenu {
     private int outputNo;
-     private Account account;
+    private Account account;
     private Request request;
     private CommandProcessor commandProcessor;
     private int detailMenu = 0;
     private boolean managerWant = false;
     private boolean headManager = true;
-    private OutputHandler outputHandler= new OutputHandler();
+    private OutputHandler outputHandler = new OutputHandler();
+    private String username;
+    private String role;
 
     public void processRegister(String role, String username) {
         if (username.matches(".+")) {
             if (!account.isThereAccountWithUsername(username)) {
                 if (role.matches(".+")) {
-                    registerByRole(role, username);
+                    this.username = username;
+                    this.role = role;
                     commandProcessor.setSubMenuStatus(SubMenuStatus.REGISTERATIONDETAILS);
                     outputNo = 2;
                 } else outputNo = 26;
@@ -47,7 +50,7 @@ public class RegisterMenu {
 
     }
 
-    private void createManagerAccount(String username){
+    private void createManagerAccount(String username) {
         if (managerWant || (!headManager)) {
             Manager newManager = new Manager(username);
             headManager = false;
@@ -59,23 +62,24 @@ public class RegisterMenu {
         }
     }
 
-    private void createSellerAccount(String username){
-            String sellerAccountRequest = username + " wants seller account";
-            if (request.isThereRequestFromID(sellerAccountRequest)) {
-                if (request.isRequestViewed()) {
-                    if (request.isRequestAccepted()) {
-                        Seller newSeller = new Seller(username);
-                    }else outputNo = 28;
-                } else outputNo = 29;
-            } else {
-                Request newRequest = new Request(sellerAccountRequest);
-                outputNo = 27;
-            }
-            outputHandler.showAccountOutput(outputNo);
+    private void createSellerAccount(String username) {
+        String sellerAccountRequest = username + " wants seller account";
+        if (request.isThereRequestFromID(sellerAccountRequest)) {
+            if (request.isRequestViewed()) {
+                if (request.isRequestAccepted()) {
+                    Seller newSeller = new Seller(username);
+                } else outputNo = 28;
+            } else outputNo = 29;
+        } else {
+            Request newRequest = new Request(sellerAccountRequest);
+            outputNo = 27;
+        }
+        outputHandler.showAccountOutput(outputNo);
     }
 
 
     public void completeRegisterProcess(String detail) {
+        registerByRole(role, username);
         if (detailMenu == 0) {
             if (detail.matches(".+")) {
                 account.setPassword(detail);

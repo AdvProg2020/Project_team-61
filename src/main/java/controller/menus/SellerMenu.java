@@ -1,6 +1,7 @@
 package controller.menus;
 
 
+import controller.request.Request;
 import model.firms.Firm;
 import model.off.Sale;
 import model.productRelated.Product;
@@ -32,13 +33,15 @@ public class SellerMenu {
 
     }
 
+    //--------------------------------------------------------------------------------------
     // manager // customer // seller
     private boolean checkProduct(String productID) {
         if (productID.matches("")) {
             if (product.isThereProductWithId(productID)) {
                 return true;
-            } else inputNo =0;
-        } else inputNo =0;
+            } else inputNo = 3;
+        } else inputNo = 2;
+        outputHandler.showAccountOutput(inputNo);
         return false;
     }
 
@@ -65,7 +68,6 @@ public class SellerMenu {
         commandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTFIELD);
     }
 
-
     public void editProductField(String edit) {
         if (field.equalsIgnoreCase("")) {
             if (edit.matches("")) {
@@ -83,6 +85,7 @@ public class SellerMenu {
             if (detail.matches("")) {
             }
         }
+        Request newRequest = new Request("edit products "+ field +" to "+ detail );
     }
 
     public void processRemoveProduct(String productID) {

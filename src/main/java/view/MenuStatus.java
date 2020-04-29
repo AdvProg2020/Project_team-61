@@ -15,12 +15,13 @@ public enum MenuStatus {
     //
     SALEMENU,
     //
-    PRODUCTLISTMENUE,
+    PRODUCTSMENU,
     CATEGORY,
     SEARCH,
     //
     PAYMENT,
     DISCOUNTCODE,
+    CREATIONMENU,
     RECIVERINFORMATION;
 
 }
