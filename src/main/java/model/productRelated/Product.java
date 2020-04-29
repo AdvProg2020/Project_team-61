@@ -6,7 +6,7 @@ import model.log.BuyLog;
 import model.log.Log;
 
 import java.util.*;
-public class Product {
+public class Product  {
 
     //productDetail
     private String productId;
@@ -49,14 +49,14 @@ public class Product {
 
 
     //finish
-    public void setDetailProduct (String name , String companiesName , double price , Seller seller , int numberOfProducts ) {
+    public void setDetailProduct (String name , String companiesName , double price , Seller seller , int numberOfProducts ,Category category) {
         this.productName = name;
         this.companiesName=companiesName;
         this.price=price;
         this.seller=seller;
         this.numberOfProducts=numberOfProducts;
         this.category=category;
-        allProduct.add(this);
+//        allProduct.add(this);
         listOfSellers.add(seller);
         listOfAllProducts.put(category,allProduct);
 
@@ -156,7 +156,7 @@ public class Product {
     //othersTobeHandel-------------------------------------------------------------------------------
 
     //finish
-    public Product getProductById ( String id ) {
+    public static Product getProductById(String id) {
         for (Product product : allProduct) {
             if (product.getId().equals(id)){
                 return product;
@@ -177,7 +177,7 @@ public class Product {
     }
 
     //finish
-    public  void deleteProduct ( String productId ){
+    public static void deleteProduct ( String productId ){
         Product product=getProductById(productId);
         Iterator iterator = allProduct.iterator();
         while(iterator.hasNext()) {
@@ -196,7 +196,7 @@ public class Product {
     }
 
     //finish
-    public boolean isThereProductWithId (String productId){
+    public static boolean isThereProductWithId (String productId){
         Product product=getProductById(productId);
         if (product==null){
             return false;
@@ -243,6 +243,19 @@ public class Product {
         customer.buyLog.addProductToBuyLog(product);
     }
 
+    //finish
+    public void deleteProductByCategory(String categoryId){
+        ArrayList<Product> productArrayList=listOfAllProducts.get(categoryId);
+        for (int i = 0; i < allProduct.size(); i++) {
+            for (int i1 = 0; i1 < productArrayList.size(); i1++) {
+                if (allProduct.get(i).equals(productArrayList.get(i1))){
+                    Product.deleteProduct(allProduct.get(i).getId());
+                }
+            }
+        }
+    }
+
+    //finish
     public static Comparator<Product> productComparatorForView = new Comparator<Product>() {
 
         public int compare(Product s1, Product s2) {
@@ -265,6 +278,5 @@ public class Product {
 
         }
     };
-
 
 }

@@ -15,7 +15,7 @@ public abstract class Sort {
     ArrayList<ArrayList<Product>> listOfSorts = new ArrayList<>();
     ArrayList<ArrayList<Product>> helpSort = new ArrayList<>();
 
-    //if view->1   score ->2   date ->3
+    //if view->1   score ->2
 
     //sorts----------------------------------------------------------------------
 
@@ -39,14 +39,11 @@ public abstract class Sort {
 
     //finish
     public ArrayList<Product> disableSort(){
-        if (sortName.equals("numberOfViewFilter")){
+        if (sortName.equals("numberOfViewSort")){
             numberOfSort=1;
         }
-        else if (sortName.equals("ScoreFilter")){
+        else if (sortName.equals("ScoreSort")){
             numberOfSort=2;
-        }
-        else if (sortName.equals("dateFilter")){
-            numberOfSort=3;
         }
         helpSort.remove(helpSort.indexOf(listOfSorts.get(numberOfSort)));
         listOfSorts.remove(numberOfSort);
@@ -57,7 +54,7 @@ public abstract class Sort {
     //finish
     public ArrayList<String> currentSorts() {
         ArrayList<String> current=new ArrayList<>();
-        for (int i = 1; i <= 4; i++) {
+        for (int i = 1; i <= 3; i++) {
             if (listOfSorts.get(i)!=null){
                 if (i==1){
                     current.add("view");
@@ -65,13 +62,11 @@ public abstract class Sort {
                 else if (i==2){
                     current.add("score");
                 }
-                else if (i==3){
-                    current.add("date");
-                }
             }
         }
         return current;
     }
+
 
 
 
