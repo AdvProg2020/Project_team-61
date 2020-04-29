@@ -1,8 +1,15 @@
 package model.filtar;
 
 
+import model.off.DiscountCode;
+import model.productRelated.Category;
+import model.productRelated.Product;
+
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 public abstract class Filter {
-   /* Product product;
+    Product product;
     int numberOfFilter = 0;
     String filterName;
     ArrayList<Product> newArrayOfProductFilter = new ArrayList<>();
@@ -25,7 +32,7 @@ public abstract class Filter {
     //filtering-----------------------------------------------------------------------------
 
     public ArrayList<Product> categoryFilter(Category category) {
-        newArrayOfProductFilter = product.getProductList().stream().filter(product1 -> product.getCategory().equals(category)).collect(Collectors.toCollection(ArrayList::new));
+        newArrayOfProductFilter = Product.getProductList().stream().filter(product1 -> product.getCategory().equals(category)).collect(Collectors.toCollection(ArrayList::new));
         listOfFilters.add(1, newArrayOfProductFilter);
         helpFilter.add(newArrayOfProductFilter);
         return product.getProductList();
@@ -94,6 +101,6 @@ public abstract class Filter {
             }
         }
        return current;
-    }*/
+    }
 
 }
