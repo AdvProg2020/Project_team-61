@@ -24,7 +24,7 @@ public class RegisterMenu {
     private String role;
 
     public void processRegister(String role, String username) {
-        if (username.matches(".+")) {
+        if (username.matches("^(?i)(?=.*[a-z])(?=.*[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
             if (!account.isThereAccountWithUsername(username)) {
                 if (role.matches(".+")) {
                     this.username = username;
@@ -81,7 +81,7 @@ public class RegisterMenu {
     public void completeRegisterProcess(String detail) {
         registerByRole(role, username);
         if (detailMenu == 0) {
-            if (detail.matches(".+")) {
+            if (detail.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")) {
                 account.setPassword(detail);
                 detailMenu++;
                 outputNo = 4;

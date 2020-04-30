@@ -2,6 +2,7 @@ package controller.menus;
 
 
 import model.accounts.Account;
+import model.log.SaleLog;
 import model.productRelated.Product;
 import view.CommandProcessor;
 import view.OutputHandler;
@@ -15,6 +16,7 @@ public class CustomerMenu {
     private OutputHandler outputHandler= new OutputHandler();
     private Product product;
     private CommandProcessor commandProcessor;
+    private SaleLog saleLog;
 
     //array
     public void processViewCart() {
@@ -28,6 +30,7 @@ public class CustomerMenu {
                 return true;
             } else inputNo =0;
         } else inputNo =0;
+        outputHandler.showAccountOutput(inputNo);
         return false;
     }
 
@@ -40,11 +43,14 @@ public class CustomerMenu {
         if(checkProduct(productID)) {
             outputHandler.showProduct(product.getProductById(productID));
         }
-        outputHandler.showAccountOutput(inputNo);
     }
 
     public void increaseProductNumber(String productID) {
+       if(checkProduct(productID)) {
+           //  product.getProductById()
+           //commandProcessor.setSubMenuStatus(number);
 
+       }
     }
 
     public void decreaseProductNumber(String productID) {
@@ -52,7 +58,7 @@ public class CustomerMenu {
     }
 
     public void showTotalPrice() {
-
+        saleLog.addProductToSaleLog();
     }
 
     public void purchase() {
@@ -67,6 +73,7 @@ public class CustomerMenu {
     public void processViewOrders() {
         commandProcessor.setSubMenuStatus(SubMenuStatus.VIEWORDERS);
     }
+
 
     public void showOrder(String orderID) {
 

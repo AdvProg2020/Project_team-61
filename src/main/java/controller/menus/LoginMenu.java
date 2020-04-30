@@ -16,17 +16,9 @@ public class LoginMenu {
     private boolean login;
     private OutputHandler outputHandler= new OutputHandler();
 
-    public boolean isLogin() {
-        return login;
-    }
-
-    public Account getLoginAccount() {
-        return loginAccount;
-    }
-
     public void processLogin(String username) {
         if (!login) {
-            if (username.matches(" ")) {
+            if (username.matches("^(?i)(?=.*[a-z])(?=.*[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
                 if (account.isThereAccountWithUsername(username)) {
                     commandProcessor.setSubMenuStatus(SubMenuStatus.PASSWORD);
                     outputNo = 2;
@@ -37,7 +29,7 @@ public class LoginMenu {
     }
 
     public void checkPassword(String password) {
-        if (password.matches(" ")) {
+        if (password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")) {
             if (account.isThereAccountWithUsernameAndPassword(username, password)) {
                 loginAccount = account.getAccountWithUsername(username);
                 login = true;
@@ -70,7 +62,7 @@ public class LoginMenu {
 
     public void processEdit(String field) {
         if(login) {
-            if(!field.matches("")) {
+            if(!field.matches("(username|password|lastname|email|phone numbaer)")) {
                 commandProcessor.setSubMenuStatus(SubMenuStatus.EDITACCOUNT);
                 this.field = field;
                 outputHandler.showOutputWithString(field, 3);
@@ -81,7 +73,7 @@ public class LoginMenu {
 
     public void editField(String edit) {
         if (this.field.equalsIgnoreCase("password")) {
-            if (edit.matches("")) {
+            if (edit.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")) {
                 loginAccount.setPassword(edit);
                 outputNo = 17;
             } else outputNo = 3;

@@ -6,10 +6,9 @@ import model.off.DiscountCode;
 import model.productRelated.Category;
 import model.productRelated.Product;
 import view.CommandProcessor;
+import view.MenuStatus;
 import view.OutputHandler;
 import view.SubMenuStatus;
-
-import java.text.SimpleDateFormat;
 
 
 public class ManagerMenu {
@@ -36,7 +35,7 @@ public class ManagerMenu {
     }
 
     private boolean checkUsername(String username) {
-        if (username.matches(".+")) {
+        if (username.matches("^(?i)(?=.*[a-z])(?=.*[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
             if (account.isThereAccountWithUsername(username)) {
                 return true;
             } else inputNo = 13;
@@ -105,6 +104,7 @@ public class ManagerMenu {
     public void createNewDiscountCode(String discountCodeId) {
         if (checkDiscountCode(discountCodeId)) {
             DiscountCode newDiscountCode = new DiscountCode(discountCodeId);
+            commandProcessor.setMenuStatus(MenuStatus.CREATIONMENU);
             commandProcessor.setSubMenuStatus(SubMenuStatus.DETAILDESCOUNTCODE);
             outputHandler.showAccountOutput(7);
         }
@@ -136,11 +136,12 @@ public class ManagerMenu {
                 detailMenu = 0;
             } else inputNo = 14;
         }*/
+        commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
     }
 
     // array
     public void processViewDiscountCodes() {
-        commandProcessor.setSubMenuStatus(SubMenuStatus.VIEWDISCOUNTCOD);
+        commandProcessor.setSubMenuStatus(SubMenuStatus.VIEWDISCOUNTCODES);
     }
 
     public void viewDiscountCode(String discountCodeID) {
@@ -185,6 +186,8 @@ public class ManagerMenu {
                 inputNo = 19;
             } else inputNo = 14;
         }*/
+        commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+        commandProcessor.setMenuStatus(MenuStatus.MANAGERMENU);
     }
 
 
@@ -264,7 +267,25 @@ public class ManagerMenu {
         outputHandler.showOutputWithString(field,3);
     }
     public void editCategoryField(String edit) {
-
+        /*if (field.equalsIgnoreCase("trait")) {
+            if (field.matches("")) {
+            }
+        }else if (field.equalsIgnoreCase("")) {
+            if (field.matches("")) {
+            }
+        }else if (field.equalsIgnoreCase("")) {
+            if (field.matches("")) {
+            }
+        }else if (field.equalsIgnoreCase("")) {
+            if (field.matches("")) {
+            }
+        }else if (field.equalsIgnoreCase("")) {
+            if (field.matches("")) {
+            }
+        }else if (field.equalsIgnoreCase("")) {
+            if (field.matches("")) {
+            }
+        }*/
     }
 
     public void addCategory(String category) {
@@ -275,6 +296,27 @@ public class ManagerMenu {
         }
     }
     public void setDetailToCategory(String detail){
+
+       /*if (field.equalsIgnoreCase("")) {
+            if (field.matches("")) {
+
+            }
+        }else if (field.equalsIgnoreCase("")) {
+            if (field.matches("")) {
+            }
+        }else if (field.equalsIgnoreCase("")) {
+            if (field.matches("")) {
+            }
+        }else if (field.equalsIgnoreCase("")) {
+            if (field.matches("")) {
+            }
+        }else if (field.equalsIgnoreCase("")) {
+            if (field.matches("")) {
+            }
+        }else if (field.equalsIgnoreCase("")) {
+            if (field.matches("")) {
+            }
+        }*/
 
     }
 
