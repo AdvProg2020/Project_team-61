@@ -48,7 +48,8 @@ public enum SubMenuStatus {
     EDITSALE,
     SALEFIELD,
     //
-
+    COMMENTSTITLE,
+    COMMENTSCONTENT;
 
 
 
