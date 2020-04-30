@@ -2,14 +2,11 @@ package controller.menus;
 
 
 import model.accounts.Account;
-import model.accounts.Seller;
 import model.productRelated.Comment;
 import model.productRelated.Product;
 import view.CommandProcessor;
 import view.OutputHandler;
 import view.SubMenuStatus;
-
-import java.util.ArrayList;
 
 public class ProductMenu {
     private int outputNo;
@@ -19,25 +16,20 @@ public class ProductMenu {
     private Account account;
     private ProductsMenu productsMenu;
     private Product selectedProduct;
-    private LoginMenu loginMenu;
 
     private OutputHandler outputHandler = new OutputHandler();
 
-    //finish
-    public ArrayList<String> processDigest() {
+    public void processDigest() {
         commandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
         //IN PRODUCTE BAYAD VIJHEGIASHO NESHOON BDIM
         //kln mikhai add kni ... az in selected estefade kn
         selectedProduct = Product.getProductById(productsMenu.getProductId());
-        return selectedProduct.getInfo();
     }
 
-    //finish
-    public void addToCart(int amount) {
-        selectedProduct.addProductToLog(account.getUsername(),selectedProduct.getId(),amount);
+    public void addToCart() {
+
     }
 
-    //finish
     private boolean checkSeller(String seller) {
         if (seller.matches("")) {
             if (account.isThereAccountWithUsername(seller)) {
@@ -48,43 +40,27 @@ public class ProductMenu {
         return false;
     }
 
-    //finish
-    public Seller selectSeller(String username) {
+    public void selectSeller(String username) {
         if (checkSeller(username)) {
-            for (Seller seller : selectedProduct.getListOfSellers()) {
-                if (seller.getUsername().equals(username)){
-                return seller;
-                }
-            }
-        }
-        return null;
-    }
 
+        }
+    }
 
     public void processAttributes() {
 
     }
 
-    //finish
     public void processCompare(String productID) {
-        Product productToCompare=Product.getProductById(productID);
-        productToCompare.getInfo();
-        selectedProduct.getInfo();
+
     }
 
     //comment--------------------------------------------------------------------
-
-    //finish
     public void processComments() {
         commandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
-        selectedProduct.getScore();
-        selectedProduct.listOfComments(selectedProduct.getId());
     }
 
-    //finish
-    public void addComments(String content) {
+    public void addComments() {
         commandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
-        selectedProduct.addComment(selectedProduct.getId(),loginMenu.getLoginAccount(),content);
     }
 
     public void titleOfComment(String title){

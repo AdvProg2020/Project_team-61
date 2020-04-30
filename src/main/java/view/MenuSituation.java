@@ -20,7 +20,7 @@ public class MenuSituation {
             commandProcessor.setMenuStatus(MenuStatus.MAINMENU);
             System.out.println("");
         } else if (commandProcessor.getMenuStatus() == MenuStatus.PRODUCTMENU) {
-            //commandProcessor.setMenuStatus();
+            commandProcessor.setMenuStatus(MenuStatus.PRODUCTSMENU);
             System.out.println("");
         } else if (commandProcessor.getMenuStatus() == MenuStatus.SALEMENU) {
             commandProcessor.setMenuStatus(MenuStatus.MAINMENU);
@@ -88,7 +88,7 @@ public class MenuSituation {
         } else if (commandProcessor.getSubMenuStatus() == SubMenuStatus.MANAGECATAGORIES) {
             commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
             System.out.println("");
-        }  else if (commandProcessor.getSubMenuStatus() == SubMenuStatus.ADDDISCOUNTCODE) {
+        } else if (commandProcessor.getSubMenuStatus() == SubMenuStatus.ADDDISCOUNTCODE) {
             commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
             System.out.println("");
         } else if (commandProcessor.getSubMenuStatus() == SubMenuStatus.DETAILDESCOUNTCODE) {
@@ -104,7 +104,6 @@ public class MenuSituation {
             commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
             System.out.println("");
         } //
-
 
 
     }
