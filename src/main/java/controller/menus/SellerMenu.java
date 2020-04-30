@@ -1,6 +1,5 @@
 package controller.menus;
 
-
 import controller.request.Request;
 import model.firms.Firm;
 import model.off.Sale;
@@ -94,18 +93,23 @@ public class SellerMenu {
         }
         outputHandler.showAccountOutput(inputNo);
     }
+    //----------------------------------------------------------------------------------------
 
+    //array
     public void processShowCategories() {
 
     }
 
+    //---------------------------------------------------------------------------------------
     private boolean checkSale(String offID) {
         if (offID.matches("")) {
             if (sale.isThereSaleWithId(offID)) {
                 return true;
             } else inputNo =0;
         } else inputNo =0;
+        outputHandler.showAccountOutput(inputNo);
         return false;
+
     }
 
     //array
@@ -117,16 +121,34 @@ public class SellerMenu {
         if (checkSale(offID)) {
             outputHandler.showSale(sale.getSaleWithId(offID));
         }
-        outputHandler.showAccountOutput(inputNo);
+
     }
 
     public void editOff(String offID) {
-        saleToEdit = sale.getSaleWithId(offID);
-        commandProcessor.setSubMenuStatus(SubMenuStatus.SALEFIELD);
+        if (checkSale(offID)) {
+            saleToEdit = sale.getSaleWithId(offID);
+            commandProcessor.setSubMenuStatus(SubMenuStatus.SALEFIELD);
+        }
     }
 
     public void editOffField(String edit) {
         if (field.equalsIgnoreCase("")) {
+            if (edit.matches("")) {
+
+            }
+        }else if (field.equalsIgnoreCase("")) {
+            if (edit.matches("")) {
+
+            }
+        }else if (field.equalsIgnoreCase("")) {
+            if (edit.matches("")) {
+
+            }
+        }else if (field.equalsIgnoreCase("")) {
+            if (edit.matches("")) {
+
+            }
+        }else if (field.equalsIgnoreCase("")) {
             if (edit.matches("")) {
 
             }
@@ -141,14 +163,28 @@ public class SellerMenu {
         if (detailMenu == 0) {
             if (detail.matches("")) {
             }
+        }else if (detailMenu == 1) {
+            if (detail.matches("")) {
+            }
+        }else if (detailMenu == 2) {
+            if (detail.matches("")) {
+            }
+        }else if (detailMenu == 3) {
+            if (detail.matches("")) {
+            }
+        }else if (detailMenu == 4) {
+            if (detail.matches("")) {
+            }
+        }else if (detailMenu == 5) {
+            if (detail.matches("")) {
+            }
         }
     }
 
+    //-------------------------------------------------------------------------------
     public void processViewBalance() {
 
     }
 
-    public void setField(String field) {
-        this.field = field;
-    }
+
 }

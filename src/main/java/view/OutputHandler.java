@@ -78,6 +78,70 @@ public class OutputHandler {
     }
 
 
+    public void showCustomerOutput(int output) {
+        if (output == 0) {
+            System.out.println("username format is invalid");
+        } else if (output == 1) {
+            System.out.println("a user exists with this username");
+        } else if (output == 2) {
+            System.out.println("please enter your password");
+        } else if (output == 3) {
+            System.out.println("password format is invalid");
+        } else if (output == 4) {
+            System.out.println("please enter your name");
+        } else if (output == 5) {
+            System.out.println("name format is invalid");
+        } else if (output == 6) {
+            System.out.println("please enter your lastname");
+        } else if (output == 7) {
+            System.out.println("lastname format is invalid");
+        } else if (output == 8) {
+            System.out.println("please enter your Email");
+        } else if (output == 9) {
+            System.out.println("email format is invalid");
+        } else if (output == 10) {
+            System.out.println("please enter your phone number");
+        } else if (output == 11) {
+            System.out.println("phone number format is invalid");
+        } else if (output == 12) {
+            System.out.println("register successful");
+        } else if (output == 13) {
+            System.out.println("no user exist with this username");
+        } else if (output == 14) {
+            System.out.println("your password is wrong");
+        } else if (output == 15) {
+            System.out.println("login successful");
+        } else if (output == 16) {
+            System.out.println("no field matches with this");
+        } else if (output == 17) {
+            System.out.println("password changed");
+        } else if (output == 18) {
+            System.out.println("name changed");
+        } else if (output == 19) {
+            System.out.println("last name changed");
+        } else if (output == 20) {
+            System.out.println("Email changed");
+        } else if (output == 21) {
+            System.out.println("phone number changed");
+        } else if (output == 22) {
+            System.out.println("logout");
+        } else if (output == 23) {
+            System.out.println("you cannot create manager profile");
+        } else if (output == 24) {
+            System.out.println("You've logged in before");
+        } else if (output == 25) {
+            System.out.println("you have to login first");
+        } else if (output == 26) {
+            System.out.println("no role matches with this");
+        } else if (output == 27) {
+            System.out.println("you have already requested for new account");
+        } else if (output == 28) {
+            System.out.println("you don't have permission for new account");
+        } else if (output == 29) {
+            System.out.println("Your request has not been reviewed");
+        }
+    }
+
     public void showAccountOutput(int output) {
         if (output == 0) {
             System.out.println("username format is invalid");
@@ -130,7 +194,7 @@ public class OutputHandler {
         } else if (output == 24) {
             System.out.println("You've logged in before");
         } else if (output == 25) {
-            System.out.println("You've not logged in before");
+            System.out.println("you have to login first");
         } else if (output == 26) {
             System.out.println("no role matches with this");
         } else if (output == 27) {
