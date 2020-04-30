@@ -38,9 +38,6 @@ public abstract class Score implements Comparable {
     public double getAverageScore() {
         return averageScore;
     }
-    public void setAverageScore(double averageScore) {
-        this.averageScore = averageScore;
-    }
     public ArrayList<Score> getAllScores() {
         return allScores;
     }
@@ -51,9 +48,9 @@ public abstract class Score implements Comparable {
     public void calculateAverageScore (int score ){
         double total=0;
         for(int i=0; i<allScores.size(); i++){
-            total = total + allScores.get(i).getScore();
+            total =+ total + allScores.get(i).getScore();
         }
-        setAverageScore(total);
+        productTOScore.setAverageScore(total);
     }
 
 

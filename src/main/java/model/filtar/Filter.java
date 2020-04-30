@@ -10,13 +10,21 @@ import java.util.stream.Collectors;
 
 public abstract class Filter {
     Product product;
-    int numberOfFilter = 0;
+    public static int numberOfFilter = 0;
     String filterName;
-    ArrayList<Product> newArrayOfProductFilter = new ArrayList<>();
-    ArrayList<ArrayList<Product>> listOfFilters = new ArrayList<>();
-    ArrayList<ArrayList<Product>> helpFilter = new ArrayList<>();
+    public static ArrayList<Product> newArrayOfProductFilter = new ArrayList<>();
+    public static ArrayList<ArrayList<Product>> listOfFilters = new ArrayList<>();
+    public static ArrayList<ArrayList<Product>> helpFilter = new ArrayList<>();
+    public static ArrayList<String> availableFilters=new ArrayList<>();
 
     //if category ->1    companies ->2   discount ->3   productName ->4
+
+    public Filter(ArrayList<String> availableFilters) {
+        availableFilters.add("category");
+        availableFilters.add("companyName");
+        availableFilters.add("discount");
+        availableFilters.add("productName");
+    }
 
 
     //setterGetter--------------------------------------------------------------------------
@@ -29,12 +37,14 @@ public abstract class Filter {
         return numberOfFilter;
     }
 
+
     //filtering-----------------------------------------------------------------------------
 
     public ArrayList<Product> categoryFilter(Category category) {
         newArrayOfProductFilter = Product.getProductList().stream().filter(product1 -> product.getCategory().equals(category)).collect(Collectors.toCollection(ArrayList::new));
         listOfFilters.add(1, newArrayOfProductFilter);
         helpFilter.add(newArrayOfProductFilter);
+        availableFilters.remove(0);
         return product.getProductList();
     }
 
@@ -42,6 +52,7 @@ public abstract class Filter {
         newArrayOfProductFilter = Product.getProductList().stream().filter(product1 -> product.getCompaniesName().equals(companiesName)).collect(Collectors.toCollection(ArrayList::new));
         listOfFilters.add(2, newArrayOfProductFilter);
         helpFilter.add(newArrayOfProductFilter);
+        availableFilters.remove(1);
         return newArrayOfProductFilter;
     }
 
@@ -49,6 +60,7 @@ public abstract class Filter {
         newArrayOfProductFilter = Product.getProductList().stream().filter(product1 -> product.getHasDiscount()).collect(Collectors.toCollection(ArrayList::new));
         listOfFilters.add(3, newArrayOfProductFilter);
         helpFilter.add(newArrayOfProductFilter);
+        availableFilters.remove(2);
         return newArrayOfProductFilter;
     }
 
@@ -56,6 +68,7 @@ public abstract class Filter {
         newArrayOfProductFilter = Product.getProductList().stream().filter(product1 -> product.getProductName().equals(productName)).collect(Collectors.toCollection(ArrayList::new));
         listOfFilters.add(4, newArrayOfProductFilter);
         helpFilter.add(newArrayOfProductFilter);
+        availableFilters.remove(3);
         return newArrayOfProductFilter;
     }
 
@@ -63,7 +76,7 @@ public abstract class Filter {
     //others-----------------------------------------------------------------------------
 
     //finish
-    public ArrayList<Product> disableFilter(){
+    public static ArrayList<Product> disableFilter(String filterName){
         if (filterName.equals("categoryFilter")){
             numberOfFilter=1;
         }
@@ -82,7 +95,7 @@ public abstract class Filter {
     }
 
     //finish
-    public ArrayList<String> currentFilters() {
+    public static ArrayList<String> currentFilters() {
         ArrayList<String> current=new ArrayList<>();
         for (int i = 1; i <= 4; i++) {
             if (listOfFilters.get(i)!=null){
@@ -101,6 +114,17 @@ public abstract class Filter {
             }
         }
        return current;
+    }
+
+    public static ArrayList<String> showAvailableFilters(){
+        return availableFilters;
+    }
+
+    public static boolean ifFilterAvailable(String filterName){
+        if (availableFilters.contains(filterName)){
+            return true;
+        }
+        else return false;
     }
 
 }

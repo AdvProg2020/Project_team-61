@@ -14,8 +14,16 @@ public abstract class Sort {
     ArrayList<Product> newArrayOfProductSort = Product.getProductList();
     ArrayList<ArrayList<Product>> listOfSorts = new ArrayList<>();
     ArrayList<ArrayList<Product>> helpSort = new ArrayList<>();
+    ArrayList<String> availableSorts=new ArrayList<>();
+
+    public Sort(ArrayList<String> availableSorts) {
+        availableSorts.add("numberOfView");
+        availableSorts.add("score");
+    }
 
     //if view->1   score ->2
+
+
 
     //sorts----------------------------------------------------------------------
 
@@ -23,6 +31,7 @@ public abstract class Sort {
         Collections.sort(newArrayOfProductSort,Product.productComparatorForView);
         listOfSorts.add(1,newArrayOfProductSort);
         helpSort.add(newArrayOfProductSort);
+        availableSorts.remove(0);
         return newArrayOfProductSort;
     }
 
@@ -30,15 +39,15 @@ public abstract class Sort {
         Collections.sort(newArrayOfProductSort,Product.productComparatorForScore);
         listOfSorts.add(2,newArrayOfProductSort);
         helpSort.add(newArrayOfProductSort);
+        availableSorts.remove(1);
         return newArrayOfProductSort;
     }
 
-    //dateSort
 
     //other---------------------------------------------------------------------------
 
     //finish
-    public ArrayList<Product> disableSort(){
+    public ArrayList<Product> disableSort(String sortName){
         if (sortName.equals("numberOfViewSort")){
             numberOfSort=1;
         }
@@ -67,7 +76,14 @@ public abstract class Sort {
         return current;
     }
 
+    public ArrayList<String> showAvailableSort(){
+        return availableSorts;
+    }
 
-
-
+    public boolean ifAvailable(String sortId){
+        if (availableSorts.contains(sortId)){
+            return true;
+        }
+        else return false;
+    }
 }

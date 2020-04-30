@@ -21,9 +21,7 @@ public class Comment {
 
 
 
-    public Comment(boolean isSold, CommentStatus commentStatus, Product productToCommit, Account personToVote) {
-        this.isSold = isSold;
-        this.commentStatus = commentStatus;
+    public Comment(Product productToCommit, Account personToVote) {
         this.productToComment = productToCommit;
         this.personToVote = personToVote;
         allComments.add(this);

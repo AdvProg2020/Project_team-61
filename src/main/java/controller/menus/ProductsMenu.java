@@ -3,8 +3,11 @@ package controller.menus;
 import model.productRelated.Category;
 import model.productRelated.Product;
 import model.filtar.Filter;
+import model.sort.Sort;
 import view.CommandProcessor;
 import view.SubMenuStatus;
+
+import java.util.ArrayList;
 
 public class ProductsMenu {
     private int outputNo;
@@ -13,6 +16,7 @@ public class ProductsMenu {
     private Category category;
     private CommandProcessor commandProcessor;
     private Filter filter;
+    private Sort sort;
 
     //a
     public void processProducts() {
@@ -28,21 +32,41 @@ public class ProductsMenu {
         commandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
     }
 
-    //a
-    public void showAvailableFilters() {
+    //finish
+    public ArrayList<String> showAvailableFilters() {
         commandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
+        return filter.showAvailableFilters();
     }
 
-    public void filter(String filterID) {
-
+    //finish
+    public ArrayList<Product> filter(String filterID) {
+        if (filter.ifFilterAvailable(filterID)){
+            if (filterID.equals("category")){
+               return filter.categoryFilter(product.getCategory());
+            }
+            else if (filterID.equals("companyName")){
+                return filter.companiesFilter(product.getCompaniesName());
+            }
+            else if (filterID.equals("discount")){
+                if (product.getHasDiscount()){
+                    return filter.discountFilter(product.getDiscountCode());
+                }
+            }
+            else if (filterID.equals("productName")){
+                return filter.productNameFilter(product.getProductName());
+            }
+        }
+        return null;
     }
 
-    public void currentFilters() {
-
+    //finish
+    public ArrayList<String> currentFilters() {
+        return filter.currentFilters();
     }
 
+    //finish
     public void disableFilter(String filterID) {
-
+        filter.disableFilter(filterID);
     }
 
 
@@ -51,28 +75,42 @@ public class ProductsMenu {
 
     }
 
-    public void showAvailableSorts() {
-
+    //finish
+    public ArrayList<String> showAvailableSorts() {
+        return sort.showAvailableSort();
     }
 
-    public void sort(String sortID) {
-
+    //finish
+    public ArrayList<Product> sort(String sortID) {
+        if (sort.ifAvailable(sortID)){
+            if (sortID.equals("numberOfView")){
+                return sort.scoreSort();
+            }
+            else if (sortID.equals("score")){
+                return sort.numberOfViewsSort();
+            }
+        }
+        return null;
     }
 
-
-    public void currentSorts() {
-
+    //finish
+    public ArrayList<String> currentSorts() {
+        return sort.currentSorts();
     }
 
-    public void disableSort() {
-
+    //finish
+    public void disableSort(String sortName) {
+        sort.disableSort(sortName);
     }
 
-    //ARRAY
-    public void processShowProducts() {
-
+    //finish
+    public ArrayList<Product> processShowProducts() {
+        return Filter.newArrayOfProductFilter;
     }
 
-    public void processShowProductsID(String id) {
+    //finish
+    public ArrayList<String> processShowProductsID(String id) {
+        return Product.listOfId;
     }
+
 }
