@@ -54,7 +54,6 @@ public class BuyLog extends Log {
             assert product != null;
             if (product.getNumberOfProducts()!=0){
                 listOfOneProduct.add(product);
-                product.setNumberOfProducts(product.getNumberOfProducts()-1);
                 numberOfChosenPro++;
             }
         }
@@ -99,10 +98,16 @@ public class BuyLog extends Log {
                 }
             }
         }
-        setIsBought(true);
+//        setIsBought(true);
         return price;
     }
 
-
+    public void reduceNumberOfProduct(){
+        for (ArrayList<Product> productArrayList : allBoughtProduct) {
+            for (Product product1 : listOfOneProduct) {
+                product1.setNumberOfProducts(product1.getNumberOfProducts()-1);
+            }
+        }
+    }
 
 }
