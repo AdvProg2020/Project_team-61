@@ -2,9 +2,11 @@ package controller.menus;
 
 
 import model.accounts.Account;
+import model.log.Log;
 import model.log.SaleLog;
 import model.productRelated.Product;
 import view.CommandProcessor;
+import view.MenuStatus;
 import view.OutputHandler;
 import view.SubMenuStatus;
 
@@ -17,6 +19,7 @@ public class CustomerMenu {
     private Product product;
     private CommandProcessor commandProcessor;
     private SaleLog saleLog;
+    private Log log;
 
     //array
     public void processViewCart() {
@@ -58,15 +61,38 @@ public class CustomerMenu {
     }
 
     public void showTotalPrice() {
-        saleLog.addProductToSaleLog();
     }
 
+    //purches--------------------------------------------------------
     public void purchase() {
-
+        commandProcessor.setMenuStatus(MenuStatus.PURCHASE);
     }
 
     public void processPurchase() {
+        commandProcessor.setMenuStatus(MenuStatus.RECEIVERINFORMATION);
+    }
 
+    public void receiverInformation(String information){
+        commandProcessor.setMenuStatus(MenuStatus.DISCOUNTCODE);
+    }
+
+    public void discountCode(String discountCodeId){
+        commandProcessor.setMenuStatus(MenuStatus.PAYMENT);
+    }
+
+    public void payment(){
+        commandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+    }
+
+    //log---------------------------------------------------------------
+    private boolean checkLog(String orderID) {
+        if (orderID.matches(".+")) {
+            if (log.isThereLogWithID(orderID)) {
+                return true;
+            } else inputNo =0;
+        } else inputNo =0;
+        outputHandler.showAccountOutput(inputNo);
+        return false;
     }
 
     //array
@@ -76,11 +102,17 @@ public class CustomerMenu {
 
 
     public void showOrder(String orderID) {
+        if(checkLog(orderID)){
+
+        }
 
     }
 
+    //-------------------------------------------------------
     public void rateProduct(String productID, int number) {
+        if(checkProduct(productID)){
 
+        }
     }
 
     public void processViewBalance() {
