@@ -9,7 +9,7 @@ import view.SubMenuStatus;
 public class LoginMenu {
     private int outputNo;
     private Account account;
-    private Account loginAccount;
+    private static Account loginAccount;
     private CommandProcessor commandProcessor;
     private String field = null;
     private String username;
@@ -20,7 +20,7 @@ public class LoginMenu {
         return login;
     }
 
-    public Account getLoginAccount() {
+    public static Account getLoginAccount() {
         return loginAccount;
     }
 

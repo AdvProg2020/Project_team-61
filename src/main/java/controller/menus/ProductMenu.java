@@ -2,73 +2,97 @@ package controller.menus;
 
 
 import model.accounts.Account;
-import model.accounts.Customer;
 import model.accounts.Seller;
-import model.log.Log;
 import model.productRelated.Comment;
 import model.productRelated.Product;
 import view.CommandProcessor;
+import view.OutputHandler;
 import view.SubMenuStatus;
 
 import java.util.ArrayList;
-
 
 public class ProductMenu {
     private int outputNo;
     private int inputNo;
     private Comment comment;
     private CommandProcessor commandProcessor;
-    private Product product;
     private Account account;
+    private ProductsMenu productsMenu;
+    private Product selectedProduct;
     private LoginMenu loginMenu;
-    Customer customer;
 
-    public ProductMenu(Product product) {
-        this.product = product;
-    }
+    private OutputHandler outputHandler = new OutputHandler();
 
     //finish
     public ArrayList<String> processDigest() {
         commandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
-        return product.getInfo();
+        //IN PRODUCTE BAYAD VIJHEGIASHO NESHOON BDIM
+        //kln mikhai add kni ... az in selected estefade kn
+        selectedProduct = Product.getProductById(productsMenu.getProductId());
+        return selectedProduct.getInfo();
     }
 
     //finish
-    public void addToCart(){
-        product.addProductToLog(account.getUsername(),product.getId());
+    public void addToCart(int amount) {
+        selectedProduct.addProductToLog(account.getUsername(),selectedProduct.getId(),amount);
     }
 
     //finish
-    public Seller selectSeller(String username){
-        for (Seller seller : product.getListOfSellers()) {
-            if (seller.getUsername().equals(username)){
+    private boolean checkSeller(String seller) {
+        if (seller.matches("")) {
+            if (account.isThereAccountWithUsername(seller)) {
+                return true;
+            } else inputNo = 0;
+        } else inputNo = 0;
+        outputHandler.showAccountOutput(inputNo);
+        return false;
+    }
+
+    //finish
+    public Seller selectSeller(String username) {
+        if (checkSeller(username)) {
+            for (Seller seller : selectedProduct.getListOfSellers()) {
+                if (seller.getUsername().equals(username)){
                 return seller;
+                }
             }
         }
         return null;
     }
 
+
     public void processAttributes() {
 
     }
 
-    //finish//doubt
+    //finish
     public void processCompare(String productID) {
         Product productToCompare=Product.getProductById(productID);
         productToCompare.getInfo();
-        product.getInfo();
+        selectedProduct.getInfo();
     }
 
-    //aLittleUnfinished
+    //comment--------------------------------------------------------------------
+
+    //finish
     public void processComments() {
-        product.getScore();
-        product.listOfComments(product.getId());
+        commandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
+        selectedProduct.getScore();
+        selectedProduct.listOfComments(selectedProduct.getId());
     }
 
-    //finish//doubt
-    public void addComments(String content){
-        commandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
-        product.addComment(product.getId(),loginMenu.getLoginAccount(),content);
+    //finish
+    public void addComments(String content) {
+        commandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
+        selectedProduct.addComment(selectedProduct.getId(),loginMenu.getLoginAccount(),content);
+    }
+
+    public void titleOfComment(String title){
+        commandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
+    }
+
+    public void contentOfComment(String content){
+        commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
     }
 
 }

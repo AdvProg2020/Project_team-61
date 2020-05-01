@@ -1,13 +1,15 @@
 package controller.menus;
 
-import model.productRelated.Category;
-import model.productRelated.Product;
-import model.filtar.Filter;
-import model.sort.Sort;
-import view.CommandProcessor;
-import view.SubMenuStatus;
+        import model.productRelated.Category;
+        import model.productRelated.Product;
+        import model.filtar.Filter;
+        import model.sort.Sort;
+        import view.CommandProcessor;
+        import view.MenuStatus;
+        import view.OutputHandler;
+        import view.SubMenuStatus;
 
-import java.util.ArrayList;
+        import java.util.ArrayList;
 
 public class ProductsMenu {
     private int outputNo;
@@ -15,17 +17,31 @@ public class ProductsMenu {
     private Product product;
     private Category category;
     private CommandProcessor commandProcessor;
+    private OutputHandler outputHandler = new OutputHandler();
     private Filter filter;
     private Sort sort;
+    private String productId;
 
-    //a
     public void processProducts() {
+        commandProcessor.setMenuStatus(MenuStatus.PRODUCTSMENU);
+    }
+
+    //array
+    public void processViewCategories() {
 
     }
 
-    //a
-    public void processViewCategories() {
+    //filter-------------------------------------------------------
 
+    //finish
+    private boolean checkFilter(String filterName) {
+        if (filterName.matches("")) {
+             if (filter.isThereFilterWithName(filterName)) {
+            return true;
+             } else inputNo = 0;
+        } else inputNo = 0;
+        outputHandler.showAccountOutput(inputNo);
+        return false;
     }
 
     public void processFiltering() {
@@ -35,25 +51,24 @@ public class ProductsMenu {
     //finish
     public ArrayList<String> showAvailableFilters() {
         commandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
-        return filter.showAvailableFilters();
+        return Filter.showAvailableFilters();
     }
 
     //finish
     public ArrayList<Product> filter(String filterID) {
-        if (filter.ifFilterAvailable(filterID)){
-            if (filterID.equals("category")){
-               return filter.categoryFilter(product.getCategory());
-            }
-            else if (filterID.equals("companyName")){
-                return filter.companiesFilter(product.getCompaniesName());
-            }
-            else if (filterID.equals("discount")){
-                if (product.getHasDiscount()){
-                    return filter.discountFilter(product.getDiscountCode());
+        if (checkFilter(filterID)) {
+            if (Filter.ifFilterAvailable(filterID)) {
+                if (filterID.equals("category")) {
+                    return filter.categoryFilter(product.getCategory());
+                } else if (filterID.equals("companyName")) {
+                    return filter.companiesFilter(product.getCompaniesName());
+                } else if (filterID.equals("discount")) {
+                    if (product.getHasDiscount()) {
+                        return filter.discountFilter(product.getDiscountCode());
+                    }
+                } else if (filterID.equals("productName")) {
+                    return filter.productNameFilter(product.getProductName());
                 }
-            }
-            else if (filterID.equals("productName")){
-                return filter.productNameFilter(product.getProductName());
             }
         }
         return null;
@@ -61,18 +76,33 @@ public class ProductsMenu {
 
     //finish
     public ArrayList<String> currentFilters() {
-        return filter.currentFilters();
+        return Filter.currentFilters();
     }
 
     //finish
     public void disableFilter(String filterID) {
-        filter.disableFilter(filterID);
+        if (checkFilter(filterID)) {
+            Filter.disableFilter(filterID);
+        }
+    }
+
+
+    //sort-----------------------------------------------------------------
+
+    //finish
+    private boolean checkSort(String sortName) {
+        if (sortName.matches("")) {
+            if (sort.isThereFilterWithName(sortName)) {
+            return true;
+             } else inputNo = 0;
+        } else inputNo = 0;
+        outputHandler.showAccountOutput(inputNo);
+        return false;
     }
 
 
     public void processSorting() {
         commandProcessor.setSubMenuStatus(SubMenuStatus.SORTING);
-
     }
 
     //finish
@@ -82,16 +112,19 @@ public class ProductsMenu {
 
     //finish
     public ArrayList<Product> sort(String sortID) {
-        if (sort.ifAvailable(sortID)){
-            if (sortID.equals("numberOfView")){
-                return sort.scoreSort();
-            }
-            else if (sortID.equals("score")){
-                return sort.numberOfViewsSort();
+        if (checkSort(sortID)) {
+            if (sort.ifAvailable(sortID)){
+                if (sortID.equals("numberOfView")){
+                    return sort.scoreSort();
+                }
+                else if (sortID.equals("score")){
+                    return sort.numberOfViewsSort();
+                }
             }
         }
         return null;
     }
+
 
     //finish
     public ArrayList<String> currentSorts() {
@@ -101,7 +134,10 @@ public class ProductsMenu {
     //finish
     public void disableSort(String sortName) {
         sort.disableSort(sortName);
+
     }
+
+    //product--------------------------------------------------
 
     //finish
     public ArrayList<Product> processShowProducts() {
@@ -109,8 +145,13 @@ public class ProductsMenu {
     }
 
     //finish
-    public ArrayList<String> processShowProductsID(String id) {
+    public ArrayList<String> processShowProductsID(String productId) {
+        this.productId = productId;
+        commandProcessor.setMenuStatus(MenuStatus.PRODUCTMENU);
         return Product.listOfId;
     }
 
+    public String getProductId() {
+        return productId;
+    }
 }

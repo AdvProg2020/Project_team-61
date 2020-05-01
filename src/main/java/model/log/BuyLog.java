@@ -44,58 +44,63 @@ public class BuyLog extends Log {
 
     //finish
     public static boolean isBought(String productId) {
-        if (ifItsFinal){
-            return true;
-        }
-        else return false;
+        return ifItsFinal;
     }
 
 
-    public void amountOfProductCountabale(String productId,int amount){
+    public void addProductToBuyLog(String productId,int amount){
         Product product=Product.getProductById(productId);
         for (int i = 0; i < amount; i++) {
+            assert product != null;
             if (product.getNumberOfProducts()!=0){
                 listOfOneProduct.add(product);
                 product.setNumberOfProducts(product.getNumberOfProducts()-1);
                 numberOfChosenPro++;
             }
         }
-
+        allBoughtProduct.add(listOfOneProduct);
+        product.setTotalNumberOfBuyers(product.getTotalNumberOfBuyers()+1);
+        ifItsFinal=true;
     }
 
 //    public void amountOfProductUncounteble(String productId,String amount){
 //        Product product=Product.getProductById(productId);
 //    }
 
-    //finish//doubt
-    public void addProductToBuyLog(Product product){
-        allBoughtProduct.add(listOfOneProduct);
-        product.setTotalNumberOfBuyers(product.getTotalNumberOfBuyers()+1);
-        ifItsFinal=true;
+    public double holePriceWithOutDiscount(){
+        double price=0;
+        for (ArrayList<Product> productArrayList : allBoughtProduct) {
+            for (Product product1 : productArrayList) {
+                 price=+product1.getPrice();
+            }
+        }
+        return price;
     }
 
-
-    public double finalPrice(String productId){
+    public double holePriceWithDiscount(){
         double price=0;
-        Product product=Product.getProductById(productId);
-        assert product != null;
-        if (product.getHasDiscount()){
-            DiscountCode discountCode=product.getDiscountCode();
+        for (ArrayList<Product> productArrayList : allBoughtProduct) {
+            for (Product product1 : productArrayList) {
+                if (product1.getHasDiscount()){
+
+                }
+            }
         }
-        price=+product.getPrice();
         return price;
     }
 
 
-    public void payThePrice(){
+    public double payThePrice(){
+        double price=0;
         if (ifItsFinal){
             for (ArrayList<Product> productArrayList : allBoughtProduct) {
                 for (Product product1 : productArrayList) {
-                    double price=+finalPrice(product1.getId());
+                     price=+holePriceWithDiscount()+holePriceWithOutDiscount();
                 }
             }
         }
         setIsBought(true);
+        return price;
     }
 
 
