@@ -262,11 +262,10 @@ public class Product  {
     }
 
     //finish//doubt
-    public void addProductToLog(String userName , String productId){
-        Product product=getProductById(productId);
-        seller.saleLog.addProductToSaleLog(product);
+    public void addProductToLog(String userName , String productId,int amount){
+        seller.saleLog.addProductToSaleLog(Product.getProductById(productId),amount);
         Customer customer= (Customer) account.getAccountWithUsername(userName);
-        customer.buyLog.addProductToBuyLog(product);
+        customer.buyLog.addProductToBuyLog(productId,amount);
     }
 
     //finish

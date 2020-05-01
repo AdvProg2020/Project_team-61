@@ -59,6 +59,9 @@ public class SellerMenu {
 
     //array
     public void viewBuyersProduct(String productID) {
+        if(checkProduct(productID)){
+
+        }
 
     }
 

@@ -9,12 +9,16 @@ import view.SubMenuStatus;
 public class LoginMenu {
     private int outputNo;
     private Account account;
-    private Account loginAccount;
+    private static Account loginAccount;
     private CommandProcessor commandProcessor;
     private String field = null;
     private String username;
     private boolean login;
     private OutputHandler outputHandler= new OutputHandler();
+
+    public static Account getLoginAccount() {
+        return loginAccount;
+    }
 
     public void processLogin(String username) {
         if (!login) {

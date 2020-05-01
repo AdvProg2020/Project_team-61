@@ -3,7 +3,7 @@ import model.accounts.Account;
 
 import java.util.ArrayList;
 
-public abstract class Score implements Comparable {
+public class Score {
 
     //detail
     int score;

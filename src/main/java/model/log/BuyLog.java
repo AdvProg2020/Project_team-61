@@ -68,7 +68,16 @@ public class BuyLog extends Log {
 //    }
 
     //finish//doubt
-    public void addProductToBuyLog(Product product){
+    public void addProductToBuyLog(String productId,int amount){
+        Product product=Product.getProductById(productId);
+        for (int i = 0; i < amount; i++) {
+            assert product != null;
+            if (product.getNumberOfProducts()!=0){
+                listOfOneProduct.add(product);
+                product.setNumberOfProducts(product.getNumberOfProducts()-1);
+                numberOfChosenPro++;
+            }
+        }
         allBoughtProduct.add(listOfOneProduct);
         product.setTotalNumberOfBuyers(product.getTotalNumberOfBuyers()+1);
         ifItsFinal=true;
@@ -87,17 +96,41 @@ public class BuyLog extends Log {
     }
 
 
-    public void payThePrice(){
+
+    public double holePriceWithOutDiscount(){
+        double price=0;
+        for (ArrayList<Product> productArrayList : allBoughtProduct) {
+            for (Product product1 : productArrayList) {
+                price=+product1.getPrice();
+            }
+        }
+        return price;
+    }
+
+    public double holePriceWithDiscount(){
+        double price=0;
+        for (ArrayList<Product> productArrayList : allBoughtProduct) {
+            for (Product product1 : productArrayList) {
+                if (product1.getHasDiscount()){
+
+                }
+            }
+        }
+        return price;
+    }
+
+
+    public double payThePrice(){
+        double price=0;
         if (ifItsFinal){
             for (ArrayList<Product> productArrayList : allBoughtProduct) {
                 for (Product product1 : productArrayList) {
-                    double price=+finalPrice(product1.getId());
+                    price=+holePriceWithDiscount()+holePriceWithOutDiscount();
                 }
             }
         }
         setIsBought(true);
+        return price;
     }
-
-
 
 }

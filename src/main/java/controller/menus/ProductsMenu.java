@@ -79,7 +79,6 @@ public class ProductsMenu {
 
     public void processSorting() {
         commandProcessor.setSubMenuStatus(SubMenuStatus.SORTING);
-
     }
 
     public void showAvailableSorts() {

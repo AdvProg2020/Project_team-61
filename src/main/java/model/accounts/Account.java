@@ -88,6 +88,9 @@ public abstract class Account {
     public void setPhoneNo(int phoneNo) {
         this.phoneNo = phoneNo;
     }
+    public void setCredit(double credit) {
+        this.credit = credit;
+    }
 
     //-----------------------------------------------------------------
     public String getUsername() {

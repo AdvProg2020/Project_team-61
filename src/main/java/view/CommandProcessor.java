@@ -279,6 +279,10 @@ public class CommandProcessor {
                         } else if (input.matches(regex[22])) {
                             customerMenu.rateProduct(getMatcher(input, regex[22]).group(1), Integer.parseInt(getMatcher(input, regex[22]).group(2)));
                         }
+                    } else if (subMenuStatus == SubMenuStatus.PRODUCTNUMBER) {
+                        if (input.matches(regex[21])) {
+                            customerMenu.productNumber(getMatcher(input, regex[21]).group(1));
+                        }
                     }
                 } else if (menuStatus == MenuStatus.PRODUCTSMENU || menuStatus == MenuStatus.MAINMENU) {
                     //ProductsMenu
@@ -369,3 +373,4 @@ public class CommandProcessor {
         }
 
     }
+}
