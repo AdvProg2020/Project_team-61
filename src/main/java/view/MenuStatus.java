@@ -19,9 +19,10 @@ public enum MenuStatus {
     CATEGORY,
     SEARCH,
     //
+    PURCHASE,
     PAYMENT,
     DISCOUNTCODE,
     CREATIONMENU,
-    RECIVERINFORMATION;
+    RECEIVERINFORMATION;
 
 }
