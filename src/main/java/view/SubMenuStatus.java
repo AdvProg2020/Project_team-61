@@ -49,7 +49,9 @@ public enum SubMenuStatus {
     SALEFIELD,
     //
     COMMENTSTITLE,
-    COMMENTSCONTENT;
+    COMMENTSCONTENT,
+    PRODUCTNUMBER,
+    RECIEVEMONEY;
 
 
 

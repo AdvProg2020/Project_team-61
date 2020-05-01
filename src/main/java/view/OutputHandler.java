@@ -221,6 +221,14 @@ public class OutputHandler {
             System.out.println("request " + string + " declined");
         }else if (output == 7) {
             System.out.println("category " + string + " removed");
+        }else if (output == 8) {
+            System.out.println("your credit " + string );
+        }
+    }
+
+    public void showOutputWith2String(String first, String second, int output) {
+        if (output == 1) {
+            System.out.println("you get " + first + " to product " + second);
         }
     }
 

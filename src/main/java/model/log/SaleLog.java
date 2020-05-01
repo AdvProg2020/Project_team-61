@@ -53,6 +53,10 @@ public class SaleLog extends Log{
         return false;
     }
 
+    public void addProductToSaleLog(Product product,int amount){
+        allSoldProduct.add(product);
+
+    }
     //finish//doubt
     public void addProductToSaleLog(Product product,int amount){
         allSoldProduct.add(product);
