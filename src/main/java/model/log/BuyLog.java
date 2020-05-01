@@ -44,30 +44,10 @@ public class BuyLog extends Log {
 
     //finish
     public static boolean isBought(String productId) {
-        if (ifItsFinal){
-            return true;
-        }
-        else return false;
+        return ifItsFinal;
     }
 
 
-    public void amountOfProductCountabale(String productId,int amount){
-        Product product=Product.getProductById(productId);
-        for (int i = 0; i < amount; i++) {
-            if (product.getNumberOfProducts()!=0){
-                listOfOneProduct.add(product);
-                product.setNumberOfProducts(product.getNumberOfProducts()-1);
-                numberOfChosenPro++;
-            }
-        }
-
-    }
-
-//    public void amountOfProductUncounteble(String productId,String amount){
-//        Product product=Product.getProductById(productId);
-//    }
-
-    //finish//doubt
     public void addProductToBuyLog(String productId,int amount){
         Product product=Product.getProductById(productId);
         for (int i = 0; i < amount; i++) {
@@ -83,25 +63,15 @@ public class BuyLog extends Log {
         ifItsFinal=true;
     }
 
-
-    public double finalPrice(String productId){
-        double price=0;
-        Product product=Product.getProductById(productId);
-        assert product != null;
-        if (product.getHasDiscount()){
-            DiscountCode discountCode=product.getDiscountCode();
-        }
-        price=+product.getPrice();
-        return price;
-    }
-
-
+//    public void amountOfProductUncounteble(String productId,String amount){
+//        Product product=Product.getProductById(productId);
+//    }
 
     public double holePriceWithOutDiscount(){
         double price=0;
         for (ArrayList<Product> productArrayList : allBoughtProduct) {
             for (Product product1 : productArrayList) {
-                price=+product1.getPrice();
+                 price=+product1.getPrice();
             }
         }
         return price;
@@ -125,12 +95,14 @@ public class BuyLog extends Log {
         if (ifItsFinal){
             for (ArrayList<Product> productArrayList : allBoughtProduct) {
                 for (Product product1 : productArrayList) {
-                    price=+holePriceWithDiscount()+holePriceWithOutDiscount();
+                     price=+holePriceWithDiscount()+holePriceWithOutDiscount();
                 }
             }
         }
         setIsBought(true);
         return price;
     }
+
+
 
 }

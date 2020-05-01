@@ -28,9 +28,10 @@ public class Product  {
     private int totalNumberOfBuyers;
     //trueIsCountable
     private boolean countableOrNot;
+    private boolean isBought;
 
     //lists
-    private ArrayList<Seller> listOfSellers = new ArrayList<Seller>();
+    private static ArrayList<Seller> listOfSellers = new ArrayList<Seller>();
     private HashMap<Category,ArrayList<Product>> listOfAllProducts = new HashMap<Category, ArrayList<Product>>();
     private static ArrayList<Product> allProduct = new ArrayList<Product>();
     private ArrayList<String> info=new ArrayList<>();
@@ -198,6 +199,14 @@ public class Product  {
     }
     public ArrayList<String> getInfo() {
         return info;
+    }
+
+    public HashMap<Category, ArrayList<Product>> getListOfAllProducts() {
+        return listOfAllProducts;
+    }
+
+    public Seller getSeller() {
+        return seller;
     }
 
     //othersTobeHandel-------------------------------------------------------------------------------

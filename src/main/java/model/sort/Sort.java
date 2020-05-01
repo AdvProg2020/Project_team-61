@@ -86,4 +86,14 @@ public abstract class Sort {
         }
         else return false;
     }
+
+    public boolean isThereFilterWithName(String sortName){
+        if (sortName.matches("numberOfView")){
+            return true;
+        }
+        else if (sortName.matches("score")){
+            return true;
+        }
+        return false;
+    }
 }

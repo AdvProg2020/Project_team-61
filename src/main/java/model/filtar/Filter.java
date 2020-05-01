@@ -127,4 +127,20 @@ public abstract class Filter {
         else return false;
     }
 
+    public boolean isThereFilterWithName(String filter){
+        if (filter.matches("category")){
+            return true;
+        }
+        else if (filter.matches("companyName")){
+            return true;
+        }
+        else if (filter.matches("discount")){
+            return true;
+        }
+        else if (filter.matches("productName")){
+            return true;
+        }
+        return false;
+    }
+
 }
