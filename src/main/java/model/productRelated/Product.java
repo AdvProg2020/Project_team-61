@@ -4,9 +4,12 @@ import model.accounts.Customer;
 import model.accounts.Seller;
 import model.log.BuyLog;
 import model.log.Log;
+import model.off.DiscountCode;
+import model.off.Sale;
 
 import java.util.*;
 public class Product  {
+
 
     //productDetail
     private String productId;
@@ -30,7 +33,8 @@ public class Product  {
     private ArrayList<Seller> listOfSellers = new ArrayList<Seller>();
     private HashMap<Category,ArrayList<Product>> listOfAllProducts = new HashMap<Category, ArrayList<Product>>();
     private static ArrayList<Product> allProduct = new ArrayList<Product>();
-    private HashMap<Product,Integer> allProductsWithViews;
+    private ArrayList<String> info=new ArrayList<>();
+    public static ArrayList<String> listOfId=new ArrayList<String>();
 
     //objectsAdded
     private Comment comment;
@@ -38,12 +42,14 @@ public class Product  {
     private Log log;
     private Account account;
     private Date date;
+    private DiscountCode discountCode;
+    private Sale sale;
 
 
 
     public Product(String productId) {
         this.productId = productId;
-        allProduct.add(this);
+        listOfId.add(productId);
     }
 
 
@@ -59,6 +65,7 @@ public class Product  {
 //        allProduct.add(this);
         listOfSellers.add(seller);
         listOfAllProducts.put(category,allProduct);
+        allProduct.add(this);
 
     }
 
@@ -123,7 +130,7 @@ public class Product  {
         return productStatus;
     }
 
-    public boolean getOnSale () {
+    public boolean getInSale () {
         return isInSale;
     }
     public void setInSale(boolean inSale) {
@@ -153,7 +160,54 @@ public class Product  {
         return score;
     }
 
+    public void setSale(Sale sale) {
+        this.sale = sale;
+        setInSale(true);
+    }
+    public Sale getSale() {
+        return sale;
+    }
+
+    public void setDiscountCode(DiscountCode discountCode) {
+        this.discountCode = discountCode;
+        setHasDiscount(true);
+    }
+    public DiscountCode getDiscountCode() {
+        return discountCode;
+    }
+
+    public void setTotalNumberOfBuyers(int totalNumberOfBuyers) {
+        this.totalNumberOfBuyers = totalNumberOfBuyers;
+    }
+    public int getTotalNumberOfBuyers() {
+        return totalNumberOfBuyers;
+    }
+
+    public void setInfo(ArrayList<String> info) {
+        info.add(getProductName());
+        info.add(getCompaniesName());
+        info.add(String.valueOf(getPrice()));
+        if (hasDiscount){
+           // info.add(discountCode.get)
+        }
+        info.add(getCategory().getName());
+        info.add(seller.getName());
+        info.add(String.valueOf(getAverageScore()));
+        info.add(additionalDetail);
+
+    }
+    public ArrayList<String> getInfo() {
+        return info;
+    }
+
     //othersTobeHandel-------------------------------------------------------------------------------
+
+    //finish
+    public void addComment(String productId , Account account, String content){
+        Product product=getProductById(productId);
+        product.comment=new Comment(product,account);
+        comment.setCommentContent(content);
+    }
 
     //finish
     public static Product getProductById(String id) {
@@ -189,13 +243,6 @@ public class Product  {
     }
 
     //finish
-    public void viewProductStatus (String productId){
-        Product product=getProductById(productId);
-        System.out.println(product.productStatus);
-
-    }
-
-    //finish
     public static boolean isThereProductWithId (String productId){
         Product product=getProductById(productId);
         if (product==null){
@@ -205,34 +252,13 @@ public class Product  {
     }
 
     //finish
-    public void viewAllAdditionalProductStatus ( String productId){
-        Product product=getProductById(productId);
-        System.out.println(product.additionalDetail);
-    }
-
-    //finish
-    public void addTotalNumberOfBuyers() {
-        if (BuyLog.isBought(productId)){
-            totalNumberOfBuyers++;
-        }
-    }
-
-    //finish
     public static ArrayList<Product> getProductList(){
         return allProduct;
     }
 
     //finish
-    public int getProductLListSize (){
+    public int getProductListSize (){
         return allProduct.size();
-    }
-
-
-    //finish
-    public static ArrayList<Comment> allCommentsOnProduct ( String productId){
-        Product product=null;
-        product = product.getProductById(productId);
-        return product.comment.allComments;
     }
 
     //finish//doubt
