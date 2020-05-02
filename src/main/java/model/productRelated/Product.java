@@ -242,6 +242,14 @@ public class Product  {
         Customer customer= (Customer) account.getAccountWithUsername(userName);
         customer.buyLog.addProductToBuyLog(product);
     }
+    public Product getProductWithName(String name){
+        for (model.productRelated.Product product : allProduct) {
+            if (product.getProductName().equals(name)){
+                return product;
+            }
+
+        }
+    }
 
     //finish
     public void deleteProductByCategory(String categoryId){
@@ -254,6 +262,7 @@ public class Product  {
             }
         }
     }
+
 
     //finish
     public static Comparator<Product> productComparatorForView = new Comparator<Product>() {
@@ -277,6 +286,6 @@ public class Product  {
             return Double.compare(productScore1,productScore2);
 
         }
-    };
+    }
 
 }
