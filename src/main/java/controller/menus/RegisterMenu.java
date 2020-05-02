@@ -4,13 +4,11 @@ import controller.request.Request;
 import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Manager;
-import model.accounts.Seller;
 import view.*;
 
 
 public class RegisterMenu {
     private int outputNo;
-    private Account account;
     private Request request;
     private int detailMenu = 0;
     private boolean managerWant = false;
@@ -26,7 +24,7 @@ public class RegisterMenu {
 
     public void processRegister(String role, String username) {
         if (username.matches("^(?i)(?=.*[a-z])(?=.*[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
-            if (!account.isThereAccountWithUsername(username)) {
+            if (!Account.isThereAccountWithUsername(username)) {
                 if (role.matches(".+")) {
                     this.role = role;
                     this.username = username;
@@ -122,7 +120,7 @@ public class RegisterMenu {
 
     public void createAccountWithDetails(){
         if (!(role.equalsIgnoreCase("seller"))) {
-            account.setDetailsToAccount( password, name, lastname, Email, phoneNo);
+            Account.setDetailsToAccount( password, name, lastname, Email, phoneNo);
         }
         else {
             request.sellerAccountDetails(username, password, name, lastname, Email, phoneNo);
@@ -130,7 +128,7 @@ public class RegisterMenu {
     }
 
 
-    public void setManagerWant(boolean managerWant) {
-        this.managerWant = managerWant;
+    public static void setManagerWant(boolean managerWant) {
+        managerWant = managerWant;
     }
 }

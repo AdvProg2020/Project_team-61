@@ -140,7 +140,7 @@ public class SellerMenu {
     }
 
     public void editOffField(String edit) {
-        if (field.equalsIgnoreCase("sale status")) {
+        /*if (field.equalsIgnoreCase("sale status")) {
             if (edit.matches("CONFIRMED")) {
                 saleToEdit.setSaleStatus(SaleStatus.CONFIRMED);
             } else if (edit.matches("UNDERREVIEWFOREDITING")) {
@@ -175,6 +175,8 @@ public class SellerMenu {
 
             }
         }
+
+         */
     }
 
     public void addOff() {
@@ -182,6 +184,7 @@ public class SellerMenu {
     }
 
     public void setDetailsToSale(String detail) {
+        /*
         if (detailMenu == 0) {
             if (detail.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
                 Date currentDate = new Date();

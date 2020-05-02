@@ -21,7 +21,7 @@ public abstract class Account {
     ArrayList<BuyLog> allBuyLogs;
     ArrayList<Account> allAccounts;
 
-    public void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo) {
+    public static void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo) {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -35,7 +35,7 @@ public abstract class Account {
         this.username = username;
     }
 
-    public boolean isThereAccountWithUsername(String username) {
+    public static boolean isThereAccountWithUsername(String username) {
 
         for (Account account : allAccounts) {
             if (account.username.equalsIgnoreCase(username)) return true;
@@ -43,7 +43,7 @@ public abstract class Account {
         return false;
     }
 
-    public Account getAccountWithUsername(String username) {
+    public static Account getAccountWithUsername(String username) {
 
         for (Account account : allAccounts) {
             if (account.username.equalsIgnoreCase(username)) return account;
@@ -51,11 +51,11 @@ public abstract class Account {
         return null;
     }
 
-    public void deleteAccount(String username) {
+    public static void deleteAccount(String username) {
         allAccounts.remove(getAccountWithUsername(username));
     }
 
-    public boolean isThereAccountWithUsernameAndPassword(String username, String password) {
+    public static boolean isThereAccountWithUsernameAndPassword(String username, String password) {
 
         for (Account account : allAccounts) {
             if (account.username.equalsIgnoreCase(username) && account.password.equals(password)) return true;
