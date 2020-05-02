@@ -8,7 +8,6 @@ import view.SubMenuStatus;
 
 public class LoginMenu {
     private int outputNo;
-    private Account account;
     private static Account loginAccount;
     private String field = null;
     private String username;
@@ -19,14 +18,10 @@ public class LoginMenu {
         return loginAccount;
     }
 
-    public boolean isLogin() {
-        return login;
-    }
-
     public void processLogin(String username) {
         if (!login) {
             if (username.matches("^(?i)(?=.*[a-z])(?=.*[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
-                if (account.isThereAccountWithUsername(username)) {
+                if (Account.isThereAccountWithUsername(username)) {
                     CommandProcessor.setSubMenuStatus(SubMenuStatus.PASSWORD);
                     outputNo = 2;
                 } else outputNo = 14;
@@ -37,8 +32,8 @@ public class LoginMenu {
 
     public void checkPassword(String password) {
         if (password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")) {
-            if (account.isThereAccountWithUsernameAndPassword(username, password)) {
-                loginAccount = account.getAccountWithUsername(username);
+            if (Account.isThereAccountWithUsernameAndPassword(username, password)) {
+                loginAccount = Account.getAccountWithUsername(username);
                 login = true;
                 findRole();
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);

@@ -9,21 +9,18 @@ import view.CommandProcessor;
 import view.OutputHandler;
 import view.SubMenuStatus;
 import model.accounts.Seller;
-import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 public class SellerMenu {
+
     private int outputNo;
-    private int inputNo;
     private Sale sale;
     private Product product;
     private Firm firm;
     private String field;
     private int detailMenu = 0;
-    private CommandProcessor commandProcessor;
     private OutputHandler outputHandler = new OutputHandler();
     private LoginMenu loginMenu;
     private Product productToEdit;
@@ -46,15 +43,15 @@ public class SellerMenu {
         if (productID.matches("")) {
             if (product.isThereProductWithId(productID)) {
                 return true;
-            } else inputNo = 3;
-        } else inputNo = 2;
-        outputHandler.showAccountOutput(inputNo);
+            } else outputNo = 3;
+        } else outputNo = 2;
+        outputHandler.showAccountOutput(outputNo);
         return false;
     }
 
     //array
     public void processManageProducts() {
-        commandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEPRODUCTS);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEPRODUCTS);
 
     }
 
@@ -62,7 +59,7 @@ public class SellerMenu {
         if (checkProduct(productID)) {
             outputHandler.showProduct(product.getProductById(productID));
         }
-        outputHandler.showAccountOutput(inputNo);
+        outputHandler.showAccountOutput(outputNo);
     }
 
     //array
@@ -75,7 +72,7 @@ public class SellerMenu {
 
     public void editProduct(String productID) {
         productToEdit = product.getProductById(productID);
-        commandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTFIELD);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTFIELD);
     }
 
     public void editProductField(String edit) {
@@ -87,7 +84,7 @@ public class SellerMenu {
     }
 
     public void processAddProduct() {
-        commandProcessor.setSubMenuStatus(SubMenuStatus.ADDPRODUCT);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDPRODUCT);
     }
 
     public void addProduct(String detail) {
@@ -102,7 +99,7 @@ public class SellerMenu {
         if (checkProduct(productID)) {
             product.deleteProduct(productID);
         }
-        outputHandler.showAccountOutput(inputNo);
+        outputHandler.showAccountOutput(outputNo);
     }
     //----------------------------------------------------------------------------------------
 
@@ -116,9 +113,9 @@ public class SellerMenu {
         if (offID.matches("")) {
             if (sale.isThereSaleWithId(offID)) {
                 return true;
-            } else inputNo = 0;
-        } else inputNo = 0;
-        outputHandler.showAccountOutput(inputNo);
+            } else outputNo = 0;
+        } else outputNo = 0;
+        outputHandler.showAccountOutput(outputNo);
         return false;
 
     }
@@ -138,12 +135,12 @@ public class SellerMenu {
     public void editOff(String offID) {
         if (checkSale(offID)) {
             saleToEdit = sale.getSaleWithId(offID);
-            commandProcessor.setSubMenuStatus(SubMenuStatus.SALEFIELD);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.SALEFIELD);
         }
     }
 
     public void editOffField(String edit) {
-        if (field.equalsIgnoreCase("sale status")) {
+        /*if (field.equalsIgnoreCase("sale status")) {
             if (edit.matches("CONFIRMED")) {
                 saleToEdit.setSaleStatus(SaleStatus.CONFIRMED);
             } else if (edit.matches("UNDERREVIEWFOREDITING")) {
@@ -178,13 +175,16 @@ public class SellerMenu {
 
             }
         }
+
+         */
     }
 
     public void addOff() {
-        commandProcessor.setSubMenuStatus(SubMenuStatus.ADDSALE);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDSALE);
     }
 
     public void setDetailsToSale(String detail) {
+        /*
         if (detailMenu == 0) {
             if (detail.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
                 Date currentDate = new Date();
