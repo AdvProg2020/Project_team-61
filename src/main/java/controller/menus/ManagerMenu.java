@@ -10,6 +10,14 @@ import view.MenuStatus;
 import view.OutputHandler;
 import view.SubMenuStatus;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 
 public class ManagerMenu {
     private int outputNo;
@@ -109,33 +117,42 @@ public class ManagerMenu {
             outputHandler.showAccountOutput(7);
         }
     }
-    public void setDetailToDiscountCode(String detail) {
-        /*
+    //exception for parse!!
+    public void setDetailToDiscountCode (String detail) {
+
         if (detailMenu == 0) {
-            if (detail.matches("")) {
-                newDiscountCode.setStartOfDiscountPeriod(detail);
-                inputNo = 9;
-                detailMenu = 1;
+            if (detail.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
+                Date currentDate=new Date();
+                Date inputDate=new SimpleDateFormat("dd/MM/yyyy").parse(detail);
+                if (inputDate.after(currentDate)) {
+                    newDiscountCode.setStartOfDiscountPeriod(inputDate);
+                    inputNo = 9;
+                    detailMenu = 1;
+                }
             } else inputNo = 8;
         } else if (detailMenu == 1) {
-            if (detail.matches("")) {
-                newDiscountCode.setEndOfDiscountPeriod(detail);
-                inputNo = 11;
-                detailMenu = 1;
+            if (detail.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
+                Date currentDate=new Date();
+                Date inputDate=new SimpleDateFormat("dd/MM/yyyy").parse(detail);
+                if (inputDate.after(currentDate)) {
+                    newDiscountCode.setStartOfDiscountPeriod(inputDate);
+                    inputNo = 11;
+                    detailMenu = 1;
+                }
             } else inputNo = 10;
         } else if (detailMenu == 2) {
-            if (detail.matches("")) {
-                newDiscountCode.setMaxDiscountAmount(detailMenu);
+            if (detail.matches("\\d+")) {
+                newDiscountCode.setMaxDiscountAmount(Integer.parseInt(detail));
                 inputNo = 13;
                 detailMenu = 1;
             } else inputNo = 12;
         } else if (detailMenu == 3) {
-            if (detail.matches("")) {
+            if (detail.matches("\\d+")) {
                 newDiscountCode.setTotalTimesOfUse(Integer.parseInt(detail));
               //  inputNo = 15;
                 detailMenu = 0;
             } else inputNo = 14;
-        }*/
+        }
         commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
     }
 
@@ -164,28 +181,36 @@ public class ManagerMenu {
     }
     ///????????ParseException
     public void editDiscountCodeField(String edit) {
-        /*
+
         if (field.equalsIgnoreCase("start Of Discount Period")) {
-            if (field.matches("")) {
-                editableDiscountCode.setStartOfDiscountPeriod(new SimpleDateFormat("dd/MM/yyyy").parse(edit));
-                inputNo = 16;
+            if (edit.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
+                Date currentDate=new Date();
+                Date inputDate=new SimpleDateFormat("dd/MM/yyyy").parse(edit);
+                if (inputDate.after(currentDate)){
+                    editableDiscountCode.setStartOfDiscountPeriod(inputDate) ;
+                    inputNo = 16;
+                }
             } else inputNo = 8;
         } else if (field.equalsIgnoreCase("end Of Discount Period")) {
-            if (field.equalsIgnoreCase("start Of Discount Period")) {
-                editableDiscountCode.setEndOfDiscountPeriod(new SimpleDateFormat("dd/MM/yyyy").parse(edit));
-                inputNo = 17;
+            if (edit.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
+                Date currentDate=new Date();
+                Date inputDate=new SimpleDateFormat("dd/MM/yyyy").parse(edit);
+                if (inputDate.after(currentDate)){
+                    editableDiscountCode.setEndOfDiscountPeriod(inputDate);
+                    inputNo = 17;
+                }
             } else inputNo = 10;
         } else if (field.equalsIgnoreCase("max Discount Amount")) {
-            if (field.equalsIgnoreCase("start Of Discount Period")) {
+            if (edit.matches("\\d+\\.\\d*")) {
                 editableDiscountCode.setMaxDiscountAmount(Double.parseDouble(edit));
                 inputNo = 18;
             } else inputNo = 12;
         } else if (field.equalsIgnoreCase("total Times Of Use")) {
-            if (field.equalsIgnoreCase("start Of Discount Period")) {
+            if (edit.matches("\\d+")) {
                 editableDiscountCode.setTotalTimesOfUse(Integer.parseInt(edit));
                 inputNo = 19;
             } else inputNo = 14;
-        }*/
+        }
         commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
         commandProcessor.setMenuStatus(MenuStatus.MANAGERMENU);
     }
@@ -263,25 +288,18 @@ public class ManagerMenu {
         outputHandler.showOutputWithString(field,3);
     }
     public void editCategoryField(String edit) {
-        /*if (field.equalsIgnoreCase("trait")) {
-            if (field.matches("")) {
+        if (field.equalsIgnoreCase("trait")) {
+            if (field.matches("\\D")) {
+            editableCategory.setTraits(edit);
             }
-        }else if (field.equalsIgnoreCase("")) {
-            if (field.matches("")) {
+        }else if (field.equalsIgnoreCase("product")) {
+            if (edit.matches("")) {
+                ArrayList<Product> products = category.getAllProducts();
+                products.add(product.getProductWithName(detail));
+                category.setAllProducts(products);
             }
-        }else if (field.equalsIgnoreCase("")) {
-            if (field.matches("")) {
-            }
-        }else if (field.equalsIgnoreCase("")) {
-            if (field.matches("")) {
-            }
-        }else if (field.equalsIgnoreCase("")) {
-            if (field.matches("")) {
-            }
-        }else if (field.equalsIgnoreCase("")) {
-            if (field.matches("")) {
-            }
-        }*/
+        }
+
     }
 
     public void addCategory(String category) {
@@ -293,26 +311,22 @@ public class ManagerMenu {
     }
     public void setDetailToCategory(String detail){
 
-       /*if (field.equalsIgnoreCase("")) {
-            if (field.matches("")) {
+       if (field.equalsIgnoreCase("name")) {
+            if (detail.matches("\\D+")) {
+                category.setName(detail);
+            }
+        }else if (field.equalsIgnoreCase("traits")) {
+            if (detail.matches("\\D+")) {
+                category.setTraits(detail);
+            }
+        }else if (field.equalsIgnoreCase("product")) {
+           if (detail.matches("\\D+")) {
+               ArrayList<Product> products = category.getAllProducts();
+               products.add(product.getProductWithName(detail));
+               category.setAllProducts(products);
 
-            }
-        }else if (field.equalsIgnoreCase("")) {
-            if (field.matches("")) {
-            }
-        }else if (field.equalsIgnoreCase("")) {
-            if (field.matches("")) {
-            }
-        }else if (field.equalsIgnoreCase("")) {
-            if (field.matches("")) {
-            }
-        }else if (field.equalsIgnoreCase("")) {
-            if (field.matches("")) {
-            }
-        }else if (field.equalsIgnoreCase("")) {
-            if (field.matches("")) {
-            }
-        }*/
+           }
+       }
 
     }
 
