@@ -7,8 +7,6 @@ import view.OutputHandler;
 
 public class SaleMenu {
     private int outputNo;
-    private int inputNo;
-    private Product product;
     private OutputHandler outputHandler= new OutputHandler();
     private Sale sale;
 
@@ -18,7 +16,7 @@ public class SaleMenu {
     }
 
     public void processShowProductsID(String id) {
-        outputHandler.showProduct(product.getProductById(id));
+        outputHandler.showProduct(Product.getProductById(id));
     }
 
 

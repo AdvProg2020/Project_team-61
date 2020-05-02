@@ -3,6 +3,7 @@ package controller.menus;
 
 import model.accounts.Account;
 import model.accounts.Seller;
+import model.log.BuyLog;
 import model.productRelated.Comment;
 import model.productRelated.Product;
 import view.CommandProcessor;
@@ -26,8 +27,6 @@ public class ProductMenu {
     //finish
     public ArrayList<String> processDigest() {
         commandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
-        //IN PRODUCTE BAYAD VIJHEGIASHO NESHOON BDIM
-        //kln mikhai add kni ... az in selected estefade kn
         selectedProduct = Product.getProductById(productsMenu.getProductId());
         return selectedProduct.getInfo();
     }

@@ -57,7 +57,7 @@ public class DiscountCode {
         return allCustomersWithDiscountCode;
     }
 
-    public boolean isThereDiscountWithId(int id) {
+    public boolean isThereDiscountWithId(String id) {
         for (DiscountCode discountCode : allDiscountCodes) {
             if (discountCode.getDiscountId().equals(id)) {
                 return true;
@@ -66,7 +66,7 @@ public class DiscountCode {
         return false;
     }
 
-    public DiscountCode getDiscountWithId(int id) {
+    public DiscountCode getDiscountWithId(String id) {
         for (DiscountCode discountcode : allDiscountCodes) {
             if (discountcode.getDiscountId().equals(id)) {
                 return discountcode;
@@ -75,7 +75,7 @@ public class DiscountCode {
         return null;
     }
 
-    public void deleteDiscount(int id) {
+    public void deleteDiscount(String id) {
         allDiscountCodes.remove(getDiscountWithId(id));
 
     }

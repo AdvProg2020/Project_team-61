@@ -5,31 +5,34 @@ import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
-import view.CommandProcessor;
-import view.MenuStatus;
-import view.OutputHandler;
-import view.SubMenuStatus;
+import view.*;
 
 
 public class RegisterMenu {
     private int outputNo;
     private Account account;
     private Request request;
-    private CommandProcessor commandProcessor;
     private int detailMenu = 0;
     private boolean managerWant = false;
     private boolean headManager = true;
     private OutputHandler outputHandler = new OutputHandler();
-    private String username;
     private String role;
+    private String username;
+    private String password;
+    private String name;
+    private String lastname;
+    private String Email;
+    private double phoneNo;
 
     public void processRegister(String role, String username) {
         if (username.matches("^(?i)(?=.*[a-z])(?=.*[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
             if (!account.isThereAccountWithUsername(username)) {
                 if (role.matches(".+")) {
-                    this.username = username;
                     this.role = role;
-                    commandProcessor.setSubMenuStatus(SubMenuStatus.REGISTERATIONDETAILS);
+                    this.username = username;
+                    registerByRole(role, username);
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.REGISTERATIONDETAILS);
+                    CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
                     outputNo = 2;
                 } else outputNo = 26;
             } else outputNo = 1;
@@ -45,24 +48,25 @@ public class RegisterMenu {
             createManagerAccount(username);
 
         } else if (role.equalsIgnoreCase("seller")) {
-            createSellerAccount(username);
+            String sellerAccountRequest = username + " wants seller account";
+            //createSellerAccount(username);
         }
 
     }
 
     private void createManagerAccount(String username) {
-        if (managerWant || (!headManager)) {
+        if (managerWant || (headManager)) {
             Manager newManager = new Manager(username);
             headManager = false;
             managerWant = false;
         } else {
             //???????
-            commandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
             outputNo = 23;
         }
     }
 
-    private void createSellerAccount(String username) {
+    /*private void createSellerAccount(String username) {
         String sellerAccountRequest = username + " wants seller account";
         if (request.isThereRequestFromID(sellerAccountRequest)) {
             if (request.isRequestViewed()) {
@@ -75,44 +79,56 @@ public class RegisterMenu {
             outputNo = 27;
         }
         outputHandler.showAccountOutput(outputNo);
-    }
+    }*/
 
 
     public void completeRegisterProcess(String detail) {
-        registerByRole(role, username);
         if (detailMenu == 0) {
             if (detail.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")) {
-                account.setPassword(detail);
+                this.password = detail;
                 detailMenu++;
                 outputNo = 4;
             } else outputNo = 3;
         } else if (detailMenu == 1) {
             if (detail.matches(".+")) {
-                account.setName(detail);
+                this.name = detail;
                 detailMenu++;
                 outputNo = 6;
             } else outputNo = 5;
         } else if (detailMenu == 2) {
             if (detail.matches(".+")) {
-                account.setLastname(detail);
+                this.lastname = detail;
                 detailMenu++;
                 outputNo = 8;
             } else outputNo = 7;
         } else if (detailMenu == 3) {
             if (detail.matches(".+")) {
-                account.setEmail(detail);
+                this.Email = detail;
                 detailMenu++;
                 outputNo = 10;
             } else outputNo = 9;
         } else if (detailMenu == 4) {
             if (detail.matches(".+")) {
-                account.setPhoneNo(detailMenu);
+                this.phoneNo = Double.parseDouble(detail);
                 detailMenu = 0;
-                commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                createAccountWithDetails();
                 outputNo = 12;
             } else outputNo = 11;
         }
+
     }
+
+    public void createAccountWithDetails(){
+        if (!(role.equalsIgnoreCase("seller"))) {
+            account.setDetailsToAccount( password, name, lastname, Email, phoneNo);
+        }
+        else {
+            request.sellerAccountDetails(username, password, name, lastname, Email, phoneNo);
+        }
+    }
+
 
     public void setManagerWant(boolean managerWant) {
         this.managerWant = managerWant;

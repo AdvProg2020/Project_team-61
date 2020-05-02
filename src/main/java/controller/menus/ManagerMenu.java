@@ -222,18 +222,14 @@ public class ManagerMenu {
 
     public void acceptRequest(String requestID) {
         if (checkRequest(requestID)) {
-            Request chosenRequest = request.getRequestFromID(requestID);
-            chosenRequest.setRequestAccepted(true);
-            chosenRequest.setRequestViewed(true);
+            request.acceptRequest(requestID);
             outputHandler.showOutputWithString(requestID,4);
         }
     }
 
     public void declineRequest(String requestID) {
         if (checkRequest(requestID)) {
-            Request chosenRequest = request.getRequestFromID(requestID);
-            chosenRequest.setRequestAccepted(false);
-            chosenRequest.setRequestViewed(true);
+            request.declineRequest(requestID);
             outputHandler.showOutputWithString(requestID,4);
         }
     }
@@ -241,9 +237,9 @@ public class ManagerMenu {
 
     private boolean checkCategory(String category) {
         if (category.matches("")) {
-             //if (category.isThereCategoryWithName(category)) {
+            //if (category.isThereCategoryWithName(category)) {
             return true;
-           // } else inputNo =23;
+            // } else inputNo =23;
         } else inputNo = 22;
         return false;
     }
@@ -292,7 +288,7 @@ public class ManagerMenu {
         if (checkCategory(category)) {
             Category newCategory = new Category(category);
             commandProcessor.setSubMenuStatus(SubMenuStatus.DETAILCATEGORY);
-           // outputHandler.showAccountOutput();
+            // outputHandler.showAccountOutput();
         }
     }
     public void setDetailToCategory(String detail){
@@ -323,7 +319,7 @@ public class ManagerMenu {
 
     public void removeCategory(String category) {
         if (checkCategory(category)) {
-           // category.deleteCategory(category);
+            // category.deleteCategory(category);
             outputHandler.showOutputWithString(category, 7);
         }
     }

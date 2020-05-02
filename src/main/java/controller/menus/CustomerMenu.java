@@ -1,10 +1,8 @@
 package controller.menus;
 
 
-import model.accounts.Account;
 import model.log.BuyLog;
 import model.log.Log;
-import model.log.SaleLog;
 import model.productRelated.Product;
 import model.productRelated.Score;
 import view.CommandProcessor;
@@ -14,30 +12,25 @@ import view.SubMenuStatus;
 
 
 public class CustomerMenu {
-    private int inputNo;
     private int outputNo;
-    private Account account;
     private OutputHandler outputHandler = new OutputHandler();
     private Product product;
-    private CommandProcessor commandProcessor;
-    // private SaleLog saleLog;
     private BuyLog buyLog;
-    private Log log;
     private String productID;
 
     //array
     public void processViewCart() {
-        commandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
     }
 
     // manager // customer // seller
     private boolean checkProduct(String productID) {
         if (productID.matches(".+")) {
-            if (product.isThereProductWithId(productID)) {
+            if (Product.isThereProductWithId(productID)) {
                 return true;
-            } else inputNo = 0;
-        } else inputNo = 0;
-        outputHandler.showAccountOutput(inputNo);
+            } else outputNo = 0;
+        } else outputNo = 0;
+        outputHandler.showAccountOutput(outputNo);
         return false;
     }
 
@@ -48,27 +41,30 @@ public class CustomerMenu {
 
     public void viewProduct(String productID) {
         if (checkProduct(productID)) {
-            outputHandler.showProduct(product.getProductById(productID));
+            outputHandler.showProduct(Product.getProductById(productID));
         }
     }
 
     public void increaseProductNumber(String productID) {
         if (checkProduct(productID)) {
             this.productID = productID;
-            commandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTNUMBER);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTNUMBER);
+            outputHandler.showOutput(1);
         }
     }
 
     public void productNumber(String number) {
         if (number.matches("\\d+")) {
             product.addProductToLog(LoginMenu.getLoginAccount().getUsername(), productID, Integer.parseInt(number));
+            outputHandler.showOutputWith2String(productID,number,2);
         }
     }
 
     public void decreaseProductNumber(String productID) {
         if (checkProduct(productID)) {
             this.productID = productID;
-            commandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTNUMBER);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTNUMBER);
+            outputHandler.showOutput(2);
         }
     }
 
@@ -78,27 +74,28 @@ public class CustomerMenu {
 
     //purches--------------------------------------------------------
     public void purchase() {
-        commandProcessor.setMenuStatus(MenuStatus.RECEIVERINFORMATION);
+        CommandProcessor.setMenuStatus(MenuStatus.RECEIVERINFORMATION);
     }
 
     public void processPurchase() {
-        commandProcessor.setMenuStatus(MenuStatus.RECEIVERINFORMATION);
+        outputHandler.showOutput(3);
+        CommandProcessor.setMenuStatus(MenuStatus.RECEIVERINFORMATION);
     }
 
     public void receiverInformation(String information) {
-        commandProcessor.setMenuStatus(MenuStatus.DISCOUNTCODE);
+        CommandProcessor.setMenuStatus(MenuStatus.DISCOUNTCODE);
     }
 
     public void discountCode(String discountCodeId) {
 
-        commandProcessor.setMenuStatus(MenuStatus.PAYMENT);
+        CommandProcessor.setMenuStatus(MenuStatus.PAYMENT);
     }
 
     public void payment() {
         if (buyLog.holePriceWithDiscount() <= LoginMenu.getLoginAccount().getCredit()) {
             finishingPayment();
 
-            commandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+            CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
         } else {
 
         }
@@ -114,17 +111,17 @@ public class CustomerMenu {
     //log---------------------------------------------------------------
     private boolean checkLog(String orderID) {
         if (orderID.matches(".+")) {
-            if (log.isThereLogWithID(orderID)) {
+            if (Log.isThereLogWithID(orderID)) {
                 return true;
-            } else inputNo = 0;
-        } else inputNo = 0;
-        outputHandler.showAccountOutput(inputNo);
+            } else outputNo = 0;
+        } else outputNo = 0;
+        outputHandler.showAccountOutput(outputNo);
         return false;
     }
 
     //array
     public void processViewOrders() {
-        commandProcessor.setSubMenuStatus(SubMenuStatus.VIEWORDERS);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWORDERS);
     }
 
 
