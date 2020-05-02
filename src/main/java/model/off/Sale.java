@@ -1,28 +1,26 @@
 package model.off;
-import model.accounts.Account;
-import model.accounts.Customer;
-import model.off.SaleStatus;
-import model.productRelated.Product;
+
 import model.accounts.Seller;
+import model.productRelated.Product;
+
 import java.util.ArrayList;
 import java.util.*;
-public class Sale  implements Comparable{
+
+public class Sale  implements Comparable {
     private String offId;
     private SaleStatus saleStatus;
     private Date startOfSalePeriod;
     private Date endOfSalePeriod;
     private int saleAmount;
     private Seller seller;
-    private ArrayList <Product>allProducts;
-    private static ArrayList <Sale> allSales;
+    private ArrayList<Product> allProducts;
+    private static ArrayList<Sale> allSales;
 
     public Sale(String offId) {
         this.offId = offId;
-        allProducts=new ArrayList<>();
-        allSales.add(this);
-
     }
-    public void setSaleDetails(SaleStatus saleStatus, Date startOfSalePeriod, Date endOfSalePeriod, int saleAmount, Seller seller){
+
+    public void setSaleDetails(SaleStatus saleStatus, Date startOfSalePeriod, Date endOfSalePeriod, int saleAmount, Seller seller) {
         this.saleStatus = saleStatus;
         this.startOfSalePeriod = startOfSalePeriod;
         this.endOfSalePeriod = endOfSalePeriod;
@@ -58,7 +56,7 @@ public class Sale  implements Comparable{
         return allProducts;
     }
 
-    public  Sale getSaleWithId(String id){
+    public Sale getSaleWithId(String id) {
         for (Sale sale : allSales) {
             if (sale.getOffId().equals(id)) {
                 return sale;
@@ -66,27 +64,30 @@ public class Sale  implements Comparable{
         }
         return null;
     }
-    public boolean isThereSaleWithId(String id){
+
+    public boolean isThereSaleWithId(String id) {
         return allSales.contains(getSaleWithId(id));
     }
 
 
-    public int getSaleListSize(){
+    public int getSaleListSize() {
         return allSales.size();
     }
-    public Sale getSaleWithSeller(Seller seller){
-        for (Sale sale:allSales){
-            if ((sale.getSeller())==(seller)){
+
+    public Sale getSaleWithSeller(Seller seller) {
+        for (Sale sale : allSales) {
+            if ((sale.getSeller()) == (seller)) {
                 return sale;
             }
 
         }
         return null;
     }
-    public Sale getSaleWithProduct(Product product){
+
+    public Sale getSaleWithProduct(Product product) {
         for (Sale sale : allSales) {
             for (Product products : sale.getAllProducts()) {
-                if (product.equals(products)){
+                if (products.equals(product)) {
                     return sale;
                 }
             }
@@ -109,23 +110,25 @@ public class Sale  implements Comparable{
     public boolean isTheProductInAnotherSale(Product product) {
         for (Sale sale : allSales) {
             if (sale.getAllProducts().contains(product)) {
-                return true;}
+                return true;
+            }
         }
         return false;
 
     }
 
-    @Override
     public int compareTo(Object o) {
         return 0;
     }
 
-    public ArrayList<Sale> listSales(){
+    public ArrayList<Sale> listSales() {
         return allSales;
     }
-    public ArrayList<Sale> viewSalesList(){
+
+    public ArrayList<Sale> viewSalesList() {
         return allSales;
     }
+
     @Override
     public String toString() {
         return "Sale{" +

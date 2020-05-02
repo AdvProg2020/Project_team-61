@@ -16,6 +16,7 @@ public class Seller extends Account {
         role = "seller";
     }
 
+
     public Firm getFirm() {
         return firm;
     }
