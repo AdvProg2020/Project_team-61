@@ -1,29 +1,26 @@
 package controller.menus;
 
-        import model.productRelated.Category;
-        import model.productRelated.Product;
-        import model.filtar.Filter;
-        import model.sort.Sort;
-        import view.CommandProcessor;
-        import view.MenuStatus;
-        import view.OutputHandler;
-        import view.SubMenuStatus;
-
-        import java.util.ArrayList;
+import model.productRelated.Category;
+import model.productRelated.Product;
+import model.filtar.Filter;
+import model.sort.Sort;
+import view.CommandProcessor;
+import view.MenuStatus;
+import view.OutputHandler;
+import view.SubMenuStatus;
+import java.util.ArrayList;
 
 public class ProductsMenu {
     private int outputNo;
     private int inputNo;
     private Product product;
-    private Category category;
-    private CommandProcessor commandProcessor;
     private OutputHandler outputHandler = new OutputHandler();
     private Filter filter;
     private Sort sort;
     private String productId;
 
     public void processProducts() {
-        commandProcessor.setMenuStatus(MenuStatus.PRODUCTSMENU);
+        CommandProcessor.setMenuStatus(MenuStatus.PRODUCTSMENU);
     }
 
     //array
@@ -45,12 +42,12 @@ public class ProductsMenu {
     }
 
     public void processFiltering() {
-        commandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
     }
 
     //finish
     public ArrayList<String> showAvailableFilters() {
-        commandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
         return Filter.showAvailableFilters();
     }
 
@@ -102,7 +99,7 @@ public class ProductsMenu {
 
 
     public void processSorting() {
-        commandProcessor.setSubMenuStatus(SubMenuStatus.SORTING);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.SORTING);
     }
 
     //finish
@@ -147,7 +144,7 @@ public class ProductsMenu {
     //finish
     public ArrayList<String> processShowProductsID(String productId) {
         this.productId = productId;
-        commandProcessor.setMenuStatus(MenuStatus.PRODUCTMENU);
+        CommandProcessor.setMenuStatus(MenuStatus.PRODUCTMENU);
         return Product.listOfId;
     }
 

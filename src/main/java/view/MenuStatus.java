@@ -22,7 +22,7 @@ public enum MenuStatus {
     PURCHASE,
     PAYMENT,
     DISCOUNTCODE,
-    CREATIONMENU,
+    //CREATIONMENU,
     RECEIVERINFORMATION;
 
 }

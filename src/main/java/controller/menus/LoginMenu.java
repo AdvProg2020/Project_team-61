@@ -10,7 +10,6 @@ public class LoginMenu {
     private int outputNo;
     private Account account;
     private static Account loginAccount;
-    private CommandProcessor commandProcessor;
     private String field = null;
     private String username;
     private boolean login;
@@ -20,11 +19,15 @@ public class LoginMenu {
         return loginAccount;
     }
 
+    public boolean isLogin() {
+        return login;
+    }
+
     public void processLogin(String username) {
         if (!login) {
             if (username.matches("^(?i)(?=.*[a-z])(?=.*[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
                 if (account.isThereAccountWithUsername(username)) {
-                    commandProcessor.setSubMenuStatus(SubMenuStatus.PASSWORD);
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.PASSWORD);
                     outputNo = 2;
                 } else outputNo = 14;
             } else outputNo = 0;
@@ -38,7 +41,7 @@ public class LoginMenu {
                 loginAccount = account.getAccountWithUsername(username);
                 login = true;
                 findRole();
-                commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
                 outputNo = 15;
             } else outputNo = 14;
         } else outputNo = 3;
@@ -55,23 +58,24 @@ public class LoginMenu {
         } else if (role.equalsIgnoreCase("seller")) {
             menu = MenuStatus.SELLERMENU;
         }
-        commandProcessor.setMenuStatus(menu);
+        CommandProcessor.setMenuStatus(menu);
     }
 
     public void viewPersonalInfo() {
-        if(login) {
+        //if(login) {
             outputHandler.showAccount(loginAccount);
-        }outputHandler.showAccountOutput(25);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.EDIT);
+       // }outputHandler.showAccountOutput(25);
     }
 
     public void processEdit(String field) {
-        if(login) {
-            if(!field.matches("(username|password|lastname|email|phone numbaer)")) {
-                commandProcessor.setSubMenuStatus(SubMenuStatus.EDITACCOUNT);
+       // if(login) {
+            if(!field.matches("(?i)(?:username|password|last name|email|phone numbaer)")) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITACCOUNT);
                 this.field = field;
                 outputHandler.showOutputWithString(field, 3);
             }else outputNo = 16;
-        }else outputNo = 25;
+       // }else outputNo = 25;
         outputHandler.showAccountOutput(outputNo);
     }
 
@@ -108,7 +112,7 @@ public class LoginMenu {
     public void processLogout() {
         if (login) {
             loginAccount = null;
-            commandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+            CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
             login = false;
             outputNo = 22;
         } else outputNo = 25;

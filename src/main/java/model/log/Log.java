@@ -56,7 +56,7 @@ public abstract class Log{
     }
 
     //finish
-    public boolean isThereLogWithID (String logId){
+    public static boolean isThereLogWithID(String logId){
         for (Log allLog : allLogs) {
             if (allLog.logId.equals(logId)){
                 return true;

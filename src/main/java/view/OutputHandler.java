@@ -80,9 +80,9 @@ public class OutputHandler {
 
     public void showCustomerOutput(int output) {
         if (output == 0) {
-            System.out.println("username format is invalid");
+            System.out.println("");
         } else if (output == 1) {
-            System.out.println("a user exists with this username");
+            System.out.println("please enter product number");
         } else if (output == 2) {
             System.out.println("please enter your password");
         } else if (output == 3) {
