@@ -101,6 +101,7 @@ public class ManagerMenu {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDDISCOUNTCODE);
         outputHandler.showAccountOutput(6);
     }
+
     public void createNewDiscountCode(String discountCodeId) {
         if (checkDiscountCode(discountCodeId)) {
             DiscountCode newDiscountCode = new DiscountCode(discountCodeId);
@@ -108,8 +109,9 @@ public class ManagerMenu {
             outputHandler.showAccountOutput(7);
         }
     }
+
     //exception for parse!!
-    public void setDetailToDiscountCode (String detail) {
+    public void setDetailToDiscountCode(String detail) {
         /*
         if (detailMenu == 0) {
             if (detail.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
@@ -167,11 +169,15 @@ public class ManagerMenu {
             outputHandler.showAccountOutput(15);
         }
     }
+
     public void discountCodeField(String field) {
-        this.field = field;
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITDISCOUNTCODE);
-        outputHandler.showOutputWithString(field,3);
+        if (field.matches("(?i)(?:||||)")) {
+            this.field = field;
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITDISCOUNTCODE);
+            outputHandler.showOutputWithString(field, 3);
+        }
     }
+
     ///????????ParseException
     public void editDiscountCodeField(String edit) {
         /*
@@ -214,7 +220,7 @@ public class ManagerMenu {
     public void removeDiscountCode(String discountCodeID) {
         if (checkDiscountCode(discountCodeID)) {
             discountCode.deleteDiscount(discountCodeID);
-            outputHandler.showOutputWithString(discountCodeID,4);
+            outputHandler.showOutputWithString(discountCodeID, 4);
         }
     }
     //-------------------------------------------------------------------------------------
@@ -243,14 +249,14 @@ public class ManagerMenu {
     public void acceptRequest(String requestID) {
         if (checkRequest(requestID)) {
             request.acceptRequest(requestID);
-            outputHandler.showOutputWithString(requestID,4);
+            outputHandler.showOutputWithString(requestID, 4);
         }
     }
 
     public void declineRequest(String requestID) {
         if (checkRequest(requestID)) {
             request.declineRequest(requestID);
-            outputHandler.showOutputWithString(requestID,4);
+            outputHandler.showOutputWithString(requestID, 4);
         }
     }
     //------------------------------------------------------------------------------
@@ -271,17 +277,21 @@ public class ManagerMenu {
     }
 
     public void editCategory(String category) {
-        if(checkCategory(category)){
+        if (checkCategory(category)) {
             //editableCategory = category.get
             CommandProcessor.setSubMenuStatus(SubMenuStatus.CATEGORYFIELD);
 
         }
     }
+
     public void categoryField(String field) {
-        this.field = field;
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITCATEGORY);
-        outputHandler.showOutputWithString(field,3);
+        if (field.matches("(?i)(?:||||)")) {
+            this.field = field;
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITCATEGORY);
+            outputHandler.showOutputWithString(field, 3);
+        }
     }
+
     public void editCategoryField(String edit) {
        /* if (field.equalsIgnoreCase("trait")) {
             if (field.matches("\\D")) {
@@ -301,29 +311,30 @@ public class ManagerMenu {
 
     public void addCategory(String category) {
         if (checkCategory(category)) {
-           // Category newCategory = new Category(category);
+            // Category newCategory = new Category(category);
             CommandProcessor.setSubMenuStatus(SubMenuStatus.DETAILCATEGORY);
             // outputHandler.showAccountOutput();
         }
     }
-    public void setDetailToCategory(String detail){
 
-       if (field.equalsIgnoreCase("name")) {
+    public void setDetailToCategory(String detail) {
+
+        if (field.equalsIgnoreCase("name")) {
             if (detail.matches("\\D+")) {
                 category.setName(detail);
             }
-        }else if (field.equalsIgnoreCase("traits")) {
+        } else if (field.equalsIgnoreCase("traits")) {
             if (detail.matches("\\D+")) {
                 category.setTraits(detail);
             }
-        }else if (field.equalsIgnoreCase("product")) {
-           if (detail.matches("\\D+")) {
-               ArrayList<Product> products = category.getAllProducts();
-               products.add(product.getProductWithName(detail));
-              // category.setAllProducts(products);
+        } else if (field.equalsIgnoreCase("product")) {
+            if (detail.matches("\\D+")) {
+                ArrayList<Product> products = category.getAllProducts();
+                products.add(product.getProductWithName(detail));
+                // category.setAllProducts(products);
 
-           }
-       }
+            }
+        }
 
     }
 

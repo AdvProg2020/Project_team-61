@@ -18,6 +18,10 @@ public class LoginMenu {
         return loginAccount;
     }
 
+    public boolean isLogin() {
+        return login;
+    }
+
     public void processLogin(String username) {
         if (!login) {
             if (username.matches("^(?i)(?=.*[a-z])(?=.*[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
@@ -107,8 +111,8 @@ public class LoginMenu {
     public void processLogout() {
         if (login) {
             loginAccount = null;
-            CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
             login = false;
+            CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
             outputNo = 22;
         } else outputNo = 25;
         outputHandler.showAccountOutput(outputNo);

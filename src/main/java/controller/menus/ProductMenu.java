@@ -16,7 +16,6 @@ public class ProductMenu {
     private int outputNo;
     private int inputNo;
     private Comment comment;
-    private CommandProcessor commandProcessor;
     private Account account;
     private ProductsMenu productsMenu;
     private Product selectedProduct;
@@ -26,14 +25,14 @@ public class ProductMenu {
 
     //finish
     public ArrayList<String> processDigest() {
-        commandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
         selectedProduct = Product.getProductById(productsMenu.getProductId());
         return selectedProduct.getInfo();
     }
 
     //finish
-    public void addToCart(int amount) {
-        selectedProduct.addProductToLog(account.getUsername(),selectedProduct.getId(),amount);
+    public void addToCart() {
+        selectedProduct.addProductToLog(account.getUsername(),selectedProduct.getId(),1);
     }
 
     //finish
@@ -75,23 +74,23 @@ public class ProductMenu {
 
     //finish
     public void processComments() {
-        commandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
         selectedProduct.getScore();
         selectedProduct.listOfComments(selectedProduct.getId());
     }
 
     //finish
-    public void addComments(String content) {
-        commandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
-        selectedProduct.addComment(selectedProduct.getId(),loginMenu.getLoginAccount(),content);
+    public void addComments() {
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
+        //selectedProduct.addComment(selectedProduct.getId(),loginMenu.getLoginAccount(),content);
     }
 
     public void titleOfComment(String title){
-        commandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
     }
 
     public void contentOfComment(String content){
-        commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
     }
 
 }

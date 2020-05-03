@@ -1,11 +1,13 @@
 package controller.menus;
 
+import controller.request.ProductRequest;
 import controller.request.Request;
 import model.firms.Firm;
 import model.off.Sale;
 import model.off.SaleStatus;
 import model.productRelated.Product;
 import view.CommandProcessor;
+import view.InternalMenu;
 import view.OutputHandler;
 import view.SubMenuStatus;
 import model.accounts.Seller;
@@ -26,6 +28,9 @@ public class SellerMenu {
     private Product productToEdit;
     private Sale saleToEdit;
     private Seller seller;
+    private String sellerName;
+    private ProductRequest productRequest;
+
 
     //?
     public void processViewCompanyInformation() {
@@ -64,36 +69,92 @@ public class SellerMenu {
 
     //array
     public void viewBuyersProduct(String productID) {
-        if(checkProduct(productID)){
+        if (checkProduct(productID)) {
 
         }
 
     }
 
     public void editProduct(String productID) {
-        productToEdit = product.getProductById(productID);
+        ProductRequest newRequest = new ProductRequest("edit product: " + productID);
+        CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
         CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTFIELD);
     }
 
+    public void productField(String field) {
+        if (field.matches("(?i)(?:seller||||)")) {
+            this.field = field;
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITPRODUCT);
+        }
+    }
+
     public void editProductField(String edit) {
-        if (field.equalsIgnoreCase("")) {
+        if (field.equalsIgnoreCase("seller")) {
+            if (edit.matches("")) {
+
+            }
+        } else if (field.equalsIgnoreCase("")) {
+            if (edit.matches("")) {
+
+            }
+        } else if (field.equalsIgnoreCase("")) {
+            if (edit.matches("")) {
+
+            }
+        } else if (field.equalsIgnoreCase("")) {
+            if (edit.matches("")) {
+
+            }
+        } else if (field.equalsIgnoreCase("")) {
+            if (edit.matches("")) {
+
+            }
+        } else if (field.equalsIgnoreCase("")) {
             if (edit.matches("")) {
 
             }
         }
+
     }
 
     public void processAddProduct() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDPRODUCT);
+        CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
     }
 
     public void addProduct(String detail) {
         if (detailMenu == 0) {
             if (detail.matches("")) {
+                ProductRequest newRequest = new ProductRequest("add product: " + detail);
+               // aval id bgir un abalaei bzr bashe ltfn
+                productRequest.setProductId(detail);
+            }
+        } else if (detailMenu == 1) {
+            if (detail.matches("")) {
+            }
+        } else if (detailMenu == 2) {
+            if (detail.matches("")) {
+            }
+        } else if (detailMenu == 3) {
+            if (detail.matches("")) {
+            }
+        } else if (detailMenu == 4) {
+            if (detail.matches("")) {
+            }
+        } else if (detailMenu == 5) {
+            if (detail.matches("")) {
+            }
+        } else if (detailMenu == 6) {
+            if (detail.matches("")) {
+            }
+        } else if (detailMenu == 7) {
+            if (detail.matches("")) {
             }
         }
-        Request newRequest = new Request("edit products " + field + " to " + detail);
+        CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
     }
+
 
     public void processRemoveProduct(String productID) {
         if (checkProduct(productID)) {
@@ -136,8 +197,17 @@ public class SellerMenu {
         if (checkSale(offID)) {
             saleToEdit = sale.getSaleWithId(offID);
             CommandProcessor.setSubMenuStatus(SubMenuStatus.SALEFIELD);
+            CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
         }
     }
+
+    public void offField(String field) {
+        if (field.matches("(?i)(?:sale status|start of sale period|end of sale period|seller)")) {
+            this.field = field;
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITSALE);
+        }
+    }
+
 
     public void editOffField(String edit) {
         /*if (field.equalsIgnoreCase("sale status")) {
@@ -181,6 +251,7 @@ public class SellerMenu {
 
     public void addOff() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDSALE);
+        CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
     }
 
     public void setDetailsToSale(String detail) {
@@ -224,11 +295,13 @@ public class SellerMenu {
             if (detail.matches("")) {
             }
         }*/
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+        CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
     }
 
     //-------------------------------------------------------------------------------
     public void processViewBalance() {
-
+    //CREDIT
     }
 }
 
