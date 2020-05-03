@@ -1,5 +1,6 @@
 package controller.menus;
 
+import controller.request.AccountRequest;
 import controller.request.Request;
 import model.accounts.Account;
 import model.accounts.Customer;
@@ -14,6 +15,7 @@ public class RegisterMenu {
     private boolean managerWant = false;
     private boolean headManager = true;
     private OutputHandler outputHandler = new OutputHandler();
+    private AccountRequest accountRequest;
     private String role;
     private String username;
     private String password;
@@ -46,8 +48,7 @@ public class RegisterMenu {
             createManagerAccount(username);
 
         } else if (role.equalsIgnoreCase("seller")) {
-            String sellerAccountRequest = username + " wants seller account";
-            //createSellerAccount(username);
+            AccountRequest newRequest = new AccountRequest(username + " wants seller account");
         }
 
     }
@@ -123,7 +124,7 @@ public class RegisterMenu {
             Account.setDetailsToAccount( password, name, lastname, Email, phoneNo);
         }
         else {
-            request.sellerAccountDetails(username, password, name, lastname, Email, phoneNo);
+            accountRequest.sellerAccountDetails(username, password, name, lastname, Email, phoneNo);
         }
     }
 

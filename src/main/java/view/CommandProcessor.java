@@ -237,8 +237,8 @@ public class CommandProcessor {
                 }
                 ///$$$$$$$$$$$$$
                 if (subMenuStatus.equals(SubMenuStatus.PRODUCTFIELD)) {
-                    sellerMenu.setField(getMatcher(input, regex[27]).group(1));
-                    subMenuStatus = SubMenuStatus.EDITPRODUCT;
+                    sellerMenu.productField(getMatcher(input, regex[27]).group(1));
+
                 }
                 if (subMenuStatus.equals(SubMenuStatus.EDITPRODUCT)) {
                     sellerMenu.editProductField(getMatcher(input, regex[27]).group(1));
@@ -247,8 +247,8 @@ public class CommandProcessor {
                     sellerMenu.addProduct(getMatcher(input, regex[27]).group(1));
                 }
                 if (subMenuStatus.equals(SubMenuStatus.SALEFIELD)) {
-                    sellerMenu.setField(getMatcher(input, regex[27]).group(1));
-                    subMenuStatus = SubMenuStatus.EDITSALE;
+                    sellerMenu.offField(getMatcher(input, regex[27]).group(1));
+
                 }
                 if (subMenuStatus.equals(SubMenuStatus.EDITSALE)) {
                     sellerMenu.editProductField(getMatcher(input, regex[27]).group(1));
