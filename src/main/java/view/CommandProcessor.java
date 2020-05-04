@@ -23,6 +23,15 @@ public class CommandProcessor {
     //
     private OutputHandler outputHandler = new OutputHandler();
 
+    public SubMenuStatus getSubMenuStatus() {
+        return subMenuStatus;
+    }
+
+    public MenuStatus getMenuStatus() {
+        return menuStatus;
+    }
+
+
     private String[] regex = {"(?i)create\\s+account\\s+((?!^ +$)^.+$)",
             "(?i)login\\s+((?!^ +$)^.+$)",//1
             "(?i)edit\\s+((?!^ +$)^.+$)",//2

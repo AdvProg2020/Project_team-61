@@ -25,10 +25,10 @@ public class MenuSituation {
         } else if (commandProcessor.getMenuStatus() == MenuStatus.SALEMENU) {
             commandProcessor.setMenuStatus(MenuStatus.MAINMENU);
             System.out.println("");
-        } else if (commandProcessor.getMenuStatus() == MenuStatus.CREATIONMENU) {
+        }/* else if (commandProcessor.getMenuStatus() == MenuStatus.CREATIONMENU) {
             commandProcessor.setMenuStatus(MenuStatus.MAINMENU);
             System.out.println("");
-        } //
+        } */
         else if (commandProcessor.getSubMenuStatus() == SubMenuStatus.MANAGEUSERS) {
             commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
             System.out.println("");
@@ -145,7 +145,5 @@ public class MenuSituation {
         } else if (commandProcessor.getMenuStatus() == MenuStatus.SELLERMENU) {
             System.out.println("");
         }
-
-
     }
 }
