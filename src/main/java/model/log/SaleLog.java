@@ -1,5 +1,7 @@
 package model.log;
 
+import model.accounts.Seller;
+import model.off.Sale;
 import model.productRelated.Product;
 
 import java.util.ArrayList;
@@ -20,8 +22,9 @@ public class SaleLog extends Log{
 
 
     //list
-    ArrayList<Product> allSoldProduct = new ArrayList<Product>();
-    ArrayList<SaleLog> allSellersLog = new ArrayList<SaleLog>();
+    private static ArrayList<Product> sellersProducts=new ArrayList<>();
+    private ArrayList<Product> allSoldProduct = new ArrayList<Product>();
+    private ArrayList<SaleLog> allSellersLog = new ArrayList<SaleLog>();
 
 
     //setterAndGetter--------------------------------------------
@@ -46,8 +49,15 @@ public class SaleLog extends Log{
 
     //finish//doubt
     public void addProductToSaleLog(Product product){
-        allSoldProduct.add(product);
+        sellersProducts.add(product);
     }
 
+    private static void sellerDeleteProduct(String productId){
+        Product.deleteProduct(productId);
+        for (Product product : sellersProducts) {
+            if (product.getId().equals(productId)){
 
+            }
+        }
+    }
 }

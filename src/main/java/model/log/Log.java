@@ -17,7 +17,7 @@ public abstract class Log{
     Product product;
 
     //list
-    ArrayList<Log> allLogs = new ArrayList<Log>();
+    private static ArrayList<Log> allLogs = new ArrayList<Log>();
 
 
     public Log(String logId , Date date) {

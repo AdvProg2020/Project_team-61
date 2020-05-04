@@ -19,9 +19,9 @@ public abstract class Account {
     ArrayList<DiscountCode> discountCodeLists;
     ArrayList<SaleLog> allSaleLogs;
     ArrayList<BuyLog> allBuyLogs;
-    ArrayList<Account> allAccounts;
+    private  static ArrayList<Account> allAccounts;
 
-    public static void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo) {
+    public  void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo) {
         this.username = username;
         this.password = password;
         this.name = name;
