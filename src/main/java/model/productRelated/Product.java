@@ -272,7 +272,7 @@ public class Product  {
 
     //finish//doubt
     public void addProductToLog(String userName , String productId,int amount){
-        seller.saleLog.addProductToSaleLog(Product.getProductById(productId),amount);
+        seller.saleLog.addProductToSaleLog(Product.getProductById(productId));
         Customer customer= (Customer) account.getAccountWithUsername(userName);
         customer.buyLog.addProductToBuyLog(productId,amount);
     }
@@ -283,6 +283,7 @@ public class Product  {
             }
 
         }
+        return null;
     }
 
     //finish
@@ -320,6 +321,6 @@ public class Product  {
             return Double.compare(productScore1,productScore2);
 
         }
-    }
+    };
 
 }

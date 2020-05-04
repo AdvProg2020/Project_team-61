@@ -8,12 +8,9 @@ import java.util.Collections;
 
 public abstract class Sort {
     public Product product;
-    public Score score;
-    String sortName;
     int numberOfSort=0;
     ArrayList<Product> newArrayOfProductSort = Product.getProductList();
     ArrayList<ArrayList<Product>> listOfSorts = new ArrayList<>();
-    ArrayList<ArrayList<Product>> helpSort = new ArrayList<>();
     ArrayList<String> availableSorts=new ArrayList<>();
 
     public Sort(ArrayList<String> availableSorts) {
@@ -29,16 +26,14 @@ public abstract class Sort {
 
     public ArrayList<Product> numberOfViewsSort() {
         Collections.sort(newArrayOfProductSort,Product.productComparatorForView);
-        listOfSorts.add(1,newArrayOfProductSort);
-        helpSort.add(newArrayOfProductSort);
+        listOfSorts.add(newArrayOfProductSort);
         availableSorts.remove(0);
         return newArrayOfProductSort;
     }
 
     public ArrayList<Product> scoreSort() {
         Collections.sort(newArrayOfProductSort,Product.productComparatorForScore);
-        listOfSorts.add(2,newArrayOfProductSort);
-        helpSort.add(newArrayOfProductSort);
+        listOfSorts.add(newArrayOfProductSort);
         availableSorts.remove(1);
         return newArrayOfProductSort;
     }
@@ -47,17 +42,9 @@ public abstract class Sort {
     //other---------------------------------------------------------------------------
 
     //finish
-    public ArrayList<Product> disableSort(String sortName){
-        if (sortName.equals("numberOfViewSort")){
-            numberOfSort=1;
-        }
-        else if (sortName.equals("ScoreSort")){
-            numberOfSort=2;
-        }
-        helpSort.remove(helpSort.indexOf(listOfSorts.get(numberOfSort)));
-        listOfSorts.remove(numberOfSort);
-
-        return helpSort.get(helpSort.size()-1);
+    public ArrayList<Product> disableSort(){
+        listOfSorts.remove(listOfSorts.size()-1);
+        return listOfSorts.get(listOfSorts.size()-1);
     }
 
     //finish
@@ -87,7 +74,7 @@ public abstract class Sort {
         else return false;
     }
 
-    public boolean isThereFilterWithName(String sortName){
+    public boolean isThereSortWithName(String sortName){
         if (sortName.matches("numberOfView")){
             return true;
         }

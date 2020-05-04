@@ -4,7 +4,6 @@ import controller.request.ProductRequest;
 import controller.request.Request;
 import model.firms.Firm;
 import model.off.Sale;
-import model.off.SaleStatus;
 import model.productRelated.Product;
 import view.CommandProcessor;
 import view.InternalMenu;
@@ -12,8 +11,7 @@ import view.OutputHandler;
 import view.SubMenuStatus;
 import model.accounts.Seller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 public class SellerMenu {
 
@@ -30,6 +28,7 @@ public class SellerMenu {
     private Seller seller;
     private String sellerName;
     private ProductRequest productRequest;
+
 
 
     //?
@@ -89,29 +88,29 @@ public class SellerMenu {
     }
 
     public void editProductField(String edit) {
-        if (field.equalsIgnoreCase("seller")) {
-            if (edit.matches("")) {
-
+        if (field.equalsIgnoreCase("Name")) {
+            if (edit.matches("^(?!\\s*$).+")) {
+                productRequest.setProductName(edit);
             }
-        } else if (field.equalsIgnoreCase("")) {
-            if (edit.matches("")) {
-
+        } else if (field.equalsIgnoreCase("price")) {
+            if (edit.matches("[+-]?\\\\d*\\\\.?\\\\d+")) {
+                productRequest.setPrice(Double.parseDouble(edit));
             }
-        } else if (field.equalsIgnoreCase("")) {
-            if (edit.matches("")) {
-
+        } else if (field.equalsIgnoreCase("category")) {
+            if (edit.matches("^(?!\\s*$).+")) {
+                productRequest.setCategoryName(edit);
             }
-        } else if (field.equalsIgnoreCase("")) {
-            if (edit.matches("")) {
-
+        } else if (field.equalsIgnoreCase("seller")) {
+            if (edit.matches("^(?!\\s*$).+")) {
+                productRequest.setSellerName(edit);
             }
-        } else if (field.equalsIgnoreCase("")) {
-            if (edit.matches("")) {
-
+        } else if (field.equalsIgnoreCase("companyName")) {
+            if (edit.matches("^(?!\\s*$).+")) {
+                productRequest.setCompanyName(edit);
             }
-        } else if (field.equalsIgnoreCase("")) {
-            if (edit.matches("")) {
-
+        } else if (field.equalsIgnoreCase("numberOfProduct")) {
+            if (edit.matches("(?<=\\s|^)\\d+(?=\\s|$)")) {
+                productRequest.setNumberOfProduct(Integer.parseInt(edit));
             }
         }
 
@@ -124,31 +123,34 @@ public class SellerMenu {
 
     public void addProduct(String detail) {
         if (detailMenu == 0) {
-            if (detail.matches("")) {
+            if (detail.matches("^(?!\\s*$).+")) {
                 ProductRequest newRequest = new ProductRequest("add product: " + detail);
                // aval id bgir un abalaei bzr bashe ltfn
                 productRequest.setProductId(detail);
             }
         } else if (detailMenu == 1) {
-            if (detail.matches("")) {
+            if (detail.matches("^(?!\\s*$).+")) {
+                productRequest.setProductName(detail);
             }
         } else if (detailMenu == 2) {
-            if (detail.matches("")) {
+            if (detail.matches("[+-]?\\\\d*\\\\.?\\\\d+")) {
+                productRequest.setPrice(Double.parseDouble(detail));
             }
         } else if (detailMenu == 3) {
-            if (detail.matches("")) {
+            if (detail.matches("^(?!\\s*$).+")) {
+                productRequest.setCategoryName(detail);
             }
         } else if (detailMenu == 4) {
-            if (detail.matches("")) {
+            if (detail.matches("^(?!\\s*$).+")) {
+                productRequest.setSellerName(detail);
             }
         } else if (detailMenu == 5) {
-            if (detail.matches("")) {
+            if (detail.matches("^(?!\\s*$).+")) {
+                productRequest.setCompanyName(detail);
             }
         } else if (detailMenu == 6) {
-            if (detail.matches("")) {
-            }
-        } else if (detailMenu == 7) {
-            if (detail.matches("")) {
+            if (detail.matches("(?<=\\s|^)\\d+(?=\\s|$)")) {
+                productRequest.setNumberOfProduct(Integer.parseInt(detail));
             }
         }
         CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);

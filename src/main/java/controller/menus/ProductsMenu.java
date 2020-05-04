@@ -92,7 +92,7 @@ public class ProductsMenu {
     //finish
     private boolean checkSort(String sortName) {
         if (sortName.matches("")) {
-            if (sort.isThereFilterWithName(sortName)) {
+            if (sort.isThereSortWithName(sortName)) {
                 return true;
             } else inputNo = 0;
         } else inputNo = 0;
@@ -131,8 +131,8 @@ public class ProductsMenu {
     }
 
     //finish
-    public void disableSort(String sortName) {
-        sort.disableSort(sortName);
+    public void disableSort() {
+        sort.disableSort();
 
     }
 
