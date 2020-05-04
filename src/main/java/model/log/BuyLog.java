@@ -1,15 +1,17 @@
 package model.log;
 
-import model.off.DiscountCode;
+
 import model.productRelated.Product;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 public class BuyLog extends Log {
 
     public BuyLog(String logId, Date date) {
         super(logId, date);
+
         allCustomersLog.add(this);
     }
 
@@ -28,17 +30,20 @@ public class BuyLog extends Log {
 
     //setterAndGetter----------------------------------------------------
 
-    public void setBuyLogDetail(String buyerName , double paidAmount){
-        this.buyerName=buyerName;
-        this.paidAmount=paidAmount;
+    public void setBuyLogDetail(String buyerName, double paidAmount) {
+        this.buyerName = buyerName;
+        this.paidAmount = paidAmount;
         allCustomersLog.add(this);
     }
+
     public void setIsBought(boolean bought) {
         isBought = bought;
     }
-    public boolean getIsBought(){
+
+    public boolean getIsBought() {
         return isBought;
     }
+
 
     //other--------------------------------------------------------------
 
@@ -48,39 +53,36 @@ public class BuyLog extends Log {
     }
 
 
-    public void addProductToBuyLog(String productId,int amount){
-        Product product=Product.getProductById(productId);
+    public void addProductToBuyLog(String productId, int amount) {
+        Product product = Product.getProductById(productId);
         for (int i = 0; i < amount; i++) {
             assert product != null;
-            if (product.getNumberOfProducts()!=0){
+            if (product.getNumberOfProducts() != 0) {
                 listOfOneProduct.add(product);
                 numberOfChosenPro++;
             }
         }
         allBoughtProduct.add(listOfOneProduct);
-        product.setTotalNumberOfBuyers(product.getTotalNumberOfBuyers()+1);
-        ifItsFinal=true;
+        product.setTotalNumberOfBuyers(product.getTotalNumberOfBuyers() + 1);
+        ifItsFinal = true;
     }
 
-//    public void amountOfProductUncounteble(String productId,String amount){
-//        Product product=Product.getProductById(productId);
-//    }
-
-    public double holePriceWithOutDiscount(){
-        double price=0;
+    public double holePriceWithOutDiscount() {
+        double price = 0;
         for (ArrayList<Product> productArrayList : allBoughtProduct) {
             for (Product product1 : productArrayList) {
-                 price=+product1.getPrice();
+                price = +product1.getPrice();
             }
         }
         return price;
     }
 
-    public double holePriceWithDiscount(){
-        double price=0;
+
+    public double holePriceWithDiscount() {
+        double price = 0;
         for (ArrayList<Product> productArrayList : allBoughtProduct) {
             for (Product product1 : productArrayList) {
-                if (product1.getHasDiscount()){
+                if (product1.getHasDiscount()) {
 
                 }
             }
@@ -89,25 +91,26 @@ public class BuyLog extends Log {
     }
 
 
-    public double payThePrice(){
-        double price=0;
-        if (ifItsFinal){
-            for (ArrayList<Product> productArrayList : allBoughtProduct) {
-                for (Product product1 : productArrayList) {
-                     price=+holePriceWithDiscount()+holePriceWithOutDiscount();
-                }
-            }
-        }
-//        setIsBought(true);
-        return price;
-    }
-
-    public void reduceNumberOfProduct(){
+    public void reduceNumberOfProduct() {
         for (ArrayList<Product> productArrayList : allBoughtProduct) {
             for (Product product1 : listOfOneProduct) {
-                product1.setNumberOfProducts(product1.getNumberOfProducts()-1);
+                product1.setNumberOfProducts(product1.getNumberOfProducts() - 1);
             }
         }
+    }
+
+    public static void deleteProductFromBuyLog(String productId) {
+        Product product = Product.getProductById(productId);
+        ArrayList<Product> help = null;
+        Iterator iterator = listOfOneProduct.iterator();
+        while (iterator.hasNext()) {
+            Product product1 = (Product) iterator.next();
+            if (product1.equals(product)) {
+                help.add(product1);
+                iterator.remove();
+            }
+        }
+        allBoughtProduct.remove(help);
     }
 
 }

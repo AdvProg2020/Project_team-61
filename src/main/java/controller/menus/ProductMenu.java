@@ -3,7 +3,6 @@ package controller.menus;
 
 import model.accounts.Account;
 import model.accounts.Seller;
-import model.log.BuyLog;
 import model.productRelated.Comment;
 import model.productRelated.Product;
 import view.CommandProcessor;
@@ -16,6 +15,7 @@ public class ProductMenu {
     private int outputNo;
     private int inputNo;
     private Comment comment;
+    private CommandProcessor commandProcessor;
     private Account account;
     private ProductsMenu productsMenu;
     private Product selectedProduct;
@@ -25,14 +25,16 @@ public class ProductMenu {
 
     //finish
     public ArrayList<String> processDigest() {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
+        commandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
+        //IN PRODUCTE BAYAD VIJHEGIASHO NESHOON BDIM
+        //kln mikhai add kni ... az in selected estefade kn
         selectedProduct = Product.getProductById(productsMenu.getProductId());
         return selectedProduct.getInfo();
     }
 
     //finish
-    public void addToCart() {
-        selectedProduct.addProductToLog(account.getUsername(),selectedProduct.getId(),1);
+    public void addToCart(int amount) {
+        selectedProduct.addProductToLog(account.getUsername(),selectedProduct.getId(),amount);
     }
 
     //finish
@@ -74,23 +76,23 @@ public class ProductMenu {
 
     //finish
     public void processComments() {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
+        commandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
         selectedProduct.getScore();
         selectedProduct.listOfComments(selectedProduct.getId());
     }
 
     //finish
-    public void addComments() {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
-        //selectedProduct.addComment(selectedProduct.getId(),loginMenu.getLoginAccount(),content);
+    public void addComments(String content) {
+        commandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
+        selectedProduct.addComment(selectedProduct.getId(),loginMenu.getLoginAccount(),content);
     }
 
     public void titleOfComment(String title){
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
+        commandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
     }
 
     public void contentOfComment(String content){
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+        commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
     }
 
 }
