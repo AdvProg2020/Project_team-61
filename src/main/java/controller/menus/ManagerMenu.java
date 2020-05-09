@@ -8,6 +8,7 @@ import model.productRelated.Product;
 import view.CommandProcessor;
 import view.OutputHandler;
 import view.SubMenuStatus;
+import controller.request.SaleRequest;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -112,13 +113,13 @@ public class ManagerMenu {
 
     //exception for parse!!
     public void setDetailToDiscountCode(String detail) {
-        /*
+        SaleRequest saleRequest= new controller.request.SaleRequest();
         if (detailMenu == 0) {
             if (detail.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
                 Date currentDate=new Date();
                 Date inputDate=new SimpleDateFormat("dd/MM/yyyy").parse(detail);
                 if (inputDate.after(currentDate)) {
-                    newDiscountCode.setStartOfDiscountPeriod(inputDate);
+                    saleRequest.setStartOfDiscountPeriod();
                     outputNo = 9;
                     detailMenu = 1;
                 }
@@ -128,27 +129,27 @@ public class ManagerMenu {
                 Date currentDate=new Date();
                 Date inputDate=new SimpleDateFormat("dd/MM/yyyy").parse(detail);
                 if (inputDate.after(currentDate)) {
-                    newDiscountCode.setStartOfDiscountPeriod(inputDate);
+                    saleRequest.setStartOfDiscountPeriod(inputDate);
                     outputNo = 11;
                     detailMenu = 1;
                 }
             } else outputNo = 10;
         } else if (detailMenu == 2) {
             if (detail.matches("\\d+")) {
-                newDiscountCode.setMaxDiscountAmount(Integer.parseInt(detail));
+                saleRequest.setMaximumAmountOfDiscount(Integer.parseInt(detail));
                 outputNo = 13;
                 detailMenu = 1;
             } else outputNo = 12;
         } else if (detailMenu == 3) {
             if (detail.matches("\\d+")) {
-                newDiscountCode.setTotalTimesOfUse(Integer.parseInt(detail));
+                saleRequest.setTotalTimeOfUse(Integer.parseInt(detail));
               //  inputNo = 15;
                 detailMenu = 0;
             } else outputNo = 14;
         }
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
 
-         */
+
     }
 
     // array
@@ -180,13 +181,14 @@ public class ManagerMenu {
 
     ///????????ParseException
     public void editDiscountCodeField(String edit) {
-        /*
+        SaleRequest saleRequest=new SaleRequest();
         if (field.equalsIgnoreCase("start Of Discount Period")) {
-            if (edit.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
+
+        if (edit.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
                 Date currentDate=new Date();
                 Date inputDate=new SimpleDateFormat("dd/MM/yyyy").parse(edit);
                 if (inputDate.after(currentDate)){
-                    editableDiscountCode.setStartOfDiscountPeriod(inputDate) ;
+                    saleRequest.setStartOfDiscountPeriod(inputDate) ;
                     outputNo = 16;
                 }
             } else outputNo = 8;
@@ -195,25 +197,25 @@ public class ManagerMenu {
                 Date currentDate=new Date();
                 Date inputDate=new SimpleDateFormat("dd/MM/yyyy").parse(edit);
                 if (inputDate.after(currentDate)){
-                    editableDiscountCode.setEndOfDiscountPeriod(inputDate);
+                    saleRequest.setEndOfDiscountPeriod(inputDate);
                     outputNo = 17;
                 }
             } else outputNo = 10;
         } else if (field.equalsIgnoreCase("max Discount Amount")) {
             if (edit.matches("\\d+\\.\\d*")) {
-                editableDiscountCode.setMaxDiscountAmount(Double.parseDouble(edit));
+                saleRequest.setMaximumAmountOfDiscount(Double.parseDouble(edit));
                 outputNo = 18;
             } else outputNo = 12;
         } else if (field.equalsIgnoreCase("total Times Of Use")) {
             if (edit.matches("\\d+")) {
-                editableDiscountCode.setTotalTimesOfUse(Integer.parseInt(edit));
+                saleRequest.setTotalTimeOfUse(Integer.parseInt(edit));
                 outputNo = 19;
             } else outputNo = 14;
         }
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
         CommandProcessor.setMenuStatus(MenuStatus.MANAGERMENU);
 
-         */
+
     }
 
 

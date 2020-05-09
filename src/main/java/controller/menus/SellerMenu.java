@@ -2,6 +2,7 @@ package controller.menus;
 
 import controller.request.ProductRequest;
 import controller.request.Request;
+import controller.request.SaleRequest;
 import model.firms.Firm;
 import model.off.Sale;
 import model.off.SaleStatus;
@@ -210,43 +211,44 @@ public class SellerMenu {
 
 
     public void editOffField(String edit) {
-        /*if (field.equalsIgnoreCase("sale status")) {
+        SaleRequest saleRequest=new SaleRequest();
+        if (field.equalsIgnoreCase("sale status")) {
             if (edit.matches("CONFIRMED")) {
-                saleToEdit.setSaleStatus(SaleStatus.CONFIRMED);
+                saleRequest.setSaleStatus(SaleStatus.CONFIRMED);
             } else if (edit.matches("UNDERREVIEWFOREDITING")) {
-                saleToEdit.setSaleStatus(SaleStatus.UNDERREVIEWFOREDITING);
+                saleRequest.setSaleStatus(SaleStatus.UNDERREVIEWFOREDITING);
             } else {
-                saleToEdit.setSaleStatus(SaleStatus.UNDERREVIEWFOREDITING);
+                saleRequest.setSaleStatus(SaleStatus.UNDERREVIEWFOREDITING);
             }
         } else if (field.equalsIgnoreCase("start of sale period")) {
             if (edit.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
                 Date currentDate = new Date();
                 Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(edit);
                 if (inputDate.after(currentDate)) {
-                    saleToEdit.setStartOfSalePeriod(inputDate);
+                    saleRequest.setStartOfSalePeriod(inputDate);
                 }
             } else if (field.equalsIgnoreCase("end of sale period")) {
                 if (edit.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
                     Date currentDate = new Date();
                     Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(edit);
                     if (inputDate.after(currentDate)) {
-                        saleToEdit.setEndOfSalePeriod(inputDate);
+                        saleRequest.setEndOfSalePeriod(inputDate);
                     }
                 }
             } else if (field.equalsIgnoreCase("sale amount")) {
                 if (edit.matches("\\d+\\.?\\d*")) {
-                    saleToEdit.setSaleAmount(Integer.parseInt(edit));
+                    saleRequest.setSaleAmount(Integer.parseInt(edit));
                 }
             } else if (field.equalsIgnoreCase("seller")) {
                 if (edit.matches("\\D+")) {
                     //convert seller to string!!!
-                    saleToEdit.setSeller();
+                    saleRequest.setSeller();
                 }
 
             }
         }
 
-         */
+
     }
 
     public void addOff() {
@@ -255,13 +257,14 @@ public class SellerMenu {
     }
 
     public void setDetailsToSale(String detail) {
-        /*
+
         if (detailMenu == 0) {
             if (detail.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
                 Date currentDate = new Date();
                 Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
                 if (inputDate.after(currentDate)) {
-                    sale.setStartOfSalePeriod(inputDate);
+                    controller.request.SaleRequest saleRequest=new SaleRequest();
+                    saleRequest.setStartOfSalePeriod(inputDate);
                 }
             }
         } else if (detailMenu == 1) {
@@ -269,7 +272,8 @@ public class SellerMenu {
                 Date currentDate = new Date();
                 Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
                 if (inputDate.after(currentDate)) {
-                    sale.setEndOfSalePeriod(inputDate);
+                    SaleRequest saleRequest=new SaleRequest();
+                    saleRequest.setEndOfSalePeriod(inputDate);
                 }
             }
         } else if (detailMenu == 2) {
@@ -278,12 +282,13 @@ public class SellerMenu {
             }
         } else if (detailMenu == 3) {
             if (detail.matches("\\D+")) {
+                SaleRequest saleRequest=new SaleRequest();
                 if (detail.equals(SaleStatus.CONFIRMED)) {
-                    sale.setSaleStatus(SaleStatus.CONFIRMED);
+                    saleRequest.setSaleStatus(SaleStatus.CONFIRMED);
                 } else if (detail.equals(SaleStatus.UNDERREVIEWFORCONSTRUCTION)) {
-                    sale.setSaleStatus(SaleStatus.UNDERREVIEWFORCONSTRUCTION);
+                    saleRequest.setSaleStatus(SaleStatus.UNDERREVIEWFORCONSTRUCTION);
                 } else {
-                    sale.setSaleStatus(SaleStatus.UNDERREVIEWFOREDITING);
+                    saleRequest.setSaleStatus(SaleStatus.UNDERREVIEWFOREDITING);
                 }
             }
         }
