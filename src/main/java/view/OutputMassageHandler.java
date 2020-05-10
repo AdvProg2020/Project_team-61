@@ -8,7 +8,7 @@ import model.off.Sale;
 import model.productRelated.Product;
 
 public class OutputMassageHandler {
-    private CommandProcessor commandProcessor;
+    private view.commandProcessor commandProcessor;
     // 0 = invalidCommand
     // 1 = exit
 

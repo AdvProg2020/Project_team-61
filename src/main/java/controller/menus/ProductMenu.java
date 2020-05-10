@@ -5,7 +5,6 @@ import model.accounts.Account;
 import model.accounts.Seller;
 import model.productRelated.Comment;
 import model.productRelated.Product;
-import view.CommandProcessor;
 import view.OutputMassageHandler;
 import view.SubMenuStatus;
 
@@ -15,7 +14,7 @@ public class ProductMenu {
     private int outputNo;
     private int inputNo;
     private Comment comment;
-    private CommandProcessor commandProcessor;
+    private view.commandProcessor commandProcessor;
     private Account account;
     private ProductsMenu productsMenu;
     private Product selectedProduct;

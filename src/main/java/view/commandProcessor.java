@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CommandProcessor {
+public class commandProcessor {
     private MenuStatus menuStatus = MenuStatus.MAINMENU;
     private SubMenuStatus subMenuStatus = SubMenuStatus.MAINMENU;
     private InternalMenu internalMenu = InternalMenu.MAINMENU;
@@ -320,6 +320,14 @@ public class CommandProcessor {
                 } else if (subMenuStatus == subMenuStatus.EDITACCOUNT) {
                     if (input.matches(regex[27])) {
                         loginMenu.editField(getMatcher(input, regex[27]).group(1));
+                    }
+                }
+            }
+            //ReceiverInformation
+            if (menuStatus == MenuStatus.RECEIVERINFORMATION ) {
+                if (subMenuStatus == SubMenuStatus.RECIVERINFORMATION) {
+                    if (input.matches(regex[27])) {
+                        registerMenu.receiverInformation(getMatcher(input, regex[27]).group(1));
                     }
                 }
             }

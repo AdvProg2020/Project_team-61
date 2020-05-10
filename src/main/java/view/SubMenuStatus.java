@@ -52,7 +52,8 @@ public enum SubMenuStatus {
     COMMENTSCONTENT,
     PRODUCTNUMBER,
     RECIEVEMONEY,
-    EDIT;
+    EDIT,
+    RECIVERINFORMATION;
 
 
 

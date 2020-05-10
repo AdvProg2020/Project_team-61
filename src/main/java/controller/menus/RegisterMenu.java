@@ -32,8 +32,8 @@ public class RegisterMenu {
                     this.role = role;
                     this.username = username;
                     registerByRole(role, username);
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.REGISTERATIONDETAILS);
-                    CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
+                    commandProcessor.setSubMenuStatus(SubMenuStatus.REGISTERATIONDETAILS);
+                    commandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
                     outputNo = 2;
                 } else outputNo = 26;
             } else outputNo = 1;
@@ -61,7 +61,7 @@ public class RegisterMenu {
             managerWant = false;
         } else {
             //???????
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+            commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
             outputNo = 23;
         }
     }
@@ -111,8 +111,8 @@ public class RegisterMenu {
             if (detail.matches(".+")) {
                 this.phoneNo = Double.parseDouble(detail);
                 detailMenu = 0;
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                commandProcessor.setInternalMenu(InternalMenu.MAINMENU);
                 createAccountWithDetails();
                 outputNo = 12;
             } else outputNo = 11;
@@ -128,6 +128,35 @@ public class RegisterMenu {
             accountRequest.sellerAccountDetails(username, password, name, lastname, Email, phoneNo);
         }
     }
+
+    //******************************************************88
+    public void receiverInformation(String detail){
+        if (detailMenu == 0) {
+            if (detail.matches("\\d+")) {
+                LoginMenu.getLoginAccount().setCurrentPhoneNo(Double.parseDouble(detail));
+                detailMenu =1;
+                outputNo = 4;
+            } else outputNo = 3;
+        } else if (detailMenu == 1) {
+            if (detail.matches(".+")) {
+                LoginMenu.getLoginAccount().setAddress(detail);
+                detailMenu=2;
+                outputNo = 6;
+            } else outputNo = 5;
+        } else if (detailMenu == 2) {
+            if (detail.matches(".+")) {
+                this.phoneNo = Double.parseDouble(detail);
+                detailMenu = 0;
+                 commandProcessor.setMenuStatus(MenuStatus.DISCOUNTCODE);
+                commandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                createAccountWithDetails();
+                outputNo = 12;
+            } else outputNo = 11;
+        }
+
+    }
+
+
 
 
     public static void setManagerWant(boolean managerWant) {

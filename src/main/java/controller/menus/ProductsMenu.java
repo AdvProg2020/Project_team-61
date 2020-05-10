@@ -4,7 +4,6 @@ import model.productRelated.Category;
 import model.productRelated.Product;
 import model.filtar.Filter;
 import model.sort.Sort;
-import view.CommandProcessor;
 import view.MenuStatus;
 import view.OutputMassageHandler;
 import view.SubMenuStatus;
@@ -16,7 +15,7 @@ public class ProductsMenu {
     private int inputNo;
     private Product product;
     private Category category;
-    private CommandProcessor commandProcessor;
+    private view.commandProcessor commandProcessor;
     private OutputMassageHandler outputMassageHandler = new OutputMassageHandler();
     private Filter filter;
     private Sort sort;

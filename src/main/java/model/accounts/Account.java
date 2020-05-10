@@ -16,6 +16,8 @@ public abstract class Account {
     double phoneNo;
     double credit;
     String role;
+    double currentPhoneNo;
+    String address;
     ArrayList<DiscountCode> discountCodeLists;
     ArrayList<SaleLog> allSaleLogs;
     ArrayList<BuyLog> allBuyLogs;
@@ -104,6 +106,14 @@ public abstract class Account {
 
     public void setCredit(double credit) {
         this.credit = credit;
+    }
+
+    public void setCurrentPhoneNo(double currentPhoneNo) {
+        this.currentPhoneNo = currentPhoneNo;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     //-----------------------------------------------------------------

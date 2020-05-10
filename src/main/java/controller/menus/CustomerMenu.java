@@ -5,7 +5,7 @@ import model.log.BuyLog;
 import model.log.Log;
 import model.productRelated.Product;
 import model.productRelated.Score;
-import view.CommandProcessor;
+import view.commandProcessor;
 import view.MenuStatus;
 import view.OutputMassageHandler;
 import view.SubMenuStatus;
@@ -20,12 +20,12 @@ public class CustomerMenu {
 
     //array
     public void processViewCart() {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
+        commandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
     }
 
     // manager // customer // seller
     private boolean checkProduct(String productID) {
-        if (productID.matches(".+")) {
+        if (productID.matches("((?!^ +$)^.+$)")) {
             if (Product.isThereProductWithId(productID)) {
                 return true;
             } else outputNo = 0;
@@ -48,7 +48,7 @@ public class CustomerMenu {
     public void increaseProductNumber(String productID) {
         if (checkProduct(productID)) {
             this.productID = productID;
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTNUMBER);
+            commandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTNUMBER);
             outputMassageHandler.showOutput(1);
         }
     }
@@ -63,7 +63,7 @@ public class CustomerMenu {
     public void decreaseProductNumber(String productID) {
         if (checkProduct(productID)) {
             this.productID = productID;
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTNUMBER);
+            commandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTNUMBER);
             outputMassageHandler.showOutput(2);
         }
     }
@@ -74,28 +74,30 @@ public class CustomerMenu {
 
     //purches--------------------------------------------------------
     public void purchase() {
-        CommandProcessor.setMenuStatus(MenuStatus.RECEIVERINFORMATION);
+        if(LoginMenu.isLogin()) {
+            commandProcessor.setMenuStatus(MenuStatus.RECEIVERINFORMATION);
+        }
+        else{
+        }
     }
 
     public void processPurchase() {
         outputMassageHandler.showOutput(3);
-        CommandProcessor.setMenuStatus(MenuStatus.RECEIVERINFORMATION);
+        commandProcessor.setMenuStatus(MenuStatus.RECEIVERINFORMATION);
+        commandProcessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
     }
-
-    public void receiverInformation(String information) {
-        CommandProcessor.setMenuStatus(MenuStatus.DISCOUNTCODE);
-    }
+    
 
     public void discountCode(String discountCodeId) {
 
-        CommandProcessor.setMenuStatus(MenuStatus.PAYMENT);
+        commandProcessor.setMenuStatus(MenuStatus.PAYMENT);
     }
 
     public void payment() {
         if (buyLog.holePriceWithDiscount() <= LoginMenu.getLoginAccount().getCredit()) {
             finishingPayment();
 
-            CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+            commandProcessor.setMenuStatus(MenuStatus.MAINMENU);
         } else {
 
         }
@@ -110,7 +112,7 @@ public class CustomerMenu {
 
     //log---------------------------------------------------------------
     private boolean checkLog(String orderID) {
-        if (orderID.matches(".+")) {
+        if (orderID.matches("(?!^ +$)^.+$")) {
             if (Log.isThereLogWithID(orderID)) {
                 return true;
             } else outputNo = 0;
@@ -121,7 +123,7 @@ public class CustomerMenu {
 
     //array
     public void processViewOrders() {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWORDERS);
+        commandProcessor.setSubMenuStatus(SubMenuStatus.VIEWORDERS);
     }
 
 

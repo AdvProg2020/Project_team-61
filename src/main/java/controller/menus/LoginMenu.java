@@ -1,7 +1,6 @@
 package controller.menus;
 
 import model.accounts.Account;
-import view.CommandProcessor;
 import view.MenuStatus;
 import view.OutputMassageHandler;
 import view.SubMenuStatus;
@@ -10,13 +9,13 @@ public class LoginMenu {
     private int outputNo;
     private Account account;
     private static Account loginAccount;
-    private CommandProcessor commandProcessor;
+    private view.commandProcessor commandProcessor;
     private String field = null;
     private String username;
-    private boolean login;
+    private static boolean login;
     private OutputMassageHandler outputMassageHandler = new OutputMassageHandler();
 
-    public boolean isLogin() {
+    public static boolean isLogin() {
         return login;
     }
 
@@ -37,7 +36,7 @@ public class LoginMenu {
     }
 
     public void checkPassword(String password) {
-        if (password.matches(" ")) {
+        if (password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$ ")) {
             if (account.isThereAccountWithUsernameAndPassword(username, password)) {
                 loginAccount = account.getAccountWithUsername(username);
                 login = true;
