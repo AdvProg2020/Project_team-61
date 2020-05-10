@@ -189,7 +189,7 @@ public class Product  {
         info.add(getCompaniesName());
         info.add(String.valueOf(getPrice()));
         if (hasDiscount){
-           // info.add(discountCode.get)
+            // info.add(discountCode.get)
         }
         info.add(getCategory().getName());
         info.add(seller.getName());
@@ -272,9 +272,18 @@ public class Product  {
 
     //finish//doubt
     public void addProductToLog(String userName , String productId,int amount){
-        seller.saleLog.addProductToSaleLog(Product.getProductById(productId),amount);
+        seller.saleLog.addProductToSaleLog(Product.getProductById(productId));
         Customer customer= (Customer) account.getAccountWithUsername(userName);
         customer.buyLog.addProductToBuyLog(productId,amount);
+    }
+    public Product getProductWithName(String name){
+        for (model.productRelated.Product product : allProduct) {
+            if (product.getProductName().equals(name)){
+                return product;
+            }
+
+        }
+        return null;
     }
 
     //finish
@@ -288,6 +297,7 @@ public class Product  {
             }
         }
     }
+
 
     //finish
     public static Comparator<Product> productComparatorForView = new Comparator<Product>() {

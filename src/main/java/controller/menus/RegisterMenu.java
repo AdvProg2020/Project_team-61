@@ -14,7 +14,7 @@ public class RegisterMenu {
     private int detailMenu = 0;
     private boolean managerWant = false;
     private boolean headManager = true;
-    private OutputHandler outputHandler = new OutputHandler();
+    private OutputMassageHandler outputMassageHandler = new OutputMassageHandler();
     private AccountRequest accountRequest;
     private String role;
     private String username;
@@ -23,9 +23,10 @@ public class RegisterMenu {
     private String lastname;
     private String Email;
     private double phoneNo;
+    private Account account;
 
     public void processRegister(String role, String username) {
-        if (username.matches("^(?i)(?=.*[a-z])(?=.*[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
+        if (username.matches("^(?i)(?=.[a-z])(?=.[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
             if (!Account.isThereAccountWithUsername(username)) {
                 if (role.matches(".+")) {
                     this.role = role;
@@ -37,7 +38,7 @@ public class RegisterMenu {
                 } else outputNo = 26;
             } else outputNo = 1;
         } else outputNo = 0;
-        outputHandler.showAccountOutput(outputNo);
+        outputMassageHandler.showAccountOutput(outputNo);
     }
 
     ///////////////// go back to menu for seller request
@@ -83,7 +84,7 @@ public class RegisterMenu {
 
     public void completeRegisterProcess(String detail) {
         if (detailMenu == 0) {
-            if (detail.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")) {
+            if (detail.matches("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}$")) {
                 this.password = detail;
                 detailMenu++;
                 outputNo = 4;
@@ -121,7 +122,7 @@ public class RegisterMenu {
 
     public void createAccountWithDetails(){
         if (!(role.equalsIgnoreCase("seller"))) {
-            Account.setDetailsToAccount( password, name, lastname, Email, phoneNo);
+            account.setDetailsToAccount( password, name, lastname, Email, phoneNo);
         }
         else {
             accountRequest.sellerAccountDetails(username, password, name, lastname, Email, phoneNo);

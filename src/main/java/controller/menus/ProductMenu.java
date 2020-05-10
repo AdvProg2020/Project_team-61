@@ -6,7 +6,7 @@ import model.accounts.Seller;
 import model.productRelated.Comment;
 import model.productRelated.Product;
 import view.CommandProcessor;
-import view.OutputHandler;
+import view.OutputMassageHandler;
 import view.SubMenuStatus;
 
 import java.util.ArrayList;
@@ -21,20 +21,18 @@ public class ProductMenu {
     private Product selectedProduct;
     private LoginMenu loginMenu;
 
-    private OutputHandler outputHandler = new OutputHandler();
+    private OutputMassageHandler outputMassageHandler = new OutputMassageHandler();
 
     //finish
     public ArrayList<String> processDigest() {
         commandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
-        //IN PRODUCTE BAYAD VIJHEGIASHO NESHOON BDIM
-        //kln mikhai add kni ... az in selected estefade kn
         selectedProduct = Product.getProductById(productsMenu.getProductId());
         return selectedProduct.getInfo();
     }
 
     //finish
-    public void addToCart(int amount) {
-        selectedProduct.addProductToLog(account.getUsername(),selectedProduct.getId(),amount);
+    public void addToCart() {
+        selectedProduct.addProductToLog(account.getUsername(),selectedProduct.getId(),1);
     }
 
     //finish
@@ -44,7 +42,7 @@ public class ProductMenu {
                 return true;
             } else inputNo = 0;
         } else inputNo = 0;
-        outputHandler.showAccountOutput(inputNo);
+        outputMassageHandler.showAccountOutput(inputNo);
         return false;
     }
 
@@ -53,7 +51,7 @@ public class ProductMenu {
         if (checkSeller(username)) {
             for (Seller seller : selectedProduct.getListOfSellers()) {
                 if (seller.getUsername().equals(username)){
-                return seller;
+                    return seller;
                 }
             }
         }
@@ -82,9 +80,8 @@ public class ProductMenu {
     }
 
     //finish
-    public void addComments(String content) {
+    public void addComments() {
         commandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
-        selectedProduct.addComment(selectedProduct.getId(),loginMenu.getLoginAccount(),content);
     }
 
     public void titleOfComment(String title){
@@ -93,6 +90,7 @@ public class ProductMenu {
 
     public void contentOfComment(String content){
         commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+        selectedProduct.addComment(selectedProduct.getId(),LoginMenu.getLoginAccount(),content);
     }
 
 }

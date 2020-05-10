@@ -7,13 +7,13 @@ import model.productRelated.Product;
 import model.productRelated.Score;
 import view.CommandProcessor;
 import view.MenuStatus;
-import view.OutputHandler;
+import view.OutputMassageHandler;
 import view.SubMenuStatus;
 
 
 public class CustomerMenu {
     private int outputNo;
-    private OutputHandler outputHandler = new OutputHandler();
+    private OutputMassageHandler outputMassageHandler = new OutputMassageHandler();
     private Product product;
     private BuyLog buyLog;
     private String productID;
@@ -30,7 +30,7 @@ public class CustomerMenu {
                 return true;
             } else outputNo = 0;
         } else outputNo = 0;
-        outputHandler.showAccountOutput(outputNo);
+        outputMassageHandler.showAccountOutput(outputNo);
         return false;
     }
 
@@ -41,7 +41,7 @@ public class CustomerMenu {
 
     public void viewProduct(String productID) {
         if (checkProduct(productID)) {
-            outputHandler.showProduct(Product.getProductById(productID));
+            outputMassageHandler.showProduct(Product.getProductById(productID));
         }
     }
 
@@ -49,14 +49,14 @@ public class CustomerMenu {
         if (checkProduct(productID)) {
             this.productID = productID;
             CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTNUMBER);
-            outputHandler.showOutput(1);
+            outputMassageHandler.showOutput(1);
         }
     }
 
     public void productNumber(String number) {
         if (number.matches("\\d+")) {
             product.addProductToLog(LoginMenu.getLoginAccount().getUsername(), productID, Integer.parseInt(number));
-            outputHandler.showOutputWith2String(productID,number,2);
+            outputMassageHandler.showOutputWith2String(productID,number,2);
         }
     }
 
@@ -64,12 +64,12 @@ public class CustomerMenu {
         if (checkProduct(productID)) {
             this.productID = productID;
             CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTNUMBER);
-            outputHandler.showOutput(2);
+            outputMassageHandler.showOutput(2);
         }
     }
 
     public void showTotalPrice() {
-        outputHandler.showOutputWithString(String.valueOf(buyLog.holePriceWithOutDiscount()), 8);
+        outputMassageHandler.showOutputWithString(String.valueOf(buyLog.holePriceWithOutDiscount()), 8);
     }
 
     //purches--------------------------------------------------------
@@ -78,7 +78,7 @@ public class CustomerMenu {
     }
 
     public void processPurchase() {
-        outputHandler.showOutput(3);
+        outputMassageHandler.showOutput(3);
         CommandProcessor.setMenuStatus(MenuStatus.RECEIVERINFORMATION);
     }
 
@@ -115,7 +115,7 @@ public class CustomerMenu {
                 return true;
             } else outputNo = 0;
         } else outputNo = 0;
-        outputHandler.showAccountOutput(outputNo);
+        outputMassageHandler.showAccountOutput(outputNo);
         return false;
     }
 
@@ -136,12 +136,12 @@ public class CustomerMenu {
     public void rateProduct(String productID, int number) {
         if (checkProduct(productID)) {
             Score newScore = new Score(LoginMenu.getLoginAccount(), Product.getProductById(productID), number);
-            outputHandler.showOutputWith2String(productID, String.valueOf(number), 1);
+            outputMassageHandler.showOutputWith2String(productID, String.valueOf(number), 1);
         }
     }
 
     public void processViewBalance() {
-        outputHandler.showOutputWithString(String.valueOf(LoginMenu.getLoginAccount().getCredit()), 8);
+        outputMassageHandler.showOutputWithString(String.valueOf(LoginMenu.getLoginAccount().getCredit()), 8);
     }
 
     //array

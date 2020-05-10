@@ -6,7 +6,7 @@ import model.filtar.Filter;
 import model.sort.Sort;
 import view.CommandProcessor;
 import view.MenuStatus;
-import view.OutputHandler;
+import view.OutputMassageHandler;
 import view.SubMenuStatus;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class ProductsMenu {
     private Product product;
     private Category category;
     private CommandProcessor commandProcessor;
-    private OutputHandler outputHandler = new OutputHandler();
+    private OutputMassageHandler outputMassageHandler = new OutputMassageHandler();
     private Filter filter;
     private Sort sort;
     private String productId;
@@ -40,7 +40,7 @@ public class ProductsMenu {
                 return true;
             } else inputNo = 0;
         } else inputNo = 0;
-        outputHandler.showAccountOutput(inputNo);
+        outputMassageHandler.showAccountOutput(inputNo);
         return false;
     }
 
@@ -96,7 +96,7 @@ public class ProductsMenu {
                 return true;
             } else inputNo = 0;
         } else inputNo = 0;
-        outputHandler.showAccountOutput(inputNo);
+        outputMassageHandler.showAccountOutput(inputNo);
         return false;
     }
 
@@ -114,7 +114,7 @@ public class ProductsMenu {
     public ArrayList<Product> sort(String sortID) {
         if (checkSort(sortID)) {
             if (sort.ifAvailable(sortID)) {
-                if (sortID.equals("numberOfView")) {
+                if (sortID.equals("number Of View")) {
                     return sort.scoreSort();
                 } else if (sortID.equals("score")) {
                     return sort.numberOfViewsSort();

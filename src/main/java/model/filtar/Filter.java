@@ -100,7 +100,7 @@ public abstract class Filter {
         for (int i = 1; i <= 4; i++) {
             if (listOfFilters.get(i)!=null){
                 if (i==1){
-                   current.add("category");
+                    current.add("category");
                 }
                 else if (i==2){
                     current.add("companisName");
@@ -113,7 +113,7 @@ public abstract class Filter {
                 }
             }
         }
-       return current;
+        return current;
     }
 
     public static ArrayList<String> showAvailableFilters(){

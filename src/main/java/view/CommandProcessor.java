@@ -21,7 +21,7 @@ public class CommandProcessor {
     private RegisterMenu registerMenu = new RegisterMenu();
     private MenuSituation menuSituation = new MenuSituation();
     //
-    private OutputHandler outputHandler = new OutputHandler();
+    private OutputMassageHandler outputMassageHandler = new OutputMassageHandler();
 
     public SubMenuStatus getSubMenuStatus() {
         return subMenuStatus;
@@ -59,7 +59,8 @@ public class CommandProcessor {
             "(?i)disable\\s+filter",//24
             "(?i)sort((?!^ +$)^.+$)",//25
             "(?i)select seller",//26
-            "((?!^ +$)^.+$)"//27
+            "((?!^ +$)^.+$)",//27
+            ""
 
 
     };
@@ -159,7 +160,7 @@ public class CommandProcessor {
                     } else if (input.matches(regex[14])) {
                         managerMenu.declineRequest(getMatcher(input, regex[14]).group(1));
                     }
-                } else if (subMenuStatus == SubMenuStatus.MANAGECATAGORIES) {
+                } else if (subMenuStatus == SubMenuStatus.MANAGECATEGORIES) {
                     if (input.matches(regex[15])) {
                         managerMenu.editCategory(getMatcher(input, regex[15]).group(1));
                     } else if (input.matches(regex[16])) {
@@ -401,12 +402,12 @@ public class CommandProcessor {
                     saleMenu.processShowProductsID(getMatcher(input, regex[4]).group(1));
                 }
             } else {
-                outputHandler.showOutput(0);
+                outputMassageHandler.showOutput(0);
             }
 
         }
         if (input.equals("exit")) {
-            outputHandler.showOutput(1);
+            outputMassageHandler.showOutput(1);
         }
 
 
