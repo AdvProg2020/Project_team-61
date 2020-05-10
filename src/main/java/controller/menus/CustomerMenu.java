@@ -7,13 +7,13 @@ import model.productRelated.Product;
 import model.productRelated.Score;
 import view.CommandProcessor;
 import view.MenuStatus;
-import view.OutputHandler;
+import view.OutputMassageHandler;
 import view.SubMenuStatus;
 
 
 public class CustomerMenu {
     private int outputNo;
-    private OutputHandler outputHandler = new OutputHandler();
+    private OutputMassageHandler outputHandler = new OutputMassageHandler();
     private Product product;
     private BuyLog buyLog;
     private String productID;

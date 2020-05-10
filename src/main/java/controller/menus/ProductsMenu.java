@@ -1,12 +1,13 @@
 package controller.menus;
 
+import model.off.Sale;
 import model.productRelated.Category;
 import model.productRelated.Product;
 import model.filtar.Filter;
 import model.sort.Sort;
 import view.CommandProcessor;
 import view.MenuStatus;
-import view.OutputHandler;
+import view.OutputMassageHandler;
 import view.SubMenuStatus;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class ProductsMenu {
     private Product product;
     private Category category;
     private CommandProcessor commandProcessor;
-    private OutputHandler outputHandler = new OutputHandler();
+    private OutputMassageHandler outputHandler = new OutputMassageHandler();
     private Filter filter;
     private Sort sort;
     private String productId;
@@ -49,34 +50,37 @@ public class ProductsMenu {
     }
 
     //finish
-    public ArrayList<String> showAvailableFilters() {
+    public void showAvailableFilters() {
         commandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
-        return Filter.showAvailableFilters();
+        ArrayList<String> availableFilters=Filter.showAvailableFilters();
     }
 
     //finish
-    public ArrayList<Product> filter(String filterID) {
+    public void filter(String filterID) {
+        ArrayList<Product> filteredArray=null;
         if (checkFilter(filterID)) {
             if (Filter.ifFilterAvailable(filterID)) {
                 if (filterID.equals("category")) {
-                    return filter.categoryFilter(product.getCategory());
+                    filteredArray=filter.categoryFilter(product.getCategory());
                 } else if (filterID.equals("companyName")) {
-                    return filter.companiesFilter(product.getCompaniesName());
+                    filteredArray=filter.companiesFilter(product.getCompaniesName());
                 } else if (filterID.equals("discount")) {
                     if (product.getHasDiscount()) {
-                        return filter.discountFilter(product.getDiscountCode());
+                        filteredArray=filter.discountFilter(product.getDiscountCode());
                     }
                 } else if (filterID.equals("productName")) {
-                    return filter.productNameFilter(product.getProductName());
+                    filteredArray=filter.productNameFilter(product.getProductName());
+                }else if (filterID.equalsIgnoreCase("periodFilter")){
+                    // return filter.periodFilter();
                 }
             }
         }
-        return null;
     }
 
     //finish
-    public ArrayList<String> currentFilters() {
-        return Filter.currentFilters();
+    public void currentFilters() {
+        ArrayList<String> currentFilters=Filter.currentFilters();
+
     }
 
     //finish
@@ -106,28 +110,28 @@ public class ProductsMenu {
     }
 
     //finish
-    public ArrayList<String> showAvailableSorts() {
-        return sort.showAvailableSort();
+    public void showAvailableSorts() {
+        ArrayList<String> availableSorts=sort.showAvailableSort();
     }
 
     //finish
-    public ArrayList<Product> sort(String sortID) {
+    public void sort(String sortID) {
+        ArrayList<Product> sortedList=null;
         if (checkSort(sortID)) {
             if (sort.ifAvailable(sortID)) {
-                if (sortID.equals("numberOfView")) {
-                    return sort.scoreSort();
-                } else if (sortID.equals("score")) {
-                    return sort.numberOfViewsSort();
+                if (sortID.equalsIgnoreCase("number Of View")) {
+                    sortedList=sort.scoreSort();
+                } else if (sortID.equalsIgnoreCase("score")) {
+                    sortedList=sort.numberOfViewsSort();
                 }
             }
         }
-        return null;
     }
 
 
     //finish
-    public ArrayList<String> currentSorts() {
-        return sort.currentSorts();
+    public void currentSorts() {
+        ArrayList<String> currentSorts=sort.currentSorts();
     }
 
     //finish
@@ -139,15 +143,15 @@ public class ProductsMenu {
     //product--------------------------------------------------
 
     //finish
-    public ArrayList<Product> processShowProducts() {
-        return Filter.newArrayOfProductFilter;
+    public void processShowProducts() {
+        ArrayList<Product> listOfProductToShow= Filter.newArrayOfProductFilter;
     }
 
     //finish
-    public ArrayList<String> processShowProductsID(String productId) {
+    public void processShowProductsID(String productId) {
         this.productId = productId;
         commandProcessor.setMenuStatus(MenuStatus.PRODUCTMENU);
-        return Product.listOfId;
+        ArrayList<String> productsId=Product.listOfId;
     }
 
     public String getProductId() {

@@ -6,12 +6,10 @@ import model.off.DiscountCode;
 import model.productRelated.Category;
 import model.productRelated.Product;
 import view.CommandProcessor;
-import view.OutputHandler;
+import view.OutputMassageHandler;
 import view.SubMenuStatus;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class ManagerMenu {
@@ -24,7 +22,7 @@ public class ManagerMenu {
     private DiscountCode editableDiscountCode;
     private Category editableCategory;
     private String field;
-    private OutputHandler outputHandler = new OutputHandler();
+    private OutputMassageHandler outputHandler = new OutputMassageHandler();
     private int detailMenu = 0;
     private DiscountCode newDiscountCode;
 

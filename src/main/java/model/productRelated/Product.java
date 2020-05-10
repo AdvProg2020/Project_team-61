@@ -1,4 +1,5 @@
 package model.productRelated;
+import com.google.gson.Gson;
 import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Seller;
@@ -9,7 +10,8 @@ import model.off.Sale;
 
 import java.util.*;
 public class Product  {
-
+    private Gson productGson;
+    private String productJson;
 
     //productDetail
     private String productId;
@@ -42,7 +44,6 @@ public class Product  {
     public Score score;
     private Log log;
     private Account account;
-    private Date date;
     private DiscountCode discountCode;
     private Sale sale;
 
@@ -67,11 +68,21 @@ public class Product  {
         listOfSellers.add(seller);
         listOfAllProducts.put(category,allProduct);
         allProduct.add(this);
+        productJson=productGson.toJson(allProduct);
 
     }
 
 
     //settersAndGetters----------------------------------------------------------------------------------
+
+
+    public void setProductJson(String productJson) {
+        this.productJson = productJson;
+    }
+
+    public String getProductJson() {
+        return productJson;
+    }
 
     public String  getId () {
         return productId;
@@ -211,10 +222,11 @@ public class Product  {
 
     //othersTobeHandel-------------------------------------------------------------------------------
 
-    //finish
-    public void addComment(String productId , Account account, String content){
-        Product product=getProductById(productId);
-        product.comment=new Comment(product,account);
+
+    public void addCommentTitle(String title){
+        comment.setCommentTitle(title);
+    }
+    public void addCommentContent(String content){
         comment.setCommentContent(content);
     }
 

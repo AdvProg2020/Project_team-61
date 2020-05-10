@@ -3,11 +3,10 @@ package controller.menus;
 
 import model.accounts.Account;
 import model.accounts.Seller;
-import model.log.BuyLog;
 import model.productRelated.Comment;
 import model.productRelated.Product;
 import view.CommandProcessor;
-import view.OutputHandler;
+import view.OutputMassageHandler;
 import view.SubMenuStatus;
 
 import java.util.ArrayList;
@@ -22,13 +21,13 @@ public class ProductMenu {
     private Product selectedProduct;
     private LoginMenu loginMenu;
 
-    private OutputHandler outputHandler = new OutputHandler();
+    private OutputMassageHandler outputHandler = new OutputMassageHandler();
 
     //finish
-    public ArrayList<String> processDigest() {
+    public void processDigest() {
         commandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
         selectedProduct = Product.getProductById(productsMenu.getProductId());
-        return selectedProduct.getInfo();
+        ArrayList<String> info=selectedProduct.getInfo();
     }
 
     //finish
@@ -48,15 +47,15 @@ public class ProductMenu {
     }
 
     //finish
-    public Seller selectSeller(String username) {
+    public void selectSeller(String username) {
+        Seller seller1;
         if (checkSeller(username)) {
             for (Seller seller : selectedProduct.getListOfSellers()) {
                 if (seller.getUsername().equals(username)){
-                return seller;
+                seller1=seller;
                 }
             }
         }
-        return null;
     }
 
 
@@ -87,11 +86,13 @@ public class ProductMenu {
 
     public void titleOfComment(String title){
         commandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
+        selectedProduct.addCommentTitle(title);
     }
 
+    //finish
     public void contentOfComment(String content){
         commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-        selectedProduct.addComment(selectedProduct.getId(),LoginMenu.getLoginAccount(),content);
+        selectedProduct.addCommentContent(content);
     }
 
 }

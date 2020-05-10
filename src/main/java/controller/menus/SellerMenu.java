@@ -1,13 +1,12 @@
 package controller.menus;
 
 import controller.request.ProductRequest;
-import controller.request.Request;
 import model.firms.Firm;
 import model.off.Sale;
 import model.productRelated.Product;
 import view.CommandProcessor;
 import view.InternalMenu;
-import view.OutputHandler;
+import view.OutputMassageHandler;
 import view.SubMenuStatus;
 import model.accounts.Seller;
 
@@ -21,7 +20,7 @@ public class SellerMenu {
     private Firm firm;
     private String field;
     private int detailMenu = 0;
-    private OutputHandler outputHandler = new OutputHandler();
+    private OutputMassageHandler outputHandler = new OutputMassageHandler();
     private LoginMenu loginMenu;
     private Product productToEdit;
     private Sale saleToEdit;

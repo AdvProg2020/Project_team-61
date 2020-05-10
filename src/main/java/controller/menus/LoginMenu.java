@@ -3,7 +3,7 @@ package controller.menus;
 import model.accounts.Account;
 import view.CommandProcessor;
 import view.MenuStatus;
-import view.OutputHandler;
+import view.OutputMassageHandler;
 import view.SubMenuStatus;
 
 public class LoginMenu {
@@ -14,7 +14,7 @@ public class LoginMenu {
     private String field = null;
     private String username;
     private boolean login;
-    private OutputHandler outputHandler= new OutputHandler();
+    private OutputMassageHandler outputHandler= new OutputMassageHandler();
 
     public boolean isLogin() {
         return login;

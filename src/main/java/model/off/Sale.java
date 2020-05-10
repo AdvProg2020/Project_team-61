@@ -1,7 +1,4 @@
 package model.off;
-import model.accounts.Account;
-import model.accounts.Customer;
-import model.off.SaleStatus;
 import model.productRelated.Product;
 import model.accounts.Seller;
 import java.util.ArrayList;

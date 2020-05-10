@@ -21,7 +21,7 @@ public class CommandProcessor {
     private RegisterMenu registerMenu = new RegisterMenu();
     private MenuSituation menuSituation = new MenuSituation();
     //
-    private OutputHandler outputHandler = new OutputHandler();
+    private OutputMassageHandler outputHandler = new OutputMassageHandler();
 
     public SubMenuStatus getSubMenuStatus() {
         return subMenuStatus;

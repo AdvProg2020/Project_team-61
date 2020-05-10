@@ -4,21 +4,26 @@ import model.accounts.Seller;
 import model.off.Sale;
 import model.productRelated.Product;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 public class SaleLog extends Log{
 
 
-    public SaleLog(String logId, Date date) {
-        super(logId, date);
+    public SaleLog(String logId) {
+        super(logId);
         allSellersLog.add(this);
+        localDateTimeForSaleLog=LocalDateTime.now();
     }
 
     //detail
     double receivedAmount;
     double reducedAmount;
     String customerName;
+    Product product;
+    LocalDateTime localDateTimeForSaleLog;
 
 
     //list
@@ -35,6 +40,10 @@ public class SaleLog extends Log{
         allSellersLog.add(this);
     }
 
+    public LocalDateTime getLocalDateTimeForSaleLog() {
+        return localDateTimeForSaleLog;
+    }
+
     //other-------------------------------------------------------
 
     //finish
@@ -48,15 +57,19 @@ public class SaleLog extends Log{
     }
 
     //finish//doubt
-    public void addProductToSaleLog(Product product){
-        sellersProducts.add(product);
+    public void addProductToSaleLog(String productId){
+        Product product=Product.getProductById(productId);
+        allSoldProduct.add(product);
     }
 
     private static void sellerDeleteProduct(String productId){
         Product.deleteProduct(productId);
-        for (Product product : sellersProducts) {
-            if (product.getId().equals(productId)){
-
+        Product product1=Product.getProductById(productId);
+        Iterator iterator = sellersProducts.iterator();
+        while (iterator.hasNext()) {
+            Product product2 = (Product) iterator.next();
+            if (product2.equals(product1)){
+                iterator.remove();
             }
         }
     }

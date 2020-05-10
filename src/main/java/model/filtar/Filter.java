@@ -15,7 +15,7 @@ public abstract class Filter {
     public static ArrayList<Product> newArrayOfProductFilter = new ArrayList<>();
     public static ArrayList<ArrayList<Product>> listOfFilters = new ArrayList<>();
     public static ArrayList<ArrayList<Product>> helpFilter = new ArrayList<>();
-    public static ArrayList<String> availableFilters=new ArrayList<>();
+    public static ArrayList<String> availableFilters = new ArrayList<>();
 
     //if category ->1    companies ->2   discount ->3   productName ->4
 
@@ -24,6 +24,7 @@ public abstract class Filter {
         availableFilters.add("companyName");
         availableFilters.add("discount");
         availableFilters.add("productName");
+        availableFilters.add("periodFilter");
     }
 
 
@@ -72,72 +73,79 @@ public abstract class Filter {
         return newArrayOfProductFilter;
     }
 
+    public ArrayList<Product> periodFilter(int n, int m) {
+        for (Product product1 : Product.getProductList()) {
+            if (product1.getPrice() > n && product1.getPrice() < m) {
+                newArrayOfProductFilter.add(product1);
+            }
+        }
+        listOfFilters.add(5,newArrayOfProductFilter);
+        helpFilter.add(newArrayOfProductFilter);
+        availableFilters.remove(4);
+        return newArrayOfProductFilter;
+    }
+
 
     //others-----------------------------------------------------------------------------
 
     //finish
-    public static ArrayList<Product> disableFilter(String filterName){
-        if (filterName.equals("categoryFilter")){
-            numberOfFilter=1;
-        }
-        else if (filterName.equals("companiesFilter")){
-            numberOfFilter=2;
-        }
-        else if (filterName.equals("discountFilter")){
-            numberOfFilter=3;
-        }
-        else if (filterName.equals("productNameFilter")) {
+    public static ArrayList<Product> disableFilter(String filterName) {
+        if (filterName.equals("categoryFilter")) {
+            numberOfFilter = 1;
+        } else if (filterName.equals("companiesFilter")) {
+            numberOfFilter = 2;
+        } else if (filterName.equals("discountFilter")) {
+            numberOfFilter = 3;
+        } else if (filterName.equals("productNameFilter")) {
             numberOfFilter = 4;
+        }else if (filterName.equals("periodFilter")){
+            numberOfFilter=5;
         }
         helpFilter.remove(helpFilter.indexOf(listOfFilters.get(numberOfFilter)));
         listOfFilters.remove(numberOfFilter);
-        return helpFilter.get(helpFilter.size()-1);
+        return helpFilter.get(helpFilter.size() - 1);
     }
-
     //finish
     public static ArrayList<String> currentFilters() {
-        ArrayList<String> current=new ArrayList<>();
+        ArrayList<String> current = new ArrayList<>();
         for (int i = 1; i <= 4; i++) {
-            if (listOfFilters.get(i)!=null){
-                if (i==1){
-                   current.add("category");
-                }
-                else if (i==2){
+            if (listOfFilters.get(i) != null) {
+                if (i == 1) {
+                    current.add("category");
+                } else if (i == 2) {
                     current.add("companisName");
-                }
-                else if (i==3){
+                } else if (i == 3) {
                     current.add("discount");
-                }
-                else if (i==4){
+                } else if (i == 4) {
                     current.add("productName");
+                }else if (i==5){
+                    current.add("periodFilter");
                 }
             }
         }
-       return current;
+        return current;
     }
 
-    public static ArrayList<String> showAvailableFilters(){
+    public static ArrayList<String> showAvailableFilters() {
         return availableFilters;
     }
 
-    public static boolean ifFilterAvailable(String filterName){
-        if (availableFilters.contains(filterName)){
+    public static boolean ifFilterAvailable(String filterName) {
+        if (availableFilters.contains(filterName)) {
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
-    public boolean isThereFilterWithName(String filter){
-        if (filter.matches("category")){
+    public boolean isThereFilterWithName(String filter) {
+        if (filter.matches("category")) {
             return true;
-        }
-        else if (filter.matches("companyName")){
+        } else if (filter.matches("companyName")) {
             return true;
-        }
-        else if (filter.matches("discount")){
+        } else if (filter.matches("discount")) {
             return true;
-        }
-        else if (filter.matches("productName")){
+        } else if (filter.matches("productName")) {
+            return true;
+        }else if (filter.matches("periodFilter")){
             return true;
         }
         return false;

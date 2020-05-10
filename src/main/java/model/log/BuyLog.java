@@ -3,15 +3,16 @@ package model.log;
 
 import model.productRelated.Product;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
 public class BuyLog extends Log {
 
-    public BuyLog(String logId, Date date) {
-        super(logId, date);
-
+    public BuyLog(String logId) {
+        super(logId);
+        localDateTimeForLog=LocalDateTime.now();
         allCustomersLog.add(this);
     }
 
@@ -22,6 +23,8 @@ public class BuyLog extends Log {
     int numberOfChosenPro;
     private static boolean ifItsFinal;
     boolean isBought;
+    private boolean firstProduct=true;
+    LocalDateTime localDateTimeForLog;
 
     //list
     private static ArrayList<Product> listOfOneProduct = new ArrayList<Product>();
@@ -44,8 +47,13 @@ public class BuyLog extends Log {
         return isBought;
     }
 
+    public LocalDateTime getLocalDateTimeForLog() {
+        return localDateTimeForLog;
+    }
+
 
     //other--------------------------------------------------------------
+
 
     //finish
     public static boolean isBought(String productId) {
@@ -64,6 +72,7 @@ public class BuyLog extends Log {
         }
         allBoughtProduct.add(listOfOneProduct);
         product.setTotalNumberOfBuyers(product.getTotalNumberOfBuyers() + 1);
+        firstProduct=false;
         ifItsFinal = true;
     }
 

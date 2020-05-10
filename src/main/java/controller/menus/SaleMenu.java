@@ -3,11 +3,11 @@ package controller.menus;
 
 import model.off.Sale;
 import model.productRelated.Product;
-import view.OutputHandler;
+import view.OutputMassageHandler;
 
 public class SaleMenu {
     private int outputNo;
-    private OutputHandler outputHandler= new OutputHandler();
+    private OutputMassageHandler outputHandler= new OutputMassageHandler();
     private Sale sale;
 
     //array

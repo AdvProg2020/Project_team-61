@@ -3,6 +3,7 @@ package controller.request;
 import model.productRelated.Product;
 
 public class ProductRequest extends Request {
+
     private Product product;
     private Product selectedProduct;
     private String productId;
