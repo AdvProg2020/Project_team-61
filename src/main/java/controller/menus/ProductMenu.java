@@ -1,10 +1,13 @@
 package controller.menus;
 
 
+import com.sun.corba.se.impl.orbutil.ObjectUtility;
 import model.accounts.Account;
 import model.accounts.Seller;
 import model.productRelated.Comment;
 import model.productRelated.Product;
+import view.CommandProcessor;
+import view.OutputHandler;
 import view.OutputMassageHandler;
 import view.SubMenuStatus;
 
@@ -14,19 +17,19 @@ public class ProductMenu {
     private int outputNo;
     private int inputNo;
     private Comment comment;
-    private view.commandProcessor commandProcessor;
+    private CommandProcessor commandProcessor;
     private Account account;
     private ProductsMenu productsMenu;
     private Product selectedProduct;
     private LoginMenu loginMenu;
 
-    private OutputMassageHandler outputMassageHandler = new OutputMassageHandler();
+    private OutputMassageHandler outputHandler = new OutputMassageHandler();
 
     //finish
-    public ArrayList<String> processDigest() {
+    public void processDigest() {
         commandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
         selectedProduct = Product.getProductById(productsMenu.getProductId());
-        return selectedProduct.getInfo();
+        ArrayList<String> info=selectedProduct.getInfo();
     }
 
     //finish
@@ -41,37 +44,43 @@ public class ProductMenu {
                 return true;
             } else inputNo = 0;
         } else inputNo = 0;
-        outputMassageHandler.showAccountOutput(inputNo);
+        outputHandler.showAccountOutput(inputNo);
         return false;
     }
 
     //finish
-    public Seller selectSeller(String username) {
+    public void selectSeller(String username) {
+        Seller seller1 = null;
         if (checkSeller(username)) {
             for (Seller seller : selectedProduct.getListOfSellers()) {
                 if (seller.getUsername().equals(username)){
-                    return seller;
+                seller1=seller;
                 }
             }
         }
-        return null;
+        if (seller1!=null){
+            selectedProduct.setSeller(seller1);
+        }
     }
 
+    //finish//json
+    public void allSellersForProduct(String productId){
+        OutputHandler.showAllSellersForOneProduct(Product.getProductById(productId).getListOfSellers());
+    }
 
     public void processAttributes() {
 
     }
 
-    //finish
+    //finish//json
     public void processCompare(String productID) {
         Product productToCompare=Product.getProductById(productID);
-        productToCompare.getInfo();
-        selectedProduct.getInfo();
+        OutputHandler.compareProducts(productToCompare.getInfo(),selectedProduct.getInfo());
     }
 
     //comment--------------------------------------------------------------------
 
-    //finish
+    //
     public void processComments() {
         commandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
         selectedProduct.getScore();
@@ -85,11 +94,13 @@ public class ProductMenu {
 
     public void titleOfComment(String title){
         commandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
+        selectedProduct.addCommentTitle(title);
     }
 
+    //finish
     public void contentOfComment(String content){
         commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-        selectedProduct.addComment(selectedProduct.getId(),LoginMenu.getLoginAccount(),content);
+        selectedProduct.addCommentContent(content);
     }
 
 }

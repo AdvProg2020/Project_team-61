@@ -9,6 +9,7 @@ public class Comment {
 
     //commentDetail
     private boolean isSold;
+    private String commentTitle;
     private String commentContent;
     private CommentStatus commentStatus;
 
@@ -34,6 +35,9 @@ public class Comment {
         this.commentContent = commentContent;
     }
 
+    public void setCommentTitle(String commentTitle){
+        this.commentTitle=commentTitle;
+    }
     public Account getPersonToVote() {
         return personToVote;
     }
