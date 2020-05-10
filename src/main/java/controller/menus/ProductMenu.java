@@ -1,11 +1,13 @@
 package controller.menus;
 
 
+import com.sun.corba.se.impl.orbutil.ObjectUtility;
 import model.accounts.Account;
 import model.accounts.Seller;
 import model.productRelated.Comment;
 import model.productRelated.Product;
 import view.CommandProcessor;
+import view.OutputHandler;
 import view.OutputMassageHandler;
 import view.SubMenuStatus;
 
@@ -48,7 +50,7 @@ public class ProductMenu {
 
     //finish
     public void selectSeller(String username) {
-        Seller seller1;
+        Seller seller1 = null;
         if (checkSeller(username)) {
             for (Seller seller : selectedProduct.getListOfSellers()) {
                 if (seller.getUsername().equals(username)){
@@ -56,23 +58,29 @@ public class ProductMenu {
                 }
             }
         }
+        if (seller1!=null){
+            selectedProduct.setSeller(seller1);
+        }
     }
 
+    //finish//json
+    public void allSellersForProduct(String productId){
+        OutputHandler.showAllSellersForOneProduct(Product.getProductById(productId).getListOfSellers());
+    }
 
     public void processAttributes() {
 
     }
 
-    //finish
+    //finish//json
     public void processCompare(String productID) {
         Product productToCompare=Product.getProductById(productID);
-        productToCompare.getInfo();
-        selectedProduct.getInfo();
+        OutputHandler.compareProducts(productToCompare.getInfo(),selectedProduct.getInfo());
     }
 
     //comment--------------------------------------------------------------------
 
-    //finish
+    //
     public void processComments() {
         commandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
         selectedProduct.getScore();

@@ -220,6 +220,10 @@ public class Product  {
         return seller;
     }
 
+    public void setSeller(Seller seller) {
+        this.seller = seller;
+    }
+
     //othersTobeHandel-------------------------------------------------------------------------------
 
 
@@ -284,7 +288,7 @@ public class Product  {
 
     //finish//doubt
     public void addProductToLog(String userName , String productId,int amount){
-        seller.saleLog.addProductToSaleLog(Product.getProductById(productId));
+        seller.saleLog.addProductToSaleLog(productId);
         Customer customer= (Customer) account.getAccountWithUsername(userName);
         customer.buyLog.addProductToBuyLog(productId,amount);
     }
