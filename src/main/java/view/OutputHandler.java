@@ -65,6 +65,7 @@ public class OutputHandler {
     public static String showAllSellersForOneProduct(ArrayList<Seller> sellerArrayList){
         return makeJsonFromSellerArrayList(sellerArrayList);
     }
+
     public static void showInput(int input) {
     }
 

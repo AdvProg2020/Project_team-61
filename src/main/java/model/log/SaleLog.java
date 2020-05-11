@@ -1,12 +1,9 @@
 package model.log;
 
-import model.accounts.Seller;
-import model.off.Sale;
 import model.productRelated.Product;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 
 public class SaleLog extends Log{
@@ -29,7 +26,7 @@ public class SaleLog extends Log{
     //list
     private static ArrayList<Product> sellersProducts=new ArrayList<>();
     private ArrayList<Product> allSoldProduct = new ArrayList<Product>();
-    private ArrayList<SaleLog> allSellersLog = new ArrayList<SaleLog>();
+    private static ArrayList<SaleLog> allSellersLog = new ArrayList<SaleLog>();
 
 
     //setterAndGetter--------------------------------------------
@@ -42,6 +39,10 @@ public class SaleLog extends Log{
 
     public LocalDateTime getLocalDateTimeForSaleLog() {
         return localDateTimeForSaleLog;
+    }
+
+    public static ArrayList<SaleLog> getAllSellersLog() {
+        return allSellersLog;
     }
 
     //other-------------------------------------------------------
@@ -72,5 +73,9 @@ public class SaleLog extends Log{
                 iterator.remove();
             }
         }
+    }
+
+    public int compareTo(SaleLog saleLog) {
+        return getLocalDateTimeForSaleLog().compareTo(saleLog.getLocalDateTimeForSaleLog());
     }
 }

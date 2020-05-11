@@ -286,12 +286,6 @@ public class Product  {
         return allProduct.size();
     }
 
-    //finish//doubt
-    public void addProductToLog(String userName , String productId,int amount){
-        seller.saleLog.addProductToSaleLog(productId);
-        Customer customer= (Customer) account.getAccountWithUsername(userName);
-        customer.buyLog.addProductToBuyLog(productId,amount);
-    }
     public Product getProductWithName(String name){
         for (model.productRelated.Product product : allProduct) {
             if (product.getProductName().equals(name)){

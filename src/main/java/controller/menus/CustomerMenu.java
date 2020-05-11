@@ -55,7 +55,7 @@ public class CustomerMenu {
 
     public void productNumber(String number) {
         if (number.matches("\\d+")) {
-            product.addProductToLog(LoginMenu.getLoginAccount().getUsername(), productID, Integer.parseInt(number));
+            buyLog.addProductToBuyLog(productID,Integer.parseInt(number));
             outputHandler.showOutputWith2String(productID,number,2);
         }
     }
