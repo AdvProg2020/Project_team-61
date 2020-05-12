@@ -211,42 +211,42 @@ public class SellerMenu {
 
 
     public void editOffField(String edit) {
-        SaleRequest saleRequest=new SaleRequest();
-        if (field.equalsIgnoreCase("sale status")) {
-            if (edit.matches("CONFIRMED")) {
-                saleRequest.setSaleStatus(SaleStatus.CONFIRMED);
-            } else if (edit.matches("UNDERREVIEWFOREDITING")) {
-                saleRequest.setSaleStatus(SaleStatus.UNDERREVIEWFOREDITING);
-            } else {
-                saleRequest.setSaleStatus(SaleStatus.UNDERREVIEWFOREDITING);
-            }
-        } else if (field.equalsIgnoreCase("start of sale period")) {
-            if (edit.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
-                Date currentDate = new Date();
-                Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(edit);
-                if (inputDate.after(currentDate)) {
-                    saleRequest.setStartOfSalePeriod(inputDate);
+            SaleRequest saleRequest=new SaleRequest();
+            if (field.equalsIgnoreCase("sale status")) {
+                if (edit.matches("CONFIRMED")) {
+                    saleRequest.setSaleStatus(SaleStatus.CONFIRMED);
+                } else if (edit.matches("UNDERREVIEWFOREDITING")) {
+                    saleRequest.setSaleStatus(SaleStatus.UNDERREVIEWFOREDITING);
+                } else {
+                    saleRequest.setSaleStatus(SaleStatus.UNDERREVIEWFOREDITING);
                 }
-            } else if (field.equalsIgnoreCase("end of sale period")) {
+            } else if (field.equalsIgnoreCase("start of sale period")) {
                 if (edit.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
                     Date currentDate = new Date();
                     Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(edit);
                     if (inputDate.after(currentDate)) {
-                        saleRequest.setEndOfSalePeriod(inputDate);
+                        saleRequest.setStartOfSalePeriod(inputDate);
                     }
-                }
-            } else if (field.equalsIgnoreCase("sale amount")) {
-                if (edit.matches("\\d+\\.?\\d*")) {
-                    saleRequest.setSaleAmount(Integer.parseInt(edit));
-                }
-            } else if (field.equalsIgnoreCase("seller")) {
-                if (edit.matches("\\D+")) {
-                    //convert seller to string!!!
-                    saleRequest.setSeller();
-                }
+                } else if (field.equalsIgnoreCase("end of sale period")) {
+                    if (edit.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
+                        Date currentDate = new Date();
+                        Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(edit);
+                        if (inputDate.after(currentDate)) {
+                            saleRequest.setEndOfSalePeriod(inputDate);
+                        }
+                    }
+                } else if (field.equalsIgnoreCase("sale amount")) {
+                    if (edit.matches("\\d+\\.?\\d*")) {
+                        saleRequest.setSaleAmount(Integer.parseInt(edit));
+                    }
+                } else if (field.equalsIgnoreCase("seller")) {
+                    if (edit.matches("\\D+")) {
+                        //convert seller to string!!!
+                        saleRequest.setSeller();
+                    }
 
+                }
             }
-        }
 
 
     }
