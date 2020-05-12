@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class commandprocessor {
+public class CommandProcessor {
     private MenuStatus menuStatus = MenuStatus.MAINMENU;
     private SubMenuStatus subMenuStatus = SubMenuStatus.MAINMENU;
     private InternalMenu internalMenu = InternalMenu.MAINMENU;

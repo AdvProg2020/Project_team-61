@@ -1,16 +1,13 @@
 package model.productRelated;
 import com.google.gson.Gson;
 import model.accounts.Account;
-import model.accounts.Customer;
 import model.accounts.Seller;
-import model.log.BuyLog;
 import model.log.Log;
 import model.off.DiscountCode;
 import model.off.Sale;
 
 import java.util.*;
 public class Product  {
-    private Gson productGson;
     private String productJson;
 
     //productDetail
@@ -24,17 +21,14 @@ public class Product  {
     private double averageScore;
     private int numberOfProducts;
     private boolean isInSale;
-    private boolean hasDiscount;
     private String additionalDetail;
     private int numberOfViews;
     private int totalNumberOfBuyers;
-    //trueIsCountable
-    private boolean countableOrNot;
     private boolean isBought;
 
     //lists
     private static ArrayList<Seller> listOfSellers = new ArrayList<Seller>();
-    private HashMap<Category,ArrayList<Product>> listOfAllProducts = new HashMap<Category, ArrayList<Product>>();
+    private HashMap<Category,ArrayList<Product>> listOfAllProducts = new HashMap<>();
     private static ArrayList<Product> allProduct = new ArrayList<Product>();
     private ArrayList<String> info=new ArrayList<>();
     public static ArrayList<String> listOfId=new ArrayList<String>();
@@ -44,7 +38,6 @@ public class Product  {
     public Score score;
     private Log log;
     private Account account;
-    private DiscountCode discountCode;
     private Sale sale;
 
 
@@ -64,25 +57,14 @@ public class Product  {
         this.seller=seller;
         this.numberOfProducts=numberOfProducts;
         this.category=category;
-//        allProduct.add(this);
         listOfSellers.add(seller);
-        listOfAllProducts.put(category,allProduct);
+        productsFromSameCategory(category.getName());
         allProduct.add(this);
-        productJson=productGson.toJson(allProduct);
-
+        setInfo();
     }
 
 
     //settersAndGetters----------------------------------------------------------------------------------
-
-
-    public void setProductJson(String productJson) {
-        this.productJson = productJson;
-    }
-
-    public String getProductJson() {
-        return productJson;
-    }
 
     public String  getId () {
         return productId;
@@ -100,13 +82,6 @@ public class Product  {
     }
     public double getPrice() {
         return price;
-    }
-
-    public void setCountableOrNot(boolean countableOrNot) {
-        this.countableOrNot = countableOrNot;
-    }
-    public boolean getCountableOrNot(){
-        return countableOrNot;
     }
 
     public int getNumberOfView () {
@@ -130,6 +105,7 @@ public class Product  {
 
     public void setAdditionalDetail(String additionalDetail) {
         this.additionalDetail = additionalDetail;
+        setInfo();
     }
     public String getAdditionalDetail() {
         return additionalDetail;
@@ -157,13 +133,6 @@ public class Product  {
         return companiesName;
     }
 
-    public void setHasDiscount(boolean hasDiscount) {
-        this.hasDiscount = hasDiscount;
-    }
-    public boolean getHasDiscount() {
-        return hasDiscount;
-    }
-
     public String getProductName() {
         return productName;
     }
@@ -180,14 +149,6 @@ public class Product  {
         return sale;
     }
 
-    public void setDiscountCode(DiscountCode discountCode) {
-        this.discountCode = discountCode;
-        setHasDiscount(true);
-    }
-    public DiscountCode getDiscountCode() {
-        return discountCode;
-    }
-
     public void setTotalNumberOfBuyers(int totalNumberOfBuyers) {
         this.totalNumberOfBuyers = totalNumberOfBuyers;
     }
@@ -195,24 +156,24 @@ public class Product  {
         return totalNumberOfBuyers;
     }
 
-    public void setInfo(ArrayList<String> info) {
+    public void setInfo() {
         info.add(getProductName());
         info.add(getCompaniesName());
         info.add(String.valueOf(getPrice()));
-        if (hasDiscount){
-           // info.add(discountCode.get)
-        }
         info.add(getCategory().getName());
         info.add(seller.getName());
         info.add(String.valueOf(getAverageScore()));
-        info.add(additionalDetail);
+        if (additionalDetail!=null){
+            info.add(additionalDetail);
+        }else info.add("\n");
+
 
     }
     public ArrayList<String> getInfo() {
         return info;
     }
 
-    public HashMap<Category, ArrayList<Product>> getListOfAllProducts() {
+    public HashMap<Category, ArrayList<Product>> getListOfAllSameCategoryProducts() {
         return listOfAllProducts;
     }
 
@@ -227,14 +188,26 @@ public class Product  {
     //othersTobeHandel-------------------------------------------------------------------------------
 
 
-    public void addCommentTitle(String title){
-        comment.setCommentTitle(title);
-    }
-    public void addCommentContent(String content){
-        comment.setCommentContent(content);
+    public void productsFromSameCategory(String categoryName){
+        ArrayList<Product> products=null;
+        for (Product product : allProduct) {
+            if (product.getCategory().equals(Category.getCategoryWithName(categoryName))) {
+                products.add(product);
+            }
+        }
+        listOfAllProducts.put(Category.getCategoryWithName(categoryName),products);
     }
 
-    //finish
+    //ina bayad tooye menu oonjaee ke comment new mishe bashan
+//    public void addCommentTitle(String title){
+//        comment.setTitle(title);
+//    }
+//
+//    public void addCommentContent(String content){
+//        comment.setContent(content);
+//    }
+
+    //checked
     public static Product getProductById(String id) {
         for (Product product : allProduct) {
             if (product.getId().equals(id)){
@@ -244,10 +217,21 @@ public class Product  {
         return null;
     }
 
-    //finish
-    public List listOfComments ( String id) {
-        Product product=getProductById(id);
-        return product.comment.allComments;
+
+//    public List listOfComments ( String id) {
+//        Product product=getProductById(id);
+//        return product.comment.allComments;
+//    }
+
+    public boolean ifProductHasSeller(String productId, String sellerUserName){
+        if (isThereProductWithId(productId)) {
+            for (Seller seller : Product.getProductById(productId).getListOfSellers()) {
+                if (seller.equals(Seller.getAccountWithUsername(sellerUserName))){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     //finish
@@ -267,13 +251,10 @@ public class Product  {
         }
     }
 
-    //finish
+    //checked
     public static boolean isThereProductWithId (String productId){
         Product product=getProductById(productId);
-        if (product==null){
-            return false;
-        }
-        else return true;
+        return product != null;
     }
 
     //finish
@@ -286,12 +267,12 @@ public class Product  {
         return allProduct.size();
     }
 
+    //checked
     public Product getProductWithName(String name){
-        for (model.productRelated.Product product : allProduct) {
+        for (Product product : allProduct) {
             if (product.getProductName().equals(name)){
                 return product;
             }
-
         }
         return null;
     }
@@ -308,8 +289,7 @@ public class Product  {
         }
     }
 
-
-    //finish
+    //checked
     public static Comparator<Product> productComparatorForView = new Comparator<Product>() {
 
         public int compare(Product s1, Product s2) {
@@ -321,7 +301,7 @@ public class Product  {
         }
     };
 
-    //finish
+    //checked
     public static Comparator<Product> productComparatorForScore = new Comparator<Product>() {
 
         public int compare(Product s1, Product s2) {

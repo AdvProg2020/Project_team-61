@@ -6,11 +6,11 @@ import model.accounts.Seller;
 import model.log.BuyLog;
 import model.productRelated.Comment;
 import model.productRelated.Product;
-import sun.jvm.hotspot.CommandProcessor;
+import view.CommandProcessor;
 import view.OutputHandler;
 import view.OutputMassageHandler;
 import view.SubMenuStatus;
-import view.commandprocessor;
+
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public class ProductMenu {
     private ProductsMenu productsMenu;
     private Product selectedProduct;
     private BuyLog buyLog;
-    private CommandProcessor commandProcessor;
+    private CommandProcessor commandprocessor;
 
 
     //finish
@@ -44,7 +44,7 @@ public class ProductMenu {
     //finish
     private boolean checkSeller(String seller) {
         //if (seller.matches("")) {
-        if (account.isThereAccountWithUsername(seller)) {
+        if (Account.isThereAccountWithUsername(seller)) {
             return true;
         } else outputNo = 0;
         //} else outputNo = 0;
@@ -100,7 +100,7 @@ public class ProductMenu {
 
     public void titleOfComment(String title) {
         commandprocessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
-        comment = new Comment()
+        comment = new Comment();
         //selectedProduct.addCommentTitle(title);
     }
 
