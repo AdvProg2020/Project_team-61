@@ -74,6 +74,12 @@ public class DiscountCode {
         }
         return null;
     }
+    public void giveDiscountToRandomCustomers(){
+
+    }
+    public void giveDiscountInBirthday(){
+
+    }
 
     public static void deleteDiscount(String id) {
         allDiscountCodes.remove(getDiscountWithId(id));
