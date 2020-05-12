@@ -57,7 +57,7 @@ public class DiscountCode {
         return allCustomersWithDiscountCode;
     }
 
-    public boolean isThereDiscountWithId(String id) {
+    public static boolean isThereDiscountWithId(String id) {
         for (DiscountCode discountCode : allDiscountCodes) {
             if (discountCode.getDiscountId().equals(id)) {
                 return true;

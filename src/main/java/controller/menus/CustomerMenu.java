@@ -1,104 +1,133 @@
 package controller.menus;
 
-
 import model.log.BuyLog;
 import model.log.Log;
+import model.off.DiscountCode;
 import model.productRelated.Product;
 import model.productRelated.Score;
-import view.CommandProcessor;
-import view.MenuStatus;
-import view.OutputMassageHandler;
-import view.SubMenuStatus;
+import view.*;
 
 
 public class CustomerMenu {
     private int outputNo;
-    private OutputMassageHandler outputHandler = new OutputMassageHandler();
     private Product product;
     private BuyLog buyLog;
     private String productID;
 
-    //array
+    //gson
     public void processViewCart() {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
+        OutputHandler.showCustomerLog();
+        commandprocessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
     }
 
+    //gson
+    public void showTotalPrice() {
+        // OutputMassageHandler.showOutputWithString(String.valueOf(buyLog.holePriceWithOutDiscount()), 8);
+        OutputHandler.showTotalPrice();
+    }
+
+    //product.......................................................................................
     // manager // customer // seller
     private boolean checkProduct(String productID) {
-        if (productID.matches(".+")) {
-            if (Product.isThereProductWithId(productID)) {
-                return true;
-            } else outputNo = 0;
-        } else outputNo = 0;
-        outputHandler.showAccountOutput(outputNo);
+        // if (productID.matches("((?!^ +$)^.+$)")) {
+        if (Product.isThereProductWithId(productID)) {
+            return true;
+        } else outputNo = 1;
+        // } else outputNo = 0;
+        OutputMassageHandler.showCustomerOutput(outputNo);
         return false;
     }
 
-    //array
+    //gson
     public void showProducts() {
-
+        OutputHandler.showProduct();
     }
 
+    //GSON
     public void viewProduct(String productID) {
         if (checkProduct(productID)) {
-            outputHandler.showProduct(Product.getProductById(productID));
+            OutputHandler.showProduct();
         }
     }
 
     public void increaseProductNumber(String productID) {
         if (checkProduct(productID)) {
             this.productID = productID;
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTNUMBER);
-            outputHandler.showOutput(1);
+            commandprocessor.setSubMenuStatus(SubMenuStatus.PRODUCTNUMBER);
+            OutputMassageHandler.showOutput(2);
         }
     }
 
+    //naghes
     public void productNumber(String number) {
         if (number.matches("\\d+")) {
-            buyLog.addProductToBuyLog(productID,Integer.parseInt(number));
-            outputHandler.showOutputWith2String(productID,number,2);
-        }
+            // product.addProductToLog(LoginMenu.getLoginAccount().getUsername(), productID, Integer.parseInt(number));
+            OutputMassageHandler.showOutputWith2String(productID, number, 2);
+        } else OutputMassageHandler.showCustomerOutput(4);
     }
 
     public void decreaseProductNumber(String productID) {
         if (checkProduct(productID)) {
             this.productID = productID;
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTNUMBER);
-            outputHandler.showOutput(2);
+            commandprocessor.setSubMenuStatus(SubMenuStatus.PRODUCTNUMBER);
+            OutputMassageHandler.showOutput(3);
         }
     }
 
-    public void showTotalPrice() {
-        outputHandler.showOutputWithString(String.valueOf(buyLog.holePriceWithOutDiscount()), 8);
-    }
 
-    //purches--------------------------------------------------------
+    //purches............................................................................
     public void purchase() {
-        CommandProcessor.setMenuStatus(MenuStatus.RECEIVERINFORMATION);
+        commandprocessor.setMenuStatus(MenuStatus.PURCHASE);
+        commandprocessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
+        commandprocessor.setInternalMenu(InternalMenu.MAINMENU);
+        OutputMassageHandler.showCustomerOutput(5);
+
     }
 
+    //product menu bayad bzrmsh*******************************************
     public void processPurchase() {
-        outputHandler.showOutput(3);
-        CommandProcessor.setMenuStatus(MenuStatus.RECEIVERINFORMATION);
+        if (LoginMenu.isLogin()) {
+            if (LoginMenu.getLoginAccount().getRole().equals("customer")) {
+                commandprocessor.setMenuStatus(MenuStatus.PURCHASE);
+                commandprocessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
+                commandprocessor.setInternalMenu(InternalMenu.MAINMENU);
+                outputNo = 5;
+            }else outputNo=9;
+        } else outputNo = 6;
+        OutputMassageHandler.showCustomerOutput(outputNo);
     }
 
-    public void receiverInformation(String information) {
-        CommandProcessor.setMenuStatus(MenuStatus.DISCOUNTCODE);
+    private boolean checkDiscountCode(String discountCodeID) {
+        //if (discountCodeID.matches("")) {
+        if (DiscountCode.isThereDiscountWithId(discountCodeID)) {
+            return true;
+        } else outputNo = 7;
+        // } else outputNo = ;
+        OutputMassageHandler.showAccountOutput(outputNo);
+        return false;
     }
 
-    public void discountCode(String discountCodeId) {
 
-        CommandProcessor.setMenuStatus(MenuStatus.PAYMENT);
+    public void discountCodeValidation(String discountCodeId) {
+        if (checkDiscountCode(discountCodeId)) {
+            if () {
+                commandprocessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
+
+            } else outputNo = 10;
+                OutputMassageHandler.showCustomerOutput(outputNo);
+        }
     }
 
     public void payment() {
         if (buyLog.holePriceWithDiscount() <= LoginMenu.getLoginAccount().getCredit()) {
             finishingPayment();
-
-            CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+            commandprocessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+            commandprocessor.setMenuStatus(MenuStatus.MAINMENU);
+            outputNo =0;
         } else {
-
+            outputNo=0;
         }
+        OutputMassageHandler.showCustomerOutput(outputNo);
     }
 
     private void finishingPayment() {
@@ -108,45 +137,51 @@ public class CustomerMenu {
     }
 
 
-    //log---------------------------------------------------------------
+    //log.............................................................................
     private boolean checkLog(String orderID) {
-        if (orderID.matches(".+")) {
-            if (Log.isThereLogWithID(orderID)) {
-                return true;
-            } else outputNo = 0;
-        } else outputNo = 0;
-        outputHandler.showAccountOutput(outputNo);
+        // if (orderID.matches("(?!^ +$)^.+$")) {
+        if (Log.isThereLogWithID(orderID)) {
+            return true;
+        } else outputNo = 8;
+        //} else outputNo = 0;
+        OutputMassageHandler.showAccountOutput(outputNo);
         return false;
     }
 
-    //array
+    //gson
     public void processViewOrders() {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWORDERS);
+        OutputHandler.showOrders();
+        commandprocessor.setSubMenuStatus(SubMenuStatus.VIEWORDERS);
     }
 
 
+    //gson
     public void showOrder(String orderID) {
         if (checkLog(orderID)) {
-
+            OutputHandler.showOrder();
         }
 
     }
 
-    //-------------------------------------------------------
+    //score.............................................................
     public void rateProduct(String productID, int number) {
         if (checkProduct(productID)) {
-            Score newScore = new Score(LoginMenu.getLoginAccount(), Product.getProductById(productID), number);
-            outputHandler.showOutputWith2String(productID, String.valueOf(number), 1);
+            if (number >= 1 && number <= 5) {
+                Score newScore = new Score(LoginMenu.getLoginAccount(), Product.getProductById(productID), number);
+                OutputMassageHandler.showOutputWith2String(productID, String.valueOf(number), 1);
+            } else outputNo = 11;
         }
     }
 
+    //GSON
     public void processViewBalance() {
-        outputHandler.showOutputWithString(String.valueOf(LoginMenu.getLoginAccount().getCredit()), 8);
+        // OutputMassageHandler.showOutputWithString(String.valueOf(LoginMenu.getLoginAccount().getCredit()), 8);
+        OutputHandler.showBalance();
     }
 
-    //array
+    //GSON
     public void processViewDiscountCodes() {
-
+        OutputHandler.showDiscountCodes();
     }
 
 }

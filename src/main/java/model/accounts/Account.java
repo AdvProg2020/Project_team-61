@@ -3,10 +3,8 @@ package model.accounts;
 import model.log.BuyLog;
 import model.off.DiscountCode;
 import model.log.SaleLog;
-import model.productRelated.Product;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Iterator;
 
 public abstract class Account {
@@ -18,9 +16,11 @@ public abstract class Account {
     double phoneNo;
     double credit;
     String role;
-    public static ArrayList<DiscountCode> discountCodeLists;
-    public static ArrayList<SaleLog> allSaleLogs;
-    public static ArrayList<BuyLog> allBuyLogs;
+    double currentPhoneNo;
+    String address;
+    ArrayList<DiscountCode> discountCodeLists;
+    ArrayList<SaleLog> allSaleLogs;
+    ArrayList<BuyLog> allBuyLogs;
     private  static ArrayList<Account> allAccounts;
 
     public  void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo) {
@@ -108,7 +108,21 @@ public abstract class Account {
         this.credit = credit;
     }
 
+    public void setCurrentPhoneNo(double currentPhoneNo) {
+        this.currentPhoneNo = currentPhoneNo;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     //-----------------------------------------------------------------
+
+
+    public String getAddress() {
+        return address;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -132,31 +146,4 @@ public abstract class Account {
     public double getCredit() {
         return credit;
     }
-
-    public static ArrayList<Account> getAllAccounts() {
-        return allAccounts;
-    }
-
-    public static ArrayList<SaleLog> getAllSaleLogs() {
-        return allSaleLogs;
-    }
-
-    public static ArrayList<BuyLog> getAllBuyLogs() {
-        return allBuyLogs;
-    }
-
-    public static ArrayList<DiscountCode> getDiscountCodeLists() {
-        return discountCodeLists;
-    }
-
-
-    public static Comparator<Account> accountComparatorForUsername = new Comparator<Account>() {
-
-        public int compare(Account s1, Account s2) {
-
-            String userName1 = s1.getUsername().toUpperCase();
-            String userName2 = s2.getUsername().toUpperCase();
-            return userName1.compareTo(userName2);
-        }
-    };
 }

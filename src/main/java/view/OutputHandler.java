@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import model.accounts.Seller;
 import model.productRelated.Product;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 
 public class OutputHandler {
@@ -65,11 +66,84 @@ public class OutputHandler {
     public static String showAllSellersForOneProduct(ArrayList<Seller> sellerArrayList){
         return makeJsonFromSellerArrayList(sellerArrayList);
     }
-
-    public static void showInput(int input) {
+    //..................................................................
+    public static void showAccountInformation(){
+        System.out.println();
     }
 
-    public static void showObjectInput(Object object, int size, int number) {
+    public static void showAccounts(){
 
     }
+
+    public static void showDiscountCodes(){
+
+    }
+
+    public static void showDiscountCode(){
+
+    }
+
+    public static void showRequest(){
+
+    }
+
+    public static void showRequests(){
+
+    }
+
+    public static void showCategories(){
+
+    }
+
+    public static void showOff(){
+
+    }
+
+    public static void showOffs(){
+
+    }
+
+  //  public static void showBalance(){
+
+  //  }
+
+    public static void showSalesHistory(){
+        //loginaccount sellere
+    }
+
+    public static void showFirmInformation(){
+        //loginaccount sellere
+    }
+
+    public static void showCustomerLog(){
+
+    }
+
+    public static void showOrders(){
+        //sabeghe kharid
+
+    }
+
+    public static void showOrder(){
+
+    }
+
+    public static void showProductBuyers(){
+
+    }
+
+    public static void showProduct(){
+
+    }
+
+    public static void showTotalPrice(){
+        //poole log bedoone discount
+
+    }
+
+    public static void showBalance(){
+        //credite har account
+    }
+
+
 }
