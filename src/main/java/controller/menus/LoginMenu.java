@@ -12,9 +12,8 @@ public class LoginMenu {
     private static Account loginAccount;
     private String field = null;
     private String username = null;
-    private boolean login = false;
+    private static boolean login = false;
     private SubMenuStatus subMenuStatus;
-    private CommandProcessor commandProcessor ;
 
     public static Account getLoginAccount() {
         return loginAccount;
@@ -28,8 +27,8 @@ public class LoginMenu {
         if (!login) {
             if (username.matches("^(?i)(?=.[a-z])(?=.[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
                 if (Account.isThereAccountWithUsername(username)) {
-                    subMenuStatus = commandProcessor.setSubMenuStatus();
-                    commandProcessor.setSubMenuStatus(SubMenuStatus.PASSWORD);
+                    subMenuStatus = CommandProcessor.getSubMenuStatus();
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.PASSWORD);
                     outputNo = 2;
                 } else outputNo = 14;
             } else outputNo = 0;
@@ -43,7 +42,7 @@ public class LoginMenu {
                 loginAccount = Account.getAccountWithUsername(username);
                 login = true;
                 findRole();
-                commandProcessor.setSubMenuStatus(subMenuStatus);
+                CommandProcessor.setSubMenuStatus(subMenuStatus);
                 outputNo = 15;
             } else outputNo = 14;
         } else outputNo = 3;
@@ -60,7 +59,7 @@ public class LoginMenu {
         } else if (role.equalsIgnoreCase("seller")) {
             menu = MenuStatus.SELLERMENU;
         }
-        commandProcessor.setMenuStatus(menu);
+        CommandProcessor.setMenuStatus(menu);
     }
 
     //gson
@@ -73,7 +72,7 @@ public class LoginMenu {
     public void processEdit(String field) {
         // if(login) {
         if(!field.matches("(?i)(?:username|password|last name|email|phone number)")) {
-            commandProcessor.setSubMenuStatus(SubMenuStatus.EDITACCOUNT);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITACCOUNT);
             this.field = field;
             OutputMassageHandler.showOutputWithString(field, 3);
         }else outputNo = 16;
@@ -115,8 +114,8 @@ public class LoginMenu {
         if (login) {
             loginAccount = null;
             login = false;
-            commandProcessor.setMenuStatus(MenuStatus.MAINMENU);
-            commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+            CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
             outputNo = 22;
         } else outputNo = 25;
         OutputMassageHandler.showAccountOutput(outputNo);

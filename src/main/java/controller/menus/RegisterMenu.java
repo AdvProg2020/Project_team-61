@@ -5,12 +5,11 @@ import controller.request.FirmRequest;
 import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Manager;
-import sun.jvm.hotspot.CommandProcessor;
+import view.CommandProcessor;
 import view.*;
 
 
 public class RegisterMenu {
-    private CommandProcessor commandProcessor;
     private int outputNo;
     private Manager manager;
     private Customer customer;
@@ -28,8 +27,8 @@ public class RegisterMenu {
     private double phoneNo;
     private SubMenuStatus subMenuStatus;
 
-    public void setManagerWant(boolean managerWant) {
-        this.managerWant = managerWant;
+    public static void setManagerWant(boolean managerWant) {
+        RegisterMenu.managerWant = managerWant;
     }
 
     public void processRegister(String role, String username) {
@@ -39,9 +38,9 @@ public class RegisterMenu {
                     this.role = role;
                     this.username = username;
                     registerByRole(role, username);
-                    subMenuStatus = commandProcessor.getSubMenuStatus();
-                    commandProcessor.setSubMenuStatus(SubMenuStatus.REGISTERATIONDETAILS);
-                    commandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
+                    subMenuStatus = CommandProcessor.getSubMenuStatus();
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.REGISTERATIONDETAILS);
+                    CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
                 } else outputNo = 26;
             } else outputNo = 1;
         } else outputNo = 0;
@@ -70,8 +69,8 @@ public class RegisterMenu {
             managerWant = false;
             outputNo = 2;
         } else {
-            commandProcessor.setInternalMenu(InternalMenu.MAINMENU);
-            commandProcessor.setSubMenuStatus(subMenuStatus);
+            CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+            CommandProcessor.setSubMenuStatus(subMenuStatus);
             outputNo = 23;
         }
     }
@@ -118,12 +117,12 @@ public class RegisterMenu {
             CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMINFORMATION);
         } else if (role.equalsIgnoreCase("customer")) {
             customer.setDetailsToAccount(password, name, lastname, Email, phoneNo);
-            commandProcessor.setSubMenuStatus(subMenuStatus);
-            commandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+            CommandProcessor.setSubMenuStatus(subMenuStatus);
+            CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
         } else if (role.equalsIgnoreCase("customer")) {
             manager.setDetailsToAccount(password, name, lastname, Email, phoneNo);
-            commandProcessor.setSubMenuStatus(subMenuStatus);
-            commandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+            CommandProcessor.setSubMenuStatus(subMenuStatus);
+            CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
         }
     }
 
@@ -148,8 +147,8 @@ public class RegisterMenu {
             if (detail.matches(".+")) {
                 firmRequest.setPhoneNO(detailMenu);
                 detailMenu = 0;
-                commandProcessor.setSubMenuStatus(subMenuStatus);
-                commandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                CommandProcessor.setSubMenuStatus(subMenuStatus);
+                CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
                 outputNo = 8;
             } else outputNo = 7;
         }
@@ -173,8 +172,8 @@ public class RegisterMenu {
             if (detail.matches(".+")) {
                 this.phoneNo = Double.parseDouble(detail);
                 detailMenu = 0;
-                commandProcessor.setSubMenuStatus(SubMenuStatus.CHECKDISCOUNTCODE);
-                commandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.CHECKDISCOUNTCODE);
+                CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
                 outputNo = 12;
             } else outputNo = 11;
         }

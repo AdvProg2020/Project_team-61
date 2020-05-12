@@ -1,7 +1,7 @@
 package view;
 
 public class MenuSituation {
-    private commandprocessor commandProcessor;
+    private CommandProcessor commandProcessor;
 
 
     void processBack() {

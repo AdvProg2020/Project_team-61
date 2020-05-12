@@ -35,11 +35,11 @@ public  class Request {
         allRequests.add(this);
     }
 
-    public void declineRequest(String requestId){
+    public static void declineRequest(String requestId){
         allRequests.remove(getRequestFromID(requestId));
     }
 
-    public void acceptRequest(String requestId){
+    public static void acceptRequest(String requestId){
         if(requestId.matches("((?!^ +$)^.+$) wants seller account")){
             //
             accountRequest.acceptRequestDetail();
@@ -53,7 +53,7 @@ public  class Request {
         }
         return null;
     }
-    public boolean isThereRequestFromID(String requestID){
+    public static boolean isThereRequestFromID(String requestID){
         for(Request request : allRequests){
             if (request.requestText.equalsIgnoreCase(requestID)) return true;
         }

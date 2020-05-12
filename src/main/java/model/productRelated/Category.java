@@ -47,7 +47,7 @@ public class Category{
         this.subCategories = subCategories;
     }
 
-    public Category getCategoryWithName(String name){
+    public static Category getCategoryWithName(String name){
         for( Category category:allCategories){
             if (category.getName().equalsIgnoreCase(name)){
                 return category;

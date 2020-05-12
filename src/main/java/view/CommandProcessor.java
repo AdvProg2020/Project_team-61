@@ -7,9 +7,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CommandProcessor {
-    private MenuStatus menuStatus = MenuStatus.MAINMENU;
-    private SubMenuStatus subMenuStatus = SubMenuStatus.MAINMENU;
-    private InternalMenu internalMenu = InternalMenu.MAINMENU;
+    private static MenuStatus menuStatus = MenuStatus.MAINMENU;
+    private static SubMenuStatus subMenuStatus = SubMenuStatus.MAINMENU;
+    private static InternalMenu internalMenu = InternalMenu.MAINMENU;
     //
     private ProductMenu productMenu = new ProductMenu();
     private ProductsMenu productsMenu = new ProductsMenu();
@@ -23,28 +23,28 @@ public class CommandProcessor {
     //
 
 
-    public MenuStatus getMenuStatus() {
+    public static MenuStatus getMenuStatus() {
         return menuStatus;
     }
 
-    public void setMenuStatus(MenuStatus menuStatus) {
-        this.menuStatus = menuStatus;
+    public static void setMenuStatus(MenuStatus menuStatus) {
+        CommandProcessor.menuStatus = menuStatus;
     }
 
-    public SubMenuStatus getSubMenuStatus() {
+    public static SubMenuStatus getSubMenuStatus() {
         return subMenuStatus;
     }
 
-    public void setSubMenuStatus(SubMenuStatus subMenuStatus) {
-        this.subMenuStatus = subMenuStatus;
+    public static void setSubMenuStatus(SubMenuStatus subMenuStatus) {
+        CommandProcessor.subMenuStatus = subMenuStatus;
     }
 
-    public InternalMenu getInternalMenu() {
+    public static InternalMenu getInternalMenu() {
         return internalMenu;
     }
 
-    public void setInternalMenu(InternalMenu internalMenu) {
-        this.internalMenu = internalMenu;
+    public static void setInternalMenu(InternalMenu internalMenu) {
+        CommandProcessor.internalMenu = internalMenu;
     }
 
     private String[] regex = {"(?i)create\\s+account\\s+((?!^ +$)^.+$)",
