@@ -2,7 +2,7 @@ package view;
 
 
 public class OutputMassageHandler {
-    private commandprocessor commandProcessor;
+
 
     public static void showOutput(int output) {
         if (output == 0) {
@@ -50,7 +50,7 @@ public class OutputMassageHandler {
         }
     }
 
-    public void showManagerMenuOutput(int output) {
+    public static void showManageOutput(int output) {
         if (output == 0) {
             System.out.println("");
         } else if (output == 1) {
@@ -103,7 +103,6 @@ public class OutputMassageHandler {
             System.out.println("total time of use format is invalid");
         }
     }
-
 
     public static void showCustomerOutput(int output) {
         if (output == 0) {
@@ -329,7 +328,7 @@ public class OutputMassageHandler {
         }else if (output == 2) {
             System.out.println("product " + first + " "+ second+" number changed" );
         }else if (output == 3) {
-            System.out.println("your credit " + string );
+            System.out.println( );
         }
     }
 

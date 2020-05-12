@@ -17,7 +17,7 @@ public class CustomerMenu {
     //gson
     public void processViewCart() {
         OutputHandler.showCustomerLog();
-        commandprocessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
     }
 
     //gson
@@ -53,7 +53,7 @@ public class CustomerMenu {
     public void increaseProductNumber(String productID) {
         if (checkProduct(productID)) {
             this.productID = productID;
-            commandprocessor.setSubMenuStatus(SubMenuStatus.PRODUCTNUMBER);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTNUMBER);
             OutputMassageHandler.showOutput(2);
         }
     }
@@ -69,7 +69,7 @@ public class CustomerMenu {
     public void decreaseProductNumber(String productID) {
         if (checkProduct(productID)) {
             this.productID = productID;
-            commandprocessor.setSubMenuStatus(SubMenuStatus.PRODUCTNUMBER);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTNUMBER);
             OutputMassageHandler.showOutput(3);
         }
     }
@@ -77,9 +77,9 @@ public class CustomerMenu {
 
     //purches............................................................................
     public void purchase() {
-        commandprocessor.setMenuStatus(MenuStatus.PURCHASE);
-        commandprocessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
-        commandprocessor.setInternalMenu(InternalMenu.MAINMENU);
+        CommandProcessor.setMenuStatus(MenuStatus.PURCHASE);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
+        CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
         OutputMassageHandler.showCustomerOutput(5);
 
     }
@@ -88,9 +88,9 @@ public class CustomerMenu {
     public void processPurchase() {
         if (LoginMenu.isLogin()) {
             if (LoginMenu.getLoginAccount().getRole().equals("customer")) {
-                commandprocessor.setMenuStatus(MenuStatus.PURCHASE);
-                commandprocessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
-                commandprocessor.setInternalMenu(InternalMenu.MAINMENU);
+                CommandProcessor.setMenuStatus(MenuStatus.PURCHASE);
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
+                CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
                 outputNo = 5;
             }else outputNo=9;
         } else outputNo = 6;
@@ -110,10 +110,10 @@ public class CustomerMenu {
 
     public void discountCodeValidation(String discountCodeId) {
         if (checkDiscountCode(discountCodeId)) {
-            if () {
-                commandprocessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
+            //if () {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
 
-            } else outputNo = 10;
+           // } else outputNo = 10;
                 OutputMassageHandler.showCustomerOutput(outputNo);
         }
     }
@@ -121,8 +121,8 @@ public class CustomerMenu {
     public void payment() {
         if (buyLog.holePriceWithDiscount() <= LoginMenu.getLoginAccount().getCredit()) {
             finishingPayment();
-            commandprocessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-            commandprocessor.setMenuStatus(MenuStatus.MAINMENU);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+            CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
             outputNo =0;
         } else {
             outputNo=0;
@@ -151,7 +151,7 @@ public class CustomerMenu {
     //gson
     public void processViewOrders() {
         OutputHandler.showOrders();
-        commandprocessor.setSubMenuStatus(SubMenuStatus.VIEWORDERS);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWORDERS);
     }
 
 

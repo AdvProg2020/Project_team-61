@@ -4,7 +4,7 @@ import model.productRelated.Category;
 import model.productRelated.Product;
 import model.filtar.Filter;
 import model.sort.Sort;
-import sun.jvm.hotspot.CommandProcessor;
+import view.CommandProcessor;
 import view.*;
 
 import java.util.ArrayList;
@@ -14,14 +14,13 @@ public class ProductsMenu {
     private int outputNo;
     private Product product;
     private Category category;
-    private CommandProcessor commandProcessor ;
     private Filter filter;
     private Sort sort;
     private String productId;
 
 
     public void processProducts() {
-        commandProcessor.setMenuStatus(MenuStatus.PRODUCTSMENU);
+        CommandProcessor.setMenuStatus(MenuStatus.PRODUCTSMENU);
     }
 
     //array
@@ -38,17 +37,17 @@ public class ProductsMenu {
                 return true;
             } else outputNo = 0;
        // } else inputNo = 0;
-        OutputHandler.showAccountOutput(outputNo);
+        OutputMassageHandler.showAccountOutput(outputNo);
         return false;
     }
 
     public void processFiltering() {
-        commandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
     }
 
     //finish//json
     public void showAvailableFilters() {
-        commandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
         OutputHandler.showAvailableFilters(Filter.showAvailableFilters());
     }
 
@@ -101,13 +100,13 @@ public class ProductsMenu {
                 return true;
             } else outputNo = 0;
         //} else inputNo = 0;
-        OutputHandler.showAccountOutput(outputNo);
+        OutputMassageHandler.showAccountOutput(outputNo);
         return false;
     }
 
 
     public void processSorting() {
-        commandProcessor.setSubMenuStatus(SubMenuStatus.SORTING);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.SORTING);
     }
 
     //finish//json
@@ -157,7 +156,7 @@ public class ProductsMenu {
     public void processShowProductsID(String productId) {
         this.productId = productId;
         OutputHandler.showProductsIds();
-        commandProcessor.setMenuStatus(MenuStatus.PRODUCTMENU);
+        CommandProcessor.setMenuStatus(MenuStatus.PRODUCTMENU);
          
     }
 

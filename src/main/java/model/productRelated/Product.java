@@ -272,7 +272,7 @@ public class Product  {
     }
 
     //checked
-    public Product getProductWithName(String name){
+    public static Product getProductWithName(String name){
         for (Product product : allProduct) {
             if (product.getProductName().equals(name)){
                 return product;

@@ -7,7 +7,6 @@ import model.off.Sale;
 import model.off.SaleStatus;
 import model.productRelated.Product;
 import view.*;
-import model.accounts.Seller;
 
 import java.util.Date;
 
@@ -46,7 +45,7 @@ public class SellerMenu {
     //gson
     public void processManageProducts() {
         OutputHandler.showProducts(Filter.newArrayOfProductFilter);
-        commandprocessor.setSubMenuStatus(SubMenuStatus.MANAGEPRODUCTS);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEPRODUCTS);
 
     }
 
@@ -70,7 +69,7 @@ public class SellerMenu {
             String id = LoginMenu.getLoginAccount().getUsername() + "wants edit product " + productID;
             if(!(productRequest.isThereRequestFromID(id))) {
                 productRequest = new ProductRequest(id);
-                commandprocessor.setSubMenuStatus(SubMenuStatus.PRODUCTFIELD);
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTFIELD);
               outputNo=2;
             }outputNo=0;
             OutputMassageHandler.showSellerOutput(outputNo);
@@ -80,7 +79,7 @@ public class SellerMenu {
     public void productField(String field) {
         if (field.matches("(?i)(?:seller||||)")) {
             this.field = field;
-            commandprocessor.setSubMenuStatus(SubMenuStatus.EDITPRODUCT);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITPRODUCT);
             OutputMassageHandler.showSellerOutput(3);
         }
     }
@@ -123,8 +122,8 @@ public class SellerMenu {
     }
 
     public void processAddProduct() {
-        commandprocessor.setSubMenuStatus(SubMenuStatus.ADDPRODUCT);
-        commandprocessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDPRODUCT);
+        CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
         OutputMassageHandler.showSellerOutput(10);
     }
 
@@ -169,8 +168,8 @@ public class SellerMenu {
                 productRequest.setNumberOfProduct(Integer.parseInt(detail));
                 detailMenu = 0;
                 outputNo = 17;
-                commandprocessor.setInternalMenu(InternalMenu.MAINMENU);
-                commandprocessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
             }
         }
         OutputMassageHandler.showSellerOutput(outputNo);
@@ -223,7 +222,7 @@ public class SellerMenu {
             if() {
                 saleRequest = new SaleRequest("edit off " + offID);
                 saleRequest.setOffId(offID);
-                commandprocessor.setSubMenuStatus(SubMenuStatus.SALEFIELD);
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.SALEFIELD);
                 OutputMassageHandler.showSellerOutput(20);
             }else
 
@@ -233,7 +232,7 @@ public class SellerMenu {
     public void offField(String field) {
         if (field.matches("(?i)(?:sale status|start of sale period|end of sale period|seller)")) {
             this.field = field;
-            commandprocessor.setSubMenuStatus(SubMenuStatus.EDITSALE);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITSALE);
             OutputMassageHandler.showSellerOutput(21);
         }
     }
@@ -279,8 +278,8 @@ public class SellerMenu {
     }
 
     public void addOff() {
-        commandprocessor.setSubMenuStatus(SubMenuStatus.ADDSALE);
-        commandprocessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDSALE);
+        CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
         OutputMassageHandler.showSellerOutput(0);
     }
 
@@ -327,8 +326,8 @@ public class SellerMenu {
                     saleRequest.setSaleStatus(SaleStatus.UNDERREVIEWFOREDITING);
                 }
                 detailMenu = 0;
-                commandprocessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                commandprocessor.setInternalMenu(InternalMenu.MAINMENU);
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
             }
         }
 

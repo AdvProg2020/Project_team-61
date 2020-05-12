@@ -1,16 +1,14 @@
 package controller.menus;
 
-
 import model.accounts.Account;
 import model.accounts.Seller;
 import model.log.BuyLog;
 import model.productRelated.Comment;
 import model.productRelated.Product;
-import sun.jvm.hotspot.CommandProcessor;
+import view.CommandProcessor;
 import view.OutputHandler;
 import view.OutputMassageHandler;
 import view.SubMenuStatus;
-import view.commandprocessor;
 
 import java.util.ArrayList;
 
@@ -22,12 +20,11 @@ public class ProductMenu {
     private ProductsMenu productsMenu;
     private Product selectedProduct;
     private BuyLog buyLog;
-    private CommandProcessor commandProcessor;
 
 
     //finish
     public void processDigest() {
-        commandprocessor.setSubMenuStatus(SubMenuStatus.DIGEST);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
         selectedProduct = Product.getProductById(productsMenu.getProductId());
         ArrayList<String> info = selectedProduct.getInfo();
     }
@@ -38,13 +35,13 @@ public class ProductMenu {
             //???????????????????
             buyLog = new BuyLog(LoginMenu.getLoginAccount().getUsername());
         }
-        selectedProduct.addProductToLog(account.getUsername(), selectedProduct.getId(), 1);
+      //  selectedProduct.addProductToLog(account.getUsername(), selectedProduct.getId(), 1);
     }
 
     //finish
     private boolean checkSeller(String seller) {
         //if (seller.matches("")) {
-        if (account.isThereAccountWithUsername(seller)) {
+        if (Account.isThereAccountWithUsername(seller)) {
             return true;
         } else outputNo = 0;
         //} else outputNo = 0;
@@ -88,25 +85,25 @@ public class ProductMenu {
 
     //
     public void processComments() {
-        commandprocessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
         selectedProduct.getScore();
         selectedProduct.listOfComments(selectedProduct.getId());
     }
 
     //finish
     public void addComments() {
-        commandprocessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
     }
 
     public void titleOfComment(String title) {
-        commandprocessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
         comment = new Comment()
         //selectedProduct.addCommentTitle(title);
     }
 
     //finish
     public void contentOfComment(String content) {
-        commandprocessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
         //selectedProduct.addCommentContent(content);
     }
 
