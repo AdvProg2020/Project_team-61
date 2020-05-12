@@ -2,12 +2,11 @@ package controller.menus;
 
 import controller.request.Request;
 import model.accounts.Account;
+import model.filtar.Filter;
 import model.off.DiscountCode;
 import model.productRelated.Category;
 import model.productRelated.Product;
-import view.InternalMenu;
-import view.OutputMassageHandler;
-import view.SubMenuStatus;
+import view.*;
 
 import java.util.ArrayList;
 
@@ -25,12 +24,13 @@ public class ManagerMenu {
     private OutputMassageHandler outputMassageHandler = new OutputMassageHandler();
     private int detailMenu = 0;
     private DiscountCode newDiscountCode;
-    private view.commandProcessor commandProcessor;
+    private  Category newCategory;
+    private commandprocessor commandProcessor;
 
-    //----------------------------------------------------------------------
-    //array
+    //gson
     public void processManageUsers() {
-        view.commandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEUSERS);
+        OutputHandler.showAccounts();
+        commandprocessor.setSubMenuStatus(SubMenuStatus.MANAGEUSERS);
     }
 
     private boolean checkUsername(String username) {
@@ -42,9 +42,11 @@ public class ManagerMenu {
         return false;
     }
 
+    //gson
     public void view(String username) {
         if (checkUsername(username)) {
-            outputMassageHandler.showAccount(Account.getAccountWithUsername(username));
+            OutputHandler.showAccountInformation();
+           // outputMassageHandler.showAccount(Account.getAccountWithUsername(username));
         } else outputMassageHandler.showAccountOutput(outputNo);
     }
 
@@ -57,23 +59,25 @@ public class ManagerMenu {
     }
 
     public void createManagerProfile() {
-        view.commandProcessor.setSubMenuStatus(SubMenuStatus.CREATEMANAGERACCOUNT);
+        commandprocessor.setSubMenuStatus(SubMenuStatus.CREATEMANAGERACCOUNT);
         RegisterMenu.setManagerWant(true);
         outputMassageHandler.showManagerMenuOutput(1);
     }
     //--------------------------------------------------------------------
 
-    // array
+    //gson
+    // more detail of product????
     public void processManageAllProducts() {
-        view.commandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEALLPRODUCTS);
+        OutputHandler.showProducts(Filter.newArrayOfProductFilter);
+        commandprocessor.setSubMenuStatus(SubMenuStatus.MANAGEALLPRODUCTS);
     }
 
     private boolean checkProduct(String productID) {
-        if (productID.matches("")) {
+       // if (productID.matches("")) {
             if (product.isThereProductWithId(productID)) {
                 return true;
             } else outputNo = 3;
-        } else outputNo = 2;
+       // } else outputNo = 2;
         outputMassageHandler.showAccountOutput(outputNo);
         return false;
     }
@@ -87,25 +91,25 @@ public class ManagerMenu {
     //------------------------------------------------
 
     private boolean checkDiscountCode(String discountCodeID) {
-        if (discountCodeID.matches("")) {
+        //if (discountCodeID.matches("")) {
             if (discountCode.isThereDiscountWithId(discountCodeID)) {
                 return true;
             } else outputNo = 5;
-        } else outputNo = 4;
+       // } else outputNo = 4;
         outputMassageHandler.showAccountOutput(outputNo);
         return false;
     }
 
     public void processCreateDiscountCode() {
-        view.commandProcessor.setSubMenuStatus(SubMenuStatus.ADDDISCOUNTCODE);
+        commandprocessor.setSubMenuStatus(SubMenuStatus.ADDDISCOUNTCODE);
         outputMassageHandler.showAccountOutput(6);
     }
 
     public void createNewDiscountCode(String discountCodeId) {
         if (checkDiscountCode(discountCodeId)) {
-            DiscountCode newDiscountCode = new DiscountCode(discountCodeId);
+            newDiscountCode = new DiscountCode(discountCodeId);
             commandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
-            view.commandProcessor.setSubMenuStatus(SubMenuStatus.DETAILDESCOUNTCODE);
+            commandprocessor.setSubMenuStatus(SubMenuStatus.DETAILDESCOUNTCODE);
             outputMassageHandler.showAccountOutput(7);
         }
     }
@@ -156,10 +160,12 @@ public class ManagerMenu {
 
     // array
     public void processViewDiscountCodes() {
-        view.commandProcessor.setSubMenuStatus(SubMenuStatus.VIEWDISCOUNTCODES);
+        OutputHandler.showDiscountCodes();
+        commandprocessor.setSubMenuStatus(SubMenuStatus.VIEWDISCOUNTCODES);
     }
 
     public void viewDiscountCode(String discountCodeID) {
+        OutputHandler.showDiscountCode();
         if (checkDiscountCode(discountCodeID)) {
             outputMassageHandler.showDiscountCode(discountCode.getDiscountWithId(discountCodeID));
         }
@@ -168,7 +174,7 @@ public class ManagerMenu {
     public void editDiscountCode(String discountCodeID) {
         if (checkDiscountCode(discountCodeID)) {
             editableDiscountCode = discountCode.getDiscountWithId(discountCodeID);
-            view.commandProcessor.setSubMenuStatus(SubMenuStatus.DISCOUNTCODEFIELD);
+            commandprocessor.setSubMenuStatus(SubMenuStatus.DISCOUNTCODEFIELD);
             outputMassageHandler.showAccountOutput(15);
         }
     }
@@ -176,7 +182,7 @@ public class ManagerMenu {
     public void discountCodeField(String field) {
         if (field.matches("(?i)(?:||||)")) {
             this.field = field;
-            view.commandProcessor.setSubMenuStatus(SubMenuStatus.EDITDISCOUNTCODE);
+            commandprocessor.setSubMenuStatus(SubMenuStatus.EDITDISCOUNTCODE);
             outputMassageHandler.showOutputWithString(field, 3);
         }
     }
@@ -239,10 +245,12 @@ public class ManagerMenu {
 
     /// array
     public void processManageRequests() {
-        view.commandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEREQUESTS);
+        commandprocessor.setSubMenuStatus(SubMenuStatus.MANAGEREQUESTS);
+        OutputHandler.showRequests();
     }
 
     public void detailsRequest(String requestID) {
+        OutputHandler.showRequest();
         if (checkRequest(requestID)) {
             outputMassageHandler.showRequest(request.getRequestFromID(requestID));
         }
@@ -274,14 +282,16 @@ public class ManagerMenu {
 
     // array
     public void processManageCategories() {
-        view.commandProcessor.setSubMenuStatus(SubMenuStatus.MANAGECATEGORIES);
+        OutputHandler.showCategories();
+        commandprocessor.setSubMenuStatus(SubMenuStatus.MANAGECATEGORIES);
 
     }
 
     public void editCategory(String category) {
         if (checkCategory(category)) {
-           // editableCategory = category.getCa
-            view.commandProcessor.setSubMenuStatus(SubMenuStatus.CATEGORYFIELD);
+            editableCategory = category.getCategoryWithName(category);
+            commandprocessor.setSubMenuStatus(SubMenuStatus.CATEGORYFIELD);
+            outputNo= 0;
 
         }
     }
@@ -289,7 +299,7 @@ public class ManagerMenu {
     public void categoryField(String field) {
         if (field.matches("(?i)(?:||||)")) {
             this.field = field;
-            view.commandProcessor.setSubMenuStatus(SubMenuStatus.EDITCATEGORY);
+            commandprocessor.setSubMenuStatus(SubMenuStatus.EDITCATEGORY);
             outputMassageHandler.showOutputWithString(field, 3);
         }
     }
@@ -312,27 +322,31 @@ public class ManagerMenu {
     }
 
     public void addCategory(String category) {
-        if (checkCategory(category)) {
-            // Category newCategory = new Category(category);
-            view.commandProcessor.setSubMenuStatus(SubMenuStatus.DETAILCATEGORY);
-            commandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
-            // outputHandler.showAccountOutput();
-        }
+            if(!(newCategory.isThereCategoryWithName(category))) {
+                newCategory = new Category(category);
+                commandprocessor.setSubMenuStatus(SubMenuStatus.DETAILCATEGORY);
+                commandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
+                outputNo = 0;
+            }else outputNo=0;
+
     }
 
     public void setDetailToCategory(String detail) {
-
-        if (field.equalsIgnoreCase("name")) {
+        //oon bala dade!
+       /* if (field.equalsIgnoreCase("name")) {
             if (detail.matches("\\D+")) {
-                category.setName(detail);
+                if(newCategory.isThereCategoryWithName(detail)) {
+                    newCategory = new Category(detail);
+                }else outputNo=0;
             }
-        } else if (field.equalsIgnoreCase("traits")) {
+        }  */
+        if (field.equalsIgnoreCase("traits")) {
             if (detail.matches("\\D+")) {
-                category.setTraits(detail);
+                newCategory.setTraits(detail);
             }
         } else if (field.equalsIgnoreCase("product")) {
             if (detail.matches("\\D+")) {
-                ArrayList<Product> products = category.getAllProducts();
+                ArrayList<Product> products = newCategory.getAllProducts();
                 products.add(product.getProductWithName(detail));
                 // category.setAllProducts(products);
                 detailMenu = 0;

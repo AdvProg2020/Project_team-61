@@ -24,12 +24,12 @@ public class BuyLog extends Log {
     private static boolean ifItsFinal;
     boolean isBought;
     private boolean firstProduct=true;
-    LocalDateTime localDateTimeForLog;
+    public static LocalDateTime localDateTimeForLog;
 
     //list
     private static ArrayList<Product> listOfOneProduct = new ArrayList<Product>();
     private static ArrayList<ArrayList<Product>> allBoughtProduct = new ArrayList<>();
-    ArrayList<BuyLog> allCustomersLog = new ArrayList<BuyLog>();
+    public static ArrayList<BuyLog> allCustomersLog = new ArrayList<BuyLog>();
 
     //setterAndGetter----------------------------------------------------
 
@@ -47,8 +47,12 @@ public class BuyLog extends Log {
         return isBought;
     }
 
-    public LocalDateTime getLocalDateTimeForLog() {
+    public static LocalDateTime getLocalDateTimeForLog() {
         return localDateTimeForLog;
+    }
+
+    public static ArrayList<BuyLog> getAllCustomersLog() {
+        return allCustomersLog;
     }
 
 
@@ -86,7 +90,6 @@ public class BuyLog extends Log {
         return price;
     }
 
-
     public double holePriceWithDiscount() {
         double price = 0;
         for (ArrayList<Product> productArrayList : allBoughtProduct) {
@@ -120,6 +123,11 @@ public class BuyLog extends Log {
             }
         }
         allBoughtProduct.remove(help);
+    }
+
+
+    public  int compareTo(BuyLog buyLog) {
+        return getLocalDateTimeForLog().compareTo(buyLog.getLocalDateTimeForLog());
     }
 
 }

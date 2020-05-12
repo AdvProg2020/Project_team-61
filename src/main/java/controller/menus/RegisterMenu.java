@@ -1,21 +1,24 @@
 package controller.menus;
 
 import controller.request.AccountRequest;
-import controller.request.Request;
+import controller.request.FirmRequest;
 import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Manager;
+import sun.jvm.hotspot.CommandProcessor;
 import view.*;
 
 
 public class RegisterMenu {
+    private CommandProcessor commandProcessor;
     private int outputNo;
-    private Request request;
-    private int detailMenu = 0;
-    private boolean managerWant = false;
-    private boolean headManager = true;
-    private OutputMassageHandler outputMassageHandler = new OutputMassageHandler();
+    private Manager manager;
+    private Customer customer;
     private AccountRequest accountRequest;
+    private FirmRequest firmRequest;
+    private int detailMenu = 0;
+    private  static boolean managerWant = false;
+    private boolean headManager = true;
     private String role;
     private String username;
     private String password;
@@ -23,64 +26,55 @@ public class RegisterMenu {
     private String lastname;
     private String Email;
     private double phoneNo;
-    private Account account;
+    private SubMenuStatus subMenuStatus;
+
+    public void setManagerWant(boolean managerWant) {
+        this.managerWant = managerWant;
+    }
 
     public void processRegister(String role, String username) {
         if (username.matches("^(?i)(?=.[a-z])(?=.[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
             if (!Account.isThereAccountWithUsername(username)) {
-                if (role.matches(".+")) {
+                if (role.matches("(?i)(?:customer|manager|seller)")) {
                     this.role = role;
                     this.username = username;
                     registerByRole(role, username);
+                    subMenuStatus = commandProcessor.getSubMenuStatus();
                     commandProcessor.setSubMenuStatus(SubMenuStatus.REGISTERATIONDETAILS);
                     commandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
-                    outputNo = 2;
                 } else outputNo = 26;
             } else outputNo = 1;
         } else outputNo = 0;
-        outputMassageHandler.showAccountOutput(outputNo);
+        OutputMassageHandler.showAccountOutput(outputNo);
     }
 
-    ///////////////// go back to menu for seller request
+
     private void registerByRole(String role, String username) {
         if (role.equalsIgnoreCase("customer")) {
-            Customer newCustomer = new Customer(username);
+            customer = new Customer(username);
+            outputNo = 2;
         } else if (role.equalsIgnoreCase("manager")) {
             createManagerAccount(username);
-
         } else if (role.equalsIgnoreCase("seller")) {
-            AccountRequest newRequest = new AccountRequest(username + " wants seller account");
+            accountRequest = new AccountRequest(username + " wants seller account");
+            outputNo = 2;
         }
+        OutputMassageHandler.showAccountOutput(outputNo);
 
     }
 
     private void createManagerAccount(String username) {
         if (managerWant || (headManager)) {
-            Manager newManager = new Manager(username);
+            manager = new Manager(username);
             headManager = false;
             managerWant = false;
+            outputNo = 2;
         } else {
-            //???????
-            commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+            commandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+            commandProcessor.setSubMenuStatus(subMenuStatus);
             outputNo = 23;
         }
     }
-
-    /*private void createSellerAccount(String username) {
-        String sellerAccountRequest = username + " wants seller account";
-        if (request.isThereRequestFromID(sellerAccountRequest)) {
-            if (request.isRequestViewed()) {
-                if (request.isRequestAccepted()) {
-                    Seller newSeller = new Seller(username);
-                } else outputNo = 28;
-            } else outputNo = 29;
-        } else {
-            Request newRequest = new Request(sellerAccountRequest);
-            outputNo = 27;
-        }
-        outputHandler.showAccountOutput(outputNo);
-    }*/
-
 
     public void completeRegisterProcess(String detail) {
         if (detailMenu == 0) {
@@ -90,29 +84,27 @@ public class RegisterMenu {
                 outputNo = 4;
             } else outputNo = 3;
         } else if (detailMenu == 1) {
-            if (detail.matches(".+")) {
+            if (detail.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$")) {
                 this.name = detail;
                 detailMenu++;
                 outputNo = 6;
             } else outputNo = 5;
         } else if (detailMenu == 2) {
-            if (detail.matches(".+")) {
+            if (detail.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$")) {
                 this.lastname = detail;
                 detailMenu++;
                 outputNo = 8;
             } else outputNo = 7;
         } else if (detailMenu == 3) {
-            if (detail.matches(".+")) {
+            if (detail.matches("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")) {
                 this.Email = detail;
                 detailMenu++;
                 outputNo = 10;
             } else outputNo = 9;
         } else if (detailMenu == 4) {
-            if (detail.matches(".+")) {
+            if (detail.matches("09[0-9]{9}")) {
                 this.phoneNo = Double.parseDouble(detail);
                 detailMenu = 0;
-                commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                commandProcessor.setInternalMenu(InternalMenu.MAINMENU);
                 createAccountWithDetails();
                 outputNo = 12;
             } else outputNo = 11;
@@ -120,36 +112,69 @@ public class RegisterMenu {
 
     }
 
-    public void createAccountWithDetails(){
-        if (!(role.equalsIgnoreCase("seller"))) {
-            account.setDetailsToAccount( password, name, lastname, Email, phoneNo);
-        }
-        else {
+    public void createAccountWithDetails() {
+        if (role.equalsIgnoreCase("seller")) {
             accountRequest.sellerAccountDetails(username, password, name, lastname, Email, phoneNo);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMINFORMATION);
+        } else if (role.equalsIgnoreCase("customer")) {
+            customer.setDetailsToAccount(password, name, lastname, Email, phoneNo);
+            commandProcessor.setSubMenuStatus(subMenuStatus);
+            commandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+        } else if (role.equalsIgnoreCase("customer")) {
+            manager.setDetailsToAccount(password, name, lastname, Email, phoneNo);
+            commandProcessor.setSubMenuStatus(subMenuStatus);
+            commandProcessor.setInternalMenu(InternalMenu.MAINMENU);
         }
     }
 
-    //******************************************************88
-    public void receiverInformation(String detail){
+    public void createFirm(String detail) {
         if (detailMenu == 0) {
-            if (detail.matches("\\d+")) {
-                LoginMenu.getLoginAccount().setCurrentPhoneNo(Double.parseDouble(detail));
-                detailMenu =1;
-                outputNo = 4;
+            if (detail.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$")) {
+                String id = "seller "+ LoginMenu.getLoginAccount().getUsername()+ "wants firm "+ detail ;
+                if(firmRequest.isThereRequestFromID(id)) {
+                    firmRequest = new FirmRequest(id);
+                    firmRequest.setName(detail);
+                    detailMenu++;
+                    outputNo = 4;
+                }else outputNo = 0;
             } else outputNo = 3;
         } else if (detailMenu == 1) {
             if (detail.matches(".+")) {
+                firmRequest.setPhoneNO(detailMenu);
+                detailMenu++;
+                outputNo = 6;
+            } else outputNo = 5;
+        } else if (detailMenu == 2) {
+            if (detail.matches(".+")) {
+                firmRequest.setPhoneNO(detailMenu);
+                detailMenu = 0;
+                commandProcessor.setSubMenuStatus(subMenuStatus);
+                commandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                outputNo = 8;
+            } else outputNo = 7;
+        }
+    }
+
+    //******************************************************
+    public void receiverInformation(String detail) {
+        if (detailMenu == 0) {
+            if (detail.matches("\\d+")) {
+                LoginMenu.getLoginAccount().setCurrentPhoneNo(Double.parseDouble(detail));
+                detailMenu = 1;
+                outputNo = 4;
+            } else outputNo = 3;
+        } else if (detailMenu == 1) {
+            if (detail.matches("\\d{1,5}\\s\\w.\\s(\\b\\w*\\b\\s){1,2}\\w*\\.")) {
                 LoginMenu.getLoginAccount().setAddress(detail);
-                detailMenu=2;
+                detailMenu = 2;
                 outputNo = 6;
             } else outputNo = 5;
         } else if (detailMenu == 2) {
             if (detail.matches(".+")) {
                 this.phoneNo = Double.parseDouble(detail);
                 detailMenu = 0;
-                 commandProcessor.setMenuStatus(MenuStatus.DISCOUNTCODE);
+                commandProcessor.setSubMenuStatus(SubMenuStatus.CHECKDISCOUNTCODE);
                 commandProcessor.setInternalMenu(InternalMenu.MAINMENU);
-                createAccountWithDetails();
                 outputNo = 12;
             } else outputNo = 11;
         }
@@ -158,8 +183,4 @@ public class RegisterMenu {
 
 
 
-
-    public static void setManagerWant(boolean managerWant) {
-        managerWant = managerWant;
-    }
 }

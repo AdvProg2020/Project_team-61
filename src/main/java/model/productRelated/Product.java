@@ -1,16 +1,13 @@
 package model.productRelated;
 import com.google.gson.Gson;
 import model.accounts.Account;
-import model.accounts.Customer;
 import model.accounts.Seller;
-import model.log.BuyLog;
 import model.log.Log;
 import model.off.DiscountCode;
 import model.off.Sale;
 
 import java.util.*;
 public class Product  {
-    private Gson productGson;
     private String productJson;
 
     //productDetail
@@ -68,21 +65,11 @@ public class Product  {
         listOfSellers.add(seller);
         listOfAllProducts.put(category,allProduct);
         allProduct.add(this);
-        productJson=productGson.toJson(allProduct);
 
     }
 
 
     //settersAndGetters----------------------------------------------------------------------------------
-
-
-    public void setProductJson(String productJson) {
-        this.productJson = productJson;
-    }
-
-    public String getProductJson() {
-        return productJson;
-    }
 
     public String  getId () {
         return productId;
@@ -230,11 +217,12 @@ public class Product  {
     public void addCommentTitle(String title){
         comment.setCommentTitle(title);
     }
+
     public void addCommentContent(String content){
         comment.setCommentContent(content);
     }
 
-    //finish
+    //checked
     public static Product getProductById(String id) {
         for (Product product : allProduct) {
             if (product.getId().equals(id)){
@@ -267,13 +255,10 @@ public class Product  {
         }
     }
 
-    //finish
+    //checked
     public static boolean isThereProductWithId (String productId){
         Product product=getProductById(productId);
-        if (product==null){
-            return false;
-        }
-        else return true;
+        return product != null;
     }
 
     //finish
@@ -286,18 +271,12 @@ public class Product  {
         return allProduct.size();
     }
 
-    //finish//doubt
-    public void addProductToLog(String userName , String productId,int amount){
-        seller.saleLog.addProductToSaleLog(productId);
-        Customer customer= (Customer) account.getAccountWithUsername(userName);
-        customer.buyLog.addProductToBuyLog(productId,amount);
-    }
+    //checked
     public Product getProductWithName(String name){
-        for (model.productRelated.Product product : allProduct) {
+        for (Product product : allProduct) {
             if (product.getProductName().equals(name)){
                 return product;
             }
-
         }
         return null;
     }
@@ -314,8 +293,7 @@ public class Product  {
         }
     }
 
-
-    //finish
+    //checked
     public static Comparator<Product> productComparatorForView = new Comparator<Product>() {
 
         public int compare(Product s1, Product s2) {
@@ -327,7 +305,7 @@ public class Product  {
         }
     };
 
-    //finish
+    //checked
     public static Comparator<Product> productComparatorForScore = new Comparator<Product>() {
 
         public int compare(Product s1, Product s2) {

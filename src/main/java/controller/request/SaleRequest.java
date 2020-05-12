@@ -58,5 +58,4 @@ public class SaleRequest extends Request {
     }
 
 
-
 }

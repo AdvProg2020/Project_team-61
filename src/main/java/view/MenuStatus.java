@@ -4,25 +4,28 @@ public enum MenuStatus {
 
     MAINMENU,
     //
-    USERMENU,
-    REGISTERMENUE,
-    LOGINMENU,
     MANAGERMENU,
     SELLERMENU,
     CUSTOMERMENU,
     //
+    PRODUCTSMENU,
     PRODUCTMENU,
     //
     SALEMENU,
     //
-    PRODUCTSMENU,
-    CATEGORY,
-    SEARCH,
-    //
     PURCHASE,
+    //
+
+   /* CATEGORY,
+    SEARCH,
+    USERMENU,
+    REGISTERMENUE,
+    LOGINMENU,
     PAYMENT,
-    DISCOUNTCODE,
-    //CREATIONMENU,
+    CHECKDISCOUNTCODE,
+    CREATIONMENU,
     RECEIVERINFORMATION;
+
+    */
 
 }

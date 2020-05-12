@@ -3,13 +3,15 @@ package model.firms;
 import java.util.ArrayList;
 
 public abstract class Firm implements Comparable<Firm>{
-    String ID;
-    String name;
-    String phoneNO;
+
+    private String name;
+    private double phoneNO;
+    private String address;
+
     private ArrayList<Firm> allFirms;
 
-    public Firm(String ID) {
-        this.ID = ID;
+    public Firm(String name) {
+        this.name = name;
     }
 
     public Firm getFirmWithID(String ID){
@@ -28,15 +30,8 @@ public abstract class Firm implements Comparable<Firm>{
         return false;
     }
 
-    public int compareTO(Firm firm){
-        return 0;
-    }
-
     public void deleteFirm(String ID){
         allFirms.remove(getFirmWithID(ID));
     }
 
-    public int getFirmListSize(){
-        return allFirms.size();
-    }
 }

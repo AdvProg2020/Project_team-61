@@ -117,6 +117,12 @@ public abstract class Account {
     }
 
     //-----------------------------------------------------------------
+
+
+    public String getAddress() {
+        return address;
+    }
+
     public String getUsername() {
         return username;
     }

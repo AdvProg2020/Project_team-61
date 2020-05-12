@@ -63,7 +63,7 @@ public class Sale  implements Comparable{
         }
         return null;
     }
-    public boolean isThereSaleWithId(String id){
+    public static boolean isThereSaleWithId(String id){
         return allSales.contains(getSaleWithId(id));
     }
 

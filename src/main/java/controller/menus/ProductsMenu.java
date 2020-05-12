@@ -1,24 +1,24 @@
 package controller.menus;
 
-import model.off.Sale;
 import model.productRelated.Category;
 import model.productRelated.Product;
 import model.filtar.Filter;
 import model.sort.Sort;
+import sun.jvm.hotspot.CommandProcessor;
 import view.*;
 
 import java.util.ArrayList;
 
 public class ProductsMenu {
+
     private int outputNo;
-    private int inputNo;
     private Product product;
     private Category category;
-    private CommandProcessor commandProcessor;
-    private OutputMassageHandler outputHandler = new OutputMassageHandler();
+    private CommandProcessor commandProcessor ;
     private Filter filter;
     private Sort sort;
     private String productId;
+
 
     public void processProducts() {
         commandProcessor.setMenuStatus(MenuStatus.PRODUCTSMENU);
@@ -31,14 +31,14 @@ public class ProductsMenu {
 
     //filter-------------------------------------------------------
 
-    //finish
+
     private boolean checkFilter(String filterName) {
-        if (filterName.matches("")) {
+        //if (filterName.matches("(?i)(?:)")) {
             if (filter.isThereFilterWithName(filterName)) {
                 return true;
-            } else inputNo = 0;
-        } else inputNo = 0;
-        outputHandler.showAccountOutput(inputNo);
+            } else outputNo = 0;
+       // } else inputNo = 0;
+        OutputHandler.showAccountOutput(outputNo);
         return false;
     }
 
@@ -86,7 +86,9 @@ public class ProductsMenu {
     public void disableFilter(String filterID) {
         if (checkFilter(filterID)) {
             Filter.disableFilter(filterID);
-        }
+            outputNo =0 ;
+        }else outputNo =0;
+        OutputMassageHandler.showProductsOutput(outputNo);
     }
 
 
@@ -94,12 +96,12 @@ public class ProductsMenu {
 
     //finish
     private boolean checkSort(String sortName) {
-        if (sortName.matches("")) {
+        //if (sortName.matches("")) {
             if (sort.isThereSortWithName(sortName)) {
                 return true;
-            } else inputNo = 0;
-        } else inputNo = 0;
-        outputHandler.showAccountOutput(inputNo);
+            } else outputNo = 0;
+        //} else inputNo = 0;
+        OutputHandler.showAccountOutput(outputNo);
         return false;
     }
 
@@ -139,6 +141,7 @@ public class ProductsMenu {
     //finish
     public void disableSort() {
         sort.disableSort();
+        OutputMassageHandler.showProductsOutput();
 
     }
 
@@ -149,11 +152,13 @@ public class ProductsMenu {
         OutputHandler.showProducts(Filter.newArrayOfProductFilter);
     }
 
-    //finish//json
+
+    //GSON
     public void processShowProductsID(String productId) {
         this.productId = productId;
+        OutputHandler.showProductsIds();
         commandProcessor.setMenuStatus(MenuStatus.PRODUCTMENU);
-        OutputHandler.showProductsIds(Product.listOfId);
+         
     }
 
 

@@ -1,11 +1,11 @@
-import view.commandProcessor;
+import view.commandprocessor;
 
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args)  {
-        commandProcessor commandProcessor = new commandProcessor();
+        commandprocessor commandProcessor = new commandprocessor();
 
         commandProcessor.run();
         Scanner in =new Scanner(System.in);

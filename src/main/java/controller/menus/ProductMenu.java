@@ -1,50 +1,54 @@
 package controller.menus;
 
 
-import com.sun.corba.se.impl.orbutil.ObjectUtility;
 import model.accounts.Account;
 import model.accounts.Seller;
+import model.log.BuyLog;
 import model.productRelated.Comment;
 import model.productRelated.Product;
-import view.CommandProcessor;
+import sun.jvm.hotspot.CommandProcessor;
 import view.OutputHandler;
 import view.OutputMassageHandler;
 import view.SubMenuStatus;
+import view.commandprocessor;
 
 import java.util.ArrayList;
 
 public class ProductMenu {
+
     private int outputNo;
-    private int inputNo;
     private Comment comment;
-    private CommandProcessor commandProcessor;
-    private Account account;
+    private Account loginAccount = LoginMenu.getLoginAccount();
     private ProductsMenu productsMenu;
     private Product selectedProduct;
-    private LoginMenu loginMenu;
+    private BuyLog buyLog;
+    private CommandProcessor commandProcessor;
 
-    private OutputMassageHandler outputHandler = new OutputMassageHandler();
 
     //finish
     public void processDigest() {
-        commandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
+        commandprocessor.setSubMenuStatus(SubMenuStatus.DIGEST);
         selectedProduct = Product.getProductById(productsMenu.getProductId());
-        ArrayList<String> info=selectedProduct.getInfo();
+        ArrayList<String> info = selectedProduct.getInfo();
     }
 
-    //finish
+
     public void addToCart() {
-        selectedProduct.addProductToLog(account.getUsername(),selectedProduct.getId(),1);
+        if (Product.isFirstProduct()) {
+            //???????????????????
+            buyLog = new BuyLog(LoginMenu.getLoginAccount().getUsername());
+        }
+        selectedProduct.addProductToLog(account.getUsername(), selectedProduct.getId(), 1);
     }
 
     //finish
     private boolean checkSeller(String seller) {
-        if (seller.matches("")) {
-            if (account.isThereAccountWithUsername(seller)) {
-                return true;
-            } else inputNo = 0;
-        } else inputNo = 0;
-        outputHandler.showAccountOutput(inputNo);
+        //if (seller.matches("")) {
+        if (account.isThereAccountWithUsername(seller)) {
+            return true;
+        } else outputNo = 0;
+        //} else outputNo = 0;
+        OutputMassageHandler.showAccountOutput(outputNo);
         return false;
     }
 
@@ -53,18 +57,20 @@ public class ProductMenu {
         Seller seller1 = null;
         if (checkSeller(username)) {
             for (Seller seller : selectedProduct.getListOfSellers()) {
-                if (seller.getUsername().equals(username)){
-                seller1=seller;
+                if (seller.getUsername().equals(username)) {
+                    seller1 = seller;
                 }
             }
         }
-        if (seller1!=null){
+        if (seller1 != null) {
             selectedProduct.setSeller(seller1);
         }
     }
 
     //finish//json
-    public void allSellersForProduct(String productId){
+
+    //TO COMMANDA NDIDM
+    public void allSellersForProduct(String productId) {
         OutputHandler.showAllSellersForOneProduct(Product.getProductById(productId).getListOfSellers());
     }
 
@@ -74,33 +80,34 @@ public class ProductMenu {
 
     //finish//json
     public void processCompare(String productID) {
-        Product productToCompare=Product.getProductById(productID);
-        OutputHandler.compareProducts(productToCompare.getInfo(),selectedProduct.getInfo());
+        Product productToCompare = Product.getProductById(productID);
+        OutputHandler.compareProducts(productToCompare.getInfo(), selectedProduct.getInfo());
     }
 
     //comment--------------------------------------------------------------------
 
     //
     public void processComments() {
-        commandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
+        commandprocessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
         selectedProduct.getScore();
         selectedProduct.listOfComments(selectedProduct.getId());
     }
 
     //finish
     public void addComments() {
-        commandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
+        commandprocessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
     }
 
-    public void titleOfComment(String title){
-        commandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
-        selectedProduct.addCommentTitle(title);
+    public void titleOfComment(String title) {
+        commandprocessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
+        comment = new Comment()
+        //selectedProduct.addCommentTitle(title);
     }
 
     //finish
-    public void contentOfComment(String content){
-        commandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-        selectedProduct.addCommentContent(content);
+    public void contentOfComment(String content) {
+        commandprocessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+        //selectedProduct.addCommentContent(content);
     }
 
 }
