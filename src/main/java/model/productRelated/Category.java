@@ -1,10 +1,7 @@
 package model.productRelated;
-import model.accounts.Account;
-import model.accounts.Customer;
-import model.accounts.Seller;
-//import model.productRelated.Product;
-
 import java.util.ArrayList;
+
+//import model.productRelated.Product;
 public class Category{
     private String name;
     private String traits;
@@ -12,9 +9,16 @@ public class Category{
     private ArrayList <Product> allProducts = new ArrayList<>();
     private static ArrayList <Category> allCategories;
 
-    public Category(String name, String traits) {
+   /* public Category(String name, String traits) {
         this.name = name;
         this.traits = traits;
+        allCategories.add(this);
+    }
+
+    */
+
+    public Category(String name) {
+        this.name = name;
         allCategories.add(this);
     }
 
@@ -34,9 +38,6 @@ public class Category{
         return allProducts;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public void setTraits(String traits) {
         this.traits = traits;
@@ -46,7 +47,7 @@ public class Category{
         this.subCategories = subCategories;
     }
 
-    public Category getCategoryWithName(String name){
+    public static Category getCategoryWithName(String name){
         for( Category category:allCategories){
             if (category.getName().equalsIgnoreCase(name)){
                 return category;
@@ -83,3 +84,4 @@ public class Category{
                 ", allProducts=" + allProducts
                 ;
     }
+}

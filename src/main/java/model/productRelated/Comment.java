@@ -1,4 +1,5 @@
 package model.productRelated;
+
 import model.accounts.Account;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ public class Comment {
 
     //commentDetail
     private boolean isSold;
+    private String commentTitle;
     private String commentContent;
     private CommentStatus commentStatus;
 
@@ -18,7 +20,6 @@ public class Comment {
 
     //list
     public ArrayList<Comment> allComments = new ArrayList<Comment>();
-
 
 
     public Comment(Product productToCommit, Account personToVote) {
@@ -33,9 +34,14 @@ public class Comment {
     public void setCommentContent(String commentContent) {
         this.commentContent = commentContent;
     }
+
+    public void setCommentTitle(String commentTitle){
+        this.commentTitle=commentTitle;
+    }
     public Account getPersonToVote() {
         return personToVote;
     }
+
     public void setCommentStatus(CommentStatus commentStatus) {
         this.commentStatus = commentStatus;
     }
@@ -43,13 +49,13 @@ public class Comment {
     //other------------------------------------------------------------------------------------------------------
 
     //finish
-    public void deleteCommentOnProduct (Comment comment){
+    public void deleteCommentOnProduct(Comment comment) {
         for (Comment allComment : allComments) {
-            if (allComment.equals(comment)){
+            if (allComment.equals(comment)) {
                 Iterator iterator = allComments.iterator();
-                while(iterator.hasNext()) {
+                while (iterator.hasNext()) {
                     Comment comment1 = (Comment) iterator.next();
-                    if(comment1.equals(comment)) {
+                    if (comment1.equals(comment)) {
                         iterator.remove();
                     }
                 }

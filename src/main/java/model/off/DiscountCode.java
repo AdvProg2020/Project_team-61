@@ -1,6 +1,7 @@
 package model.off;
-
 import model.accounts.Account;
+import model.accounts.Customer;
+import model.accounts.Seller;
 
 import java.util.*;
 import java.util.ArrayList;
@@ -11,13 +12,14 @@ public class DiscountCode {
     private Date endOfDiscountPeriod;
     private double maxDiscountAmount;
     private int totalTimesOfUse;
-    private ArrayList<Account> allCustomersWithDiscountCode;
+    private ArrayList<Account> allCustomersWithDiscountCode = new ArrayList<Account>();
     private static ArrayList<DiscountCode> allDiscountCodes;
 
     public DiscountCode(String discountId) {
         this.discountId = discountId;
+        this.allCustomersWithDiscountCode = new ArrayList<>();
+        allDiscountCodes.add(this);
     }
-
 
     public void setStartOfDiscountPeriod(Date startOfDiscountPeriod) {
         this.startOfDiscountPeriod = startOfDiscountPeriod;
@@ -51,27 +53,29 @@ public class DiscountCode {
         return totalTimesOfUse;
     }
 
-    public ArrayList<model.accounts.Account> getAllCustomersWithDiscountCode() {
+    public ArrayList<Account> getAllCustomersWithDiscountCode() {
         return allCustomersWithDiscountCode;
     }
 
-    public boolean isThereDiscountWithId(String id){
+    public static boolean isThereDiscountWithId(String id) {
         for (DiscountCode discountCode : allDiscountCodes) {
-            if(discountCode.getDiscountId() == id) {
+            if (discountCode.getDiscountId().equals(id)) {
                 return true;
             }
         }
         return false;
     }
-    public DiscountCode getDiscountWithId(String id){
-        for ( DiscountCode discountcode:allDiscountCodes){
-            if (discountcode.getDiscountId()==id){
+
+    public static DiscountCode getDiscountWithId(String id) {
+        for (DiscountCode discountcode : allDiscountCodes) {
+            if (discountcode.getDiscountId().equals(id)) {
                 return discountcode;
             }
         }
         return null;
     }
-    public void deleteDiscount(String id){
+
+    public static void deleteDiscount(String id) {
         allDiscountCodes.remove(getDiscountWithId(id));
 
     }
@@ -87,12 +91,4 @@ public class DiscountCode {
                 ", allCustomersWithDiscountCode=" + allCustomersWithDiscountCode +
                 '}';
     }
-
-    public void setTotalTimesOfUse(int parseInt) {
-    }
-    /*   public void viewDiscountCodes(){
-        for (DiscountCode discountCode:allDiscountCodes){
-            di
-        }
-    }*/
 }

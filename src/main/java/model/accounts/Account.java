@@ -16,12 +16,14 @@ public abstract class Account {
     double phoneNo;
     double credit;
     String role;
+    double currentPhoneNo;
+    String address;
     ArrayList<DiscountCode> discountCodeLists;
     ArrayList<SaleLog> allSaleLogs;
     ArrayList<BuyLog> allBuyLogs;
-    ArrayList<Account> allAccounts;
+    private  static ArrayList<Account> allAccounts;
 
-    public static void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo) {
+    public  void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo) {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -106,7 +108,21 @@ public abstract class Account {
         this.credit = credit;
     }
 
+    public void setCurrentPhoneNo(double currentPhoneNo) {
+        this.currentPhoneNo = currentPhoneNo;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     //-----------------------------------------------------------------
+
+
+    public String getAddress() {
+        return address;
+    }
+
     public String getUsername() {
         return username;
     }

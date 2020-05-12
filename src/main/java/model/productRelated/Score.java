@@ -1,4 +1,5 @@
 package model.productRelated;
+
 import model.accounts.Account;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class Score {
     Account personToScore;
 
     //lists
-    ArrayList<Score> allScores=new ArrayList<>();
+    ArrayList<Score> allScores = new ArrayList<>();
 
 
     public Score(Account personToScore, Product productTOScore, int score) {
@@ -26,18 +27,20 @@ public class Score {
     }
 
 
-
     //setterAndGetters---------------------------------------------------------
     public void setScore(int score) {
         this.score = score;
         calculateAverageScore(score);
     }
+
     public int getScore() {
         return score;
     }
+
     public double getAverageScore() {
         return averageScore;
     }
+
     public ArrayList<Score> getAllScores() {
         return allScores;
     }
@@ -45,14 +48,13 @@ public class Score {
     //others-------------------------------------------------------------------
 
     //finish
-    public void calculateAverageScore (int score ){
-        double total=0;
-        for(int i=0; i<allScores.size(); i++){
-            total =+ total + allScores.get(i).getScore();
+    public void calculateAverageScore(int score) {
+        double total = 0;
+        for (int i = 0; i < allScores.size(); i++) {
+            total = +total + allScores.get(i).getScore();
         }
         productTOScore.setAverageScore(total);
     }
-
 
 
 }

@@ -2,26 +2,31 @@ package model.log;
 
 import model.productRelated.Product;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Iterator;
 
 public class SaleLog extends Log{
 
 
-    public SaleLog(String logId, Date date) {
-        super(logId, date);
+    public SaleLog(String logId) {
+        super(logId);
         allSellersLog.add(this);
+        localDateTimeForSaleLog=LocalDateTime.now();
     }
 
     //detail
     double receivedAmount;
     double reducedAmount;
     String customerName;
+    Product product;
+    LocalDateTime localDateTimeForSaleLog;
 
 
     //list
-    ArrayList<Product> allSoldProduct = new ArrayList<Product>();
-    ArrayList<SaleLog> allSellersLog = new ArrayList<SaleLog>();
+    private static ArrayList<Product> sellersProducts=new ArrayList<>();
+    private ArrayList<Product> allSoldProduct = new ArrayList<Product>();
+    private static ArrayList<SaleLog> allSellersLog = new ArrayList<SaleLog>();
 
 
     //setterAndGetter--------------------------------------------
@@ -30,6 +35,14 @@ public class SaleLog extends Log{
         this.reducedAmount=reducedAmount;
         this.customerName=customerName;
         allSellersLog.add(this);
+    }
+
+    public LocalDateTime getLocalDateTimeForSaleLog() {
+        return localDateTimeForSaleLog;
+    }
+
+    public static ArrayList<SaleLog> getAllSellersLog() {
+        return allSellersLog;
     }
 
     //other-------------------------------------------------------
@@ -45,9 +58,24 @@ public class SaleLog extends Log{
     }
 
     //finish//doubt
-    public void addProductToSaleLog(Product product){
+    public void addProductToSaleLog(String productId){
+        Product product=Product.getProductById(productId);
         allSoldProduct.add(product);
     }
 
+    private static void sellerDeleteProduct(String productId){
+        Product.deleteProduct(productId);
+        Product product1=Product.getProductById(productId);
+        Iterator iterator = sellersProducts.iterator();
+        while (iterator.hasNext()) {
+            Product product2 = (Product) iterator.next();
+            if (product2.equals(product1)){
+                iterator.remove();
+            }
+        }
+    }
 
+    public int compareTo(SaleLog saleLog) {
+        return getLocalDateTimeForSaleLog().compareTo(saleLog.getLocalDateTimeForSaleLog());
+    }
 }

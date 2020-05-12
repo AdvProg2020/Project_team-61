@@ -11,17 +11,15 @@ public abstract class Log{
 
     //detail
     String logId;
-    Date date;
     DeliveryStatus deliveryStatus;
     boolean itsDone;
     Product product;
 
     //list
-    ArrayList<Log> allLogs = new ArrayList<Log>();
+    private static ArrayList<Log> allLogs = new ArrayList<Log>();
 
 
-    public Log(String logId , Date date) {
-        this.date = date;
+    public Log(String logId) {
         this.logId=logId;
         allLogs.add(this);
     }

@@ -1,5 +1,7 @@
 package controller.request;
 
+import model.off.SaleStatus;
+
 import java.util.Date;
 
 public class SaleRequest extends Request {
@@ -54,7 +56,6 @@ public class SaleRequest extends Request {
     public SaleRequest(String requestID) {
         super(requestID);
     }
-
 
 
 }

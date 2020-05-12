@@ -7,9 +7,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CommandProcessor {
-    private MenuStatus menuStatus = MenuStatus.MAINMENU;
-    private SubMenuStatus subMenuStatus = SubMenuStatus.MAINMENU;
-    private InternalMenu internalMenu = InternalMenu.MAINMENU;
+    private static MenuStatus menuStatus = MenuStatus.MAINMENU;
+    private static SubMenuStatus subMenuStatus = SubMenuStatus.MAINMENU;
+    private static InternalMenu internalMenu = InternalMenu.MAINMENU;
     //
     private ProductMenu productMenu = new ProductMenu();
     private ProductsMenu productsMenu = new ProductsMenu();
@@ -21,7 +21,31 @@ public class CommandProcessor {
     private RegisterMenu registerMenu = new RegisterMenu();
     private MenuSituation menuSituation = new MenuSituation();
     //
-    private OutputHandler outputHandler = new OutputHandler();
+
+
+    public static MenuStatus getMenuStatus() {
+        return menuStatus;
+    }
+
+    public static void setMenuStatus(MenuStatus menuStatus) {
+        CommandProcessor.menuStatus = menuStatus;
+    }
+
+    public static SubMenuStatus getSubMenuStatus() {
+        return subMenuStatus;
+    }
+
+    public static void setSubMenuStatus(SubMenuStatus subMenuStatus) {
+        CommandProcessor.subMenuStatus = subMenuStatus;
+    }
+
+    public static InternalMenu getInternalMenu() {
+        return internalMenu;
+    }
+
+    public static void setInternalMenu(InternalMenu internalMenu) {
+        CommandProcessor.internalMenu = internalMenu;
+    }
 
     private String[] regex = {"(?i)create\\s+account\\s+((?!^ +$)^.+$)",
             "(?i)login\\s+((?!^ +$)^.+$)",//1
@@ -50,7 +74,8 @@ public class CommandProcessor {
             "(?i)disable\\s+filter",//24
             "(?i)sort((?!^ +$)^.+$)",//25
             "(?i)select seller",//26
-            "((?!^ +$)^.+$)"//27
+            "((?!^ +$)^.+$)",//27
+            ""
 
 
     };
@@ -60,18 +85,6 @@ public class CommandProcessor {
         Matcher matcher = pattern.matcher(input);
         matcher.find();
         return matcher;
-    }
-
-    public static void setInternalMenu(InternalMenu internalMenu) {
-        internalMenu = internalMenu;
-    }
-
-    public static void setSubMenuStatus(SubMenuStatus subMenuStatus) {
-        subMenuStatus = subMenuStatus;
-    }
-
-    public static void setMenuStatus(MenuStatus menuStatus) {
-        menuStatus = menuStatus;
     }
 
     public void run() {
@@ -102,6 +115,11 @@ public class CommandProcessor {
             if (subMenuStatus == subMenuStatus.REGISTERATIONDETAILS) {
                 if (input.matches(regex[27])) {
                     registerMenu.completeRegisterProcess(getMatcher(input, regex[27]).group(1));
+                }
+            }
+            if (subMenuStatus == subMenuStatus.FIRMINFORMATION) {
+                if (input.matches(regex[27])) {
+                    registerMenu.createFirm(getMatcher(input, regex[27]).group(1));
                 }
             }
             if (menuStatus == MenuStatus.MANAGERMENU) {
@@ -150,7 +168,7 @@ public class CommandProcessor {
                     } else if (input.matches(regex[14])) {
                         managerMenu.declineRequest(getMatcher(input, regex[14]).group(1));
                     }
-                } else if (subMenuStatus == SubMenuStatus.MANAGECATAGORIES) {
+                } else if (subMenuStatus == SubMenuStatus.MANAGECATEGORIES) {
                     if (input.matches(regex[15])) {
                         managerMenu.editCategory(getMatcher(input, regex[15]).group(1));
                     } else if (input.matches(regex[16])) {
@@ -189,6 +207,10 @@ public class CommandProcessor {
                 } else if (subMenuStatus.equals(SubMenuStatus.DETAILDESCOUNTCODE)) {
                     if (input.matches(regex[15])) {
                         managerMenu.setDetailToDiscountCode(getMatcher(input, regex[16]).group(1));
+                    }
+                } else if (subMenuStatus.equals(SubMenuStatus.CREATEMANAGERACCOUNT)) {
+                    if (input.matches(regex[15])) {
+                        registerMenu.processRegister("manager" ,getMatcher(input, regex[16]).group(1));
                     }
                 }
             }
@@ -313,6 +335,22 @@ public class CommandProcessor {
                     }
                 }
             }
+            //ReceiverInformation
+            if (menuStatus == MenuStatus.PURCHASE ) {
+                if (subMenuStatus == SubMenuStatus.RECIVERINFORMATION) {
+                    if (input.matches(regex[27])) {
+                        registerMenu.receiverInformation(getMatcher(input, regex[27]).group(1));
+                    }
+                }else if (subMenuStatus == SubMenuStatus.CHECKDISCOUNTCODE) {
+                    if (input.matches(regex[27])) {
+                        customerMenu.discountCodeValidation(getMatcher(input, regex[27]).group(1));
+                    }
+                }else if (subMenuStatus == SubMenuStatus.PAYMENT) {
+                    if (input.matches(regex[27])) {
+                        customerMenu.payment(getMatcher(input, regex[27]).group(1));
+                    }
+                }
+            }
             if (menuStatus == MenuStatus.PRODUCTSMENU || menuStatus == MenuStatus.MAINMENU) {
                 //ProductsMenu
                 if (subMenuStatus == SubMenuStatus.MAINMENU) {
@@ -349,6 +387,8 @@ public class CommandProcessor {
                     } else if (input.equalsIgnoreCase("disable sort")) {
                         productsMenu.disableSort();
                     }
+                } else if (input.equalsIgnoreCase("purchase")) {
+                    customerMenu.processPurchase();
                 }
 
             } else if (menuStatus == MenuStatus.PRODUCTMENU) {
@@ -392,12 +432,12 @@ public class CommandProcessor {
                     saleMenu.processShowProductsID(getMatcher(input, regex[4]).group(1));
                 }
             } else {
-                outputHandler.showOutput(0);
+                OutputMassageHandler.showOutput(0);
             }
 
         }
         if (input.equals("exit")) {
-            outputHandler.showOutput(1);
+            OutputMassageHandler.showOutput(1);
         }
 
 
