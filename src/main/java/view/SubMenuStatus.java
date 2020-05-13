@@ -57,6 +57,17 @@ public enum SubMenuStatus {
     FIRMINFORMATION,
     CHECKDISCOUNTCODE,
     PAYMENT,
+    /*
+    VIEWCART
+    PRODUCTNUMBER
+    PRODUCTNUMBER
+    RECIVERINFORMATION
+    RECIVERINFORMATION
+    VIEW ORDERS
+    \\
+
+     */
+
 
 
 

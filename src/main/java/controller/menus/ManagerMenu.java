@@ -23,7 +23,7 @@ public class ManagerMenu {
 
     //gson
     public void processManageUsers() {
-        OutputHandler.showAccounts();
+        view.OutputHandler.showAccounts();
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEUSERS);
     }
 
