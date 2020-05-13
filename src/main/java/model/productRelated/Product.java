@@ -1,9 +1,9 @@
 package model.productRelated;
-import com.google.gson.Gson;
 import model.accounts.Account;
+import model.accounts.Customer;
 import model.accounts.Seller;
+import model.firms.Company;
 import model.log.Log;
-import model.off.DiscountCode;
 import model.off.Sale;
 
 import java.util.*;
@@ -13,9 +13,9 @@ public class Product  {
     //productDetail
     private String productId;
     private String productName;
-    private String companiesName;
+    private Company companiesName;
     private double price;
-    private Seller seller;
+    private Account seller;
     private ProductStatus productStatus;
     private Category category;
     private double averageScore;
@@ -27,7 +27,8 @@ public class Product  {
     private boolean isBought;
 
     //lists
-    private static ArrayList<Seller> listOfSellers = new ArrayList<Seller>();
+    private static ArrayList<Account> listOfSellers = new ArrayList<Account>();
+    private static ArrayList<Customer> listOfBuyers=new ArrayList<>();
     private HashMap<Category,ArrayList<Product>> listOfAllProducts = new HashMap<>();
     private static ArrayList<Product> allProduct = new ArrayList<Product>();
     private ArrayList<String> info=new ArrayList<>();
@@ -50,7 +51,7 @@ public class Product  {
 
 
     //finish
-    public void setDetailProduct (String name , String companiesName , double price , Seller seller , int numberOfProducts ,Category category) {
+    public void setDetailProduct (String name , Company companiesName , double price , Account seller , int numberOfProducts ,Category category) {
         this.productName = name;
         this.companiesName=companiesName;
         this.price=price;
@@ -60,7 +61,7 @@ public class Product  {
         listOfSellers.add(seller);
         productsFromSameCategory(category.getName());
         allProduct.add(this);
-        setInfo();
+//        setInfo();
     }
 
 
@@ -105,7 +106,7 @@ public class Product  {
 
     public void setAdditionalDetail(String additionalDetail) {
         this.additionalDetail = additionalDetail;
-        setInfo();
+//        setInfo();
     }
     public String getAdditionalDetail() {
         return additionalDetail;
@@ -129,7 +130,7 @@ public class Product  {
         return category;
     }
 
-    public String getCompaniesName() {
+    public Company getCompaniesName() {
         return companiesName;
     }
 
@@ -155,34 +156,40 @@ public class Product  {
     public int getTotalNumberOfBuyers() {
         return totalNumberOfBuyers;
     }
-
-    public void setInfo() {
-        info.add(getProductName());
-        info.add(getCompaniesName());
-        info.add(String.valueOf(getPrice()));
-        info.add(getCategory().getName());
-        info.add(seller.getName());
-        info.add(String.valueOf(getAverageScore()));
-        if (additionalDetail!=null){
-            info.add(additionalDetail);
-        }else info.add("\n");
-
-
-    }
-    public ArrayList<String> getInfo() {
-        return info;
-    }
+//
+//    public void setInfo() {
+//        info.add(getProductName());
+//        info.add(getCompaniesName());
+//        info.add(String.valueOf(getPrice()));
+//        info.add(getCategory().getName());
+//        info.add(seller.getName());
+//        info.add(String.valueOf(getAverageScore()));
+//        if (additionalDetail!=null){
+//            info.add(additionalDetail);
+//        }else info.add("\n");
+//
+//    }
+//    public ArrayList<String> getInfo() {
+//        return info;
+//    }
 
     public HashMap<Category, ArrayList<Product>> getListOfAllSameCategoryProducts() {
         return listOfAllProducts;
     }
 
     public Seller getSeller() {
-        return seller;
+        return (Seller) seller;
     }
 
     public void setSeller(Seller seller) {
         this.seller = seller;
+    }
+
+    public void setComment(Comment comment) {
+        this.comment = comment;
+    }
+    public Comment getComment() {
+        return comment;
     }
 
     //othersTobeHandel-------------------------------------------------------------------------------
@@ -225,7 +232,7 @@ public class Product  {
 
     public boolean ifProductHasSeller(String productId, String sellerUserName){
         if (isThereProductWithId(productId)) {
-            for (Seller seller : Product.getProductById(productId).getListOfSellers()) {
+            for (Account seller : Product.getProductById(productId).getListOfSellers()) {
                 if (seller.equals(Seller.getAccountWithUsername(sellerUserName))){
                     return true;
                 }
@@ -235,7 +242,7 @@ public class Product  {
     }
 
     //finish
-    public ArrayList<Seller> getListOfSellers () {
+    public ArrayList<Account> getListOfSellers () {
         return listOfSellers;
     }
 
@@ -268,7 +275,7 @@ public class Product  {
     }
 
     //checked
-    public static Product getProductWithName(String name){
+    public Product getProductWithName(String name){
         for (Product product : allProduct) {
             if (product.getProductName().equals(name)){
                 return product;

@@ -5,6 +5,7 @@ import model.accounts.Seller;
 import model.log.BuyLog;
 import model.productRelated.Comment;
 import model.productRelated.Product;
+import org.omg.CORBA.CODESET_INCOMPATIBLE;
 import view.CommandProcessor;
 import view.OutputHandler;
 import view.OutputMassageHandler;
@@ -26,16 +27,14 @@ public class ProductMenu {
     public void processDigest() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
         selectedProduct = Product.getProductById(productsMenu.getProductId());
-        ArrayList<String> info = selectedProduct.getInfo();
+
     }
 
 
     public void addToCart() {
-        if (Product.isFirstProduct()) {
-            //???????????????????
+        if (BuyLog.getFirstProduct()) {
             buyLog = new BuyLog(LoginMenu.getLoginAccount().getUsername());
         }
-      //  selectedProduct.addProductToLog(account.getUsername(), selectedProduct.getId(), 1);
     }
 
     //finish
@@ -75,11 +74,10 @@ public class ProductMenu {
 
     }
 
-    //finish//json
-    public void processCompare(String productID) {
-        Product productToCompare = Product.getProductById(productID);
-        OutputHandler.compareProducts(productToCompare.getInfo(), selectedProduct.getInfo());
-    }
+//    public void processCompare(String productID) {
+//        Product productToCompare = Product.getProductById(productID);
+//        OutputHandler.compareProducts(productToCompare.getInfo(), selectedProduct.getInfo());
+//    }
 
     //comment--------------------------------------------------------------------
 
@@ -87,24 +85,26 @@ public class ProductMenu {
     public void processComments() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
         selectedProduct.getScore();
-        selectedProduct.listOfComments(selectedProduct.getId());
+        comment.getAllComments();
     }
 
     //finish
     public void addComments() {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
+        selectedProduct.setComment(comment=new Comment(selectedProduct,loginAccount));
+        comment.setAllComments();
     }
 
     public void titleOfComment(String title) {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
-        comment = new Comment()
-        //selectedProduct.addCommentTitle(title);
+        comment.setTitle(title);
+        comment.setAllComments();
     }
 
     //finish
     public void contentOfComment(String content) {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-        //selectedProduct.addCommentContent(content);
+        comment.setContent(content);
+        comment.setAllComments();
     }
 
 }

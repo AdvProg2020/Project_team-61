@@ -33,6 +33,11 @@ public class Comment {
 
 
 
+
+
+
+
+
     //setterAndGetter--------------------------------------------------------------------------------------------
 
     public void setTitle(String title) {
@@ -45,6 +50,10 @@ public class Comment {
 
     public void setAllComments() {
         allComments.add(this);
+    }
+
+    public static ArrayList<Comment> getAllComments() {
+        return allComments;
     }
 
     public Account getPersonToVote() {
