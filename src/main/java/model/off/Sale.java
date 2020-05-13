@@ -1,25 +1,27 @@
 package model.off;
+
+import model.accounts.Account;
 import model.productRelated.Product;
 import model.accounts.Seller;
 import java.util.ArrayList;
 import java.util.*;
-public class Sale  implements Comparable{
+
+public class Sale{
     private String offId;
     private SaleStatus saleStatus;
     private Date startOfSalePeriod;
     private Date endOfSalePeriod;
     private int saleAmount;
-    private Seller seller;
-    private ArrayList <Product>allProducts;
+    private static Account seller;
+    private ArrayList <Product> allSaleProducts;
     private static ArrayList <Sale> allSales;
 
     public Sale(String offId) {
         this.offId = offId;
-        allProducts=new ArrayList<>();
         allSales.add(this);
 
     }
-    public void setSaleDetails(SaleStatus saleStatus, Date startOfSalePeriod, Date endOfSalePeriod, int saleAmount, Seller seller){
+    public void setSaleDetails(SaleStatus saleStatus, Date startOfSalePeriod, Date endOfSalePeriod, int saleAmount, Account seller){
         this.saleStatus = saleStatus;
         this.startOfSalePeriod = startOfSalePeriod;
         this.endOfSalePeriod = endOfSalePeriod;
@@ -30,32 +32,29 @@ public class Sale  implements Comparable{
     public String getOffId() {
         return offId;
     }
-
     public SaleStatus getSaleStatus() {
         return saleStatus;
     }
-
     public Date getStartOfSalePeriod() {
         return startOfSalePeriod;
     }
-
     public Date getEndOfSalePeriod() {
         return endOfSalePeriod;
     }
-
     public int getSaleAmount() {
         return saleAmount;
     }
-
-    public Seller getSeller() {
+    public static Account getSeller() {
         return seller;
     }
-
-    public ArrayList<Product> getAllProducts() {
-        return allProducts;
+    public ArrayList<Product> getAllSaleProducts() {
+        return allSaleProducts;
+    }
+    public ArrayList<Sale> listSales(){
+        return allSales;
     }
 
-    public  Sale getSaleWithId(String id){
+    public static Sale getSaleWithId(String id){
         for (Sale sale : allSales) {
             if (sale.getOffId().equals(id)) {
                 return sale;
@@ -67,10 +66,6 @@ public class Sale  implements Comparable{
         return allSales.contains(getSaleWithId(id));
     }
 
-
-    public int getSaleListSize(){
-        return allSales.size();
-    }
     public Sale getSaleWithSeller(Seller seller){
         for (Sale sale:allSales){
             if ((sale.getSeller())==(seller)){
@@ -80,9 +75,10 @@ public class Sale  implements Comparable{
         }
         return null;
     }
+
     public Sale getSaleWithProduct(Product product){
         for (Sale sale : allSales) {
-            for (Product products : sale.getAllProducts()) {
+            for (Product products : sale.getAllSaleProducts()) {
                 if (product.equals(products)){
                     return sale;
                 }
@@ -94,36 +90,36 @@ public class Sale  implements Comparable{
     public void setStartOfSalePeriod(Date startOfSalePeriod) {
         this.startOfSalePeriod = startOfSalePeriod;
     }
-
     public void setEndOfSalePeriod(Date endOfSalePeriod) {
         this.endOfSalePeriod = endOfSalePeriod;
     }
-
     public void setSaleAmount(int saleAmount) {
         this.saleAmount = saleAmount;
+    }
+    public void setAllSaleProducts(ArrayList<Product> allSaleProducts) {
+        this.allSaleProducts = allSaleProducts;
+    }
+
+    public void setSaleStatus(SaleStatus saleStatus) {
+        this.saleStatus = saleStatus;
+    }
+
+    public static void deleteSale(String id){
+        allSales.remove(id);
     }
 
     public boolean isTheProductInAnotherSale(Product product) {
         for (Sale sale : allSales) {
-            if (sale.getAllProducts().contains(product)) {
+            if (sale.getAllSaleProducts().contains(product)) {
                 return true;}
         }
         return false;
 
     }
 
-    @Override
-    public int compareTo(Object o) {
-        return 0;
-    }
 
-    public ArrayList<Sale> listSales(){
-        return allSales;
-    }
-    public ArrayList<Sale> viewSalesList(){
-        return allSales;
-    }
-    @Override
+
+    /*@Override
     public String toString() {
         return "Sale{" +
                 "offId='" + offId + '\'' +
@@ -132,7 +128,9 @@ public class Sale  implements Comparable{
                 ", endOfSalePeriod=" + endOfSalePeriod +
                 ", saleAmount=" + saleAmount +
                 ", seller=" + seller +
-                ", allProducts=" + allProducts +
+                ", allProducts=" + allSaleProducts +
                 '}';
     }
+
+     */
 }

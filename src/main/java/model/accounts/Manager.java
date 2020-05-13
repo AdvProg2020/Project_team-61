@@ -9,9 +9,7 @@ public class Manager extends Account {
     public Manager(String username) {
         super(username);
         role = "manager";
+        allManagers.add(this);
     }
 
-    public int compareTo(Account o) {
-        return 0;
-    }
 }

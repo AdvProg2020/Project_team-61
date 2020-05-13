@@ -1,7 +1,7 @@
 package model.productRelated;
-import com.google.gson.Gson;
 import model.accounts.Account;
 import model.accounts.Seller;
+import model.firms.Firm;
 import model.log.Log;
 import model.off.DiscountCode;
 import model.off.Sale;
@@ -54,7 +54,7 @@ public class Product  {
 
 
     //finish
-    public void setDetailProduct (String name , String companiesName , double price , Seller seller , int numberOfProducts ,Category category) {
+    public void setDetailProduct (String name , Firm companiesName , double price , Account seller , int numberOfProducts , Category category) {
         this.productName = name;
         this.companiesName=companiesName;
         this.price=price;
@@ -253,6 +253,17 @@ public class Product  {
                 iterator.remove();
             }
         }
+    }
+
+    public static boolean ifProductHasSeller(String productId, String sellerUserName){
+        if (isThereProductWithId(productId)) {
+            for (Account seller : Product.getProductById(productId).getListOfSellers()) {
+                if (seller.equals(Seller.getAccountWithUsername(sellerUserName))){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     //checked

@@ -12,7 +12,7 @@ public class OutputMassageHandler {
         }
     }
 
-    public static void showProductsOutput(int output){
+    public static void showProductsOutput(int output) {
         if (output == 0) {
             System.out.println("");
         } else if (output == 1) {
@@ -183,8 +183,8 @@ public class OutputMassageHandler {
             System.out.println("product price changed");
         } else if (output == 6) {
             System.out.println("product category changed");
-        } else if (output == 7) {
-            System.out.println("product seller changed");
+       // } else if (output == 7) {
+          //  System.out.println("product seller changed");
         } else if (output == 8) {
             System.out.println("product companyName changed");
         } else if (output == 9) {
@@ -197,8 +197,8 @@ public class OutputMassageHandler {
             System.out.println("please enter product price");
         } else if (output == 13) {
             System.out.println("please enter product category name");
-        } else if (output == 14) {
-            System.out.println("please enter product seller name");
+       // } else if (output == 14) {
+        //    System.out.println("please enter product seller name");
         } else if (output == 15) {
             System.out.println("please enter product firm name");
         } else if (output == 16) {
@@ -266,7 +266,7 @@ public class OutputMassageHandler {
         } else if (output == 15) {
             System.out.println("login successful");
         } else if (output == 16) {
-            System.out.println("no field matches with this");
+            System.out.println("no account field matches with this");
         } else if (output == 17) {
             System.out.println("password changed");
         } else if (output == 18) {
@@ -288,16 +288,76 @@ public class OutputMassageHandler {
         } else if (output == 26) {
             System.out.println("no role matches with this");
         } else if (output == 27) {
-            System.out.println("");
+            System.out.println("you can't change firm information");
         } else if (output == 28) {
-            System.out.println("");
+            System.out.println("please enter firm name you want to change");
         } else if (output == 29) {
             System.out.println("");
         } else if (output == 30) {
             System.out.println("");
         } else if (output == 31) {
-            System.out.println("");
+            System.out.println("f");
         } else if (output == 32) {
+            System.out.println("");
+        } else if (output == 33) {
+            System.out.println("");
+        } else if (output == 34) {
+            System.out.println("");
+        } else if (output == 35) {
+            System.out.println("");
+        } else if (output == 36) {
+            System.out.println("");
+        } else if (output == 37) {
+            System.out.println("");
+        } else if (output == 38) {
+            System.out.println("");
+        } else if (output == 39) {
+            System.out.println("");
+        } else if (output == 40) {
+            System.out.println("");
+        }
+    }
+
+    public static void showFirmOutput(int output) {
+        if (output == 0) {
+            System.out.println("");
+        } else if (output == 1) {
+            System.out.println("no firm field matches with this");
+        } else if (output == 2) {
+            System.out.println("please enter new value");
+        } else if (output == 3) {
+            System.out.println("firm name format is invalid");
+       // } else if (output == 4) {
+       //     System.out.println("you already send your request");
+        } else if (output == 5) {
+            System.out.println("please enter firm's field you want to change");
+        } else if (output == 6) {
+            System.out.println("phone number format is invalid");
+        } else if (output == 7) {
+            System.out.println("phone number request for new value sent");
+        } else if (output == 8) {
+            System.out.println("address format is invalid");
+        } else if (output == 9) {
+            System.out.println("address request for new value sent");
+        } else if (output == 10) {
+            System.out.println("Email format is invalid");
+        } else if (output == 11) {
+            System.out.println("Email number request for new value sent");
+        } else if (output == 12) {
+            System.out.println("you dont have firm with this name");
+        } else if (output == 13) {
+            System.out.println("");
+        } else if (output == 14) {
+            System.out.println("");
+        } else if (output == 15) {
+            System.out.println("");
+        } else if (output == 16) {
+            System.out.println("");
+        } else if (output == 17) {
+            System.out.println("");
+        } else if (output == 18) {
+            System.out.println("");
+        } else if (output == 19) {
             System.out.println("");
         }
     }
@@ -315,20 +375,20 @@ public class OutputMassageHandler {
             System.out.println("request " + string + " accepted");
         } else if (output == 6) {
             System.out.println("request " + string + " declined");
-        }else if (output == 7) {
+        } else if (output == 7) {
             System.out.println("category " + string + " removed");
-        }else if (output == 8) {
-            System.out.println("your credit " + string );
+        } else if (output == 8) {
+            System.out.println("your credit " + string);
         }
     }
 
     public static void showOutputWith2String(String first, String second, int output) {
         if (output == 1) {
             System.out.println("you get " + first + " to product " + second);
-        }else if (output == 2) {
-            System.out.println("product " + first + " "+ second+" number changed" );
-        }else if (output == 3) {
-            System.out.println( );
+        } else if (output == 2) {
+            System.out.println("product " + first + " " + second + " number changed");
+        } else if (output == 3) {
+            System.out.println();
         }
     }
 

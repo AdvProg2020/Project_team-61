@@ -1,10 +1,12 @@
 package model.accounts;
 
 import model.log.BuyLog;
-import model.off.DiscountCode;
 import model.log.SaleLog;
+import model.off.DiscountCode;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 public abstract class Account {
@@ -14,27 +16,39 @@ public abstract class Account {
     String password;
     String email;
     double phoneNo;
-    double credit;
+    double credit = 500000000;
     String role;
     double currentPhoneNo;
     String address;
-    ArrayList<DiscountCode> discountCodeLists;
+    Date birthdayDate;
+    int usedDiscount=0;
+    ArrayList<DiscountCode> allDiscountCodes;
     ArrayList<SaleLog> allSaleLogs;
     ArrayList<BuyLog> allBuyLogs;
     private  static ArrayList<Account> allAccounts;
 
-    public  void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo) {
-        this.username = username;
+    public  void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo, Data birthdayDate) {
+
         this.password = password;
         this.name = name;
         this.lastname = lastname;
         this.email = Email;
         this.phoneNo = phoneNo;
+        this.birthdayDate = (Date) birthdayDate;
     }
 
 
     public Account(String username) {
         this.username = username;
+        allAccounts.add(this);
+    }
+
+    public void addDiscountCode(DiscountCode discountCode){
+        allDiscountCodes.add(discountCode);
+    }
+
+    public void removeDiscountCode(DiscountCode discountCode){
+        allDiscountCodes.remove(discountCode);
     }
 
     public static boolean isThereAccountWithUsername(String username) {

@@ -7,14 +7,13 @@ public class Customer extends Account {
 
     private ArrayList<Customer> allCustomers;
     private ArrayList<BuyLog> BuyLogsHistory;
-    public   BuyLog buyLog;
+    public BuyLog buyLog;
 
     public Customer(String username) {
         super(username);
         role = "customer";
+        allCustomers.add(this);
     }
 
-    public int compareTo(Account o) {
-        return 0;
-    }
+
 }
