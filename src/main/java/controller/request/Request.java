@@ -2,7 +2,6 @@ package controller.request;
 
 import controller.menus.LoginMenu;
 import model.accounts.Account;
-import model.accounts.Seller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -17,8 +16,7 @@ public  class Request {
    // private boolean isRequested = false;
    // private boolean requestAccepted = false;
    // private boolean requestViewed = false;
-    private ArrayList<Request> allRequests;
-    private AccountRequest accountRequest;
+    private static ArrayList<Request> allRequests;
 
     private LoginMenu loginMenu;
 
@@ -29,9 +27,7 @@ public  class Request {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         requestDate = dtf.format(now);
-        if(loginMenu.isLogin()){
-            seller = loginMenu.getLoginAccount();
-        }
+        seller = LoginMenu.getLoginAccount();
         allRequests.add(this);
     }
 
@@ -41,13 +37,14 @@ public  class Request {
 
     public static void acceptRequest(String requestId){
         if(requestId.matches("((?!^ +$)^.+$) wants seller account")){
-            //
-            accountRequest.acceptRequestDetail();
+            AccountRequest.acceptRequestDetail();
         }
     }
 
-
-    public Request getRequestFromID(String requestID){
+    public static void deleteRequest(String id){
+        allRequests.remove(getRequestFromID(id));
+    }
+    public static Request getRequestFromID(String requestID){
         for(Request request : allRequests){
             if (request.requestText.equalsIgnoreCase(requestID)) return request;
         }

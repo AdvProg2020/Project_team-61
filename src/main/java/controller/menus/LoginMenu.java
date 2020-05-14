@@ -1,11 +1,11 @@
 package controller.menus;
 
+import controller.request.AccountRequest;
+import controller.request.FirmRequest;
+import controller.request.Request;
 import model.accounts.Account;
-import view.CommandProcessor;
-import view.MenuStatus;
-import view.OutputHandler;
-import view.OutputMassageHandler;
-import view.SubMenuStatus;
+import model.accounts.Seller;
+import view.*;
 
 public class LoginMenu {
     private int outputNo;
@@ -14,6 +14,9 @@ public class LoginMenu {
     private String username = null;
     private static boolean login = false;
     private SubMenuStatus subMenuStatus;
+    private FirmRequest firmRequest;
+    private AccountRequest accountRequest;
+    private static String firmName;
 
     public static Account getLoginAccount() {
         return loginAccount;
@@ -30,7 +33,7 @@ public class LoginMenu {
                     subMenuStatus = CommandProcessor.getSubMenuStatus();
                     CommandProcessor.setSubMenuStatus(SubMenuStatus.PASSWORD);
                     outputNo = 2;
-                } else outputNo = 14;
+                } else outputNo = 13;
             } else outputNo = 0;
         } else outputNo = 24;
         OutputMassageHandler.showAccountOutput(outputNo);
@@ -71,12 +74,56 @@ public class LoginMenu {
 
     public void processEdit(String field) {
         // if(login) {
-        if(!field.matches("(?i)(?:username|password|last name|email|phone number)")) {
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITACCOUNT);
+        if (field.matches("(?i)(?:username|password|last\\s*name|email|phone\\s*number|firm)")) {
+            if (loginAccount.getRole() == "seller") {
+                String id = "seller " + LoginMenu.getLoginAccount().getUsername() + "wants edit account's " + field;
+                if (Request.isThereRequestFromID(id)) {
+                    Request.deleteRequest(id);
+                }
+                accountRequest = new AccountRequest(id);
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITSELLERACCOUNT);
+            } else {
+                if (!field.equalsIgnoreCase("firm")) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITACCOUNT);
+                } else outputNo = 27;
+            }
             this.field = field;
             OutputMassageHandler.showOutputWithString(field, 3);
-        }else outputNo = 16;
+        } else outputNo = 16;
         // }else outputNo = 25;
+        OutputMassageHandler.showAccountOutput(outputNo);
+    }
+
+    public void editSellerField(String edit) {
+        if (this.field.equalsIgnoreCase("password")) {
+            if (edit.matches("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}$")) {
+                accountRequest.setPassword(edit);
+                outputNo = 17;
+            } else outputNo = 3;
+        } else if (this.field.equalsIgnoreCase("name")) {
+            if (edit.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$")) {
+                accountRequest.setName(edit);
+                outputNo = 18;
+            } else outputNo = 5;
+        } else if (this.field.matches("last\\s*name")) {
+            if (edit.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$")) {
+                accountRequest.setLastname(edit);
+                outputNo = 19;
+            } else outputNo = 7;
+        } else if (this.field.equalsIgnoreCase("Email")) {
+            if (edit.matches("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")) {
+                accountRequest.setEmail(edit);
+                outputNo = 20;
+            } else outputNo = 9;
+        } else if (this.field.matches("Phone\\s*number")) {
+            if (edit.matches("09[0-9]{9}")) {
+                accountRequest.setPhoneNo(Integer.parseInt(edit));
+                outputNo = 21;
+            } else outputNo = 11;
+        } else if (field.equalsIgnoreCase("firm")) {
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMNAME);
+            outputNo = 28;
+        }
         OutputMassageHandler.showAccountOutput(outputNo);
     }
 
@@ -91,7 +138,7 @@ public class LoginMenu {
                 loginAccount.setName(edit);
                 outputNo = 18;
             } else outputNo = 5;
-        } else if (this.field.equalsIgnoreCase("last name")) {
+        } else if (this.field.matches("last\\s*name")) {
             if (edit.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$")) {
                 loginAccount.setLastname(edit);
                 outputNo = 19;
@@ -101,7 +148,7 @@ public class LoginMenu {
                 loginAccount.setEmail(edit);
                 outputNo = 20;
             } else outputNo = 9;
-        } else if (this.field.equalsIgnoreCase("Phone number")) {
+        } else if (this.field.matches("Phone\\s*number")) {
             if (edit.matches("09[0-9]{9}")) {
                 loginAccount.setPhoneNo(Integer.parseInt(edit));
                 outputNo = 21;
@@ -109,6 +156,63 @@ public class LoginMenu {
         }
         OutputMassageHandler.showAccountOutput(outputNo);
     }
+
+    public void firmField(String field) {
+        if (!field.matches("(?i)(?:name|address|email|phone\\s*number)")) {
+            String id = "seller " + LoginMenu.getLoginAccount().getUsername() + "wants edit firm " + firmName + "'s " + field;
+            if (firmRequest.isThereRequestFromID(id)) {
+                Request.deleteRequest(id);
+            }
+            firmRequest = new FirmRequest(id);
+            firmRequest.setName(firmName);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITFIRM);
+            this.field = field;
+            outputNo = 2;
+        } else outputNo = 1;
+        OutputMassageHandler.showFirmOutput(outputNo);
+    }
+
+    public void firmName(String name) {
+        if (name.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$")) {
+            if (checkFirm()) {
+                firmName = name;
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMFIELD);
+                outputNo = 5;
+            }else outputNo =12;
+        } else outputNo = 3;
+        OutputMassageHandler.showFirmOutput(outputNo);
+    }
+
+    public static boolean checkFirm() {
+        if (loginAccount instanceof Seller) {
+            if (((Seller) loginAccount).getFirm().getName().equalsIgnoreCase(firmName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void editFirm(String detail) {
+        if (field.matches("phone\\s*number")) {
+            if (detail.matches("09[0-9]{9}")) {
+                firmRequest.setPhoneNO(Double.parseDouble(detail));
+                outputNo = 7;
+            } else outputNo = 6;
+        } else if (field.equalsIgnoreCase("address")) {
+            if (detail.matches(".+")) {
+                firmRequest.setAddress(detail);
+                outputNo = 9;
+            } else outputNo = 8;
+        } else if (field.equalsIgnoreCase("email")) {
+            if (detail.matches("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")) {
+                firmRequest.setEmail(detail);
+                CommandProcessor.setSubMenuStatus(subMenuStatus);
+                CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                outputNo = 11;
+            } else outputNo = 10;
+        }
+    }
+
 
     public void processLogout() {
         if (login) {

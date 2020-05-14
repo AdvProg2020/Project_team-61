@@ -1,9 +1,9 @@
 package model.productRelated;
-import com.google.gson.Gson;
 import model.accounts.Account;
+import model.accounts.Customer;
 import model.accounts.Seller;
+import model.firms.Company;
 import model.log.Log;
-import model.off.DiscountCode;
 import model.off.Sale;
 
 import java.util.*;
@@ -13,25 +13,23 @@ public class Product  {
     //productDetail
     private String productId;
     private String productName;
-    private String companiesName;
+    private Company companiesName;
     private double price;
-    private Seller seller;
+    private Account seller;
     private ProductStatus productStatus;
     private Category category;
     private double averageScore;
     private int numberOfProducts;
     private boolean isInSale;
-    private boolean hasDiscount;
     private String additionalDetail;
     private int numberOfViews;
     private int totalNumberOfBuyers;
-    //trueIsCountable
-    private boolean countableOrNot;
     private boolean isBought;
 
     //lists
-    private static ArrayList<Seller> listOfSellers = new ArrayList<Seller>();
-    private HashMap<Category,ArrayList<Product>> listOfAllProducts = new HashMap<Category, ArrayList<Product>>();
+    private static ArrayList<Account> listOfSellers = new ArrayList<Account>();
+    private static ArrayList<Customer> listOfBuyers=new ArrayList<>();
+    private HashMap<Category,ArrayList<Product>> listOfAllProducts = new HashMap<>();
     private static ArrayList<Product> allProduct = new ArrayList<Product>();
     private ArrayList<String> info=new ArrayList<>();
     public static ArrayList<String> listOfId=new ArrayList<String>();
@@ -41,7 +39,6 @@ public class Product  {
     public Score score;
     private Log log;
     private Account account;
-    private DiscountCode discountCode;
     private Sale sale;
 
 
@@ -54,18 +51,17 @@ public class Product  {
 
 
     //finish
-    public void setDetailProduct (String name , String companiesName , double price , Seller seller , int numberOfProducts ,Category category) {
+    public void setDetailProduct (String name , Company companiesName , double price , Account seller , int numberOfProducts ,Category category) {
         this.productName = name;
         this.companiesName=companiesName;
         this.price=price;
         this.seller=seller;
         this.numberOfProducts=numberOfProducts;
         this.category=category;
-//        allProduct.add(this);
         listOfSellers.add(seller);
-        listOfAllProducts.put(category,allProduct);
+        productsFromSameCategory(category.getName());
         allProduct.add(this);
-
+//        setInfo();
     }
 
 
@@ -89,13 +85,6 @@ public class Product  {
         return price;
     }
 
-    public void setCountableOrNot(boolean countableOrNot) {
-        this.countableOrNot = countableOrNot;
-    }
-    public boolean getCountableOrNot(){
-        return countableOrNot;
-    }
-
     public int getNumberOfView () {
         return numberOfViews;
     }
@@ -117,6 +106,7 @@ public class Product  {
 
     public void setAdditionalDetail(String additionalDetail) {
         this.additionalDetail = additionalDetail;
+//        setInfo();
     }
     public String getAdditionalDetail() {
         return additionalDetail;
@@ -140,15 +130,8 @@ public class Product  {
         return category;
     }
 
-    public String getCompaniesName() {
+    public Company getCompaniesName() {
         return companiesName;
-    }
-
-    public void setHasDiscount(boolean hasDiscount) {
-        this.hasDiscount = hasDiscount;
-    }
-    public boolean getHasDiscount() {
-        return hasDiscount;
     }
 
     public String getProductName() {
@@ -167,13 +150,6 @@ public class Product  {
         return sale;
     }
 
-    public void setDiscountCode(DiscountCode discountCode) {
-        this.discountCode = discountCode;
-        setHasDiscount(true);
-    }
-    public DiscountCode getDiscountCode() {
-        return discountCode;
-    }
 
     public void setTotalNumberOfBuyers(int totalNumberOfBuyers) {
         this.totalNumberOfBuyers = totalNumberOfBuyers;
@@ -181,46 +157,63 @@ public class Product  {
     public int getTotalNumberOfBuyers() {
         return totalNumberOfBuyers;
     }
+//
+//    public void setInfo() {
+//        info.add(getProductName());
+//        info.add(getCompaniesName());
+//        info.add(String.valueOf(getPrice()));
+//        info.add(getCategory().getName());
+//        info.add(seller.getName());
+//        info.add(String.valueOf(getAverageScore()));
+//        if (additionalDetail!=null){
+//            info.add(additionalDetail);
+//        }else info.add("\n");
+//
+//    }
+//    public ArrayList<String> getInfo() {
+//        return info;
+//    }
 
-    public void setInfo(ArrayList<String> info) {
-        info.add(getProductName());
-        info.add(getCompaniesName());
-        info.add(String.valueOf(getPrice()));
-        if (hasDiscount){
-            // info.add(discountCode.get)
-        }
-        info.add(getCategory().getName());
-        info.add(seller.getName());
-        info.add(String.valueOf(getAverageScore()));
-        info.add(additionalDetail);
-
-    }
-    public ArrayList<String> getInfo() {
-        return info;
-    }
-
-    public HashMap<Category, ArrayList<Product>> getListOfAllProducts() {
+    public HashMap<Category, ArrayList<Product>> getListOfAllSameCategoryProducts() {
         return listOfAllProducts;
     }
 
-    public Seller getSeller() {
-        return seller;
+    public Account getSeller() {
+        return (Seller) seller;
     }
 
-    public void setSeller(Seller seller) {
+    public void setSeller(Account seller) {
         this.seller = seller;
+    }
+
+    public void setComment(Comment comment) {
+        this.comment = comment;
+    }
+    public Comment getComment() {
+        return comment;
     }
 
     //othersTobeHandel-------------------------------------------------------------------------------
 
 
-    public void addCommentTitle(String title){
-        comment.setCommentTitle(title);
+    public void productsFromSameCategory(String categoryName){
+        ArrayList<Product> products=null;
+        for (Product product : allProduct) {
+            if (product.getCategory().equals(Category.getCategoryWithName(categoryName))) {
+                products.add(product);
+            }
+        }
+        listOfAllProducts.put(Category.getCategoryWithName(categoryName),products);
     }
 
-    public void addCommentContent(String content){
-        comment.setCommentContent(content);
-    }
+    //ina bayad tooye menu oonjaee ke comment new mishe bashan
+//    public void addCommentTitle(String title){
+//        comment.setTitle(title);
+//    }
+//
+//    public void addCommentContent(String content){
+//        comment.setContent(content);
+//    }
 
     //checked
     public static Product getProductById(String id) {
@@ -232,14 +225,25 @@ public class Product  {
         return null;
     }
 
-    //finish
-    public List listOfComments ( String id) {
-        Product product=getProductById(id);
-        return product.comment.allComments;
+
+//    public List listOfComments ( String id) {
+//        Product product=getProductById(id);
+//        return product.comment.allComments;
+//    }
+
+    public boolean ifProductHasSeller(String productId, String sellerUserName){
+        if (isThereProductWithId(productId)) {
+            for (Account seller : Product.getProductById(productId).getListOfSellers()) {
+                if (seller.equals(Seller.getAccountWithUsername(sellerUserName))){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     //finish
-    public ArrayList<Seller> getListOfSellers () {
+    public ArrayList<Account> getListOfSellers () {
         return listOfSellers;
     }
 
@@ -272,7 +276,7 @@ public class Product  {
     }
 
     //checked
-    public static Product getProductWithName(String name){
+    public Product getProductWithName(String name){
         for (Product product : allProduct) {
             if (product.getProductName().equals(name)){
                 return product;

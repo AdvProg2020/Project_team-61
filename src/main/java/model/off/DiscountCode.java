@@ -1,28 +1,56 @@
 package model.off;
-import model.accounts.Account;
-import model.accounts.Customer;
-import model.accounts.Seller;
 
-import java.util.*;
+import model.accounts.Account;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DiscountCode {
     private String discountId;
     private Date startOfDiscountPeriod;
     private Date endOfDiscountPeriod;
+    private int discountAmount;
     private double maxDiscountAmount;
     private int totalTimesOfUse;
-    private ArrayList<Account> allCustomersWithDiscountCode = new ArrayList<Account>();
+    private static ArrayList<Account> allCustomersWithDiscountCode = new ArrayList<Account>();
     private static ArrayList<DiscountCode> allDiscountCodes;
 
     public DiscountCode(String discountId) {
         this.discountId = discountId;
-        this.allCustomersWithDiscountCode = new ArrayList<>();
         allDiscountCodes.add(this);
+    }
+
+    public void addAccount(Account customer){
+        allCustomersWithDiscountCode.add(customer);
+        customer.addDiscountCode(getDiscountWithId(discountId));
+    }
+    public void removeAccount(Account account){
+        allCustomersWithDiscountCode.remove(account);
+        account.removeDiscountCode(getDiscountWithId(discountId));
     }
 
     public void setStartOfDiscountPeriod(Date startOfDiscountPeriod) {
         this.startOfDiscountPeriod = startOfDiscountPeriod;
+    }
+
+    public static boolean discountMatchAccount(String username){
+
+        for (Account account : allCustomersWithDiscountCode) {
+            if (account.getUsername().equalsIgnoreCase(username)) return true;
+        }
+        return false;
+    }
+
+    public static boolean discountDateValid(){
+
+    }
+
+    public void setDiscountAmount(int discountAmount) {
+        this.discountAmount = discountAmount;
+    }
+
+    public void setTotalTimesOfUse(int totalTimesOfUse) {
+        this.totalTimesOfUse = totalTimesOfUse;
     }
 
     public void setEndOfDiscountPeriod(Date endOfDiscountPeriod) {
@@ -86,6 +114,7 @@ public class DiscountCode {
 
     }
 
+    /*
     @Override
     public String toString() {
         return "DiscountCode{" +
@@ -97,4 +126,6 @@ public class DiscountCode {
                 ", allCustomersWithDiscountCode=" + allCustomersWithDiscountCode +
                 '}';
     }
+
+     */
 }

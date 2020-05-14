@@ -1,7 +1,6 @@
 package controller.menus;
 
 import model.accounts.Account;
-import model.accounts.Seller;
 import model.log.BuyLog;
 import model.productRelated.Comment;
 import model.productRelated.Product;
@@ -10,14 +9,10 @@ import view.OutputHandler;
 import view.OutputMassageHandler;
 import view.SubMenuStatus;
 
-import java.util.ArrayList;
-
 public class ProductMenu {
 
     private int outputNo;
     private Comment comment;
-    private Account loginAccount = LoginMenu.getLoginAccount();
-    private ProductsMenu productsMenu;
     private Product selectedProduct;
     private BuyLog buyLog;
 
@@ -25,17 +20,15 @@ public class ProductMenu {
     //finish
     public void processDigest() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
-        selectedProduct = Product.getProductById(productsMenu.getProductId());
-        ArrayList<String> info = selectedProduct.getInfo();
+        selectedProduct = Product.getProductById(ProductsMenu.getProductId());
     }
 
 
     public void addToCart() {
-        if (Product.isFirstProduct()) {
-            //???????????????????
+        if (BuyLog.getFirstProduct()) {
             buyLog = new BuyLog(LoginMenu.getLoginAccount().getUsername());
         }
-      //  selectedProduct.addProductToLog(account.getUsername(), selectedProduct.getId(), 1);
+        buyLog.addProductToBuyLog(ProductsMenu.getProductId(),1);
     }
 
     //finish
@@ -51,9 +44,9 @@ public class ProductMenu {
 
     //finish
     public void selectSeller(String username) {
-        Seller seller1 = null;
+        Account seller1 = null;
         if (checkSeller(username)) {
-            for (Seller seller : selectedProduct.getListOfSellers()) {
+            for (Account seller : selectedProduct.getListOfSellers()) {
                 if (seller.getUsername().equals(username)) {
                     seller1 = seller;
                 }
@@ -75,36 +68,37 @@ public class ProductMenu {
 
     }
 
-    //finish//json
-    public void processCompare(String productID) {
-        Product productToCompare = Product.getProductById(productID);
-        OutputHandler.compareProducts(productToCompare.getInfo(), selectedProduct.getInfo());
-    }
+//    public void processCompare(String productID) {
+//        Product productToCompare = Product.getProductById(productID);
+//        OutputHandler.compareProducts(productToCompare.getInfo(), selectedProduct.getInfo());
+//    }
 
     //comment--------------------------------------------------------------------
 
-    //
+    //neshoon dadanie
     public void processComments() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
         selectedProduct.getScore();
-        selectedProduct.listOfComments(selectedProduct.getId());
+        comment.getAllComments();
     }
 
     //finish
     public void addComments() {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
+        selectedProduct.setComment(comment=new Comment(selectedProduct,LoginMenu.getLoginAccount()));
+        comment.setAllComments();
     }
 
     public void titleOfComment(String title) {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
-        comment = new Comment()
-        //selectedProduct.addCommentTitle(title);
+        comment.setTitle(title);
+        comment.setAllComments();
     }
 
     //finish
     public void contentOfComment(String content) {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-        //selectedProduct.addCommentContent(content);
+        comment.setContent(content);
+        comment.setAllComments();
     }
 
 }

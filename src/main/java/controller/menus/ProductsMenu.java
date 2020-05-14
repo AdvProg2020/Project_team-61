@@ -16,7 +16,7 @@ public class ProductsMenu {
     private Category category;
     private Filter filter;
     private Sort sort;
-    private String productId;
+    private static String productId;
 
 
     public void processProducts() {
@@ -59,11 +59,7 @@ public class ProductsMenu {
                 if (filterID.equals("category")) {
                     filteredArray=filter.categoryFilter(product.getCategory());
                 } else if (filterID.equals("companyName")) {
-                    filteredArray=filter.companiesFilter(product.getCompaniesName());
-                } else if (filterID.equals("discount")) {
-                    if (product.getHasDiscount()) {
-                        filteredArray=filter.discountFilter(product.getDiscountCode());
-                    }
+                    filteredArray=filter.companiesFilter(product.firm.getCompaniesName());
                 } else if (filterID.equals("productName")) {
                     filteredArray=filter.productNameFilter(product.getProductName());
                 }else if (filterID.equalsIgnoreCase("periodFilter")){
@@ -141,7 +137,6 @@ public class ProductsMenu {
     public void disableSort() {
         sort.disableSort();
         OutputMassageHandler.showProductsOutput();
-
     }
 
     //product--------------------------------------------------
@@ -154,14 +149,14 @@ public class ProductsMenu {
 
     //GSON
     public void processShowProductsID(String productId) {
-        this.productId = productId;
-        OutputHandler.showProductsIds();
+        Product product=Product.getProductById(productId);
+        OutputHandler.showProductsIds(product);
         CommandProcessor.setMenuStatus(MenuStatus.PRODUCTMENU);
          
     }
 
 
-    public String getProductId() {
+    public static String getProductId() {
         return productId;
     }
 }

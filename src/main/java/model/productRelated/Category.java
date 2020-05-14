@@ -56,7 +56,7 @@ public class Category{
         return null;
     }
 
-    public boolean isThereCategoryWithName(String name){
+    public static boolean isThereCategoryWithName(String name){
         for ( Category category:allCategories){
             if (category.getName().equalsIgnoreCase(name))
                 return true;

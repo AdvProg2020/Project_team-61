@@ -9,35 +9,53 @@ public class Comment {
 
     //commentDetail
     private boolean isSold;
-    private String commentTitle;
-    private String commentContent;
-    private CommentStatus commentStatus;
+    String title;
+    String content;
+    CommentStatus commentStatus;
 
     //objectAdded
-    private Product productToComment;
+    Product productToComment;
     private Account personToVote;
 
 
     //list
-    public ArrayList<Comment> allComments = new ArrayList<Comment>();
+    public static ArrayList<Comment> allComments = new ArrayList<Comment>();
 
 
     public Comment(Product productToCommit, Account personToVote) {
         this.productToComment = productToCommit;
         this.personToVote = personToVote;
-        allComments.add(this);
     }
+
+
+
+
+
+
+
+
+
+
 
 
     //setterAndGetter--------------------------------------------------------------------------------------------
 
-    public void setCommentContent(String commentContent) {
-        this.commentContent = commentContent;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setCommentTitle(String commentTitle){
-        this.commentTitle=commentTitle;
+    public void setContent(String content) {
+        this.content = content;
     }
+
+    public void setAllComments() {
+        allComments.add(this);
+    }
+
+    public static ArrayList<Comment> getAllComments() {
+        return allComments;
+    }
+
     public Account getPersonToVote() {
         return personToVote;
     }

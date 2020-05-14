@@ -1,10 +1,17 @@
 package model.sort;
 
+import model.accounts.Account;
+import model.log.BuyLog;
+import model.log.SaleLog;
+import model.off.Sale;
 import model.productRelated.Product;
 import model.productRelated.Score;
+import view.CommandProcessor;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 
 public abstract class Sort {
     public Product product;
@@ -38,6 +45,41 @@ public abstract class Sort {
         return newArrayOfProductSort;
     }
 
+    public ArrayList<Account> accountSortUserName(){
+        ArrayList<Account> helper=Account.getAllAccounts();
+        Collections.sort(helper,Account.accountComparatorForUsername);
+        return helper;
+    }
+
+    public ArrayList<BuyLog> accountSortLogs(){
+        ArrayList<BuyLog> helper=Account.getAllBuyLogs();
+        Collections.sort(helper, new Comparator<BuyLog>() {
+            public int compare(BuyLog o1, BuyLog o2) {
+                return o1.getLocalDateTimeForLog().compareTo(o2.getLocalDateTimeForLog());
+            }
+        });
+        return helper;
+    }
+
+    public ArrayList<BuyLog> buyLogSortDate(){
+        ArrayList<BuyLog> helper=BuyLog.getAllCustomersLog();
+        Collections.sort(helper, new Comparator<BuyLog>() {
+            public int compare(BuyLog o1, BuyLog o2) {
+                return o1.getLocalDateTimeForLog().compareTo(o2.getLocalDateTimeForLog());
+            }
+        });
+        return helper;
+    }
+
+    public ArrayList<SaleLog> saleLogSortDate(){
+        ArrayList<SaleLog> helper=SaleLog.getAllSellersLog();
+        Collections.sort(helper, new Comparator<SaleLog>() {
+            public int compare(SaleLog o1, SaleLog o2) {
+                return o1.getLocalDateTimeForSaleLog().compareTo(o2.getLocalDateTimeForSaleLog());
+            }
+        });
+        return helper;
+    }
 
     //other---------------------------------------------------------------------------
 
