@@ -1,5 +1,11 @@
 package model.firms;
 
+import com.google.gson.reflect.TypeToken;
+import model.productRelated.Product;
+import view.FileHandling;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public abstract class Firm {
@@ -70,6 +76,12 @@ public abstract class Firm {
 
     public void deleteFirm(String ID){
         allFirms.remove(getFirmWithID(ID));
+    }
+
+    public static void writeInJ() throws IOException {
+        Type collectionType = new TypeToken<ArrayList<Firm>>(){}.getType();
+        String json= FileHandling.getGson().toJson(Firm.allFirms,collectionType);
+        FileHandling.turnToArray(json+" "+"firm.json");
     }
 
 }

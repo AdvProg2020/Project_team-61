@@ -1,7 +1,12 @@
 package model.off;
 
+import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
+import model.productRelated.Product;
+import view.FileHandling;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -108,6 +113,11 @@ public class DiscountCode {
 
     }
 
+    public static void writeInJ() throws IOException {
+        Type collectionType = new TypeToken<ArrayList<DiscountCode>>(){}.getType();
+        String json= FileHandling.getGson().toJson(DiscountCode.allDiscountCodes,collectionType);
+        FileHandling.turnToArray(json+" "+"discountCode.json");
+    }
     /*
     @Override
     public String toString() {

@@ -1,10 +1,15 @@
 package model.accounts;
 
+import com.google.gson.reflect.TypeToken;
 import model.log.BuyLog;
 import model.log.SaleLog;
 import model.off.DiscountCode;
+import model.productRelated.Product;
+import view.FileHandling;
 
 import javax.xml.crypto.Data;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -168,5 +173,11 @@ public abstract class Account {
 
     public int getUsedDiscount() {
         return usedDiscount;
+    }
+
+    public static void writeInJ() throws IOException {
+        Type collectionType = new TypeToken<ArrayList<Account>>(){}.getType();
+        String json= FileHandling.getGson().toJson(Account.allAccounts,collectionType);
+        FileHandling.turnToArray(json+" "+"account.json");
     }
 }

@@ -1,7 +1,11 @@
 package model.log;
 
+import com.google.gson.reflect.TypeToken;
 import model.productRelated.Product;
+import view.FileHandling;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -61,6 +65,12 @@ public abstract class Log{
             }
         }
         return false;
+    }
+
+    public static void writeInJ() throws IOException {
+        Type collectionType = new TypeToken<ArrayList<Log>>(){}.getType();
+        String json= FileHandling.getGson().toJson(Log.allLogs,collectionType);
+        FileHandling.turnToArray(json+" "+"log.json");
     }
 
 }

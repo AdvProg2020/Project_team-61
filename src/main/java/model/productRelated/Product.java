@@ -1,16 +1,21 @@
 package model.productRelated;
+import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Seller;
 import model.firms.Company;
 import model.log.Log;
 import model.off.Sale;
+import view.FileHandling;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.*;
 public class Product  {
-    private String productJson;
+    private static String productJson;
 
     //productDetail
+
     private String productId;
     private String productName;
     private Company companiesName;
@@ -61,7 +66,6 @@ public class Product  {
         listOfSellers.add(seller);
         productsFromSameCategory(category.getName());
         allProduct.add(this);
-//        setInfo();
     }
 
 
@@ -112,7 +116,7 @@ public class Product  {
         return additionalDetail;
     }
 
-    public void setProductStatus ( ProductStatus status ){
+    public void setProductStatus (ProductStatus status ){
         productStatus = status ;
     }
     public ProductStatus getProductStatus() {
@@ -276,7 +280,7 @@ public class Product  {
     }
 
     //checked
-    public Product getProductWithName(String name){
+    public static Product getProductWithName(String name){
         for (Product product : allProduct) {
             if (product.getProductName().equals(name)){
                 return product;
@@ -321,4 +325,9 @@ public class Product  {
         }
     };
 
+    public static void writeInJ() throws IOException {
+        Type collectionType = new TypeToken<ArrayList<Product>>(){}.getType();
+        String json= FileHandling.getGson().toJson(Product.getProductList(),collectionType);
+        FileHandling.turnToArray(json+" "+"product.json");
+    }
 }

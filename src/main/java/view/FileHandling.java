@@ -5,10 +5,18 @@ import com.google.gson.GsonBuilder;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-public class WriteFile {
+public class FileHandling {
 
     public static Gson gson = new GsonBuilder().create();
+
+    public static void turnToArray(String arrayAndFile) throws IOException {
+        ArrayList<String> parts = new ArrayList<String>(
+                Arrays.asList(arrayAndFile.split(" ")));
+        writeInFile(parts.get(0),parts.get(1));
+    }
 
     public static void writeInFile(String json,String fileName) throws IOException {
         FileWriter writer = new FileWriter(fileName);
@@ -24,4 +32,7 @@ public class WriteFile {
         }
     }
 
+    public static Gson getGson() {
+        return gson;
+    }
 }

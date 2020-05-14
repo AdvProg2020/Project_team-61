@@ -1,8 +1,13 @@
 package model.off;
 
+import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
 import model.productRelated.Product;
 import model.accounts.Seller;
+import view.FileHandling;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.*;
 
@@ -118,6 +123,11 @@ public class Sale{
     }
 
 
+    public static void writeInJ() throws IOException {
+        Type collectionType = new TypeToken<ArrayList<Sale>>(){}.getType();
+        String json= FileHandling.getGson().toJson(Sale.allSales,collectionType);
+        FileHandling.turnToArray(json+" "+"sale.json");
+    }
 
     /*@Override
     public String toString() {

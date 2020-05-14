@@ -1,8 +1,12 @@
 package model.log;
 
 
+import com.google.gson.reflect.TypeToken;
 import model.productRelated.Product;
+import view.FileHandling;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -131,7 +135,13 @@ public class BuyLog extends Log {
 
 
     public  int compareTo(BuyLog buyLog) {
-        return getLocalDateTimeForLog().compareTo(buyLog.getLocalDateTimeForLog());
+        return getLocalDateTimeForLog().compareTo(getLocalDateTimeForLog());
+    }
+
+    public static void writeInJ() throws IOException {
+        Type collectionType = new TypeToken<ArrayList<BuyLog>>(){}.getType();
+        String json= FileHandling.getGson().toJson(BuyLog.getAllCustomersLog(),collectionType);
+        FileHandling.turnToArray(json+" "+"buyLog.json");
     }
 
 }
