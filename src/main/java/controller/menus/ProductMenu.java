@@ -9,6 +9,9 @@ import view.OutputHandler;
 import view.OutputMassageHandler;
 import view.SubMenuStatus;
 
+import java.io.IOException;
+import java.util.UUID;
+
 public class ProductMenu {
 
     private int outputNo;
@@ -25,8 +28,9 @@ public class ProductMenu {
 
 
     public void addToCart() {
+        String uniqueID = UUID.randomUUID().toString();
         if (BuyLog.getFirstProduct()) {
-            buyLog = new BuyLog(LoginMenu.getLoginAccount().getUsername());
+            buyLog = new BuyLog(uniqueID);
         }
         buyLog.addProductToBuyLog(ProductsMenu.getProductId(),1);
     }
@@ -83,22 +87,25 @@ public class ProductMenu {
     }
 
     //finish
-    public void addComments() {
+    public void addComments() throws IOException {
         selectedProduct.setComment(comment=new Comment(selectedProduct,LoginMenu.getLoginAccount()));
         comment.setAllComments();
+        Comment.writeInJ();
     }
 
-    public void titleOfComment(String title) {
+    public void titleOfComment(String title) throws IOException {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
         comment.setTitle(title);
         comment.setAllComments();
+        Comment.writeInJ();
     }
 
     //finish
-    public void contentOfComment(String content) {
+    public void contentOfComment(String content) throws IOException {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
         comment.setContent(content);
         comment.setAllComments();
+        Comment.writeInJ();
     }
 
 }

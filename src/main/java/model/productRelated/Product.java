@@ -56,7 +56,7 @@ public class Product  {
 
 
     //finish
-    public void setDetailProduct (String name , Company companiesName , double price , Account seller , int numberOfProducts ,Category category) {
+    public void setDetailProduct (String name , Company companiesName , double price , Account seller , int numberOfProducts ,Category category) throws IOException {
         this.productName = name;
         this.companiesName=companiesName;
         this.price=price;
@@ -66,6 +66,7 @@ public class Product  {
         listOfSellers.add(seller);
         productsFromSameCategory(category.getName());
         allProduct.add(this);
+        writeInJ();
     }
 
 
@@ -329,5 +330,32 @@ public class Product  {
         Type collectionType = new TypeToken<ArrayList<Product>>(){}.getType();
         String json= FileHandling.getGson().toJson(Product.getProductList(),collectionType);
         FileHandling.turnToArray(json+" "+"product.json");
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId='" + productId + '\'' +
+                ", productName='" + productName + '\'' +
+                ", companiesName=" + companiesName +
+                ", price=" + price +
+                ", seller=" + seller +
+                ", productStatus=" + productStatus +
+                ", category=" + category +
+                ", averageScore=" + averageScore +
+                ", numberOfProducts=" + numberOfProducts +
+                ", isInSale=" + isInSale +
+                ", additionalDetail='" + additionalDetail + '\'' +
+                ", numberOfViews=" + numberOfViews +
+                ", totalNumberOfBuyers=" + totalNumberOfBuyers +
+                ", isBought=" + isBought +
+                ", listOfAllProducts=" + listOfAllProducts +
+                ", info=" + info +
+                ", comment=" + comment +
+                ", score=" + score +
+                ", log=" + log +
+                ", account=" + account +
+                ", sale=" + sale +
+                '}';
     }
 }

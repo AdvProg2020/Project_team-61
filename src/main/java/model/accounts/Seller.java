@@ -16,10 +16,11 @@ public class Seller extends Account {
     private static ArrayList<Seller> allSellers;
     public SaleLog saleLog;
 
-    public Seller(String username) {
+    public Seller(String username) throws IOException {
         super(username);
         role = "seller";
         allSellers.add(this);
+        writeInJ();
     }
 
 
@@ -31,5 +32,27 @@ public class Seller extends Account {
         Type collectionType = new TypeToken<ArrayList<Seller>>(){}.getType();
         String json= FileHandling.getGson().toJson(Seller.allSellers,collectionType);
         FileHandling.turnToArray(json+" "+"seller.json");
+    }
+
+    @Override
+    public String toString() {
+        return "Seller{" +
+                "firm=" + firm +
+                ", saleLogsHistory=" + saleLogsHistory +
+                ", saleLog=" + saleLog +
+                ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNo=" + phoneNo +
+                ", credit=" + credit +
+                ", role='" + role + '\'' +
+                ", currentPhoneNo=" + currentPhoneNo +
+                ", address='" + address + '\'' +
+                ", birthdayDate=" + birthdayDate +
+                ", usedDiscount=" + usedDiscount +
+                ", allDiscountCodes=" + allDiscountCodes +
+                '}';
     }
 }

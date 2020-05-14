@@ -11,9 +11,10 @@ import java.util.ArrayList;
 public class Factory extends Firm {
     private static ArrayList<Factory> allFactories;
 
-    public Factory(String ID) {
+    public Factory(String ID) throws IOException {
         super(ID);
         allFactories.add(this);
+        writeInJ();
     }
     public static void writeInJ() throws IOException {
         Type collectionType = new TypeToken<ArrayList<Factory>>(){}.getType();
@@ -21,4 +22,8 @@ public class Factory extends Firm {
         FileHandling.turnToArray(json+" "+"factory.json");
     }
 
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

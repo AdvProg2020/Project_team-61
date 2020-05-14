@@ -29,6 +29,7 @@ public class Comment {
     public Comment(Product productToCommit, Account personToVote) {
         this.productToComment = productToCommit;
         this.personToVote = personToVote;
+
     }
 
 
@@ -91,4 +92,15 @@ public class Comment {
         FileHandling.turnToArray(json+" "+"commend.json");
     }
 
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "isSold=" + isSold +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", commentStatus=" + commentStatus +
+                ", productToComment=" + productToComment +
+                ", personToVote=" + personToVote +
+                '}';
+    }
 }

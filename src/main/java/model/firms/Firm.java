@@ -16,9 +16,10 @@ public abstract class Firm {
     private String Email;
     private static ArrayList<Firm> allFirms;
 
-    public Firm(String name) {
+    public Firm(String name) throws IOException {
         this.name = name;
         allFirms.add(this);
+        writeInJ();
     }
 
     public void setDetailToFirm(String name, Double phoneNO, String address, String email){
@@ -84,4 +85,13 @@ public abstract class Firm {
         FileHandling.turnToArray(json+" "+"firm.json");
     }
 
+    @Override
+    public String toString() {
+        return "Firm{" +
+                "name='" + name + '\'' +
+                ", phoneNO=" + phoneNO +
+                ", address='" + address + '\'' +
+                ", Email='" + Email + '\'' +
+                '}';
+    }
 }

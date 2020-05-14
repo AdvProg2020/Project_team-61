@@ -20,9 +20,10 @@ public class DiscountCode {
     private static ArrayList<Account> allCustomersWithDiscountCode = new ArrayList<Account>();
     private static ArrayList<DiscountCode> allDiscountCodes;
 
-    public DiscountCode(String discountId) {
+    public DiscountCode(String discountId) throws IOException {
         this.discountId = discountId;
         allDiscountCodes.add(this);
+        writeInJ();
     }
 
     public void addAccount(Account customer){
@@ -118,7 +119,8 @@ public class DiscountCode {
         String json= FileHandling.getGson().toJson(DiscountCode.allDiscountCodes,collectionType);
         FileHandling.turnToArray(json+" "+"discountCode.json");
     }
-    /*
+
+
     @Override
     public String toString() {
         return "DiscountCode{" +
@@ -131,5 +133,4 @@ public class DiscountCode {
                 '}';
     }
 
-     */
 }

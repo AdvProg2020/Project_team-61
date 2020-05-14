@@ -2,9 +2,15 @@ package view;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import model.productRelated.Product;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -31,6 +37,12 @@ public class FileHandling {
             writer.close();
         }
     }
+
+    public static JsonReader readFile(String fileName) throws FileNotFoundException {
+        JsonReader reader = new JsonReader(new FileReader(fileName));
+        return reader;
+    }
+
 
     public static Gson getGson() {
         return gson;

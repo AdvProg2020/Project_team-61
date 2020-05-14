@@ -23,11 +23,12 @@ public class Score {
     public  static ArrayList<Score> allScores = new ArrayList<>();
 
 
-    public Score(Account personToScore, Product productTOScore, int score) {
+    public Score(Account personToScore, Product productTOScore, int score) throws IOException {
         this.personToScore = personToScore;
         this.productTOScore = productTOScore;
         this.score = score;
         allScores.add(this);
+        writeInJ();
     }
 
 
@@ -64,5 +65,15 @@ public class Score {
         Type collectionType = new TypeToken<ArrayList<Score>>(){}.getType();
         String json= FileHandling.getGson().toJson(getAllScores(),collectionType);
         FileHandling.turnToArray(json+" "+"score.json");
+    }
+
+    @Override
+    public String toString() {
+        return "Score{" +
+                "score=" + score +
+                ", averageScore=" + averageScore +
+                ", productTOScore=" + productTOScore +
+                ", personToScore=" + personToScore +
+                '}';
     }
 }

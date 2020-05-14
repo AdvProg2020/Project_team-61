@@ -13,6 +13,7 @@ import java.util.Iterator;
 
 public abstract class Log{
 
+
     //detail
     String logId;
     DeliveryStatus deliveryStatus;
@@ -23,9 +24,10 @@ public abstract class Log{
     private static ArrayList<Log> allLogs = new ArrayList<Log>();
 
 
-    public Log(String logId) {
+    public Log(String logId) throws IOException {
         this.logId=logId;
         allLogs.add(this);
+        writeInJ();
     }
 
     //setterAndGetters-----------------------------------------------------------------------
@@ -73,4 +75,13 @@ public abstract class Log{
         FileHandling.turnToArray(json+" "+"log.json");
     }
 
+    @Override
+    public String toString() {
+        return "Log{" +
+                "logId='" + logId + '\'' +
+                ", deliveryStatus=" + deliveryStatus +
+                ", itsDone=" + itsDone +
+                ", product=" + product +
+                '}';
+    }
 }

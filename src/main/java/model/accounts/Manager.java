@@ -12,15 +12,21 @@ public class Manager extends Account {
 
     private static ArrayList<Manager> allManagers;
 
-    public Manager(String username) {
+    public Manager(String username) throws IOException {
         super(username);
         role = "manager";
         allManagers.add(this);
+        writeInJ();
     }
 
     public static void writeInJ() throws IOException {
         Type collectionType = new TypeToken<ArrayList<Manager>>(){}.getType();
         String json= FileHandling.getGson().toJson(Manager.allManagers,collectionType);
         FileHandling.turnToArray(json+" "+"manager.json");
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

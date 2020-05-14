@@ -15,10 +15,11 @@ public class Customer extends Account {
     private ArrayList<BuyLog> BuyLogsHistory;
     public BuyLog buyLog;
 
-    public Customer(String username) {
+    public Customer(String username) throws IOException {
         super(username);
         role = "customer";
         allCustomers.add(this);
+        writeInJ();
     }
 
     public static void writeInJ() throws IOException {
@@ -27,4 +28,24 @@ public class Customer extends Account {
         FileHandling.turnToArray(json+" "+"customer.json");
     }
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "BuyLogsHistory=" + BuyLogsHistory +
+                ", buyLog=" + buyLog +
+                ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNo=" + phoneNo +
+                ", credit=" + credit +
+                ", role='" + role + '\'' +
+                ", currentPhoneNo=" + currentPhoneNo +
+                ", address='" + address + '\'' +
+                ", birthdayDate=" + birthdayDate +
+                ", usedDiscount=" + usedDiscount +
+                ", allDiscountCodes=" + allDiscountCodes +
+                '}';
+    }
 }

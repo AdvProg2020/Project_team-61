@@ -22,9 +22,10 @@ public class Category{
 
     */
 
-    public Category(String name) {
+    public Category(String name) throws IOException {
         this.name = name;
         allCategories.add(this);
+        writeInJ();
     }
 
     public String getName() {
