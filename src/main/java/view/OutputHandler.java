@@ -18,11 +18,6 @@ import model.productRelated.Product;
 import java.util.ArrayList;
 
 public class OutputHandler {
-    public static Gson gson = new GsonBuilder().create();
-
-    public static Gson getGson() {
-        return gson;
-    }
 
 
     public static void showAvailableFilters(ArrayList<String> listOfAvailableFilters) {
