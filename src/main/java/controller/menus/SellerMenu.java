@@ -74,8 +74,9 @@ public class SellerMenu {
     }
 
     public void editProduct(String productID) {
+        Product product = Product.getProductById(productID);
         if (checkProduct(productID)) {
-            if (Product.ifProductHasSeller(productID, LoginMenu.getLoginAccount().getUsername())) {
+            if (product.ifProductHasSeller(productID, LoginMenu.getLoginAccount().getUsername())) {
                 //  Product.deleteProduct(productID);
                 //  Product product= new Product(productID);
                 Product.getProductById(productID).setProductStatus(ProductStatus.UNDERREVIEWFOREDITING);
@@ -206,8 +207,9 @@ public class SellerMenu {
 
 
     public void processRemoveProduct(String productID) {
+
         if (checkProduct(productID)) {
-            if (Product.ifProductHasSeller(productID, LoginMenu.getLoginAccount().getUsername())) {
+            if (Product.getProductById(productID).ifProductHasSeller(productID, LoginMenu.getLoginAccount().getUsername())) {
                 Product.deleteProduct(productID);
                 OutputMassageHandler.showAccountOutput(18);
             }
@@ -389,7 +391,7 @@ public class SellerMenu {
 
     private boolean checkProductSale(String detail) {
         if (checkProduct(detail)) {
-            if (Product.ifProductHasSeller(detail, loginAccount.getUsername())) {
+            if (Product.getProductById(productId).ifProductHasSeller(detail, loginAccount.getUsername())) {
                 return true;
             }
         }

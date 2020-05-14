@@ -16,7 +16,7 @@ public class ProductsMenu {
     private Category category;
     private Filter filter;
     private Sort sort;
-    private String productId;
+    private static String productId;
 
 
     public void processProducts() {
@@ -156,7 +156,7 @@ public class ProductsMenu {
     }
 
 
-    public String getProductId() {
+    public static String getProductId() {
         return productId;
     }
 }
