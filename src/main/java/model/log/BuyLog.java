@@ -10,6 +10,8 @@ import java.util.Iterator;
 
 public class BuyLog extends Log {
 
+
+
     public BuyLog(String logId) {
         super(logId);
         localDateTimeForLog=LocalDateTime.now();
@@ -23,7 +25,7 @@ public class BuyLog extends Log {
     int numberOfChosenPro;
     private static boolean ifItsFinal;
     boolean isBought;
-    private boolean firstProduct=true;
+    private static boolean firstProduct=true;
     public static LocalDateTime localDateTimeForLog;
 
     //list
@@ -55,7 +57,9 @@ public class BuyLog extends Log {
         return allCustomersLog;
     }
 
-
+    public static boolean getFirstProduct(){
+        return firstProduct;
+    }
     //other--------------------------------------------------------------
 
 
@@ -94,9 +98,9 @@ public class BuyLog extends Log {
         double price = 0;
         for (ArrayList<Product> productArrayList : allBoughtProduct) {
             for (Product product1 : productArrayList) {
-                if (product1.getHasDiscount()) {
-
-                }
+//                if () {
+//
+//                }
             }
         }
         return price;

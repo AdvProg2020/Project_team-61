@@ -57,14 +57,6 @@ public abstract class Filter {
         return newArrayOfProductFilter;
     }
 
-    public ArrayList<Product> discountFilter(DiscountCode discountCode) {
-        newArrayOfProductFilter = Product.getProductList().stream().filter(product1 -> product.getHasDiscount()).collect(Collectors.toCollection(ArrayList::new));
-        listOfFilters.add(3, newArrayOfProductFilter);
-        helpFilter.add(newArrayOfProductFilter);
-        availableFilters.remove(2);
-        return newArrayOfProductFilter;
-    }
-
     public ArrayList<Product> productNameFilter(String productName) {
         newArrayOfProductFilter = Product.getProductList().stream().filter(product1 -> product.getProductName().equals(productName)).collect(Collectors.toCollection(ArrayList::new));
         listOfFilters.add(4, newArrayOfProductFilter);
@@ -85,6 +77,16 @@ public abstract class Filter {
         return newArrayOfProductFilter;
     }
 
+    public ArrayList<Product> isAvailable(){
+        ArrayList<Product> delete=new ArrayList<>();
+        for (Product product1 : Product.getProductList()) {
+            if (product1.getNumberOfProducts()==0){
+                delete.add(product1);
+            }
+        }
+        newArrayOfProductFilter.removeAll(delete);
+        return newArrayOfProductFilter;
+    }
 
     //others-----------------------------------------------------------------------------
 

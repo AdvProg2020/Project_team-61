@@ -1,105 +1,104 @@
 package view;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import controller.request.Request;
+import model.accounts.Account;
+import model.accounts.Customer;
 import model.accounts.Seller;
+import model.firms.Firm;
+import model.log.BuyLog;
+import model.log.SaleLog;
+import model.off.DiscountCode;
+import model.off.Sale;
+import model.productRelated.Category;
 import model.productRelated.Product;
 
-import java.security.PublicKey;
+
 import java.util.ArrayList;
 
 public class OutputHandler {
-    private static Gson gson = new Gson();
+    public static Gson gson = new GsonBuilder().create();
 
     public static Gson getGson() {
         return gson;
     }
 
 
-    public static String makeJsonFromStringArrayList(ArrayList<String> arrayList) {
-        return OutputHandler.getGson().toJson(arrayList);
+    public static void showAvailableFilters(ArrayList<String> listOfAvailableFilters) {
+
     }
 
-    public static String makeJsonFromProductArrayList(ArrayList<Product> productArrayList) {
-        return OutputHandler.getGson().toJson(productArrayList);
+    public static void showAllProductAfterFilter(ArrayList<Product> filteredProduct) {
+
     }
 
-    public static String makeJsonFromSellerArrayList(ArrayList<Seller> sellerArrayList){
-        return OutputHandler.getGson().toJson(sellerArrayList);
+    public static void showCurrentFilter(ArrayList<String> currentFilters) {
+
     }
 
-    public static String showAvailableFilters(ArrayList<String> listOfAvailableFilters) {
-        return makeJsonFromStringArrayList(listOfAvailableFilters);
+    public static void showAvailableSorts(ArrayList<String> availableSort) {
+
     }
 
-    public static String showAllProductAfterFilter(ArrayList<Product> filteredProduct) {
-        return makeJsonFromProductArrayList(filteredProduct);
+    public static void showAllProductAfterSort(ArrayList<Product> productArrayList) {
+
     }
 
-    public static String showCurrentFilter(ArrayList<String> currentFilters) {
-        return makeJsonFromStringArrayList(currentFilters);
+    public static void showCurrentSorts(ArrayList<String> currentSorts) {
+
     }
 
-    public static String showAvailableSorts(ArrayList<String> availableSort) {
-        return makeJsonFromStringArrayList(availableSort);
+    public static void showProducts(ArrayList<Product> productArrayList) {
+
     }
 
-    public static String showAllProductAfterSort(ArrayList<Product> productArrayList) {
-        return makeJsonFromProductArrayList(productArrayList);
+    public static void showProductsIds(Product product) {
+
     }
 
-    public static String showCurrentSorts(ArrayList<String> currentSorts) {
-        return makeJsonFromStringArrayList(currentSorts);
+    public static void compareProducts(Product first, Product second) {
+
     }
 
-    public static String showProducts(ArrayList<Product> productArrayList) {
-        return makeJsonFromProductArrayList(productArrayList);
-    }
+    public static void showAllSellersForOneProduct(ArrayList<Account> sellerArrayList){
 
-    public static String showProductsIds(ArrayList<String> id) {
-        return makeJsonFromStringArrayList(id);
-    }
-
-    public static String compareProducts(ArrayList<String> first, ArrayList<String> second) {
-        return makeJsonFromStringArrayList(first) + makeJsonFromStringArrayList(second);
-    }
-
-    public static String showAllSellersForOneProduct(ArrayList<Seller> sellerArrayList){
-        return makeJsonFromSellerArrayList(sellerArrayList);
     }
     //..................................................................
-    public static void showAccountInformation(){
-        System.out.println();
-    }
 
-    public static void showAccounts(){
+    public static void showAccountInformation(Account accountInfo){
 
     }
 
-    public static void showDiscountCodes(){
+    public static void showAccounts(ArrayList<Account> accounts){
 
     }
 
-    public static void showDiscountCode(){
+    public static void showDiscountCodes(ArrayList<DiscountCode> discountCodes){
 
     }
 
-    public static void showRequest(){
+    public static void showDiscountCode(DiscountCode discountInfo){
 
     }
 
-    public static void showRequests(){
+    public static void showRequest(Request requestInfo){
 
     }
 
-    public static void showCategories(){
+    public static void showRequests(ArrayList<Request> requests){
 
     }
 
-    public static void showOff(){
+    public static void showCategories(ArrayList<Category> categories){
 
     }
 
-    public static void showOffs(){
+    public static void showOff(Sale saleInfo){
+
+    }
+
+    public static void showOffs(ArrayList<Sale> sales){
 
     }
 
@@ -107,42 +106,45 @@ public class OutputHandler {
 
   //  }
 
-    public static void showSalesHistory(){
-        //loginaccount sellere
-    }
-
-    public static void showFirmInformation(){
-        //loginaccount sellere
-    }
-
-    public static void showCustomerLog(){
+    public static void showSalesHistory(ArrayList<SaleLog> saleLogs){
 
     }
 
-    public static void showOrders(){
-        //sabeghe kharid
+    public static void showFirmInformation(Firm firmInfo){
 
     }
 
-    public static void showOrder(){
+    public static void showCustomerLog(BuyLog buyLog){
 
     }
 
-    public static void showProductBuyers(){
+    public static void showOrders(ArrayList<BuyLog> buyLogs){
+
 
     }
 
-    public static void showProduct(){
+    public static void showOrder(BuyLog buyLog){
 
     }
 
-    public static void showTotalPrice(){
-        //poole log bedoone discount
+    public static void showProductShow(ArrayList<Seller> sellers){
 
     }
 
-    public static void showBalance(){
-        //credite har account
+    public static void showProductBuyers(ArrayList<Customer> customers){
+
+    }
+
+    public static void showProduct(Product product){
+
+    }
+
+    public static void showTotalPrice(double price){
+
+    }
+
+    public static void showBalance(double balance){
+
     }
 
 
