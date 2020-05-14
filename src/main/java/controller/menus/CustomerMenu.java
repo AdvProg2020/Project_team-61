@@ -1,5 +1,6 @@
 package controller.menus;
 
+import model.accounts.Account;
 import model.log.BuyLog;
 import model.log.Log;
 import model.off.DiscountCode;
@@ -53,9 +54,25 @@ public class CustomerMenu {
     public void increaseProductNumber(String productID) {
         if (checkProduct(productID)) {
             this.productID = productID;
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTNUMBER);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.INCREASEPRODUCTNUMBER);
             OutputMassageHandler.showOutput(2);
         }
+    }
+
+    public void increaseLogProduct(String number){
+        if (number.matches("\\d+")) {
+           Product product= Product.getProductById(productID);
+            if(product.getNumberOfProducts()<= p){
+                
+            }
+        }
+    }
+
+    public void decreaseLogProduct(String number){
+        if (number.matches("\\d+")) {
+
+        }
+
     }
 
     //naghes
@@ -69,7 +86,7 @@ public class CustomerMenu {
     public void decreaseProductNumber(String productID) {
         if (checkProduct(productID)) {
             this.productID = productID;
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTNUMBER);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.DECREASEPRODUCTNUMBER);
             OutputMassageHandler.showOutput(3);
         }
     }
@@ -90,9 +107,9 @@ public class CustomerMenu {
             if (LoginMenu.getLoginAccount().getRole().equals("customer")) {
                 CommandProcessor.setMenuStatus(MenuStatus.PURCHASE);
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
-                CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
                 outputNo = 5;
-            }else outputNo=9;
+            } else outputNo = 9;
         } else outputNo = 6;
         OutputMassageHandler.showCustomerOutput(outputNo);
     }
@@ -107,15 +124,35 @@ public class CustomerMenu {
         return false;
     }
 
+    public void haveDiscount(String have){
+        if(have.matches("(?i)(?:yes|no)")){
+            if (have.equalsIgnoreCase("yes")) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.CHECKDISCOUNTCODE);
+                outputNo=0;
+            } else {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
+                outputNo=0;
+            }
+        }else outputNo=0;
+        OutputMassageHandler.showCustomerOutput(outputNo);
+    }
+
 
     public void discountCodeValidation(String discountCodeId) {
-        if (checkDiscountCode(discountCodeId)) {
-            //if () {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
-
-           // } else outputNo = 10;
-                OutputMassageHandler.showCustomerOutput(outputNo);
-        }
+        Account loginAccount = LoginMenu.getLoginAccount();
+            DiscountCode discountCode = DiscountCode.getDiscountWithId(discountCodeId);
+            if (checkDiscountCode(discountCodeId)) {
+                if (discountCode.discountMatchAccount(loginAccount.getUsername())) {
+                    if (discountCode.discountDateValid()) {
+                        if (loginAccount.getUsedDiscount() < DiscountCode.getDiscountWithId(discountCodeId).getTotalTimesOfUse()) {
+                            CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
+                            loginAccount.increaseDiscountUsed();
+                            outputNo = 0;
+                        } else outputNo = 10;
+                    } else outputNo = 10;
+                } else outputNo = 10;
+            }
+         OutputMassageHandler.showCustomerOutput(outputNo);
     }
 
     public void payment() {
@@ -123,16 +160,23 @@ public class CustomerMenu {
             finishingPayment();
             CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
             CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
-            outputNo =0;
+            CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+            outputNo = 0;
         } else {
-            outputNo=0;
+            outputNo = 0;
         }
         OutputMassageHandler.showCustomerOutput(outputNo);
     }
 
     private void finishingPayment() {
-        double money = LoginMenu.getLoginAccount().getCredit() - buyLog.holePriceWithDiscount();
-        LoginMenu.getLoginAccount().setCredit(money);
+        Account loginAccount =  LoginMenu.getLoginAccount();
+        double money = loginAccount.getCredit() - buyLog.holePriceWithDiscount();
+        loginAccount.setCredit(money);
+        //set buy log
+        //set say log
+        //set manager creadit
+        //set seller credit
+        //decrease product
 
     }
 

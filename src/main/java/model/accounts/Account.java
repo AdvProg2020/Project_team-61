@@ -80,6 +80,10 @@ public abstract class Account {
 
     }
 
+    public void increaseDiscountUsed(){
+        usedDiscount++;
+    }
+
     public Account listUsers() {
         Iterator iterator = allAccounts.iterator();
         while (iterator.hasNext()) {
@@ -130,6 +134,7 @@ public abstract class Account {
         this.address = address;
     }
 
+
     //-----------------------------------------------------------------
 
 
@@ -159,5 +164,9 @@ public abstract class Account {
 
     public double getCredit() {
         return credit;
+    }
+
+    public int getUsedDiscount() {
+        return usedDiscount;
     }
 }

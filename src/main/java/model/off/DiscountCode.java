@@ -12,7 +12,7 @@ public class DiscountCode {
     private int discountAmount;
     private double maxDiscountAmount;
     private int totalTimesOfUse;
-    private ArrayList<Account> allCustomersWithDiscountCode = new ArrayList<Account>();
+    private static ArrayList<Account> allCustomersWithDiscountCode = new ArrayList<Account>();
     private static ArrayList<DiscountCode> allDiscountCodes;
 
     public DiscountCode(String discountId) {
@@ -31,6 +31,18 @@ public class DiscountCode {
 
     public void setStartOfDiscountPeriod(Date startOfDiscountPeriod) {
         this.startOfDiscountPeriod = startOfDiscountPeriod;
+    }
+
+    public static boolean discountMatchAccount(String username){
+
+        for (Account account : allCustomersWithDiscountCode) {
+            if (account.getUsername().equalsIgnoreCase(username)) return true;
+        }
+        return false;
+    }
+
+    public static boolean discountDateValid(){
+
     }
 
     public void setDiscountAmount(int discountAmount) {

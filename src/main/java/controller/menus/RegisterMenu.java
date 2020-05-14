@@ -187,7 +187,7 @@ public class RegisterMenu {
             if (detail.matches(".+")) {
                 this.phoneNo = Double.parseDouble(detail);
                 detailMenu = 0;
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.CHECKDISCOUNTCODE);
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.HAVEDISCOUNT);
                 CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
                 outputNo = 12;
             } else outputNo = 11;

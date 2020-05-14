@@ -357,6 +357,10 @@ public class CommandProcessor {
                     if (input.matches(regex[27])) {
                         customerMenu.discountCodeValidation(getMatcher(input, regex[27]).group(1));
                     }
+                } else if (subMenuStatus == SubMenuStatus.HAVEDISCOUNT) {
+                    if (input.matches(regex[27])) {
+                        customerMenu.haveDiscount(getMatcher(input, regex[27]).group(1));
+                    }
                 } else if (subMenuStatus == SubMenuStatus.PAYMENT) {
                     if (input.matches(regex[27])) {
                         customerMenu.payment(getMatcher(input, regex[27]).group(1));
