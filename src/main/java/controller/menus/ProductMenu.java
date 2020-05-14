@@ -1,24 +1,18 @@
 package controller.menus;
 
 import model.accounts.Account;
-import model.accounts.Seller;
 import model.log.BuyLog;
 import model.productRelated.Comment;
 import model.productRelated.Product;
-import org.omg.CORBA.CODESET_INCOMPATIBLE;
 import view.CommandProcessor;
 import view.OutputHandler;
 import view.OutputMassageHandler;
 import view.SubMenuStatus;
 
-import java.util.ArrayList;
-
 public class ProductMenu {
 
     private int outputNo;
     private Comment comment;
-    private Account loginAccount = LoginMenu.getLoginAccount();
-    private ProductsMenu productsMenu;
     private Product selectedProduct;
     private BuyLog buyLog;
 
@@ -26,8 +20,7 @@ public class ProductMenu {
     //finish
     public void processDigest() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
-        selectedProduct = Product.getProductById(productsMenu.getProductId());
-
+        selectedProduct = Product.getProductById(ProductsMenu.getProductId());
     }
 
 
@@ -35,6 +28,7 @@ public class ProductMenu {
         if (BuyLog.getFirstProduct()) {
             buyLog = new BuyLog(LoginMenu.getLoginAccount().getUsername());
         }
+        buyLog.addProductToBuyLog(ProductsMenu.getProductId(),1);
     }
 
     //finish
@@ -81,7 +75,7 @@ public class ProductMenu {
 
     //comment--------------------------------------------------------------------
 
-    //
+    //neshoon dadanie
     public void processComments() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
         selectedProduct.getScore();
@@ -90,7 +84,7 @@ public class ProductMenu {
 
     //finish
     public void addComments() {
-        selectedProduct.setComment(comment=new Comment(selectedProduct,loginAccount));
+        selectedProduct.setComment(comment=new Comment(selectedProduct,LoginMenu.getLoginAccount()));
         comment.setAllComments();
     }
 

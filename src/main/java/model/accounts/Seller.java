@@ -14,6 +14,7 @@ public class Seller extends Account {
     public Seller(String username) {
         super(username);
         role = "seller";
+        allSellers.add(this);
     }
 
 
@@ -21,8 +22,5 @@ public class Seller extends Account {
         return firm;
     }
 
-    public int compareTo(Account o) {
-        return 0;
-    }
 
 }

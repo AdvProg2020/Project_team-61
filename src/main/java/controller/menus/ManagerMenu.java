@@ -8,7 +8,9 @@ import model.productRelated.Category;
 import model.productRelated.Product;
 import view.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class ManagerMenu {
@@ -40,7 +42,6 @@ public class ManagerMenu {
     public void view(String username) {
         if (checkUsername(username)) {
             OutputHandler.showAccountInformation();
-           // outputMassageHandler.showAccount(Account.getAccountWithUsername(username));
         } else OutputMassageHandler.showAccountOutput(outputNo);
     }
 
@@ -60,7 +61,6 @@ public class ManagerMenu {
     //--------------------------------------------------------------------
 
     //gson
-    // more detail of product????
     public void processManageAllProducts() {
         OutputHandler.showProducts(Filter.newArrayOfProductFilter);
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEALLPRODUCTS);
@@ -100,17 +100,16 @@ public class ManagerMenu {
     }
 
     public void createNewDiscountCode(String discountCodeId) {
-        if (checkDiscountCode(discountCodeId)) {
+        if (!DiscountCode.isThereDiscountWithId(discountCodeId)) {
             newDiscountCode = new DiscountCode(discountCodeId);
             CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
             CommandProcessor.setSubMenuStatus(SubMenuStatus.DETAILDESCOUNTCODE);
             OutputMassageHandler.showAccountOutput(7);
-        }
+        }else outputNo=0;
     }
 
     //exception for parse!!
     public void setDetailToDiscountCode(String detail) {
-        /*
         if (detailMenu == 0) {
             if (detail.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
                 Date currentDate=new Date();
@@ -121,6 +120,7 @@ public class ManagerMenu {
                     detailMenu = 1;
                 }
             } else outputNo = 8;
+            //END???
         } else if (detailMenu == 1) {
             if (detail.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
                 Date currentDate=new Date();
@@ -133,7 +133,7 @@ public class ManagerMenu {
             } else outputNo = 10;
         } else if (detailMenu == 2) {
             if (detail.matches("\\d+")) {
-                newDiscountCode.setMaxDiscountAmount(Integer.parseInt(detail));
+                newDiscountCode.setMaxDiscountAmount(Double.parseDouble(detail));
                 outputNo = 13;
                 detailMenu = 1;
             } else outputNo = 12;
@@ -143,12 +143,34 @@ public class ManagerMenu {
               //  inputNo = 15;
                 detailMenu = 0;
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                 commandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                 CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
 
             } else outputNo = 14;
+            //
+        }else if (detailMenu == 4) {
+            if (detail.matches("\\d+")) {
+                newDiscountCode.setDiscountAmount(Integer.parseInt(detail));
+                //  inputNo = 15;
+                detailMenu = 0;
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+
+            } else outputNo = 14;
+        }else if (detailMenu == 5) {
+            if(detail.equalsIgnoreCase("")) {
+                if (detail.matches("\\d+")) {
+                    if (Account.isThereAccountWithUsername(detail)) {
+                        newDiscountCode.addAccount(Account.getAccountWithUsername(detail));
+                        //  inputNo = 15;
+                        detailMenu = 0;
+                        CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                        CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                    } else outputNo = 14;
+                } else outputNo = 14;
+            }
         }
 
-         */
+
 
     }
 
@@ -183,8 +205,7 @@ public class ManagerMenu {
 
     ///????????ParseException
     public void editDiscountCodeField(String edit) {
-        /*
-        if (field.equalsIgnoreCase("start Of Discount Period")) {
+        if (field.matches("(?i)start\\s+Of\\s+Discount\\s+Period")) {
             if (edit.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
                 Date currentDate=new Date();
                 Date inputDate=new SimpleDateFormat("dd/MM/yyyy").parse(edit);
@@ -193,7 +214,7 @@ public class ManagerMenu {
                     outputNo = 16;
                 }
             } else outputNo = 8;
-        } else if (field.equalsIgnoreCase("end Of Discount Period")) {
+        } else if (field.matches("(?i)end\\s+Of\\s+Discount\\s+Period")) {
             if (edit.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
                 Date currentDate=new Date();
                 Date inputDate=new SimpleDateFormat("dd/MM/yyyy").parse(edit);
@@ -202,20 +223,40 @@ public class ManagerMenu {
                     outputNo = 17;
                 }
             } else outputNo = 10;
-        } else if (field.equalsIgnoreCase("max Discount Amount")) {
+        } else if (field.matches("(?i)max\\s+Discount\\s+Amount")) {
             if (edit.matches("\\d+\\.\\d*")) {
                 editableDiscountCode.setMaxDiscountAmount(Double.parseDouble(edit));
                 outputNo = 18;
             } else outputNo = 12;
-        } else if (field.equalsIgnoreCase("total Times Of Use")) {
+        } else if (field.matches("(?i)total\\s+Times\\s+Of\\s+Use")) {
             if (edit.matches("\\d+")) {
                 editableDiscountCode.setTotalTimesOfUse(Integer.parseInt(edit));
                 outputNo = 19;
             } else outputNo = 14;
+            //
+        } else if (field.matches("(?i)discount\\s+amount")) {
+            if (edit.matches("\\d+")) {
+                editableDiscountCode.setDiscountAmount(Integer.parseInt(edit));
+                outputNo = 19;
+            } else outputNo = 14;
+        } else if (field.matches("(?i)add\\s+account")) {
+            if (edit.matches("\\d+")) {
+                if(Account.isThereAccountWithUsername(edit)) {
+                    editableDiscountCode.addAccount(Account.getAccountWithUsername(edit));
+                    outputNo = 19;
+                }
+            } else outputNo = 14;
+        } else if (field.matches("(?i)remove\\s+account")) {
+            if (edit.matches("\\d+")) {
+                if(Account.isThereAccountWithUsername(edit)) {
+                    editableDiscountCode.removeAccount(Account.getAccountWithUsername(edit));
+                    outputNo = 19;
+                }
+            } else outputNo = 14;
         }
 
 
-         */
+
     }
 
 
@@ -228,11 +269,11 @@ public class ManagerMenu {
     //-------------------------------------------------------------------------------------
 
     private boolean checkRequest(String requestID) {
-        if (requestID.matches("")) {
+       // if (requestID.matches("")) {
             if (Request.isThereRequestFromID(requestID)) {
                 return true;
             } else outputNo = 21;
-        } else outputNo = 20;
+       // } else outputNo = 20;
         OutputMassageHandler.showAccountOutput(outputNo);
         return false;
     }

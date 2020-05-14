@@ -57,7 +57,21 @@ public enum SubMenuStatus {
     FIRMINFORMATION,
     CHECKDISCOUNTCODE,
     PAYMENT,
+    FIRMFIELD,
+    EDITFIRM,
+    FIRMNAME,
+    HAVEDISCOUNT,
+    EDITSELLERACCOUNT,
+    INCREASEPRODUCTNUMBER,
+    DECREASEPRODUCTNUMBER;
 
+
+
+  //customer menu
+
+
+
+    //
 
 
 }
