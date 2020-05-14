@@ -150,6 +150,7 @@ public class Product  {
         return sale;
     }
 
+
     public void setTotalNumberOfBuyers(int totalNumberOfBuyers) {
         this.totalNumberOfBuyers = totalNumberOfBuyers;
     }
@@ -177,11 +178,11 @@ public class Product  {
         return listOfAllProducts;
     }
 
-    public Seller getSeller() {
+    public Account getSeller() {
         return (Seller) seller;
     }
 
-    public void setSeller(Seller seller) {
+    public void setSeller(Account seller) {
         this.seller = seller;
     }
 

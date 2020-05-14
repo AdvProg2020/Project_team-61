@@ -59,7 +59,7 @@ public class ProductsMenu {
                 if (filterID.equals("category")) {
                     filteredArray=filter.categoryFilter(product.getCategory());
                 } else if (filterID.equals("companyName")) {
-                    filteredArray=filter.companiesFilter(product.getCompaniesName());
+                    filteredArray=filter.companiesFilter(product.firm.getCompaniesName());
                 } else if (filterID.equals("productName")) {
                     filteredArray=filter.productNameFilter(product.getProductName());
                 }else if (filterID.equalsIgnoreCase("periodFilter")){
@@ -137,7 +137,6 @@ public class ProductsMenu {
     public void disableSort() {
         sort.disableSort();
         OutputMassageHandler.showProductsOutput();
-
     }
 
     //product--------------------------------------------------

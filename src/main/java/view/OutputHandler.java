@@ -61,7 +61,7 @@ public class OutputHandler {
 
     }
 
-    public static void showAllSellersForOneProduct(ArrayList<Seller> sellerArrayList){
+    public static void showAllSellersForOneProduct(ArrayList<Account> sellerArrayList){
 
     }
     //..................................................................

@@ -50,9 +50,9 @@ public class ProductMenu {
 
     //finish
     public void selectSeller(String username) {
-        Seller seller1 = null;
+        Account seller1 = null;
         if (checkSeller(username)) {
-            for (Seller seller : selectedProduct.getListOfSellers()) {
+            for (Account seller : selectedProduct.getListOfSellers()) {
                 if (seller.getUsername().equals(username)) {
                     seller1 = seller;
                 }
