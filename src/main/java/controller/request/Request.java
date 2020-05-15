@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 
 
-public  class Request {
+public  abstract class Request {
     private String requestText;
     private String requestDate;
     private Account seller;
@@ -45,11 +45,7 @@ public  class Request {
         allRequests.remove(getRequestFromID(requestId));
     }
 
-    public static void acceptRequest(String requestId){
-        if(requestId.matches("((?!^ +$)^.+$) wants seller account")){
-            AccountRequest.acceptRequestDetail();
-        }
-    }
+    public abstract void acceptRequest();
 
     public static void deleteRequest(String id){
         allRequests.remove(getRequestFromID(id));

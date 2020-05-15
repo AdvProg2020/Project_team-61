@@ -20,7 +20,8 @@ public class ProductsMenu {
 
 
     public void processProducts() {
-        CommandProcessor.setMenuStatus(MenuStatus.PRODUCTSMENU);
+        CommandProcessor.setMenuStatus(MenuStatus.PRODUCTMENU);
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
     }
 
     //array

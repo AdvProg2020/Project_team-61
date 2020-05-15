@@ -105,7 +105,7 @@ public class CustomerMenu {
     public void processPurchase() {
         if (LoginMenu.isLogin()) {
             if (LoginMenu.getLoginAccount().getRole().equals("customer")) {
-             //   CommandProcessor.setSubMenuStatus(SubMenuStatus.PURCHASE);
+                CommandProcessor.setMenuStatus(MenuStatus.PURCHASE);
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
                 CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
                 outputNo = 5;

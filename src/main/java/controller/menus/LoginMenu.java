@@ -4,6 +4,7 @@ import controller.request.AccountRequest;
 import controller.request.FirmRequest;
 import controller.request.Request;
 import model.accounts.Account;
+import model.accounts.AccountStatus;
 import model.accounts.Seller;
 import view.*;
 
@@ -51,7 +52,7 @@ public class LoginMenu {
                 login = true;
                 findRole();
                 CommandProcessor.setSubMenuStatus(subMenuStatus);
-                outputNo = 15;
+
             } else outputNo = 14;
         } else outputNo = 3;
         OutputMassageHandler.showAccountOutput(outputNo);
@@ -61,10 +62,13 @@ public class LoginMenu {
         String role = loginAccount.getRole();
         MenuStatus menu = null;
         if (role.equalsIgnoreCase("customer")) {
+            outputNo = 15;
             menu = MenuStatus.CUSTOMERMENU;
         } else if (role.equalsIgnoreCase("manager")) {
+            outputNo = 15;
             menu = MenuStatus.MANAGERMENU;
         } else if (role.equalsIgnoreCase("seller")) {
+            if()
             menu = MenuStatus.SELLERMENU;
         }
         CommandProcessor.setMenuStatus(menu);
@@ -88,6 +92,7 @@ public class LoginMenu {
                     Request.deleteRequest(id);
                 }
                 accountRequest = new AccountRequest(id);
+                loginAccount.setAccountStatus(AccountStatus.UNDERREVIEWFOREDITING);
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITSELLERACCOUNT);
             } else {
                 if (!field.equalsIgnoreCase("firm")) {

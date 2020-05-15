@@ -5,10 +5,10 @@ import model.firms.Firm;
 import java.util.ArrayList;
 
 public class FirmRequest extends Request {
-    private String name;
-    private double phoneNO;
-    private String address;
-    private String Email;
+    private String name = null;
+    private double phoneNO = 0;
+    private String address = null;
+    private String Email = null;
     private ArrayList<FirmRequest> allFirmRequests;
 
 
@@ -16,6 +16,12 @@ public class FirmRequest extends Request {
     public FirmRequest(String requestID) {
         super(requestID);
         allFirmRequests.add(this);
+    }
+
+    @Override
+    public void acceptRequest() {
+        Firm firm = Firm.getFirmWithID(name);
+        firm.setDetailToFirm(name,phoneNO,address,Email);
     }
 
     public void setName(String name) {
@@ -31,9 +37,4 @@ public class FirmRequest extends Request {
         Email = email;
     }
 
-    public void acceptFirmRequest(){
-        Firm firm = Firm.getFirmWithID(name);
-        firm.setDetailToFirm(name,phoneNO,address,Email);
-
-    }
 }

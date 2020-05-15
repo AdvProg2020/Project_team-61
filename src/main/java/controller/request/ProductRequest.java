@@ -4,25 +4,34 @@ import model.accounts.Account;
 import model.firms.Firm;
 import model.productRelated.Category;
 import model.productRelated.Product;
+import model.productRelated.ProductStatus;
 
 import java.util.ArrayList;
 
 public class ProductRequest extends Request {
 
-    private String productId;
-    private String productName;
-    private double price;
-    private Account sellerName;
-    private Firm companyName;
-    private Category categoryName;
-    private String additionalDetail;
-    private int numberOfProduct;
+    private String productId = null;
+    private String productName = null;
+    private double price = 0;
+    private Account sellerName = null;
+    private Firm companyName = null;
+    private Category categoryName = null;
+    private String additionalDetail = null;
+    private int numberOfProduct = 0;
     private ArrayList<ProductRequest> allProductRequests;
 
 
     public ProductRequest(String requestID) {
         super(requestID);
         allProductRequests.add(this);
+    }
+
+    @Override
+    public void acceptRequest() {
+        Product newProduct = Product.getProductById(productId);
+        newProduct.setDetailProduct(productName, companyName,price, sellerName,numberOfProduct,categoryName);
+        newProduct.setAdditionalDetail(additionalDetail);
+        newProduct.setProductStatus(ProductStatus.CONFIRMED);
     }
 
     public void setProductId(String productId) {
@@ -51,12 +60,6 @@ public class ProductRequest extends Request {
     }
 
 
-    public void acceptRequestDetail(){
-       Product newProduct = Product.getProductById(productId);
-        newProduct.setDetailProduct(productName, companyName,price, sellerName,numberOfProduct,categoryName);
-        newProduct.setAdditionalDetail(additionalDetail);
-        //additional,
-    }
 
 
 }

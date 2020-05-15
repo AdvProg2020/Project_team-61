@@ -28,6 +28,7 @@ public abstract class Account {
     String address;
     Date birthdayDate;
     int usedDiscount=0;
+    private AccountStatus accountStatus;
     ArrayList<DiscountCode> allDiscountCodes;
     private static ArrayList<SaleLog> allSaleLogs;
     private static ArrayList<BuyLog> allBuyLogs;
@@ -141,6 +142,9 @@ public abstract class Account {
         this.address = address;
     }
 
+    public void setAccountStatus(AccountStatus accountStatus) {
+        this.accountStatus = accountStatus;
+    }
 
     //-----------------------------------------------------------------
 

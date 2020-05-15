@@ -62,6 +62,7 @@ public class RegisterMenu {
         } else if (role.equalsIgnoreCase("manager")) {
             createManagerAccount(username);
         } else if (role.equalsIgnoreCase("seller")) {
+
             accountRequest = new AccountRequest(username + " wants seller account");
             outputNo = 2;
         }

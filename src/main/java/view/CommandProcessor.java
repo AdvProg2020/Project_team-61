@@ -387,7 +387,7 @@ public class CommandProcessor {
                         }
                     }
                 }
-                if (menuStatus == MenuStatus.PRODUCTSMENU || menuStatus == MenuStatus.MAINMENU) {
+                /*if (menuStatus == MenuStatus.PRODUCTSMENU || menuStatus == MenuStatus.MAINMENU) {
                     //ProductsMenu
                     if (subMenuStatus == SubMenuStatus.MAINMENU) {
                         if (input.equalsIgnoreCase("products")) {
@@ -460,7 +460,7 @@ public class CommandProcessor {
                         }
                     }
                 }
-                if (menuStatus == MenuStatus.PRODUCTSMENU || menuStatus == MenuStatus.MAINMENU || menuStatus == MenuStatus.SALEMENU) {
+                if (menuStatus == MenuStatus.PRODUCTSMENU|| menuStatus == MenuStatus.SALEMENU) {
                     if (input.equalsIgnoreCase("filtering")) {
                         productsMenu.processFiltering();
                     } else if (input.equalsIgnoreCase("sorting")) {
@@ -487,13 +487,12 @@ public class CommandProcessor {
                         }
                     }
                 }
-                if ((menuStatus == MenuStatus.SALEMENU) || (menuStatus == MenuStatus.MAINMENU)) {
+                if ( (menuStatus == MenuStatus.MAINMENU)) {
                     //SaleMenu
                     if (input.equalsIgnoreCase("offs")) {
                         saleMenu.processOffs();
-                    } else if (input.matches(regex[4])) {
-                        //moshtarak
-                        saleMenu.processShowProductsID(getMatcher(input, regex[4]).group(1));
+                    }else if (input.equalsIgnoreCase("products")) {
+                        productsMenu.processProducts();
                     }
                 } else {
                     OutputMassageHandler.showOutput(0);
