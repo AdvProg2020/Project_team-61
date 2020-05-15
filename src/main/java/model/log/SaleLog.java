@@ -1,7 +1,11 @@
 package model.log;
 
+import com.google.gson.reflect.TypeToken;
 import model.productRelated.Product;
+import view.FileHandling;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,10 +13,11 @@ import java.util.Iterator;
 public class SaleLog extends Log{
 
 
-    public SaleLog(String logId) {
+    public SaleLog(String logId) throws IOException {
         super(logId);
         allSellersLog.add(this);
         localDateTimeForSaleLog=LocalDateTime.now();
+        writeInJ();
     }
 
     //detail
@@ -77,5 +82,23 @@ public class SaleLog extends Log{
 
     public int compareTo(SaleLog saleLog) {
         return getLocalDateTimeForSaleLog().compareTo(saleLog.getLocalDateTimeForSaleLog());
+    }
+
+    public static void writeInJ() throws IOException {
+        Type collectionType = new TypeToken<ArrayList<SaleLog>>(){}.getType();
+        String json= FileHandling.getGson().toJson(getAllSellersLog(),collectionType);
+        FileHandling.turnToArray(json+" "+"saleLog.json");
+    }
+
+    @Override
+    public String toString() {
+        return "SaleLog{" +
+                "receivedAmount=" + receivedAmount +
+                ", reducedAmount=" + reducedAmount +
+                ", customerName='" + customerName + '\'' +
+                ", product=" + product +
+                ", localDateTimeForSaleLog=" + localDateTimeForSaleLog +
+                ", allSoldProduct=" + allSoldProduct +
+                '}';
     }
 }

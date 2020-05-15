@@ -1,11 +1,17 @@
 package model.accounts;
 
+import com.google.gson.reflect.TypeToken;
 import model.log.BuyLog;
 import model.log.SaleLog;
 import model.off.DiscountCode;
+import model.productRelated.Product;
+import view.FileHandling;
 
 import javax.xml.crypto.Data;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 
@@ -23,11 +29,11 @@ public abstract class Account {
     Date birthdayDate;
     int usedDiscount=0;
     ArrayList<DiscountCode> allDiscountCodes;
-    ArrayList<SaleLog> allSaleLogs;
-    ArrayList<BuyLog> allBuyLogs;
+    private static ArrayList<SaleLog> allSaleLogs;
+    private static ArrayList<BuyLog> allBuyLogs;
     private  static ArrayList<Account> allAccounts;
 
-    public  void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo, Data birthdayDate) {
+    public  void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo, Data birthdayDate) throws IOException {
 
         this.password = password;
         this.name = name;
@@ -35,6 +41,7 @@ public abstract class Account {
         this.email = Email;
         this.phoneNo = phoneNo;
         this.birthdayDate = (Date) birthdayDate;
+        writeInJ();
     }
 
 
@@ -138,6 +145,14 @@ public abstract class Account {
     //-----------------------------------------------------------------
 
 
+    public static ArrayList<Account> getAllAccounts() {
+        return allAccounts;
+    }
+
+    public static ArrayList<BuyLog> getAllBuyLogs() {
+        return allBuyLogs;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -168,5 +183,38 @@ public abstract class Account {
 
     public int getUsedDiscount() {
         return usedDiscount;
+    }
+
+    public static void writeInJ() throws IOException {
+        Type collectionType = new TypeToken<ArrayList<Account>>(){}.getType();
+        String json= FileHandling.getGson().toJson(Account.allAccounts,collectionType);
+        FileHandling.turnToArray(json+" "+"account.json");
+    }
+
+    public static Comparator<Account> accountComparatorForUsername = new Comparator<Account>() {
+
+        public int compare(Account s1, Account s2) {
+            String name1 = s1.getName().toUpperCase();
+            String name2 = s2.getName().toUpperCase();
+            return name1.compareTo(name2);
+        }};
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNo=" + phoneNo +
+                ", credit=" + credit +
+                ", role='" + role + '\'' +
+                ", currentPhoneNo=" + currentPhoneNo +
+                ", address='" + address + '\'' +
+                ", birthdayDate=" + birthdayDate +
+                ", usedDiscount=" + usedDiscount +
+                ", allDiscountCodes=" + allDiscountCodes +
+                '}';
     }
 }

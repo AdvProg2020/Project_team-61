@@ -1,11 +1,16 @@
 package model.productRelated;
+import com.google.gson.reflect.TypeToken;
+import view.FileHandling;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 //import model.productRelated.Product;
 public class Category{
     private String name;
     private String traits;
-    private ArrayList <Category>subCategories = new ArrayList<>();
+    private static ArrayList <Category>subCategories = new ArrayList<>();
     private ArrayList <Product> allProducts = new ArrayList<>();
     private static ArrayList <Category> allCategories;
 
@@ -17,9 +22,10 @@ public class Category{
 
     */
 
-    public Category(String name) {
+    public Category(String name) throws IOException {
         this.name = name;
         allCategories.add(this);
+        writeInJ();
     }
 
     public String getName() {
@@ -30,7 +36,7 @@ public class Category{
         return traits;
     }
 
-    public ArrayList<Category> getSubCategories() {
+    public static ArrayList<Category> getSubCategories() {
         return subCategories;
     }
 
@@ -83,5 +89,10 @@ public class Category{
                 ", subCategories=" + subCategories +
                 ", allProducts=" + allProducts
                 ;
+    }
+    public static void writeInJ() throws IOException {
+        Type collectionType = new TypeToken<ArrayList<Category>>(){}.getType();
+        String json= FileHandling.getGson().toJson(Category.allCategories,collectionType);
+        FileHandling.turnToArray(json+" "+"category.json");
     }
 }

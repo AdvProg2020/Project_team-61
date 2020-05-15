@@ -1,7 +1,11 @@
 package model.productRelated;
 
+import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
+import view.FileHandling;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Score {
@@ -16,14 +20,15 @@ public class Score {
     Account personToScore;
 
     //lists
-    ArrayList<Score> allScores = new ArrayList<>();
+    public  static ArrayList<Score> allScores = new ArrayList<>();
 
 
-    public Score(Account personToScore, Product productTOScore, int score) {
+    public Score(Account personToScore, Product productTOScore, int score) throws IOException {
         this.personToScore = personToScore;
         this.productTOScore = productTOScore;
         this.score = score;
         allScores.add(this);
+        writeInJ();
     }
 
 
@@ -41,7 +46,7 @@ public class Score {
         return averageScore;
     }
 
-    public ArrayList<Score> getAllScores() {
+    public static ArrayList<Score> getAllScores() {
         return allScores;
     }
 
@@ -56,5 +61,19 @@ public class Score {
         productTOScore.setAverageScore(total);
     }
 
+    public static void writeInJ() throws IOException {
+        Type collectionType = new TypeToken<ArrayList<Score>>(){}.getType();
+        String json= FileHandling.getGson().toJson(getAllScores(),collectionType);
+        FileHandling.turnToArray(json+" "+"score.json");
+    }
 
+    @Override
+    public String toString() {
+        return "Score{" +
+                "score=" + score +
+                ", averageScore=" + averageScore +
+                ", productTOScore=" + productTOScore +
+                ", personToScore=" + personToScore +
+                '}';
+    }
 }
