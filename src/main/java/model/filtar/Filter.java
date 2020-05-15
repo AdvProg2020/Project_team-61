@@ -1,18 +1,34 @@
 package model.filtar;
 
 
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 import model.off.DiscountCode;
 import model.productRelated.Category;
 import model.productRelated.Product;
+import view.FileHandling;
 
+import java.io.FileNotFoundException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public abstract class Filter {
+
+
     Product product;
     public static int numberOfFilter = 0;
     String filterName;
-    public static ArrayList<Product> newArrayOfProductFilter = new ArrayList<>();
+    public static ArrayList<Product> newArrayOfProductFilter;
+
+    static {
+        try {
+            newArrayOfProductFilter = getListOfProductFromFile();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static ArrayList<ArrayList<Product>> listOfFilters = new ArrayList<>();
     public static ArrayList<ArrayList<Product>> helpFilter = new ArrayList<>();
     public static ArrayList<String> availableFilters = new ArrayList<>();
@@ -38,27 +54,45 @@ public abstract class Filter {
         return numberOfFilter;
     }
 
+    public static ArrayList<Product> getListOfProductFromFile() throws FileNotFoundException {
+        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
+        }.getType();
+        JsonReader proReader= FileHandling.readFile("product.json");
+        ArrayList<Product> data = FileHandling.getGson().fromJson(proReader, REVIEW_TYPE);
+        return data;
+    }
+
 
     //filtering-----------------------------------------------------------------------------
 
-    public ArrayList<Product> categoryFilter(Category category) {
-        newArrayOfProductFilter = Product.getProductList().stream().filter(product1 -> product.getCategory().equals(category)).collect(Collectors.toCollection(ArrayList::new));
+
+
+    public static ArrayList<Product> getNewArrayOfProductFilter() {
+        return newArrayOfProductFilter;
+    }
+
+    public static ArrayList<String> getAvailableFilters() {
+        return availableFilters;
+    }
+
+    public ArrayList<Product> categoryFilter(Category category) throws FileNotFoundException {
+        newArrayOfProductFilter = newArrayOfProductFilter.stream().filter(product1 -> product.getCategory().equals(category)).collect(Collectors.toCollection(ArrayList::new));
         listOfFilters.add(1, newArrayOfProductFilter);
         helpFilter.add(newArrayOfProductFilter);
         availableFilters.remove(0);
         return product.getProductList();
     }
 
-    public ArrayList<Product> companiesFilter(String companiesName) {
-        newArrayOfProductFilter = Product.getProductList().stream().filter(product1 -> product.getCompaniesName().equals(companiesName)).collect(Collectors.toCollection(ArrayList::new));
+    public ArrayList<Product> companiesFilter(String companiesName) throws FileNotFoundException {
+        newArrayOfProductFilter = newArrayOfProductFilter.stream().filter(product1 -> product.getCompaniesName().equals(companiesName)).collect(Collectors.toCollection(ArrayList::new));
         listOfFilters.add(2, newArrayOfProductFilter);
         helpFilter.add(newArrayOfProductFilter);
         availableFilters.remove(1);
         return newArrayOfProductFilter;
     }
 
-    public ArrayList<Product> productNameFilter(String productName) {
-        newArrayOfProductFilter = Product.getProductList().stream().filter(product1 -> product.getProductName().equals(productName)).collect(Collectors.toCollection(ArrayList::new));
+    public ArrayList<Product> productNameFilter(String productName) throws FileNotFoundException {
+        newArrayOfProductFilter = newArrayOfProductFilter.stream().filter(product1 -> product.getProductName().equals(productName)).collect(Collectors.toCollection(ArrayList::new));
         listOfFilters.add(4, newArrayOfProductFilter);
         helpFilter.add(newArrayOfProductFilter);
         availableFilters.remove(3);
@@ -66,11 +100,13 @@ public abstract class Filter {
     }
 
     public ArrayList<Product> periodFilter(int n, int m) {
-        for (Product product1 : Product.getProductList()) {
+        ArrayList<Product> helper=null;
+        for (Product product1 : newArrayOfProductFilter) {
             if (product1.getPrice() > n && product1.getPrice() < m) {
-                newArrayOfProductFilter.add(product1);
+                helper.add(product1);
             }
         }
+        newArrayOfProductFilter.removeAll(helper);
         listOfFilters.add(5,newArrayOfProductFilter);
         helpFilter.add(newArrayOfProductFilter);
         availableFilters.remove(4);

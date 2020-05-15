@@ -1,5 +1,11 @@
 package model.firms;
 
+import com.google.gson.reflect.TypeToken;
+import model.productRelated.Product;
+import view.FileHandling;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public abstract class Firm {
@@ -10,9 +16,10 @@ public abstract class Firm {
     private String Email;
     private static ArrayList<Firm> allFirms;
 
-    public Firm(String name) {
+    public Firm(String name) throws IOException {
         this.name = name;
         allFirms.add(this);
+        writeInJ();
     }
 
     public void setDetailToFirm(String name, Double phoneNO, String address, String email){
@@ -72,4 +79,19 @@ public abstract class Firm {
         allFirms.remove(getFirmWithID(ID));
     }
 
+    public static void writeInJ() throws IOException {
+        Type collectionType = new TypeToken<ArrayList<Firm>>(){}.getType();
+        String json= FileHandling.getGson().toJson(Firm.allFirms,collectionType);
+        FileHandling.turnToArray(json+" "+"firm.json");
+    }
+
+    @Override
+    public String toString() {
+        return "Firm{" +
+                "name='" + name + '\'' +
+                ", phoneNO=" + phoneNO +
+                ", address='" + address + '\'' +
+                ", Email='" + Email + '\'' +
+                '}';
+    }
 }

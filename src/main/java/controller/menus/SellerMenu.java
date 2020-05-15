@@ -20,14 +20,21 @@ import java.util.Date;
 public class SellerMenu {
 
     private int outputNo;
-    private String field;
-    private int detailMenu = 0;
+    private static String field;
+    private static int detailMenu = 0;
     private ProductRequest productRequest;
     private SaleRequest saleRequest;
     private String productId;
     private String offId;
     private Account loginAccount = LoginMenu.getLoginAccount();
 
+    public static String getField() {
+        return field;
+    }
+
+    public static int getDetailMenu() {
+        return detailMenu;
+    }
 
     //gson
     public void processViewCompanyInformation() {
@@ -237,6 +244,7 @@ public class SellerMenu {
 
     //array
     public void processViewOffs() {
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWOFFS);
         OutputHandler.showOffs();
     }
 
@@ -325,7 +333,7 @@ public class SellerMenu {
         OutputMassageHandler.showSellerOutput(0);
     }
 
-    public boolean checkSaleId(String detail) {
+    private boolean checkSaleId(String detail) {
         if (!Sale.isThereSaleWithId(detail)) {
             Sale sale = new Sale(detail);
             sale.setSaleStatus(SaleStatus.UNDERREVIEWFORCONSTRUCTION);

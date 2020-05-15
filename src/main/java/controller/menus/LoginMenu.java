@@ -10,13 +10,17 @@ import view.*;
 public class LoginMenu {
     private int outputNo;
     private static Account loginAccount;
-    private String field = null;
+    private static String field = null;
     private String username = null;
     private static boolean login = false;
     private SubMenuStatus subMenuStatus;
     private FirmRequest firmRequest;
     private AccountRequest accountRequest;
     private static String firmName;
+
+    public static String getField() {
+        return field;
+    }
 
     public static Account getLoginAccount() {
         return loginAccount;
@@ -30,6 +34,7 @@ public class LoginMenu {
         if (!login) {
             if (username.matches("^(?i)(?=.[a-z])(?=.[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
                 if (Account.isThereAccountWithUsername(username)) {
+                    this.username =username;
                     subMenuStatus = CommandProcessor.getSubMenuStatus();
                     CommandProcessor.setSubMenuStatus(SubMenuStatus.PASSWORD);
                     outputNo = 2;
@@ -69,8 +74,10 @@ public class LoginMenu {
     public void viewPersonalInfo() {
         //if(login) {
         OutputHandler.showAccountInformation();
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWPERSONALINFO);
         // }outputHandler.showAccountOutput(25);
     }
+
 
     public void processEdit(String field) {
         // if(login) {
@@ -127,7 +134,7 @@ public class LoginMenu {
         OutputMassageHandler.showAccountOutput(outputNo);
     }
 
-    public void editField(String edit) {
+    public void editAccount(String edit) {
         if (this.field.equalsIgnoreCase("password")) {
             if (edit.matches("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}$")) {
                 loginAccount.setPassword(edit);
@@ -178,7 +185,7 @@ public class LoginMenu {
                 firmName = name;
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMFIELD);
                 outputNo = 5;
-            }else outputNo =12;
+            } else outputNo = 12;
         } else outputNo = 3;
         OutputMassageHandler.showFirmOutput(outputNo);
     }

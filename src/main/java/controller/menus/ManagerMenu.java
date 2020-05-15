@@ -8,6 +8,7 @@ import model.productRelated.Category;
 import model.productRelated.Product;
 import view.*;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,10 +19,18 @@ public class ManagerMenu {
     private int outputNo;
     private DiscountCode editableDiscountCode;
     private Category editableCategory;
-    private String field;
-    private int detailMenu = 0;
+    private static String field;
+    private static int detailMenu = 0;
     private DiscountCode newDiscountCode;
     private  Category newCategory;
+
+    public static String getField() {
+        return field;
+    }
+
+    public static int getDetailMenu() {
+        return detailMenu;
+    }
 
     //gson
     public void processManageUsers() {
@@ -204,7 +213,7 @@ public class ManagerMenu {
     }
 
     ///????????ParseException
-    public void editDiscountCodeField(String edit) {
+    public void editDiscountCodeField(String edit) throws ParseException {
         if (field.matches("(?i)start\\s+Of\\s+Discount\\s+Period")) {
             if (edit.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
                 Date currentDate=new Date();
@@ -317,7 +326,7 @@ public class ManagerMenu {
 
     // array
     public void processManageCategories() {
-        OutputHandler.showCategories();
+        OutputHandler.showCategories(Category.);
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGECATEGORIES);
 
     }

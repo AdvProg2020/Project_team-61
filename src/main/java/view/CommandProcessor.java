@@ -97,11 +97,10 @@ public class CommandProcessor {
             if (input.equalsIgnoreCase("help")) {
                 menuSituation.processHelp();
             }
-            if (input.matches(regex[1])) {
-                loginMenu.processLogin(getMatcher(input, regex[1]).group(1));
-            }
             if (internalMenu == InternalMenu.MAINMENU) {
-                if (input.equalsIgnoreCase("logout")) {
+                if (input.matches(regex[1])) {
+                    loginMenu.processLogin(getMatcher(input, regex[1]).group(1));
+                } else if (input.equalsIgnoreCase("logout")) {
                     loginMenu.processLogout();
                 } else if (input.matches(regex[0])) {
                     registerMenu.processRegister(getMatcher(input, regex[0]).group(1), getMatcher(input, regex[0]).group(2));
@@ -117,11 +116,7 @@ public class CommandProcessor {
                     registerMenu.completeRegisterProcess(getMatcher(input, regex[27]).group(1));
                 }
             }
-            if (subMenuStatus == subMenuStatus.FIRMINFORMATION) {
-                if (input.matches(regex[27])) {
-                    registerMenu.createFirm(getMatcher(input, regex[27]).group(1));
-                }
-            }
+
             if (menuStatus == MenuStatus.MANAGERMENU) {
                 //ManagerMenu
                 if (subMenuStatus == SubMenuStatus.MAINMENU) {
@@ -139,6 +134,10 @@ public class CommandProcessor {
                         managerMenu.processManageRequests();
                     } else if (input.equalsIgnoreCase("manage categories")) {
                         managerMenu.processManageCategories();
+                    } else if (subMenuStatus == SubMenuStatus.VIEWPERSONALINFO) {
+                        if (input.matches(regex[2])) {
+                            loginMenu.processEdit(getMatcher(input, regex[2]).group(1));
+                        }
                     }
                 } else if (subMenuStatus == SubMenuStatus.MANAGEUSERS) {
                     if (input.matches(regex[6])) {
@@ -176,314 +175,338 @@ public class CommandProcessor {
                     } else if (input.matches(regex[17])) {
                         managerMenu.removeCategory(getMatcher(input, regex[17]).group(1));
                     }
-                } else if (subMenuStatus == SubMenuStatus.EDIT) {
-                    if (input.matches(regex[2])) {
-                        loginMenu.processEdit(getMatcher(input, regex[2]).group(1));
+                    //sub
+                    else if (subMenuStatus.equals(SubMenuStatus.DISCOUNTCODEFIELD)) {
+                        if (input.matches(regex[27])) {
+                            managerMenu.discountCodeField(getMatcher(input, regex[27]).group(1));
+                        }
+                    } else if (subMenuStatus.equals(SubMenuStatus.EDITDISCOUNTCODE)) {
+                        if (input.matches(regex[27])) {
+                            managerMenu.editDiscountCodeField(getMatcher(input, regex[27]).group(1));
+                        }
+                    } else if (subMenuStatus.equals(SubMenuStatus.ADDDISCOUNTCODE)) {
+                        if (input.matches(regex[15])) {
+                            managerMenu.createNewDiscountCode(getMatcher(input, regex[16]).group(1));
+                        }
+                    } else if (subMenuStatus.equals(SubMenuStatus.DETAILDESCOUNTCODE)) {
+                        if (input.matches(regex[15])) {
+                            managerMenu.setDetailToDiscountCode(getMatcher(input, regex[16]).group(1));
+                        }
+                    } else if (subMenuStatus.equals(SubMenuStatus.DETAILCATEGORY)) {
+                        if (input.matches(regex[27])) {
+                            managerMenu.setDetailToCategory(getMatcher(input, regex[27]).group(1));
+                        }
+                    } else if (subMenuStatus.equals(SubMenuStatus.CATEGORYFIELD)) {
+                        if (input.matches(regex[27])) {
+                            managerMenu.categoryField(getMatcher(input, regex[27]).group(1));
+                        }
+                    } else if (subMenuStatus.equals(SubMenuStatus.EDITCATEGORY)) {
+                        if (input.matches(regex[27])) {
+                            managerMenu.editCategoryField(getMatcher(input, regex[27]).group(1));
+                        }
+                    } else if (subMenuStatus == subMenuStatus.EDITACCOUNT) {
+                        if (input.matches(regex[27])) {
+                            loginMenu.editAccount(getMatcher(input, regex[27]).group(1));
+                        }
+                    } else if (subMenuStatus == subMenuStatus.CREATEMANAGERACCOUNT) {
+                        if (input.matches(regex[27])) {
+                            registerMenu.processRegister("manager", getMatcher(input, regex[27]).group(1));
+                        }
+                    } else if (subMenuStatus == subMenuStatus.EDITSELLERACCOUNT) {
+                        if (input.matches(regex[27])) {
+                            loginMenu.editSellerField(getMatcher(input, regex[27]).group(1));
+                        }
                     }
-                }
-                //$$$$$
-                else if (subMenuStatus.equals(SubMenuStatus.DISCOUNTCODEFIELD)) {
-                    managerMenu.discountCodeField(getMatcher(input, regex[27]).group(1));
-                } else if (subMenuStatus.equals(SubMenuStatus.EDITDISCOUNTCODE)) {
-                    managerMenu.editDiscountCodeField(getMatcher(input, regex[27]).group(1));
-                } else if (subMenuStatus.equals(SubMenuStatus.DETAILCATEGORY)) {
-                    managerMenu.setDetailToCategory(getMatcher(input, regex[27]).group(1));
-                } else if (subMenuStatus.equals(SubMenuStatus.CATEGORYFIELD)) {
-                    managerMenu.categoryField(getMatcher(input, regex[27]).group(1));
-                } else if (subMenuStatus.equals(SubMenuStatus.EDITCATEGORY)) {
-                    managerMenu.editCategoryField(getMatcher(input, regex[27]).group(1));
-                } else if (subMenuStatus == subMenuStatus.EDITACCOUNT) {
-                    if (input.matches(regex[27])) {
-                        loginMenu.editField(getMatcher(input, regex[27]).group(1));
-                    }
-                } else if (subMenuStatus == subMenuStatus.CREATEMANAGERACCOUNT) {
-                    if (input.matches(regex[27])) {
-                        registerMenu.processRegister("manager", getMatcher(input, regex[27]).group(1));
-                    }
-                } else if (subMenuStatus.equals(SubMenuStatus.ADDDISCOUNTCODE)) {
-                    if (input.matches(regex[15])) {
-                        managerMenu.createNewDiscountCode(getMatcher(input, regex[16]).group(1));
-                    }
-                } else if (subMenuStatus.equals(SubMenuStatus.DETAILDESCOUNTCODE)) {
-                    if (input.matches(regex[15])) {
-                        managerMenu.setDetailToDiscountCode(getMatcher(input, regex[16]).group(1));
-                    }
-                } else if (subMenuStatus.equals(SubMenuStatus.CREATEMANAGERACCOUNT)) {
-                    if (input.matches(regex[15])) {
-                        registerMenu.processRegister("manager", getMatcher(input, regex[16]).group(1));
-                    }
-                }
-            }
-            if (menuStatus == MenuStatus.SELLERMENU) {
-                // SellerMenu
-                if (subMenuStatus == SubMenuStatus.MAINMENU) {
-                    if (input.equalsIgnoreCase("view company information")) {
-                        sellerMenu.processViewCompanyInformation();
-                    } else if (input.equalsIgnoreCase("view personal info")) {
-                        loginMenu.viewPersonalInfo();
-                    } else if (input.equalsIgnoreCase("view sales history")) {
-                        sellerMenu.processViewSalesHistory();
-                    } else if (input.equalsIgnoreCase("manage products")) {
-                        sellerMenu.processManageProducts();
-                    } else if (input.equalsIgnoreCase("add product")) {
-                        sellerMenu.processAddProduct();
-                    } else if (input.matches(regex[3])) {
-                        sellerMenu.processRemoveProduct(getMatcher(input, regex[3]).group(1));
-                    } else if (input.equalsIgnoreCase("show categories")) {
-                        sellerMenu.processShowCategories();
-                    } else if (input.equalsIgnoreCase("view offs")) {
-                        sellerMenu.processViewOffs();
-                    } else if (input.equalsIgnoreCase("view balance")) {
-                        sellerMenu.processViewBalance();
-                    }
-                } else if (subMenuStatus == SubMenuStatus.MANAGEPRODUCTS) {
-                    if (input.matches(regex[6])) {
-                        sellerMenu.viewProduct(getMatcher(input, regex[6]).group(1));
-                    } else if (input.matches(regex[18])) {
-                        sellerMenu.viewBuyersProduct(getMatcher(input, regex[18]).group(1));
-                    } else if (input.matches(regex[15])) {
-                        sellerMenu.editProduct(getMatcher(input, regex[15]).group(1));
-                    }
-                } else if (subMenuStatus == SubMenuStatus.VIEWOFFS) {
-                    if (input.matches(regex[6])) {
-                        sellerMenu.viewOff(getMatcher(input, regex[6]).group(1));
-                    } else if (input.matches(regex[15])) {
-                        sellerMenu.editOff(getMatcher(input, regex[15]).group(1));
-                    } else if (input.equalsIgnoreCase("add off")) {
-                        sellerMenu.addOff();
-                    }
-                } else if (subMenuStatus == SubMenuStatus.EDIT) {
-                    if (input.matches(regex[2])) {
-                        loginMenu.processEdit(getMatcher(input, regex[2]).group(1));
-                    }
-                }
-                ///$$$$$$$$$$$$$
-                if (subMenuStatus.equals(SubMenuStatus.PRODUCTFIELD)) {
-                    sellerMenu.productField(getMatcher(input, regex[27]).group(1));
 
                 }
-                if (subMenuStatus.equals(SubMenuStatus.EDITPRODUCT)) {
-                    sellerMenu.editProductField(getMatcher(input, regex[27]).group(1));
-                }
-                if (subMenuStatus.equals(SubMenuStatus.ADDPRODUCT)) {
-                    sellerMenu.addProduct(getMatcher(input, regex[27]).group(1));
-                }
-                if (subMenuStatus.equals(SubMenuStatus.SALEFIELD)) {
-                    sellerMenu.offField(getMatcher(input, regex[27]).group(1));
+                if (menuStatus == MenuStatus.SELLERMENU) {
+                    // SellerMenu
+                    if (subMenuStatus == SubMenuStatus.MAINMENU) {
+                        if (input.equalsIgnoreCase("view company information")) {
+                            sellerMenu.processViewCompanyInformation();
+                        } else if (input.equalsIgnoreCase("view personal info")) {
+                            loginMenu.viewPersonalInfo();
+                        } else if (input.equalsIgnoreCase("view sales history")) {
+                            sellerMenu.processViewSalesHistory();
+                        } else if (input.equalsIgnoreCase("manage products")) {
+                            sellerMenu.processManageProducts();
+                        } else if (input.equalsIgnoreCase("add product")) {
+                            sellerMenu.processAddProduct();
+                        } else if (input.matches(regex[3])) {
+                            sellerMenu.processRemoveProduct(getMatcher(input, regex[3]).group(1));
+                        } else if (input.equalsIgnoreCase("show categories")) {
+                            sellerMenu.processShowCategories();
+                        } else if (input.equalsIgnoreCase("view offs")) {
+                            sellerMenu.processViewOffs();
+                        } else if (input.equalsIgnoreCase("view balance")) {
+                            sellerMenu.processViewBalance();
+                        }
+                    } else if (subMenuStatus == SubMenuStatus.MANAGEPRODUCTS) {
+                        if (input.matches(regex[6])) {
+                            sellerMenu.viewProduct(getMatcher(input, regex[6]).group(1));
+                        } else if (input.matches(regex[18])) {
+                            sellerMenu.viewBuyersProduct(getMatcher(input, regex[18]).group(1));
+                        } else if (input.matches(regex[15])) {
+                            sellerMenu.editProduct(getMatcher(input, regex[15]).group(1));
+                        }
+                    } else if (subMenuStatus == SubMenuStatus.VIEWOFFS) {
+                        if (input.matches(regex[6])) {
+                            sellerMenu.viewOff(getMatcher(input, regex[6]).group(1));
+                        } else if (input.matches(regex[15])) {
+                            sellerMenu.editOff(getMatcher(input, regex[15]).group(1));
+                        } else if (input.equalsIgnoreCase("add off")) {
+                            sellerMenu.addOff();
+                        }
+                    } else if (subMenuStatus == SubMenuStatus.VIEWPERSONALINFO) {
+                        if (input.matches(regex[2])) {
+                            loginMenu.processEdit(getMatcher(input, regex[2]).group(1));
+                        }
+                    }
+                    ///$$$$$$$$$$$$$
+                    if (subMenuStatus.equals(SubMenuStatus.PRODUCTFIELD)) {
+                        if (input.matches(regex[27])) {
+                            sellerMenu.productField(getMatcher(input, regex[27]).group(1));
+                        }
+                    } else if (subMenuStatus.equals(SubMenuStatus.EDITPRODUCT)) {
+                        if (input.matches(regex[27])) {
+                            sellerMenu.editProductField(getMatcher(input, regex[27]).group(1));
+                        }
+                    } else if (subMenuStatus.equals(SubMenuStatus.ADDPRODUCT)) {
+                        if (input.matches(regex[27])) {
+                            sellerMenu.addProduct(getMatcher(input, regex[27]).group(1));
+                        }
+                    } else if (subMenuStatus.equals(SubMenuStatus.SALEFIELD)) {
+                        if (input.matches(regex[27])) {
+                            sellerMenu.offField(getMatcher(input, regex[27]).group(1));
+                        }
+                    } else if (subMenuStatus.equals(SubMenuStatus.EDITSALE)) {
+                        if (input.matches(regex[27])) {
+                            sellerMenu.editProductField(getMatcher(input, regex[27]).group(1));
+                        }
+                    } else if (subMenuStatus.equals(SubMenuStatus.FIRMFIELD)) {
+                        if (input.matches(regex[27])) {
+                            loginMenu.firmField(getMatcher(input, regex[27]).group(1));
+                        }
+                    } else if (subMenuStatus.equals(SubMenuStatus.EDITFIRM)) {
+                        if (input.matches(regex[27])) {
+                            loginMenu.editFirm(getMatcher(input, regex[27]).group(1));
+                        }
+                    } else if (subMenuStatus.equals(SubMenuStatus.FIRMNAME)) {
+                        if (input.matches(regex[27])) {
+                            loginMenu.firmName(getMatcher(input, regex[27]).group(1));
+                        }
+                    } else if (subMenuStatus.equals(SubMenuStatus.ADDSALE)) {
+                        if (input.matches(regex[27])) {
+                            sellerMenu.setDetailsToSale(getMatcher(input, regex[27]).group(1));
+                        }
+                    } else if (subMenuStatus == subMenuStatus.EDITSELLERACCOUNT) {
+                        if (input.matches(regex[27])) {
+                            loginMenu.editSellerField(getMatcher(input, regex[27]).group(1));
+                        }
+                    }
+                    if (subMenuStatus == subMenuStatus.ADDFIRM) {
+                        if (input.matches(regex[27])) {
+                            registerMenu.createFirm(getMatcher(input, regex[27]).group(1));
+                        }
+                    }
+
 
                 }
-                if (subMenuStatus.equals(SubMenuStatus.FIRMFIELD)) {
-                    loginMenu.firmField(getMatcher(input, regex[27]).group(1));
-
-                }
-                if (subMenuStatus.equals(SubMenuStatus.EDITFIRM)) {
-                    loginMenu.editFirm(getMatcher(input, regex[27]).group(1));
-
-                }
-                if (subMenuStatus.equals(SubMenuStatus.FIRMNAME)) {
-                    loginMenu.firmName(getMatcher(input, regex[27]).group(1));
-
-                }
-                if (subMenuStatus.equals(SubMenuStatus.EDITSALE)) {
-                    sellerMenu.editProductField(getMatcher(input, regex[27]).group(1));
-                } else if (subMenuStatus.equals(SubMenuStatus.ADDSALE)) {
-                    sellerMenu.setDetailsToSale(getMatcher(input, regex[27]).group(1));
-                } else if (subMenuStatus == subMenuStatus.EDITSELLERACCOUNT) {
-                    if (input.matches(regex[27])) {
-                        loginMenu.editSellerField(getMatcher(input, regex[27]).group(1));
+                if (menuStatus == MenuStatus.CUSTOMERMENU) {
+                    //CustomerMenu
+                    if (subMenuStatus == SubMenuStatus.MAINMENU) {
+                        if (input.equalsIgnoreCase("view cart")) {
+                            customerMenu.processViewCart();
+                        } else if (input.equalsIgnoreCase("view personal info")) {
+                            loginMenu.viewPersonalInfo();
+                        } else if (input.equalsIgnoreCase("purchase")) {
+                            customerMenu.processPurchase();
+                        } else if (input.equalsIgnoreCase("view orders")) {
+                            customerMenu.processViewOrders();
+                        } else if (input.equalsIgnoreCase("view balance")) {
+                            customerMenu.processViewBalance();
+                        } else if (input.equalsIgnoreCase("view discount codes")) {
+                            customerMenu.processViewDiscountCodes();
+                        }
+                    } else if (subMenuStatus == SubMenuStatus.VIEWCART) {
+                        if (input.equalsIgnoreCase("show products")) {
+                            customerMenu.showProducts();
+                        } else if (input.matches(regex[6])) {
+                            customerMenu.viewProduct(getMatcher(input, regex[6]).group(1));
+                        } else if (input.matches(regex[19])) {
+                            customerMenu.increaseProductNumber(getMatcher(input, regex[19]).group(1));
+                        } else if (input.matches(regex[20])) {
+                            customerMenu.decreaseProductNumber(getMatcher(input, regex[20]).group(1));
+                        } else if (input.equalsIgnoreCase("show total price")) {
+                            customerMenu.showTotalPrice();
+                        } else if (input.equalsIgnoreCase("purchase")) {
+                            customerMenu.purchase();
+                        }
+                    } else if (subMenuStatus == SubMenuStatus.VIEWORDERS) {
+                        if (input.matches(regex[21])) {
+                            customerMenu.showOrder(getMatcher(input, regex[21]).group(1));
+                        } else if (input.matches(regex[22])) {
+                            customerMenu.rateProduct(getMatcher(input, regex[22]).group(1), Integer.parseInt(getMatcher(input, regex[22]).group(2)));
+                        }
+                    } else if (subMenuStatus == SubMenuStatus.VIEWPERSONALINFO) {
+                        if (input.matches(regex[2])) {
+                            loginMenu.processEdit(getMatcher(input, regex[2]).group(1));
+                        }
+                        //SUB
+                    } else if (subMenuStatus == SubMenuStatus.INCREASEPRODUCTNUMBER) {
+                        if (input.matches(regex[21])) {
+                            customerMenu.increaseLogProduct(getMatcher(input, regex[21]).group(1));
+                        }
+                    } else if (subMenuStatus == SubMenuStatus.DECREASEPRODUCTNUMBER) {
+                        if (input.matches(regex[21])) {
+                            customerMenu.decreaseLogProduct(getMatcher(input, regex[21]).group(1));
+                        }
+                    } else if (subMenuStatus == subMenuStatus.EDITACCOUNT) {
+                        if (input.matches(regex[27])) {
+                            loginMenu.editAccount(getMatcher(input, regex[27]).group(1));
+                        }
                     }
                 }
-
-
-            }
-            if (menuStatus == MenuStatus.CUSTOMERMENU) {
-                //CustomerMenu
-                if (subMenuStatus == SubMenuStatus.MAINMENU) {
-                    if (input.equalsIgnoreCase("view cart")) {
-                        customerMenu.processViewCart();
-                    } else if (input.equalsIgnoreCase("view personal info")) {
-                        loginMenu.viewPersonalInfo();
-                    } else if (input.equalsIgnoreCase("purchase")) {
+                //ReceiverInformation
+                if (menuStatus == MenuStatus.PURCHASE) {
+                    if (subMenuStatus == SubMenuStatus.RECIVERINFORMATION) {
+                        if (input.matches(regex[27])) {
+                            registerMenu.receiverInformation(getMatcher(input, regex[27]).group(1));
+                        }
+                    } else if (subMenuStatus == SubMenuStatus.HAVEDISCOUNT) {
+                        if (input.matches(regex[27])) {
+                            customerMenu.haveDiscount(getMatcher(input, regex[27]).group(1));
+                        }
+                    } else if (subMenuStatus == SubMenuStatus.CHECKDISCOUNTCODE) {
+                        if (input.matches(regex[27])) {
+                            customerMenu.discountCodeValidation(getMatcher(input, regex[27]).group(1));
+                        }
+                    } else if (subMenuStatus == SubMenuStatus.PAYMENT) {
+                        if (input.matches(regex[27])) {
+                            customerMenu.payment(getMatcher(input, regex[27]).group(1));
+                        }
+                    }
+                }
+                if (menuStatus == MenuStatus.PRODUCTSMENU || menuStatus == MenuStatus.MAINMENU) {
+                    //ProductsMenu
+                    if (subMenuStatus == SubMenuStatus.MAINMENU) {
+                        if (input.equalsIgnoreCase("products")) {
+                            productsMenu.processProducts();
+                        } else if (input.equalsIgnoreCase("view categories")) {
+                            productsMenu.processViewCategories();
+                        } else if (input.equalsIgnoreCase("filtering")) {
+                            productsMenu.processFiltering();
+                        } else if (input.equalsIgnoreCase("sorting")) {
+                            productsMenu.processSorting();
+                        } else if (input.equalsIgnoreCase("show products")) {
+                            productsMenu.processShowProducts();
+                        } else if (input.matches(regex[4])) {
+                            productsMenu.processShowProductsID(getMatcher(input, regex[4]).group(1));
+                        }
+                    } else if (subMenuStatus == SubMenuStatus.FILTERING) {
+                        if (input.equalsIgnoreCase("show available filters ")) {
+                            productsMenu.showAvailableFilters();
+                        } else if (input.matches(regex[23])) {
+                            productsMenu.filter(getMatcher(input, regex[23]).group(1));
+                        } else if (input.equalsIgnoreCase("current filters")) {
+                            productsMenu.currentFilters();
+                        } else if (input.matches(regex[24])) {
+                            productsMenu.disableFilter(getMatcher(input, regex[24]).group(1));
+                        }
+                    } else if (subMenuStatus == SubMenuStatus.SORTING) {
+                        if (input.equalsIgnoreCase("show available sorts")) {
+                            productsMenu.showAvailableSorts();
+                        } else if (input.matches(regex[25])) {
+                            productsMenu.sort(getMatcher(input, regex[25]).group(1));
+                        } else if (input.equalsIgnoreCase("current sort")) {
+                            productsMenu.currentSorts();
+                        } else if (input.equalsIgnoreCase("disable sort")) {
+                            productsMenu.disableSort();
+                        }
+                    } /*else if (input.equalsIgnoreCase("purchase")) {
                         customerMenu.processPurchase();
-                    } else if (input.equalsIgnoreCase("view orders")) {
-                        customerMenu.processViewOrders();
-                    } else if (input.equalsIgnoreCase("view balance")) {
-                        customerMenu.processViewBalance();
-                    } else if (input.equalsIgnoreCase("view discount codes")) {
-                        //MANAGERAM DARE
-                        customerMenu.processViewDiscountCodes();
                     }
-                } else if (subMenuStatus == SubMenuStatus.VIEWCART) {
-                    if (input.equalsIgnoreCase("show products")) {
-                        customerMenu.showProducts();
-                    } else if (input.matches(regex[6])) {
-                        customerMenu.viewProduct(getMatcher(input, regex[6]).group(1));
-                    } else if (input.matches(regex[19])) {
-                        customerMenu.increaseProductNumber(getMatcher(input, regex[19]).group(1));
-                    } else if (input.matches(regex[20])) {
-                        customerMenu.decreaseProductNumber(getMatcher(input, regex[20]).group(1));
-                    } else if (input.equalsIgnoreCase("show total price")) {
-                        customerMenu.showTotalPrice();
-                    } else if (input.equalsIgnoreCase("purchase")) {
-                        customerMenu.purchase();
-                    }
-                } else if (subMenuStatus == SubMenuStatus.VIEWORDERS) {
-                    if (input.matches(regex[21])) {
-                        customerMenu.showOrder(getMatcher(input, regex[21]).group(1));
-                    } else if (input.matches(regex[22])) {
-                        customerMenu.rateProduct(getMatcher(input, regex[22]).group(1), Integer.parseInt(getMatcher(input, regex[22]).group(2)));
-                    }
-                } else if (subMenuStatus == SubMenuStatus.EDIT) {
-                    if (input.matches(regex[2])) {
-                        loginMenu.processEdit(getMatcher(input, regex[2]).group(1));
-                    }
-                } else if (subMenuStatus == SubMenuStatus.PRODUCTNUMBER) {
-                    if (input.matches(regex[21])) {
-                        customerMenu.productNumber(getMatcher(input, regex[21]).group(1));
-                    }
-                } else if (subMenuStatus == subMenuStatus.EDITACCOUNT) {
-                    if (input.matches(regex[27])) {
-                        loginMenu.editField(getMatcher(input, regex[27]).group(1));
+                    */
+
+                } else if (menuStatus == MenuStatus.PRODUCTMENU) {
+                    //ProductMenu
+                    if (subMenuStatus == SubMenuStatus.MAINMENU) {
+                        if (input.equalsIgnoreCase("digest")) {
+                            productMenu.processDigest();
+                        } else if (input.equalsIgnoreCase("attributes")) {
+                            productMenu.processAttributes();
+                        } else if (input.matches(regex[5])) {
+                            productMenu.processCompare(getMatcher(input, regex[5]).group(1));
+                        } else if (input.equalsIgnoreCase("Comments")) {
+                            productMenu.processComments();
+                        }
+                    } else if (subMenuStatus == SubMenuStatus.DIGEST) {
+                        if (input.equalsIgnoreCase("add to cart")) {
+                            productMenu.addToCart();
+                        } else if (input.matches(regex[25])) {
+                            productMenu.selectSeller(getMatcher(input, regex[25]).group(1));
+                        }
+                    } else if (subMenuStatus == SubMenuStatus.COMMENTS) {
+                        if (input.equalsIgnoreCase("add comment")) {
+                            productMenu.addComments();
+                        }
+                    } else if (subMenuStatus == SubMenuStatus.COMMENTSTITLE) {
+                        if (input.matches(regex[27])) {
+                            productMenu.titleOfComment(getMatcher(input, regex[27]).group(1));
+                        }
+                    } else if (subMenuStatus == SubMenuStatus.COMMENTSCONTENT) {
+                        if (input.matches(regex[27])) {
+                            productMenu.contentOfComment(getMatcher(input, regex[27]).group(1));
+                        }
                     }
                 }
-            }
-            //ReceiverInformation
-            if (menuStatus == MenuStatus.PURCHASE) {
-                if (subMenuStatus == SubMenuStatus.RECIVERINFORMATION) {
-                    if (input.matches(regex[27])) {
-                        registerMenu.receiverInformation(getMatcher(input, regex[27]).group(1));
-                    }
-                } else if (subMenuStatus == SubMenuStatus.CHECKDISCOUNTCODE) {
-                    if (input.matches(regex[27])) {
-                        customerMenu.discountCodeValidation(getMatcher(input, regex[27]).group(1));
-                    }
-                } else if (subMenuStatus == SubMenuStatus.HAVEDISCOUNT) {
-                    if (input.matches(regex[27])) {
-                        customerMenu.haveDiscount(getMatcher(input, regex[27]).group(1));
-                    }
-                } else if (subMenuStatus == SubMenuStatus.PAYMENT) {
-                    if (input.matches(regex[27])) {
-                        customerMenu.payment(getMatcher(input, regex[27]).group(1));
-                    }
-                }
-            }
-            if (menuStatus == MenuStatus.PRODUCTSMENU || menuStatus == MenuStatus.MAINMENU) {
-                //ProductsMenu
-                if (subMenuStatus == SubMenuStatus.MAINMENU) {
-                    if (input.equalsIgnoreCase("products")) {
-                        productsMenu.processProducts();
-                    } else if (input.equalsIgnoreCase("view categories")) {
-                        productsMenu.processViewCategories();
-                    } else if (input.equalsIgnoreCase("filtering")) {
+                if (menuStatus == MenuStatus.PRODUCTSMENU || menuStatus == MenuStatus.MAINMENU || menuStatus == MenuStatus.SALEMENU) {
+                    if (input.equalsIgnoreCase("filtering")) {
                         productsMenu.processFiltering();
                     } else if (input.equalsIgnoreCase("sorting")) {
                         productsMenu.processSorting();
-                    } else if (input.equalsIgnoreCase("show products")) {
-                        productsMenu.processShowProducts();
+                    } else if (subMenuStatus == SubMenuStatus.FILTERING) {
+                        if (input.equalsIgnoreCase("show available filters ")) {
+                            productsMenu.showAvailableFilters();
+                        } else if (input.matches(regex[23])) {
+                            productsMenu.filter(getMatcher(input, regex[23]).group(1));
+                        } else if (input.equalsIgnoreCase("current filters")) {
+                            productsMenu.currentFilters();
+                        } else if (input.matches(regex[24])) {
+                            productsMenu.disableFilter(getMatcher(input, regex[24]).group(1));
+                        }
+                    } else if (subMenuStatus == SubMenuStatus.SORTING) {
+                        if (input.equalsIgnoreCase("show available sorts")) {
+                            productsMenu.showAvailableSorts();
+                        } else if (input.matches(regex[25])) {
+                            productsMenu.sort(getMatcher(input, regex[25]).group(1));
+                        } else if (input.equalsIgnoreCase("current sort")) {
+                            productsMenu.currentSorts();
+                        } else if (input.equalsIgnoreCase("disable sort")) {
+                            productsMenu.disableSort();
+                        }
+                    }
+                }
+                if ((menuStatus == MenuStatus.SALEMENU) || (menuStatus == MenuStatus.MAINMENU)) {
+                    //SaleMenu
+                    if (input.equalsIgnoreCase("offs")) {
+                        saleMenu.processOffs();
                     } else if (input.matches(regex[4])) {
-                        productsMenu.processShowProductsID(getMatcher(input, regex[4]).group(1));
+                        //moshtarak
+                        saleMenu.processShowProductsID(getMatcher(input, regex[4]).group(1));
                     }
-                } else if (subMenuStatus == SubMenuStatus.FILTERING) {
-                    if (input.equalsIgnoreCase("show available filters ")) {
-                        productsMenu.showAvailableFilters();
-                    } else if (input.matches(regex[23])) {
-                        productsMenu.filter(getMatcher(input, regex[23]).group(1));
-                    } else if (input.equalsIgnoreCase("current filters")) {
-                        productsMenu.currentFilters();
-                    } else if (input.matches(regex[24])) {
-                        productsMenu.disableFilter(getMatcher(input, regex[24]).group(1));
-                    }
-                } else if (subMenuStatus == SubMenuStatus.SORTING) {
-                    if (input.equalsIgnoreCase("show available sorts")) {
-                        productsMenu.showAvailableSorts();
-                    } else if (input.matches(regex[25])) {
-                        productsMenu.sort(getMatcher(input, regex[25]).group(1));
-                    } else if (input.equalsIgnoreCase("current sort")) {
-                        productsMenu.currentSorts();
-                    } else if (input.equalsIgnoreCase("disable sort")) {
-                        productsMenu.disableSort();
-                    }
-                } else if (input.equalsIgnoreCase("purchase")) {
-                    customerMenu.processPurchase();
+                } else {
+                    OutputMassageHandler.showOutput(0);
+                }
+                if (input.equals("exit")) {
+                    OutputMassageHandler.showOutput(1);
                 }
 
-            } else if (menuStatus == MenuStatus.PRODUCTMENU) {
-                //ProductMenu
-                if (subMenuStatus == SubMenuStatus.MAINMENU) {
-                    if (input.equalsIgnoreCase("digest")) {
-                        productMenu.processDigest();
-                    } else if (input.equalsIgnoreCase("attributes")) {
-                        productMenu.processAttributes();
-                    } else if (input.matches(regex[5])) {
-                        productMenu.processCompare(getMatcher(input, regex[5]).group(1));
-                    } else if (input.equalsIgnoreCase("Comments")) {
-                        productMenu.processComments();
-                    }
-                } else if (subMenuStatus == SubMenuStatus.DIGEST) {
-                    if (input.equalsIgnoreCase("add to cart")) {
-                        productMenu.addToCart();
-                    } else if (input.matches(regex[25])) {
-                        productMenu.selectSeller(getMatcher(input, regex[25]).group(1));
-                    }
-                } else if (subMenuStatus == SubMenuStatus.COMMENTS) {
-                    if (input.equalsIgnoreCase("add comment")) {
-                        productMenu.addComments();
-                    }
-                } else if (subMenuStatus == SubMenuStatus.COMMENTSTITLE) {
-                    if (input.matches(regex[27])) {
-                        productMenu.titleOfComment(getMatcher(input, regex[27]).group(1));
-                    }
-                } else if (subMenuStatus == SubMenuStatus.COMMENTSCONTENT) {
-                    if (input.matches(regex[27])) {
-                        productMenu.contentOfComment(getMatcher(input, regex[27]).group(1));
-                    }
-                }
-            }
-            if (menuStatus == MenuStatus.PRODUCTSMENU || menuStatus == MenuStatus.MAINMENU || menuStatus == MenuStatus.SALEMENU) {
-                if (input.equalsIgnoreCase("filtering")) {
-                    productsMenu.processFiltering();
-                } else if (input.equalsIgnoreCase("sorting")) {
-                    productsMenu.processSorting();
-                } else if (subMenuStatus == SubMenuStatus.FILTERING) {
-                    if (input.equalsIgnoreCase("show available filters ")) {
-                        productsMenu.showAvailableFilters();
-                    } else if (input.matches(regex[23])) {
-                        productsMenu.filter(getMatcher(input, regex[23]).group(1));
-                    } else if (input.equalsIgnoreCase("current filters")) {
-                        productsMenu.currentFilters();
-                    } else if (input.matches(regex[24])) {
-                        productsMenu.disableFilter(getMatcher(input, regex[24]).group(1));
-                    }
-                } else if (subMenuStatus == SubMenuStatus.SORTING) {
-                    if (input.equalsIgnoreCase("show available sorts")) {
-                        productsMenu.showAvailableSorts();
-                    } else if (input.matches(regex[25])) {
-                        productsMenu.sort(getMatcher(input, regex[25]).group(1));
-                    } else if (input.equalsIgnoreCase("current sort")) {
-                        productsMenu.currentSorts();
-                    } else if (input.equalsIgnoreCase("disable sort")) {
-                        productsMenu.disableSort();
-                    }
-                }
-            }
-            if ((menuStatus == MenuStatus.SALEMENU) || (menuStatus == MenuStatus.MAINMENU)) {
-                //SaleMenu
-                if (input.equalsIgnoreCase("offs")) {
-                    saleMenu.processOffs();
-                } else if (input.matches(regex[4])) {
-                    //moshtarak
-                    saleMenu.processShowProductsID(getMatcher(input, regex[4]).group(1));
-                }
-            } else {
-                OutputMassageHandler.showOutput(0);
-            }
-            if (input.equals("exit")) {
-                OutputMassageHandler.showOutput(1);
+
             }
 
 
         }
-
-
     }
+
 }

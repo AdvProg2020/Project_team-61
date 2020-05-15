@@ -17,7 +17,7 @@ public class RegisterMenu {
     private Customer customer;
     private AccountRequest accountRequest;
     private FirmRequest firmRequest;
-    private int detailMenu = 0;
+    private static int detailMenu = 0;
     private  static boolean managerWant = false;
     private boolean headManager = true;
     private String role;
@@ -29,6 +29,10 @@ public class RegisterMenu {
     private double phoneNo;
     private Data birthdayDate;
     private SubMenuStatus subMenuStatus;
+
+    public static int getDetailMenu() {
+        return detailMenu;
+    }
 
     public static void setManagerWant(boolean managerWant) {
         RegisterMenu.managerWant = managerWant;
@@ -123,7 +127,7 @@ public class RegisterMenu {
     public void createAccountWithDetails() {
         if (role.equalsIgnoreCase("seller")) {
             accountRequest.sellerAccountDetails(username, password, name, lastname, Email, phoneNo, birthdayDate);
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMINFORMATION);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDFIRM);
         } else if (role.equalsIgnoreCase("customer")) {
             customer.setDetailsToAccount(password, name, lastname, Email, phoneNo, birthdayDate);
             CommandProcessor.setSubMenuStatus(subMenuStatus);

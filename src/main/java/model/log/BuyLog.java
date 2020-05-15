@@ -1,26 +1,34 @@
 package model.log;
 
 
-import  model.productRelated.Product;
+import com.google.gson.reflect.TypeToken;
+import model.productRelated.Product;
+import view.FileHandling;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 
 public class BuyLog extends Log {
 
 
 
-    public BuyLog(String logId) {
+    public BuyLog(String logId) throws IOException {
         super(logId);
+        id=logId;
         localDateTimeForLog=LocalDateTime.now();
         allCustomersLog.add(this);
     }
 
 
+    private String id;
     //detail
-    double paidAmount;
+    private double amountBeforeDis;
+    double amountAfterDis;
     String buyerName;
     int numberOfChosenPro;
     private static boolean ifItsFinal;
@@ -32,13 +40,23 @@ public class BuyLog extends Log {
     private static ArrayList<Product> listOfOneProduct = new ArrayList<Product>();
     private static ArrayList<ArrayList<Product>> allBoughtProduct = new ArrayList<>();
     public static ArrayList<BuyLog> allCustomersLog = new ArrayList<BuyLog>();
+    public static HashMap<ArrayList<Product>, Double> productWithPriceWithSale=new HashMap<>();
+    public static HashMap<ArrayList<Product>, Double> productWithPriceWithoutSale=new HashMap<>();
 
     //setterAndGetter----------------------------------------------------
 
-    public void setBuyLogDetail(String buyerName, double paidAmount) {
+    public void setBuyLogDetail(String buyerName) throws IOException {
         this.buyerName = buyerName;
-        this.paidAmount = paidAmount;
         allCustomersLog.add(this);
+        writeInJ();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public double getAmountBeforeDis() {
+        return amountBeforeDis;
     }
 
     public void setIsBought(boolean bought) {
@@ -48,6 +66,8 @@ public class BuyLog extends Log {
     public boolean getIsBought() {
         return isBought;
     }
+
+
 
     public static LocalDateTime getLocalDateTimeForLog() {
         return localDateTimeForLog;
@@ -131,7 +151,24 @@ public class BuyLog extends Log {
 
 
     public  int compareTo(BuyLog buyLog) {
-        return getLocalDateTimeForLog().compareTo(buyLog.getLocalDateTimeForLog());
+        return getLocalDateTimeForLog().compareTo(getLocalDateTimeForLog());
     }
 
+    public static void writeInJ() throws IOException {
+        Type collectionType = new TypeToken<ArrayList<BuyLog>>(){}.getType();
+        String json= FileHandling.getGson().toJson(BuyLog.getAllCustomersLog(),collectionType);
+        FileHandling.turnToArray(json+" "+"buyLog.json");
+    }
+
+    @Override
+    public String toString() {
+        return "BuyLog{" +
+                "id='" + id + '\'' +
+                ", amountBeforeDis=" + amountBeforeDis +
+                ", amountAfterDis=" + amountAfterDis +
+                ", buyerName='" + buyerName + '\'' +
+                ", numberOfChosenPro=" + numberOfChosenPro +
+                ", isBought=" + isBought +
+                '}';
+    }
 }

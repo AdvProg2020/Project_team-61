@@ -1,8 +1,13 @@
 package model.off;
 
+import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
 import model.productRelated.Product;
 import model.accounts.Seller;
+import view.FileHandling;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.*;
 
@@ -26,12 +31,13 @@ public class Sale{
         allSales.add(this);
 
     }
-    public void setSaleDetails(SaleStatus saleStatus, Date startOfSalePeriod, Date endOfSalePeriod, int saleAmount, Account seller){
+    public void setSaleDetails(SaleStatus saleStatus, Date startOfSalePeriod, Date endOfSalePeriod, int saleAmount, Account seller) throws IOException {
         this.saleStatus = saleStatus;
         this.startOfSalePeriod = startOfSalePeriod;
         this.endOfSalePeriod = endOfSalePeriod;
         this.saleAmount = saleAmount;
         this.seller = seller;
+        writeInJ();
     }
 
     public String getOffId() {
@@ -110,12 +116,15 @@ public class Sale{
     public void setStartOfSalePeriod(Date startOfSalePeriod) {
         this.startOfSalePeriod = startOfSalePeriod;
     }
+
     public void setEndOfSalePeriod(Date endOfSalePeriod) {
         this.endOfSalePeriod = endOfSalePeriod;
     }
+
     public void setSaleAmount(int saleAmount) {
         this.saleAmount = saleAmount;
     }
+
     public void setAllSaleProducts(ArrayList<Product> allSaleProducts) {
         this.allSaleProducts = allSaleProducts;
     }
@@ -146,9 +155,13 @@ public class Sale{
 
     }
 
+    public static void writeInJ() throws IOException {
+        Type collectionType = new TypeToken<ArrayList<Sale>>(){}.getType();
+        String json= FileHandling.getGson().toJson(Sale.allSales,collectionType);
+        FileHandling.turnToArray(json+" "+"sale.json");
+    }
 
-
-    /*@Override
+    @Override
     public String toString() {
         return "Sale{" +
                 "offId='" + offId + '\'' +
@@ -161,5 +174,4 @@ public class Sale{
                 '}';
     }
 
-     */
 }

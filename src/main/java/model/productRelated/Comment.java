@@ -1,7 +1,11 @@
 package model.productRelated;
 
+import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
+import view.FileHandling;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -25,6 +29,7 @@ public class Comment {
     public Comment(Product productToCommit, Account personToVote) {
         this.productToComment = productToCommit;
         this.personToVote = personToVote;
+
     }
 
 
@@ -81,4 +86,21 @@ public class Comment {
         }
     }
 
+    public static void writeInJ() throws IOException {
+        Type collectionType = new TypeToken<ArrayList<Comment>>(){}.getType();
+        String json= FileHandling.getGson().toJson(getAllComments(),collectionType);
+        FileHandling.turnToArray(json+" "+"commend.json");
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "isSold=" + isSold +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", commentStatus=" + commentStatus +
+                ", productToComment=" + productToComment +
+                ", personToVote=" + personToVote +
+                '}';
+    }
 }

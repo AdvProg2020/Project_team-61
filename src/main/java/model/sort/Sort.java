@@ -1,5 +1,7 @@
 package model.sort;
 
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 import model.accounts.Account;
 import model.log.BuyLog;
 import model.log.SaleLog;
@@ -7,7 +9,10 @@ import model.off.Sale;
 import model.productRelated.Product;
 import model.productRelated.Score;
 import view.CommandProcessor;
+import view.FileHandling;
 
+import java.io.FileNotFoundException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -16,11 +21,20 @@ import java.util.Comparator;
 public abstract class Sort {
     public Product product;
     int numberOfSort=0;
-    ArrayList<Product> newArrayOfProductSort = Product.getProductList();
-    ArrayList<ArrayList<Product>> listOfSorts = new ArrayList<>();
-    ArrayList<String> availableSorts=new ArrayList<>();
+    private static ArrayList<Product> newArrayOfProductSort;
 
-    public Sort(ArrayList<String> availableSorts) {
+    static {
+        try {
+            newArrayOfProductSort = getProductFromFile();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static ArrayList<ArrayList<Product>> listOfSorts = new ArrayList<>();
+    private static ArrayList<String> availableSorts=new ArrayList<>();
+
+    public Sort(ArrayList<String> availableSorts) throws FileNotFoundException {
         availableSorts.add("numberOfView");
         availableSorts.add("score");
     }
@@ -28,8 +42,24 @@ public abstract class Sort {
     //if view->1   score ->2
 
 
+    public static ArrayList<Product> getProductFromFile() throws FileNotFoundException {
+        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
+        }.getType();
+        JsonReader proReader= FileHandling.readFile("product.json");
+        ArrayList<Product> data = FileHandling.getGson().fromJson(proReader, REVIEW_TYPE);
+        return data;
+    }
 
     //sorts----------------------------------------------------------------------
+
+
+    public static ArrayList<Product> getNewArrayOfProductSort() {
+        return newArrayOfProductSort;
+    }
+
+    public static ArrayList<String> getAvailableSorts() {
+        return availableSorts;
+    }
 
     public ArrayList<Product> numberOfViewsSort() {
         Collections.sort(newArrayOfProductSort,Product.productComparatorForView);
@@ -45,52 +75,64 @@ public abstract class Sort {
         return newArrayOfProductSort;
     }
 
-    public ArrayList<Account> accountSortUserName(){
-        ArrayList<Account> helper=Account.getAllAccounts();
-        Collections.sort(helper,Account.accountComparatorForUsername);
-        return helper;
+    public ArrayList<Account> accountSortUserName() throws FileNotFoundException {
+        Type REVIEW_TYPE = new TypeToken<ArrayList<Account>>() {
+        }.getType();
+        JsonReader sellerReader=FileHandling.readFile("account.json");
+        ArrayList<Account> data = FileHandling.getGson().fromJson(sellerReader, REVIEW_TYPE);
+        Collections.sort(data,Account.accountComparatorForUsername);
+        return data;
     }
 
-    public ArrayList<BuyLog> accountSortLogs(){
-        ArrayList<BuyLog> helper=Account.getAllBuyLogs();
-        Collections.sort(helper, new Comparator<BuyLog>() {
+    public ArrayList<BuyLog> accountSortLogs() throws FileNotFoundException {
+        Type REVIEW_TYPE = new TypeToken<ArrayList<BuyLog>>() {
+        }.getType();
+        JsonReader BuyLogReader=FileHandling.readFile("buyLog.json");
+        ArrayList<BuyLog> data = FileHandling.getGson().fromJson(BuyLogReader, REVIEW_TYPE);
+        Collections.sort(data, new Comparator<BuyLog>() {
             public int compare(BuyLog o1, BuyLog o2) {
                 return o1.getLocalDateTimeForLog().compareTo(o2.getLocalDateTimeForLog());
             }
         });
-        return helper;
+        return data;
     }
 
-    public ArrayList<BuyLog> buyLogSortDate(){
-        ArrayList<BuyLog> helper=BuyLog.getAllCustomersLog();
-        Collections.sort(helper, new Comparator<BuyLog>() {
+    public ArrayList<BuyLog> buyLogSortDate() throws FileNotFoundException {
+        Type REVIEW_TYPE = new TypeToken<ArrayList<BuyLog>>() {
+        }.getType();
+        JsonReader BuyLogReader=FileHandling.readFile("buyLog.json");
+        ArrayList<BuyLog> data = FileHandling.getGson().fromJson(BuyLogReader, REVIEW_TYPE);
+        Collections.sort(data, new Comparator<BuyLog>() {
             public int compare(BuyLog o1, BuyLog o2) {
                 return o1.getLocalDateTimeForLog().compareTo(o2.getLocalDateTimeForLog());
             }
         });
-        return helper;
+        return data;
     }
 
-    public ArrayList<SaleLog> saleLogSortDate(){
-        ArrayList<SaleLog> helper=SaleLog.getAllSellersLog();
-        Collections.sort(helper, new Comparator<SaleLog>() {
+    public ArrayList<SaleLog> saleLogSortDate() throws FileNotFoundException {
+        Type REVIEW_TYPE = new TypeToken<ArrayList<SaleLog>>() {
+        }.getType();
+        JsonReader SaleLogReader=FileHandling.readFile("saleLog.json");
+        ArrayList<SaleLog> data = FileHandling.getGson().fromJson(SaleLogReader, REVIEW_TYPE);
+        Collections.sort(data, new Comparator<SaleLog>() {
             public int compare(SaleLog o1, SaleLog o2) {
                 return o1.getLocalDateTimeForSaleLog().compareTo(o2.getLocalDateTimeForSaleLog());
             }
         });
-        return helper;
+        return data;
     }
 
     //other---------------------------------------------------------------------------
 
     //finish
-    public ArrayList<Product> disableSort(){
+    public static ArrayList<Product> disableSort(){
         listOfSorts.remove(listOfSorts.size()-1);
         return listOfSorts.get(listOfSorts.size()-1);
     }
 
     //finish
-    public ArrayList<String> currentSorts() {
+    public static ArrayList<String> currentSorts() {
         ArrayList<String> current=new ArrayList<>();
         for (int i = 1; i <= 3; i++) {
             if (listOfSorts.get(i)!=null){
@@ -105,18 +147,18 @@ public abstract class Sort {
         return current;
     }
 
-    public ArrayList<String> showAvailableSort(){
+    public static ArrayList<String> showAvailableSort(){
         return availableSorts;
     }
 
-    public boolean ifAvailable(String sortId){
+    public static boolean ifAvailable(String sortId){
         if (availableSorts.contains(sortId)){
             return true;
         }
         else return false;
     }
 
-    public boolean isThereSortWithName(String sortName){
+    public static boolean isThereSortWithName(String sortName){
         if (sortName.matches("numberOfView")){
             return true;
         }
