@@ -33,15 +33,30 @@ public abstract class Account {
     private static ArrayList<SaleLog> allSaleLogs;
     private static ArrayList<BuyLog> allBuyLogs;
     private  static ArrayList<Account> allAccounts;
+    private static ArrayList<Date> birthdayDates;
 
-    public  void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo, Data birthdayDate) throws IOException {
+    public  void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate) throws IOException {
 
-        this.password = password;
-        this.name = name;
-        this.lastname = lastname;
-        this.email = Email;
-        this.phoneNo = phoneNo;
-        this.birthdayDate = (Date) birthdayDate;
+        if(password!= null) {
+            this.password = password;
+        }
+        if(name!= null) {
+            this.name = name;
+        }
+        if(lastname!= null){
+            this.lastname = lastname;
+        }
+        if(email != null){
+            this.email = Email;
+        }
+        if(phoneNo != 0){
+            this.phoneNo = phoneNo;
+        }
+        if(birthdayDate != null){
+            this.birthdayDate = (Date) birthdayDate;
+            birthdayDates.add(birthdayDate);
+        }
+
         writeInJ();
     }
 

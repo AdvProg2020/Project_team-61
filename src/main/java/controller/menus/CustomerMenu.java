@@ -16,13 +16,13 @@ public class CustomerMenu {
     private String productID;
 
     //gson
-    public void processViewCart() {
+    public static void processViewCart() {
         OutputHandler.showCustomerLog();
         CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
     }
 
     //gson
-    public void showTotalPrice() {
+    public static void showTotalPrice() {
         // OutputMassageHandler.showOutputWithString(String.valueOf(buyLog.holePriceWithOutDiscount()), 8);
         OutputHandler.showTotalPrice();
     }
@@ -40,18 +40,18 @@ public class CustomerMenu {
     }
 
     //gson
-    public void showProducts() {
+    public static void showProducts() {
         OutputHandler.showProduct();
     }
 
     //GSON
-    public void viewProduct(String productID) {
+    public static void viewProduct(String productID) {
         if (checkProduct(productID)) {
             OutputHandler.showProduct();
         }
     }
 
-    public void increaseProductNumber(String productID) {
+    public static void increaseProductNumber(String productID) {
         if (checkProduct(productID)) {
             this.productID = productID;
             CommandProcessor.setSubMenuStatus(SubMenuStatus.INCREASEPRODUCTNUMBER);
@@ -59,7 +59,7 @@ public class CustomerMenu {
         }
     }
 
-    public void increaseLogProduct(String number){
+    public static void increaseLogProduct(String number){
         if (number.matches("\\d+")) {
            Product product= Product.getProductById(productID);
             if(product.getNumberOfProducts()<= p){
@@ -68,7 +68,7 @@ public class CustomerMenu {
         }
     }
 
-    public void decreaseLogProduct(String number){
+    public static void decreaseLogProduct(String number){
         if (number.matches("\\d+")) {
 
         }
@@ -83,7 +83,7 @@ public class CustomerMenu {
         } else OutputMassageHandler.showCustomerOutput(4);
     }
 
-    public void decreaseProductNumber(String productID) {
+    public static void decreaseProductNumber(String productID) {
         if (checkProduct(productID)) {
             this.productID = productID;
             CommandProcessor.setSubMenuStatus(SubMenuStatus.DECREASEPRODUCTNUMBER);
@@ -93,7 +93,7 @@ public class CustomerMenu {
 
 
     //purches............................................................................
-    public void purchase() {
+    public static void purchase() {
       //  CommandProcessor.setMenuStatus(MenuStatus.PURCHASE);
         CommandProcessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
         CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
@@ -102,7 +102,7 @@ public class CustomerMenu {
     }
 
     //product menu bayad bzrmsh*******************************************
-    public void processPurchase() {
+    public static void processPurchase() {
         if (LoginMenu.isLogin()) {
             if (LoginMenu.getLoginAccount().getRole().equals("customer")) {
                 CommandProcessor.setMenuStatus(MenuStatus.PURCHASE);
@@ -124,7 +124,7 @@ public class CustomerMenu {
         return false;
     }
 
-    public void haveDiscount(String have){
+    public static void haveDiscount(String have){
         if(have.matches("(?i)(?:yes|no)")){
             if (have.equalsIgnoreCase("yes")) {
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.CHECKDISCOUNTCODE);
@@ -138,7 +138,7 @@ public class CustomerMenu {
     }
 
 
-    public void discountCodeValidation(String discountCodeId) {
+    public static void discountCodeValidation(String discountCodeId) {
         Account loginAccount = LoginMenu.getLoginAccount();
             DiscountCode discountCode = DiscountCode.getDiscountWithId(discountCodeId);
             if (checkDiscountCode(discountCodeId)) {
@@ -155,7 +155,7 @@ public class CustomerMenu {
          OutputMassageHandler.showCustomerOutput(outputNo);
     }
 
-    public void payment() {
+    public static void payment() {
         if (buyLog.holePriceWithDiscount() <= LoginMenu.getLoginAccount().getCredit()) {
             finishingPayment();
             CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
@@ -193,14 +193,14 @@ public class CustomerMenu {
     }
 
     //gson
-    public void processViewOrders() {
+    public static void processViewOrders() {
         OutputHandler.showOrders();
         CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWORDERS);
     }
 
 
     //gson
-    public void showOrder(String orderID) {
+    public static void showOrder(String orderID) {
         if (checkLog(orderID)) {
             OutputHandler.showOrder();
         }
@@ -208,7 +208,7 @@ public class CustomerMenu {
     }
 
     //score.............................................................
-    public void rateProduct(String productID, int number) {
+    public static void rateProduct(String productID, int number) {
         if (checkProduct(productID)) {
             if (number >= 1 && number <= 5) {
                 Score newScore = new Score(LoginMenu.getLoginAccount(), Product.getProductById(productID), number);
@@ -218,13 +218,13 @@ public class CustomerMenu {
     }
 
     //GSON
-    public void processViewBalance() {
+    public static void processViewBalance() {
         // OutputMassageHandler.showOutputWithString(String.valueOf(LoginMenu.getLoginAccount().getCredit()), 8);
         OutputHandler.showBalance();
     }
 
     //GSON
-    public void processViewDiscountCodes() {
+    public static void processViewDiscountCodes() {
         OutputHandler.showDiscountCodes();
     }
 

@@ -11,7 +11,7 @@ public class SaleMenu {
 
 
     //gson
-    public void processOffs() {
+    public static void processOffs() {
         OutputHandler.showOffs();
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
         CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);

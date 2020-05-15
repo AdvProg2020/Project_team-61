@@ -38,7 +38,7 @@ public class RegisterMenu {
         RegisterMenu.managerWant = managerWant;
     }
 
-    public void processRegister(String role, String username) {
+    public static void processRegister(String role, String username) {
         if (username.matches("^(?i)(?=.[a-z])(?=.[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
             if (!Account.isThereAccountWithUsername(username)) {
                 if (role.matches("(?i)(?:customer|manager|seller)")) {
@@ -83,7 +83,7 @@ public class RegisterMenu {
         }
     }
 
-    public void completeRegisterProcess(String detail) {
+    public static void completeRegisterProcess(String detail) {
         if (detailMenu == 0) {
             if (detail.matches("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}$")) {
                 this.password = detail;
@@ -140,7 +140,7 @@ public class RegisterMenu {
         }
     }
 
-    public void createFirm(String detail) {
+    public static void createFirm(String detail) {
         if (detailMenu == 0) {
             if (detail.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$")) {
                 String id = "seller "+ LoginMenu.getLoginAccount().getUsername()+ "wants firm "+ detail ;
@@ -175,7 +175,7 @@ public class RegisterMenu {
     }
 
     //******************************************************
-    public void receiverInformation(String detail) {
+    public static void receiverInformation(String detail) {
         if (detailMenu == 0) {
             if (detail.matches("\\d+")) {
                 LoginMenu.getLoginAccount().setCurrentPhoneNo(Double.parseDouble(detail));

@@ -37,12 +37,12 @@ public class SellerMenu {
     }
 
     //gson
-    public void processViewCompanyInformation() {
+    public static void processViewCompanyInformation() {
         OutputHandler.showFirmInformation();
     }
 
     //gson
-    public void processViewSalesHistory() {
+    public static void processViewSalesHistory() {
         OutputHandler.showSalesHistory();
     }
 
@@ -59,28 +59,28 @@ public class SellerMenu {
     }
 
     //gson
-    public void processManageProducts() {
+    public static void processManageProducts() {
         OutputHandler.showProducts(Filter.newArrayOfProductFilter);
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEPRODUCTS);
 
     }
 
     //gson
-    public void viewProduct(String productID) {
+    public static void viewProduct(String productID) {
         if (checkProduct(productID)) {
             OutputHandler.showProductsIds(Product.listOfId);
         }
     }
 
     //gson
-    public void viewBuyersProduct(String productID) {
+    public static void viewBuyersProduct(String productID) {
         if (checkProduct(productID)) {
             OutputHandler.showProductBuyers();
         }
 
     }
 
-    public void editProduct(String productID) {
+    public static void editProduct(String productID) {
         Product product = Product.getProductById(productID);
         if (checkProduct(productID)) {
             if (product.ifProductHasSeller(productID, LoginMenu.getLoginAccount().getUsername())) {
@@ -96,7 +96,7 @@ public class SellerMenu {
         }
     }
 
-    public void productField(String field) {
+    public static void productField(String field) {
         if (field.matches("(?i)(?:Name|price|category|company\\s*Name|number\\s*Of\\s*Product)")) {
             String id = LoginMenu.getLoginAccount().getUsername() + " wants edit product " + productId + "'s " + field;
             if (productRequest.isThereRequestFromID(id)) {
@@ -112,7 +112,7 @@ public class SellerMenu {
         OutputMassageHandler.showSellerOutput(outputNo);
     }
 
-    public void editProductField(String edit) {
+    public static void editProductField(String edit) {
         if (field.equalsIgnoreCase("Name")) {
             if (edit.matches("^(?!\\s*$).+")) {
                 productRequest.setProductName(edit);
@@ -147,13 +147,13 @@ public class SellerMenu {
         OutputMassageHandler.showSellerOutput(outputNo);
     }
 
-    public void processAddProduct() {
+    public static void processAddProduct() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDPRODUCT);
         CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
         OutputMassageHandler.showSellerOutput(10);
     }
 
-    public void addProduct(String detail) {
+    public static void addProduct(String detail) {
         if (detailMenu == 0) {
             if (detail.matches("^(?!\\s*$).+")) {
                 if (!Product.isThereProductWithId(detail)) {
@@ -213,7 +213,7 @@ public class SellerMenu {
     }
 
 
-    public void processRemoveProduct(String productID) {
+    public static void processRemoveProduct(String productID) {
 
         if (checkProduct(productID)) {
             if (Product.getProductById(productID).ifProductHasSeller(productID, LoginMenu.getLoginAccount().getUsername())) {
@@ -226,7 +226,7 @@ public class SellerMenu {
     //----------------------------------------------------------------------------------------
 
     //array
-    public void processShowCategories() {
+    public static void processShowCategories() {
         OutputHandler.showCategories();
     }
 
@@ -243,19 +243,19 @@ public class SellerMenu {
     }
 
     //array
-    public void processViewOffs() {
+    public static void processViewOffs() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWOFFS);
         OutputHandler.showOffs();
     }
 
-    public void viewOff(String offID) {
+    public static void viewOff(String offID) {
         if (checkSale(offID)) {
             OutputHandler.showOff();
         }
 
     }
 
-    public void editOff(String offID) {
+    public static void editOff(String offID) {
         if (checkSale(offID)) {
             if (Sale.getSeller() == loginAccount) {
                 //   Sale sale = new Sale(offID);
@@ -269,7 +269,7 @@ public class SellerMenu {
         OutputMassageHandler.showSellerOutput(outputNo);
     }
 
-    public void offField(String field) {
+    public static void offField(String field) {
         if (field.matches("(?i)(?:sale\\s*status|start\\s*of\\s*sale\\s*period|end\\s*of\\s*sale\\s*period|remove\\s*product|add\\s*product)")) {
             String id = loginAccount + " wants edit off " + offId + "'s " + field;
             if (Request.isThereRequestFromID(id)) {
@@ -327,7 +327,7 @@ public class SellerMenu {
         OutputMassageHandler.showSellerOutput(outputNo);
     }
 
-    public void addOff() {
+    public static void addOff() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDSALE);
         CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
         OutputMassageHandler.showSellerOutput(0);
@@ -349,7 +349,7 @@ public class SellerMenu {
         return false;
     }
 
-    public void setDetailsToSale(String detail) {
+    public static void setDetailsToSale(String detail) {
         if (detailMenu == 0) {
             if (detail.matches("^(?!\\s*$).+")) {
                 if (checkSaleId(detail)) {
@@ -408,7 +408,7 @@ public class SellerMenu {
 
     //-------------------------------------------------------------------------------
     //gson
-    public void processViewBalance() {
+    public static void processViewBalance() {
         OutputHandler.showBalance();
     }
 }

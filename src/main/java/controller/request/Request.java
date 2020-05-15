@@ -18,9 +18,6 @@ public  abstract class Request {
     private String requestText;
     private String requestDate;
     private Account seller;
-   // private boolean isRequested = false;
-   // private boolean requestAccepted = false;
-   // private boolean requestViewed = false;
     private static ArrayList<Request> allRequests;
 
     private LoginMenu loginMenu;

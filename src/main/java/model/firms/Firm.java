@@ -23,10 +23,19 @@ public abstract class Firm {
     }
 
     public void setDetailToFirm(String name, Double phoneNO, String address, String email){
-        this.name= name;
-        this.phoneNO=phoneNO;
-        this.address= address;
-        this.Email= email;
+        if(name!= null){
+            this.name= name;
+        }
+        if( phoneNO != null){
+            this.phoneNO=phoneNO;
+        }
+        if (address != null){
+            this.address= address;
+        }
+        if(email != null){
+            this.Email= email;
+        }
+
     }
 
     public String getName() {

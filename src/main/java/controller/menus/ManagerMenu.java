@@ -33,7 +33,7 @@ public class ManagerMenu {
     }
 
     //gson
-    public void processManageUsers() {
+    public static void processManageUsers() {
         OutputHandler.showAccounts();
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEUSERS);
     }
@@ -48,13 +48,13 @@ public class ManagerMenu {
     }
 
     //gson
-    public void view(String username) {
+    public static void view(String username) {
         if (checkUsername(username)) {
             OutputHandler.showAccountInformation();
         } else OutputMassageHandler.showAccountOutput(outputNo);
     }
 
-    public void deleteUser(String username) {
+    public static void deleteUser(String username) {
         if (checkUsername(username)) {
             Account.deleteAccount(username);
             OutputMassageHandler.showOutputWithString(username, 1);
@@ -62,7 +62,7 @@ public class ManagerMenu {
         OutputMassageHandler.showAccountOutput(outputNo);
     }
 
-    public void createManagerProfile() {
+    public static void createManagerProfile() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.CREATEMANAGERACCOUNT);
         RegisterMenu.setManagerWant(true);
         OutputMassageHandler.showManageOutput(1);
@@ -70,7 +70,7 @@ public class ManagerMenu {
     //--------------------------------------------------------------------
 
     //gson
-    public void processManageAllProducts() {
+    public static void processManageAllProducts() {
         OutputHandler.showProducts(Filter.newArrayOfProductFilter);
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEALLPRODUCTS);
     }
@@ -85,7 +85,7 @@ public class ManagerMenu {
         return false;
     }
 
-    public void removeProduct(String productID) {
+    public static void removeProduct(String productID) {
         if (checkProduct(productID)) {
             Product.deleteProduct(productID);
             OutputMassageHandler.showOutputWithString(productID, 2);
@@ -103,12 +103,12 @@ public class ManagerMenu {
         return false;
     }
 
-    public void processCreateDiscountCode() {
+    public static void processCreateDiscountCode() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDDISCOUNTCODE);
         OutputMassageHandler.showAccountOutput(6);
     }
 
-    public void createNewDiscountCode(String discountCodeId) {
+    public static void createNewDiscountCode(String discountCodeId) {
         if (!DiscountCode.isThereDiscountWithId(discountCodeId)) {
             newDiscountCode = new DiscountCode(discountCodeId);
             CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
@@ -118,7 +118,7 @@ public class ManagerMenu {
     }
 
     //exception for parse!!
-    public void setDetailToDiscountCode(String detail) {
+    public static void setDetailToDiscountCode(String detail) {
         if (detailMenu == 0) {
             if (detail.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
                 Date currentDate=new Date();
@@ -184,19 +184,19 @@ public class ManagerMenu {
     }
 
     // array
-    public void processViewDiscountCodes() {
+    public static void processViewDiscountCodes() {
         OutputHandler.showDiscountCodes();
         CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWDISCOUNTCODES);
     }
 
-    public void viewDiscountCode(String discountCodeID) {
+    public static void viewDiscountCode(String discountCodeID) {
         OutputHandler.showDiscountCode();
         if (checkDiscountCode(discountCodeID)) {
             OutputHandler.showDiscountCode();
         }
     }
 
-    public void editDiscountCode(String discountCodeID) {
+    public static void editDiscountCode(String discountCodeID) {
         if (checkDiscountCode(discountCodeID)) {
             editableDiscountCode = DiscountCode.getDiscountWithId(discountCodeID);
             CommandProcessor.setSubMenuStatus(SubMenuStatus.DISCOUNTCODEFIELD);
@@ -204,7 +204,7 @@ public class ManagerMenu {
         }
     }
 
-    public void discountCodeField(String field) {
+    public static void discountCodeField(String field) {
         if (field.matches("(?i)(?:||||)")) {
             this.field = field;
             CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITDISCOUNTCODE);
@@ -213,7 +213,7 @@ public class ManagerMenu {
     }
 
     ///????????ParseException
-    public void editDiscountCodeField(String edit) throws ParseException {
+    public static void editDiscountCodeField(String edit) throws ParseException {
         if (field.matches("(?i)start\\s+Of\\s+Discount\\s+Period")) {
             if (edit.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
                 Date currentDate=new Date();
@@ -269,7 +269,7 @@ public class ManagerMenu {
     }
 
 
-    public void removeDiscountCode(String discountCodeID) {
+    public static void removeDiscountCode(String discountCodeID) {
         if (checkDiscountCode(discountCodeID)) {
             DiscountCode.deleteDiscount(discountCodeID);
             OutputMassageHandler.showOutputWithString(discountCodeID, 4);
@@ -288,26 +288,26 @@ public class ManagerMenu {
     }
 
     /// array
-    public void processManageRequests() {
+    public static void processManageRequests() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEREQUESTS);
         OutputHandler.showRequests();
     }
 
-    public void detailsRequest(String requestID) {
+    public static void detailsRequest(String requestID) {
         OutputHandler.showRequest();
         if (checkRequest(requestID)) {
             OutputHandler.showRequest();
         }
     }
 
-    public void acceptRequest(String requestID) {
+    public static void acceptRequest(String requestID) {
         if (checkRequest(requestID)) {
             Request.acceptRequest(requestID);
             OutputMassageHandler.showOutputWithString(requestID, 4);
         }
     }
 
-    public void declineRequest(String requestID) {
+    public static void declineRequest(String requestID) {
         if (checkRequest(requestID)) {
             Request.declineRequest(requestID);
             OutputMassageHandler.showOutputWithString(requestID, 4);
@@ -325,13 +325,13 @@ public class ManagerMenu {
     }
 
     // array
-    public void processManageCategories() {
+    public static void processManageCategories() {
         OutputHandler.showCategories(Category.);
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGECATEGORIES);
 
     }
 
-    public void editCategory(String category) {
+    public static void editCategory(String category) {
         if (checkCategory(category)) {
             editableCategory = Category.getCategoryWithName(category);
             CommandProcessor.setSubMenuStatus(SubMenuStatus.CATEGORYFIELD);
@@ -340,7 +340,7 @@ public class ManagerMenu {
         }
     }
 
-    public void categoryField(String field) {
+    public static void categoryField(String field) {
         if (field.matches("(?i)(?:||||)")) {
             this.field = field;
             CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITCATEGORY);
@@ -348,7 +348,7 @@ public class ManagerMenu {
         }
     }
 
-    public void editCategoryField(String edit) {
+    public static void editCategoryField(String edit) {
        /* if (field.equalsIgnoreCase("trait")) {
             if (field.matches("\\D")) {
             editableCategory.setTraits(edit);
@@ -365,7 +365,7 @@ public class ManagerMenu {
 
     }
 
-    public void addCategory(String category) {
+    public static void addCategory(String category) {
             if(!(newCategory.isThereCategoryWithName(category))) {
                 newCategory = new Category(category);
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.DETAILCATEGORY);
@@ -375,7 +375,7 @@ public class ManagerMenu {
 
     }
 
-    public void setDetailToCategory(String detail) {
+    public static void setDetailToCategory(String detail) {
         //oon bala dade!
        /* if (field.equalsIgnoreCase("name")) {
             if (detail.matches("\\D+")) {
@@ -403,7 +403,7 @@ public class ManagerMenu {
     }
 
 
-    public void removeCategory(String category) {
+    public static void removeCategory(String category) {
         if (checkCategory(category)) {
             // category.deleteCategory(category);
             OutputMassageHandler.showOutputWithString(category, 7);

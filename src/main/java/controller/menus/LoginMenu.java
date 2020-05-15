@@ -31,7 +31,7 @@ public class LoginMenu {
         return login;
     }
 
-    public void processLogin(String username) {
+    public static void processLogin(String username) {
         if (!login) {
             if (username.matches("^(?i)(?=.[a-z])(?=.[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
                 if (Account.isThereAccountWithUsername(username)) {
@@ -45,7 +45,7 @@ public class LoginMenu {
         OutputMassageHandler.showAccountOutput(outputNo);
     }
 
-    public void checkPassword(String password) {
+    public static void checkPassword(String password) {
         if (password.matches("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}$")) {
             if (Account.isThereAccountWithUsernameAndPassword(username, password)) {
                 loginAccount = Account.getAccountWithUsername(username);
@@ -75,7 +75,7 @@ public class LoginMenu {
     }
 
     //gson
-    public void viewPersonalInfo() {
+    public static void viewPersonalInfo() {
         //if(login) {
         OutputHandler.showAccountInformation();
         CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWPERSONALINFO);
@@ -83,7 +83,7 @@ public class LoginMenu {
     }
 
 
-    public void processEdit(String field) {
+    public static void processEdit(String field) {
         // if(login) {
         if (field.matches("(?i)(?:username|password|last\\s*name|email|phone\\s*number|firm)")) {
             if (loginAccount.getRole() == "seller") {
@@ -106,7 +106,7 @@ public class LoginMenu {
         OutputMassageHandler.showAccountOutput(outputNo);
     }
 
-    public void editSellerField(String edit) {
+    public static void editSellerField(String edit) {
         if (this.field.equalsIgnoreCase("password")) {
             if (edit.matches("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}$")) {
                 accountRequest.setPassword(edit);
@@ -139,7 +139,7 @@ public class LoginMenu {
         OutputMassageHandler.showAccountOutput(outputNo);
     }
 
-    public void editAccount(String edit) {
+    public static void editAccount(String edit) {
         if (this.field.equalsIgnoreCase("password")) {
             if (edit.matches("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}$")) {
                 loginAccount.setPassword(edit);
@@ -169,7 +169,7 @@ public class LoginMenu {
         OutputMassageHandler.showAccountOutput(outputNo);
     }
 
-    public void firmField(String field) {
+    public static void firmField(String field) {
         if (!field.matches("(?i)(?:name|address|email|phone\\s*number)")) {
             String id = "seller " + LoginMenu.getLoginAccount().getUsername() + "wants edit firm " + firmName + "'s " + field;
             if (firmRequest.isThereRequestFromID(id)) {
@@ -184,7 +184,7 @@ public class LoginMenu {
         OutputMassageHandler.showFirmOutput(outputNo);
     }
 
-    public void firmName(String name) {
+    public static void firmName(String name) {
         if (name.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$")) {
             if (checkFirm()) {
                 firmName = name;
@@ -204,7 +204,7 @@ public class LoginMenu {
         return false;
     }
 
-    public void editFirm(String detail) {
+    public static void editFirm(String detail) {
         if (field.matches("phone\\s*number")) {
             if (detail.matches("09[0-9]{9}")) {
                 firmRequest.setPhoneNO(Double.parseDouble(detail));
@@ -226,7 +226,7 @@ public class LoginMenu {
     }
 
 
-    public void processLogout() {
+    public static void processLogout() {
         if (login) {
             loginAccount = null;
             login = false;

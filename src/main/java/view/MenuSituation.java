@@ -89,7 +89,7 @@ public class MenuSituation {
         }
     }
 
-    public void processHelp() {
+    public static void processHelp() {
         if (CommandProcessor.getMenuStatus() == MenuStatus.MAINMENU) {
             System.out.println("create account [type][username]\nlogin [username]\nlogout\nback\nhelp");
         } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.PASSWORD) {
@@ -222,7 +222,7 @@ public class MenuSituation {
     }
 
 
-    public void processBack() {
+    public static void processBack() {
         if (CommandProcessor.getMenuStatus() == MenuStatus.MAINMENU) {
             System.out.println("this is first page");
         } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.PASSWORD) {
