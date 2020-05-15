@@ -1,7 +1,7 @@
 package model.log;
 
 
-import model.productRelated.Product;
+import  model.productRelated.Product;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

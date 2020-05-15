@@ -13,6 +13,11 @@ public class Sale{
     private Date endOfSalePeriod;
     private int saleAmount;
     private static Account seller;
+
+    public static ArrayList<Sale> getAllSales() {
+        return allSales;
+    }
+
     private ArrayList <Product> allSaleProducts;
     private static ArrayList <Sale> allSales;
 
@@ -68,12 +73,27 @@ public class Sale{
 
     public Sale getSaleWithSeller(Seller seller){
         for (Sale sale:allSales){
-            if ((sale.getSeller())==(seller)){
+            if ((sale.getSeller()).equals(seller)){
                 return sale;
             }
 
         }
         return null;
+    }
+    public static boolean saleDateValid( Date start,Date end){
+        Date currentDate=new Date();
+        if(start.after(currentDate) && end.after(currentDate)&& end.after(start) ){
+            return  true;
+        }
+        return false;
+    }
+    public void deleteExpiredDiscount(){
+        Date currentDate=new Date();
+        for (Sale sale : allSales) {
+            if (sale.getEndOfDiscountPeriod().before(currentDate)){
+                allSales.remove(sale);
+            }
+        }
     }
 
     public Sale getSaleWithProduct(Product product){
@@ -107,6 +127,15 @@ public class Sale{
     public static void deleteSale(String id){
         allSales.remove(id);
     }
+    //!
+    public ArrayList<Double> calculatePriceAfterSale(){
+        ArrayList<Double> prices = new ArrayList<>();
+        for (Product saleProduct : allSaleProducts) {
+           double price=saleProduct.getPrice()*(1-(saleAmount/100));
+           prices.add(price);
+        }
+        return prices;
+            }
 
     public boolean isTheProductInAnotherSale(Product product) {
         for (Sale sale : allSales) {

@@ -41,8 +41,20 @@ public class DiscountCode {
         return false;
     }
 
-    public static boolean discountDateValid(){
-
+    public static boolean discountDateValid( Date start,Date end){
+        Date currentDate=new Date();
+        if(start.after(currentDate) && end.after(currentDate)&& end.after(start) ){
+            return  true;
+        }
+        return false;
+    }
+    public void deleteExpiredDiscount(){
+        Date currentDate=new Date();
+        for (DiscountCode discountCode : allDiscountCodes) {
+            if (discountCode.getEndOfDiscountPeriod().before(currentDate)){
+                allDiscountCodes.remove(discountCode);
+            }
+        }
     }
 
     public void setDiscountAmount(int discountAmount) {
@@ -112,6 +124,10 @@ public class DiscountCode {
     public static void deleteDiscount(String id) {
         allDiscountCodes.remove(getDiscountWithId(id));
 
+    }
+    public double CalculatePriceAfterDiscount(double totalPrice){
+        totalPrice*=(1-this.discountAmount/100);
+        return totalPrice;
     }
 
     /*

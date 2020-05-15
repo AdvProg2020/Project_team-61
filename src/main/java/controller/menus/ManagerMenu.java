@@ -321,6 +321,9 @@ public class ManagerMenu {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGECATEGORIES);
 
     }
+    public void acceptSaleRequest(){
+
+    }
 
     public void editCategory(String category) {
         if (checkCategory(category)) {

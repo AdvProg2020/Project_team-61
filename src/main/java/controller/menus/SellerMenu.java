@@ -370,7 +370,7 @@ public class SellerMenu {
                 } else outputNo = 0;
             } else outputNo = 0;
         } else if (detailMenu == 3) {
-            if (detail.matches("\\d+")) {
+            if (detail.matches("[1-9]|[1-9][1-9]|[100]")) {
                 saleRequest.setSaleAmount(Integer.parseInt(detail));
                 detailMenu = 4;
                 outputNo = 0;

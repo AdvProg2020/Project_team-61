@@ -24,11 +24,22 @@ public class SaleRequest extends Request {
         allSaleRequests.add(this);
 
     }
+    public void processAcceptSaleRequest(){
 
-    public void acceptSaleRequest() {
+    }
+
+    public static void acceptSaleRequest() {
         sale= Sale.getSaleWithId(offId);
         sale.setSaleDetails(SaleStatus.CONFIRMED, startOfSalePeriod, endOfSalePeriod, saleAmount, seller);
         sale.setAllSaleProducts(allSaleProducts);
+        Sale.getAllSales().add(sale);
+        sale.calculatePriceAfterSale();
+    }
+    public boolean isSaleRequestAccepted(){
+        if (saleStatus.equals(SaleStatus.CONFIRMED)){
+            return true;
+        }
+        return false;
     }
 
 
