@@ -7,6 +7,7 @@ import model.sort.Sort;
 import view.CommandProcessor;
 import view.*;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class ProductsMenu {
@@ -32,6 +33,7 @@ public class ProductsMenu {
     //filter-------------------------------------------------------
 
 
+    //done
     private boolean checkFilter(String filterName) {
         //if (filterName.matches("(?i)(?:)")) {
             if (filter.isThereFilterWithName(filterName)) {
@@ -42,43 +44,43 @@ public class ProductsMenu {
         return false;
     }
 
+    //done
     public void processFiltering() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
     }
 
-    //finish//json
+    //done
     public void showAvailableFilters() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
-        OutputHandler.showAvailableFilters(Filter.showAvailableFilters());
+        OutputHandler.showAvailableFilters(Filter.getAvailableFilters());
     }
 
-    //finish//json
-    public void filter(String filterID) {
-        ArrayList<Product> filteredArray = null;
+    //firm ro che konam
+    public void filter(String filterID) throws FileNotFoundException {
         if (checkFilter(filterID)) {
             if (Filter.ifFilterAvailable(filterID)) {
                 if (filterID.equals("category")) {
-                    filteredArray=filter.categoryFilter(product.getCategory());
+                    filter.categoryFilter(product.getCategory());
                 } else if (filterID.equals("companyName")) {
-                    filteredArray=filter.companiesFilter(product.firm.getCompaniesName());
+                    filter.companiesFilter(product.firm.getCompaniesName());
                 } else if (filterID.equals("productName")) {
-                    filteredArray=filter.productNameFilter(product.getProductName());
+                    filter.productNameFilter(product.getProductName());
                 }else if (filterID.equalsIgnoreCase("periodFilter")){
                     // return filter.periodFilter();
+                }else if (filterID.equalsIgnoreCase("isAvailable")){
+                    filter.isAvailable();
                 }
             }
         }
-        if (filteredArray != null){
-            OutputHandler.showAllProductAfterFilter(filteredArray);
-        }
+        OutputHandler.showAllProductAfterFilter();
     }
 
-    //finish//json
+    //done
     public void currentFilters() {
         OutputHandler.showCurrentFilter(Filter.currentFilters());
     }
 
-    //finish
+    //not done
     public void disableFilter(String filterID) {
         if (checkFilter(filterID)) {
             Filter.disableFilter(filterID);
@@ -90,7 +92,7 @@ public class ProductsMenu {
 
     //sort-----------------------------------------------------------------
 
-    //finish
+    //done
     private boolean checkSort(String sortName) {
         //if (sortName.matches("")) {
             if (sort.isThereSortWithName(sortName)) {
@@ -101,17 +103,17 @@ public class ProductsMenu {
         return false;
     }
 
-
+    //done
     public void processSorting() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.SORTING);
     }
 
-    //finish//json
+    //done
     public void showAvailableSorts() {
-        OutputHandler.showAvailableSorts(sort.showAvailableSort());
+        OutputHandler.showAvailableSorts(Sort.getAvailableSorts());
     }
 
-    //finish//json
+    //done
     public void sort(String sortID) {
         ArrayList<Product> sortedList=null;
         if (checkSort(sortID)) {
@@ -128,13 +130,12 @@ public class ProductsMenu {
         }
     }
 
-
-    //finish//json
+    //done
     public void currentSorts() {
-        OutputHandler.showCurrentSorts(sort.currentSorts());
+        OutputHandler.showCurrentSorts(Sort.currentSorts());
     }
 
-    //finish
+
     public void disableSort() {
         sort.disableSort();
         OutputMassageHandler.showProductsOutput();
@@ -142,21 +143,19 @@ public class ProductsMenu {
 
     //product--------------------------------------------------
 
-    //finish//json
-    public void processShowProducts() {
-        OutputHandler.showProducts(Filter.newArrayOfProductFilter);
+    //done
+    public void processShowProducts() throws FileNotFoundException {
+        OutputHandler.showProducts(Filter.getNewArrayOfProductFilter());
     }
 
-
-    //GSON
-    public void processShowProductsID(String productId) {
-        Product product=Product.getProductById(productId);
-        OutputHandler.showProductsIds(product);
+    //done
+    public void processShowProductsID() throws FileNotFoundException {
+        OutputHandler.showProductsIds();
         CommandProcessor.setMenuStatus(MenuStatus.PRODUCTMENU);
          
     }
 
-
+    //done
     public static String getProductId() {
         return productId;
     }

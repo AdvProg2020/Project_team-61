@@ -38,6 +38,8 @@ public class Product  {
     private static ArrayList<Product> allProduct = new ArrayList<Product>();
     private ArrayList<String> info=new ArrayList<>();
     public static ArrayList<String> listOfId=new ArrayList<String>();
+    private  ArrayList<Comment> proComments = new ArrayList<Comment>();
+
 
     //objectsAdded
     private Comment comment;
@@ -71,6 +73,11 @@ public class Product  {
 
 
     //settersAndGetters----------------------------------------------------------------------------------
+
+    public void setComment(Comment comment) {
+        this.comment = comment;
+        proComments.add(comment);
+    }
 
     public String  getId () {
         return productId;
@@ -191,9 +198,6 @@ public class Product  {
         this.seller = seller;
     }
 
-    public void setComment(Comment comment) {
-        this.comment = comment;
-    }
     public Comment getComment() {
         return comment;
     }

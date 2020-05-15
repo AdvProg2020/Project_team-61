@@ -41,6 +41,7 @@ public abstract class Filter {
         availableFilters.add("discount");
         availableFilters.add("productName");
         availableFilters.add("periodFilter");
+        availableFilters.add("isAvailable");
     }
 
 
@@ -75,31 +76,31 @@ public abstract class Filter {
         return availableFilters;
     }
 
-    public ArrayList<Product> categoryFilter(Category category) throws FileNotFoundException {
+    public void categoryFilter(Category category) throws FileNotFoundException {
         newArrayOfProductFilter = newArrayOfProductFilter.stream().filter(product1 -> product.getCategory().equals(category)).collect(Collectors.toCollection(ArrayList::new));
         listOfFilters.add(1, newArrayOfProductFilter);
         helpFilter.add(newArrayOfProductFilter);
         availableFilters.remove(0);
-        return product.getProductList();
+
     }
 
-    public ArrayList<Product> companiesFilter(String companiesName) throws FileNotFoundException {
+    public void companiesFilter(String companiesName) throws FileNotFoundException {
         newArrayOfProductFilter = newArrayOfProductFilter.stream().filter(product1 -> product.getCompaniesName().equals(companiesName)).collect(Collectors.toCollection(ArrayList::new));
         listOfFilters.add(2, newArrayOfProductFilter);
         helpFilter.add(newArrayOfProductFilter);
         availableFilters.remove(1);
-        return newArrayOfProductFilter;
+
     }
 
-    public ArrayList<Product> productNameFilter(String productName) throws FileNotFoundException {
+    public void productNameFilter(String productName) throws FileNotFoundException {
         newArrayOfProductFilter = newArrayOfProductFilter.stream().filter(product1 -> product.getProductName().equals(productName)).collect(Collectors.toCollection(ArrayList::new));
         listOfFilters.add(4, newArrayOfProductFilter);
         helpFilter.add(newArrayOfProductFilter);
         availableFilters.remove(3);
-        return newArrayOfProductFilter;
+
     }
 
-    public ArrayList<Product> periodFilter(int n, int m) {
+    public void periodFilter(int n, int m) {
         ArrayList<Product> helper=null;
         for (Product product1 : newArrayOfProductFilter) {
             if (product1.getPrice() > n && product1.getPrice() < m) {
@@ -110,10 +111,9 @@ public abstract class Filter {
         listOfFilters.add(5,newArrayOfProductFilter);
         helpFilter.add(newArrayOfProductFilter);
         availableFilters.remove(4);
-        return newArrayOfProductFilter;
     }
 
-    public ArrayList<Product> isAvailable(){
+    public void isAvailable(){
         ArrayList<Product> delete=new ArrayList<>();
         for (Product product1 : Product.getProductList()) {
             if (product1.getNumberOfProducts()==0){
@@ -121,7 +121,10 @@ public abstract class Filter {
             }
         }
         newArrayOfProductFilter.removeAll(delete);
-        return newArrayOfProductFilter;
+        listOfFilters.add(6,newArrayOfProductFilter);
+        helpFilter.add(newArrayOfProductFilter);
+        availableFilters.remove(5);
+
     }
 
     //others-----------------------------------------------------------------------------
