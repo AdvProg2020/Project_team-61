@@ -54,7 +54,7 @@ public enum SubMenuStatus {
     RECIEVEMONEY,
     EDIT,
     RECIVERINFORMATION,
-    FIRMINFORMATION,
+    ADDFIRM,
     CHECKDISCOUNTCODE,
     PAYMENT,
     FIRMFIELD,
@@ -63,15 +63,8 @@ public enum SubMenuStatus {
     HAVEDISCOUNT,
     EDITSELLERACCOUNT,
     INCREASEPRODUCTNUMBER,
-    DECREASEPRODUCTNUMBER;
-
-
-
-  //customer menu
-
-
-
-    //
-
+    DECREASEPRODUCTNUMBER,
+    VIEWPERSONALINFO,
+    PURCHASE;
 
 }

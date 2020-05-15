@@ -13,7 +13,7 @@ public enum MenuStatus {
     //
     SALEMENU,
     //
-    PURCHASE,
+    //PURCHASE,
     //
 
    /* CATEGORY,

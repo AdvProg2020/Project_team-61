@@ -94,7 +94,7 @@ public class CustomerMenu {
 
     //purches............................................................................
     public void purchase() {
-        CommandProcessor.setMenuStatus(MenuStatus.PURCHASE);
+      //  CommandProcessor.setMenuStatus(MenuStatus.PURCHASE);
         CommandProcessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
         CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
         OutputMassageHandler.showCustomerOutput(5);
@@ -105,7 +105,7 @@ public class CustomerMenu {
     public void processPurchase() {
         if (LoginMenu.isLogin()) {
             if (LoginMenu.getLoginAccount().getRole().equals("customer")) {
-                CommandProcessor.setMenuStatus(MenuStatus.PURCHASE);
+             //   CommandProcessor.setSubMenuStatus(SubMenuStatus.PURCHASE);
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
                 CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
                 outputNo = 5;

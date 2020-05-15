@@ -18,10 +18,18 @@ public class ManagerMenu {
     private int outputNo;
     private DiscountCode editableDiscountCode;
     private Category editableCategory;
-    private String field;
-    private int detailMenu = 0;
+    private static String field;
+    private static int detailMenu = 0;
     private DiscountCode newDiscountCode;
     private  Category newCategory;
+
+    public static String getField() {
+        return field;
+    }
+
+    public static int getDetailMenu() {
+        return detailMenu;
+    }
 
     //gson
     public void processManageUsers() {
