@@ -13,8 +13,10 @@ import model.log.SaleLog;
 import model.off.DiscountCode;
 import model.off.Sale;
 import model.productRelated.Category;
+import model.productRelated.Comment;
 import model.productRelated.Product;
 import model.sort.Sort;
+import sun.dc.pr.PRError;
 
 
 import java.io.FileNotFoundException;
@@ -25,8 +27,8 @@ public class OutputHandler {
 
 
     //withoutJson//pr
-    public static void showAvailableFilters() {
-        for (String availableFilter : Filter.getAvailableFilters()) {
+    public static void showAvailableFilters(ArrayList<String> available) {
+        for (String availableFilter : available) {
             System.out.println(availableFilter);
         }
     }
@@ -39,46 +41,42 @@ public class OutputHandler {
     }
 
     //withoutJson//pr
-    public static void showCurrentFilter() {
-        for (String currentFilter : Filter.currentFilters()) {
+    public static void showCurrentFilter(ArrayList<String> current) {
+        for (String currentFilter : current) {
             System.out.println(currentFilter);
         }
     }
 
     //withoutJson//pr
-    public static void showAvailableSorts() {
-        for (String availableSort : Sort.getAvailableSorts()) {
+    public static void showAvailableSorts(ArrayList<String> available) {
+        for (String availableSort : available) {
             System.out.println(availableSort);
         }
     }
 
     //withoutJson//pr
-    public static void showAllProductAfterSort() {
-        for (Product product : Sort.getNewArrayOfProductSort()) {
+    public static void showAllProductAfterSort(ArrayList<Product> sorted) {
+        for (Product product : sorted) {
             System.out.println(product);
         }
     }
 
     //withoutJson//pr
-    public static void showCurrentSorts() {
-        for (String currentSort : Sort.currentSorts()) {
+    public static void showCurrentSorts(ArrayList<String> currentSorts) {
+        for (String currentSort : currentSorts) {
             System.out.println(currentSort);
         }
     }
 
     //finish//pr
-    public static void showProducts() throws FileNotFoundException {
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
-        }.getType();
-        JsonReader proReader=FileHandling.readFile("product.json");
-        ArrayList<Product> data = FileHandling.getGson().fromJson(proReader, REVIEW_TYPE);
+    public static void showProducts(ArrayList<Product> data) throws FileNotFoundException {
         for (Product product : data) {
             System.out.println(product);
         }
     }
 
     //finish//pr
-    public static void showProductsIds(String productId) throws FileNotFoundException {
+    public static void showProductsIds() throws FileNotFoundException {
         Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
         }.getType();
         JsonReader proReader=FileHandling.readFile("product.json");
@@ -194,7 +192,7 @@ public class OutputHandler {
     }
 
     //finish//pr
-    public static void showRequests(ArrayList<Request> requests) throws FileNotFoundException {
+    public static void showRequests() throws FileNotFoundException {
         Type REVIEW_TYPE = new TypeToken<ArrayList<Request>>() {
         }.getType();
         JsonReader requestReader=FileHandling.readFile("request.json");
@@ -381,5 +379,30 @@ public class OutputHandler {
         System.out.println(accountToShow.getCredit());
     }
 
+    //finish//pr
+    public static void showAllComments() throws FileNotFoundException {
+        Type REVIEW_TYPE = new TypeToken<ArrayList<Comment>>() {
+        }.getType();
+        JsonReader commentReader=FileHandling.readFile("comment.json");
+        ArrayList<Comment> data = FileHandling.getGson().fromJson(commentReader, REVIEW_TYPE);
+        for (Comment comment : data) {
+            System.out.println(comment);
+        }
+    }
+
+    //finish//pr
+    public static void showCommentOnOneProduct(String productId) throws FileNotFoundException {
+        Comment commentToShow=null;
+        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
+        }.getType();
+        JsonReader productReader=FileHandling.readFile("product.json");
+        ArrayList<Product> data = FileHandling.getGson().fromJson(productReader, REVIEW_TYPE);
+        for (Product product : data) {
+            if (product.getId().matches(productId)){
+                System.out.println(product.getComment());
+            }
+        }
+
+    }
 
 }

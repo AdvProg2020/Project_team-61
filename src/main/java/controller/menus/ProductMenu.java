@@ -9,6 +9,7 @@ import view.OutputHandler;
 import view.OutputMassageHandler;
 import view.SubMenuStatus;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -27,7 +28,7 @@ public class ProductMenu {
     }
 
 
-    public void addToCart() {
+    public void addToCart() throws IOException {
         String uniqueID = UUID.randomUUID().toString();
         if (BuyLog.getFirstProduct()) {
             buyLog = new BuyLog(uniqueID);
@@ -61,11 +62,9 @@ public class ProductMenu {
         }
     }
 
-    //finish//json
-
-    //TO COMMANDA NDIDM
-    public void allSellersForProduct(String productId) {
-        OutputHandler.showAllSellersForOneProduct(Product.getProductById(productId).getListOfSellers());
+    //done
+    public void allSellersForProduct() throws FileNotFoundException {
+        OutputHandler.showAllSellersForOneProduct(selectedProduct.getId());
     }
 
     public void processAttributes() {
@@ -79,20 +78,26 @@ public class ProductMenu {
 
     //comment--------------------------------------------------------------------
 
-    //neshoon dadanie
-    public void processComments() {
+    //done
+    public void processComments() throws FileNotFoundException {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
-        selectedProduct.getScore();
-        comment.getAllComments();
+        OutputHandler.showAllComments();
     }
 
-    //finish
+    //done
+    public void processCommentOnProduct() throws FileNotFoundException {
+        OutputHandler.showCommentOnOneProduct(selectedProduct.getId());
+        selectedProduct.getScore();
+    }
+
+    //done
     public void addComments() throws IOException {
         selectedProduct.setComment(comment=new Comment(selectedProduct,LoginMenu.getLoginAccount()));
         comment.setAllComments();
         Comment.writeInJ();
     }
 
+    //done
     public void titleOfComment(String title) throws IOException {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
         comment.setTitle(title);
@@ -100,7 +105,7 @@ public class ProductMenu {
         Comment.writeInJ();
     }
 
-    //finish
+    //done
     public void contentOfComment(String content) throws IOException {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
         comment.setContent(content);
