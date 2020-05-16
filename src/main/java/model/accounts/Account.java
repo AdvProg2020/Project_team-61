@@ -172,8 +172,6 @@ public abstract class Account {
     }
 
     //-----------------------------------------------------------------
-
-
     public static ArrayList<Account> getAllAccounts() {
         return allAccounts;
     }
@@ -214,6 +212,11 @@ public abstract class Account {
         return usedDiscount;
     }
 
+    public AccountStatus getAccountStatus() {
+        return accountStatus;
+    }
+
+    //......................................................................
     public static void writeInJ() throws IOException {
         Type collectionType = new TypeToken<ArrayList<Account>>(){}.getType();
         String json= FileHandling.getGson().toJson(Account.allAccounts,collectionType);

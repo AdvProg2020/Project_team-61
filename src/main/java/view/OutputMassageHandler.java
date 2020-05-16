@@ -234,7 +234,7 @@ public class OutputMassageHandler {
 
     public static void showAccountOutput(int output) {
         if (output == 0) {
-            System.out.println("username format is invalid");
+            System.out.println("");
         } else if (output == 1) {
             System.out.println("a user exists with this username");
         } else if (output == 2) {
@@ -266,7 +266,7 @@ public class OutputMassageHandler {
         } else if (output == 15) {
             System.out.println("login successful");
         } else if (output == 16) {
-            System.out.println("no account field matches with this");
+            System.out.println("no account field matches with this (username|password|last name|email|phone number|firm)");
         } else if (output == 17) {
             System.out.println("password changed");
         } else if (output == 18) {
@@ -298,11 +298,11 @@ public class OutputMassageHandler {
         } else if (output == 31) {
             System.out.println("please enter firm name");
         } else if (output == 32) {
-            System.out.println("");
+            System.out.println("username format is invalid");
         } else if (output == 33) {
-            System.out.println("");
+            System.out.println("you can't login");
         } else if (output == 34) {
-            System.out.println("");
+            System.out.println("enter new value");
         } else if (output == 35) {
             System.out.println("");
         } else if (output == 36) {
@@ -322,7 +322,7 @@ public class OutputMassageHandler {
         if (output == 0) {
             System.out.println("");
         } else if (output == 1) {
-            System.out.println("no firm field matches with this");
+            System.out.println("no firm field matches with this (name|address|email|phone number)");
         } else if (output == 2) {
             System.out.println("please enter new value");
         } else if (output == 3) {
