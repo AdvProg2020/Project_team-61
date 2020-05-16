@@ -17,7 +17,7 @@ public class RegisterMenu {
     private Customer customer;
     private AccountRequest accountRequest;
     private FirmRequest firmRequest;
-    private int detailMenu = 0;
+    private static int detailMenu = 0;
     private  static boolean managerWant = false;
     private boolean headManager = true;
     private String role;
@@ -30,11 +30,15 @@ public class RegisterMenu {
     private Data birthdayDate;
     private SubMenuStatus subMenuStatus;
 
+    public static int getDetailMenu() {
+        return detailMenu;
+    }
+
     public static void setManagerWant(boolean managerWant) {
         RegisterMenu.managerWant = managerWant;
     }
 
-    public void processRegister(String role, String username) {
+    public static void processRegister(String role, String username) {
         if (username.matches("^(?i)(?=.[a-z])(?=.[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
             if (!Account.isThereAccountWithUsername(username)) {
                 if (role.matches("(?i)(?:customer|manager|seller)")) {
@@ -58,6 +62,7 @@ public class RegisterMenu {
         } else if (role.equalsIgnoreCase("manager")) {
             createManagerAccount(username);
         } else if (role.equalsIgnoreCase("seller")) {
+
             accountRequest = new AccountRequest(username + " wants seller account");
             outputNo = 2;
         }
@@ -78,7 +83,7 @@ public class RegisterMenu {
         }
     }
 
-    public void completeRegisterProcess(String detail) {
+    public static void completeRegisterProcess(String detail) {
         if (detailMenu == 0) {
             if (detail.matches("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}$")) {
                 this.password = detail;
@@ -123,7 +128,7 @@ public class RegisterMenu {
     public void createAccountWithDetails() {
         if (role.equalsIgnoreCase("seller")) {
             accountRequest.sellerAccountDetails(username, password, name, lastname, Email, phoneNo, birthdayDate);
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMINFORMATION);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDFIRM);
         } else if (role.equalsIgnoreCase("customer")) {
             customer.setDetailsToAccount(password, name, lastname, Email, phoneNo, birthdayDate);
             CommandProcessor.setSubMenuStatus(subMenuStatus);
@@ -135,6 +140,69 @@ public class RegisterMenu {
         }
     }
 
+    public static void createFirm(String detail) {
+        if (detailMenu == 0) {
+            if (detail.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$")) {
+                String id = "seller "+ LoginMenu.getLoginAccount().getUsername()+ "wants firm "+ detail ;
+                if(!firmRequest.isThereRequestFromID(id)) {
+                    firmRequest = new FirmRequest(id);
+                    firmRequest.setName(detail);
+                    detailMenu++;
+                    outputNo = 4;
+                }else outputNo = 0;
+            } else outputNo = 3;
+        } else if (detailMenu == 1) {
+            if (detail.matches("09[0-9]{9}")) {
+                firmRequest.setPhoneNO(Double.parseDouble(detail));
+                detailMenu++;
+                outputNo = 6;
+            } else outputNo = 5;
+        } else if (detailMenu == 2) {
+            if (detail.matches(".+")) {
+                firmRequest.setAddress(detail);
+                detailMenu = 3;
+                outputNo = 8;
+            } else outputNo = 7;
+        }else if (detailMenu == 3) {
+            if (detail.matches("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")) {
+                firmRequest.setEmail(detail);
+                detailMenu = 0;
+                CommandProcessor.setSubMenuStatus(subMenuStatus);
+                CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                outputNo = 0;
+            } else outputNo = 0;
+        }
+    }
+
+    //******************************************************
+    public static void receiverInformation(String detail) {
+        if (detailMenu == 0) {
+            if (detail.matches("\\d+")) {
+                LoginMenu.getLoginAccount().setCurrentPhoneNo(Double.parseDouble(detail));
+                detailMenu = 1;
+                outputNo = 4;
+            } else outputNo = 3;
+        } else if (detailMenu == 1) {
+            if (detail.matches("\\d{1,5}\\s\\w.\\s(\\b\\w*\\b\\s){1,2}\\w*\\.")) {
+                LoginMenu.getLoginAccount().setAddress(detail);
+                detailMenu = 2;
+                outputNo = 6;
+            } else outputNo = 5;
+        } else if (detailMenu == 2) {
+            if (detail.matches(".+")) {
+                this.phoneNo = Double.parseDouble(detail);
+                detailMenu = 0;
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.HAVEDISCOUNT);
+                CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                outputNo = 12;
+            } else outputNo = 11;
+        }
+
+    }
+
+
+
+}
     public void createFirm(String detail) {
         if (detailMenu == 0) {
             if (detail.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$")) {

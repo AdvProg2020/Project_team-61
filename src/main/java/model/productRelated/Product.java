@@ -32,13 +32,14 @@ public class Product  {
     private boolean isBought;
 
     //lists
-    private static ArrayList<Account> listOfSellers = new ArrayList<Account>();
-    private static ArrayList<Customer> listOfBuyers=new ArrayList<>();
+    private  ArrayList<Account> listOfSellers = new ArrayList<Account>();
+    private  ArrayList<Customer> listOfBuyers=new ArrayList<>();
     private HashMap<Category,ArrayList<Product>> listOfAllProducts = new HashMap<>();
     private static ArrayList<Product> allProduct = new ArrayList<Product>();
     private ArrayList<String> info=new ArrayList<>();
     public static ArrayList<String> listOfId=new ArrayList<String>();
     private  ArrayList<Comment> proComments = new ArrayList<Comment>();
+    private ArrayList<Score> proScores = new ArrayList<>();
 
 
     //objectsAdded
@@ -73,6 +74,12 @@ public class Product  {
 
 
     //settersAndGetters----------------------------------------------------------------------------------
+
+
+    public void setScore(Score score) {
+        this.score = score;
+        proScores.add(score);
+    }
 
     public void setComment(Comment comment) {
         this.comment = comment;
@@ -169,22 +176,6 @@ public class Product  {
     public int getTotalNumberOfBuyers() {
         return totalNumberOfBuyers;
     }
-//
-//    public void setInfo() {
-//        info.add(getProductName());
-//        info.add(getCompaniesName());
-//        info.add(String.valueOf(getPrice()));
-//        info.add(getCategory().getName());
-//        info.add(seller.getName());
-//        info.add(String.valueOf(getAverageScore()));
-//        if (additionalDetail!=null){
-//            info.add(additionalDetail);
-//        }else info.add("\n");
-//
-//    }
-//    public ArrayList<String> getInfo() {
-//        return info;
-//    }
 
     public HashMap<Category, ArrayList<Product>> getListOfAllSameCategoryProducts() {
         return listOfAllProducts;
@@ -215,14 +206,6 @@ public class Product  {
         listOfAllProducts.put(Category.getCategoryWithName(categoryName),products);
     }
 
-    //ina bayad tooye menu oonjaee ke comment new mishe bashan
-//    public void addCommentTitle(String title){
-//        comment.setTitle(title);
-//    }
-//
-//    public void addCommentContent(String content){
-//        comment.setContent(content);
-//    }
 
     //checked
     public static Product getProductById(String id) {
@@ -234,11 +217,6 @@ public class Product  {
         return null;
     }
 
-
-//    public List listOfComments ( String id) {
-//        Product product=getProductById(id);
-//        return product.comment.allComments;
-//    }
 
     public boolean ifProductHasSeller(String productId, String sellerUserName){
         if (isThereProductWithId(productId)) {

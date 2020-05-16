@@ -4,19 +4,24 @@ import controller.request.AccountRequest;
 import controller.request.FirmRequest;
 import controller.request.Request;
 import model.accounts.Account;
+import model.accounts.AccountStatus;
 import model.accounts.Seller;
 import view.*;
 
 public class LoginMenu {
     private int outputNo;
     private static Account loginAccount;
-    private String field = null;
+    private static String field = null;
     private String username = null;
     private static boolean login = false;
     private SubMenuStatus subMenuStatus;
     private FirmRequest firmRequest;
     private AccountRequest accountRequest;
     private static String firmName;
+
+    public static String getField() {
+        return field;
+    }
 
     public static Account getLoginAccount() {
         return loginAccount;
@@ -26,10 +31,11 @@ public class LoginMenu {
         return login;
     }
 
-    public void processLogin(String username) {
+    public static void processLogin(String username) {
         if (!login) {
             if (username.matches("^(?i)(?=.[a-z])(?=.[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
                 if (Account.isThereAccountWithUsername(username)) {
+                    this.username =username;
                     subMenuStatus = CommandProcessor.getSubMenuStatus();
                     CommandProcessor.setSubMenuStatus(SubMenuStatus.PASSWORD);
                     outputNo = 2;
@@ -39,14 +45,14 @@ public class LoginMenu {
         OutputMassageHandler.showAccountOutput(outputNo);
     }
 
-    public void checkPassword(String password) {
+    public static void checkPassword(String password) {
         if (password.matches("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}$")) {
             if (Account.isThereAccountWithUsernameAndPassword(username, password)) {
                 loginAccount = Account.getAccountWithUsername(username);
                 login = true;
                 findRole();
                 CommandProcessor.setSubMenuStatus(subMenuStatus);
-                outputNo = 15;
+
             } else outputNo = 14;
         } else outputNo = 3;
         OutputMassageHandler.showAccountOutput(outputNo);
@@ -56,23 +62,28 @@ public class LoginMenu {
         String role = loginAccount.getRole();
         MenuStatus menu = null;
         if (role.equalsIgnoreCase("customer")) {
+            outputNo = 15;
             menu = MenuStatus.CUSTOMERMENU;
         } else if (role.equalsIgnoreCase("manager")) {
+            outputNo = 15;
             menu = MenuStatus.MANAGERMENU;
         } else if (role.equalsIgnoreCase("seller")) {
-            menu = MenuStatus.SELLERMENU;
+            if()
+                menu = MenuStatus.SELLERMENU;
         }
         CommandProcessor.setMenuStatus(menu);
     }
 
     //gson
-    public void viewPersonalInfo() {
+    public static void viewPersonalInfo() {
         //if(login) {
         OutputHandler.showAccountInformation();
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWPERSONALINFO);
         // }outputHandler.showAccountOutput(25);
     }
 
-    public void processEdit(String field) {
+
+    public static void processEdit(String field) {
         // if(login) {
         if (field.matches("(?i)(?:username|password|last\\s*name|email|phone\\s*number|firm)")) {
             if (loginAccount.getRole() == "seller") {
@@ -81,6 +92,7 @@ public class LoginMenu {
                     Request.deleteRequest(id);
                 }
                 accountRequest = new AccountRequest(id);
+                loginAccount.setAccountStatus(AccountStatus.UNDERREVIEWFOREDITING);
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITSELLERACCOUNT);
             } else {
                 if (!field.equalsIgnoreCase("firm")) {
@@ -94,7 +106,7 @@ public class LoginMenu {
         OutputMassageHandler.showAccountOutput(outputNo);
     }
 
-    public void editSellerField(String edit) {
+    public static void editSellerField(String edit) {
         if (this.field.equalsIgnoreCase("password")) {
             if (edit.matches("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}$")) {
                 accountRequest.setPassword(edit);
@@ -127,7 +139,7 @@ public class LoginMenu {
         OutputMassageHandler.showAccountOutput(outputNo);
     }
 
-    public void editField(String edit) {
+    public static void editAccount(String edit) {
         if (this.field.equalsIgnoreCase("password")) {
             if (edit.matches("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}$")) {
                 loginAccount.setPassword(edit);
@@ -157,7 +169,7 @@ public class LoginMenu {
         OutputMassageHandler.showAccountOutput(outputNo);
     }
 
-    public void firmField(String field) {
+    public static void firmField(String field) {
         if (!field.matches("(?i)(?:name|address|email|phone\\s*number)")) {
             String id = "seller " + LoginMenu.getLoginAccount().getUsername() + "wants edit firm " + firmName + "'s " + field;
             if (firmRequest.isThereRequestFromID(id)) {
@@ -172,13 +184,13 @@ public class LoginMenu {
         OutputMassageHandler.showFirmOutput(outputNo);
     }
 
-    public void firmName(String name) {
+    public static void firmName(String name) {
         if (name.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$")) {
             if (checkFirm()) {
                 firmName = name;
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMFIELD);
                 outputNo = 5;
-            }else outputNo =12;
+            } else outputNo = 12;
         } else outputNo = 3;
         OutputMassageHandler.showFirmOutput(outputNo);
     }
@@ -192,7 +204,7 @@ public class LoginMenu {
         return false;
     }
 
-    public void editFirm(String detail) {
+    public static void editFirm(String detail) {
         if (field.matches("phone\\s*number")) {
             if (detail.matches("09[0-9]{9}")) {
                 firmRequest.setPhoneNO(Double.parseDouble(detail));
@@ -214,7 +226,7 @@ public class LoginMenu {
     }
 
 
-    public void processLogout() {
+    public static void processLogout() {
         if (login) {
             loginAccount = null;
             login = false;

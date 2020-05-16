@@ -14,13 +14,10 @@ import java.util.ArrayList;
 
 
 
-public  class Request {
+public  abstract class Request {
     private String requestText;
     private String requestDate;
     private Account seller;
-   // private boolean isRequested = false;
-   // private boolean requestAccepted = false;
-   // private boolean requestViewed = false;
     private static ArrayList<Request> allRequests;
 
     private LoginMenu loginMenu;
@@ -45,11 +42,7 @@ public  class Request {
         allRequests.remove(getRequestFromID(requestId));
     }
 
-    public static void acceptRequest(String requestId){
-        if(requestId.matches("((?!^ +$)^.+$) wants seller account")){
-            AccountRequest.acceptRequestDetail();
-        }
-    }
+    public abstract void acceptRequest() throws IOException;
 
     public static void deleteRequest(String id){
         allRequests.remove(getRequestFromID(id));

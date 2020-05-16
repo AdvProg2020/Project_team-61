@@ -183,8 +183,8 @@ public class OutputMassageHandler {
             System.out.println("product price changed");
         } else if (output == 6) {
             System.out.println("product category changed");
-       // } else if (output == 7) {
-          //  System.out.println("product seller changed");
+            // } else if (output == 7) {
+            //  System.out.println("product seller changed");
         } else if (output == 8) {
             System.out.println("product companyName changed");
         } else if (output == 9) {
@@ -197,8 +197,8 @@ public class OutputMassageHandler {
             System.out.println("please enter product price");
         } else if (output == 13) {
             System.out.println("please enter product category name");
-       // } else if (output == 14) {
-        //    System.out.println("please enter product seller name");
+            // } else if (output == 14) {
+            //    System.out.println("please enter product seller name");
         } else if (output == 15) {
             System.out.println("please enter product firm name");
         } else if (output == 16) {
@@ -327,8 +327,8 @@ public class OutputMassageHandler {
             System.out.println("please enter new value");
         } else if (output == 3) {
             System.out.println("firm name format is invalid");
-       // } else if (output == 4) {
-       //     System.out.println("you already send your request");
+            // } else if (output == 4) {
+            //     System.out.println("you already send your request");
         } else if (output == 5) {
             System.out.println("please enter firm's field you want to change");
         } else if (output == 6) {
@@ -394,5 +394,3 @@ public class OutputMassageHandler {
 
 
 }
-
-

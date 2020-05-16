@@ -25,20 +25,24 @@ public class BuyLog extends Log {
     }
 
 
-    private String id;
+
+
     //detail
-    private double amountBeforeDis;
-    double amountAfterDis;
+    private String id;
+    public static LocalDateTime localDateTimeForLog;
+    public double paidAmount;
+    private double discountOnPrice;
     String buyerName;
+
     int numberOfChosenPro;
     private static boolean ifItsFinal;
     boolean isBought;
     private static boolean firstProduct=true;
-    public static LocalDateTime localDateTimeForLog;
+    double amountAfterDis;
 
     //list
-    private static ArrayList<Product> listOfOneProduct = new ArrayList<Product>();
     private static ArrayList<ArrayList<Product>> allBoughtProduct = new ArrayList<>();
+    private static ArrayList<Product> listOfOneProduct = new ArrayList<Product>();
     public static ArrayList<BuyLog> allCustomersLog = new ArrayList<BuyLog>();
     public static HashMap<ArrayList<Product>, Double> productWithPriceWithSale=new HashMap<>();
     public static HashMap<ArrayList<Product>, Double> productWithPriceWithoutSale=new HashMap<>();
@@ -55,10 +59,6 @@ public class BuyLog extends Log {
         return id;
     }
 
-    public double getAmountBeforeDis() {
-        return amountBeforeDis;
-    }
-
     public void setIsBought(boolean bought) {
         isBought = bought;
     }
@@ -66,8 +66,6 @@ public class BuyLog extends Log {
     public boolean getIsBought() {
         return isBought;
     }
-
-
 
     public static LocalDateTime getLocalDateTimeForLog() {
         return localDateTimeForLog;

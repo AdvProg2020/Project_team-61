@@ -25,7 +25,6 @@ public enum MenuStatus {
     CHECKDISCOUNTCODE,
     CREATIONMENU,
     RECEIVERINFORMATION;
-
     */
 
 }
