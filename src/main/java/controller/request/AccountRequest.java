@@ -9,14 +9,14 @@ import java.util.ArrayList;
 
 public class AccountRequest extends Request {
 
-    private static String username = null;
-    private static String password = null;
-    private static String name = null;
-    private static String lastname = null;
-    private static String Email = null;
-    private static double phoneNo = 0;
-    private static Data birthdayDate = null;
-    private static Account selectedAccount;
+    private  String username = null;
+    private  String password = null;
+    private  String name = null;
+    private  String lastname = null;
+    private  String Email = null;
+    private  double phoneNo = 0;
+    private  Data birthdayDate = null;
+    private  Account selectedAccount;
     private ArrayList<AccountRequest> allAccountRequests;
 
     public AccountRequest(String requestID) {

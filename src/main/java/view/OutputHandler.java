@@ -281,7 +281,7 @@ public class OutputHandler {
     }
 
     //finish//pr
-    public static void showOrders(ArrayList<BuyLog> buyLogs) throws FileNotFoundException {
+    public static void showOrders() throws FileNotFoundException {
         Type REVIEW_TYPE = new TypeToken<ArrayList<BuyLog>>() {
         }.getType();
         JsonReader BuyLogReader=FileHandling.readFile("buyLog.json");

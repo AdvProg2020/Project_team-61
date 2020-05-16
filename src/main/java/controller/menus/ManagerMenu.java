@@ -8,6 +8,8 @@ import model.productRelated.Category;
 import model.productRelated.Product;
 import view.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,13 +18,13 @@ import java.util.Date;
 
 public class ManagerMenu {
 
-    private int outputNo;
-    private DiscountCode editableDiscountCode;
-    private Category editableCategory;
+    private static int outputNo;
+    private static DiscountCode editableDiscountCode;
+    private static Category editableCategory;
     private static String field;
     private static int detailMenu = 0;
-    private DiscountCode newDiscountCode;
-    private  Category newCategory;
+    private static DiscountCode newDiscountCode;
+    private static Category newCategory;
 
     public static String getField() {
         return field;
@@ -33,12 +35,12 @@ public class ManagerMenu {
     }
 
     //gson
-    public static void processManageUsers() {
+    public static void processManageUsers() throws FileNotFoundException {
         OutputHandler.showAccounts();
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEUSERS);
     }
 
-    private boolean checkUsername(String username) {
+    private static boolean checkUsername(String username) {
         if (username.matches("^(?i)(?=.[a-z])(?=.[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
             if (Account.isThereAccountWithUsername(username)) {
                 return true;
@@ -48,9 +50,9 @@ public class ManagerMenu {
     }
 
     //gson
-    public static void view(String username) {
+    public static void view(String username) throws FileNotFoundException {
         if (checkUsername(username)) {
-            OutputHandler.showAccountInformation();
+            OutputHandler.showAccountInformation(username);
         } else OutputMassageHandler.showAccountOutput(outputNo);
     }
 
@@ -70,12 +72,12 @@ public class ManagerMenu {
     //--------------------------------------------------------------------
 
     //gson
-    public static void processManageAllProducts() {
-        OutputHandler.showProducts(Filter.newArrayOfProductFilter);
+    public static void processManageAllProducts() throws FileNotFoundException {
+        OutputHandler.showProducts(Filter.getNewArrayOfProductFilter());
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEALLPRODUCTS);
     }
 
-    private boolean checkProduct(String productID) {
+    private static boolean checkProduct(String productID) {
         // if (productID.matches("")) {
         if (Product.isThereProductWithId(productID)) {
             return true;
@@ -93,7 +95,7 @@ public class ManagerMenu {
     }
     //------------------------------------------------
 
-    private boolean checkDiscountCode(String discountCodeID) {
+    private static boolean checkDiscountCode(String discountCodeID) {
         //if (discountCodeID.matches("")) {
         if (DiscountCode.isThereDiscountWithId(discountCodeID)) {
             return true;
@@ -108,7 +110,7 @@ public class ManagerMenu {
         OutputMassageHandler.showAccountOutput(6);
     }
 
-    public static void createNewDiscountCode(String discountCodeId) {
+    public static void createNewDiscountCode(String discountCodeId) throws IOException {
         if (!DiscountCode.isThereDiscountWithId(discountCodeId)) {
             newDiscountCode = new DiscountCode(discountCodeId);
             CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
@@ -118,7 +120,7 @@ public class ManagerMenu {
     }
 
     //exception for parse!!
-    public static void setDetailToDiscountCode(String detail) {
+    public static void setDetailToDiscountCode(String detail) throws ParseException {
         if (detailMenu == 0) {
             if (detail.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
                 Date currentDate=new Date();
@@ -184,15 +186,16 @@ public class ManagerMenu {
     }
 
     // array
-    public static void processViewDiscountCodes() {
+    public static void processViewDiscountCodes() throws FileNotFoundException {
         OutputHandler.showDiscountCodes();
         CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWDISCOUNTCODES);
     }
 
-    public static void viewDiscountCode(String discountCodeID) {
-        OutputHandler.showDiscountCode();
+    //moshkel dare
+    public static void viewDiscountCode(String discountCodeID) throws FileNotFoundException {
+        OutputHandler.showDiscountCode(discountCodeID);
         if (checkDiscountCode(discountCodeID)) {
-            OutputHandler.showDiscountCode();
+            OutputHandler.showDiscountCode(discountCodeID);
         }
     }
 
@@ -206,7 +209,7 @@ public class ManagerMenu {
 
     public static void discountCodeField(String field) {
         if (field.matches("(?i)(?:||||)")) {
-            this.field = field;
+            ManagerMenu.field = field;
             CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITDISCOUNTCODE);
             OutputMassageHandler.showOutputWithString(field, 3);
         }
@@ -277,7 +280,7 @@ public class ManagerMenu {
     }
     //-------------------------------------------------------------------------------------
 
-    private boolean checkRequest(String requestID) {
+    private static boolean checkRequest(String requestID) {
         // if (requestID.matches("")) {
         if (Request.isThereRequestFromID(requestID)) {
             return true;
@@ -288,21 +291,23 @@ public class ManagerMenu {
     }
 
     /// array
-    public static void processManageRequests() {
+    public static void processManageRequests() throws FileNotFoundException {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEREQUESTS);
         OutputHandler.showRequests();
     }
 
-    public static void detailsRequest(String requestID) {
-        OutputHandler.showRequest();
+    //moshkel dare
+    public static void detailsRequest(String requestID) throws FileNotFoundException {
+        //OutputHandler.showRequest();
         if (checkRequest(requestID)) {
-            OutputHandler.showRequest();
+            OutputHandler.showRequest(requestID);
         }
     }
 
+    //moshkel dare
     public static void acceptRequest(String requestID) {
         if (checkRequest(requestID)) {
-            Request.acceptRequest(requestID);
+            //Request.acceptRequest(requestID);
             OutputMassageHandler.showOutputWithString(requestID, 4);
         }
     }
@@ -315,7 +320,7 @@ public class ManagerMenu {
     }
     //------------------------------------------------------------------------------
 
-    private boolean checkCategory(String category) {
+    private static boolean checkCategory(String category) {
         if (category.matches("")) {
             //if (category.isThereCategoryWithName(category)) {
             return true;
@@ -325,8 +330,8 @@ public class ManagerMenu {
     }
 
     // array
-    public static void processManageCategories() {
-        OutputHandler.showCategories(Category.);
+    public static void processManageCategories() throws FileNotFoundException {
+        OutputHandler.showCategories();
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGECATEGORIES);
 
     }
@@ -342,7 +347,7 @@ public class ManagerMenu {
 
     public static void categoryField(String field) {
         if (field.matches("(?i)(?:||||)")) {
-            this.field = field;
+            ManagerMenu.field = field;
             CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITCATEGORY);
             OutputMassageHandler.showOutputWithString(field, 3);
         }
@@ -364,7 +369,7 @@ public class ManagerMenu {
 
     }
 
-    public static void addCategory(String category) {
+    public static void addCategory(String category) throws IOException {
         if(!(newCategory.isThereCategoryWithName(category))) {
             newCategory = new Category(category);
             CommandProcessor.setSubMenuStatus(SubMenuStatus.DETAILCATEGORY);

@@ -13,20 +13,22 @@ import model.productRelated.Product;
 import model.productRelated.ProductStatus;
 import view.*;
 
+import java.io.FileNotFoundException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
 public class SellerMenu {
 
-    private int outputNo;
+    private static int outputNo;
     private static String field;
     private static int detailMenu = 0;
-    private ProductRequest productRequest;
-    private SaleRequest saleRequest;
-    private String productId;
-    private String offId;
-    private Account loginAccount = LoginMenu.getLoginAccount();
+    private static ProductRequest productRequest;
+    private static SaleRequest saleRequest;
+    private static String productId;
+    private static String offId;
+    private static Account loginAccount = LoginMenu.getLoginAccount();
 
     public static String getField() {
         return field;
@@ -37,18 +39,18 @@ public class SellerMenu {
     }
 
     //gson
-    public static void processViewCompanyInformation() {
-        OutputHandler.showFirmInformation();
+    public static void processViewCompanyInformation() throws FileNotFoundException {
+        OutputHandler.showFirmInformation(Product.getProductById(productId).getFirm().getName());
     }
 
     //gson
-    public static void processViewSalesHistory() {
+    public static void processViewSalesHistory() throws FileNotFoundException {
         OutputHandler.showSalesHistory();
     }
 
     //product--------------------------------------------------------------------------------------
     // manager // customer // seller
-    private boolean checkProduct(String productID) {
+    private static boolean checkProduct(String productID) {
         // if (productID.matches("((?!^ +$)^.+$)")) {
         if (Product.isThereProductWithId(productID)) {
             return true;
@@ -59,23 +61,23 @@ public class SellerMenu {
     }
 
     //gson
-    public static void processManageProducts() {
+    public static void processManageProducts() throws FileNotFoundException {
         OutputHandler.showProducts(Filter.newArrayOfProductFilter);
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEPRODUCTS);
 
     }
 
     //gson
-    public static void viewProduct(String productID) {
+    public static void viewProduct(String productID) throws FileNotFoundException {
         if (checkProduct(productID)) {
-            OutputHandler.showProductsIds(Product.listOfId);
+            OutputHandler.showProductsIds();
         }
     }
 
     //gson
-    public static void viewBuyersProduct(String productID) {
+    public static void viewBuyersProduct(String productID) throws FileNotFoundException {
         if (checkProduct(productID)) {
-            OutputHandler.showProductBuyers();
+            OutputHandler.showProductBuyers(productID);
         }
 
     }
@@ -105,7 +107,7 @@ public class SellerMenu {
             productRequest = new ProductRequest(id);
             productRequest.setSellerName(LoginMenu.getLoginAccount());
             productRequest.setProductId(productId);
-            this.field = field;
+            SellerMenu.field = field;
             CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITPRODUCT);
             outputNo = 3;
         } else outputNo = 0;
@@ -226,12 +228,12 @@ public class SellerMenu {
     //----------------------------------------------------------------------------------------
 
     //array
-    public static void processShowCategories() {
+    public static void processShowCategories() throws FileNotFoundException {
         OutputHandler.showCategories();
     }
 
     //---------------------------------------------------------------------------------------
-    private boolean checkSale(String offID) {
+    private static boolean checkSale(String offID) {
         //if (offID.matches("")) {
         if (Sale.isThereSaleWithId(offID)) {
             return true;
@@ -243,14 +245,14 @@ public class SellerMenu {
     }
 
     //array
-    public static void processViewOffs() {
+    public static void processViewOffs() throws FileNotFoundException {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWOFFS);
         OutputHandler.showOffs();
     }
 
-    public static void viewOff(String offID) {
+    public static void viewOff(String offID) throws FileNotFoundException {
         if (checkSale(offID)) {
-            OutputHandler.showOff();
+            OutputHandler.showOff(offID);
         }
 
     }
@@ -260,7 +262,7 @@ public class SellerMenu {
             if (Sale.getSeller() == loginAccount) {
                 //   Sale sale = new Sale(offID);
                 Sale.getSaleWithId(offID).setSaleStatus(SaleStatus.UNDERREVIEWFOREDITING);
-                this.offId = offId;
+                offId = offId;
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.SALEFIELD);
                 outputNo = 20;
             } else outputNo = 0;
@@ -277,15 +279,15 @@ public class SellerMenu {
             }
             saleRequest = new SaleRequest(id);
             saleRequest.setOffId(offId);
-            this.field = field;
+            SellerMenu.field = field;
             CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITSALE);
             outputNo = 21;
         }
         OutputMassageHandler.showSellerOutput(outputNo);
     }
 
-    public void editOffField(String edit) {
-        if (field.matches("(?i))start\\s*of\\s*sale\\s*period")) {
+    public void editOffField(String edit) throws ParseException {
+        if (field.matches("(?i)start\\s*of\\s*sale\\s*period")) {
             if (edit.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
                 Date currentDate = new Date();
                 Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(edit);
@@ -333,7 +335,7 @@ public class SellerMenu {
         OutputMassageHandler.showSellerOutput(0);
     }
 
-    private boolean checkSaleId(String detail) {
+    private static boolean checkSaleId(String detail) {
         if (!Sale.isThereSaleWithId(detail)) {
             Sale sale = new Sale(detail);
             sale.setSaleStatus(SaleStatus.UNDERREVIEWFORCONSTRUCTION);
@@ -349,7 +351,7 @@ public class SellerMenu {
         return false;
     }
 
-    public static void setDetailsToSale(String detail) {
+    public static void setDetailsToSale(String detail) throws ParseException {
         if (detailMenu == 0) {
             if (detail.matches("^(?!\\s*$).+")) {
                 if (checkSaleId(detail)) {
@@ -397,7 +399,7 @@ public class SellerMenu {
 
     }
 
-    private boolean checkProductSale(String detail) {
+    private static boolean checkProductSale(String detail) {
         if (checkProduct(detail)) {
             if (Product.getProductById(productId).ifProductHasSeller(detail, loginAccount.getUsername())) {
                 return true;
@@ -408,7 +410,7 @@ public class SellerMenu {
 
     //-------------------------------------------------------------------------------
     //gson
-    public static void processViewBalance() {
-        OutputHandler.showBalance();
+    public static void processViewBalance() throws FileNotFoundException {
+        OutputHandler.showBalance(loginAccount.getUsername());
     }
 }

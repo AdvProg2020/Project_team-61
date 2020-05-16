@@ -4,6 +4,7 @@ import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Seller;
 import model.firms.Company;
+import model.firms.Firm;
 import model.log.Log;
 import model.off.Sale;
 import view.FileHandling;
@@ -48,7 +49,7 @@ public class Product  {
     private Log log;
     private Account account;
     private Sale sale;
-
+    private Firm firm;
 
 
     public Product(String productId) {
@@ -59,9 +60,9 @@ public class Product  {
 
 
     //finish
-    public void setDetailProduct (String name , Company companiesName , double price , Account seller , int numberOfProducts ,Category category) throws IOException {
+    public void setDetailProduct (String name , Firm firm , double price , Account seller , int numberOfProducts ,Category category) throws IOException {
         this.productName = name;
-        this.companiesName=companiesName;
+        this.firm=firm;
         this.price=price;
         this.seller=seller;
         this.numberOfProducts=numberOfProducts;
@@ -75,6 +76,10 @@ public class Product  {
 
     //settersAndGetters----------------------------------------------------------------------------------
 
+
+    public Firm getFirm() {
+        return firm;
+    }
 
     public void setScore(Score score) {
         this.score = score;

@@ -8,28 +8,32 @@ import model.productRelated.Product;
 import model.productRelated.Score;
 import view.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 
 public class CustomerMenu {
-    private int outputNo;
-    private Product product;
-    private BuyLog buyLog;
-    private String productID;
+    private static int outputNo;
+    private static Product product;
+    private static BuyLog buyLog;
+    private static String productID;
 
     //gson
-    public static void processViewCart() {
-        OutputHandler.showCustomerLog();
+    public static void processViewCart() throws FileNotFoundException {
+        OutputHandler.showCustomerLog(buyLog.getId());
         CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
     }
 
     //gson
-    public static void showTotalPrice() {
+    public static void showTotalPrice() throws FileNotFoundException {
         // OutputMassageHandler.showOutputWithString(String.valueOf(buyLog.holePriceWithOutDiscount()), 8);
-        OutputHandler.showTotalPrice();
+        OutputHandler.showTotalPrice(buyLog.getId());
     }
 
     //product.......................................................................................
+
     // manager // customer // seller
-    private boolean checkProduct(String productID) {
+    private static boolean checkProduct(String productID) {
         // if (productID.matches("((?!^ +$)^.+$)")) {
         if (Product.isThereProductWithId(productID)) {
             return true;
@@ -40,20 +44,20 @@ public class CustomerMenu {
     }
 
     //gson
-    public static void showProducts() {
-        OutputHandler.showProduct();
+    public static void showProducts() throws FileNotFoundException {
+        OutputHandler.showProduct(product.getId());
     }
 
     //GSON
-    public static void viewProduct(String productID) {
+    public static void viewProduct(String productID) throws FileNotFoundException {
         if (checkProduct(productID)) {
-            OutputHandler.showProduct();
+            OutputHandler.showProduct(productID);
         }
     }
 
     public static void increaseProductNumber(String productID) {
         if (checkProduct(productID)) {
-            this.productID = productID;
+            CustomerMenu.productID = productID;
             CommandProcessor.setSubMenuStatus(SubMenuStatus.INCREASEPRODUCTNUMBER);
             OutputMassageHandler.showOutput(2);
         }
@@ -85,7 +89,7 @@ public class CustomerMenu {
 
     public static void decreaseProductNumber(String productID) {
         if (checkProduct(productID)) {
-            this.productID = productID;
+            CustomerMenu.productID = productID;
             CommandProcessor.setSubMenuStatus(SubMenuStatus.DECREASEPRODUCTNUMBER);
             OutputMassageHandler.showOutput(3);
         }
@@ -114,7 +118,7 @@ public class CustomerMenu {
         OutputMassageHandler.showCustomerOutput(outputNo);
     }
 
-    private boolean checkDiscountCode(String discountCodeID) {
+    private static boolean checkDiscountCode(String discountCodeID) {
         //if (discountCodeID.matches("")) {
         if (DiscountCode.isThereDiscountWithId(discountCodeID)) {
             return true;
@@ -168,7 +172,7 @@ public class CustomerMenu {
         OutputMassageHandler.showCustomerOutput(outputNo);
     }
 
-    private void finishingPayment() {
+    private static void finishingPayment() {
         Account loginAccount =  LoginMenu.getLoginAccount();
         double money = loginAccount.getCredit() - buyLog.holePriceWithDiscount();
         loginAccount.setCredit(money);
@@ -182,7 +186,8 @@ public class CustomerMenu {
 
 
     //log.............................................................................
-    private boolean checkLog(String orderID) {
+
+    private static boolean checkLog(String orderID) {
         // if (orderID.matches("(?!^ +$)^.+$")) {
         if (Log.isThereLogWithID(orderID)) {
             return true;
@@ -193,22 +198,22 @@ public class CustomerMenu {
     }
 
     //gson
-    public static void processViewOrders() {
+    public static void processViewOrders() throws FileNotFoundException {
         OutputHandler.showOrders();
         CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWORDERS);
     }
 
 
     //gson
-    public static void showOrder(String orderID) {
+    public static void showOrder(String orderID) throws FileNotFoundException {
         if (checkLog(orderID)) {
-            OutputHandler.showOrder();
+            OutputHandler.showOrder(buyLog.getId());
         }
 
     }
 
     //score.............................................................
-    public static void rateProduct(String productID, int number) {
+    public static void rateProduct(String productID, int number) throws IOException {
         if (checkProduct(productID)) {
             if (number >= 1 && number <= 5) {
                 Score newScore = new Score(LoginMenu.getLoginAccount(), Product.getProductById(productID), number);
@@ -224,7 +229,7 @@ public class CustomerMenu {
     }
 
     //GSON
-    public static void processViewDiscountCodes() {
+    public static void processViewDiscountCodes() throws FileNotFoundException {
         OutputHandler.showDiscountCodes();
     }
 

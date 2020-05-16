@@ -8,16 +8,20 @@ import model.accounts.AccountStatus;
 import model.accounts.Seller;
 import view.*;
 
+import java.io.FileNotFoundException;
+
 public class LoginMenu {
-    private int outputNo;
+    private static int outputNo;
     private static Account loginAccount;
     private static String field = null;
-    private String username = null;
+    private static String username = null;
     private static boolean login = false;
-    private SubMenuStatus subMenuStatus;
-    private FirmRequest firmRequest;
-    private AccountRequest accountRequest;
+    private static SubMenuStatus subMenuStatus;
+    private static FirmRequest firmRequest;
+    private static AccountRequest accountRequest;
     private static String firmName;
+
+
 
     public static String getField() {
         return field;
@@ -35,7 +39,7 @@ public class LoginMenu {
         if (!login) {
             if (username.matches("^(?i)(?=.[a-z])(?=.[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
                 if (Account.isThereAccountWithUsername(username)) {
-                    this.username =username;
+                    LoginMenu.username =username;
                     subMenuStatus = CommandProcessor.getSubMenuStatus();
                     CommandProcessor.setSubMenuStatus(SubMenuStatus.PASSWORD);
                     outputNo = 2;
@@ -75,9 +79,9 @@ public class LoginMenu {
     }
 
     //gson
-    public static void viewPersonalInfo() {
+    public static void viewPersonalInfo() throws FileNotFoundException {
         //if(login) {
-        OutputHandler.showAccountInformation();
+        OutputHandler.showAccountInformation(loginAccount.getUsername());
         CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWPERSONALINFO);
         // }outputHandler.showAccountOutput(25);
     }
@@ -99,7 +103,7 @@ public class LoginMenu {
                     CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITACCOUNT);
                 } else outputNo = 27;
             }
-            this.field = field;
+            LoginMenu.field = field;
             OutputMassageHandler.showOutputWithString(field, 3);
         } else outputNo = 16;
         // }else outputNo = 25;
@@ -107,27 +111,27 @@ public class LoginMenu {
     }
 
     public static void editSellerField(String edit) {
-        if (this.field.equalsIgnoreCase("password")) {
+        if (field.equalsIgnoreCase("password")) {
             if (edit.matches("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}$")) {
                 accountRequest.setPassword(edit);
                 outputNo = 17;
             } else outputNo = 3;
-        } else if (this.field.equalsIgnoreCase("name")) {
+        } else if (field.equalsIgnoreCase("name")) {
             if (edit.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$")) {
                 accountRequest.setName(edit);
                 outputNo = 18;
             } else outputNo = 5;
-        } else if (this.field.matches("last\\s*name")) {
+        } else if (field.matches("last\\s*name")) {
             if (edit.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$")) {
                 accountRequest.setLastname(edit);
                 outputNo = 19;
             } else outputNo = 7;
-        } else if (this.field.equalsIgnoreCase("Email")) {
+        } else if (field.equalsIgnoreCase("Email")) {
             if (edit.matches("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")) {
                 accountRequest.setEmail(edit);
                 outputNo = 20;
             } else outputNo = 9;
-        } else if (this.field.matches("Phone\\s*number")) {
+        } else if (field.matches("Phone\\s*number")) {
             if (edit.matches("09[0-9]{9}")) {
                 accountRequest.setPhoneNo(Integer.parseInt(edit));
                 outputNo = 21;
@@ -140,27 +144,27 @@ public class LoginMenu {
     }
 
     public static void editAccount(String edit) {
-        if (this.field.equalsIgnoreCase("password")) {
+        if (field.equalsIgnoreCase("password")) {
             if (edit.matches("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}$")) {
                 loginAccount.setPassword(edit);
                 outputNo = 17;
             } else outputNo = 3;
-        } else if (this.field.equalsIgnoreCase("name")) {
+        } else if (field.equalsIgnoreCase("name")) {
             if (edit.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$")) {
                 loginAccount.setName(edit);
                 outputNo = 18;
             } else outputNo = 5;
-        } else if (this.field.matches("last\\s*name")) {
+        } else if (field.matches("last\\s*name")) {
             if (edit.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$")) {
                 loginAccount.setLastname(edit);
                 outputNo = 19;
             } else outputNo = 7;
-        } else if (this.field.equalsIgnoreCase("Email")) {
+        } else if (field.equalsIgnoreCase("Email")) {
             if (edit.matches("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")) {
                 loginAccount.setEmail(edit);
                 outputNo = 20;
             } else outputNo = 9;
-        } else if (this.field.matches("Phone\\s*number")) {
+        } else if (field.matches("Phone\\s*number")) {
             if (edit.matches("09[0-9]{9}")) {
                 loginAccount.setPhoneNo(Integer.parseInt(edit));
                 outputNo = 21;
@@ -178,7 +182,7 @@ public class LoginMenu {
             firmRequest = new FirmRequest(id);
             firmRequest.setName(firmName);
             CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITFIRM);
-            this.field = field;
+            LoginMenu.field = field;
             outputNo = 2;
         } else outputNo = 1;
         OutputMassageHandler.showFirmOutput(outputNo);

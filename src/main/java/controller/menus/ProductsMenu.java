@@ -20,7 +20,7 @@ public class ProductsMenu {
     private static String productId;
 
 
-    public void processProducts() {
+    public static void processProducts() {
         CommandProcessor.setMenuStatus(MenuStatus.PRODUCTSMENU);
     }
 
@@ -44,18 +44,18 @@ public class ProductsMenu {
     }
 
     //done
-    public void processFiltering() {
+    public static void processFiltering() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
     }
 
     //done
-    public void showAvailableFilters() {
+    public static void showAvailableFilters() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
         OutputHandler.showAvailableFilters(Filter.getAvailableFilters());
     }
 
     //firm ro che konam
-    public void filter(String filterID) throws FileNotFoundException {
+    public static void filter(String filterID) throws FileNotFoundException {
         if (checkFilter(filterID)) {
             if (Filter.ifFilterAvailable(filterID)) {
                 if (filterID.equals("category")) {
@@ -75,12 +75,12 @@ public class ProductsMenu {
     }
 
     //done
-    public void currentFilters() {
+    public static void currentFilters() {
         OutputHandler.showCurrentFilter(Filter.currentFilters());
     }
 
     //not done
-    public void disableFilter(String filterID) {
+    public static void disableFilter(String filterID) {
         if (checkFilter(filterID)) {
             Filter.disableFilter(filterID);
             outputNo =0 ;
@@ -103,17 +103,17 @@ public class ProductsMenu {
     }
 
     //done
-    public void processSorting() {
+    public static void processSorting() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.SORTING);
     }
 
     //done
-    public void showAvailableSorts() {
+    public static void showAvailableSorts() {
         OutputHandler.showAvailableSorts(Sort.getAvailableSorts());
     }
 
     //done
-    public void sort(String sortID) {
+    public static void sort(String sortID) {
         ArrayList<Product> sortedList=null;
         if (checkSort(sortID)) {
             if (sort.ifAvailable(sortID)) {
@@ -130,12 +130,12 @@ public class ProductsMenu {
     }
 
     //done
-    public void currentSorts() {
+    public static void currentSorts() {
         OutputHandler.showCurrentSorts(Sort.currentSorts());
     }
 
 
-    public void disableSort() {
+    public static void disableSort() {
         sort.disableSort();
         OutputMassageHandler.showProductsOutput();
     }

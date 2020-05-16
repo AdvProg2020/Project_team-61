@@ -162,7 +162,6 @@ public class BuyLog extends Log {
     public String toString() {
         return "BuyLog{" +
                 "id='" + id + '\'' +
-                ", amountBeforeDis=" + amountBeforeDis +
                 ", amountAfterDis=" + amountAfterDis +
                 ", buyerName='" + buyerName + '\'' +
                 ", numberOfChosenPro=" + numberOfChosenPro +

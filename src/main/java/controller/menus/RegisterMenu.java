@@ -9,14 +9,15 @@ import view.CommandProcessor;
 import view.*;
 
 import javax.xml.crypto.Data;
+import java.io.IOException;
 
 
 public class RegisterMenu {
-    private int outputNo;
+    private static int outputNo;
     private Manager manager;
     private Customer customer;
     private AccountRequest accountRequest;
-    private FirmRequest firmRequest;
+    private static FirmRequest firmRequest;
     private static int detailMenu = 0;
     private  static boolean managerWant = false;
     private boolean headManager = true;
@@ -27,8 +28,8 @@ public class RegisterMenu {
     private String lastname;
     private String Email;
     private double phoneNo;
-    private Data birthdayDate;
-    private SubMenuStatus subMenuStatus;
+    private double birthdayDate;
+    private static SubMenuStatus subMenuStatus;
 
     public static int getDetailMenu() {
         return detailMenu;
@@ -38,7 +39,7 @@ public class RegisterMenu {
         RegisterMenu.managerWant = managerWant;
     }
 
-    public static void processRegister(String role, String username) {
+    public static void processRegister(String role, String username) throws IOException {
         if (username.matches("^(?i)(?=.[a-z])(?=.[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
             if (!Account.isThereAccountWithUsername(username)) {
                 if (role.matches("(?i)(?:customer|manager|seller)")) {
@@ -55,7 +56,7 @@ public class RegisterMenu {
     }
 
 
-    private void registerByRole(String role, String username) {
+    private void registerByRole(String role, String username) throws IOException {
         if (role.equalsIgnoreCase("customer")) {
             customer = new Customer(username);
             outputNo = 2;
@@ -70,7 +71,7 @@ public class RegisterMenu {
 
     }
 
-    private void createManagerAccount(String username) {
+    private void createManagerAccount(String username) throws IOException {
         if (managerWant || (headManager)) {
             manager = new Manager(username);
             headManager = false;
