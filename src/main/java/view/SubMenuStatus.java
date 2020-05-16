@@ -63,8 +63,9 @@ public enum SubMenuStatus {
     HAVEDISCOUNT,
     EDITSELLERACCOUNT,
     INCREASEPRODUCTNUMBER,
-    DECREASEPRODUCTNUMBER;
-
+    DECREASEPRODUCTNUMBER,
+    ADDFIRM,
+    VIEWPERSONALINFO;
 
 
   //customer menu
@@ -73,5 +74,5 @@ public enum SubMenuStatus {
 
     //
 
-
+    ;
 }

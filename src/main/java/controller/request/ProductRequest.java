@@ -1,7 +1,6 @@
 package controller.request;
 
 import model.accounts.Account;
-import model.firms.Company;
 import model.firms.Firm;
 import model.productRelated.Category;
 import model.productRelated.Product;
@@ -31,7 +30,7 @@ public class ProductRequest extends Request {
     @Override
     public void acceptRequest() throws IOException {
         Product newProduct = Product.getProductById(productId);
-        newProduct.setDetailProduct(productName, Company.getCompanyWithName(companyName),price, sellerName,numberOfProduct,categoryName);
+        newProduct.setDetailProduct(productName, companyName,price, sellerName,numberOfProduct,categoryName);
         newProduct.setAdditionalDetail(additionalDetail);
         newProduct.setProductStatus(ProductStatus.CONFIRMED);
     }

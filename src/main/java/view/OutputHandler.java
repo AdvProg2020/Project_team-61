@@ -5,7 +5,6 @@ import com.google.gson.stream.JsonReader;
 import controller.request.Request;
 import model.accounts.Account;
 import model.accounts.Customer;
-import model.accounts.Seller;
 import model.filtar.Filter;
 import model.firms.Firm;
 import model.log.BuyLog;
@@ -15,9 +14,6 @@ import model.off.Sale;
 import model.productRelated.Category;
 import model.productRelated.Comment;
 import model.productRelated.Product;
-import model.sort.Sort;
-import sun.dc.pr.PRError;
-
 
 import java.io.FileNotFoundException;
 import java.lang.reflect.Type;
@@ -358,7 +354,7 @@ public class OutputHandler {
         ArrayList<BuyLog> data = FileHandling.getGson().fromJson(BuyLogReader, REVIEW_TYPE);
         for (BuyLog buyLog : data) {
             if (buyLog.getId().equals(logId)){
-                totalPriceToShow=buyLog.getAmountBeforeDis();
+                //totalPriceToShow=buyLog.getAmountBeforeDis();
             }
         }
         System.out.println(totalPriceToShow);

@@ -3,7 +3,6 @@ package controller.request;
 import com.google.gson.reflect.TypeToken;
 import controller.menus.LoginMenu;
 import model.accounts.Account;
-import model.productRelated.Product;
 import view.FileHandling;
 
 import java.io.IOException;

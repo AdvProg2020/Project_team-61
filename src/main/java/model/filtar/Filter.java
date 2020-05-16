@@ -3,7 +3,6 @@ package model.filtar;
 
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import model.off.DiscountCode;
 import model.productRelated.Category;
 import model.productRelated.Product;
 import view.FileHandling;

@@ -62,7 +62,7 @@ public class LoginMenu {
         OutputMassageHandler.showAccountOutput(outputNo);
     }
 
-    private void findRole() {
+    private static void findRole() {
         String role = loginAccount.getRole();
         MenuStatus menu = null;
         if (role.equalsIgnoreCase("customer")) {
@@ -72,7 +72,7 @@ public class LoginMenu {
             outputNo = 15;
             menu = MenuStatus.MANAGERMENU;
         } else if (role.equalsIgnoreCase("seller")) {
-            if()
+            //if()
                 menu = MenuStatus.SELLERMENU;
         }
         CommandProcessor.setMenuStatus(menu);

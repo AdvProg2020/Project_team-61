@@ -8,7 +8,7 @@ import controller.menus.SellerMenu;
 public class MenuSituation {
     private int outputNo;
 
-    private void accountFields(){
+    private static void accountFields(){
         if (RegisterMenu.getDetailMenu() == 0) {
             System.out.println("please enter your password");
         } else if (RegisterMenu.getDetailMenu() == 1) {
@@ -24,7 +24,7 @@ public class MenuSituation {
         }
     }
 
-    private void firmFields(){
+    private static void firmFields(){
         if (RegisterMenu.getDetailMenu() == 0) {
             System.out.println("please enter your password");
         } else if (RegisterMenu.getDetailMenu() == 1) {
@@ -41,7 +41,7 @@ public class MenuSituation {
     }
 
 
-    private void discountFields(){
+    private static void discountFields(){
         if (ManagerMenu.getDetailMenu() == 0) {
             System.out.println("please enter start of");
         } else if (ManagerMenu.getDetailMenu() == 1) {
@@ -57,7 +57,7 @@ public class MenuSituation {
         }
     }
 
-    private void categoryField(){
+    private static void categoryField(){
         if (ManagerMenu.getDetailMenu() == 0) {
             System.out.println("please enter start ofs");
         } else if (ManagerMenu.getDetailMenu() == 1) {
@@ -73,7 +73,7 @@ public class MenuSituation {
         }
     }
 
-    public void productField(){
+    public static void productField(){
         if (SellerMenu.getDetailMenu() == 0) {
             System.out.println("please enter start ofs");
         } else if (SellerMenu.getDetailMenu() == 1) {

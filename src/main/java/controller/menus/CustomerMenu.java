@@ -66,9 +66,9 @@ public class CustomerMenu {
     public static void increaseLogProduct(String number){
         if (number.matches("\\d+")) {
             Product product= Product.getProductById(productID);
-            if(product.getNumberOfProducts()<= p){
+           // if(product.getNumberOfProducts()<= p){
 
-            }
+            //}
         }
     }
 
@@ -223,9 +223,9 @@ public class CustomerMenu {
     }
 
     //GSON
-    public static void processViewBalance() {
+    public static void processViewBalance() throws FileNotFoundException {
         // OutputMassageHandler.showOutputWithString(String.valueOf(LoginMenu.getLoginAccount().getCredit()), 8);
-        OutputHandler.showBalance();
+        OutputHandler.showBalance(LoginMenu.getLoginAccount().getUsername());
     }
 
     //GSON

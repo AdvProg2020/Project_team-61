@@ -4,10 +4,8 @@ import com.google.gson.reflect.TypeToken;
 import model.log.BuyLog;
 import model.log.SaleLog;
 import model.off.DiscountCode;
-import model.productRelated.Product;
 import view.FileHandling;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;

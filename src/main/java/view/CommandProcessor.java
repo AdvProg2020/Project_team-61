@@ -2,7 +2,6 @@ package view;
 
 import controller.menus.*;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
@@ -377,7 +376,7 @@ public class CommandProcessor {
                         }
                     } else if (subMenuStatus == SubMenuStatus.PAYMENT) {
                         if (input.matches(regex[27])) {
-                            CustomerMenu.payment(getMatcher(input, regex[27]).group(1));
+                         //   CustomerMenu.payment(getMatcher(input, regex[27]).group(1));
                         }
                     }
                 }
@@ -502,4 +501,3 @@ public class CommandProcessor {
     }
 }
 
-}

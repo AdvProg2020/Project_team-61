@@ -12,11 +12,11 @@ import java.util.ArrayList;
 
 public class ProductsMenu {
 
-    private int outputNo;
-    private Product product;
+    private static int outputNo;
+    private static Product product;
     private Category category;
-    private Filter filter;
-    private Sort sort;
+    private static Filter filter;
+    private static Sort sort;
     private static String productId;
 
 
@@ -33,7 +33,7 @@ public class ProductsMenu {
 
 
     //done
-    private boolean checkFilter(String filterName) {
+    private static boolean checkFilter(String filterName) {
         //if (filterName.matches("(?i)(?:)")) {
             if (filter.isThereFilterWithName(filterName)) {
                 return true;
@@ -61,7 +61,7 @@ public class ProductsMenu {
                 if (filterID.equals("category")) {
                     filter.categoryFilter(product.getCategory());
                 } else if (filterID.equals("companyName")) {
-                    filter.companiesFilter(product.firm.getCompaniesName());
+                    filter.companiesFilter(product.getFirm().getName());
                 } else if (filterID.equals("productName")) {
                     filter.productNameFilter(product.getProductName());
                 }else if (filterID.equalsIgnoreCase("periodFilter")){
@@ -92,7 +92,7 @@ public class ProductsMenu {
     //sort-----------------------------------------------------------------
 
     //done
-    private boolean checkSort(String sortName) {
+    private static boolean checkSort(String sortName) {
         //if (sortName.matches("")) {
             if (sort.isThereSortWithName(sortName)) {
                 return true;
@@ -137,7 +137,7 @@ public class ProductsMenu {
 
     public static void disableSort() {
         sort.disableSort();
-        OutputMassageHandler.showProductsOutput();
+       // OutputMassageHandler.showProductsOutput();
     }
 
     //product--------------------------------------------------

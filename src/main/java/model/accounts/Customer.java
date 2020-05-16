@@ -2,7 +2,6 @@ package model.accounts;
 
 import com.google.gson.reflect.TypeToken;
 import model.log.BuyLog;
-import model.productRelated.Product;
 import view.FileHandling;
 
 import java.io.IOException;

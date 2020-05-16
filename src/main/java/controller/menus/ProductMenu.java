@@ -15,20 +15,23 @@ import java.util.UUID;
 
 public class ProductMenu {
 
-    private int outputNo;
-    private Comment comment;
-    private Product selectedProduct;
+    private static int outputNo;
+    private static Comment comment;
+    private static Product selectedProduct;
     private BuyLog buyLog;
+
+    public static void processCompare(String group) {
+    }
 
 
     //finish
-    public void processDigest() {
+    public static void processDigest() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
         selectedProduct = Product.getProductById(ProductsMenu.getProductId());
     }
 
 
-    public void addToCart() throws IOException {
+    public static void addToCart() throws IOException {
         String uniqueID = UUID.randomUUID().toString();
         if (BuyLog.getFirstProduct()) {
             buyLog = new BuyLog(uniqueID);
@@ -37,7 +40,7 @@ public class ProductMenu {
     }
 
     //finish
-    private boolean checkSeller(String seller) {
+    private static boolean checkSeller(String seller) {
         //if (seller.matches("")) {
         if (Account.isThereAccountWithUsername(seller)) {
             return true;
@@ -67,7 +70,7 @@ public class ProductMenu {
         OutputHandler.showAllSellersForOneProduct(selectedProduct.getId());
     }
 
-    public void processAttributes() {
+    public static void processAttributes() {
 
     }
 
@@ -79,7 +82,7 @@ public class ProductMenu {
     //comment--------------------------------------------------------------------
 
     //done
-    public void processComments() throws FileNotFoundException {
+    public static void processComments() throws FileNotFoundException {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
         OutputHandler.showAllComments();
     }

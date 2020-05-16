@@ -3,9 +3,9 @@ package controller.request;
 import model.accounts.Account;
 import model.accounts.AccountStatus;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AccountRequest extends Request {
 
@@ -15,7 +15,7 @@ public class AccountRequest extends Request {
     private  String lastname = null;
     private  String Email = null;
     private  double phoneNo = 0;
-    private  Data birthdayDate = null;
+    private Date birthdayDate = null;
     private  Account selectedAccount;
     private ArrayList<AccountRequest> allAccountRequests;
 
@@ -51,7 +51,7 @@ public class AccountRequest extends Request {
         this.phoneNo = phoneNo;
     }
 
-    public void sellerAccountDetails(String username, String password, String name, String lastname, String Email, double phoneNo, Data birthdayDate) {
+    public void sellerAccountDetails(String username, String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate) {
         this.username = username;
         this.password = password;
         this.name = name;
