@@ -3,9 +3,7 @@ package controller.menus;
 import controller.request.ProductRequest;
 import controller.request.Request;
 import controller.request.SaleRequest;
-import model.accounts.Account;
 import model.filtar.Filter;
-import model.firms.Firm;
 import model.off.Sale;
 import model.off.SaleStatus;
 import model.productRelated.Category;
@@ -28,7 +26,6 @@ public class SellerMenu {
     private static SaleRequest saleRequest;
     private static String productId;
     private static String offId;
-    private static Account loginAccount = LoginMenu.getLoginAccount();
 
     public static String getField() {
         return field;
@@ -40,12 +37,12 @@ public class SellerMenu {
 
     //gson
     public static void processViewCompanyInformation() throws FileNotFoundException {
-        OutputHandler.showFirmInformation(Product.getProductById(productId).getFirm().getName());
+        OutputHandler.showFirmInformation(LoginMenu.getFirm().getName());
     }
 
     //gson
     public static void processViewSalesHistory() throws FileNotFoundException {
-        OutputHandler.showSalesHistory();
+        OutputHandler.showSalesHistory(LoginMenu.getLoginAccount().getUsername());
     }
 
     //product--------------------------------------------------------------------------------------
@@ -56,7 +53,6 @@ public class SellerMenu {
             return true;
         } else outputNo = 1;
         //} else outputNo = 2;
-        OutputMassageHandler.showAccountOutput(outputNo);
         return false;
     }
 
@@ -70,7 +66,7 @@ public class SellerMenu {
     //gson
     public static void viewProduct(String productID) throws FileNotFoundException {
         if (checkProduct(productID)) {
-            OutputHandler.showProductsIds();
+            OutputHandler.showProduct(productID);
         }
     }
 
@@ -86,31 +82,28 @@ public class SellerMenu {
         Product product = Product.getProductById(productID);
         if (checkProduct(productID)) {
             if (product.ifProductHasSeller(productID, LoginMenu.getLoginAccount().getUsername())) {
-                //  Product.deleteProduct(productID);
-                //  Product product= new Product(productID);
-                Product.getProductById(productID).setProductStatus(ProductStatus.UNDERREVIEWFOREDITING);
                 productId = productID;
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTFIELD);
                 outputNo = 2;
-            }
-            outputNo = 0;
-            OutputMassageHandler.showSellerOutput(outputNo);
+            } else outputNo = 22;
         }
+        OutputMassageHandler.showSellerOutput(outputNo);
     }
 
     public static void productField(String field) {
-        if (field.matches("(?i)(?:Name|price|category|company\\s*Name|number\\s*Of\\s*Product)")) {
+        if (field.matches("(?i)(?:Name|price|category|additional\\s*details|number\\s*Of\\s*Product)")) {
             String id = LoginMenu.getLoginAccount().getUsername() + " wants edit product " + productId + "'s " + field;
             if (productRequest.isThereRequestFromID(id)) {
                 Request.deleteRequest(id);
             }
+            Product.getProductById(productId).setProductStatus(ProductStatus.UNDERREVIEWFOREDITING);
             productRequest = new ProductRequest(id);
             productRequest.setSellerName(LoginMenu.getLoginAccount());
             productRequest.setProductId(productId);
             SellerMenu.field = field;
             CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITPRODUCT);
             outputNo = 3;
-        } else outputNo = 0;
+        } else outputNo = 23;
         OutputMassageHandler.showSellerOutput(outputNo);
     }
 
@@ -119,13 +112,26 @@ public class SellerMenu {
             if (edit.matches("^(?!\\s*$).+")) {
                 productRequest.setProductName(edit);
                 outputNo = 4;
-            } else outputNo = 0;
+            } else outputNo = 6;
         } else if (field.equalsIgnoreCase("price")) {
             if (edit.matches("[+-]?\\d*\\.?\\d+")) {
                 productRequest.setPrice(Double.parseDouble(edit));
                 outputNo = 5;
-            } else outputNo = 0;
-        } else if (field.equalsIgnoreCase("category")) {
+            } else outputNo = 7;
+        } else if (field.matches("(?i)number\\s*Of\\s*Product")) {
+            if (edit.matches("\\d+")) {
+                productRequest.setNumberOfProduct(Integer.parseInt(edit));
+                outputNo = 9;
+            } else outputNo = 8;
+        } else if (field.matches("additional\\s*details")) {
+            if (edit.matches("^(?!\\s*$).+")) {
+                productRequest.setAdditionalDetail(edit);
+                outputNo = 14;
+            } else outputNo = 15;
+        }
+        OutputMassageHandler.showSellerOutput(outputNo);
+    }
+        /*} else if (field.equalsIgnoreCase("category")) {
             if (edit.matches("^(?!\\s*$).+")) {
                 if (Category.isThereCategoryWithName(edit)) {
                     productRequest.setCategoryName(Category.getCategoryWithName(edit));
@@ -139,15 +145,7 @@ public class SellerMenu {
                     outputNo = 8;
                 } else outputNo = 0;
             } else outputNo = 0;
-        } else if (field.matches("(?i)number\\s*Of\\s*Product")) {
-            if (edit.matches("(?<=\\s|^)\\d+(?=\\s|$)")) {
-                productRequest.setNumberOfProduct(Integer.parseInt(edit));
-                outputNo = 9;
-
-            }
-        }
-        OutputMassageHandler.showSellerOutput(outputNo);
-    }
+        */
 
     public static void processAddProduct() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDPRODUCT);
@@ -167,48 +165,44 @@ public class SellerMenu {
                     }
                     productRequest = new ProductRequest(id);
                     productRequest.setProductId(detail);
+                    productRequest.setCompanyName(LoginMenu.getFirm());
                     detailMenu = 1;
                     outputNo = 11;
-                } else outputNo = 0;
+                } else outputNo = 27;
             } else outputNo = 0;
         } else if (detailMenu == 1) {
             if (detail.matches("^(?!\\s*$).+")) {
                 productRequest.setProductName(detail);
-                detailMenu = 1;
+                detailMenu = 2;
                 outputNo = 12;
-            } else outputNo = 0;
+            } else outputNo = 6;
         } else if (detailMenu == 2) {
-            if (detail.matches("[+-]?\\\\d*\\\\.?\\\\d+")) {
+            if (detail.matches("[+-]?\\d*\\.?\\d+")) {
                 productRequest.setPrice(Double.parseDouble(detail));
-                detailMenu = 1;
+                detailMenu = 3;
                 outputNo = 13;
-            } else outputNo = 0;
+            } else outputNo = 7;
         } else if (detailMenu == 3) {
             if (detail.matches("^(?!\\s*$).+")) {
                 if (Category.isThereCategoryWithName(detail)) {
                     productRequest.setCategoryName(Category.getCategoryWithName(detail));
-                    detailMenu = 1;
-                    outputNo = 15;
-                } else outputNo = 0;
-            } else outputNo = 0;
+                    detailMenu = 4;
+                    outputNo = 26;
+                } else outputNo = 25;
+            } else outputNo = 24;
         } else if (detailMenu == 4) {
             if (detail.matches("^(?!\\s*$).+")) {
-                if (Firm.isThereFirmWithID(detail)) {
-                    if (LoginMenu.checkFirm()) {
-                        productRequest.setCompanyName(Firm.getFirmWithID(detail));
-                        detailMenu = 1;
-                        outputNo = 16;
-                    } else outputNo = 0;
-                } else outputNo = 0;
-            } else outputNo = 0;
+                productRequest.setAdditionalDetail(detail);
+                detailMenu = 16;
+            } else outputNo = 15;
         } else if (detailMenu == 5) {
-            if (detail.matches("(?<=\\s|^)\\d+(?=\\s|$)")) {
+            if (detail.matches("\\d+")) {
                 productRequest.setNumberOfProduct(Integer.parseInt(detail));
                 detailMenu = 0;
                 outputNo = 17;
                 CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-            } else outputNo = 0;
+            } else outputNo = 8;
         }
         OutputMassageHandler.showSellerOutput(outputNo);
 
@@ -220,9 +214,10 @@ public class SellerMenu {
         if (checkProduct(productID)) {
             if (Product.getProductById(productID).ifProductHasSeller(productID, LoginMenu.getLoginAccount().getUsername())) {
                 Product.deleteProduct(productID);
-                OutputMassageHandler.showAccountOutput(18);
+                outputNo = 18;
             }
         }
+        OutputMassageHandler.showAccountOutput(outputNo);
 
     }
     //----------------------------------------------------------------------------------------
@@ -259,34 +254,33 @@ public class SellerMenu {
 
     public static void editOff(String offID) {
         if (checkSale(offID)) {
-            if (Sale.getSeller() == loginAccount) {
-                //   Sale sale = new Sale(offID);
-                Sale.getSaleWithId(offID).setSaleStatus(SaleStatus.UNDERREVIEWFOREDITING);
+            if (Sale.getSeller() == LoginMenu.getLoginAccount()) {
                 offId = offId;
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.SALEFIELD);
                 outputNo = 20;
             } else outputNo = 0;
-
         }
-        OutputMassageHandler.showSellerOutput(outputNo);
+        OutputMassageHandler.showSaleOutput(outputNo);
     }
 
     public static void offField(String field) {
         if (field.matches("(?i)(?:sale\\s*status|start\\s*of\\s*sale\\s*period|end\\s*of\\s*sale\\s*period|remove\\s*product|add\\s*product)")) {
-            String id = loginAccount + " wants edit off " + offId + "'s " + field;
+            String id = LoginMenu.getLoginAccount() + " wants edit off " + offId + "'s " + field;
             if (Request.isThereRequestFromID(id)) {
                 Request.deleteRequest(id);
             }
+            Sale.getSaleWithId(offId).setSaleStatus(SaleStatus.UNDERREVIEWFOREDITING);
             saleRequest = new SaleRequest(id);
             saleRequest.setOffId(offId);
             SellerMenu.field = field;
             CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITSALE);
             outputNo = 21;
         }
-        OutputMassageHandler.showSellerOutput(outputNo);
+        outputNo = 0;
+        OutputMassageHandler.showSaleOutput(outputNo);
     }
 
-    public void editOffField(String edit) throws ParseException {
+    public static void editOffField(String edit) throws ParseException {
         if (field.matches("(?i)start\\s*of\\s*sale\\s*period")) {
             if (edit.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
                 Date currentDate = new Date();
@@ -326,13 +320,13 @@ public class SellerMenu {
             } else outputNo = 0;
 
         }
-        OutputMassageHandler.showSellerOutput(outputNo);
+        OutputMassageHandler.showSaleOutput(outputNo);
     }
 
     public static void addOff() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDSALE);
         CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
-        OutputMassageHandler.showSellerOutput(0);
+        OutputMassageHandler.showSaleOutput(0);
     }
 
     private static boolean checkSaleId(String detail) {
@@ -345,7 +339,7 @@ public class SellerMenu {
             }
             saleRequest = new SaleRequest(id);
             saleRequest.setOffId(detail);
-            saleRequest.setSeller(loginAccount);
+            saleRequest.setSeller(LoginMenu.getLoginAccount());
             return true;
         }
         return false;
@@ -360,7 +354,7 @@ public class SellerMenu {
                 } else outputNo = 0;
             } else outputNo = 0;
         } else if (detailMenu == 1) {
-            if (detail.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
+            if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
                 Date currentDate = new Date();
                 Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
                 if (inputDate.after(currentDate)) {
@@ -370,7 +364,7 @@ public class SellerMenu {
                 } else outputNo = 0;
             } else outputNo = 0;
         } else if (detailMenu == 2) {
-            if (detail.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
+            if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
                 Date currentDate = new Date();
                 Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
                 if (inputDate.after(currentDate)) {
@@ -392,16 +386,17 @@ public class SellerMenu {
                     detailMenu = 0;
                     CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
                     CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                    outputNo=0;
                 } else outputNo = 0;
             } else outputNo = 0;
         }
-        OutputMassageHandler.showSellerOutput(outputNo);
+        OutputMassageHandler.showSaleOutput(outputNo);
 
     }
 
     private static boolean checkProductSale(String detail) {
         if (checkProduct(detail)) {
-            if (Product.getProductById(productId).ifProductHasSeller(detail, loginAccount.getUsername())) {
+            if (Product.getProductById(productId).ifProductHasSeller(detail, LoginMenu.getLoginAccount().getUsername())) {
                 return true;
             }
         }
@@ -411,6 +406,7 @@ public class SellerMenu {
     //-------------------------------------------------------------------------------
     //gson
     public static void processViewBalance() throws FileNotFoundException {
-        OutputHandler.showBalance(loginAccount.getUsername());
+        OutputHandler.showBalance(LoginMenu.getLoginAccount().getUsername());
     }
+
 }

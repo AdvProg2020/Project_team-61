@@ -1,11 +1,13 @@
 package productRelatedTest;
 
 import model.accounts.Seller;
+import model.firms.Firm;
 import model.productRelated.Category;
 import model.productRelated.Product;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class productTest {
@@ -30,11 +32,11 @@ public class productTest {
     }
 
     @Test
-    public void isThereProWId(){
+    public void isThereProWId() throws IOException {
         product=new Product("salt");
         Category category=new Category("iphone");
         Seller seller=new Seller("shi1379");
-        product.setDetailProduct("salt","company",12,seller,2,category );
+        product.setDetailProduct("salt", Firm.getFirmWithID("company"),12,seller,2,category );
 
         try {
             Assert.assertEquals(true,Product.isThereProductWithId("salt"));

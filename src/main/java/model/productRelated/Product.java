@@ -35,7 +35,6 @@ public class Product  {
     //lists
     private  ArrayList<Account> listOfSellers = new ArrayList<Account>();
     private  ArrayList<Customer> listOfBuyers=new ArrayList<>();
-    private HashMap<Category,ArrayList<Product>> listOfAllProducts = new HashMap<>();
     private static ArrayList<Product> allProduct = new ArrayList<Product>();
     private ArrayList<String> info=new ArrayList<>();
     public static ArrayList<String> listOfId=new ArrayList<String>();
@@ -68,7 +67,6 @@ public class Product  {
         this.numberOfProducts=numberOfProducts;
         this.category=category;
         listOfSellers.add(seller);
-        productsFromSameCategory(category.getName());
         allProduct.add(this);
         writeInJ();
     }
@@ -182,10 +180,6 @@ public class Product  {
         return totalNumberOfBuyers;
     }
 
-    public HashMap<Category, ArrayList<Product>> getListOfAllSameCategoryProducts() {
-        return listOfAllProducts;
-    }
-
     public Account getSeller() {
         return (Seller) seller;
     }
@@ -200,16 +194,6 @@ public class Product  {
 
     //othersTobeHandel-------------------------------------------------------------------------------
 
-
-    public void productsFromSameCategory(String categoryName){
-        ArrayList<Product> products=null;
-        for (Product product : allProduct) {
-            if (product.getCategory().equals(Category.getCategoryWithName(categoryName))) {
-                products.add(product);
-            }
-        }
-        listOfAllProducts.put(Category.getCategoryWithName(categoryName),products);
-    }
 
 
     //checked
@@ -279,14 +263,8 @@ public class Product  {
 
     //finish
     public void deleteProductByCategory(String categoryId){
-        ArrayList<Product> productArrayList=listOfAllProducts.get(categoryId);
-        for (int i = 0; i < allProduct.size(); i++) {
-            for (int i1 = 0; i1 < productArrayList.size(); i1++) {
-                if (allProduct.get(i).equals(productArrayList.get(i1))){
-                    Product.deleteProduct(allProduct.get(i).getId());
-                }
-            }
-        }
+        Category category = Category.getCategoryWithName(categoryId);
+        category.getAllProducts().removeAll(category.getAllProducts());
     }
 
     //checked
@@ -336,7 +314,6 @@ public class Product  {
                 ", numberOfViews=" + numberOfViews +
                 ", totalNumberOfBuyers=" + totalNumberOfBuyers +
                 ", isBought=" + isBought +
-                ", listOfAllProducts=" + listOfAllProducts +
                 ", info=" + info +
                 ", comment=" + comment +
                 ", score=" + score +

@@ -13,7 +13,7 @@ public abstract class Firm {
     private double phoneNO;
     private String address;
     private String Email;
-    private static ArrayList<Firm> allFirms;
+    private static ArrayList<Firm> allFirms = new ArrayList<>();
 
     public Firm(String name) throws IOException {
         this.name = name;
@@ -21,9 +21,10 @@ public abstract class Firm {
         writeInJ();
     }
 
-    public void setDetailToFirm(String name, Double phoneNO, String address, String email){
-        if(name!= null){
-            this.name= name;
+    public void setDetailToFirm(String name , Double phoneNO, String address, String email){
+
+        if( name != null){
+            this.name=name;
         }
         if( phoneNO != null){
             this.phoneNO=phoneNO;

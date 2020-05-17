@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Manager extends Account {
 
-    private static ArrayList<Manager> allManagers;
+    private static ArrayList<Manager> allManagers = new ArrayList<>();
 
     public Manager(String username) throws IOException {
         super(username);

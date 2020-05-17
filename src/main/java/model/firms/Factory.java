@@ -8,7 +8,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Factory extends Firm {
-    private static ArrayList<Factory> allFactories;
+    private static ArrayList<Factory> allFactories = new ArrayList<>();
 
     public Factory(String ID) throws IOException {
         super(ID);

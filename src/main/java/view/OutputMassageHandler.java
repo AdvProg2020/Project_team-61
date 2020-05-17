@@ -174,21 +174,21 @@ public class OutputMassageHandler {
         } else if (output == 1) {
             System.out.println("there is no product with this productId ");
         } else if (output == 2) {
-            System.out.println("please enter field of products you want to change");
+            System.out.println("please enter field of products you want to change (Name|price|category|additional details|number Of Product)");
         } else if (output == 3) {
-            System.out.println("please enter your product new value");
+            System.out.println("please enter your product's new value");
         } else if (output == 4) {
-            System.out.println("product name changed");
+            System.out.println("product name change request sent");
         } else if (output == 5) {
-            System.out.println("product price changed");
+            System.out.println("product price change request sent");
         } else if (output == 6) {
-            System.out.println("product category changed");
-            // } else if (output == 7) {
-            //  System.out.println("product seller changed");
+            System.out.println("product name format is invalid");
+        } else if (output == 7) {
+            System.out.println("product price format is invalid");
         } else if (output == 8) {
-            System.out.println("product companyName changed");
+            System.out.println("number of product format is invalid");
         } else if (output == 9) {
-            System.out.println("product numberOfProduct changed");
+            System.out.println("number Of Product change request sent");
         } else if (output == 10) {
             System.out.println("please enter product id");
         } else if (output == 11) {
@@ -197,14 +197,14 @@ public class OutputMassageHandler {
             System.out.println("please enter product price");
         } else if (output == 13) {
             System.out.println("please enter product category name");
-            // } else if (output == 14) {
-            //    System.out.println("please enter product seller name");
+        } else if (output == 14) {
+            System.out.println("additional detail change request sent");
         } else if (output == 15) {
-            System.out.println("please enter product firm name");
+            System.out.println("additional detail format is invalid");
         } else if (output == 16) {
             System.out.println("please enter number of product");
         } else if (output == 17) {
-            System.out.println("product add");
+            System.out.println("product add request sent");
         } else if (output == 18) {
             System.out.println("product removed");
         } else if (output == 19) {
@@ -214,27 +214,91 @@ public class OutputMassageHandler {
         } else if (output == 21) {
             System.out.println("please enter your off new value");
         } else if (output == 22) {
-            System.out.println("logout");
+            System.out.println("you can't change this product");
         } else if (output == 23) {
-            System.out.println("you cannot create manager profile");
+            System.out.println("field format is invalid (Name|price|category|additional details|number Of Product)");
         } else if (output == 24) {
-            System.out.println("You've logged in before");
+            System.out.println("there is no category with this name");
         } else if (output == 25) {
-            System.out.println("you have to login first");
+            System.out.println("category format is invalid");
         } else if (output == 26) {
-            System.out.println("no role matches with this");
+            System.out.println("please enter product additional detail");
         } else if (output == 27) {
-            System.out.println("you have already requested for new account");
+            System.out.println("there is no product with this id");
         } else if (output == 28) {
-            System.out.println("you don't have permission for new account");
+            System.out.println("");
         } else if (output == 29) {
-            System.out.println("Your request has not been reviewed");
+            System.out.println("");
+        }
+    }
+
+    public static void showSaleOutput(int output) {
+        if (output == 0) {
+            System.out.println("");
+        } else if (output == 1) {
+            System.out.println("there is no product with this productId ");
+        } else if (output == 2) {
+            System.out.println("please enter field of products you want to change (Name|price|category|additional details|number Of Product)");
+        } else if (output == 3) {
+            System.out.println("please enter your product's new value");
+        } else if (output == 4) {
+            System.out.println("product name change request sent");
+        } else if (output == 5) {
+            System.out.println("product price change request sent");
+        } else if (output == 6) {
+            System.out.println("product name format is invalid");
+        } else if (output == 7) {
+            System.out.println("product price format is invalid");
+        } else if (output == 8) {
+            System.out.println("number of product format is invalid");
+        } else if (output == 9) {
+            System.out.println("number Of Product change request sent");
+        } else if (output == 10) {
+            System.out.println("please enter product id");
+        } else if (output == 11) {
+            System.out.println("please enter product name");
+        } else if (output == 12) {
+            System.out.println("please enter product price");
+        } else if (output == 13) {
+            System.out.println("please enter product category name");
+        } else if (output == 14) {
+            System.out.println("additional detail change request sent");
+        } else if (output == 15) {
+            System.out.println("additional detail format is invalid");
+        } else if (output == 16) {
+            System.out.println("please enter number of product");
+        } else if (output == 17) {
+            System.out.println("product add request sent");
+        } else if (output == 18) {
+            System.out.println("product removed");
+        } else if (output == 19) {
+            System.out.println("there is no sale with this name");
+        } else if (output == 20) {
+            System.out.println("please enter off field you want to change");
+        } else if (output == 21) {
+            System.out.println("please enter your off new value");
+        } else if (output == 22) {
+            System.out.println("you can't change this product");
+        } else if (output == 23) {
+            System.out.println("field format is invalid (Name|price|category|additional details|number Of Product)");
+        } else if (output == 24) {
+            System.out.println("there is no category with this name");
+        } else if (output == 25) {
+            System.out.println("category format is invalid");
+        } else if (output == 26) {
+            System.out.println("please enter product additional detail");
+        } else if (output == 27) {
+            System.out.println("there is no product with this id");
+        } else if (output == 28) {
+            System.out.println("");
+        } else if (output == 29) {
+            System.out.println("");
         }
     }
 
     public static void showAccountOutput(int output) {
         if (output == 0) {
-            System.out.println("username format is invalid");
+            System.out.println("");
         } else if (output == 1) {
             System.out.println("a user exists with this username");
         } else if (output == 2) {
@@ -266,7 +330,7 @@ public class OutputMassageHandler {
         } else if (output == 15) {
             System.out.println("login successful");
         } else if (output == 16) {
-            System.out.println("no account field matches with this");
+            System.out.println("no account field matches with this (username|password|last name|email|phone number|firm)");
         } else if (output == 17) {
             System.out.println("password changed");
         } else if (output == 18) {
@@ -292,17 +356,17 @@ public class OutputMassageHandler {
         } else if (output == 28) {
             System.out.println("please enter firm name you want to change");
         } else if (output == 29) {
-            System.out.println("");
+            System.out.println("please enter your birthday Date");
         } else if (output == 30) {
-            System.out.println("");
+            System.out.println("birthday Date format is invalid");
         } else if (output == 31) {
-            System.out.println("f");
+            System.out.println("please enter firm name");
         } else if (output == 32) {
-            System.out.println("");
+            System.out.println("username format is invalid");
         } else if (output == 33) {
-            System.out.println("");
+            System.out.println("you can't login");
         } else if (output == 34) {
-            System.out.println("");
+            System.out.println("enter new value");
         } else if (output == 35) {
             System.out.println("");
         } else if (output == 36) {
@@ -322,7 +386,7 @@ public class OutputMassageHandler {
         if (output == 0) {
             System.out.println("");
         } else if (output == 1) {
-            System.out.println("no firm field matches with this");
+            System.out.println("no firm field matches with this (name|address|email|phone number)");
         } else if (output == 2) {
             System.out.println("please enter new value");
         } else if (output == 3) {
@@ -332,32 +396,54 @@ public class OutputMassageHandler {
         } else if (output == 5) {
             System.out.println("please enter firm's field you want to change");
         } else if (output == 6) {
-            System.out.println("phone number format is invalid");
+            System.out.println("firm's phone number format is invalid");
         } else if (output == 7) {
             System.out.println("phone number request for new value sent");
         } else if (output == 8) {
-            System.out.println("address format is invalid");
+            System.out.println("firm's address format is invalid");
         } else if (output == 9) {
             System.out.println("address request for new value sent");
         } else if (output == 10) {
-            System.out.println("Email format is invalid");
+            System.out.println("firm's Email format is invalid");
         } else if (output == 11) {
             System.out.println("Email number request for new value sent");
         } else if (output == 12) {
             System.out.println("you dont have firm with this name");
         } else if (output == 13) {
-            System.out.println("");
+            System.out.println("please enter firm's name");
         } else if (output == 14) {
-            System.out.println("");
+            System.out.println("please enter firm's phone number");
         } else if (output == 15) {
-            System.out.println("");
+            System.out.println("please enter firm's email");
         } else if (output == 16) {
-            System.out.println("");
+            System.out.println("please enter firm's address");
         } else if (output == 17) {
-            System.out.println("");
+            System.out.println("register account request sent to manager");
         } else if (output == 18) {
-            System.out.println("");
+            System.out.println("firm's type format is invalid (company|factory|workshop)");
         } else if (output == 19) {
+            System.out.println("please enter firm's type");
+        }
+    }
+
+    public static void showReceiverInfo(int output) {
+        if (output == 0) {
+            System.out.println("");
+        } else if (output == 1) {
+            System.out.println("current phone number format is invalid");
+        } else if (output == 2) {
+            System.out.println("please enter your address");
+        } else if (output == 3) {
+            System.out.println("address format is invalid");
+        } else if (output == 4) {
+            System.out.println("do you want fast post? (yes|no)");
+        } else if (output == 5) {
+            System.out.println("answer must be yes or no");
+        } else if (output == 6) {
+            System.out.println("do yo have discount code? (yes|no)");
+        } else if (output == 7) {
+            System.out.println("");
+        } else if (output == 8) {
             System.out.println("");
         }
     }

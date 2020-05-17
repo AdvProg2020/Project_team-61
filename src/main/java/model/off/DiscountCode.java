@@ -3,6 +3,7 @@ package model.off;
 import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
 import model.productRelated.Product;
+import org.omg.CORBA.PUBLIC_MEMBER;
 import view.FileHandling;
 
 import java.io.IOException;
@@ -47,9 +48,9 @@ public class DiscountCode {
         return false;
     }
 
-    public static boolean discountDateValid(){
-
-    }
+//    public static boolean discountDateValid(){
+//
+//    }
 
     public void setDiscountAmount(int discountAmount) {
         this.discountAmount = discountAmount;
@@ -108,11 +109,24 @@ public class DiscountCode {
         }
         return null;
     }
+
     public void giveDiscountToRandomCustomers(){
 
     }
+
     public void giveDiscountInBirthday(){
 
+    }
+
+    public double calculate(double price){
+        if (price < maxDiscountAmount){
+            price = ((price*discountAmount)/100)+price;
+        }
+        else if (price > maxDiscountAmount){
+            double amountCant = price-maxDiscountAmount;
+            price = ((maxDiscountAmount*discountAmount)/100)+price;
+        }
+        return price;
     }
 
     public static void deleteDiscount(String id) {

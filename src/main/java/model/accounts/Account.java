@@ -1,6 +1,7 @@
 package model.accounts;
 
 import com.google.gson.reflect.TypeToken;
+import model.firms.Firm;
 import model.log.BuyLog;
 import model.log.SaleLog;
 import model.off.DiscountCode;
@@ -25,15 +26,17 @@ public abstract class Account {
     double currentPhoneNo;
     String address;
     Date birthdayDate;
+    Firm firm;
     int usedDiscount=0;
+    boolean fast;
     private AccountStatus accountStatus;
     ArrayList<DiscountCode> allDiscountCodes;
-    private static ArrayList<SaleLog> allSaleLogs;
-    private static ArrayList<BuyLog> allBuyLogs;
-    private  static ArrayList<Account> allAccounts;
-    private static ArrayList<Date> birthdayDates;
+    private static ArrayList<SaleLog> allSaleLogs = new ArrayList<>();
+    private static ArrayList<BuyLog> allBuyLogs = new ArrayList<>();
+    private  static ArrayList<Account> allAccounts = new ArrayList<>();
+    private static ArrayList<Date> birthdayDates=  new ArrayList<>();
 
-    public  void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate) throws IOException {
+    public void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate , Firm firm) throws IOException {
 
         if(password!= null) {
             this.password = password;
@@ -54,14 +57,19 @@ public abstract class Account {
             this.birthdayDate = (Date) birthdayDate;
             birthdayDates.add(birthdayDate);
         }
-
+        if(firm != null){
+            this.firm = firm;
+        }
         writeInJ();
+
+
     }
 
 
-    public Account(String username) {
+    public Account(String username) throws IOException {
         this.username = username;
         allAccounts.add(this);
+        // writeInJ();
     }
 
     public void addDiscountCode(DiscountCode discountCode){
@@ -159,9 +167,11 @@ public abstract class Account {
         this.accountStatus = accountStatus;
     }
 
+    public void setFast(boolean fast) {
+        this.fast = fast;
+    }
+
     //-----------------------------------------------------------------
-
-
     public static ArrayList<Account> getAllAccounts() {
         return allAccounts;
     }
@@ -202,6 +212,11 @@ public abstract class Account {
         return usedDiscount;
     }
 
+    public AccountStatus getAccountStatus() {
+        return accountStatus;
+    }
+
+    //......................................................................
     public static void writeInJ() throws IOException {
         Type collectionType = new TypeToken<ArrayList<Account>>(){}.getType();
         String json= FileHandling.getGson().toJson(Account.allAccounts,collectionType);

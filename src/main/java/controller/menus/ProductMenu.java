@@ -18,7 +18,7 @@ public class ProductMenu {
     private static int outputNo;
     private static Comment comment;
     private static Product selectedProduct;
-    private BuyLog buyLog;
+    private static BuyLog buyLog;
 
     public static void processCompare(String group) {
     }
@@ -34,9 +34,9 @@ public class ProductMenu {
     public static void addToCart() throws IOException {
         String uniqueID = UUID.randomUUID().toString();
         if (BuyLog.getFirstProduct()) {
-            buyLog = new BuyLog(uniqueID);
+//            buyLog = new BuyLog(uniqueID);
         }
-        buyLog.addProductToBuyLog(ProductsMenu.getProductId(),1);
+//        buyLog.addProductToBuyLog(ProductsMenu.getProductId(),1);
     }
 
     //finish
@@ -63,6 +63,10 @@ public class ProductMenu {
         if (seller1 != null) {
             selectedProduct.setSeller(seller1);
         }
+    }
+
+    public static BuyLog getBuyLog() {
+        return buyLog;
     }
 
     //done

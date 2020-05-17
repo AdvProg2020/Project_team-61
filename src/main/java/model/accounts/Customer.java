@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 public class Customer extends Account {
 
-    private static ArrayList<Customer> allCustomers;
-    private ArrayList<BuyLog> BuyLogsHistory;
+    private static ArrayList<Customer> allCustomers = new ArrayList<>();
+    private ArrayList<BuyLog> BuyLogsHistory = new ArrayList<>();
     public BuyLog buyLog;
 
     public Customer(String username) throws IOException {

@@ -2,6 +2,7 @@ package model.off;
 
 import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
+import model.off.SaleStatus;
 import model.productRelated.Product;
 import model.accounts.Seller;
 import view.FileHandling;
@@ -18,8 +19,13 @@ public class Sale{
     private Date endOfSalePeriod;
     private int saleAmount;
     private static Account seller;
-    private ArrayList <Product> allSaleProducts;
+    private static ArrayList <Product> allSaleProducts;
     private static ArrayList <Sale> allSales;
+    private static HashMap<Sale,ArrayList<Product>> allProductsWithSales;
+    public static ArrayList<Sale> getAllSales() {
+        return allSales;
+    }
+
 
     public Sale(String offId) {
         this.offId = offId;
@@ -32,6 +38,7 @@ public class Sale{
         this.endOfSalePeriod = endOfSalePeriod;
         this.saleAmount = saleAmount;
         this.seller = seller;
+        allProductsWithSales.put(this,null);
         writeInJ();
     }
 
@@ -74,12 +81,36 @@ public class Sale{
 
     public Sale getSaleWithSeller(Seller seller){
         for (Sale sale:allSales){
-            if ((sale.getSeller())==(seller)){
+            if ((sale.getSeller()).equals(seller)){
                 return sale;
             }
 
         }
         return null;
+    }
+    public static boolean saleDateValid( Date start,Date end){
+        Date currentDate=new Date();
+        if(start.after(currentDate) && end.after(currentDate)&& end.after(start) ){
+            return  true;
+        }
+        return false;
+    }
+    public void deleteExpiredSale(){
+        Date currentDate=new Date();
+        for (Sale sale : allSales) {
+            if (sale.getEndOfSalePeriod().before(currentDate)){
+                allSales.remove(sale);
+            }
+        }
+    }
+    public static void productsFromSameSale(String saleId){
+        ArrayList<Product> products=null;
+        for (Product product : allSaleProducts) {
+            if (product.getSale().equals(Sale.getSaleWithId((saleId)))) {
+                products.add(product);
+            }
+        }
+        allProductsWithSales.put(getSaleWithId(saleId),products);
     }
 
     public Sale getSaleWithProduct(Product product){
@@ -105,8 +136,11 @@ public class Sale{
         this.saleAmount = saleAmount;
     }
 
-    public void setAllSaleProducts(ArrayList<Product> allSaleProducts) {
-        this.allSaleProducts = allSaleProducts;
+   /* public static void setAllSaleProducts(ArrayList<Product> allSaleProducts) {
+        allSaleProducts = allSaleProducts;
+    }*/
+   public static void setAllSaleProducts(ArrayList<Product> allSaleProducts) {
+        Sale.allSaleProducts = allSaleProducts;
     }
 
     public void setSaleStatus(SaleStatus saleStatus) {
@@ -115,6 +149,15 @@ public class Sale{
 
     public static void deleteSale(String id){
         allSales.remove(id);
+    }
+    //!
+    public ArrayList<Double> calculatePriceAfterSale(){
+        ArrayList<Double> prices = new ArrayList<>();
+        for (Product saleProduct : allSaleProducts) {
+            double price=saleProduct.getPrice()*(1-(saleAmount/100));
+            prices.add(price);
+        }
+        return prices;
     }
 
     public boolean isTheProductInAnotherSale(Product product) {

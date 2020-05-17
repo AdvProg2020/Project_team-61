@@ -14,20 +14,34 @@ import java.io.IOException;
 
 public class CustomerMenu {
     private static int outputNo;
-    private static Product product;
-    private static BuyLog buyLog;
     private static String productID;
+    private static boolean hasDiscount;
+
+    public boolean isHasDiscount() {
+        return hasDiscount;
+    }
+
+    private static boolean isThereBuyLog() {
+        if (ProductMenu.getBuyLog() != null) {
+            return true;
+        }
+        OutputMassageHandler.showManageOutput(0);
+        return false;
+    }
 
     //gson
     public static void processViewCart() throws FileNotFoundException {
-        OutputHandler.showCustomerLog(buyLog.getId());
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
+        if(isThereBuyLog()) {
+            OutputHandler.showCustomerLog(ProductMenu.getBuyLog().getId());
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
+        }
     }
 
     //gson
     public static void showTotalPrice() throws FileNotFoundException {
-        // OutputMassageHandler.showOutputWithString(String.valueOf(buyLog.holePriceWithOutDiscount()), 8);
-        OutputHandler.showTotalPrice(buyLog.getId());
+        if(isThereBuyLog()) {
+            OutputHandler.showTotalPrice(ProductMenu.getBuyLog().getId());
+        }
     }
 
     //product.......................................................................................
@@ -45,41 +59,48 @@ public class CustomerMenu {
 
     //gson
     public static void showProducts() throws FileNotFoundException {
-        OutputHandler.showProduct(product.getId());
+        if(isThereBuyLog()) {
+            //  OutputHandler.showProduct(product.getId());
+        }
     }
 
     //GSON
     public static void viewProduct(String productID) throws FileNotFoundException {
         if (checkProduct(productID)) {
             OutputHandler.showProduct(productID);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+            CommandProcessor.setMenuStatus(MenuStatus.PRODUCTMENU);
         }
     }
 
     public static void increaseProductNumber(String productID) {
-        if (checkProduct(productID)) {
-            CustomerMenu.productID = productID;
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.INCREASEPRODUCTNUMBER);
-            OutputMassageHandler.showOutput(2);
+        if(isThereBuyLog()) {
+            if (checkProduct(productID)) {
+                CustomerMenu.productID = productID;
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.INCREASEPRODUCTNUMBER);
+                OutputMassageHandler.showOutput(2);
+            }
         }
+
     }
 
-    public static void increaseLogProduct(String number){
+    public static void increaseLogProduct(String number) {
         if (number.matches("\\d+")) {
-            Product product= Product.getProductById(productID);
-           // if(product.getNumberOfProducts()<= p){
-
-            //}
+            Product product = Product.getProductById(productID);
+            // if (product.getNumberOfProducts() >= p) {
+            ProductMenu.getBuyLog().addProductToBuyLog(productID, Integer.parseInt(number));
+            // }
         }
     }
 
-    public static void decreaseLogProduct(String number){
+    public static void decreaseLogProduct(String number) {
         if (number.matches("\\d+")) {
-
+            ProductMenu.getBuyLog().deleteProductFromBuyLog(productID, Integer.parseInt(number));
         }
 
     }
 
-    //naghes
+    /*//naghes
     public void productNumber(String number) {
         if (number.matches("\\d+")) {
             // product.addProductToLog(LoginMenu.getLoginAccount().getUsername(), productID, Integer.parseInt(number));
@@ -87,26 +108,21 @@ public class CustomerMenu {
         } else OutputMassageHandler.showCustomerOutput(4);
     }
 
+     */
+
     public static void decreaseProductNumber(String productID) {
-        if (checkProduct(productID)) {
-            CustomerMenu.productID = productID;
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.DECREASEPRODUCTNUMBER);
-            OutputMassageHandler.showOutput(3);
+        if(isThereBuyLog()) {
+            if (checkProduct(productID)) {
+                CustomerMenu.productID = productID;
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.DECREASEPRODUCTNUMBER);
+                OutputMassageHandler.showOutput(3);
+            }
         }
     }
 
 
     //purches............................................................................
     public static void purchase() {
-        //  CommandProcessor.setMenuStatus(MenuStatus.PURCHASE);
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
-        CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
-        OutputMassageHandler.showCustomerOutput(5);
-
-    }
-
-    //product menu bayad bzrmsh*******************************************
-    public static void processPurchase() {
         if (LoginMenu.isLogin()) {
             if (LoginMenu.getLoginAccount().getRole().equals("customer")) {
                 CommandProcessor.setMenuStatus(MenuStatus.PURCHASE);
@@ -128,16 +144,18 @@ public class CustomerMenu {
         return false;
     }
 
-    public static void haveDiscount(String have){
-        if(have.matches("(?i)(?:yes|no)")){
+    public static void haveDiscount(String have) {
+        if (have.matches("(?i)(?:yes|no)")) {
             if (have.equalsIgnoreCase("yes")) {
+                hasDiscount = true;
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.CHECKDISCOUNTCODE);
-                outputNo=0;
+                outputNo = 0;
             } else {
+                hasDiscount = false;
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
-                outputNo=0;
+                outputNo = 0;
             }
-        }else outputNo=0;
+        } else outputNo = 0;
         OutputMassageHandler.showCustomerOutput(outputNo);
     }
 
@@ -160,7 +178,7 @@ public class CustomerMenu {
     }
 
     public static void payment() {
-        if (buyLog.holePriceWithDiscount() <= LoginMenu.getLoginAccount().getCredit()) {
+        if (ProductMenu.getBuyLog().holePriceWithDiscount() <= LoginMenu.getLoginAccount().getCredit()) {
             finishingPayment();
             CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
             CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
@@ -173,8 +191,8 @@ public class CustomerMenu {
     }
 
     private static void finishingPayment() {
-        Account loginAccount =  LoginMenu.getLoginAccount();
-        double money = loginAccount.getCredit() - buyLog.holePriceWithDiscount();
+        Account loginAccount = LoginMenu.getLoginAccount();
+        double money = loginAccount.getCredit() - ProductMenu.getBuyLog().holePriceWithDiscount();
         loginAccount.setCredit(money);
         //set buy log
         //set say log
@@ -183,7 +201,6 @@ public class CustomerMenu {
         //decrease product
 
     }
-
 
     //log.............................................................................
 
@@ -207,7 +224,7 @@ public class CustomerMenu {
     //gson
     public static void showOrder(String orderID) throws FileNotFoundException {
         if (checkLog(orderID)) {
-            OutputHandler.showOrder(buyLog.getId());
+            //   OutputHandler.showOrder(Log.getLogWithId(orderID));
         }
 
     }
@@ -224,7 +241,6 @@ public class CustomerMenu {
 
     //GSON
     public static void processViewBalance() throws FileNotFoundException {
-        // OutputMassageHandler.showOutputWithString(String.valueOf(LoginMenu.getLoginAccount().getCredit()), 8);
         OutputHandler.showBalance(LoginMenu.getLoginAccount().getUsername());
     }
 

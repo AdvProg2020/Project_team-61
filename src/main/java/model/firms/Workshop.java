@@ -8,7 +8,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Workshop extends Firm {
-    private static ArrayList<Workshop> allWorkshops;
+    private static ArrayList<Workshop> allWorkshops = new ArrayList<>();
 
     public Workshop(String ID) throws IOException {
         super(ID);

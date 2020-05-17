@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 public class Seller extends Account {
     private Firm firm;
-    private ArrayList<SaleLog> saleLogsHistory ;
-    private static ArrayList<Seller> allSellers;
+    private ArrayList<SaleLog> saleLogsHistory = new ArrayList<>() ;
+    private static ArrayList<Seller> allSellers = new ArrayList<>();
     public SaleLog saleLog;
 
     public Seller(String username) throws IOException {
