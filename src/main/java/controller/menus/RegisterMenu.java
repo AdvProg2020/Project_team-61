@@ -117,8 +117,8 @@ public class RegisterMenu {
                 outputNo = 29;
             } else outputNo = 11;
           } else if (detailMenu == 5) {
-            if (detail.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
-                DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
+            if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
+                DateFormat format = new SimpleDateFormat("dd/mm/yyyy");
                 birthdayDate = format.parse(detail);
                 detailMenu = 0;
                 createAccountWithDetails();
@@ -132,8 +132,13 @@ public class RegisterMenu {
             accountRequest.sellerAccountDetails(username, password, name, lastname, Email, phoneNo, birthdayDate);
             CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDFIRM);
             outputNo=31;
-        } else {
+        } else if(role.equalsIgnoreCase("customer")) {
             customer.setDetailsToAccount(password, name, lastname, Email, phoneNo, birthdayDate , null);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+            CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+            outputNo = 12;
+        }else if(role.equalsIgnoreCase("manager")) {
+            manager.setDetailsToAccount(password, name, lastname, Email, phoneNo, birthdayDate , null);
             CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
             CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
             outputNo = 12;

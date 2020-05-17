@@ -44,8 +44,8 @@ public class ManagerMenu {
         if (username.matches("^(?i)(?=.[a-z])(?=.[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
             if (Account.isThereAccountWithUsername(username)) {
                 return true;
-            } else outputNo = 13;
-        } else outputNo = 0;
+            } else  OutputMassageHandler.showAccountOutput(outputNo);
+        } else  OutputMassageHandler.showAccountOutput(outputNo);
         return false;
     }
 
@@ -53,7 +53,7 @@ public class ManagerMenu {
     public static void view(String username) throws FileNotFoundException {
         if (checkUsername(username)) {
             OutputHandler.showAccountInformation(username);
-        } else OutputMassageHandler.showAccountOutput(outputNo);
+        }
     }
 
     public static void deleteUser(String username) {
@@ -61,7 +61,6 @@ public class ManagerMenu {
             Account.deleteAccount(username);
             OutputMassageHandler.showOutputWithString(username, 1);
         }
-        OutputMassageHandler.showAccountOutput(outputNo);
     }
 
     public static void createManagerProfile() {

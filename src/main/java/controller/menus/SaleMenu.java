@@ -1,6 +1,5 @@
 package controller.menus;
 
-import model.productRelated.Product;
 import view.CommandProcessor;
 import view.MenuStatus;
 import view.OutputHandler;
@@ -10,19 +9,11 @@ import java.io.FileNotFoundException;
 
 
 public class SaleMenu {
-
-
     //gson
     public static void processOffs() throws FileNotFoundException {
         OutputHandler.showOffs();
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-        CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+        CommandProcessor.setMenuStatus(MenuStatus.SALEMENU);
     }
-
-    //moshtarak etelat bishtr?
-    // public void processShowProductsID(String id) {
-    //    OutputHandler.showProductsIds(Product.listOfId);
-    // }
-
 
 }

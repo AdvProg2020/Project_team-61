@@ -85,18 +85,7 @@ public class CommandProcessor {
         Scanner scanner = new Scanner(System.in);
         String input;
         while (!(input = scanner.nextLine()).trim().equalsIgnoreCase("exit")) {
-            if (internalMenu == InternalMenu.MAINMENU) {
-                if (input.matches(regex[1])) {
-                    error = false;
-                    LoginMenu.processLogin(getMatcher(input, regex[1]).group(1));
-                } else if (input.equalsIgnoreCase("logout")) {
-                    error = false;
-                    LoginMenu.processLogout();
-                } else if (input.matches(regex[0])) {
-                    error = false;
-                    RegisterMenu.processRegister(getMatcher(input, regex[0]).group(1), getMatcher(input, regex[0]).group(2));
-                }
-            } else if (input.equalsIgnoreCase("back")) {
+           if (input.equalsIgnoreCase("back")) {
                 error = false;
                 MenuSituation.processBack();
             } else if (input.equalsIgnoreCase("help")) {
@@ -120,7 +109,18 @@ public class CommandProcessor {
                 } else if (input.equalsIgnoreCase("products")) {
                     error = false;
                     ProductsMenu.processProducts();
-                }
+                }  else if (internalMenu == InternalMenu.MAINMENU) {
+                   if (input.matches(regex[1])) {
+                       error = false;
+                       LoginMenu.processLogin(getMatcher(input, regex[1]).group(1));
+                   } else if (input.equalsIgnoreCase("logout")) {
+                       error = false;
+                       LoginMenu.processLogout();
+                   } else if (input.matches(regex[0])) {
+                       error = false;
+                       RegisterMenu.processRegister(getMatcher(input, regex[0]).group(1), getMatcher(input, regex[0]).group(2));
+                   }
+               }
             } else if (menuStatus == MenuStatus.MANAGERMENU) {
                 //ManagerMenu
                 if (subMenuStatus == SubMenuStatus.MAINMENU) {
@@ -335,10 +335,9 @@ public class CommandProcessor {
                         SellerMenu.offField(getMatcher(input, regex[27]).group(1));
                     }
                 } else if (subMenuStatus.equals(SubMenuStatus.EDITSALE)) {
-                    error = false;
                     if (input.matches(regex[27])) {
                         error = false;
-                        SellerMenu.editProductField(getMatcher(input, regex[27]).group(1));
+                        SellerMenu.editOffField(getMatcher(input, regex[27]).group(1));
                     }
                 } else if (subMenuStatus.equals(SubMenuStatus.FIRMFIELD)) {
                     if (input.matches(regex[27])) {
@@ -512,7 +511,7 @@ public class CommandProcessor {
                     }
                     */
 
-            if (menuStatus == MenuStatus.PRODUCTMENU) {
+            else if (menuStatus == MenuStatus.PRODUCTMENU) {
                 //ProductMenu
                 if (subMenuStatus == SubMenuStatus.MAINMENU) {
                     if (input.equalsIgnoreCase("digest")) {

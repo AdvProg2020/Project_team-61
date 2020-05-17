@@ -20,6 +20,11 @@ public class ProductMenu {
     private static Product selectedProduct;
     private static BuyLog buyLog;
 
+
+    public static BuyLog getBuyLog() {
+        return buyLog;
+    }
+
     public static void processCompare(String group) {
     }
 

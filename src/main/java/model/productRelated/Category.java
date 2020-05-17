@@ -28,6 +28,7 @@ public class Category{
         writeInJ();
     }
 
+
     public String getName() {
         return name;
     }

@@ -18,16 +18,27 @@ public class CustomerMenu {
     private static BuyLog buyLog;
     private static String productID;
 
+    private static boolean isThereBuyLog() {
+        if (ProductMenu.getBuyLog() != null) {
+            return true;
+        }
+        OutputMassageHandler.showManageOutput(0);
+        return false;
+    }
+
     //gson
     public static void processViewCart() throws FileNotFoundException {
-        OutputHandler.showCustomerLog(buyLog.getId());
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
+        if(isThereBuyLog()) {
+            OutputHandler.showCustomerLog(buyLog.getId());
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
+        }
     }
 
     //gson
     public static void showTotalPrice() throws FileNotFoundException {
-        // OutputMassageHandler.showOutputWithString(String.valueOf(buyLog.holePriceWithOutDiscount()), 8);
-        OutputHandler.showTotalPrice(buyLog.getId());
+        if(isThereBuyLog()) {
+            OutputHandler.showTotalPrice(buyLog.getId());
+        }
     }
 
     //product.......................................................................................
@@ -61,20 +72,21 @@ public class CustomerMenu {
             CommandProcessor.setSubMenuStatus(SubMenuStatus.INCREASEPRODUCTNUMBER);
             OutputMassageHandler.showOutput(2);
         }
+
     }
 
-    public static void increaseLogProduct(String number){
+    public static void increaseLogProduct(String number) {
         if (number.matches("\\d+")) {
-            Product product= Product.getProductById(productID);
-           // if(product.getNumberOfProducts()<= p){
-
-            //}
+            Product product = Product.getProductById(productID);
+            if (product.getNumberOfProducts() >= p) {
+                buyLog.addProductToBuyLog(productID, Integer.parseInt(number));
+            }
         }
     }
 
-    public static void decreaseLogProduct(String number){
+    public static void decreaseLogProduct(String number) {
         if (number.matches("\\d+")) {
-
+            buyLog.deleteProductFromBuyLog(productID, Integer.parseInt(number));
         }
 
     }
@@ -128,16 +140,16 @@ public class CustomerMenu {
         return false;
     }
 
-    public static void haveDiscount(String have){
-        if(have.matches("(?i)(?:yes|no)")){
+    public static void haveDiscount(String have) {
+        if (have.matches("(?i)(?:yes|no)")) {
             if (have.equalsIgnoreCase("yes")) {
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.CHECKDISCOUNTCODE);
-                outputNo=0;
+                outputNo = 0;
             } else {
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
-                outputNo=0;
+                outputNo = 0;
             }
-        }else outputNo=0;
+        } else outputNo = 0;
         OutputMassageHandler.showCustomerOutput(outputNo);
     }
 
@@ -173,7 +185,7 @@ public class CustomerMenu {
     }
 
     private static void finishingPayment() {
-        Account loginAccount =  LoginMenu.getLoginAccount();
+        Account loginAccount = LoginMenu.getLoginAccount();
         double money = loginAccount.getCredit() - buyLog.holePriceWithDiscount();
         loginAccount.setCredit(money);
         //set buy log

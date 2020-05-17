@@ -132,15 +132,17 @@ public class BuyLog extends Log {
         }
     }
 
-    public static void deleteProductFromBuyLog(String productId) {
+    public  void deleteProductFromBuyLog(String productId , int amount) {
         Product product = Product.getProductById(productId);
         ArrayList<Product> help = null;
         Iterator iterator = listOfOneProduct.iterator();
         while (iterator.hasNext()) {
             Product product1 = (Product) iterator.next();
             if (product1.equals(product)) {
-                help.add(product1);
-                iterator.remove();
+                for (int i=0;i<amount;i++){
+                    help.add(product1);
+                    iterator.remove();
+                }
             }
         }
         allBoughtProduct.remove(help);
