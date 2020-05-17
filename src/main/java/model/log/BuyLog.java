@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import controller.menus.CustomerMenu;
 import model.accounts.Account;
 import model.accounts.Customer;
+import model.accounts.Seller;
 import model.productRelated.Product;
 import view.FileHandling;
 
@@ -42,8 +43,7 @@ public class BuyLog extends Log {
     private HashMap<Product, Integer> allBoughtProduct = new HashMap<>();
     private static HashMap<Product, Integer> chosenProduct = new HashMap<>();
     public static ArrayList<BuyLog> allCustomersLog = new ArrayList<BuyLog>();
-    public static HashMap<ArrayList<Product>, Double> productWithPriceWithSale = new HashMap<>();
-    public static HashMap<ArrayList<Product>, Double> productWithPriceWithoutSale = new HashMap<>();
+
 
     //setterAndGetter----------------------------------------------------
 
@@ -104,6 +104,7 @@ public class BuyLog extends Log {
             chosenProduct.put(product, amount);
             numberOfChosenPro = +numberOfChosenPro + amount;
         } else {
+
             Product.deleteProduct(productId);
         }
     }
@@ -117,7 +118,7 @@ public class BuyLog extends Log {
         return price;
     }
 
-    public void whenFinal() {
+    public void whenFinal() throws IOException {
         double price = 0;
         if (CustomerMenu.isHasDiscount()) {
             price = buyerLog.getDiscount().calculate(totalPrice());
@@ -134,12 +135,22 @@ public class BuyLog extends Log {
         }
         allBoughtProduct = chosenProduct;
         itsDone = true;
-
+        changesForSaleLogAfterFinish();
     }
 
-    public void changesForSaleLogAfterFinish(){
+    public void changesForSaleLogAfterFinish() throws IOException {
         //product ha be sold ezafe
         //gheimat daryafti
+        for (Product p : allBoughtProduct.keySet()){
+            SaleLog saleLog = new SaleLog(id);
+            saleLog.setSaleLogDetail(p.getPrice(),buyerLog.getName());
+            saleLog.addProductToSaleLog(p.getId());
+            if (p.getInSale()){
+                saleLog.setReducedAmount(p.getSale().getSaleAmount());
+            }
+            else saleLog.setReducedAmount(0);
+        }
+
     }
 
 
