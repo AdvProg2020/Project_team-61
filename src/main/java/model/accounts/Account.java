@@ -237,7 +237,6 @@ public abstract class Account {
                 "username='" + username + '\'' +
                 ", name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +
-                ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNo=" + phoneNo +
                 ", credit=" + credit +

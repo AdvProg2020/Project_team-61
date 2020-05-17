@@ -120,12 +120,17 @@ public class RegisterMenu {
             if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
                 DateFormat format = new SimpleDateFormat("dd/mm/yyyy");
                 birthdayDate = format.parse(detail);
+                Date now = new Date();
+                if (birthdayDate.before(now)){
+
+                }
                 detailMenu = 0;
                 createAccountWithDetails();
             } else outputNo = 30;
         }OutputMassageHandler.showAccountOutput(outputNo);
 
     }
+
 
     public static void createAccountWithDetails() throws IOException {
         if (role.equalsIgnoreCase("seller")) {

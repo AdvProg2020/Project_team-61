@@ -75,6 +75,14 @@ public class Product  {
     //settersAndGetters----------------------------------------------------------------------------------
 
 
+    public void setIsBought(Boolean isBought){
+        this.isBought=isBought;
+    }
+
+    public boolean getIsBought(){
+        return isBought;
+    }
+
     public Firm getFirm() {
         return firm;
     }
@@ -183,6 +191,7 @@ public class Product  {
     public Account getSeller() {
         return (Seller) seller;
     }
+
 
     public void setSeller(Account seller) {
         this.seller = seller;

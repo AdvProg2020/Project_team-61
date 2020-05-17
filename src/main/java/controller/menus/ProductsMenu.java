@@ -13,10 +13,6 @@ import java.util.ArrayList;
 public class ProductsMenu {
 
     private static int outputNo;
-    private static Product product;
-    private Category category;
-    private static Filter filter;
-    private static Sort sort;
     private static String productId;
 
 
@@ -25,21 +21,19 @@ public class ProductsMenu {
     }
 
     //array
-    public void processViewCategories() {
-
+    public static void processViewCategories() throws FileNotFoundException {
+        OutputHandler.showCategories();
     }
 
     //filter-------------------------------------------------------
 
-
     //done
     private static boolean checkFilter(String filterName) {
         //if (filterName.matches("(?i)(?:)")) {
-            if (filter.isThereFilterWithName(filterName)) {
-                return true;
-            } else outputNo = 0;
-       // } else inputNo = 0;
-        OutputMassageHandler.showAccountOutput(outputNo);
+        if (Filter.isThereFilterWithName(filterName)) {
+            return true;
+        } else outputNo = 1;
+        // } else inputNo = 0;
         return false;
     }
 
@@ -50,27 +44,51 @@ public class ProductsMenu {
 
     //done
     public static void showAvailableFilters() {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
         OutputHandler.showAvailableFilters(Filter.getAvailableFilters());
     }
 
-    //firm ro che konam
+
     public static void filter(String filterID) throws FileNotFoundException {
         if (checkFilter(filterID)) {
             if (Filter.ifFilterAvailable(filterID)) {
                 if (filterID.equals("category")) {
-                    filter.categoryFilter(product.getCategory());
-                } else if (filterID.equals("companyName")) {
-                    filter.companiesFilter(product.getFirm().getName());
-                } else if (filterID.equals("productName")) {
-                    filter.productNameFilter(product.getProductName());
-                }else if (filterID.equalsIgnoreCase("periodFilter")){
-                    // return filter.periodFilter();
-                }else if (filterID.equalsIgnoreCase("isAvailable")){
-                    filter.isAvailable();
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.CATEGORYNAMEFILTER);
+                    OutputMassageHandler.showProductsOutput(10);
+                } else if (filterID.matches("firm\\s*name")) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMFILTER);
+                    OutputMassageHandler.showProductsOutput(11);
+                } else if (filterID.matches("product\\s*name")) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTNAMEFILTER);
+                    OutputMassageHandler.showProductsOutput(12);
+                } else if (filterID.matches("period\\s*nilter")) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.PERIODFILTER);
+                    OutputMassageHandler.showProductsOutput(8);
+                } else if (filterID.matches("is\\s*available")) {
+                    Filter.isAvailable();
+                    OutputHandler.showAllProductAfterFilter();
                 }
-            }
+            } else OutputMassageHandler.showProductsOutput(9);
         }
+
+    }
+
+    public static void categoryFilter(String category) throws FileNotFoundException {
+        Filter.categoryFilter(Category.getCategoryWithName(category));
+        OutputHandler.showAllProductAfterFilter();
+    }
+
+    public static void FirmFilter(String category) throws FileNotFoundException {
+        Filter.companiesFilter(category);
+        OutputHandler.showAllProductAfterFilter();
+    }
+
+    public static void productNameFilter(String product) throws FileNotFoundException {
+        Filter.productNameFilter(product);
+        OutputHandler.showAllProductAfterFilter();
+    }
+
+    public static void periodFilter(String first, String second) {
+        Filter.periodFilter(Integer.parseInt(first), Integer.parseInt(second));
         OutputHandler.showAllProductAfterFilter();
     }
 
@@ -83,8 +101,8 @@ public class ProductsMenu {
     public static void disableFilter(String filterID) {
         if (checkFilter(filterID)) {
             Filter.disableFilter(filterID);
-            outputNo =0 ;
-        }else outputNo =0;
+            outputNo = 2;
+        }
         OutputMassageHandler.showProductsOutput(outputNo);
     }
 
@@ -94,11 +112,10 @@ public class ProductsMenu {
     //done
     private static boolean checkSort(String sortName) {
         //if (sortName.matches("")) {
-            if (sort.isThereSortWithName(sortName)) {
-                return true;
-            } else outputNo = 0;
+        if (Sort.isThereSortWithName(sortName)) {
+            return true;
+        } else outputNo = 3;
         //} else inputNo = 0;
-        OutputMassageHandler.showAccountOutput(outputNo);
         return false;
     }
 
@@ -114,17 +131,19 @@ public class ProductsMenu {
 
     //done
     public static void sort(String sortID) {
-        ArrayList<Product> sortedList=null;
+        ArrayList<Product> sortedList = null;
         if (checkSort(sortID)) {
-            if (sort.ifAvailable(sortID)) {
-                if (sortID.equalsIgnoreCase("number Of View")) {
-                    sortedList=sort.scoreSort();
+            if (Sort.ifAvailable(sortID)) {
+                if (sortID.matches("number\\s*Of\\s*View")) {
+                    sortedList = Sort.scoreSort();
+                    OutputHandler.showAllProductAfterSort(sortedList);
                 } else if (sortID.equalsIgnoreCase("score")) {
-                    sortedList=sort.numberOfViewsSort();
-                }
-            }
+                    sortedList = Sort.numberOfViewsSort();
+                    OutputHandler.showAllProductAfterSort(sortedList);
+                } else outputNo = 9;
+            } else outputNo = 7;
         }
-        if (sortedList!=null){
+        if (sortedList != null) {
             OutputHandler.showAllProductAfterSort(sortedList);
         }
     }
@@ -136,22 +155,24 @@ public class ProductsMenu {
 
 
     public static void disableSort() {
-        sort.disableSort();
-       // OutputMassageHandler.showProductsOutput();
+        Sort.disableSort();
+        OutputMassageHandler.showProductsOutput(4);
     }
 
     //product--------------------------------------------------
 
     //done
-    public void processShowProducts() throws FileNotFoundException {
+    public static void processShowProducts() throws FileNotFoundException {
         OutputHandler.showProducts(Filter.getNewArrayOfProductFilter());
     }
 
     //done
-    public void processShowProductsID() throws FileNotFoundException {
-        OutputHandler.showProductsIds();
-        CommandProcessor.setMenuStatus(MenuStatus.PRODUCTMENU);
-         
+    public static void processShowProductsID(String id) throws FileNotFoundException {
+        if (Product.isThereProductWithId(id)) {
+            OutputHandler.showProduct(id);
+            productId = id;
+            CommandProcessor.setMenuStatus(MenuStatus.PRODUCTMENU);
+        } else OutputMassageHandler.showProductsOutput(5);
     }
 
     //done

@@ -8,13 +8,14 @@ import view.FileHandling;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class DiscountCode {
     private String discountId;
-    private Date startOfDiscountPeriod;
-    private Date endOfDiscountPeriod;
+    private static LocalDateTime startOfDiscountPeriod;
+    private static LocalDateTime endOfDiscountPeriod;
     private int discountAmount;
     private double maxDiscountAmount;
     private int totalTimesOfUse;
@@ -36,8 +37,8 @@ public class DiscountCode {
         account.removeDiscountCode(getDiscountWithId(discountId));
     }
 
-    public void setStartOfDiscountPeriod(Date startOfDiscountPeriod) {
-        this.startOfDiscountPeriod = startOfDiscountPeriod;
+    public static void setStartOfDiscountPeriod(LocalDateTime startOfDiscountPeriod) {
+        DiscountCode.startOfDiscountPeriod = startOfDiscountPeriod;
     }
 
     public static boolean discountMatchAccount(String username){
@@ -48,9 +49,13 @@ public class DiscountCode {
         return false;
     }
 
-//    public static boolean discountDateValid(){
-//
-//    }
+    public static boolean discountDateValid(){
+        LocalDateTime now = LocalDateTime.now();
+        if (now.isAfter(startOfDiscountPeriod) && now.isBefore(endOfDiscountPeriod)){
+            return true;
+        }
+        return false;
+    }
 
     public void setDiscountAmount(int discountAmount) {
         this.discountAmount = discountAmount;
@@ -60,8 +65,8 @@ public class DiscountCode {
         this.totalTimesOfUse = totalTimesOfUse;
     }
 
-    public void setEndOfDiscountPeriod(Date endOfDiscountPeriod) {
-        this.endOfDiscountPeriod = endOfDiscountPeriod;
+    public static void setEndOfDiscountPeriod(LocalDateTime endOfDiscountPeriod) {
+        DiscountCode.endOfDiscountPeriod = endOfDiscountPeriod;
     }
 
     public void setMaxDiscountAmount(double maxDiscountAmount) {
@@ -72,11 +77,11 @@ public class DiscountCode {
         return discountId;
     }
 
-    public Date getStartOfDiscountPeriod() {
+    public static LocalDateTime getStartOfDiscountPeriod() {
         return startOfDiscountPeriod;
     }
 
-    public Date getEndOfDiscountPeriod() {
+    public static LocalDateTime getEndOfDiscountPeriod() {
         return endOfDiscountPeriod;
     }
 

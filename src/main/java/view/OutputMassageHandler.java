@@ -16,27 +16,65 @@ public class OutputMassageHandler {
         if (output == 0) {
             System.out.println("");
         } else if (output == 1) {
-            System.out.println("please enter manager username");
+            System.out.println("there is no filter with this id");
         } else if (output == 2) {
-            System.out.println("product Id format is invalid");
+            System.out.println("filter disabled");
         } else if (output == 3) {
-            System.out.println("no product exist with this Id");
+            System.out.println("there is no sort with this id");
         } else if (output == 4) {
-            System.out.println("discount code Id format is inavlid");
+            System.out.println("sort disabled");
         } else if (output == 5) {
-            System.out.println("no discount code exist with this Id");
+            System.out.println("there is no product with this id");
         } else if (output == 6) {
-            System.out.println("please enter discount code Id");
+            System.out.println("this filter isn't available");
         } else if (output == 7) {
-            System.out.println("please enter start of discount period");
+            System.out.println("this sort isn't available");
         } else if (output == 8) {
-            System.out.println("start of discount period format is invalid");
+            System.out.println("please enter 2 number");
         } else if (output == 9) {
-            System.out.println("please enter end of discount period");
+            System.out.println("sort format is in valid");
         } else if (output == 10) {
-            System.out.println("end of discount period format is invalid");
+            System.out.println("please enter category name to filter");
         } else if (output == 11) {
-            System.out.println("please enter maximum discount amount");
+            System.out.println("please enter firm name to filter");
+        } else if (output == 12) {
+            System.out.println("please enter product name to filter");
+        } else if (output == 13) {
+            System.out.println("there is no category with this id");
+        } else if (output == 14) {
+            System.out.println("there is no firm with this id");
+        } else if (output == 15) {
+            System.out.println("there is no product with this id");
+        } else if (output == 16) {
+            System.out.println("");
+        }
+    }
+
+    public static void showProductOutput(int output) {
+        if (output == 0) {
+            System.out.println("");
+        } else if (output == 1) {
+            System.out.println("please enter comment title");
+        } else if (output == 2) {
+            System.out.println("please enter comment content");
+        } else if (output == 3) {
+            System.out.println("");
+        } else if (output == 4) {
+            System.out.println("");
+        } else if (output == 5) {
+            System.out.println("");
+        } else if (output == 6) {
+            System.out.println("");
+        } else if (output == 7) {
+            System.out.println("");
+        } else if (output == 8) {
+            System.out.println("");
+        } else if (output == 9) {
+            System.out.println("");
+        } else if (output == 10) {
+            System.out.println("");
+        } else if (output == 11) {
+            System.out.println("");
         } else if (output == 12) {
             System.out.println("maximum discount amount format is invalid");
         } else if (output == 13) {
@@ -50,7 +88,8 @@ public class OutputMassageHandler {
         }
     }
 
-    public static void showManageOutput(int output) {
+
+    public static void showManagerOutput(int output) {
         if (output == 0) {
             System.out.println("");
         } else if (output == 1) {
@@ -62,7 +101,7 @@ public class OutputMassageHandler {
         } else if (output == 4) {
             System.out.println("discount code Id format is inavlid");
         } else if (output == 5) {
-            System.out.println("no discount code exist with this Id");
+            System.out.println("there is no discount code with this Id");
         } else if (output == 6) {
             System.out.println("please enter discount code Id");
         } else if (output == 7) {
@@ -101,6 +140,50 @@ public class OutputMassageHandler {
             System.out.println("no category exist with this name");
         } else if (output == 24) {
             System.out.println("total time of use format is invalid");
+        }else if (output == 25) {
+            System.out.println("there is discount code with this id");
+        } else if (output == 26) {
+            System.out.println("date must be after current date");
+        } else if (output == 27) {
+            System.out.println("discount amount changed");
+        } else if (output == 28) {
+            System.out.println("discount amount format is invalid");
+        } else if (output == 29) {
+            System.out.println("account added to list");
+        }else if (output == 30) {
+            System.out.println("username format is invalid");
+        } else if (output == 31) {
+            System.out.println("there is no account with this username");
+        } else if (output == 32) {
+            System.out.println("account removed from list");
+        } else if (output == 33) {
+            System.out.println("please enter category field you want to change");
+        } else if (output == 34) {
+            System.out.println("there is a category with this name");
+        } else if (output == 35) {
+            System.out.println("please enter discount code amount");
+        } else if (output == 36) {
+            System.out.println("please enter username you want to add to discount code list (if you enter finish process end)");
+        } else if (output == 37) {
+            System.out.println("discount code add");
+        } else if (output == 38) {
+            System.out.println("please enter trait you want to add to category list (if you enter finish process end)");
+        } else if (output == 39) {
+            System.out.println("product add to category");
+        } else if (output == 40) {
+            System.out.println("product removed from category");
+        } else if (output == 41) {
+            System.out.println("");
+        } else if (output == 42) {
+            System.out.println("");
+        } else if (output == 43) {
+            System.out.println("");
+        } else if (output == 44) {
+            System.out.println("");
+        } else if (output == 45) {
+            System.out.println("");
+        } else if (output == 46) {
+            System.out.println("");
         }
     }
 
@@ -130,7 +213,7 @@ public class OutputMassageHandler {
         } else if (output == 11) {
             System.out.println("number must be between 1 to 5");
         } else if (output == 12) {
-            System.out.println("");
+            System.out.println("there is no log yet");
         } else if (output == 13) {
             System.out.println("no user exist with this username");
         } else if (output == 14) {
@@ -252,6 +335,70 @@ public class OutputMassageHandler {
         } else if (output == 8) {
             System.out.println("there is no product with this id");
         } else if (output == 9) {
+            System.out.println("start of sale period format is invalid");
+        } else if (output == 10) {
+            System.out.println("please enter start of sale period date");
+        } else if (output == 11) {
+            System.out.println("start of sale period request sent");
+        } else if (output == 12) {
+            System.out.println("date is invalid");
+        } else if (output == 13) {
+            System.out.println("end of sale period request sent");
+        } else if (output == 14) {
+            System.out.println("end of sale period format is invalid");
+        } else if (output == 15) {
+            System.out.println("sale amount format is invalid");
+        } else if (output == 16) {
+            System.out.println("sale amount request sent");
+        } else if (output == 17) {
+            System.out.println("product removed");
+        } else if (output == 18) {
+            System.out.println("product add");
+        } else if (output == 19) {
+            System.out.println("product id format is invalid");
+        } else if (output == 20) {
+            System.out.println("please enter end of sale period date");
+        } else if (output == 21) {
+            System.out.println("please enter sale amount");
+        } else if (output == 22) {
+            System.out.println("please enter product you want to have account (if you enter finish process end)");
+        } else if (output == 23) {
+            System.out.println("add sale request sent");
+        } else if (output == 24) {
+            System.out.println("");
+        } else if (output == 25) {
+            System.out.println("");
+        } else if (output == 26) {
+            System.out.println("");
+        } else if (output == 27) {
+            System.out.println("");
+        } else if (output == 28) {
+            System.out.println("");
+        } else if (output == 29) {
+            System.out.println("");
+        }
+    }
+
+    public static void showPurchaseOutput(int output){
+        if (output == 0) {
+            System.out.println("please enter discount id");
+        } else if (output == 1) {
+            System.out.println("answer must be (yes|no)");
+        } else if (output == 2) {
+            System.out.println("enter payment to finish buying process");
+        } else if (output == 3) {
+            System.out.println("you dont have this discount id");
+        } else if (output == 4) {
+            System.out.println("date is invalid");
+        } else if (output == 5) {
+            System.out.println("you can't use iy anymore");
+        } else if (output == 6) {
+            System.out.println("");
+        } else if (output == 7) {
+            System.out.println("");
+        } else if (output == 8) {
+            System.out.println("");
+        } else if (output == 9) {
             System.out.println("");
         } else if (output == 10) {
             System.out.println("");
@@ -276,22 +423,6 @@ public class OutputMassageHandler {
         } else if (output == 20) {
             System.out.println("");
         } else if (output == 21) {
-            System.out.println("");
-        } else if (output == 22) {
-            System.out.println("");
-        } else if (output == 23) {
-            System.out.println("");
-        } else if (output == 24) {
-            System.out.println("");
-        } else if (output == 25) {
-            System.out.println("");
-        } else if (output == 26) {
-            System.out.println("");
-        } else if (output == 27) {
-            System.out.println("");
-        } else if (output == 28) {
-            System.out.println("");
-        } else if (output == 29) {
             System.out.println("");
         }
     }
@@ -368,7 +499,7 @@ public class OutputMassageHandler {
         } else if (output == 34) {
             System.out.println("enter new value");
         } else if (output == 35) {
-            System.out.println("");
+            System.out.println("there is no account with this user name");
         } else if (output == 36) {
             System.out.println("");
         } else if (output == 37) {
@@ -448,7 +579,7 @@ public class OutputMassageHandler {
         }
     }
 
-   /* public static void showOutputWithString(String string, int output) {
+    public static void showOutputWithString(String string, int output) {
         if (output == 1) {
             System.out.println("username " + string + " deleted");
         } else if (output == 2) {
@@ -468,7 +599,7 @@ public class OutputMassageHandler {
         }
     }
 
-    */
+
 
   /*  public static void showOutputWith2String(String first, String second, int output) {
         if (output == 1) {

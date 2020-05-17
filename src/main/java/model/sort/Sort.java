@@ -61,21 +61,21 @@ public abstract class Sort {
         return availableSorts;
     }
 
-    public ArrayList<Product> numberOfViewsSort() {
+    public static ArrayList<Product> numberOfViewsSort() {
         Collections.sort(newArrayOfProductSort,Product.productComparatorForView);
         listOfSorts.add(newArrayOfProductSort);
         availableSorts.remove(0);
         return newArrayOfProductSort;
     }
 
-    public ArrayList<Product> scoreSort() {
+    public static ArrayList<Product> scoreSort() {
         Collections.sort(newArrayOfProductSort,Product.productComparatorForScore);
         listOfSorts.add(newArrayOfProductSort);
         availableSorts.remove(1);
         return newArrayOfProductSort;
     }
 
-    public ArrayList<Account> accountSortUserName() throws FileNotFoundException {
+    public static ArrayList<Account> accountSortUserName() throws FileNotFoundException {
         Type REVIEW_TYPE = new TypeToken<ArrayList<Account>>() {
         }.getType();
         JsonReader sellerReader=FileHandling.readFile("account.json");
@@ -84,7 +84,7 @@ public abstract class Sort {
         return data;
     }
 
-    public ArrayList<BuyLog> accountSortLogs() throws FileNotFoundException {
+    public static ArrayList<BuyLog> buyLogSortDate() throws FileNotFoundException {
         Type REVIEW_TYPE = new TypeToken<ArrayList<BuyLog>>() {
         }.getType();
         JsonReader BuyLogReader=FileHandling.readFile("buyLog.json");
@@ -97,20 +97,7 @@ public abstract class Sort {
         return data;
     }
 
-    public ArrayList<BuyLog> buyLogSortDate() throws FileNotFoundException {
-        Type REVIEW_TYPE = new TypeToken<ArrayList<BuyLog>>() {
-        }.getType();
-        JsonReader BuyLogReader=FileHandling.readFile("buyLog.json");
-        ArrayList<BuyLog> data = FileHandling.getGson().fromJson(BuyLogReader, REVIEW_TYPE);
-        Collections.sort(data, new Comparator<BuyLog>() {
-            public int compare(BuyLog o1, BuyLog o2) {
-                return o1.getLocalDateTimeForLog().compareTo(o2.getLocalDateTimeForLog());
-            }
-        });
-        return data;
-    }
-
-    public ArrayList<SaleLog> saleLogSortDate() throws FileNotFoundException {
+    public static ArrayList<SaleLog> saleLogSortDate() throws FileNotFoundException {
         Type REVIEW_TYPE = new TypeToken<ArrayList<SaleLog>>() {
         }.getType();
         JsonReader SaleLogReader=FileHandling.readFile("saleLog.json");

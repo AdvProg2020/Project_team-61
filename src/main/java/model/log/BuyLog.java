@@ -80,9 +80,6 @@ public class BuyLog extends Log {
         return firstProduct;
     }
 
-    public boolean isBought(String productId) {
-        return ifItsFinal;
-    }
 
     //other--------------------------------------------------------------
 
@@ -99,14 +96,23 @@ public class BuyLog extends Log {
     //done
     public void addProductToBuyLog(String productId, int amount) {
         Product product = Product.getProductById(productId);
-        if (product.getNumberOfProducts() != 0) {
-            product.setNumberOfProducts(product.getNumberOfProducts() - amount);
-            chosenProduct.put(product, amount);
+//        if (!product.getIsBought()) {
+            if (product.getNumberOfProducts() > amount) {
+                product.setNumberOfProducts(product.getNumberOfProducts() - amount);
+                chosenProduct.put(product, amount);
+            } else if (product.getNumberOfProducts() == amount) {
+                product.setNumberOfProducts(0);
+                product.setIsBought(true);
+                chosenProduct.put(product, amount);
+            } else if (product.getNumberOfProducts() < amount) {
+                product.setNumberOfProducts(0);
+                chosenProduct.put(product, product.getNumberOfProducts());
+                product.setIsBought(true);
+            }
             numberOfChosenPro = +numberOfChosenPro + amount;
-        } else {
-
-            Product.deleteProduct(productId);
-        }
+//        } else {
+//            Product.deleteProduct(productId);
+//        }
     }
 
     //done
@@ -141,14 +147,13 @@ public class BuyLog extends Log {
     public void changesForSaleLogAfterFinish() throws IOException {
         //product ha be sold ezafe
         //gheimat daryafti
-        for (Product p : allBoughtProduct.keySet()){
+        for (Product p : allBoughtProduct.keySet()) {
             SaleLog saleLog = new SaleLog(id);
-            saleLog.setSaleLogDetail(p.getPrice(),buyerLog.getName());
+            saleLog.setSaleLogDetail(p.getPrice(), buyerLog.getName());
             saleLog.addProductToSaleLog(p.getId());
-            if (p.getInSale()){
+            if (p.getInSale()) {
                 saleLog.setReducedAmount(p.getSale().getSaleAmount());
-            }
-            else saleLog.setReducedAmount(0);
+            } else saleLog.setReducedAmount(0);
         }
 
     }
@@ -161,6 +166,24 @@ public class BuyLog extends Log {
             }
         }
         return false;
+    }
+
+
+    public void increaseNumberOfProduct(String productId, int amount) {
+        Product product = Product.getProductById(productId);
+        int numberOfPro = chosenProduct.get(product);
+        if (product.getNumberOfProducts() > amount) {
+            chosenProduct.put(product, chosenProduct.get(product) + amount);
+            product.setNumberOfProducts(product.getNumberOfProducts() - amount);
+        } else if (product.getNumberOfProducts() == amount) {
+            chosenProduct.put(product, amount);
+            product.setNumberOfProducts(0);
+            product.setIsBought(true);
+        } else if (product.getNumberOfProducts() < amount) {
+            chosenProduct.put(product, product.getNumberOfProducts());
+            product.setNumberOfProducts(0);
+            product.setIsBought(true);
+        }
     }
 
     //done
