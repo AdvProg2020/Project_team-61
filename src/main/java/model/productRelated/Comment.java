@@ -33,16 +33,6 @@ public class Comment {
     }
 
 
-
-
-
-
-
-
-
-
-
-
     //setterAndGetter--------------------------------------------------------------------------------------------
 
     public void setTitle(String title) {

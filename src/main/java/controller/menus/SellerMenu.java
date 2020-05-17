@@ -284,42 +284,41 @@ public class SellerMenu {
                 Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(edit);
                 if (inputDate.after(currentDate)) {
                     saleRequest.setStartOfSalePeriod(inputDate);
-                    outputNo = 0;
-                } else outputNo = 0;
-            } else outputNo = 0;
+                    outputNo = 11;
+                } else outputNo = 12;
+            } else outputNo = 9;
         } else if (field.matches("(?i)end\\s*of\\s*sale\\s*period")) {
             if (edit.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
                 Date currentDate = new Date();
                 Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(edit);
                 if (inputDate.after(currentDate)) {
                     saleRequest.setEndOfSalePeriod(inputDate);
-                    outputNo = 0;
-                } else outputNo = 0;
-            } else outputNo = 0;
+                    outputNo = 13;
+                } else outputNo = 12;
+            } else outputNo = 14;
         } else if (field.matches("(?i)sale\\s*amount")) {
             if (edit.matches("\\d+\\.?\\d*")) {
                 saleRequest.setSaleAmount(Integer.parseInt(edit));
-                outputNo = 0;
-            } else outputNo = 0;
+                outputNo = 16;
+            } else outputNo = 15;
         } else if (field.matches("(?i)remove\\s*product")) {
             if (edit.matches("((?!^ +$)^.+$)")) {
                 if (checkProductSale(edit)) {
                     saleRequest.removeProduct(Product.getProductById(edit));
-                    outputNo = 0;
-                } else outputNo = 0;
-            } else outputNo = 0;
+                    outputNo = 17;
+                }
+            } else outputNo = 19;
         } else if (field.matches("(?i)add\\s*product")) {
             if (edit.matches("((?!^ +$)^.+$)")) {
                 if (checkProductSale(edit)) {
                     saleRequest.addProductToSale(Product.getProductById(edit));
-                    outputNo = 0;
-                } else outputNo = 0;
-            } else outputNo = 0;
+                    outputNo = 18;
+                }
+            } else outputNo = 19;
 
         }
         OutputMassageHandler.showSaleOutput(outputNo);
     }
-
 
     public static void addOff() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDSALE);
@@ -348,9 +347,9 @@ public class SellerMenu {
             if (detail.matches("^(?!\\s*$).+")) {
                 if (checkSaleId(detail)) {
                     detailMenu = 1;
-                    outputNo = 0;
+                    outputNo = 10;
                 }
-            } else outputNo = 0;
+            } else outputNo = 9;
         } else if (detailMenu == 1) {
             if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
                 Date currentDate = new Date();
@@ -358,9 +357,9 @@ public class SellerMenu {
                 if (inputDate.after(currentDate)) {
                     saleRequest.setStartOfSalePeriod(inputDate);
                     detailMenu = 2;
-                    outputNo = 0;
-                } else outputNo = 0;
-            } else outputNo = 0;
+                    outputNo = 20;
+                } else outputNo = 12;
+            } else outputNo = 9;
         } else if (detailMenu == 2) {
             if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
                 Date currentDate = new Date();
@@ -368,29 +367,29 @@ public class SellerMenu {
                 if (inputDate.after(currentDate)) {
                     saleRequest.setEndOfSalePeriod(inputDate);
                     detailMenu = 3;
-                    outputNo = 0;
-                } else outputNo = 0;
-            } else outputNo = 0;
+                    outputNo = 21;
+                } else outputNo = 12;
+            } else outputNo = 19;
         } else if (detailMenu == 3) {
             if (detail.matches("\\d+")) {
                 saleRequest.setSaleAmount(Integer.parseInt(detail));
                 detailMenu = 4;
-                outputNo = 0;
-            } else outputNo = 0;
+                outputNo = 22;
+            } else outputNo = 15;
         } else if (detailMenu == 4) {
             if (detail.matches("((?!^ +$)^.+$)")) {
                 if (!detail.equalsIgnoreCase("finish")) {
                     if (checkProductSale(detail)) {
                         saleRequest.addProductToSale(Product.getProductById(detail));
-                        outputNo = 0;
+                        outputNo = 22;
                     }
                 } else {
                     detailMenu = 0;
                     CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
                     CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
-                    outputNo = 0;
+                    outputNo = 23;
                 }
-            } else outputNo = 0;
+            } else outputNo = 19;
         }
         OutputMassageHandler.showSaleOutput(outputNo);
 

@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import controller.menus.CustomerMenu;
 import model.accounts.Account;
 import model.accounts.Customer;
+import model.accounts.Seller;
 import model.productRelated.Product;
 import view.FileHandling;
 
@@ -30,10 +31,9 @@ public class BuyLog extends Log {
     private String id;
     public static LocalDateTime localDateTimeForLog;
     public double paidAmount;
-    private double discountOnPrice;
 
     int numberOfChosenPro;
-    private static boolean ifItsFinal;
+    private static boolean ItsFinal;
     boolean isBought;
     private static boolean firstProduct = true;
     double amountAfterDis;
@@ -43,8 +43,7 @@ public class BuyLog extends Log {
     private HashMap<Product, Integer> allBoughtProduct = new HashMap<>();
     private static HashMap<Product, Integer> chosenProduct = new HashMap<>();
     public static ArrayList<BuyLog> allCustomersLog = new ArrayList<BuyLog>();
-    public static HashMap<ArrayList<Product>, Double> productWithPriceWithSale = new HashMap<>();
-    public static HashMap<ArrayList<Product>, Double> productWithPriceWithoutSale = new HashMap<>();
+
 
     //setterAndGetter----------------------------------------------------
 
@@ -100,12 +99,23 @@ public class BuyLog extends Log {
     //done
     public void addProductToBuyLog(String productId, int amount) {
         Product product = Product.getProductById(productId);
-        if (product.getNumberOfProducts() != 0) {
+//        if (!product.getIsBought()) {
+        if (product.getNumberOfProducts() > amount) {
             product.setNumberOfProducts(product.getNumberOfProducts() - amount);
             chosenProduct.put(product, amount);
-        } else {
-            Product.deleteProduct(productId);
+        } else if (product.getNumberOfProducts() == amount) {
+            product.setNumberOfProducts(0);
+            product.setIsBought(true);
+            chosenProduct.put(product, amount);
+        } else if (product.getNumberOfProducts() < amount) {
+            product.setNumberOfProducts(0);
+            chosenProduct.put(product, product.getNumberOfProducts());
+            product.setIsBought(true);
         }
+        numberOfChosenPro = +numberOfChosenPro + amount;
+//        } else {
+//            Product.deleteProduct(productId);
+//        }
     }
 
     //done
@@ -117,21 +127,66 @@ public class BuyLog extends Log {
         return price;
     }
 
-    public void whenFinal() {
+    public void whenFinal() throws IOException {
         double price = 0;
         if (CustomerMenu.isHasDiscount()) {
             price = buyerLog.getDiscount().calculate(totalPrice());
             buyerLog.getDiscount().setTotalTimesOfUse(buyerLog.getDiscount() - 1);
-        }
-        else {
+        } else {
             price = totalPrice();
         }
         for (Product p : chosenProduct.keySet()) {
             //faghat price bedoon discount be seller eafe
-            p.getSeller().setCredit(p.getSeller().getCredit()+p.getPrice());
-            buyerLog.setCredit(buyerLog.getCredit()-price);
+            p.getSeller().setCredit(p.getSeller().getCredit() + p.getPrice());
+            //price ba discount be az customer kam
+            paidAmount = buyerLog.getCredit() - price;
+            buyerLog.setCredit(paidAmount);
         }
-        allBoughtProduct=chosenProduct;
+        allBoughtProduct = chosenProduct;
+        itsDone = true;
+        changesForSaleLogAfterFinish();
+    }
+
+    public void changesForSaleLogAfterFinish() throws IOException {
+        //product ha be sold ezafe
+        //gheimat daryafti
+        for (Product p : allBoughtProduct.keySet()) {
+            SaleLog saleLog = new SaleLog(id);
+            saleLog.setSaleLogDetail(p.getPrice(), buyerLog.getName());
+            saleLog.addProductToSaleLog(p.getId());
+            if (p.getInSale()) {
+                saleLog.setReducedAmount(p.getSale().getSaleAmount());
+            } else saleLog.setReducedAmount(0);
+        }
+
+    }
+
+
+    public boolean checkIfProductIsBought(String productId) {
+        for (Product p : allBoughtProduct.keySet()) {
+            if (p.getId().equals(productId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public void increaseNumberOfProduct(String productId, int amount) {
+        Product product = Product.getProductById(productId);
+        int numberOfPro = chosenProduct.get(product);
+        if (product.getNumberOfProducts() > amount) {
+            chosenProduct.put(product, chosenProduct.get(product) + amount);
+            product.setNumberOfProducts(product.getNumberOfProducts() - amount);
+        } else if (product.getNumberOfProducts() == amount) {
+            chosenProduct.put(product, amount);
+            product.setNumberOfProducts(0);
+            product.setIsBought(true);
+        } else if (product.getNumberOfProducts() < amount) {
+            chosenProduct.put(product, product.getNumberOfProducts());
+            product.setNumberOfProducts(0);
+            product.setIsBought(true);
+        }
     }
 
     //done

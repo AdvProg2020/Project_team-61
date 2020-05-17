@@ -75,31 +75,49 @@ public abstract class Filter {
         return availableFilters;
     }
 
-    public void categoryFilter(Category category) throws FileNotFoundException {
-        newArrayOfProductFilter = newArrayOfProductFilter.stream().filter(product1 -> product.getCategory().equals(category)).collect(Collectors.toCollection(ArrayList::new));
+    public static void categoryFilter(Category category) throws FileNotFoundException {
+        ArrayList<Product> help=null;
+        for (Product product : newArrayOfProductFilter) {
+            if (product.getCategory().equals(category)){
+                help.add(product);
+            }
+        }
+        newArrayOfProductFilter=help;
         listOfFilters.add(1, newArrayOfProductFilter);
         helpFilter.add(newArrayOfProductFilter);
         availableFilters.remove(0);
 
     }
 
-    public void companiesFilter(String companiesName) throws FileNotFoundException {
-        newArrayOfProductFilter = newArrayOfProductFilter.stream().filter(product1 -> product.getCompaniesName().equals(companiesName)).collect(Collectors.toCollection(ArrayList::new));
+    public static void companiesFilter(String companiesName) throws FileNotFoundException {
+        ArrayList<Product> help=null;
+        for (Product product : newArrayOfProductFilter) {
+            if (product.getFirm().getName().equals(companiesName)){
+                help.add(product);
+            }
+        }
+        newArrayOfProductFilter=help;
         listOfFilters.add(2, newArrayOfProductFilter);
         helpFilter.add(newArrayOfProductFilter);
         availableFilters.remove(1);
 
     }
 
-    public void productNameFilter(String productName) throws FileNotFoundException {
-        newArrayOfProductFilter = newArrayOfProductFilter.stream().filter(product1 -> product.getProductName().equals(productName)).collect(Collectors.toCollection(ArrayList::new));
+    public static void productNameFilter(String productName) throws FileNotFoundException {
+        ArrayList<Product> help=null;
+        for (Product product : newArrayOfProductFilter) {
+            if (product.getProductName().equals(productName)){
+                help.add(product);
+            }
+        }
+        newArrayOfProductFilter=help;
         listOfFilters.add(4, newArrayOfProductFilter);
         helpFilter.add(newArrayOfProductFilter);
         availableFilters.remove(3);
 
     }
 
-    public void periodFilter(int n, int m) {
+    public static void periodFilter(int n, int m) {
         ArrayList<Product> helper=null;
         for (Product product1 : newArrayOfProductFilter) {
             if (product1.getPrice() > n && product1.getPrice() < m) {
@@ -112,7 +130,7 @@ public abstract class Filter {
         availableFilters.remove(4);
     }
 
-    public void isAvailable(){
+    public static void isAvailable(){
         ArrayList<Product> delete=new ArrayList<>();
         for (Product product1 : Product.getProductList()) {
             if (product1.getNumberOfProducts()==0){
@@ -176,7 +194,7 @@ public abstract class Filter {
         } else return false;
     }
 
-    public boolean isThereFilterWithName(String filter) {
+    public static boolean isThereFilterWithName(String filter) {
         if (filter.matches("category")) {
             return true;
         } else if (filter.matches("companyName")) {

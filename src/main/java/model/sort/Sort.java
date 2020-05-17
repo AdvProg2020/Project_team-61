@@ -61,14 +61,14 @@ public abstract class Sort {
         return availableSorts;
     }
 
-    public ArrayList<Product> numberOfViewsSort() {
+    public static ArrayList<Product> numberOfViewsSort() {
         Collections.sort(newArrayOfProductSort,Product.productComparatorForView);
         listOfSorts.add(newArrayOfProductSort);
         availableSorts.remove(0);
         return newArrayOfProductSort;
     }
 
-    public ArrayList<Product> scoreSort() {
+    public static ArrayList<Product> scoreSort() {
         Collections.sort(newArrayOfProductSort,Product.productComparatorForScore);
         listOfSorts.add(newArrayOfProductSort);
         availableSorts.remove(1);

@@ -1,6 +1,8 @@
 package controller.menus;
 
 import model.accounts.Account;
+import model.filtar.Filter;
+import model.log.BuyLog;
 import model.log.Log;
 import model.off.DiscountCode;
 import model.productRelated.Product;
@@ -24,43 +26,40 @@ public class CustomerMenu {
         if (ProductMenu.getBuyLog() != null) {
             return true;
         }
-        OutputMassageHandler.showManagerOutput(0);
+        outputNo = 12;
         return false;
     }
 
     //gson
     public static void processViewCart() throws FileNotFoundException {
-        if(isThereBuyLog()) {
+        if (isThereBuyLog()) {
             OutputHandler.showCustomerLog(ProductMenu.getBuyLog().getId());
             CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
-        }
+        } else OutputMassageHandler.showCustomerOutput(outputNo);
     }
 
     //gson
     public static void showTotalPrice() throws FileNotFoundException {
-        if(isThereBuyLog()) {
+        if (isThereBuyLog()) {
             OutputHandler.showTotalPrice(ProductMenu.getBuyLog().getId());
-        }
+        } else OutputMassageHandler.showCustomerOutput(outputNo);
     }
 
     //product.......................................................................................
-
-    // manager // customer // seller
     private static boolean checkProduct(String productID) {
         // if (productID.matches("((?!^ +$)^.+$)")) {
         if (Product.isThereProductWithId(productID)) {
             return true;
         } else outputNo = 1;
         // } else outputNo = 0;
-        OutputMassageHandler.showCustomerOutput(outputNo);
         return false;
     }
 
     //gson
     public static void showProducts() throws FileNotFoundException {
-        if(isThereBuyLog()) {
-          //  OutputHandler.showProduct(product.getId());
-        }
+        if (isThereBuyLog()) {
+            OutputHandler.showProducts(Filter.getNewArrayOfProductFilter());
+        } else OutputMassageHandler.showCustomerOutput(outputNo);
     }
 
     //GSON
@@ -69,26 +68,27 @@ public class CustomerMenu {
             OutputHandler.showProduct(productID);
             CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
             CommandProcessor.setMenuStatus(MenuStatus.PRODUCTMENU);
-        }
+        } else OutputMassageHandler.showCustomerOutput(outputNo);
     }
 
     public static void increaseProductNumber(String productID) {
-        if(isThereBuyLog()) {
+        if (isThereBuyLog()) {
             if (checkProduct(productID)) {
                 CustomerMenu.productID = productID;
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.INCREASEPRODUCTNUMBER);
-                OutputMassageHandler.showOutput(2);
+                outputNo = 2;
             }
         }
+        OutputMassageHandler.showCustomerOutput(outputNo);
 
     }
 
     public static void increaseLogProduct(String number) {
         if (number.matches("\\d+")) {
             Product product = Product.getProductById(productID);
-           // if (product.getNumberOfProducts() >= p) {
-                ProductMenu.getBuyLog().addProductToBuyLog(productID, Integer.parseInt(number));
-           // }
+            // if (product.getNumberOfProducts() >= p) {
+            ProductMenu.getBuyLog().addProductToBuyLog(productID, Integer.parseInt(number));
+            // }
         }
     }
 
@@ -99,24 +99,15 @@ public class CustomerMenu {
 
     }
 
-    /*//naghes
-    public void productNumber(String number) {
-        if (number.matches("\\d+")) {
-            // product.addProductToLog(LoginMenu.getLoginAccount().getUsername(), productID, Integer.parseInt(number));
-            OutputMassageHandler.showOutputWith2String(productID, number, 2);
-        } else OutputMassageHandler.showCustomerOutput(4);
-    }
-
-     */
 
     public static void decreaseProductNumber(String productID) {
-        if(isThereBuyLog()) {
+        if (isThereBuyLog()) {
             if (checkProduct(productID)) {
                 CustomerMenu.productID = productID;
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.DECREASEPRODUCTNUMBER);
-                OutputMassageHandler.showOutput(3);
+               outputNo=3;
             }
-        }
+        }OutputMassageHandler.showCustomerOutput(outputNo);
     }
 
 
@@ -139,7 +130,6 @@ public class CustomerMenu {
             return true;
         } else outputNo = 7;
         // } else outputNo = ;
-        OutputMassageHandler.showAccountOutput(outputNo);
         return false;
     }
 
@@ -148,14 +138,14 @@ public class CustomerMenu {
             if (have.equalsIgnoreCase("yes")) {
                 hasDiscount = true;
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.CHECKDISCOUNTCODE);
-                outputNo = 0;
+                outputNo = 1;
             } else {
                 hasDiscount = false;
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
-                outputNo = 0;
+                outputNo = 3;
             }
-        } else outputNo = 0;
-        OutputMassageHandler.showCustomerOutput(outputNo);
+        } else outputNo = 2;
+        OutputMassageHandler.showPurchaseOutput(outputNo);
     }
 
 
@@ -168,12 +158,12 @@ public class CustomerMenu {
                     if (loginAccount.getUsedDiscount() < DiscountCode.getDiscountWithId(discountCodeId).getTotalTimesOfUse()) {
                         CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
                         loginAccount.increaseDiscountUsed();
-                        outputNo = 0;
-                    } else outputNo = 10;
-                } else outputNo = 10;
-            } else outputNo = 10;
+                        outputNo = 2;
+                    } else outputNo = 5;
+                } else outputNo = 4;
+            } else outputNo = 3;
         }
-        OutputMassageHandler.showCustomerOutput(outputNo);
+        OutputMassageHandler.showPurchaseOutput(outputNo);
     }
 
     public static void payment() {
@@ -186,7 +176,7 @@ public class CustomerMenu {
         } else {
             outputNo = 0;
         }
-        OutputMassageHandler.showCustomerOutput(outputNo);
+        OutputMassageHandler.showPurchaseOutput(outputNo);
     }
 
     private static void finishingPayment() {
@@ -209,7 +199,6 @@ public class CustomerMenu {
             return true;
         } else outputNo = 8;
         //} else outputNo = 0;
-        OutputMassageHandler.showAccountOutput(outputNo);
         return false;
     }
 
@@ -223,7 +212,7 @@ public class CustomerMenu {
     //gson
     public static void showOrder(String orderID) throws FileNotFoundException {
         if (checkLog(orderID)) {
-         //   OutputHandler.showOrder(Log.getLogWithId(orderID));
+              OutputHandler.showOrder(Log.getLogWithId(orderID));
         }
 
     }
@@ -232,8 +221,12 @@ public class CustomerMenu {
     public static void rateProduct(String productID, int number) throws IOException {
         if (checkProduct(productID)) {
             if (number >= 1 && number <= 5) {
-                Score newScore = new Score(LoginMenu.getLoginAccount(), Product.getProductById(productID), number);
-                OutputMassageHandler.showOutputWith2String(productID, String.valueOf(number), 1);
+                for (BuyLog buyLog : LoginMenu.getLoginAccount().getAllBuyLogs()) {
+                    if (buyLog.checkIfProductIsBought(productID)){
+                        Score newScore = new Score(LoginMenu.getLoginAccount(), Product.getProductById(productID), number);
+                        OutputMassageHandler.showOutputWith2String(productID, String.valueOf(number), 1);
+                    }
+                }
             } else outputNo = 11;
         }
     }
