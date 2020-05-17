@@ -33,7 +33,7 @@ public class Product  {
     private boolean isBought;
 
     //lists
-    private  ArrayList<Account> listOfSellers = new ArrayList<Account>();
+//    private  ArrayList<Account> listOfSellers = new ArrayList<Account>();
     private  ArrayList<Customer> listOfBuyers=new ArrayList<>();
     private static ArrayList<Product> allProduct = new ArrayList<Product>();
     private ArrayList<String> info=new ArrayList<>();
@@ -66,7 +66,7 @@ public class Product  {
         this.seller=seller;
         this.numberOfProducts=numberOfProducts;
         this.category=category;
-        listOfSellers.add(seller);
+//        listOfSellers.add(seller);
         allProduct.add(this);
         writeInJ();
     }
@@ -207,21 +207,21 @@ public class Product  {
     }
 
 
-    public boolean ifProductHasSeller(String productId, String sellerUserName){
-        if (isThereProductWithId(productId)) {
-            for (Account seller : Product.getProductById(productId).getListOfSellers()) {
-                if (seller.equals(Seller.getAccountWithUsername(sellerUserName))){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+//    public boolean ifProductHasSeller(String productId, String sellerUserName){
+//        if (isThereProductWithId(productId)) {
+//            for (Account seller : Product.getProductById(productId).getListOfSellers()) {
+//                if (seller.equals(Seller.getAccountWithUsername(sellerUserName))){
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
 
     //finish
-    public ArrayList<Account> getListOfSellers () {
-        return listOfSellers;
-    }
+//    public ArrayList<Account> getListOfSellers () {
+//        return listOfSellers;
+//    }
 
     //finish
     public static void deleteProduct ( String productId ){

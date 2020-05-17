@@ -18,36 +18,32 @@ import java.util.Iterator;
 public class BuyLog extends Log {
 
 
-
     public BuyLog(String logId) throws IOException {
         super(logId);
-        id=logId;
-        localDateTimeForLog=LocalDateTime.now();
+        id = logId;
+        localDateTimeForLog = LocalDateTime.now();
         allCustomersLog.add(this);
     }
-
-
 
 
     //detail
     private String id;
     public static LocalDateTime localDateTimeForLog;
     public double paidAmount;
-    private double discountOnPrice;
 
     int numberOfChosenPro;
-    private static boolean ifItsFinal;
+    private static boolean ItsFinal;
     boolean isBought;
-    private static boolean firstProduct=true;
+    private static boolean firstProduct = true;
     double amountAfterDis;
     public Account buyerLog;
 
     //list
-    private  HashMap<Product,Integer> allBoughtProduct = new HashMap<>();
-    private  static HashMap<Product,Integer> chosenProduct = new HashMap<>();
+    private HashMap<Product, Integer> allBoughtProduct = new HashMap<>();
+    private static HashMap<Product, Integer> chosenProduct = new HashMap<>();
     public static ArrayList<BuyLog> allCustomersLog = new ArrayList<BuyLog>();
-    public static HashMap<ArrayList<Product>, Double> productWithPriceWithSale=new HashMap<>();
-    public static HashMap<ArrayList<Product>, Double> productWithPriceWithoutSale=new HashMap<>();
+    public static HashMap<ArrayList<Product>, Double> productWithPriceWithSale = new HashMap<>();
+    public static HashMap<ArrayList<Product>, Double> productWithPriceWithoutSale = new HashMap<>();
 
     //setterAndGetter----------------------------------------------------
 
@@ -56,9 +52,10 @@ public class BuyLog extends Log {
         writeInJ();
     }
 
-    public void setBuyerLog(Account account){
-        this.buyerLog=buyerLog;
+    public void setBuyerLog(Account account) {
+        this.buyerLog = buyerLog;
     }
+
     public String getId() {
         return id;
     }
@@ -79,68 +76,93 @@ public class BuyLog extends Log {
         return allCustomersLog;
     }
 
-    public static boolean getFirstProduct(){
+    public static boolean getFirstProduct() {
         return firstProduct;
     }
+
+    public boolean isBought(String productId) {
+        return ifItsFinal;
+    }
+
     //other--------------------------------------------------------------
 
     //done
-    public static BuyLog getBuyLogWithName(String buyLogId){
+    public static BuyLog getBuyLogWithName(String buyLogId) {
         for (BuyLog log : allCustomersLog) {
-            if (log.getId().equals(buyLogId)){
+            if (log.getId().equals(buyLogId)) {
                 return log;
             }
         }
         return null;
     }
 
-
-    public  boolean isBought(String productId) {
-        return ifItsFinal;
-    }
-
     //done
     public void addProductToBuyLog(String productId, int amount) {
-       Product product=Product.getProductById(productId);
-       if (product.getNumberOfProducts()!=0){
-           product.setNumberOfProducts(product.getNumberOfProducts()-amount);
-           chosenProduct.put(product,amount);
-       }
-       else {
-           Product.deleteProduct(productId);
-       }
+        Product product = Product.getProductById(productId);
+        if (product.getNumberOfProducts() != 0) {
+            product.setNumberOfProducts(product.getNumberOfProducts() - amount);
+            chosenProduct.put(product, amount);
+            numberOfChosenPro = +numberOfChosenPro + amount;
+        } else {
+            Product.deleteProduct(productId);
+        }
     }
 
     //done
-    public double holePriceWithOutDiscount() {
-        double price=0;
-        if (CustomerMenu.isHasDiscount()){
-            for (Product p : chosenProduct.keySet()){
-                price=+chosenProduct.get(p)* buyerLog.getDiscount().calculate(chosenProduct);
-            }
-        }
-        else {
-            for (Product p : chosenProduct.keySet()){
-                price=+chosenProduct.get(p)*p.getPrice();
-            }
+    public double totalPrice() {
+        double price = 0;
+        for (Product p : chosenProduct.keySet()) {
+            price = +chosenProduct.get(p) * p.getPrice();
         }
         return price;
     }
 
+    public void whenFinal() {
+        double price = 0;
+        if (CustomerMenu.isHasDiscount()) {
+            price = buyerLog.getDiscount().calculate(totalPrice());
+            buyerLog.getDiscount().setTotalTimesOfUse(buyerLog.getDiscount() - 1);
+        } else {
+            price = totalPrice();
+        }
+        for (Product p : chosenProduct.keySet()) {
+            //faghat price bedoon discount be seller eafe
+            p.getSeller().setCredit(p.getSeller().getCredit() + p.getPrice());
+            //price ba discount be az customer kam
+            paidAmount = buyerLog.getCredit() - price;
+            buyerLog.setCredit(paidAmount);
+        }
+        allBoughtProduct = chosenProduct;
+        itsDone = true;
+
+    }
+
+    public void changesForSaleLogAfterFinish(){
+        //product ha be sold ezafe
+        //gheimat daryafti
+    }
+
+
+    public boolean checkIfProductIsBought(String productId) {
+        for (Product p : allBoughtProduct.keySet()) {
+            if (p.getId().equals(productId)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     //done
-    public void reduceNumberOfProduct(String productId , int amount) {
+    public void reduceNumberOfProduct(String productId, int amount) {
         Product product = Product.getProductById(productId);
         int numberOfPro = chosenProduct.get(product);
-        if (amount<numberOfPro){
+        if (amount < numberOfPro) {
             chosenProduct.put(product, chosenProduct.get(product) - amount);
-            product.setNumberOfProducts(product.getNumberOfProducts()+amount);
-        }
-        else if (amount == numberOfPro){
+            product.setNumberOfProducts(product.getNumberOfProducts() + amount);
+        } else if (amount == numberOfPro) {
             chosenProduct.remove(product);
-            product.setNumberOfProducts(product.getNumberOfProducts()+amount);
-        }
-        else if (amount>chosenProduct.get(product)){
+            product.setNumberOfProducts(product.getNumberOfProducts() + amount);
+        } else if (amount > chosenProduct.get(product)) {
             product.setNumberOfProducts(chosenProduct.get(product));
             chosenProduct.remove(product);
         }
@@ -149,9 +171,10 @@ public class BuyLog extends Log {
 
     //done
     public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<BuyLog>>(){}.getType();
-        String json= FileHandling.getGson().toJson(BuyLog.getAllCustomersLog(),collectionType);
-        FileHandling.turnToArray(json+" "+"buyLog.json");
+        Type collectionType = new TypeToken<ArrayList<BuyLog>>() {
+        }.getType();
+        String json = FileHandling.getGson().toJson(BuyLog.getAllCustomersLog(), collectionType);
+        FileHandling.turnToArray(json + " " + "buyLog.json");
     }
 
     @Override

@@ -52,6 +52,9 @@ public class SaleLog extends Log{
 
     //other-------------------------------------------------------
 
+
+
+
     //finish
     public boolean isSold (String productId){
         for (Product product : allSoldProduct) {

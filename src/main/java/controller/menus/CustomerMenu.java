@@ -233,8 +233,12 @@ public class CustomerMenu {
     public static void rateProduct(String productID, int number) throws IOException {
         if (checkProduct(productID)) {
             if (number >= 1 && number <= 5) {
-                Score newScore = new Score(LoginMenu.getLoginAccount(), Product.getProductById(productID), number);
-                OutputMassageHandler.showOutputWith2String(productID, String.valueOf(number), 1);
+                for (BuyLog buyLog : LoginMenu.getLoginAccount().getAllBuyLogs()) {
+                    if (buyLog.checkIfProductIsBought(productID)){
+                        Score newScore = new Score(LoginMenu.getLoginAccount(), Product.getProductById(productID), number);
+                        OutputMassageHandler.showOutputWith2String(productID, String.valueOf(number), 1);
+                    }
+                }
             } else outputNo = 11;
         }
     }

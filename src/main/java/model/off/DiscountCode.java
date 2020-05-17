@@ -88,6 +88,7 @@ public class DiscountCode {
         return totalTimesOfUse;
     }
 
+
     public ArrayList<Account> getAllCustomersWithDiscountCode() {
         return allCustomersWithDiscountCode;
     }
@@ -120,18 +121,17 @@ public class DiscountCode {
 
     public double calculate(double price){
         if (price < maxDiscountAmount){
-            price = ((price*discountAmount)/100)+price;
+            price = price-((price*discountAmount)/100);
         }
         else if (price > maxDiscountAmount){
             double amountCant = price-maxDiscountAmount;
-            price = ((maxDiscountAmount*discountAmount)/100)+price;
+            price = price - ((maxDiscountAmount*discountAmount)/100);
         }
         return price;
     }
 
     public static void deleteDiscount(String id) {
         allDiscountCodes.remove(getDiscountWithId(id));
-
     }
 
     public static void writeInJ() throws IOException {
