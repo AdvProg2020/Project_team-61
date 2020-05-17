@@ -6,10 +6,9 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-//import model.productRelated.Product;
 public class Category{
     private String name;
-    private String traits;
+    private static String traits;
     private static ArrayList <Category>subCategories = new ArrayList<>();
     private ArrayList <Product> allProducts = new ArrayList<>();
     private static ArrayList <Category> allCategories = new ArrayList<>();
@@ -29,12 +28,9 @@ public class Category{
     }
 
 
+
     public String getName() {
         return name;
-    }
-
-    public String getTraits() {
-        return traits;
     }
 
     public static ArrayList<Category> getSubCategories() {
@@ -45,10 +41,6 @@ public class Category{
         return allProducts;
     }
 
-
-    public void setTraits(String traits) {
-        this.traits = traits;
-    }
 
     public void setSubCategories(ArrayList<Category> subCategories) {
         this.subCategories = subCategories;
@@ -72,7 +64,14 @@ public class Category{
 
     }
 
-    public void deleteCategory(String name){
+    public void addProductToCategory(Product product){
+        allProducts.add(product);
+    }
+    public void removeProductToCategory(Product product){
+        allProducts.remove(product);
+    }
+
+    public static void deleteCategory(String name){
         allCategories.remove(getCategoryWithName(name));
     }
 

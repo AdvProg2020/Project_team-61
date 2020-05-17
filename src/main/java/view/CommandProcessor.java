@@ -252,7 +252,18 @@ public class CommandProcessor {
                         error = false;
                         LoginMenu.editSellerField(getMatcher(input, regex[27]).group(1));
                     }
+                }/*else if (subMenuStatus == subMenuStatus.ADDPRODUCTTOCAT) {
+                    if (input.matches(regex[27])) {
+                        error = false;
+                        ManagerMenu.addProductToCategory(getMatcher(input, regex[27]).group(1));
+                    }
+                }else if (subMenuStatus == subMenuStatus.REMOVEPRODUCTTOCAT) {
+                    if (input.matches(regex[27])) {
+                        error = false;
+                        ManagerMenu.removeProductToCategory(getMatcher(input, regex[27]).group(1));
+                    }
                 }
+                */
 
             } else if (menuStatus == MenuStatus.SELLERMENU) {
                 // SellerMenu
@@ -382,9 +393,6 @@ public class CommandProcessor {
                     } else if (input.equalsIgnoreCase("view personal info")) {
                         error = false;
                         LoginMenu.viewPersonalInfo();
-                    } else if (input.equalsIgnoreCase("purchase")) {
-                        error = false;
-                        CustomerMenu.processPurchase();
                     } else if (input.equalsIgnoreCase("view orders")) {
                         error = false;
                         CustomerMenu.processViewOrders();

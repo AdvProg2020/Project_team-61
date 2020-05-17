@@ -12,7 +12,6 @@ public class Customer extends Account {
 
     private static ArrayList<Customer> allCustomers = new ArrayList<>();
     private ArrayList<BuyLog> BuyLogsHistory = new ArrayList<>();
-    public BuyLog buyLog;
 
     public Customer(String username) throws IOException {
         super(username);
@@ -20,6 +19,12 @@ public class Customer extends Account {
         allCustomers.add(this);
         writeInJ();
     }
+
+    public ArrayList<BuyLog> getBuyLogsHistory() {
+        return BuyLogsHistory;
+    }
+
+
 
     public static void writeInJ() throws IOException {
         Type collectionType = new TypeToken<ArrayList<Customer>>(){}.getType();
@@ -31,7 +36,6 @@ public class Customer extends Account {
     public String toString() {
         return "Customer{" +
                 "BuyLogsHistory=" + BuyLogsHistory +
-                ", buyLog=" + buyLog +
                 ", username='" + username + '\'' +
                 ", name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +

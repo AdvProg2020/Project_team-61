@@ -5,6 +5,7 @@ import com.google.gson.stream.JsonReader;
 import controller.request.Request;
 import model.accounts.Account;
 import model.accounts.Customer;
+import model.accounts.Seller;
 import model.filtar.Filter;
 import model.firms.Firm;
 import model.log.BuyLog;
@@ -235,13 +236,23 @@ public class OutputHandler {
         }
     }
 
-    //finish//pr
-    public static void showSalesHistory() throws FileNotFoundException {
-        Type REVIEW_TYPE = new TypeToken<ArrayList<SaleLog>>() {
+
+
+    //naaaaaaaaaaaaaaaaaaaagheeeeeeeeeeeeeeeeeeeessssssssssssssssssssssssssssss
+    public static void showSalesHistory(String username) throws FileNotFoundException {
+        ArrayList<SaleLog> saleLogs=null;
+        Type REVIEW_TYPE = new TypeToken<ArrayList<Account>>() {
         }.getType();
-        JsonReader SaleLogReader=FileHandling.readFile("saleLog.json");
-        ArrayList<SaleLog> data = FileHandling.getGson().fromJson(SaleLogReader, REVIEW_TYPE);
-        for (SaleLog saleLog : data) {
+        JsonReader accountReader=FileHandling.readFile("account.json");
+        ArrayList<Account> data = FileHandling.getGson().fromJson(accountReader, REVIEW_TYPE);
+        for (Account account : data) {
+            if (account instanceof Seller){
+                if (((Seller)account).getUsername().equals(username)){
+                    saleLogs=((Seller) account).getSaleLogsHistory();
+                }
+            }
+        }
+        for (SaleLog saleLog : saleLogs) {
             System.out.println(saleLog);
         }
     }

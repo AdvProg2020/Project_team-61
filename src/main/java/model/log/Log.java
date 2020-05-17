@@ -50,7 +50,7 @@ public abstract class Log{
     }
 
     //finish
-    public Log getLogWithId (String logId){
+    public static Log getLogWithId (String logId){
         for (Log allLog : allLogs) {
             if (allLog.logId.equals(logId)){
                 return allLog;

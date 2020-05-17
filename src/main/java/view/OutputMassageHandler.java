@@ -50,7 +50,7 @@ public class OutputMassageHandler {
         }
     }
 
-    public static void showManageOutput(int output) {
+    public static void showManagerOutput(int output) {
         if (output == 0) {
             System.out.println("");
         } else if (output == 1) {
@@ -62,7 +62,7 @@ public class OutputMassageHandler {
         } else if (output == 4) {
             System.out.println("discount code Id format is inavlid");
         } else if (output == 5) {
-            System.out.println("no discount code exist with this Id");
+            System.out.println("there is no discount code with this Id");
         } else if (output == 6) {
             System.out.println("please enter discount code Id");
         } else if (output == 7) {
@@ -101,6 +101,50 @@ public class OutputMassageHandler {
             System.out.println("no category exist with this name");
         } else if (output == 24) {
             System.out.println("total time of use format is invalid");
+        }else if (output == 25) {
+            System.out.println("there is discount code with this id");
+        } else if (output == 26) {
+            System.out.println("date must be after current date");
+        } else if (output == 27) {
+            System.out.println("discount amount changed");
+        } else if (output == 28) {
+            System.out.println("discount amount format is invalid");
+        } else if (output == 29) {
+            System.out.println("account added to list");
+        }else if (output == 30) {
+            System.out.println("username format is invalid");
+        } else if (output == 31) {
+            System.out.println("there is no account with this username");
+        } else if (output == 32) {
+            System.out.println("account removed from list");
+        } else if (output == 33) {
+            System.out.println("please enter category field you want to change");
+        } else if (output == 34) {
+            System.out.println("there is a category with this name");
+        } else if (output == 35) {
+            System.out.println("please enter discount code amount");
+        } else if (output == 36) {
+            System.out.println("please enter username you want to add to discount code list (if you enter finish process end)");
+        } else if (output == 37) {
+            System.out.println("discount code add");
+        } else if (output == 38) {
+            System.out.println("please enter trait you want to add to category list (if you enter finish process end)");
+        } else if (output == 39) {
+            System.out.println("product add to category");
+        } else if (output == 40) {
+            System.out.println("product removed from category");
+        } else if (output == 41) {
+            System.out.println("");
+        } else if (output == 42) {
+            System.out.println("");
+        } else if (output == 43) {
+            System.out.println("");
+        } else if (output == 44) {
+            System.out.println("");
+        } else if (output == 45) {
+            System.out.println("");
+        } else if (output == 46) {
+            System.out.println("");
         }
     }
 
@@ -208,11 +252,11 @@ public class OutputMassageHandler {
         } else if (output == 18) {
             System.out.println("product removed");
         } else if (output == 19) {
-            System.out.println("there is no sale with this name");
+            System.out.println("product id must not be finish");
         } else if (output == 20) {
-            System.out.println("please enter off field you want to change");
+            System.out.println("category field format is invalid");
         } else if (output == 21) {
-            System.out.println("please enter your off new value");
+            System.out.println("there is no category with this id");
         } else if (output == 22) {
             System.out.println("you can't change this product");
         } else if (output == 23) {
@@ -236,59 +280,59 @@ public class OutputMassageHandler {
         if (output == 0) {
             System.out.println("");
         } else if (output == 1) {
-            System.out.println("there is no product with this productId ");
-        } else if (output == 2) {
-            System.out.println("please enter field of products you want to change (Name|price|category|additional details|number Of Product)");
-        } else if (output == 3) {
-            System.out.println("please enter your product's new value");
-        } else if (output == 4) {
-            System.out.println("product name change request sent");
-        } else if (output == 5) {
-            System.out.println("product price change request sent");
-        } else if (output == 6) {
-            System.out.println("product name format is invalid");
-        } else if (output == 7) {
-            System.out.println("product price format is invalid");
-        } else if (output == 8) {
-            System.out.println("number of product format is invalid");
-        } else if (output == 9) {
-            System.out.println("number Of Product change request sent");
-        } else if (output == 10) {
-            System.out.println("please enter product id");
-        } else if (output == 11) {
-            System.out.println("please enter product name");
-        } else if (output == 12) {
-            System.out.println("please enter product price");
-        } else if (output == 13) {
-            System.out.println("please enter product category name");
-        } else if (output == 14) {
-            System.out.println("additional detail change request sent");
-        } else if (output == 15) {
-            System.out.println("additional detail format is invalid");
-        } else if (output == 16) {
-            System.out.println("please enter number of product");
-        } else if (output == 17) {
-            System.out.println("product add request sent");
-        } else if (output == 18) {
-            System.out.println("product removed");
-        } else if (output == 19) {
             System.out.println("there is no sale with this name");
-        } else if (output == 20) {
+        } else if (output == 2) {
             System.out.println("please enter off field you want to change");
-        } else if (output == 21) {
+        } else if (output == 3) {
+            System.out.println("off field format is invalid");
+        } else if (output == 4) {
             System.out.println("please enter your off new value");
-        } else if (output == 22) {
-            System.out.println("you can't change this product");
-        } else if (output == 23) {
-            System.out.println("field format is invalid (Name|price|category|additional details|number Of Product)");
-        } else if (output == 24) {
-            System.out.println("there is no category with this name");
-        } else if (output == 25) {
-            System.out.println("category format is invalid");
-        } else if (output == 26) {
-            System.out.println("please enter product additional detail");
-        } else if (output == 27) {
+        } else if (output == 5) {
+            System.out.println("you cant't edit this off");
+        } else if (output == 6) {
+            System.out.println("please enter off id");
+        } else if (output == 7) {
+            System.out.println("there is an off with this id");
+        } else if (output == 8) {
             System.out.println("there is no product with this id");
+        } else if (output == 9) {
+            System.out.println("");
+        } else if (output == 10) {
+            System.out.println("");
+        } else if (output == 11) {
+            System.out.println("");
+        } else if (output == 12) {
+            System.out.println("");
+        } else if (output == 13) {
+            System.out.println("");
+        } else if (output == 14) {
+            System.out.println("");
+        } else if (output == 15) {
+            System.out.println("");
+        } else if (output == 16) {
+            System.out.println("");
+        } else if (output == 17) {
+            System.out.println("");
+        } else if (output == 18) {
+            System.out.println("");
+        } else if (output == 19) {
+            System.out.println("");
+        } else if (output == 20) {
+            System.out.println("");
+        } else if (output == 21) {
+            System.out.println("");
+        } else if (output == 22) {
+            System.out.println("");
+        } else if (output == 23) {
+            System.out.println("");
+        } else if (output == 24) {
+            System.out.println("");
+        } else if (output == 25) {
+            System.out.println("");
+        } else if (output == 26) {
+            System.out.println("");
+        } else if (output == 27) {
+            System.out.println("");
         } else if (output == 28) {
             System.out.println("");
         } else if (output == 29) {
@@ -368,7 +412,7 @@ public class OutputMassageHandler {
         } else if (output == 34) {
             System.out.println("enter new value");
         } else if (output == 35) {
-            System.out.println("");
+            System.out.println("there is no account with this user name");
         } else if (output == 36) {
             System.out.println("");
         } else if (output == 37) {
@@ -468,7 +512,9 @@ public class OutputMassageHandler {
         }
     }
 
-    public static void showOutputWith2String(String first, String second, int output) {
+
+
+  /*  public static void showOutputWith2String(String first, String second, int output) {
         if (output == 1) {
             System.out.println("you get " + first + " to product " + second);
         } else if (output == 2) {
@@ -477,6 +523,8 @@ public class OutputMassageHandler {
             System.out.println();
         }
     }
+
+   */
 
 
 }

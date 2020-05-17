@@ -280,121 +280,120 @@ public class MenuSituation {
             } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITACCOUNT) {
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWPERSONALINFO);
                 System.out.println("now you have access to manage users command");
-            }
-        }//SellerMenu
-        else if (CommandProcessor.getMenuStatus() == MenuStatus.SELLERMENU) {
-            if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
-                CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
-                System.out.println("now you are in main menu");
-            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MANAGEPRODUCTS) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                System.out.println("now you are in seller menu");
-            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.VIEWOFFS) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                System.out.println("now you are in seller menu");
-            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.VIEWPERSONALINFO) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                System.out.println("now you are in seller menu");
-            }
-            //
-            else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.PRODUCTFIELD) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEPRODUCTS);
-                System.out.println("");
-            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITPRODUCT) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTFIELD);
-                System.out.println("");
-            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.ADDPRODUCT) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEPRODUCTS);
-                System.out.println("");
-            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.SALEFIELD) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWOFFS);
-                System.out.println("");
-            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITSALE) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.SALEFIELD);
-                System.out.println("");
-            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.ADDSALE) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWOFFS);
-                System.out.println("");
-            }else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITSELLERACCOUNT) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWPERSONALINFO);
-                System.out.println("");
-            }else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FIRMNAME) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.EDIT);
-                System.out.println("");
-            }else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FIRMFIELD) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMNAME);
-                System.out.println("");
-            }else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITFIRM) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMFIELD);
-                System.out.println("");
-            }
-            //CustomerMenu
-        } else if (CommandProcessor.getMenuStatus() == MenuStatus.CUSTOMERMENU) {
-            if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
-                CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
-                System.out.println("you are in main menu");
-            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.VIEWCART) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                System.out.println("you are in customer menu");
-            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.VIEWORDERS) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                System.out.println("you are in customer menu");
-            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.VIEWPERSONALINFO) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                System.out.println("now you are in customer menu");
-            }//
-            else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.INCREASEPRODUCTNUMBER) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
-                System.out.println("you have access to view cart commands");
-            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.DECREASEPRODUCTNUMBER) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
-                System.out.println("you have access to view cart commands");
-            }else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITACCOUNT) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWPERSONALINFO);
-                //System.out.println("now you have access to manage users command");
-            }
-            //ProductsMenu
-        } else if (CommandProcessor.getMenuStatus() == MenuStatus.PRODUCTSMENU) {
-            if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
-                CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
-                System.out.println("you are in main menu");
-            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FILTERING) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                System.out.println("you are in products menu");
-            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.SORTING) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                System.out.println("you are in products menu");
-            }
-            //ProductMenu
-        } else if (CommandProcessor.getMenuStatus() == MenuStatus.PRODUCTMENU) {
-            if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
-                CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
-                System.out.println("you are in main menu");
-            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.DIGEST) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                System.out.println("you are in product menu");
-            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.COMMENTS) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                System.out.println("you are in product menu");
-            }//
-            else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.COMMENTSTITLE) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
-                // System.out.println("you are in manger menu");
-            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.COMMENTSCONTENT) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
-                // System.out.println("enter comment content");
-            }
-            //SaleMenu
-        } else if (CommandProcessor.getMenuStatus() == MenuStatus.SALEMENU) {
-            if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
-                CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
-                System.out.println("you are in main menu");
-            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FILTERING) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                System.out.println("you are in sale menu");
-            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.SORTING) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                System.out.println("you are in sale menu");
+            } else if (CommandProcessor.getMenuStatus() == MenuStatus.SELLERMENU) {
+                if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
+                    CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+                    System.out.println("now you are in main menu");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MANAGEPRODUCTS) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                    System.out.println("now you are in seller menu");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.VIEWOFFS) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                    System.out.println("now you are in seller menu");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.VIEWPERSONALINFO) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                    System.out.println("now you are in seller menu");
+                }
+                //
+                else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.PRODUCTFIELD) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEPRODUCTS);
+                    System.out.println("");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITPRODUCT) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTFIELD);
+                    System.out.println("");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.ADDPRODUCT) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEPRODUCTS);
+                    System.out.println("");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.SALEFIELD) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWOFFS);
+                    System.out.println("");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITSALE) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.SALEFIELD);
+                    System.out.println("");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.ADDSALE) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWOFFS);
+                    System.out.println("");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITSELLERACCOUNT) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWPERSONALINFO);
+                    System.out.println("");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FIRMNAME) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.EDIT);
+                    System.out.println("");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FIRMFIELD) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMNAME);
+                    System.out.println("");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITFIRM) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMFIELD);
+                    System.out.println("");
+                }
+                //CustomerMenu
+            } else if (CommandProcessor.getMenuStatus() == MenuStatus.CUSTOMERMENU) {
+                if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
+                    CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+                    System.out.println("you are in main menu");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.VIEWCART) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                    System.out.println("you are in customer menu");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.VIEWORDERS) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                    System.out.println("you are in customer menu");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.VIEWPERSONALINFO) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                    System.out.println("now you are in customer menu");
+                }//
+                else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.INCREASEPRODUCTNUMBER) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
+                    System.out.println("you have access to view cart commands");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.DECREASEPRODUCTNUMBER) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
+                    System.out.println("you have access to view cart commands");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITACCOUNT) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWPERSONALINFO);
+                    //System.out.println("now you have access to manage users command");
+                }
+                //ProductsMenu
+            } else if (CommandProcessor.getMenuStatus() == MenuStatus.PRODUCTSMENU) {
+                if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
+                    CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+                    System.out.println("you are in main menu");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FILTERING) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                    System.out.println("you are in products menu");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.SORTING) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                    System.out.println("you are in products menu");
+                }
+                //ProductMenu
+            } else if (CommandProcessor.getMenuStatus() == MenuStatus.PRODUCTMENU) {
+                if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
+                    CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+                    System.out.println("you are in main menu");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.DIGEST) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                    System.out.println("you are in product menu");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.COMMENTS) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                    System.out.println("you are in product menu");
+                }//
+                else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.COMMENTSTITLE) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
+                    // System.out.println("you are in manger menu");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.COMMENTSCONTENT) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
+                    // System.out.println("enter comment content");
+                }
+                //SaleMenu
+            } else if (CommandProcessor.getMenuStatus() == MenuStatus.SALEMENU) {
+                if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
+                    CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+                    System.out.println("you are in main menu");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FILTERING) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                    System.out.println("you are in sale menu");
+                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.SORTING) {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                    System.out.println("you are in sale menu");
+                }
             }
         }
 

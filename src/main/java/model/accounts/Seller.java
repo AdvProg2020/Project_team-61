@@ -11,9 +11,8 @@ import java.util.ArrayList;
 
 public class Seller extends Account {
     private Firm firm;
-    private ArrayList<SaleLog> saleLogsHistory = new ArrayList<>();
+    private static ArrayList<SaleLog> saleLogsHistory = new ArrayList<>();
     private static ArrayList<Seller> allSellers = new ArrayList<>();
-    public SaleLog saleLog;
 
     public Seller(String username) throws IOException {
         super(username);
@@ -22,6 +21,9 @@ public class Seller extends Account {
         writeInJ();
     }
 
+    public static ArrayList<SaleLog> getSaleLogsHistory() {
+        return saleLogsHistory;
+    }
 
     public Firm getFirm() {
         return firm;
@@ -38,7 +40,6 @@ public class Seller extends Account {
         return "Seller{" +
                 "firm=" + firm +
                 ", saleLogsHistory=" + saleLogsHistory +
-                ", saleLog=" + saleLog +
                 ", username='" + username + '\'' +
                 ", name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +

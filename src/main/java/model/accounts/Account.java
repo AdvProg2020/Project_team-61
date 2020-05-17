@@ -31,8 +31,8 @@ public abstract class Account {
     boolean fast;
     private AccountStatus accountStatus;
     ArrayList<DiscountCode> allDiscountCodes;
-    private static ArrayList<SaleLog> allSaleLogs = new ArrayList<>();
-    private static ArrayList<BuyLog> allBuyLogs = new ArrayList<>();
+    //private static ArrayList<SaleLog> allSaleLogs = new ArrayList<>();
+   // private static ArrayList<BuyLog> allBuyLogs = new ArrayList<>();
     private  static ArrayList<Account> allAccounts = new ArrayList<>();
     private static ArrayList<Date> birthdayDates=  new ArrayList<>();
 
@@ -174,10 +174,6 @@ public abstract class Account {
     //-----------------------------------------------------------------
     public static ArrayList<Account> getAllAccounts() {
         return allAccounts;
-    }
-
-    public static ArrayList<BuyLog> getAllBuyLogs() {
-        return allBuyLogs;
     }
 
     public String getAddress() {

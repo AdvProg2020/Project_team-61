@@ -17,6 +17,7 @@ public class ProductRequest extends Request {
     private Account sellerName = null;
     private Firm companyName = null;
     private Category categoryName = null;
+    private Category lastCategory = null;
     private String additionalDetail = null;
     private int numberOfProduct = 0;
     private ArrayList<ProductRequest> allProductRequests = new ArrayList<>();
@@ -32,6 +33,8 @@ public class ProductRequest extends Request {
         Product newProduct = Product.getProductById(productId);
         newProduct.setDetailProduct(productName, companyName,price, sellerName,numberOfProduct,categoryName);
         newProduct.setAdditionalDetail(additionalDetail);
+        lastCategory.removeProductToCategory(newProduct);
+        categoryName.addProductToCategory(newProduct);
         newProduct.setProductStatus(ProductStatus.CONFIRMED);
     }
 
@@ -60,7 +63,7 @@ public class ProductRequest extends Request {
         this.numberOfProduct = numberOfProduct;
     }
 
-
-
-
+    public void setLastCategory(Category lastCategory) {
+        this.lastCategory = lastCategory;
+    }
 }

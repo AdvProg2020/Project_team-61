@@ -60,6 +60,7 @@ public class Sale{
         return allSales;
     }
 
+
     public static Sale getSaleWithId(String id){
         for (Sale sale : allSales) {
             if (sale.getOffId().equals(id)) {

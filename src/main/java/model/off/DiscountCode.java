@@ -17,7 +17,7 @@ public class DiscountCode {
     private double maxDiscountAmount;
     private int totalTimesOfUse;
     private static ArrayList<Account> allCustomersWithDiscountCode = new ArrayList<Account>();
-    private static ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
+    private static ArrayList<DiscountCode> allDiscountCodes;
 
     public DiscountCode(String discountId) throws IOException {
         this.discountId = discountId;
@@ -46,9 +46,9 @@ public class DiscountCode {
         return false;
     }
 
-    public static boolean discountDateValid(){
-        return true;
-    }
+//    public static boolean discountDateValid(){
+//
+//    }
 
     public void setDiscountAmount(int discountAmount) {
         this.discountAmount = discountAmount;
@@ -86,6 +86,7 @@ public class DiscountCode {
         return totalTimesOfUse;
     }
 
+
     public ArrayList<Account> getAllCustomersWithDiscountCode() {
         return allCustomersWithDiscountCode;
     }
@@ -107,16 +108,28 @@ public class DiscountCode {
         }
         return null;
     }
+
     public void giveDiscountToRandomCustomers(){
 
     }
+
     public void giveDiscountInBirthday(){
 
     }
 
+    public double calculate(double price){
+        if (price < maxDiscountAmount){
+            price = price-((price*discountAmount)/100);
+        }
+        else if (price > maxDiscountAmount){
+            double amountCant = price-maxDiscountAmount;
+            price = price - ((maxDiscountAmount*discountAmount)/100);
+        }
+        return price;
+    }
+
     public static void deleteDiscount(String id) {
         allDiscountCodes.remove(getDiscountWithId(id));
-
     }
 
     public static void writeInJ() throws IOException {
