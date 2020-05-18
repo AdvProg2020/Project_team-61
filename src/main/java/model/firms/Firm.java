@@ -21,11 +21,8 @@ public abstract class Firm {
         writeInJ();
     }
 
-    public void setDetailToFirm(String name , Double phoneNO, String address, String email){
+    public void setDetailToFirm( Double phoneNO, String address, String email){
 
-        if( name != null){
-            this.name=name;
-        }
         if( phoneNO != null){
             this.phoneNO=phoneNO;
         }

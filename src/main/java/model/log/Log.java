@@ -17,8 +17,8 @@ public abstract class Log{
     //detail
     String logId;
     DeliveryStatus deliveryStatus;
-    boolean itsDone;
     Product product;
+    private  boolean ItsFinal;
 
     //list
     private static ArrayList<Log> allLogs = new ArrayList<Log>();
@@ -38,6 +38,11 @@ public abstract class Log{
 
     //others--------------------------------------------------------------------------------
 
+
+    public void setItsFinal(boolean itsFinal) {
+        ItsFinal = itsFinal;
+    }
+
     //finish
     public void deleteLog (String id){
         Iterator iterator = allLogs.iterator();
@@ -50,7 +55,7 @@ public abstract class Log{
     }
 
     //finish
-    public Log getLogWithId (String logId){
+    public static Log getLogWithId(String logId){
         for (Log allLog : allLogs) {
             if (allLog.logId.equals(logId)){
                 return allLog;
@@ -80,8 +85,8 @@ public abstract class Log{
         return "Log{" +
                 "logId='" + logId + '\'' +
                 ", deliveryStatus=" + deliveryStatus +
-                ", itsDone=" + itsDone +
                 ", product=" + product +
+                ", ItsFinal=" + ItsFinal +
                 '}';
     }
 }

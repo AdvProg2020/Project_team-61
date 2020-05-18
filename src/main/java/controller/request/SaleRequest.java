@@ -15,14 +15,19 @@ public class SaleRequest extends Request {
     private Date endOfSalePeriod = null;
     private int saleAmount = 0;
     private Account seller = null;
-    private ArrayList<Product> allSaleProducts;
+    private ArrayList<Product> allSaleProducts = new ArrayList<>();
     private SaleStatus saleStatus;
     private Sale sale;
-    private ArrayList<SaleRequest> allSaleRequests;
+    private ArrayList<SaleRequest> allSaleRequests = new ArrayList<>();
 
     public SaleRequest(String requestID) {
         super(requestID);
         allSaleRequests.add(this);
+
+    }
+
+    @Override
+    public void declineRequest() {
 
     }
 

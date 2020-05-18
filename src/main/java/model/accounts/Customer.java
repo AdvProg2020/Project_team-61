@@ -12,13 +12,21 @@ public class Customer extends Account {
 
     private static ArrayList<Customer> allCustomers = new ArrayList<>();
     private ArrayList<BuyLog> BuyLogsHistory = new ArrayList<>();
-    public BuyLog buyLog;
 
     public Customer(String username) throws IOException {
         super(username);
         role = "customer";
         allCustomers.add(this);
         writeInJ();
+    }
+
+    public ArrayList<BuyLog> getBuyLogsHistory() {
+        return BuyLogsHistory;
+    }
+
+
+    public void addLog(BuyLog buyLog){
+        BuyLogsHistory.add(buyLog);
     }
 
     public static void writeInJ() throws IOException {
@@ -31,7 +39,6 @@ public class Customer extends Account {
     public String toString() {
         return "Customer{" +
                 "BuyLogsHistory=" + BuyLogsHistory +
-                ", buyLog=" + buyLog +
                 ", username='" + username + '\'' +
                 ", name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +
@@ -43,7 +50,6 @@ public class Customer extends Account {
                 ", currentPhoneNo=" + currentPhoneNo +
                 ", address='" + address + '\'' +
                 ", birthdayDate=" + birthdayDate +
-                ", usedDiscount=" + usedDiscount +
                 ", allDiscountCodes=" + allDiscountCodes +
                 '}';
     }

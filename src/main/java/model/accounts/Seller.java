@@ -21,6 +21,10 @@ public class Seller extends Account {
         writeInJ();
     }
 
+    public void addLog(SaleLog saleLog){
+        saleLogsHistory.add(saleLog);
+    }
+
     public static ArrayList<SaleLog> getSaleLogsHistory() {
         return saleLogsHistory;
     }
@@ -31,7 +35,7 @@ public class Seller extends Account {
 
     public static void writeInJ() throws IOException {
         Type collectionType = new TypeToken<ArrayList<Seller>>(){}.getType();
-        String json= FileHandling.getGson().toJson(Seller.allSellers,collectionType);
+        String json= FileHandling.getGson().toJson(allSellers,collectionType);
         FileHandling.turnToArray(json+" "+"seller.json");
     }
 
@@ -51,7 +55,6 @@ public class Seller extends Account {
                 ", currentPhoneNo=" + currentPhoneNo +
                 ", address='" + address + '\'' +
                 ", birthdayDate=" + birthdayDate +
-                ", usedDiscount=" + usedDiscount +
                 ", allDiscountCodes=" + allDiscountCodes +
                 '}';
     }

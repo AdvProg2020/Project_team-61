@@ -35,13 +35,18 @@ public class AccountRequest extends Request {
         allAccountRequests.add(this);
     }
 
+    @Override
+    public void declineRequest() {
+
+    }
+
 
     public void acceptRequest() throws IOException {
         selectedAccount = Account.getAccountWithUsername(username);
         createFirm();
         firm = Firm.getFirmWithID(firmName);
         selectedAccount.setDetailsToAccount(password, name, lastname, Email, phoneNo, birthdayDate, firm);
-        firm.setDetailToFirm(firmName,FirmPhoneNO, firmAddress, firmEmail);
+        firm.setDetailToFirm(FirmPhoneNO, firmAddress, firmEmail);
         selectedAccount.setAccountStatus(AccountStatus.CONFIRMED);
     }
 

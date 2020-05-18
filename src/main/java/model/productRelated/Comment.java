@@ -2,6 +2,7 @@ package model.productRelated;
 
 import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
+import model.firms.Company;
 import view.FileHandling;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ public class Comment {
     String title;
     String content;
     CommentStatus commentStatus;
+    String id;
 
     //objectAdded
     Product productToComment;
@@ -25,29 +27,38 @@ public class Comment {
     //list
     public static ArrayList<Comment> allComments = new ArrayList<Comment>();
 
-
-    public Comment(Product productToCommit, Account personToVote) {
-        this.productToComment = productToCommit;
-        this.personToVote = personToVote;
-
+    public Comment(String id) {
+        this.id = id;
     }
 
 
+//setterAndGetter--------------------------------------------------------------------------------------------
 
+    public void setDetail(String title , String content , Account personToVote , Product productToComment){
+        this.title = title;
+        this.content = content;
+        this.personToVote=personToVote;
+        this.productToComment=productToComment;
+        allComments.add(this);
+    }
 
+    public String getId() {
+        return id;
+    }
 
-
-
-
-
-
-
-
-    //setterAndGetter--------------------------------------------------------------------------------------------
+    public static Comment getCommentFromId(String id){
+        for (Comment comment : allComments) {
+            if (comment.getId().equals(id)){
+                return comment;
+            }
+        }
+        return null;
+    }
 
     public void setTitle(String title) {
         this.title = title;
     }
+
 
     public void setContent(String content) {
         this.content = content;

@@ -17,7 +17,7 @@ public  abstract class Request {
     private String requestText;
     private String requestDate;
     private Account seller;
-    private static ArrayList<Request> allRequests;
+    private static ArrayList<Request> allRequests = new ArrayList<>();
 
     private LoginMenu loginMenu;
 
@@ -37,9 +37,12 @@ public  abstract class Request {
         return requestText;
     }
 
-    public static void declineRequest(String requestId){
+    /*public static void declineRequest(String requestId){
         allRequests.remove(getRequestFromID(requestId));
     }
+
+     */
+    public abstract void declineRequest();
 
     public abstract void acceptRequest() throws IOException;
 
