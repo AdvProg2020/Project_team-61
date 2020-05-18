@@ -11,15 +11,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-
-
 public  abstract class Request {
     private String requestText;
     private String requestDate;
     private Account seller;
-    private static ArrayList<Request> allRequests = new ArrayList<>();
+    static ArrayList<Request> allRequests = new ArrayList<>();
 
-    private LoginMenu loginMenu;
 
 
     public Request(String requestID) {
@@ -37,11 +34,6 @@ public  abstract class Request {
         return requestText;
     }
 
-    /*public static void declineRequest(String requestId){
-        allRequests.remove(getRequestFromID(requestId));
-    }
-
-     */
     public abstract void declineRequest();
 
     public abstract void acceptRequest() throws IOException;
@@ -74,7 +66,6 @@ public  abstract class Request {
                 "requestText='" + requestText + '\'' +
                 ", requestDate='" + requestDate + '\'' +
                 ", seller=" + seller +
-                ", loginMenu=" + loginMenu +
                 '}';
     }
 }

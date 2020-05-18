@@ -1,8 +1,8 @@
 package controller.menus;
 
 import controller.request.AccountRequest;
+import controller.request.Request;
 import model.accounts.Account;
-import model.accounts.AccountStatus;
 import model.accounts.Seller;
 import model.firms.Firm;
 import view.*;
@@ -72,10 +72,8 @@ public class LoginMenu {
             outputNo = 15;
             menu = MenuStatus.MANAGERMENU;
         } else if (role.equalsIgnoreCase("seller")) {
-            if (loginAccount.getAccountStatus().equals(AccountStatus.CONFIRMED)) {
                 menu = MenuStatus.SELLERMENU;
                 outputNo = 15;
-            } else outputNo = 33;
         }
         CommandProcessor.setMenuStatus(menu);
     }
@@ -91,12 +89,10 @@ public class LoginMenu {
             if (loginAccount.getRole() == "seller") {
                 String id = "seller " + LoginMenu.getLoginAccount().getUsername() + "wants edit account's " + field;
                 if (accountRequest.isThereRequestFromID(id)) {
-                    accountRequest.deleteRequest(id);
-                }
-                accountRequest = new AccountRequest(id);
-                accountRequest.setLastname(LoginMenu.getLoginAccount().getUsername());
-                accountRequest.setFirmName(firm.getName());
-                loginAccount.setAccountStatus(AccountStatus.UNDERREVIEWFOREDITING);
+                    accountRequest = new AccountRequest(id);
+                    accountRequest.setLastname(LoginMenu.getLoginAccount().getUsername());
+                    accountRequest.setFirmName(firm.getName());
+                }else accountRequest= (AccountRequest) Request.getRequestFromID(id);
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITSELLERACCOUNT);
                 outputNo = 34;
             } else {

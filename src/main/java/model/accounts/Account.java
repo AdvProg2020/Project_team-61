@@ -28,7 +28,6 @@ public abstract class Account {
     Date birthdayDate;
     Firm firm;
     boolean fast;
-    private AccountStatus accountStatus;
     ArrayList<DiscountCode> allDiscountCodes;
     private  static ArrayList<Account> allAccounts = new ArrayList<>();
     private static ArrayList<Date> birthdayDates=  new ArrayList<>();
@@ -159,10 +158,6 @@ public abstract class Account {
         this.address = address;
     }
 
-    public void setAccountStatus(AccountStatus accountStatus) {
-        this.accountStatus = accountStatus;
-    }
-
     public void setFast(boolean fast) {
         this.fast = fast;
     }
@@ -200,10 +195,6 @@ public abstract class Account {
         return credit;
     }
 
-
-    public AccountStatus getAccountStatus() {
-        return accountStatus;
-    }
 
     //......................................................................
     public static void writeInJ() throws IOException {

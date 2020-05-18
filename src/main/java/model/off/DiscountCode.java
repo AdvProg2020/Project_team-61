@@ -17,6 +17,7 @@ public class DiscountCode {
     private int discountAmount;
     private double maxDiscountAmount;
     private int totalTimesOfUse;
+    private Account manager;
     private static ArrayList<Account> allCustomersWithDiscountCode = new ArrayList<Account>();
     private static ArrayList<DiscountCode> allDiscountCodes;
 
@@ -37,6 +38,10 @@ public class DiscountCode {
 
     public static void setStartOfDiscountPeriod(LocalDateTime startOfDiscountPeriod) {
         DiscountCode.startOfDiscountPeriod = startOfDiscountPeriod;
+    }
+
+    public void setManager(Account manager) {
+        this.manager = manager;
     }
 
     public static boolean discountMatchAccount(String username){

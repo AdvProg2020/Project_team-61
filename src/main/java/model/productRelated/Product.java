@@ -40,7 +40,7 @@ public class Product  {
     public static ArrayList<String> listOfId=new ArrayList<String>();
     private  ArrayList<Comment> proComments = new ArrayList<Comment>();
     private ArrayList<Score> proScores = new ArrayList<>();
-    private HashMap<String,String> categorySpecifications = new HashMap<>();
+    private static HashMap<String,String> categorySpecifications = new HashMap<>();
 
 
     //objectsAdded
@@ -58,7 +58,7 @@ public class Product  {
     }
 
 
-    public HashMap<String, String> getCategorySpecifications() {
+    public static HashMap<String, String> getCategorySpecifications() {
         return categorySpecifications;
     }
 

@@ -2,8 +2,6 @@ package controller.menus;
 
 import controller.request.CommentRequest;
 import controller.request.Request;
-import model.accounts.Account;
-import model.accounts.Seller;
 import model.log.BuyLog;
 import model.productRelated.Comment;
 import model.productRelated.CommentStatus;
@@ -65,18 +63,20 @@ public class ProductMenu {
 
     public static void addComments() throws IOException {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
-        String id= LoginMenu.getLoginAccount()+ "comment";
-        if(Request.isThereRequestFromID(id)){
-            Request.deleteRequest(id);
-        }
-        commentRequest = new CommentRequest(id);
-        commentRequest.setPersonToVote(LoginMenu.getLoginAccount());
-        commentRequest.setProduct(selectedProduct);
-        String commentId = LoginMenu.getLoginAccount() + " comment on " +selectedProduct;
-        Comment comment = new Comment(id);
-        commentRequest.setId(commentId);
-        comment.setCommentStatus(CommentStatus.WAITINGFORAPPROVAL);
-        OutputMassageHandler.showProductsOutput(1);
+        String commentId = LoginMenu.getLoginAccount() + " comment on " + selectedProduct;
+        if(!Comment.isThereCommentWithId(commentId)) {
+            String id= LoginMenu.getLoginAccount()+ "comment";
+            if (!Request.isThereRequestFromID(id)) {
+                Comment comment = new Comment(id);
+                comment.setCommentStatus(CommentStatus.WAITINGFORAPPROVAL);
+                commentRequest = new CommentRequest(id);
+                commentRequest.setPersonToVote(LoginMenu.getLoginAccount());
+                commentRequest.setProduct(selectedProduct);
+                commentRequest.setId(commentId);
+            }else commentRequest = (CommentRequest) Request.getRequestFromID(id);
+            outputNo = 1;
+        }else outputNo= 3;
+        OutputMassageHandler.showProductsOutput(outputNo);
     }
 
 

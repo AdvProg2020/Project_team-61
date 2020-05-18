@@ -26,17 +26,11 @@ public class MenuSituation {
 
     private static void firmFields(){
         if (RegisterMenu.getDetailMenu() == 0) {
-            System.out.println("please enter your password");
+            System.out.println("please enter firm name");
         } else if (RegisterMenu.getDetailMenu() == 1) {
-            System.out.println("please enter your name");
+            System.out.println("please enter firm phone number");
         } else if (RegisterMenu.getDetailMenu() == 2) {
-            System.out.println("please enter your last name");
-        } else if (RegisterMenu.getDetailMenu() == 3) {
-            System.out.println("please enter your Email name");
-        } else if (RegisterMenu.getDetailMenu() == 4) {
-            System.out.println("please enter your phone number name");
-        }else if (RegisterMenu.getDetailMenu() == 5) {
-            System.out.println("please enter your birthday date name");
+            System.out.println("please enter your firm address");
         }
     }
 
@@ -45,47 +39,55 @@ public class MenuSituation {
         if (ManagerMenu.getDetailMenu() == 0) {
             System.out.println("please enter start of");
         } else if (ManagerMenu.getDetailMenu() == 1) {
-            System.out.println("please enter your name");
+            System.out.println("please enter end of");
         } else if (ManagerMenu.getDetailMenu() == 2) {
-            System.out.println("please enter your last name");
+            System.out.println("please enter max");
         } else if (ManagerMenu.getDetailMenu() == 3) {
-            System.out.println("please enter your Email name");
+            System.out.println("please enter total");
         } else if (RegisterMenu.getDetailMenu() == 4) {
-            System.out.println("please enter your phone number name");
+            System.out.println("please enter amount");
         }else if (RegisterMenu.getDetailMenu() == 5) {
-            System.out.println("please enter your birthday date name");
+            System.out.println("please enter account");
         }
     }
 
     private static void categoryField(){
         if (ManagerMenu.getDetailMenu() == 0) {
-            System.out.println("please enter start ofs");
+            System.out.println("please enter product");
         } else if (ManagerMenu.getDetailMenu() == 1) {
-            System.out.println("please enter your names");
-        } else if (ManagerMenu.getDetailMenu() == 2) {
-            System.out.println("please enter your last names");
-        } else if (ManagerMenu.getDetailMenu() == 3) {
-            System.out.println("please enter your Email names");
-        } else if (RegisterMenu.getDetailMenu() == 4) {
-            System.out.println("please enter your phone number name");
-        }else if (RegisterMenu.getDetailMenu() == 5) {
-            System.out.println("please enter your birthday date name");
+            System.out.println("please enter trait");
         }
     }
 
     public static void productField(){
         if (SellerMenu.getDetailMenu() == 0) {
-            System.out.println("please enter start ofs");
+            System.out.println("please enter id");
         } else if (SellerMenu.getDetailMenu() == 1) {
-            System.out.println("please enter your names");
+            System.out.println("please enter  name");
         } else if (SellerMenu.getDetailMenu() == 2) {
-            System.out.println("please enter your last names");
+            System.out.println("please enter price");
         } else if (SellerMenu.getDetailMenu() == 3) {
-            System.out.println("please enter your Email names");
+            System.out.println("please enter cat names");
         } else if (SellerMenu.getDetailMenu() == 4) {
-            System.out.println("please enter your phone number name");
+            System.out.println("please enter additional");
         }else if (SellerMenu.getDetailMenu() == 5) {
-            System.out.println("please enter your birthday date name");
+            System.out.println("please enter number");
+        }else if (SellerMenu.getDetailMenu() == 6) {
+            System.out.println("please enter trait");
+        }
+    }
+
+    public static void saleField(){
+        if (SellerMenu.getDetailMenu() == 0) {
+            System.out.println("please enter id");
+        } else if (SellerMenu.getDetailMenu() == 1) {
+            System.out.println("please enter start");
+        } else if (SellerMenu.getDetailMenu() == 2) {
+            System.out.println("please enter end");
+        } else if (SellerMenu.getDetailMenu() == 3) {
+            System.out.println("please enter amount");
+        } else if (SellerMenu.getDetailMenu() == 4) {
+            System.out.println("please enter product");
         }
     }
 

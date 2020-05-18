@@ -98,25 +98,25 @@ public class CommandProcessor {
                     error = false;
                     RegisterMenu.completeRegisterProcess(getMatcher(input, regex[27]).group(1));
                 }
-            } else if (menuStatus == MenuStatus.MAINMENU) {
-                //SaleMenu
-                if (input.equalsIgnoreCase("offs")) {
-                    error = false;
-                    SaleMenu.processOffs();
-                } else if (input.equalsIgnoreCase("products")) {
-                    error = false;
-                    ProductsMenu.processProducts();
-                } else if (internalMenu == InternalMenu.MAINMENU) {
-                    if (input.matches(regex[1])) {
+            } else if (internalMenu == InternalMenu.MAINMENU) {
+                if (menuStatus == MenuStatus.MAINMENU) {
+                    if (input.equalsIgnoreCase("offs")) {
                         error = false;
-                        LoginMenu.processLogin(getMatcher(input, regex[1]).group(1));
-                    } else if (input.equalsIgnoreCase("logout")) {
+                        SaleMenu.processOffs();
+                    } else if (input.equalsIgnoreCase("products")) {
                         error = false;
-                        LoginMenu.processLogout();
-                    } else if (input.matches(regex[0])) {
-                        error = false;
-                        RegisterMenu.processRegister(getMatcher(input, regex[0]).group(1), getMatcher(input, regex[0]).group(2));
+                        ProductsMenu.processProducts();
                     }
+                }
+                if (input.matches(regex[1])) {
+                    error = false;
+                    LoginMenu.processLogin(getMatcher(input, regex[1]).group(1));
+                } else if (input.equalsIgnoreCase("logout")) {
+                    error = false;
+                    LoginMenu.processLogout();
+                } else if (input.matches(regex[0])) {
+                    error = false;
+                    RegisterMenu.processRegister(getMatcher(input, regex[0]).group(1), getMatcher(input, regex[0]).group(2));
                 }
             } else if (menuStatus == MenuStatus.MANAGERMENU) {
                 //ManagerMenu
@@ -361,12 +361,23 @@ public class CommandProcessor {
                         LoginMenu.editSellerField(getMatcher(input, regex[27]).group(1));
                     }
                 }
-                if (subMenuStatus == subMenuStatus.ADDFIRM) {
+               else if (subMenuStatus == subMenuStatus.ADDFIRM) {
                     if (input.matches(regex[27])) {
                         error = false;
                         RegisterMenu.createFirm(getMatcher(input, regex[27]).group(1));
                     }
+                }else if (subMenuStatus == subMenuStatus.TRAIT) {
+                    if (input.matches(regex[27])) {
+                        error = false;
+                        SellerMenu.traitValue(getMatcher(input, regex[27]).group(1));
+                    }
+                }else if (subMenuStatus == subMenuStatus.EDITSPECIFICATION) {
+                    if (input.matches(regex[27])) {
+                        error = false;
+                        SellerMenu.editCategorySpecifications(getMatcher(input, regex[27]).group(1));
+                    }
                 }
+
 
 
             } else if (menuStatus == MenuStatus.CUSTOMERMENU) {
@@ -462,8 +473,7 @@ public class CommandProcessor {
                         CustomerMenu.payment();
                     }
                 }
-            }
-            else if (menuStatus == MenuStatus.PRODUCTSMENU) {
+            } else if (menuStatus == MenuStatus.PRODUCTSMENU) {
                 //ProductsMenu
                 if (subMenuStatus == SubMenuStatus.MAINMENU) {
                     if (input.equalsIgnoreCase("products")) {
@@ -477,8 +487,12 @@ public class CommandProcessor {
                     }
 
                 }
-            }
-            else if (menuStatus == MenuStatus.PRODUCTMENU) {
+            } else if (menuStatus == MenuStatus.SALEMENU) {
+                if (input.equalsIgnoreCase("offs")) {
+                    error = false;
+                    SaleMenu.processOffs();
+                }
+            } else if (menuStatus == MenuStatus.PRODUCTMENU) {
                 //ProductMenu
                 if (subMenuStatus == SubMenuStatus.MAINMENU) {
                     if (input.equalsIgnoreCase("digest")) {
@@ -516,7 +530,7 @@ public class CommandProcessor {
                         ProductMenu.contentOfComment(getMatcher(input, regex[27]).group(1));
                     }
                 }
-            } else if (menuStatus == MenuStatus.PRODUCTSMENU || menuStatus == MenuStatus.SALEMENU || menuStatus == MenuStatus.MAINMENU) {
+            } else if (menuStatus == MenuStatus.PRODUCTSMENU || menuStatus == MenuStatus.SALEMENU) {
                 if (input.equalsIgnoreCase("filtering")) {
                     error = false;
                     ProductsMenu.processFiltering();
@@ -551,22 +565,22 @@ public class CommandProcessor {
                         error = false;
                         ProductsMenu.disableSort();
                     }
-                }  else if (subMenuStatus == SubMenuStatus.PERIODFILTER) {
+                } else if (subMenuStatus == SubMenuStatus.PERIODFILTER) {
                     if (input.matches(regex[28])) {
                         error = false;
-                        ProductsMenu.periodFilter(getMatcher(input, regex[24]).group(1),getMatcher(input, regex[24]).group(2));
+                        ProductsMenu.periodFilter(getMatcher(input, regex[24]).group(1), getMatcher(input, regex[24]).group(2));
                     }
-                }else if (subMenuStatus == SubMenuStatus.CATEGORYNAMEFILTER) {
+                } else if (subMenuStatus == SubMenuStatus.CATEGORYNAMEFILTER) {
                     if (input.matches(regex[28])) {
                         error = false;
                         ProductsMenu.categoryFilter(getMatcher(input, regex[24]).group(1));
                     }
-                }else if (subMenuStatus == SubMenuStatus.FIRMFILTER) {
+                } else if (subMenuStatus == SubMenuStatus.FIRMFILTER) {
                     if (input.matches(regex[28])) {
                         error = false;
                         ProductsMenu.FirmFilter(getMatcher(input, regex[24]).group(1));
                     }
-                }else if (subMenuStatus == SubMenuStatus.PRODUCTNAMEFILTER) {
+                } else if (subMenuStatus == SubMenuStatus.PRODUCTNAMEFILTER) {
                     if (input.matches(regex[28])) {
                         error = false;
                         ProductsMenu.productNameFilter(getMatcher(input, regex[24]).group(1));

@@ -113,6 +113,7 @@ public class ManagerMenu {
     public static void createNewDiscountCode(String discountCodeId) throws IOException {
         if (!DiscountCode.isThereDiscountWithId(discountCodeId)) {
             newDiscountCode = new DiscountCode(discountCodeId);
+            newDiscountCode.setManager(LoginMenu.getLoginAccount());
             CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
             CommandProcessor.setSubMenuStatus(SubMenuStatus.DETAILDESCOUNTCODE);
             outputNo = 7;

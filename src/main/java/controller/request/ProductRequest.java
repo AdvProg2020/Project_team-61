@@ -8,6 +8,7 @@ import model.productRelated.ProductStatus;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ProductRequest extends Request {
 
@@ -21,6 +22,7 @@ public class ProductRequest extends Request {
     private String additionalDetail = null;
     private int numberOfProduct = 0;
     private ArrayList<ProductRequest> allProductRequests = new ArrayList<>();
+    private HashMap<String,String> specialValue = new HashMap<>();
 
 
     public ProductRequest(String requestID) {
@@ -30,18 +32,26 @@ public class ProductRequest extends Request {
 
     @Override
     public void declineRequest() {
-
+        allRequests.remove(this);
+        allProductRequests.remove(this);
     }
+
 
     @Override
     public void acceptRequest() throws IOException {
         Product newProduct = Product.getProductById(productId);
         newProduct.setDetailProduct(productName, companyName,price, sellerName,numberOfProduct,categoryName);
         newProduct.setAdditionalDetail(additionalDetail);
+        newProduct.getCategorySpecifications().putAll(specialValue);
         lastCategory.removeProductToCategory(newProduct);
         categoryName.addProductToCategory(newProduct);
         newProduct.setProductStatus(ProductStatus.CONFIRMED);
     }
+
+    public void addHashmapValue(String key, String value){
+        specialValue.put(key,value);
+    }
+
 
     public void setProductId(String productId) {
         this.productId = productId;

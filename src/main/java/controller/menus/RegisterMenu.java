@@ -1,6 +1,7 @@
 package controller.menus;
 
 import controller.request.AccountRequest;
+import controller.request.Request;
 import model.accounts.*;
 import view.CommandProcessor;
 import view.InternalMenu;
@@ -63,9 +64,10 @@ public class RegisterMenu {
         } else if (role.equalsIgnoreCase("manager")) {
             createManagerAccount(username);
         } else if (role.equalsIgnoreCase("seller")) {
-            Seller seller = new Seller(username);
-            seller.setAccountStatus(AccountStatus.UNDERREVIEWFORCONSTRUCTION);
-            accountRequest = new AccountRequest(username + " wants seller account");
+            String id =username + " wants seller account";
+            if(!Request.isThereRequestFromID(id)) {
+                accountRequest = new AccountRequest(id);
+            }else accountRequest= (AccountRequest) Request.getRequestFromID(id);
             outputNo = 2;
         }
        // OutputMassageHandler.showAccountOutput(outputNo);
@@ -148,25 +150,19 @@ public class RegisterMenu {
     public static void createFirm(String detail) {
         if (detailMenu == 0) {
             if (detail.matches(".+")) {
-                //String id = "seller " + LoginMenu.getLoginAccount().getUsername() + "wants firm " + detail;
-               // if (!Request.isThereRequestFromID(id)) {
-                 //   firmRequest = new FirmRequest(id);
                 accountRequest.setFirmName(detail);
                     detailMenu++;
                     outputNo = 14;
-                //} else outputNo = 0;
             } else outputNo = 3;
         } else if (detailMenu == 1) {
             if (detail.matches("09[0-9]{9}")) {
                 accountRequest.setPhoneNo(Double.parseDouble(detail));
-                //firmRequest.setPhoneNO(Double.parseDouble(detail));
                 detailMenu++;
                 outputNo = 16;
             } else outputNo = 6;
         } else if (detailMenu == 2) {
             if (detail.matches(".+")) {
                 accountRequest.setFirmAddress(detail);
-               // firmRequest.setAddress(detail);
                 detailMenu = 3;
                 outputNo = 19;
             } else outputNo = 8;
@@ -178,7 +174,6 @@ public class RegisterMenu {
             } else outputNo = 18;
         } else if (detailMenu == 4) {
             if (detail.matches("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")) {
-                //firmRequest.setEmail(detail);
                 accountRequest.setFirmEmail(detail);
                 detailMenu = 0;
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);

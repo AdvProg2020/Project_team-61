@@ -9,9 +9,6 @@ public class Main {
     public static void main(String[] args) throws IOException, ParseException {
         CommandProcessor commandProcessor = new CommandProcessor();
         commandProcessor.run();
-        //Scanner in = new Scanner(System.in);
-        //int a = in.nextInt();
-        //System.out.println(a);
     }
     /* public void run(){
         System.out.println("create account [type][username]\nlogin [username]\nview personal info\nedit[field]\nmanage users\nmanage all products\ncreate discount code\nview discount codes\nmange requests\nmanage categories");

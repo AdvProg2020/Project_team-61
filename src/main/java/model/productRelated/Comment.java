@@ -31,6 +31,14 @@ public class Comment {
         this.id = id;
     }
 
+    public static boolean isThereCommentWithId(String id) {
+
+        for (Comment comment : allComments) {
+            if (comment.id.equalsIgnoreCase(id)) return true;
+        }
+        return false;
+    }
+
 
 //setterAndGetter--------------------------------------------------------------------------------------------
 
