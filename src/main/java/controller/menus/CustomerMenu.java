@@ -125,9 +125,9 @@ public class CustomerMenu {
     public static void purchase() {
         if (LoginMenu.isLogin()) {
             if (LoginMenu.getLoginAccount().getRole().equals("customer")) {
-                CommandProcessor.setMenuStatus(MenuStatus.PURCHASE);
+                //CommandProcessor.setMenuStatus(MenuStatus.PURCHASE);
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
-                CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
+                //CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
                 outputNo = 7;
             } else outputNo = 8;
         } else outputNo = 6;
@@ -180,33 +180,32 @@ public class CustomerMenu {
         if (ProductMenu.getBuyLog().holePrice <= LoginMenu.getLoginAccount().getCredit()) {
             CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
             CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
-            CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
             finishingPayment();
             outputNo = 0;
         } else outputNo = 0;
         OutputMassageHandler.showPurchaseOutput(outputNo);
     }
 
-
     private static void finishingPayment() throws IOException {
-        double holePrice=ProductMenu.getBuyLog().calculateHolePrice();
+        double holePrice = ProductMenu.getBuyLog().calculateHolePrice();
         Account loginAccount = LoginMenu.getLoginAccount();
         double money = loginAccount.getCredit() - holePrice;
         loginAccount.setCredit(money);
 
-        if (CustomerMenu.hasDiscount){
+        if (CustomerMenu.hasDiscount) {
 
         }
         for (Product p : ProductMenu.getBuyLog().getChosenProduct().keySet()) {
             //faghat price bedoon discount be seller eafe
             p.getSeller().setCredit(p.getSeller().getCredit() + p.getPrice());
+            p.getListOfBuyers().add((Customer) loginAccount);
         }
         ProductMenu.getBuyLog().setAllBoughtProduct(ProductMenu.getBuyLog().getChosenProduct());
         ProductMenu.getBuyLog().setItsFinal(true);
 
         for (Seller seller : ProductMenu.getBuyLog().getSellers()) {
             for (Product p : ProductMenu.getBuyLog().getAllBoughtProduct().keySet()) {
-                if (p.getSeller().equals(seller)){
+                if (p.getSeller().equals(seller)) {
                     UUID id = UUID.randomUUID();
                     SaleLog saleLog = new SaleLog(id.toString());
                     saleLog.setSaleLogDetail(p.getPrice(), seller.getName());
@@ -217,13 +216,6 @@ public class CustomerMenu {
                 }
             }
         }
-
-        //set buy log
-        //set sale log
-        //set manager creadit
-        //set seller credit
-        //decrease product
-
     }
 
     //log.............................................................................

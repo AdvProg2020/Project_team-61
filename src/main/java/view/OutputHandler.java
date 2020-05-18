@@ -67,41 +67,64 @@ public class OutputHandler {
     }
 
     //finish//pr
-    public static void showProducts(ArrayList<Product> data) throws FileNotFoundException {
-        for (Product product : data) {
+//    public static void showProducts(ArrayList<Product> data) throws FileNotFoundException {
+//        for (Product product : data) {
+//            System.out.println(product);
+//        }
+//    }
+
+    public static void showProducts(ArrayList<Product> data){
+        for (Product product : Product.getProductList()) {
             System.out.println(product);
         }
     }
 
-    //finish//pr
-    public static void showProductsIds() throws FileNotFoundException {
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
-        }.getType();
-        JsonReader proReader=FileHandling.readFile("product.json");
-        ArrayList<Product> data = FileHandling.getGson().fromJson(proReader, REVIEW_TYPE);
-        for (Product product : data) {
-            System.out.println(product.getId());
-        }
-    }
+
+//    //finish//pr
+//    public static void showProductsIds() throws FileNotFoundException {
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
+//        }.getType();
+//        JsonReader proReader=FileHandling.readFile("product.json");
+//        ArrayList<Product> data = FileHandling.getGson().fromJson(proReader, REVIEW_TYPE);
+//        for (Product product : data) {
+//            System.out.println(product.getId());
+//        }
+//    }
 
     //finish//pr
-    public static void compareProducts(String first, String second) throws FileNotFoundException {
-        Product firstPro=null;
-        Product secondPro=null;
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
-        }.getType();
-        JsonReader proReader=FileHandling.readFile("product.json");
-        ArrayList<Product> data = FileHandling.getGson().fromJson(proReader, REVIEW_TYPE);
-        for (Product product : data) {
+//    public static void compareProducts(String first, String second) throws FileNotFoundException {
+//        Product firstPro=null;
+//        Product secondPro=null;
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
+//        }.getType();
+//        JsonReader proReader=FileHandling.readFile("product.json");
+//        ArrayList<Product> data = FileHandling.getGson().fromJson(proReader, REVIEW_TYPE);
+//        for (Product product : data) {
+//            if (product.getId().equals(first)){
+//                firstPro=product;
+//            }else if (product.getId().equals(second)){
+//                secondPro=product;
+//            }
+//        }
+//        System.out.println(firstPro);
+//        System.out.println(secondPro);
+//    }
+
+    public static void compareProducts(String first, String second){
+        Product product1=null;
+        Product product2=null;
+        for (Product product : Product.getProductList()) {
             if (product.getId().equals(first)){
-                firstPro=product;
-            }else if (product.getId().equals(second)){
-                secondPro=product;
+                product1=product;
+            }
+            else if (product.getId().equals(second)){
+                product2=product;
             }
         }
-        System.out.println(firstPro);
-        System.out.println(secondPro);
+        System.out.println(product1);
+        System.out.println(product2);
     }
+
 
     //finish//pr
   /*  public static void showAllSellersForOneProduct(String productId) throws FileNotFoundException {
@@ -123,13 +146,23 @@ public class OutputHandler {
     //..................................................................
 
     //finish//pr
-    public static void showAccountInformation(String username) throws FileNotFoundException {
+//    public static void showAccountInformation(String username) throws FileNotFoundException {
+//        Account accountToShow=null;
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<Account>>() {
+//        }.getType();
+//        JsonReader sellerReader=FileHandling.readFile("account.json");
+//        ArrayList<Account> data = FileHandling.getGson().fromJson(sellerReader, REVIEW_TYPE);
+//        for (Account account : data) {
+//            if (account.getUsername().equals(username)){
+//                accountToShow=account;
+//            }
+//        }
+//        System.out.println(accountToShow);
+//    }
+
+    public static void showAccountInformation(String username){
         Account accountToShow=null;
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Account>>() {
-        }.getType();
-        JsonReader sellerReader=FileHandling.readFile("account.json");
-        ArrayList<Account> data = FileHandling.getGson().fromJson(sellerReader, REVIEW_TYPE);
-        for (Account account : data) {
+        for (Account account : Account.getAllAccounts()) {
             if (account.getUsername().equals(username)){
                 accountToShow=account;
             }
@@ -137,36 +170,60 @@ public class OutputHandler {
         System.out.println(accountToShow);
     }
 
+
     //finish//pr
-    public static void showAccounts() throws FileNotFoundException {
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Account>>() {
-        }.getType();
-        JsonReader sellerReader=FileHandling.readFile("account.json");
-        ArrayList<Account> data = FileHandling.getGson().fromJson(sellerReader, REVIEW_TYPE);
-        for (Account account : data) {
+//    public static void showAccounts() throws FileNotFoundException {
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<Account>>() {
+//        }.getType();
+//        JsonReader sellerReader=FileHandling.readFile("account.json");
+//        ArrayList<Account> data = FileHandling.getGson().fromJson(sellerReader, REVIEW_TYPE);
+//        for (Account account : data) {
+//            System.out.println(account);
+//        }
+//    }
+
+    public static void showAccounts(){
+        for (Account account : Account.getAllAccounts()) {
             System.out.println(account);
         }
     }
 
     //finish//pr
-    public static void showDiscountCodes() throws FileNotFoundException {
-        Type REVIEW_TYPE = new TypeToken<ArrayList<DiscountCode>>() {
-        }.getType();
-        JsonReader discountReader=FileHandling.readFile("discountCode.json");
-        ArrayList<DiscountCode> data = FileHandling.getGson().fromJson(discountReader, REVIEW_TYPE);
-        for (DiscountCode discountCode : data) {
+//    public static void showDiscountCodes() throws FileNotFoundException {
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<DiscountCode>>() {
+//        }.getType();
+//        JsonReader discountReader=FileHandling.readFile("discountCode.json");
+//        ArrayList<DiscountCode> data = FileHandling.getGson().fromJson(discountReader, REVIEW_TYPE);
+//        for (DiscountCode discountCode : data) {
+//            System.out.println(discountCode);
+//        }
+//    }
+
+    public static void showDiscountCodes(){
+        for (DiscountCode discountCode : DiscountCode.getAllDiscountCodes()) {
             System.out.println(discountCode);
         }
     }
 
+
     //finish//pr
-    public static void showDiscountCode(String discountId) throws FileNotFoundException {
+//    public static void showDiscountCode(String discountId) throws FileNotFoundException {
+//        DiscountCode discountCodeToShow=null;
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<DiscountCode>>() {
+//        }.getType();
+//        JsonReader discountReader=FileHandling.readFile("discountCode.json");
+//        ArrayList<DiscountCode> data = FileHandling.getGson().fromJson(discountReader, REVIEW_TYPE);
+//        for (DiscountCode discountCode : data) {
+//            if (discountCode.getDiscountId().equals(discountId)){
+//                discountCodeToShow=discountCode;
+//            }
+//        }
+//        System.out.println(discountCodeToShow);
+//    }
+
+    public static void showDiscountCode(String discountId){
         DiscountCode discountCodeToShow=null;
-        Type REVIEW_TYPE = new TypeToken<ArrayList<DiscountCode>>() {
-        }.getType();
-        JsonReader discountReader=FileHandling.readFile("discountCode.json");
-        ArrayList<DiscountCode> data = FileHandling.getGson().fromJson(discountReader, REVIEW_TYPE);
-        for (DiscountCode discountCode : data) {
+        for (DiscountCode discountCode : DiscountCode.getAllDiscountCodes()) {
             if (discountCode.getDiscountId().equals(discountId)){
                 discountCodeToShow=discountCode;
             }
@@ -175,13 +232,23 @@ public class OutputHandler {
     }
 
     //finish//pr
-    public static void showRequest(String requestId) throws FileNotFoundException {
+//    public static void showRequest(String requestId) throws FileNotFoundException {
+//        Request requestToShow=null;
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<Request>>() {
+//        }.getType();
+//        JsonReader requestReader=FileHandling.readFile("request.json");
+//        ArrayList<Request> data = FileHandling.getGson().fromJson(requestReader, REVIEW_TYPE);
+//        for (Request request : data) {
+//            if (request.getRequestText().equals(requestId)){
+//                requestToShow=request;
+//            }
+//        }
+//        System.out.println(requestToShow);
+//    }
+
+    public static void showRequest(String requestId){
         Request requestToShow=null;
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Request>>() {
-        }.getType();
-        JsonReader requestReader=FileHandling.readFile("request.json");
-        ArrayList<Request> data = FileHandling.getGson().fromJson(requestReader, REVIEW_TYPE);
-        for (Request request : data) {
+        for (Request request : Request.getAllRequests()) {
             if (request.getRequestText().equals(requestId)){
                 requestToShow=request;
             }
@@ -190,35 +257,57 @@ public class OutputHandler {
     }
 
     //finish//pr
-    public static void showRequests() throws FileNotFoundException {
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Request>>() {
-        }.getType();
-        JsonReader requestReader=FileHandling.readFile("request.json");
-        ArrayList<Request> data = FileHandling.getGson().fromJson(requestReader, REVIEW_TYPE);
-        for (Request request : data) {
+//    public static void showRequests() throws FileNotFoundException {
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<Request>>() {
+//        }.getType();
+//        JsonReader requestReader=FileHandling.readFile("request.json");
+//        ArrayList<Request> data = FileHandling.getGson().fromJson(requestReader, REVIEW_TYPE);
+//        for (Request request : data) {
+//            System.out.println(request);
+//        }
+//    }
+
+    public static void showRequests(){
+        for (Request request : Request.getAllRequests()) {
             System.out.println(request);
         }
     }
 
     //finish//pr
-    public static void showCategories() throws FileNotFoundException {
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Category>>() {
-        }.getType();
-        JsonReader categoryReader=FileHandling.readFile("category.json");
-        ArrayList<Category> data = FileHandling.getGson().fromJson(categoryReader, REVIEW_TYPE);
-        for (Category category : data) {
+//    public static void showCategories() throws FileNotFoundException {
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<Category>>() {
+//        }.getType();
+//        JsonReader categoryReader=FileHandling.readFile("category.json");
+//        ArrayList<Category> data = FileHandling.getGson().fromJson(categoryReader, REVIEW_TYPE);
+//        for (Category category : data) {
+//            System.out.println(category);
+//        }
+//    }
+
+    public static void showCategories(){
+        for (Category category : Category.getAllCategories()) {
             System.out.println(category);
         }
     }
 
     //finish//pr
-    public static void showOff(String saleId) throws FileNotFoundException {
+//    public static void showOff(String saleId) throws FileNotFoundException {
+//        Sale sale=null;
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<Sale>>() {
+//        }.getType();
+//        JsonReader SaleReader=FileHandling.readFile("sale.json");
+//        ArrayList<Sale> data = FileHandling.getGson().fromJson(SaleReader, REVIEW_TYPE);
+//        for (Sale sale1 : data) {
+//            if (sale1.getOffId().equals(saleId)) {
+//                sale=sale1;
+//            }
+//        }
+//        System.out.println(sale);
+//    }
+
+    public static void showOff(String saleId){
         Sale sale=null;
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Sale>>() {
-        }.getType();
-        JsonReader SaleReader=FileHandling.readFile("sale.json");
-        ArrayList<Sale> data = FileHandling.getGson().fromJson(SaleReader, REVIEW_TYPE);
-        for (Sale sale1 : data) {
+        for (Sale sale1 : Sale.getAllSales()) {
             if (sale1.getOffId().equals(saleId)) {
                 sale=sale1;
             }
@@ -226,28 +315,47 @@ public class OutputHandler {
         System.out.println(sale);
     }
 
-    //finish//pr
-    public static void showOffs() throws FileNotFoundException {
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Sale>>() {
-        }.getType();
-        JsonReader SaleReader=FileHandling.readFile("sale.json");
-        ArrayList<Sale> data = FileHandling.getGson().fromJson(SaleReader, REVIEW_TYPE);
-        for (Sale sale : data) {
+//    //finish//pr
+//    public static void showOffs() throws FileNotFoundException {
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<Sale>>() {
+//        }.getType();
+//        JsonReader SaleReader=FileHandling.readFile("sale.json");
+//        ArrayList<Sale> data = FileHandling.getGson().fromJson(SaleReader, REVIEW_TYPE);
+//        for (Sale sale : data) {
+//            System.out.println(sale);
+//        }
+//    }
+
+    public static void showOffs(){
+        for (Sale sale : Sale.getAllSales()) {
             System.out.println(sale);
         }
     }
 
 
-
     //naaaaaaaaaaaaaaaaaaaagheeeeeeeeeeeeeeeeeeeessssssssssssssssssssssssssssss
 
-    public static void showSalesHistory(String username) throws FileNotFoundException {
+//    public static void showSalesHistory(String username) throws FileNotFoundException {
+//        ArrayList<SaleLog> saleLogs=null;
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<Account>>() {
+//        }.getType();
+//        JsonReader accountReader=FileHandling.readFile("account.json");
+//        ArrayList<Account> data = FileHandling.getGson().fromJson(accountReader, REVIEW_TYPE);
+//        for (Account account : data) {
+//            if (account instanceof Seller){
+//                if (((Seller)account).getUsername().equals(username)){
+//                    saleLogs=((Seller) account).getSaleLogsHistory();
+//                }
+//            }
+//        }
+//        for (SaleLog saleLog : saleLogs) {
+//            System.out.println(saleLog);
+//        }
+//    }
+
+    public static void showSalesHistory(String username){
         ArrayList<SaleLog> saleLogs=null;
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Account>>() {
-        }.getType();
-        JsonReader accountReader=FileHandling.readFile("account.json");
-        ArrayList<Account> data = FileHandling.getGson().fromJson(accountReader, REVIEW_TYPE);
-        for (Account account : data) {
+        for (Account account : Account.getAllAccounts()) {
             if (account instanceof Seller){
                 if (((Seller)account).getUsername().equals(username)){
                     saleLogs=((Seller) account).getSaleLogsHistory();
@@ -260,13 +368,23 @@ public class OutputHandler {
     }
 
     //finish//pr
-    public static void showFirmInformation(String firmName) throws FileNotFoundException {
+//    public static void showFirmInformation(String firmName) throws FileNotFoundException {
+//        Firm firmToShow=null;
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<Firm>>() {
+//        }.getType();
+//        JsonReader FirmReader=FileHandling.readFile("firm.json");
+//        ArrayList<Firm> data = FileHandling.getGson().fromJson(FirmReader, REVIEW_TYPE);
+//        for (Firm firm : data) {
+//            if (firm.getName().equals(firmName)) {
+//                firmToShow=firm;
+//            }
+//        }
+//        System.out.println(firmToShow);
+//    }
+
+    public static void showFirmInformation(String firmName){
         Firm firmToShow=null;
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Firm>>() {
-        }.getType();
-        JsonReader FirmReader=FileHandling.readFile("firm.json");
-        ArrayList<Firm> data = FileHandling.getGson().fromJson(FirmReader, REVIEW_TYPE);
-        for (Firm firm : data) {
+        for (Firm firm : Firm.getAllFirms()) {
             if (firm.getName().equals(firmName)) {
                 firmToShow=firm;
             }
@@ -275,13 +393,23 @@ public class OutputHandler {
     }
 
     //finish//pr
-    public static void showCustomerLog(String buyLogId) throws FileNotFoundException {
+//    public static void showCustomerLog(String buyLogId) throws FileNotFoundException {
+//        BuyLog buyLogToShow=null;
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<BuyLog>>() {
+//        }.getType();
+//        JsonReader BuyLogReader=FileHandling.readFile("buyLog.json");
+//        ArrayList<BuyLog> data = FileHandling.getGson().fromJson(BuyLogReader, REVIEW_TYPE);
+//        for (BuyLog buyLog : data) {
+//            if (buyLog.getId().equals(buyLogId)){
+//                buyLogToShow=buyLog;
+//            }
+//        }
+//        System.out.println(buyLogToShow);
+//    }
+
+    public static void showCustomerLog(String buyLogId){
         BuyLog buyLogToShow=null;
-        Type REVIEW_TYPE = new TypeToken<ArrayList<BuyLog>>() {
-        }.getType();
-        JsonReader BuyLogReader=FileHandling.readFile("buyLog.json");
-        ArrayList<BuyLog> data = FileHandling.getGson().fromJson(BuyLogReader, REVIEW_TYPE);
-        for (BuyLog buyLog : data) {
+        for (BuyLog buyLog : BuyLog.getAllCustomersLog()) {
             if (buyLog.getId().equals(buyLogId)){
                 buyLogToShow=buyLog;
             }
@@ -290,30 +418,47 @@ public class OutputHandler {
     }
 
     //finish//pr
-    public static void showOrders() throws FileNotFoundException {
-        Type REVIEW_TYPE = new TypeToken<ArrayList<BuyLog>>() {
-        }.getType();
-        JsonReader BuyLogReader=FileHandling.readFile("buyLog.json");
-        ArrayList<BuyLog> data = FileHandling.getGson().fromJson(BuyLogReader, REVIEW_TYPE);
-        for (BuyLog buyLog : data) {
+//    public static void showOrders() throws FileNotFoundException {
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<BuyLog>>() {
+//        }.getType();
+//        JsonReader BuyLogReader=FileHandling.readFile("buyLog.json");
+//        ArrayList<BuyLog> data = FileHandling.getGson().fromJson(BuyLogReader, REVIEW_TYPE);
+//        for (BuyLog buyLog : data) {
+//            System.out.println(buyLog);
+//        }
+//    }
+    public static void showOrders(){
+        for (BuyLog buyLog : BuyLog.getAllCustomersLog()) {
             System.out.println(buyLog);
         }
     }
 
+
     //finish//pr
-    public static void showOrder(String buyLogId) throws FileNotFoundException {
+//    public static void showOrder(String buyLogId) throws FileNotFoundException {
+//        BuyLog buyLogToShow=null;
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<BuyLog>>() {
+//        }.getType();
+//        JsonReader BuyLogReader=FileHandling.readFile("buyLog.json");
+//        ArrayList<BuyLog> data = FileHandling.getGson().fromJson(BuyLogReader, REVIEW_TYPE);
+//        for (BuyLog buyLog : data) {
+//            if (buyLog.getId().equals(buyLogId)){
+//                buyLogToShow=buyLog;
+//            }
+//        }
+//        System.out.println(buyLogToShow);
+//    }
+
+    public static void showOrder(String buyLogId){
         BuyLog buyLogToShow=null;
-        Type REVIEW_TYPE = new TypeToken<ArrayList<BuyLog>>() {
-        }.getType();
-        JsonReader BuyLogReader=FileHandling.readFile("buyLog.json");
-        ArrayList<BuyLog> data = FileHandling.getGson().fromJson(BuyLogReader, REVIEW_TYPE);
-        for (BuyLog buyLog : data) {
+        for (BuyLog buyLog : BuyLog.getAllCustomersLog()) {
             if (buyLog.getId().equals(buyLogId)){
                 buyLogToShow=buyLog;
             }
         }
         System.out.println(buyLogToShow);
     }
+
 
     //finish//pr
   /*  public static void showProductSeller(String productId) throws FileNotFoundException {
@@ -333,13 +478,21 @@ public class OutputHandler {
     }*/
 
 
-    public static void showProductBuyers(String productId) throws FileNotFoundException {
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Customer>>() {
-        }.getType();
-        JsonReader customerReader=FileHandling.readFile("customer.json");
-        ArrayList<Customer> data = FileHandling.getGson().fromJson(customerReader, REVIEW_TYPE);
-        for (Customer customer : data) {
+//    public static void showProductBuyers(String productId) throws FileNotFoundException {
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<Customer>>() {
+//        }.getType();
+//        JsonReader customerReader=FileHandling.readFile("customer.json");
+//        ArrayList<Customer> data = FileHandling.getGson().fromJson(customerReader, REVIEW_TYPE);
+//        for (Customer customer : data) {
+//
+//        }
+//    }
 
+    public static void showProductBuyers(String productId){
+        ArrayList<Customer> buyers=null;
+        Product product=Product.getProductById(productId);
+        for (Customer buyer : product.getListOfBuyers()) {
+            System.out.println(buyer);
         }
     }
 
@@ -358,6 +511,15 @@ public class OutputHandler {
         System.out.println(productToShow);
     }
 
+//    public static void showProduct(String productId){
+//        for (Product product : Product.getProductList()) {
+//            if (product.getId().equals(productId)){
+//                productToShow=product;
+//            }
+//        }
+//        System.out.println(productToShow);
+//    }
+
     //finish//pr
     public static void showTotalPrice(String logId) throws FileNotFoundException {
         double totalPriceToShow=0;
@@ -374,13 +536,23 @@ public class OutputHandler {
     }
 
     //finish//pr
-    public static void showBalance(String username) throws FileNotFoundException {
+//    public static void showBalance(String username) throws FileNotFoundException {
+//        Account accountToShow=null;
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<Account>>() {
+//        }.getType();
+//        JsonReader sellerReader=FileHandling.readFile("account.json");
+//        ArrayList<Account> data = FileHandling.getGson().fromJson(sellerReader, REVIEW_TYPE);
+//        for (Account account : data) {
+//            if (account.getUsername().equals(username)){
+//                accountToShow=account;
+//            }
+//        }
+//        System.out.println(accountToShow.getCredit());
+//    }
+
+    public static void showBalance(String username){
         Account accountToShow=null;
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Account>>() {
-        }.getType();
-        JsonReader sellerReader=FileHandling.readFile("account.json");
-        ArrayList<Account> data = FileHandling.getGson().fromJson(sellerReader, REVIEW_TYPE);
-        for (Account account : data) {
+        for (Account account : Account.getAllAccounts()) {
             if (account.getUsername().equals(username)){
                 accountToShow=account;
             }
@@ -389,39 +561,65 @@ public class OutputHandler {
     }
 
     //finish//pr
-    public static void showAllComments() throws FileNotFoundException {
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Comment>>() {
-        }.getType();
-        JsonReader commentReader=FileHandling.readFile("comment.json");
-        ArrayList<Comment> data = FileHandling.getGson().fromJson(commentReader, REVIEW_TYPE);
-        for (Comment comment : data) {
-            System.out.println(comment);
-        }
-    }
+//    public static void showAllComments() throws FileNotFoundException {
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<Comment>>() {
+//        }.getType();
+//        JsonReader commentReader=FileHandling.readFile("comment.json");
+//        ArrayList<Comment> data = FileHandling.getGson().fromJson(commentReader, REVIEW_TYPE);
+//        for (Comment comment : data) {
+//            System.out.println(comment);
+//        }
+//    }
 
     //finish//pr
-    public static void showCommentOnOneProduct(String productId) throws FileNotFoundException {
-        Comment commentToShow=null;
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
-        }.getType();
-        JsonReader productReader=FileHandling.readFile("product.json");
-        ArrayList<Product> data = FileHandling.getGson().fromJson(productReader, REVIEW_TYPE);
-        for (Product product : data) {
+//    public static void showCommentOnOneProduct(String productId) throws FileNotFoundException {
+//        Comment commentToShow=null;
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
+//        }.getType();
+//        JsonReader productReader=FileHandling.readFile("product.json");
+//        ArrayList<Product> data = FileHandling.getGson().fromJson(productReader, REVIEW_TYPE);
+//        for (Product product : data) {
+//            if (product.getId().matches(productId)){
+//                System.out.println(product.getComment());
+//            }
+//        }
+//    }
+
+    public static void showCommentOnOneProduct(String productId){
+        for (Product product : Product.getProductList()) {
             if (product.getId().matches(productId)){
-                System.out.println(product.getComment());
+                System.out.println(product.getComment().getAllComments());
             }
         }
-
     }
 
 
-    public static void digest(String productId) throws FileNotFoundException {
-        productToShow=null;
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
-        }.getType();
-        JsonReader proReader=FileHandling.readFile("product.json");
-        ArrayList<Product> data = FileHandling.getGson().fromJson(proReader, REVIEW_TYPE);
-        for (Product product : data) {
+//    public static void digest(String productId) throws FileNotFoundException {
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
+//        }.getType();
+//        JsonReader proReader=FileHandling.readFile("product.json");
+//        ArrayList<Product> data = FileHandling.getGson().fromJson(proReader, REVIEW_TYPE);
+//        for (Product product : data) {
+//            if (product.getId().equals(productId)){
+//                productToShow=product;
+//            }
+//        }
+//        String saleAmount="";
+//        if (productToShow.getInSale()){
+//            saleAmount=String.valueOf(productToShow.getSale().getSaleAmount());
+//        }
+//        else saleAmount="\t";
+//        System.out.println(
+//                "Description : " + productToShow.getAdditionalDetail() + "\n" +
+//                        "Price : " + productToShow.getPrice() + "\n" +
+//                        "Sale Amount : " + saleAmount + "\n" +
+//                        "Category + " + productToShow.getCategory().getName() + "\n" +
+//                        "Seller : " + productToShow.getSeller().getName() + "\n" +
+//                        "Average Score : " + productToShow.getAverageScore());
+//    }
+
+    public static void digest(String productId){
+        for (Product product : Product.getProductList()) {
             if (product.getId().equals(productId)){
                 productToShow=product;
             }
@@ -440,12 +638,33 @@ public class OutputHandler {
                         "Average Score : " + productToShow.getAverageScore());
     }
 
-    public static void attributes(String productId) throws FileNotFoundException {
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
-        }.getType();
-        JsonReader proReader=FileHandling.readFile("product.json");
-        ArrayList<Product> data = FileHandling.getGson().fromJson(proReader, REVIEW_TYPE);
-        for (Product product : data) {
+
+//    public static void attributes(String productId) throws FileNotFoundException {
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
+//        }.getType();
+//        JsonReader proReader=FileHandling.readFile("product.json");
+//        ArrayList<Product> data = FileHandling.getGson().fromJson(proReader, REVIEW_TYPE);
+//        for (Product product : data) {
+//            if (product.getId().equals(productId)){
+//                productToShow=product;
+//            }
+//        }
+//        String saleAmount="";
+//        if (productToShow.getInSale()){
+//            saleAmount=String.valueOf(productToShow.getSale().getSaleAmount());
+//        }
+//        else saleAmount="\t";
+//        System.out.println(
+//                "Description : " + productToShow.getAdditionalDetail() + "\n" +
+//                        "Price : " + productToShow.getPrice() + "\n" +
+//                        "Sale Amount : " + saleAmount + "\n" +
+//                        "Category + " + productToShow.getCategory() + "\n" +
+//                        "Seller : " + productToShow.getSeller().getName() + "\n" +
+//                        "Average Score : " + productToShow.getAverageScore());
+//    }
+
+    public static void attributes(String productId){
+        for (Product product : Product.getProductList()) {
             if (product.getId().equals(productId)){
                 productToShow=product;
             }

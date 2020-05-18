@@ -94,6 +94,10 @@ public class Sale{
         return null;
     }
 
+    public static ArrayList<Sale> getAllSales() {
+        return allSales;
+    }
+
     public void setStartOfSalePeriod(Date startOfSalePeriod) {
         this.startOfSalePeriod = startOfSalePeriod;
     }

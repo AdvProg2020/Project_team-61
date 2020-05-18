@@ -96,6 +96,9 @@ public class DiscountCode {
         return totalTimesOfUse;
     }
 
+    public static ArrayList<DiscountCode> getAllDiscountCodes() {
+        return allDiscountCodes;
+    }
 
     public ArrayList<Account> getAllCustomersWithDiscountCode() {
         return allCustomersWithDiscountCode;

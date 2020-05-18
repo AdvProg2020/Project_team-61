@@ -83,6 +83,10 @@ public class Product  {
     //settersAndGetters----------------------------------------------------------------------------------
 
 
+    public ArrayList<Customer> getListOfBuyers() {
+        return listOfBuyers;
+    }
+
     public void setIsBought(Boolean isBought){
         this.isBought=isBought;
     }

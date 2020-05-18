@@ -11,10 +11,8 @@ import view.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 
 public class ManagerMenu {
@@ -215,7 +213,6 @@ public class ManagerMenu {
                 //Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 LocalDateTime inputDate = LocalDateTime.parse(edit, formatter);
-
                 if (inputDate.isAfter(currentDate)) {
                     editableDiscountCode.setStartOfDiscountPeriod(inputDate);
                     outputNo = 16;

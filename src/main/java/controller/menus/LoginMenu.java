@@ -93,8 +93,13 @@ public class LoginMenu {
                     accountRequest.setLastname(LoginMenu.getLoginAccount().getUsername());
                     accountRequest.setFirmName(firm.getName());
                 }else accountRequest= (AccountRequest) Request.getRequestFromID(id);
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITSELLERACCOUNT);
-                outputNo = 34;
+                if(field.equalsIgnoreCase("firm")){
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMNAME);
+                    outputNo = 28;
+                }else {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITSELLERACCOUNT);
+                    outputNo = 34;
+                }
             } else {
                 if (!field.equalsIgnoreCase("firm")) {
                     CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITACCOUNT);
@@ -102,7 +107,7 @@ public class LoginMenu {
                 } else outputNo = 27;
             }
             LoginMenu.field = field;
-            OutputMassageHandler.showOutputWithString(field, 3);
+           // OutputMassageHandler.showOutputWithString(field, 3);
         } else outputNo = 16;
         OutputMassageHandler.showAccountOutput(outputNo);
     }
@@ -163,9 +168,6 @@ public class LoginMenu {
                 accountRequest.setPhoneNo(Integer.parseInt(edit));
                 outputNo = 21;
             } else outputNo = 11;
-        } else if (field.equalsIgnoreCase("firm")) {
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMNAME);
-            outputNo = 28;
         }
         OutputMassageHandler.showAccountOutput(outputNo);
     }

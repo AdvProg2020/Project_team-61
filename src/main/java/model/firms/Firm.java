@@ -74,6 +74,10 @@ public abstract class Firm {
         return null;
     }
 
+    public static ArrayList<Firm> getAllFirms() {
+        return allFirms;
+    }
+
     public static boolean isThereFirmWithID(String ID){
         for(Firm firm : allFirms){
             if(firm.name.equalsIgnoreCase(ID))return true;

@@ -32,6 +32,10 @@ public class Category{
         }
     }
 
+    public static ArrayList<Category> getAllCategories() {
+        return allCategories;
+    }
+
     public void removeTrait(String trait){
         traits.remove(trait);
     }

@@ -3,6 +3,7 @@ package controller.request;
 import com.google.gson.reflect.TypeToken;
 import controller.menus.LoginMenu;
 import model.accounts.Account;
+import model.accounts.Seller;
 import view.FileHandling;
 
 import java.io.IOException;
@@ -26,7 +27,7 @@ public  abstract class Request {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         requestDate = dtf.format(now);
-        seller = LoginMenu.getLoginAccount();
+        seller = (Seller) LoginMenu.getLoginAccount();
         allRequests.add(this);
     }
 
@@ -52,6 +53,10 @@ public  abstract class Request {
             if (request.requestText.equalsIgnoreCase(requestID)) return true;
         }
         return false;
+    }
+
+    public static ArrayList<Request> getAllRequests() {
+        return allRequests;
     }
 
     public static void writeInJ() throws IOException {

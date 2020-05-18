@@ -75,16 +75,6 @@ public class OutputMassageHandler {
             System.out.println("");
         } else if (output == 11) {
             System.out.println("");
-        } else if (output == 12) {
-            System.out.println("maximum discount amount format is invalid");
-        } else if (output == 13) {
-            System.out.println("please enter total time of use");
-        } else if (output == 14) {
-            System.out.println("total time of use format is invalid");
-        } else if (output == 15) {
-            System.out.println("please enter discount code field you want to change");
-        } else if (output == 16) {
-            System.out.println("start of discount period changed");
         }
     }
 
@@ -534,7 +524,7 @@ public class OutputMassageHandler {
         } else if (output == 27) {
             System.out.println("you can't change firm information");
         } else if (output == 28) {
-            System.out.println("please enter firm name you want to change");
+            System.out.println("please enter firm's name you want to change");
         } else if (output == 29) {
             System.out.println("please enter your birthday Date");
         } else if (output == 30) {
@@ -550,9 +540,9 @@ public class OutputMassageHandler {
         } else if (output == 35) {
             System.out.println("there is no account with this user name");
         } else if (output == 36) {
-            System.out.println("");
+            System.out.println("username format is invalid");
         } else if (output == 37) {
-            System.out.println("");
+            System.out.println("enter firm name");
         } else if (output == 38) {
             System.out.println("");
         } else if (output == 39) {
@@ -654,17 +644,6 @@ public class OutputMassageHandler {
 
 
 
-  /*  public static void showOutputWith2String(String first, String second, int output) {
-        if (output == 1) {
-            System.out.println("you get " + first + " to product " + second);
-        } else if (output == 2) {
-            System.out.println("product " + first + " " + second + " number changed");
-        } else if (output == 3) {
-            System.out.println();
-        }
-    }
-
-   */
 
 
 }

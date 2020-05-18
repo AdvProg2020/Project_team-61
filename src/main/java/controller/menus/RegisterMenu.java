@@ -53,7 +53,7 @@ public class RegisterMenu {
                     CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
                 } else outputNo = 26;
             } else outputNo = 1;
-        } else outputNo = 0;
+        } else outputNo = 36;
         OutputMassageHandler.showAccountOutput(outputNo);
     }
 
@@ -82,7 +82,7 @@ public class RegisterMenu {
             outputNo = 2;
         } else {
             CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
-            CommandProcessor.setSubMenuStatus(subMenuStatus);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
             outputNo = 23;
         }
     }
@@ -205,7 +205,7 @@ public class RegisterMenu {
                 }
                 detailMenu = 0;
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.HAVEDISCOUNT);
-                CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                //CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
                 outputNo = 6;
             } else outputNo = 5;
         }
