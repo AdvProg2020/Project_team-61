@@ -29,6 +29,11 @@ public class ProductRequest extends Request {
     }
 
     @Override
+    public void declineRequest() {
+
+    }
+
+    @Override
     public void acceptRequest() throws IOException {
         Product newProduct = Product.getProductById(productId);
         newProduct.setDetailProduct(productName, companyName,price, sellerName,numberOfProduct,categoryName);

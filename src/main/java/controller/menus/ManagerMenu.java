@@ -12,6 +12,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 
@@ -120,20 +122,24 @@ public class ManagerMenu {
 
     public static void setDetailToDiscountCode(String detail) throws ParseException {
         if (detailMenu == 0) {
-            if (detail.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
-                Date currentDate = new Date();
-                Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
-                if (inputDate.after(currentDate)) {
+            if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
+                LocalDateTime currentDate = LocalDateTime.now();
+                //Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDateTime inputDate = LocalDateTime.parse(detail, formatter);
+                if (inputDate.isAfter(currentDate)) {
                     newDiscountCode.setStartOfDiscountPeriod(inputDate);
                     outputNo = 9;
                     detailMenu = 1;
                 } else outputNo = 26;
             } else outputNo = 8;
         } else if (detailMenu == 1) {
-            if (detail.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
-                Date currentDate = new Date();
-                Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
-                if (inputDate.after(currentDate)) {
+            if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
+                LocalDateTime currentDate = LocalDateTime.now();
+                //Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDateTime inputDate = LocalDateTime.parse(detail, formatter);
+                if (inputDate.isAfter(currentDate)) {
                     newDiscountCode.setEndOfDiscountPeriod(inputDate);
                     outputNo = 11;
                     detailMenu = 2;
@@ -203,19 +209,24 @@ public class ManagerMenu {
 
     public static void editDiscountCodeField(String edit) throws ParseException {
         if (field.matches("(?i)start\\s+Of\\s+Discount\\s+Period")) {
-            if (edit.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
-                Date currentDate = new Date();
-                Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(edit);
-                if (inputDate.after(currentDate)) {
+            if (edit.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
+                LocalDateTime currentDate = LocalDateTime.now();
+                //Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDateTime inputDate = LocalDateTime.parse(edit, formatter);
+
+                if (inputDate.isAfter(currentDate)) {
                     editableDiscountCode.setStartOfDiscountPeriod(inputDate);
                     outputNo = 16;
                 } else outputNo = 26;
             } else outputNo = 8;
         } else if (field.matches("(?i)end\\s+Of\\s+Discount\\s+Period")) {
-            if (edit.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
-                Date currentDate = new Date();
-                Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(edit);
-                if (inputDate.after(currentDate)) {
+            if (edit.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
+                LocalDateTime currentDate = LocalDateTime.now();
+                //Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDateTime inputDate = LocalDateTime.parse(edit, formatter);
+                if (inputDate.isAfter(currentDate)) {
                     editableDiscountCode.setEndOfDiscountPeriod(inputDate);
                     outputNo = 17;
                 } else outputNo = 26;
@@ -291,7 +302,7 @@ public class ManagerMenu {
 
     public static void declineRequest(String requestID) {
         if (checkRequest(requestID)) {
-            Request.declineRequest(requestID);
+            Request.getRequestFromID(requestID).declineRequest();
             OutputMassageHandler.showOutputWithString(requestID, 6);
         } else OutputMassageHandler.showManagerOutput(outputNo);
     }
@@ -322,7 +333,7 @@ public class ManagerMenu {
     }
 
     public static void categoryField(String field) {
-        if (field.matches("(?i)(?:add\\s*product|remove\\s*product|||)")) {
+        if (field.matches("(?i)(?:add\\s*product|remove\\s*product|remove\\s*trait|add\\s*trait)")) {
             ManagerMenu.field = field;
             CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITCATEGORY);
             OutputMassageHandler.showOutputWithString(field, 3);
@@ -330,12 +341,16 @@ public class ManagerMenu {
     }
 
     public static void editCategoryField(String edit) {
-
-      /*  if (field.equalsIgnoreCase("trait")) {
+        if (field.matches("remove\\s*trait")) {
             if (field.matches("\\D")) {
-                editableCategory.setTraits(edit);
-                outputNo = 0;
-            } else outputNo = 0;
+                editableCategory.removeTrait(edit);
+                outputNo = 41;
+            } else outputNo = 42;
+        } else if (field.matches("add\\s*trait")) {
+            if (field.matches("\\D")) {
+                editableCategory.addTrait(edit);
+                outputNo = 43;
+            } else outputNo = 42;
         } else if (field.matches("(?i)remove\\s*product")) {
             if (edit.matches("")) {
                 if (checkProduct(edit)) {
@@ -350,9 +365,9 @@ public class ManagerMenu {
                     outputNo = 39;
                 }
             } else outputNo = 2;
-        }   OutputMassageHandler.showManagerOutput(outputNo);
+        }
+        OutputMassageHandler.showManagerOutput(outputNo);
 
-       */
     }
 
     public static void addCategory(String category) throws IOException {
@@ -360,39 +375,40 @@ public class ManagerMenu {
             newCategory = new Category(category);
             CommandProcessor.setSubMenuStatus(SubMenuStatus.DETAILCATEGORY);
             CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
-            outputNo = 38;
+            outputNo = 44;
         } else outputNo = 34;
         OutputMassageHandler.showManagerOutput(outputNo);
     }
 
     public static void setDetailToCategory(String detail) {
-        /*
         if (detailMenu == 0) {
-            if (detail.matches("\\D+")) {
-                if(!detail.equalsIgnoreCase("finish")) {
-                    newCategory.setTraits(detail);
-                }else{
-                    detailMenu = 1;
-                    outputNo = 0;
-                }
-            } else outputNo = 0;
-        } else if (detailMenu == 1) {
             if (detail.matches("\\D+")) {
                 if (!detail.equalsIgnoreCase("finish")) {
                     if (Product.isThereProductWithId(detail)) {
                         newCategory.addProductToCategory(Product.getProductById(detail));
-                    } else outputNo = 0;
+                        outputNo = 39;
+                    } else outputNo = 46;
                 } else {
-                    detailMenu = 0;
+                    detailMenu = 1;
+                    outputNo = 38;
+                }
+            } else outputNo = 2;
+        } else if (detailMenu == 1) {
+            if (detail.matches("\\D+")) {
+                if (!detail.equalsIgnoreCase("finish")) {
+                    newCategory.addTrait(detail);
+                    outputNo = 43;
+                } else {
                     CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
                     CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGECATEGORIES);
-                    outputNo = 0;
+                    Category.addKey();
+                    detailMenu = 0;
+                    outputNo = 45;
                 }
-            } else outputNo = 0;
+            } else outputNo = 42;
         }
         OutputMassageHandler.showManagerOutput(outputNo);
 
-         */
     }
 
     public static void removeCategory(String category) {

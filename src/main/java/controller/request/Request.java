@@ -37,9 +37,12 @@ public  abstract class Request {
         return requestText;
     }
 
-    public static void declineRequest(String requestId){
+    /*public static void declineRequest(String requestId){
         allRequests.remove(getRequestFromID(requestId));
     }
+
+     */
+    public abstract void declineRequest();
 
     public abstract void acceptRequest() throws IOException;
 

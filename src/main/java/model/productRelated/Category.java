@@ -8,18 +8,11 @@ import java.util.ArrayList;
 
 public class Category{
     private String name;
-    private static String traits;
+    private static ArrayList <String> traits= new ArrayList<>();
     private static ArrayList <Category>subCategories = new ArrayList<>();
-    private ArrayList <Product> allProducts = new ArrayList<>();
+    private static ArrayList <Product> allProducts = new ArrayList<>();
     private static ArrayList <Category> allCategories = new ArrayList<>();
 
-   /* public Category(String name, String traits) {
-        this.name = name;
-        this.traits = traits;
-        allCategories.add(this);
-    }
-
-    */
 
     public Category(String name) throws IOException {
         this.name = name;
@@ -27,7 +20,21 @@ public class Category{
         writeInJ();
     }
 
+    public void addTrait(String trait){
+        traits.add(trait);
+    }
 
+    public static void addKey(){
+        for (Product product : allProducts) {
+            for (String tr : traits) {
+                product.getCategorySpecifications().put(tr, null);
+            }
+        }
+    }
+
+    public void removeTrait(String trait){
+        traits.remove(trait);
+    }
 
     public String getName() {
         return name;

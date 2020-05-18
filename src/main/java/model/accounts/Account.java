@@ -27,14 +27,13 @@ public abstract class Account {
     String address;
     Date birthdayDate;
     Firm firm;
-    int usedDiscount=0;
     boolean fast;
     private AccountStatus accountStatus;
     ArrayList<DiscountCode> allDiscountCodes;
-    //private static ArrayList<SaleLog> allSaleLogs = new ArrayList<>();
-   // private static ArrayList<BuyLog> allBuyLogs = new ArrayList<>();
     private  static ArrayList<Account> allAccounts = new ArrayList<>();
     private static ArrayList<Date> birthdayDates=  new ArrayList<>();
+
+
 
     public void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate , Firm firm) throws IOException {
 
@@ -109,9 +108,6 @@ public abstract class Account {
 
     }
 
-    public void increaseDiscountUsed(){
-        usedDiscount++;
-    }
 
     public Account listUsers() {
         Iterator iterator = allAccounts.iterator();
@@ -204,9 +200,6 @@ public abstract class Account {
         return credit;
     }
 
-    public int getUsedDiscount() {
-        return usedDiscount;
-    }
 
     public AccountStatus getAccountStatus() {
         return accountStatus;
@@ -241,7 +234,6 @@ public abstract class Account {
                 ", currentPhoneNo=" + currentPhoneNo +
                 ", address='" + address + '\'' +
                 ", birthdayDate=" + birthdayDate +
-                ", usedDiscount=" + usedDiscount +
                 ", allDiscountCodes=" + allDiscountCodes +
                 '}';
     }

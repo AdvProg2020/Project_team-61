@@ -20,6 +20,10 @@ public class Seller extends Account {
         allSellers.add(this);
         writeInJ();
     }
+    
+    public void addLog(SaleLog saleLog){
+        saleLogsHistory.add(saleLog);
+    }
 
     public static ArrayList<SaleLog> getSaleLogsHistory() {
         return saleLogsHistory;
@@ -51,7 +55,6 @@ public class Seller extends Account {
                 ", currentPhoneNo=" + currentPhoneNo +
                 ", address='" + address + '\'' +
                 ", birthdayDate=" + birthdayDate +
-                ", usedDiscount=" + usedDiscount +
                 ", allDiscountCodes=" + allDiscountCodes +
                 '}';
     }

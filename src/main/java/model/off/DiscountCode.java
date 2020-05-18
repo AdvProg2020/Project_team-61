@@ -2,7 +2,6 @@ package model.off;
 
 import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
-
 import view.FileHandling;
 
 import java.io.IOException;

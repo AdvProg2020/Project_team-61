@@ -21,6 +21,7 @@ public class Company extends Firm {
         FileHandling.turnToArray(json+" "+"company.json");
     }
 
+
     @Override
     public String toString() {
         return super.toString();

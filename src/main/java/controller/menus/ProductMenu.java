@@ -1,9 +1,12 @@
 package controller.menus;
 
+import controller.request.CommentRequest;
+import controller.request.Request;
 import model.accounts.Account;
 import model.accounts.Seller;
 import model.log.BuyLog;
 import model.productRelated.Comment;
+import model.productRelated.CommentStatus;
 import model.productRelated.Product;
 import view.CommandProcessor;
 import view.OutputHandler;
@@ -17,9 +20,9 @@ import java.util.UUID;
 public class ProductMenu {
 
     private static int outputNo =0;
-    private static Comment comment;
     private static Product selectedProduct;
     private static BuyLog buyLog;
+    private static CommentRequest commentRequest;
 
 
     public static BuyLog getBuyLog() {
@@ -27,9 +30,10 @@ public class ProductMenu {
     }
 
     //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-    public static void processDigest() {
+    public static void processDigest() throws FileNotFoundException {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
         selectedProduct = Product.getProductById(ProductsMenu.getProductId());
+        OutputHandler.digest(selectedProduct.getId());
     }
 
     public static void addToCart() throws IOException {
@@ -42,8 +46,8 @@ public class ProductMenu {
 
 
     //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4
-    public static void processAttributes() {
-
+    public static void processAttributes() throws FileNotFoundException {
+        OutputHandler.attributes(selectedProduct.getId());
     }
 
     public static void processCompare(String productID) throws FileNotFoundException {
@@ -61,27 +65,32 @@ public class ProductMenu {
 
     public static void addComments() throws IOException {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
-        selectedProduct.setComment(comment = new Comment(selectedProduct, LoginMenu.getLoginAccount()));
-        comment.setAllComments();
-        Comment.writeInJ();
+        String id= LoginMenu.getLoginAccount()+ "comment";
+        if(Request.isThereRequestFromID(id)){
+            Request.deleteRequest(id);
+        }
+        commentRequest = new CommentRequest(id);
+        commentRequest.setPersonToVote(LoginMenu.getLoginAccount());
+        commentRequest.setProduct(selectedProduct);
+        String commentId = LoginMenu.getLoginAccount() + " comment on " +selectedProduct;
+        Comment comment = new Comment(id);
+        commentRequest.setId(commentId);
+        comment.setCommentStatus(CommentStatus.WAITINGFORAPPROVAL);
         OutputMassageHandler.showProductsOutput(1);
     }
 
 
-    public static void titleOfComment(String title) throws IOException {
+    public static void titleOfComment(String title)  {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
-        comment.setTitle(title);
-        comment.setAllComments();
+        commentRequest.setTitle(title);
         OutputMassageHandler.showProductsOutput(2);
-        Comment.writeInJ();
+
     }
 
 
-    public static void contentOfComment(String content) throws IOException {
+    public static void contentOfComment(String content)  {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-        comment.setContent(content);
-        comment.setAllComments();
-        Comment.writeInJ();
+        commentRequest.setContent(content);
     }
 
 }

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 public class OutputHandler {
 
+    private static Product productToShow;
 
     //withoutJson//pr
     public static void showAvailableFilters(ArrayList<String> available) {
@@ -103,7 +104,7 @@ public class OutputHandler {
     }
 
     //finish//pr
-    public static void showAllSellersForOneProduct(String productId) throws FileNotFoundException {
+  /*  public static void showAllSellersForOneProduct(String productId) throws FileNotFoundException {
         ArrayList<Account> proSellers=null;
         Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
         }.getType();
@@ -118,7 +119,7 @@ public class OutputHandler {
             System.out.println(seller);
         }
     }
-
+*/
     //..................................................................
 
     //finish//pr
@@ -239,6 +240,7 @@ public class OutputHandler {
 
 
     //naaaaaaaaaaaaaaaaaaaagheeeeeeeeeeeeeeeeeeeessssssssssssssssssssssssssssss
+
     public static void showSalesHistory(String username) throws FileNotFoundException {
         ArrayList<SaleLog> saleLogs=null;
         Type REVIEW_TYPE = new TypeToken<ArrayList<Account>>() {
@@ -314,7 +316,7 @@ public class OutputHandler {
     }
 
     //finish//pr
-    public static void showProductSeller(String productId) throws FileNotFoundException {
+  /*  public static void showProductSeller(String productId) throws FileNotFoundException {
         ArrayList<Account> sellerArrayList=null;
         Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
         }.getType();
@@ -328,7 +330,7 @@ public class OutputHandler {
         for (Account account : sellerArrayList) {
             System.out.println(account);
         }
-    }
+    }*/
 
 
     public static void showProductBuyers(String productId) throws FileNotFoundException {
@@ -410,6 +412,56 @@ public class OutputHandler {
             }
         }
 
+    }
+
+
+    public static void digest(String productId) throws FileNotFoundException {
+        productToShow=null;
+        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
+        }.getType();
+        JsonReader proReader=FileHandling.readFile("product.json");
+        ArrayList<Product> data = FileHandling.getGson().fromJson(proReader, REVIEW_TYPE);
+        for (Product product : data) {
+            if (product.getId().equals(productId)){
+                productToShow=product;
+            }
+        }
+        String saleAmount="";
+        if (productToShow.getInSale()){
+            saleAmount=String.valueOf(productToShow.getSale().getSaleAmount());
+        }
+        else saleAmount="\t";
+        System.out.println(
+                "Description : " + productToShow.getAdditionalDetail() + "\n" +
+                        "Price : " + productToShow.getPrice() + "\n" +
+                        "Sale Amount : " + saleAmount + "\n" +
+                        "Category + " + productToShow.getCategory().getName() + "\n" +
+                        "Seller : " + productToShow.getSeller().getName() + "\n" +
+                        "Average Score : " + productToShow.getAverageScore());
+    }
+
+    public static void attributes(String productId) throws FileNotFoundException {
+        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
+        }.getType();
+        JsonReader proReader=FileHandling.readFile("product.json");
+        ArrayList<Product> data = FileHandling.getGson().fromJson(proReader, REVIEW_TYPE);
+        for (Product product : data) {
+            if (product.getId().equals(productId)){
+                productToShow=product;
+            }
+        }
+        String saleAmount="";
+        if (productToShow.getInSale()){
+            saleAmount=String.valueOf(productToShow.getSale().getSaleAmount());
+        }
+        else saleAmount="\t";
+        System.out.println(
+                "Description : " + productToShow.getAdditionalDetail() + "\n" +
+                        "Price : " + productToShow.getPrice() + "\n" +
+                        "Sale Amount : " + saleAmount + "\n" +
+                        "Category + " + productToShow.getCategory() + "\n" +
+                        "Seller : " + productToShow.getSeller().getName() + "\n" +
+                        "Average Score : " + productToShow.getAverageScore());
     }
 
 }

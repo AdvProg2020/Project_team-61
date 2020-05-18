@@ -6,6 +6,7 @@ import controller.menus.CustomerMenu;
 import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Seller;
+import model.off.DiscountCode;
 import model.productRelated.Product;
 import view.FileHandling;
 
@@ -38,6 +39,7 @@ public class BuyLog extends Log {
     private static boolean firstProduct = true;
     double amountAfterDis;
     public Account buyerLog;
+
 
     //list
     private HashMap<Product, Integer> allBoughtProduct = new HashMap<>();
@@ -80,9 +82,6 @@ public class BuyLog extends Log {
         return firstProduct;
     }
 
-    public boolean isBought(String productId) {
-        return ifItsFinal;
-    }
 
     //other--------------------------------------------------------------
 
@@ -127,25 +126,27 @@ public class BuyLog extends Log {
         return price;
     }
 
+
     public void whenFinal() throws IOException {
-        double price = 0;
         if (CustomerMenu.isHasDiscount()) {
-            price = buyerLog.getDiscount().calculate(totalPrice());
-            buyerLog.getDiscount().setTotalTimesOfUse(buyerLog.getDiscount() - 1);
+            DiscountCode discountCode= DiscountCode.getDiscountWithId(CustomerMenu.getDiscountID());
+            holePrice = discountCode.calculate(totalPrice());
+            discountCode.setTotalTimesOfUse(discountCode.getTotalTimesOfUse() - 1);
         } else {
-            price = totalPrice();
+            holePrice = totalPrice();
         }
         for (Product p : chosenProduct.keySet()) {
             //faghat price bedoon discount be seller eafe
             p.getSeller().setCredit(p.getSeller().getCredit() + p.getPrice());
             //price ba discount be az customer kam
-            paidAmount = buyerLog.getCredit() - price;
+            paidAmount = buyerLog.getCredit() - holePrice;
             buyerLog.setCredit(paidAmount);
         }
         allBoughtProduct = chosenProduct;
         itsDone = true;
         changesForSaleLogAfterFinish();
     }
+
 
     public void changesForSaleLogAfterFinish() throws IOException {
         //product ha be sold ezafe

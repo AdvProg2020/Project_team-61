@@ -25,6 +25,9 @@ public class Customer extends Account {
     }
 
 
+    public void addLog(BuyLog buyLog){
+        BuyLogsHistory.add(buyLog);
+    }
 
     public static void writeInJ() throws IOException {
         Type collectionType = new TypeToken<ArrayList<Customer>>(){}.getType();
@@ -47,7 +50,6 @@ public class Customer extends Account {
                 ", currentPhoneNo=" + currentPhoneNo +
                 ", address='" + address + '\'' +
                 ", birthdayDate=" + birthdayDate +
-                ", usedDiscount=" + usedDiscount +
                 ", allDiscountCodes=" + allDiscountCodes +
                 '}';
     }

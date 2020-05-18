@@ -35,6 +35,11 @@ public class AccountRequest extends Request {
         allAccountRequests.add(this);
     }
 
+    @Override
+    public void declineRequest() {
+
+    }
+
 
     public void acceptRequest() throws IOException {
         selectedAccount = Account.getAccountWithUsername(username);

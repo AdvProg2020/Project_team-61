@@ -19,6 +19,7 @@ public abstract class Log{
     DeliveryStatus deliveryStatus;
     boolean itsDone;
     Product product;
+    public double holePrice;
 
     //list
     private static ArrayList<Log> allLogs = new ArrayList<Log>();
@@ -37,6 +38,7 @@ public abstract class Log{
     }
 
     //others--------------------------------------------------------------------------------
+
 
     //finish
     public void deleteLog (String id){

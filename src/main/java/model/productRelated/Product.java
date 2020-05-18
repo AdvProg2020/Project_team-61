@@ -40,6 +40,7 @@ public class Product  {
     public static ArrayList<String> listOfId=new ArrayList<String>();
     private  ArrayList<Comment> proComments = new ArrayList<Comment>();
     private ArrayList<Score> proScores = new ArrayList<>();
+    private HashMap<String,String> categorySpecifications = new HashMap<>();
 
 
     //objectsAdded
@@ -57,6 +58,13 @@ public class Product  {
     }
 
 
+    public HashMap<String, String> getCategorySpecifications() {
+        return categorySpecifications;
+    }
+
+    public void setCategorySpecifications(HashMap<String, String> categorySpecifications) {
+        this.categorySpecifications = categorySpecifications;
+    }
 
     //finish
     public void setDetailProduct (String name , Firm firm , double price , Account seller , int numberOfProducts ,Category category) throws IOException {

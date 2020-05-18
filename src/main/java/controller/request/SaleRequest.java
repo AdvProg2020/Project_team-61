@@ -27,6 +27,11 @@ public class SaleRequest extends Request {
     }
 
     @Override
+    public void declineRequest() {
+
+    }
+
+    @Override
     public void acceptRequest() throws IOException {
         sale= Sale.getSaleWithId(offId);
         sale.setSaleDetails(SaleStatus.CONFIRMED, startOfSalePeriod, endOfSalePeriod, saleAmount, seller);
