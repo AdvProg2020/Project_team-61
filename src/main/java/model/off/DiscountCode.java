@@ -3,14 +3,14 @@ package model.off;
 import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
 import model.productRelated.Product;
-import org.omg.CORBA.PUBLIC_MEMBER;
 import view.FileHandling;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Comparator;
+
 
 public class DiscountCode {
     private String discountId;
@@ -19,13 +19,22 @@ public class DiscountCode {
     private int discountAmount;
     private double maxDiscountAmount;
     private int totalTimesOfUse;
+    private Account manager;
     private static ArrayList<Account> allCustomersWithDiscountCode = new ArrayList<Account>();
-    private static ArrayList<DiscountCode> allDiscountCodes;
+    private static ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
 
     public DiscountCode(String discountId) throws IOException {
         this.discountId = discountId;
         allDiscountCodes.add(this);
-        writeInJ();
+     //   writeInJ();
+    }
+
+    public int getDiscountAmount() {
+        return discountAmount;
+    }
+
+    public static ArrayList<DiscountCode> getAllDiscountCodes() {
+        return allDiscountCodes;
     }
 
     public void addAccount(Account customer){
@@ -39,6 +48,10 @@ public class DiscountCode {
 
     public static void setStartOfDiscountPeriod(LocalDateTime startOfDiscountPeriod) {
         DiscountCode.startOfDiscountPeriod = startOfDiscountPeriod;
+    }
+
+    public void setManager(Account manager) {
+        this.manager = manager;
     }
 
     public static boolean discountMatchAccount(String username){
@@ -139,11 +152,23 @@ public class DiscountCode {
         allDiscountCodes.remove(getDiscountWithId(id));
     }
 
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<DiscountCode>>(){}.getType();
-        String json= FileHandling.getGson().toJson(DiscountCode.allDiscountCodes,collectionType);
-        FileHandling.turnToArray(json+" "+"discountCode.json");
-    }
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<DiscountCode>>(){}.getType();
+//        String json= FileHandling.getGson().toJson(DiscountCode.allDiscountCodes,collectionType);
+//        FileHandling.turnToArray(json+" "+"discountCode.json");
+//    }
+
+
+    public static Comparator<DiscountCode> productComparatorForView = new Comparator<DiscountCode>() {
+
+        public int compare(DiscountCode s1, DiscountCode s2) {
+
+            int productView1 = s1.getDiscountAmount();
+            int productView2 = s2.getDiscountAmount();
+            return productView1- productView2;
+
+        }
+    };
 
 
     @Override

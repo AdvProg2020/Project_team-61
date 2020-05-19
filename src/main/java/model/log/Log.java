@@ -27,7 +27,7 @@ public abstract class Log{
     public Log(String logId) throws IOException {
         this.logId=logId;
         allLogs.add(this);
-        writeInJ();
+ //       writeInJ();
     }
 
     //setterAndGetters-----------------------------------------------------------------------
@@ -74,11 +74,11 @@ public abstract class Log{
         return false;
     }
 
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Log>>(){}.getType();
-        String json= FileHandling.getGson().toJson(Log.allLogs,collectionType);
-        FileHandling.turnToArray(json+" "+"log.json");
-    }
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<Log>>(){}.getType();
+//        String json= FileHandling.getGson().toJson(Log.allLogs,collectionType);
+//        FileHandling.turnToArray(json+" "+"log.json");
+//    }
 
     @Override
     public String toString() {

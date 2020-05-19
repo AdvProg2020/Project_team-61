@@ -73,6 +73,8 @@ public enum SubMenuStatus {
     PRODUCTNAMEFILTER,
     FIRMFILTER,
     CATEGORYNAMEFILTER,
+    TRAIT,
+    EDITSPECIFICATION,
     PERIODFILTER;
 
     //customer menu

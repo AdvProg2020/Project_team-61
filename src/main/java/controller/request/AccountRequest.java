@@ -1,7 +1,7 @@
 package controller.request;
 
 import model.accounts.Account;
-import model.accounts.AccountStatus;
+import model.accounts.Seller;
 import model.firms.Company;
 import model.firms.Factory;
 import model.firms.Firm;
@@ -30,24 +30,25 @@ public class AccountRequest extends Request {
     private Account selectedAccount;
     private ArrayList<AccountRequest> allAccountRequests = new ArrayList<>();
 
-    public AccountRequest(String requestID) {
+    public AccountRequest(String requestID) throws IOException {
         super(requestID);
         allAccountRequests.add(this);
     }
 
     @Override
     public void declineRequest() {
-
+        allRequests.remove(this);
+        allAccountRequests.remove(this);
     }
 
 
     public void acceptRequest() throws IOException {
-        selectedAccount = Account.getAccountWithUsername(username);
+        Seller seller = new Seller(username);
         createFirm();
         firm = Firm.getFirmWithID(firmName);
-        selectedAccount.setDetailsToAccount(password, name, lastname, Email, phoneNo, birthdayDate, firm);
+        seller.setDetailsToAccount(password, name, lastname, Email, phoneNo, birthdayDate, firm);
         firm.setDetailToFirm(FirmPhoneNO, firmAddress, firmEmail);
-        selectedAccount.setAccountStatus(AccountStatus.CONFIRMED);
+
     }
 
     private void createFirm() throws IOException {
@@ -78,6 +79,10 @@ public class AccountRequest extends Request {
 
     public void setPhoneNo(double phoneNo) {
         this.phoneNo = phoneNo;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     //..........................................................

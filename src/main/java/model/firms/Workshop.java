@@ -13,13 +13,13 @@ public class Workshop extends Firm {
     public Workshop(String ID) throws IOException {
         super(ID);
         allWorkshops.add(this);
-        writeInJ();
+  //      writeInJ();
     }
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Workshop>>(){}.getType();
-        String json= FileHandling.getGson().toJson(Workshop.allWorkshops,collectionType);
-        FileHandling.turnToArray(json+" "+"workshop.json");
-    }
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<Workshop>>(){}.getType();
+//        String json= FileHandling.getGson().toJson(Workshop.allWorkshops,collectionType);
+//        FileHandling.turnToArray(json+" "+"workshop.json");
+//    }
 
     @Override
     public String toString() {

@@ -6,15 +6,14 @@ import model.filtar.Filter;
 import model.off.DiscountCode;
 import model.productRelated.Category;
 import model.productRelated.Product;
+import model.sort.Sort;
 import view.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 
 public class ManagerMenu {
@@ -92,7 +91,7 @@ public class ManagerMenu {
             Product.deleteProduct(productID);
             OutputMassageHandler.showOutputWithString(productID, 2);
         }
-        OutputMassageHandler.showAccountOutput(outputNo);
+        OutputMassageHandler.showManagerOutput(outputNo);
     }
     //------------------------------------------------
 
@@ -107,17 +106,18 @@ public class ManagerMenu {
 
     public static void processCreateDiscountCode() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDDISCOUNTCODE);
-        OutputMassageHandler.showAccountOutput(6);
+        OutputMassageHandler.showManagerOutput(6);
     }
 
     public static void createNewDiscountCode(String discountCodeId) throws IOException {
         if (!DiscountCode.isThereDiscountWithId(discountCodeId)) {
             newDiscountCode = new DiscountCode(discountCodeId);
+            newDiscountCode.setManager(LoginMenu.getLoginAccount());
             CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
             CommandProcessor.setSubMenuStatus(SubMenuStatus.DETAILDESCOUNTCODE);
             outputNo = 7;
         } else outputNo = 25;
-        OutputMassageHandler.showAccountOutput(outputNo);
+        OutputMassageHandler.showManagerOutput(outputNo);
     }
 
     public static void setDetailToDiscountCode(String detail) throws ParseException {
@@ -177,6 +177,20 @@ public class ManagerMenu {
         OutputMassageHandler.showManagerOutput(outputNo);
     }
 
+    public static void sortBy(String sort) throws FileNotFoundException {
+        if(sort.matches("(?i)(?:request\\s+date|account\\s+name|category\\s+name|discount\\s+amount)")){
+            if(sort.matches("request\\s+date")){
+                Sort.sortRequest();
+            }else if(sort.matches("account\\s+name")){
+                Sort.accountSortUserName();
+            }else if(sort.matches("category\\s+name")){
+                Sort.categoryNameSort();
+            }else if(sort.matches("discount\\s+amount")){
+                Sort.sortDiscountCodes();
+            }
+        }
+    }
+
     // gson
     public static void processViewDiscountCodes() throws FileNotFoundException {
         OutputHandler.showDiscountCodes();
@@ -188,7 +202,7 @@ public class ManagerMenu {
         OutputHandler.showDiscountCode(discountCodeID);
         if (checkDiscountCode(discountCodeID)) {
             OutputHandler.showDiscountCode(discountCodeID);
-        } else OutputMassageHandler.showAccountOutput(outputNo);
+        } else OutputMassageHandler.showManagerOutput(outputNo);
     }
 
     public static void editDiscountCode(String discountCodeID) {
@@ -196,7 +210,7 @@ public class ManagerMenu {
             editableDiscountCode = DiscountCode.getDiscountWithId(discountCodeID);
             CommandProcessor.setSubMenuStatus(SubMenuStatus.DISCOUNTCODEFIELD);
             outputNo = 15;
-        } else OutputMassageHandler.showAccountOutput(outputNo);
+        } else OutputMassageHandler.showManagerOutput(outputNo);
     }
 
     public static void discountCodeField(String field) {
@@ -214,7 +228,6 @@ public class ManagerMenu {
                 //Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 LocalDateTime inputDate = LocalDateTime.parse(edit, formatter);
-
                 if (inputDate.isAfter(currentDate)) {
                     editableDiscountCode.setStartOfDiscountPeriod(inputDate);
                     outputNo = 16;

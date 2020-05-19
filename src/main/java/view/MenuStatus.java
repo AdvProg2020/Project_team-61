@@ -12,19 +12,8 @@ public enum MenuStatus {
     PRODUCTMENU,
     //
     SALEMENU,
-    //
-    PURCHASE,
+
     //
 
-   /* CATEGORY,
-    SEARCH,
-    USERMENU,
-    REGISTERMENUE,
-    LOGINMENU,
-    PAYMENT,
-    CHECKDISCOUNTCODE,
-    CREATIONMENU,
-    RECEIVERINFORMATION;
-    */
 
 }

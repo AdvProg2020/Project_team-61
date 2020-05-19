@@ -9,6 +9,7 @@ import view.FileHandling;
 
 import java.io.FileNotFoundException;
 import java.lang.reflect.Type;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -20,13 +21,13 @@ public abstract class Filter {
     String filterName;
     public static ArrayList<Product> newArrayOfProductFilter;
 
-    static {
-        try {
-            newArrayOfProductFilter = getListOfProductFromFile();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+//    static {
+//        try {
+//            newArrayOfProductFilter = getListOfProductFromFile();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public static ArrayList<ArrayList<Product>> listOfFilters = new ArrayList<>();
     public static ArrayList<ArrayList<Product>> helpFilter = new ArrayList<>();
@@ -62,7 +63,9 @@ public abstract class Filter {
         return data;
     }
 
-
+    public static void setNewArrayOfProductFilter(ArrayList<Product> newArrayOfProductFilter) {
+        Filter.newArrayOfProductFilter = newArrayOfProductFilter;
+    }
     //filtering-----------------------------------------------------------------------------
 
 
@@ -104,7 +107,8 @@ public abstract class Filter {
     }
 
     public static void productNameFilter(String productName) throws FileNotFoundException {
-        ArrayList<Product> help=null;
+        ArrayList<Product> help = null;
+        help.add(new Product("g"));
         for (Product product : newArrayOfProductFilter) {
             if (product.getProductName().equals(productName)){
                 help.add(product);

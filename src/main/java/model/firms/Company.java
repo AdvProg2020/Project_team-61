@@ -13,13 +13,14 @@ public class Company extends Firm {
     public Company(String ID) throws IOException {
         super(ID);
         allCompanies.add(this);
-        writeInJ();
+  //      writeInJ();
     }
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Company>>(){}.getType();
-        String json= FileHandling.getGson().toJson(Company.allCompanies,collectionType);
-        FileHandling.turnToArray(json+" "+"company.json");
-    }
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<Company>>(){}.getType();
+//        String json= FileHandling.getGson().toJson(Company.allCompanies,collectionType);
+//        FileHandling.turnToArray(json+" "+"company.json");
+//    }
+
 
     @Override
     public String toString() {

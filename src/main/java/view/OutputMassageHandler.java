@@ -58,7 +58,7 @@ public class OutputMassageHandler {
         } else if (output == 2) {
             System.out.println("please enter comment content");
         } else if (output == 3) {
-            System.out.println("");
+            System.out.println("you already commented on this product");
         } else if (output == 4) {
             System.out.println("");
         } else if (output == 5) {
@@ -75,16 +75,6 @@ public class OutputMassageHandler {
             System.out.println("");
         } else if (output == 11) {
             System.out.println("");
-        } else if (output == 12) {
-            System.out.println("maximum discount amount format is invalid");
-        } else if (output == 13) {
-            System.out.println("please enter total time of use");
-        } else if (output == 14) {
-            System.out.println("total time of use format is invalid");
-        } else if (output == 15) {
-            System.out.println("please enter discount code field you want to change");
-        } else if (output == 16) {
-            System.out.println("start of discount period changed");
         }
     }
 
@@ -264,55 +254,78 @@ public class OutputMassageHandler {
         } else if (output == 4) {
             System.out.println("number format is invalid");
         } else if (output == 5) {
-            System.out.println("please enter your phone number");
+            System.out.println("");
         } else if (output == 6) {
-            System.out.println("you have to login first");
+            System.out.println("");
         } else if (output == 7) {
             System.out.println("there is no discount code with this id");
         } else if (output == 8) {
             System.out.println("there is no log with this id");
         } else if (output == 9) {
-            System.out.println("you aren't a customer");
+            System.out.println("");
         } else if (output == 10) {
-            System.out.println("your discount is incorrect");
+            System.out.println("product number increase");
         } else if (output == 11) {
             System.out.println("number must be between 1 to 5");
         } else if (output == 12) {
             System.out.println("there is no log yet");
         } else if (output == 13) {
-            System.out.println("no user exist with this username");
+            System.out.println("you didn't buy this product");
         } else if (output == 14) {
-            System.out.println("your password is wrong");
+            System.out.println("score add to product");
         } else if (output == 15) {
-            System.out.println("login successful");
+            System.out.println("product number decrese");
         } else if (output == 16) {
-            System.out.println("no field matches with this");
+            System.out.println("");
         } else if (output == 17) {
-            System.out.println("password changed");
-        } else if (output == 18) {
-            System.out.println("name changed");
-        } else if (output == 19) {
-            System.out.println("last name changed");
-        } else if (output == 20) {
-            System.out.println("Email changed");
-        } else if (output == 21) {
-            System.out.println("phone number changed");
-        } else if (output == 22) {
-            System.out.println("logout");
-        } else if (output == 23) {
-            System.out.println("you cannot create manager profile");
-        } else if (output == 24) {
-            System.out.println("You've logged in before");
-        } else if (output == 25) {
+            System.out.println("");
+        }
+    }
+    public static void showPurchaseOutput(int output){
+        if (output == 0) {
+            System.out.println("please enter discount id");
+        } else if (output == 1) {
+            System.out.println("answer must be (yes|no)");
+        } else if (output == 2) {
+            System.out.println("enter payment to finish buying process");
+        } else if (output == 3) {
+            System.out.println("you dont have this discount id");
+        } else if (output == 4) {
+            System.out.println("date is invalid");
+        } else if (output == 5) {
+            System.out.println("you can't use iy anymore");
+        } else if (output == 6) {
             System.out.println("you have to login first");
-        } else if (output == 26) {
-            System.out.println("no role matches with this");
-        } else if (output == 27) {
-            System.out.println("you have already requested for new account");
-        } else if (output == 28) {
-            System.out.println("you don't have permission for new account");
-        } else if (output == 29) {
-            System.out.println("Your request has not been reviewed");
+        } else if (output == 7) {
+            System.out.println("please enter your phone number");
+        } else if (output == 8) {
+            System.out.println("you aren't a customer");
+        } else if (output == 9) {
+            System.out.println("");
+        } else if (output == 10) {
+            System.out.println("");
+        } else if (output == 11) {
+            System.out.println("");
+        } else if (output == 12) {
+            System.out.println("");
+        } else if (output == 13) {
+            System.out.println("");
+        } else if (output == 14) {
+            System.out.println("");
+        } else if (output == 15) {
+            System.out.println("");
+        } else if (output == 16) {
+            System.out.println("");
+        } else if (output == 17) {
+            System.out.println("");
+        } else if (output == 18) {
+            System.out.println("");
+        } else if (output == 19) {
+            System.out.println("");
+        } else if (output == 20) {
+            System.out.println("");
+        } else if (output == 21) {
+            System.out.println("");
         }
     }
 
@@ -352,7 +365,7 @@ public class OutputMassageHandler {
         } else if (output == 16) {
             System.out.println("please enter number of product");
         } else if (output == 17) {
-            System.out.println("product add request sent");
+            System.out.println("please enter value (if you enter finish process end)");
         } else if (output == 18) {
             System.out.println("product removed");
         } else if (output == 19) {
@@ -374,9 +387,17 @@ public class OutputMassageHandler {
         } else if (output == 27) {
             System.out.println("there is no product with this id");
         } else if (output == 28) {
-            System.out.println("");
+            System.out.println("sale request sent");
         } else if (output == 29) {
-            System.out.println("");
+            System.out.println("value format is invalid");
+        }else if (output == 30) {
+            System.out.println("please enter key you want to change value");
+        } else if (output == 31) {
+            System.out.println("there is no trait in category");
+        }else if (output == 32) {
+            System.out.println("please enter new value");
+        }else if (output == 33) {
+            System.out.println("new value request sent");
         }
     }
 
@@ -426,9 +447,9 @@ public class OutputMassageHandler {
         } else if (output == 21) {
             System.out.println("please enter sale amount");
         } else if (output == 22) {
-            System.out.println("please enter product you want to have account (if you enter finish process end)");
+            System.out.println("please enter product you want to have sale (if you enter finish process end)");
         } else if (output == 23) {
-            System.out.println("add sale request sent");
+            System.out.println("");
         } else if (output == 24) {
             System.out.println("");
         } else if (output == 25) {
@@ -444,53 +465,6 @@ public class OutputMassageHandler {
         }
     }
 
-    public static void showPurchaseOutput(int output){
-        if (output == 0) {
-            System.out.println("please enter discount id");
-        } else if (output == 1) {
-            System.out.println("answer must be (yes|no)");
-        } else if (output == 2) {
-            System.out.println("enter payment to finish buying process");
-        } else if (output == 3) {
-            System.out.println("you dont have this discount id");
-        } else if (output == 4) {
-            System.out.println("date is invalid");
-        } else if (output == 5) {
-            System.out.println("you can't use iy anymore");
-        } else if (output == 6) {
-            System.out.println("");
-        } else if (output == 7) {
-            System.out.println("");
-        } else if (output == 8) {
-            System.out.println("");
-        } else if (output == 9) {
-            System.out.println("");
-        } else if (output == 10) {
-            System.out.println("");
-        } else if (output == 11) {
-            System.out.println("");
-        } else if (output == 12) {
-            System.out.println("");
-        } else if (output == 13) {
-            System.out.println("");
-        } else if (output == 14) {
-            System.out.println("");
-        } else if (output == 15) {
-            System.out.println("");
-        } else if (output == 16) {
-            System.out.println("");
-        } else if (output == 17) {
-            System.out.println("");
-        } else if (output == 18) {
-            System.out.println("");
-        } else if (output == 19) {
-            System.out.println("");
-        } else if (output == 20) {
-            System.out.println("");
-        } else if (output == 21) {
-            System.out.println("");
-        }
-    }
 
     public static void showAccountOutput(int output) {
         if (output == 0) {
@@ -550,7 +524,7 @@ public class OutputMassageHandler {
         } else if (output == 27) {
             System.out.println("you can't change firm information");
         } else if (output == 28) {
-            System.out.println("please enter firm name you want to change");
+            System.out.println("please enter firm's name you want to change");
         } else if (output == 29) {
             System.out.println("please enter your birthday Date");
         } else if (output == 30) {
@@ -566,9 +540,9 @@ public class OutputMassageHandler {
         } else if (output == 35) {
             System.out.println("there is no account with this user name");
         } else if (output == 36) {
-            System.out.println("");
+            System.out.println("username format is invalid");
         } else if (output == 37) {
-            System.out.println("");
+            System.out.println("enter firm name");
         } else if (output == 38) {
             System.out.println("");
         } else if (output == 39) {
@@ -664,19 +638,12 @@ public class OutputMassageHandler {
         }
     }
 
-
-
-  /*  public static void showOutputWith2String(String first, String second, int output) {
-        if (output == 1) {
-            System.out.println("you get " + first + " to product " + second);
-        } else if (output == 2) {
-            System.out.println("product " + first + " " + second + " number changed");
-        } else if (output == 3) {
-            System.out.println();
-        }
+    public static void show(String show){
+        System.out.println(show);
     }
 
-   */
+
+
 
 
 }

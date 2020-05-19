@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 
 public class SaleLog extends Log{
@@ -20,7 +21,7 @@ public class SaleLog extends Log{
         id=logId;
         allSellersLog.add(this);
         localDateTimeForSaleLog=LocalDateTime.now();
-        writeInJ();
+     //   writeInJ();
     }
 
     //detail
@@ -67,6 +68,7 @@ public class SaleLog extends Log{
 
 
 
+
     //finish//doubt
     public void addProductToSaleLog(String productId){
         Product product=Product.getProductById(productId);
@@ -74,15 +76,18 @@ public class SaleLog extends Log{
     }
 
 
-    public int compareTo(SaleLog saleLog) {
-        return getLocalDateTimeForSaleLog().compareTo(saleLog.getLocalDateTimeForSaleLog());
-    }
+    public static Comparator<SaleLog> productComparatorForScore = new Comparator<SaleLog>() {
 
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<SaleLog>>(){}.getType();
-        String json= FileHandling.getGson().toJson(getAllSellersLog(),collectionType);
-        FileHandling.turnToArray(json+" "+"saleLog.json");
-    }
+        public int compare(SaleLog o1, SaleLog o2) {
+            return o1.getLocalDateTimeForSaleLog().compareTo(o2.getLocalDateTimeForSaleLog());
+        }
+    };
+
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<SaleLog>>(){}.getType();
+//        String json= FileHandling.getGson().toJson(getAllSellersLog(),collectionType);
+//        FileHandling.turnToArray(json+" "+"saleLog.json");
+//    }
 
     @Override
     public String toString() {

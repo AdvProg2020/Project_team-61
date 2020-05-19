@@ -1,47 +1,53 @@
 package controller.request;
 
+import com.google.gson.InstanceCreator;
 import com.google.gson.reflect.TypeToken;
+import com.sun.org.apache.regexp.internal.RE;
 import controller.menus.LoginMenu;
 import model.accounts.Account;
+import model.accounts.Seller;
+import model.log.SaleLog;
 import view.FileHandling;
+import view.OutputHandler;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
-
+import java.util.Comparator;
 
 public  abstract class Request {
     private String requestText;
     private String requestDate;
     private Account seller;
-    private static ArrayList<Request> allRequests = new ArrayList<>();
+    static ArrayList<Request> allRequests = new ArrayList<>();
+    LocalDateTime now;
 
-    private LoginMenu loginMenu;
-
-
-    public Request(String requestID) {
+    public Request(String requestID) throws IOException {
         this.requestText = requestID;
 
         //?
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
+        now = LocalDateTime.now();
         requestDate = dtf.format(now);
-        seller = LoginMenu.getLoginAccount();
+        seller = (Seller) LoginMenu.getLoginAccount();
         allRequests.add(this);
+        writeInJ();
+    }
+
+    public LocalDateTime getNow() {
+        return now;
+    }
+
+    public static ArrayList<Request> getAllRequests() {
+        return allRequests;
     }
 
     public String getRequestText() {
         return requestText;
     }
 
-    /*public static void declineRequest(String requestId){
-        allRequests.remove(getRequestFromID(requestId));
-    }
-
-     */
     public abstract void declineRequest();
 
     public abstract void acceptRequest() throws IOException;
@@ -65,8 +71,18 @@ public  abstract class Request {
     public static void writeInJ() throws IOException {
         Type collectionType = new TypeToken<ArrayList<Request>>(){}.getType();
         String json= FileHandling.getGson().toJson(Request.allRequests,collectionType);
-        FileHandling.turnToArray(json+" "+"request.json");
+        FileHandling.setFileName("request.json");
+        FileHandling.setJsonString(json);
+        FileHandling.writeInFile(json,"request.json");
     }
+
+    public static Comparator<Request> productComparatorForScore = new Comparator<Request>() {
+
+        public int compare(Request o1, Request o2) {
+            return o1.getNow().compareTo(o2.getNow());
+        }
+    };
+
 
     @Override
     public String toString() {
@@ -74,7 +90,6 @@ public  abstract class Request {
                 "requestText='" + requestText + '\'' +
                 ", requestDate='" + requestDate + '\'' +
                 ", seller=" + seller +
-                ", loginMenu=" + loginMenu +
                 '}';
     }
 }

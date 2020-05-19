@@ -5,6 +5,7 @@ import view.FileHandling;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Category{
     private String name;
@@ -17,7 +18,7 @@ public class Category{
     public Category(String name) throws IOException {
         this.name = name;
         allCategories.add(this);
-        writeInJ();
+//        writeInJ();
     }
 
     public void addTrait(String trait){
@@ -30,6 +31,10 @@ public class Category{
                 product.getCategorySpecifications().put(tr, null);
             }
         }
+    }
+
+    public static ArrayList<Category> getAllCategories() {
+        return allCategories;
     }
 
     public void removeTrait(String trait){
@@ -88,6 +93,21 @@ public class Category{
     public ArrayList<Category> listCategories(){
         return allCategories;
     }
+
+
+    public static Comparator<Category> productComparatorForView = new Comparator<Category>() {
+
+        public int compare(Category s1, Category s2) {
+
+            String productView1 = s1.getName();
+            String productView2 = s2.getName();
+            return productView1.compareTo(productView2);
+
+        }
+    };
+
+
+
     @Override
     public String toString() {
         return "Category{" +
@@ -97,9 +117,9 @@ public class Category{
                 ", allProducts=" + allProducts
                 ;
     }
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Category>>(){}.getType();
-        String json= FileHandling.getGson().toJson(Category.allCategories,collectionType);
-        FileHandling.turnToArray(json+" "+"category.json");
-    }
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<Category>>(){}.getType();
+//        String json= FileHandling.getGson().toJson(Category.allCategories,collectionType);
+//        FileHandling.turnToArray(json+" "+"category.json");
+//    }
 }

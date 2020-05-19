@@ -1,13 +1,14 @@
 package controller.menus;
 
 import controller.request.AccountRequest;
+import controller.request.Request;
 import model.accounts.Account;
-import model.accounts.AccountStatus;
 import model.accounts.Seller;
 import model.firms.Firm;
 import view.*;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class LoginMenu {
     private static int outputNo;
@@ -19,8 +20,6 @@ public class LoginMenu {
     private static AccountRequest accountRequest;
     private static Firm firm;
     private static String firmName;
-
-
 
     public static Firm getFirm() {
         return firm;
@@ -74,10 +73,8 @@ public class LoginMenu {
             outputNo = 15;
             menu = MenuStatus.MANAGERMENU;
         } else if (role.equalsIgnoreCase("seller")) {
-            if (loginAccount.getAccountStatus().equals(AccountStatus.CONFIRMED)) {
-                menu = MenuStatus.SELLERMENU;
-                outputNo = 15;
-            } else outputNo = 33;
+            menu = MenuStatus.SELLERMENU;
+            outputNo = 15;
         }
         CommandProcessor.setMenuStatus(menu);
     }
@@ -88,19 +85,22 @@ public class LoginMenu {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWPERSONALINFO);
     }
 
-    public static void processEdit(String field) {
+    public static void processEdit(String field) throws IOException {
         if (field.matches("(?i)(?:username|password|last\\s*name|email|phone\\s*number|firm)")) {
             if (loginAccount.getRole() == "seller") {
                 String id = "seller " + LoginMenu.getLoginAccount().getUsername() + "wants edit account's " + field;
                 if (accountRequest.isThereRequestFromID(id)) {
-                    accountRequest.deleteRequest(id);
+                    accountRequest = new AccountRequest(id);
+                    accountRequest.setLastname(LoginMenu.getLoginAccount().getUsername());
+                    accountRequest.setFirmName(firm.getName());
+                }else accountRequest= (AccountRequest) Request.getRequestFromID(id);
+                if(field.equalsIgnoreCase("firm")){
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMNAME);
+                    outputNo = 28;
+                }else {
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITSELLERACCOUNT);
+                    outputNo = 34;
                 }
-                accountRequest = new AccountRequest(id);
-                accountRequest.setLastname(LoginMenu.getLoginAccount().getUsername());
-                accountRequest.setFirmName(firm.getName());
-                loginAccount.setAccountStatus(AccountStatus.UNDERREVIEWFOREDITING);
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITSELLERACCOUNT);
-                outputNo = 34;
             } else {
                 if (!field.equalsIgnoreCase("firm")) {
                     CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITACCOUNT);
@@ -108,7 +108,7 @@ public class LoginMenu {
                 } else outputNo = 27;
             }
             LoginMenu.field = field;
-            OutputMassageHandler.showOutputWithString(field, 3);
+            // OutputMassageHandler.showOutputWithString(field, 3);
         } else outputNo = 16;
         OutputMassageHandler.showAccountOutput(outputNo);
     }
@@ -130,7 +130,7 @@ public class LoginMenu {
                 outputNo = 19;
             } else outputNo = 7;
         } else if (field.equalsIgnoreCase("Email")) {
-            if (edit.matches("(?:[a-z0-9!#$%&'+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'+/=?^_`{|}~-]+)|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])\")@(?:(?:[a-z0-9](?:[a-z0-9-][a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-][a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")) {
+            if (edit.matches("^(.+)@(.+)$")) {
                 loginAccount.setEmail(edit);
                 outputNo = 20;
             } else outputNo = 9;
@@ -160,7 +160,7 @@ public class LoginMenu {
                 outputNo = 19;
             } else outputNo = 7;
         } else if (field.equalsIgnoreCase("Email")) {
-            if (edit.matches("(?:[a-z0-9!#$%&'+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'+/=?^_`{|}~-]+)|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])\")@(?:(?:[a-z0-9](?:[a-z0-9-][a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-][a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")) {
+            if (edit.matches("^(.+)@(.+)$")) {
                 accountRequest.setEmail(edit);
                 outputNo = 20;
             } else outputNo = 9;
@@ -169,9 +169,6 @@ public class LoginMenu {
                 accountRequest.setPhoneNo(Integer.parseInt(edit));
                 outputNo = 21;
             } else outputNo = 11;
-        } else if (field.equalsIgnoreCase("firm")) {
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMNAME);
-            outputNo = 28;
         }
         OutputMassageHandler.showAccountOutput(outputNo);
     }
@@ -220,7 +217,7 @@ public class LoginMenu {
                 outputNo = 9;
             } else outputNo = 8;
         } else if (field.equalsIgnoreCase("email")) {
-            if (detail.matches("(?:[a-z0-9!#$%&'+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'+/=?^_`{|}~-]+)|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])\")@(?:(?:[a-z0-9](?:[a-z0-9-][a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-][a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")) {
+            if (detail.matches("^(.+)@(.+)$")) {
                 accountRequest.setFirmEmail(detail);
                 outputNo = 11;
             } else outputNo = 10;

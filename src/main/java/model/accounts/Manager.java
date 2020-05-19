@@ -15,14 +15,14 @@ public class Manager extends Account {
         super(username);
         role = "manager";
         allManagers.add(this);
-        writeInJ();
+       // writeInJ();
     }
 
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Manager>>(){}.getType();
-        String json= FileHandling.getGson().toJson(Manager.allManagers,collectionType);
-        FileHandling.turnToArray(json+" "+"manager.json");
-    }
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<Manager>>(){}.getType();
+//        String json= FileHandling.getGson().toJson(Manager.allManagers,collectionType);
+//
+//    }
 
     @Override
     public String toString() {

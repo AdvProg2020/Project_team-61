@@ -40,7 +40,7 @@ public class Product  {
     public static ArrayList<String> listOfId=new ArrayList<String>();
     private  ArrayList<Comment> proComments = new ArrayList<Comment>();
     private ArrayList<Score> proScores = new ArrayList<>();
-    private HashMap<String,String> categorySpecifications = new HashMap<>();
+    private static HashMap<String,String> categorySpecifications = new HashMap<>();
 
 
     //objectsAdded
@@ -58,7 +58,7 @@ public class Product  {
     }
 
 
-    public HashMap<String, String> getCategorySpecifications() {
+    public static HashMap<String, String> getCategorySpecifications() {
         return categorySpecifications;
     }
 
@@ -76,12 +76,16 @@ public class Product  {
         this.category=category;
 //        listOfSellers.add(seller);
         allProduct.add(this);
-        writeInJ();
+       // writeInJ();
     }
 
 
     //settersAndGetters----------------------------------------------------------------------------------
 
+
+    public ArrayList<Customer> getListOfBuyers() {
+        return listOfBuyers;
+    }
 
     public void setIsBought(Boolean isBought){
         this.isBought=isBought;
@@ -126,8 +130,8 @@ public class Product  {
     public int getNumberOfView () {
         return numberOfViews;
     }
-    public void setNumberOfViews(int numberOfViews) {
-        this.numberOfViews = numberOfViews;
+    public void setNumberOfViews() {
+        this.numberOfViews=numberOfViews+1;
     }
 
     public double getAverageScore () {
@@ -308,11 +312,11 @@ public class Product  {
         }
     };
 
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Product>>(){}.getType();
-        String json= FileHandling.getGson().toJson(Product.getProductList(),collectionType);
-        FileHandling.turnToArray(json+" "+"product.json");
-    }
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<Product>>(){}.getType();
+//        String json= FileHandling.getGson().toJson(Product.getProductList(),collectionType);
+//        FileHandling.turnToArray(json+" "+"product.json");
+//    }
 
     @Override
     public String toString() {

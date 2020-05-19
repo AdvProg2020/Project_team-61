@@ -28,7 +28,7 @@ public class Score {
         this.productTOScore = productTOScore;
         this.score = score;
         allScores.add(this);
-        writeInJ();
+//        writeInJ();
     }
 
 
@@ -61,11 +61,11 @@ public class Score {
         productTOScore.setAverageScore(total);
     }
 
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Score>>(){}.getType();
-        String json= FileHandling.getGson().toJson(getAllScores(),collectionType);
-        FileHandling.turnToArray(json+" "+"score.json");
-    }
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<Score>>(){}.getType();
+//        String json= FileHandling.getGson().toJson(getAllScores(),collectionType);
+//        FileHandling.turnToArray(json+" "+"score.json");
+//    }
 
     @Override
     public String toString() {

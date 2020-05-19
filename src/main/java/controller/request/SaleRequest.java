@@ -8,6 +8,7 @@ import model.productRelated.Product;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 public class SaleRequest extends Request {
     private String offId = null;
@@ -20,7 +21,8 @@ public class SaleRequest extends Request {
     private Sale sale;
     private ArrayList<SaleRequest> allSaleRequests = new ArrayList<>();
 
-    public SaleRequest(String requestID) {
+
+    public SaleRequest(String requestID) throws IOException {
         super(requestID);
         allSaleRequests.add(this);
 
@@ -28,7 +30,8 @@ public class SaleRequest extends Request {
 
     @Override
     public void declineRequest() {
-
+        allRequests.remove(this);
+        allSaleRequests.remove(this);
     }
 
     @Override
@@ -38,7 +41,6 @@ public class SaleRequest extends Request {
         sale.setAllSaleProducts(allSaleProducts);
         sale.setSaleStatus(SaleStatus.CONFIRMED);
     }
-
 
 
 

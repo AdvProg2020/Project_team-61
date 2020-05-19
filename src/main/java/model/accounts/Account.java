@@ -1,6 +1,7 @@
 package model.accounts;
 
 import com.google.gson.reflect.TypeToken;
+import model.filtar.Filter;
 import model.firms.Firm;
 import model.log.BuyLog;
 import model.log.SaleLog;
@@ -28,10 +29,7 @@ public abstract class Account {
     Date birthdayDate;
     Firm firm;
     boolean fast;
-    private AccountStatus accountStatus;
     ArrayList<DiscountCode> allDiscountCodes;
-    //private static ArrayList<SaleLog> allSaleLogs = new ArrayList<>();
-    // private static ArrayList<BuyLog> allBuyLogs = new ArrayList<>();
     private  static ArrayList<Account> allAccounts = new ArrayList<>();
     private static ArrayList<Date> birthdayDates=  new ArrayList<>();
 
@@ -161,10 +159,6 @@ public abstract class Account {
         this.address = address;
     }
 
-    public void setAccountStatus(AccountStatus accountStatus) {
-        this.accountStatus = accountStatus;
-    }
-
     public void setFast(boolean fast) {
         this.fast = fast;
     }
@@ -203,15 +197,11 @@ public abstract class Account {
     }
 
 
-    public AccountStatus getAccountStatus() {
-        return accountStatus;
-    }
-
     //......................................................................
     public static void writeInJ() throws IOException {
         Type collectionType = new TypeToken<ArrayList<Account>>(){}.getType();
         String json= FileHandling.getGson().toJson(Account.allAccounts,collectionType);
-        FileHandling.turnToArray(json+" "+"account.json");
+        FileHandling.writeInFile(json,"account.json");
     }
 
     public static Comparator<Account> accountComparatorForUsername = new Comparator<Account>() {

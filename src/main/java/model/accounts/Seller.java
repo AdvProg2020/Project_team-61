@@ -1,27 +1,30 @@
 package model.accounts;
 
-import com.google.gson.reflect.TypeToken;
 import model.firms.Firm;
 import model.log.SaleLog;
-import view.FileHandling;
+import model.productRelated.Product;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Seller extends Account {
     private Firm firm;
     private static ArrayList<SaleLog> saleLogsHistory = new ArrayList<>();
     private static ArrayList<Seller> allSellers = new ArrayList<>();
+    private static ArrayList<Product> allProduct = new ArrayList<>();
 
     public Seller(String username) throws IOException {
         super(username);
         role = "seller";
         allSellers.add(this);
-        writeInJ();
+        // writeInJ();
     }
 
-    public void addLog(SaleLog saleLog){
+    public static ArrayList<Product> getAllProduct() {
+        return allProduct;
+    }
+
+    public void addLog(SaleLog saleLog) {
         saleLogsHistory.add(saleLog);
     }
 
@@ -33,11 +36,14 @@ public class Seller extends Account {
         return firm;
     }
 
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Seller>>(){}.getType();
-        String json= FileHandling.getGson().toJson(allSellers,collectionType);
-        FileHandling.turnToArray(json+" "+"seller.json");
-    }
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<Seller>>() {
+//        }.getType();
+//        String json = FileHandling.getGson().toJson(Seller.allSellers, collectionType);
+//        FileHandling.setFileName("seller.json");
+//        FileHandling.setJsonString(json);
+//        FileHandling.writeInFile(json,"seller.json");
+//    }
 
     @Override
     public String toString() {

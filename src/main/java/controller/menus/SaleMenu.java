@@ -13,7 +13,7 @@ public class SaleMenu {
     public static void processOffs() throws FileNotFoundException {
         OutputHandler.showOffs();
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-        CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+        CommandProcessor.setMenuStatus(MenuStatus.SALEMENU);
     }
 
 }

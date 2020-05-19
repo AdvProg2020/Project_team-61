@@ -1,5 +1,6 @@
 package controller.menus;
 
+import model.firms.Firm;
 import model.productRelated.Category;
 import model.productRelated.Product;
 import model.filtar.Filter;
@@ -73,18 +74,24 @@ public class ProductsMenu {
     }
 
     public static void categoryFilter(String category) throws FileNotFoundException {
-        Filter.categoryFilter(Category.getCategoryWithName(category));
-        OutputHandler.showAllProductAfterFilter();
+        if(Category.isThereCategoryWithName(category)) {
+            Filter.categoryFilter(Category.getCategoryWithName(category));
+            OutputHandler.showAllProductAfterFilter();
+        }else OutputMassageHandler.showProductsOutput(13);
     }
 
     public static void FirmFilter(String category) throws FileNotFoundException {
-        Filter.companiesFilter(category);
-        OutputHandler.showAllProductAfterFilter();
+        if(Firm.isThereFirmWithID(category)) {
+            Filter.companiesFilter(category);
+            OutputHandler.showAllProductAfterFilter();
+        }else OutputMassageHandler.showProductsOutput(14);
     }
 
     public static void productNameFilter(String product) throws FileNotFoundException {
-        Filter.productNameFilter(product);
-        OutputHandler.showAllProductAfterFilter();
+        if(Product.isThereProductWithId(product)) {
+            Filter.productNameFilter(product);
+            OutputHandler.showAllProductAfterFilter();
+        }else OutputMassageHandler.showProductsOutput(15);
     }
 
     public static void periodFilter(String first, String second) {
