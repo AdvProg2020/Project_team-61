@@ -1,6 +1,7 @@
 package model.accounts;
 
 import com.google.gson.reflect.TypeToken;
+import model.filtar.Filter;
 import model.firms.Firm;
 import model.log.BuyLog;
 import model.log.SaleLog;
@@ -15,7 +16,7 @@ import java.util.Date;
 import java.util.Iterator;
 
 public abstract class Account {
-   String username;
+    String username;
     String name;
     String lastname;
     String password;
@@ -67,7 +68,7 @@ public abstract class Account {
     public Account(String username) throws IOException {
         this.username = username;
         allAccounts.add(this);
-       // writeInJ();
+        // writeInJ();
     }
 
     public void addDiscountCode(DiscountCode discountCode){
@@ -200,7 +201,7 @@ public abstract class Account {
     public static void writeInJ() throws IOException {
         Type collectionType = new TypeToken<ArrayList<Account>>(){}.getType();
         String json= FileHandling.getGson().toJson(Account.allAccounts,collectionType);
-        FileHandling.turnToArray(json+" "+"account.json");
+        FileHandling.writeInFile(json,"account.json");
     }
 
     public static Comparator<Account> accountComparatorForUsername = new Comparator<Account>() {

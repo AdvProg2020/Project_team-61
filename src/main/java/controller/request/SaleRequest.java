@@ -15,6 +15,7 @@ public class SaleRequest extends Request {
     private Date startOfSalePeriod = null;
     private Date endOfSalePeriod = null;
     private int saleAmount = 0;
+    private String product= null;
     private Account seller = null;
     private ArrayList<Product> allSaleProducts = new ArrayList<>();
     private SaleStatus saleStatus;
@@ -22,7 +23,7 @@ public class SaleRequest extends Request {
     private ArrayList<SaleRequest> allSaleRequests = new ArrayList<>();
 
 
-    public SaleRequest(String requestID) {
+    public SaleRequest(String requestID) throws IOException {
         super(requestID);
         allSaleRequests.add(this);
 
@@ -32,6 +33,7 @@ public class SaleRequest extends Request {
     public void declineRequest() {
         allRequests.remove(this);
         allSaleRequests.remove(this);
+        Request.getAllRequests().remove(this);
     }
 
     @Override
@@ -40,6 +42,7 @@ public class SaleRequest extends Request {
         sale.setSaleDetails(SaleStatus.CONFIRMED, startOfSalePeriod, endOfSalePeriod, saleAmount, seller);
         sale.setAllSaleProducts(allSaleProducts);
         sale.setSaleStatus(SaleStatus.CONFIRMED);
+        Product.getProductById(product).setInSale(true);
     }
 
 
@@ -72,5 +75,7 @@ public class SaleRequest extends Request {
         this.saleAmount = saleAmount;
     }
 
-
+    public void setProduct(String product) {
+        this.product = product;
+    }
 }

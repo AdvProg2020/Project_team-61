@@ -32,7 +32,11 @@ public class Sale{
         this.endOfSalePeriod = endOfSalePeriod;
         this.saleAmount = saleAmount;
         this.seller = seller;
-        writeInJ();
+//        writeInJ();
+    }
+
+    public static ArrayList<Sale> getAllSales() {
+        return allSales;
     }
 
     public String getOffId() {
@@ -94,10 +98,6 @@ public class Sale{
         return null;
     }
 
-    public static ArrayList<Sale> getAllSales() {
-        return allSales;
-    }
-
     public void setStartOfSalePeriod(Date startOfSalePeriod) {
         this.startOfSalePeriod = startOfSalePeriod;
     }
@@ -131,11 +131,11 @@ public class Sale{
 
     }
 
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Sale>>(){}.getType();
-        String json= FileHandling.getGson().toJson(Sale.allSales,collectionType);
-        FileHandling.turnToArray(json+" "+"sale.json");
-    }
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<Sale>>(){}.getType();
+//        String json= FileHandling.getGson().toJson(Sale.allSales,collectionType);
+//        FileHandling.turnToArray(json+" "+"sale.json");
+//    }
 
     @Override
     public String toString() {

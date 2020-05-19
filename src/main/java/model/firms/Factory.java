@@ -13,13 +13,13 @@ public class Factory extends Firm {
     public Factory(String ID) throws IOException {
         super(ID);
         allFactories.add(this);
-        writeInJ();
+        //      writeInJ();
     }
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Factory>>(){}.getType();
-        String json= FileHandling.getGson().toJson(Factory.allFactories,collectionType);
-        FileHandling.turnToArray(json+" "+"factory.json");
-    }
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<Factory>>(){}.getType();
+//        String json= FileHandling.getGson().toJson(Factory.allFactories,collectionType);
+//        FileHandling.turnToArray(json+" "+"factory.json");
+//    }
 
     @Override
     public String toString() {

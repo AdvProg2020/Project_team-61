@@ -16,13 +16,18 @@ import java.util.Arrays;
 
 public class FileHandling {
 
-    public static Gson gson = new GsonBuilder().create();
+    public static String fileName;
+    public static String jsonString;
 
-    public static void turnToArray(String arrayAndFile) throws IOException {
-        ArrayList<String> parts = new ArrayList<String>(
-                Arrays.asList(arrayAndFile.split(" ")));
-        writeInFile(parts.get(0),parts.get(1));
+    public static void setFileName(String fileName) {
+        FileHandling.fileName = fileName;
     }
+
+    public static void setJsonString(String jsonString) {
+        FileHandling.jsonString = jsonString;
+    }
+
+    public static Gson gson = new GsonBuilder().create();
 
     public static void writeInFile(String json,String fileName) throws IOException {
         FileWriter writer = new FileWriter(fileName);

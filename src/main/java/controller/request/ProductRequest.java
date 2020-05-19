@@ -1,6 +1,6 @@
 package controller.request;
 
-import model.accounts.Account;
+import model.accounts.Seller;
 import model.firms.Firm;
 import model.productRelated.Category;
 import model.productRelated.Product;
@@ -15,7 +15,7 @@ public class ProductRequest extends Request {
     private String productId = null;
     private String productName = null;
     private double price = 0;
-    private Account sellerName = null;
+    private Seller sellerName = null;
     private Firm companyName = null;
     private Category categoryName = null;
     private Category lastCategory = null;
@@ -25,7 +25,7 @@ public class ProductRequest extends Request {
     private HashMap<String,String> specialValue = new HashMap<>();
 
 
-    public ProductRequest(String requestID) {
+    public ProductRequest(String requestID) throws IOException {
         super(requestID);
         allProductRequests.add(this);
     }
@@ -34,6 +34,8 @@ public class ProductRequest extends Request {
     public void declineRequest() {
         allRequests.remove(this);
         allProductRequests.remove(this);
+        Product.getProductList().remove(this);
+        Seller.getAllProduct().remove(this);
     }
 
 
@@ -62,7 +64,7 @@ public class ProductRequest extends Request {
     public void setAdditionalDetail(String additionalDetail) {
         this.additionalDetail = additionalDetail;
     }
-    public void setSellerName(Account sellerName) {
+    public void setSellerName(Seller sellerName) {
         this.sellerName = sellerName;
     }
     public void setPrice(double price) {

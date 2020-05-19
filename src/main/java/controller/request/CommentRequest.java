@@ -5,6 +5,7 @@ import model.productRelated.Comment;
 import model.productRelated.CommentStatus;
 import model.productRelated.Product;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CommentRequest extends Request {
@@ -16,7 +17,7 @@ public class CommentRequest extends Request {
     private String id;
     private ArrayList<CommentRequest> allCommentRequests = new ArrayList<>();
 
-    public CommentRequest(String requestID) {
+    public CommentRequest(String requestID) throws IOException {
         super(requestID);
         allCommentRequests.remove(this);
     }

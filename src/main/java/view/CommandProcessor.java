@@ -68,10 +68,10 @@ public class CommandProcessor {
             "(?i)filter(.+)",//23
             "(?i)disable\\s+filter",//24
             "(?i)sort(.+)",//25
-            "(?i)select seller",//26
+            "(?i)select\\s+seller",//26
             "(.+)",//27
-            "(\\d+)\\s+(\\d+)"//28
-
+            "(\\d+)\\s+(\\d+)",//28
+            "(?i)sort\\s+by\\s+(.+)"//29
 
     };
 
@@ -181,13 +181,18 @@ public class CommandProcessor {
                     } else if (input.matches("manage\\s+categories")) {
                         error = false;
                         ManagerMenu.processManageCategories();
-                    } else if (subMenuStatus == SubMenuStatus.VIEWPERSONALINFO) {
+                    } else if (input.matches(regex[28])) {
+                        error = false;
+                        ManagerMenu.sortBy(getMatcher(input, regex[28]).group(1));
+                    }
+
+                }else if (subMenuStatus == SubMenuStatus.VIEWPERSONALINFO) {
                         if (input.matches(regex[2])) {
                             error = false;
                             LoginMenu.processEdit(getMatcher(input, regex[2]).group(1));
                         }
                     }
-                } else if (subMenuStatus == SubMenuStatus.MANAGEUSERS) {
+                 else if (subMenuStatus == SubMenuStatus.MANAGEUSERS) {
                     if (input.matches(regex[6])) {
                         error = false;
                         ManagerMenu.view(getMatcher(input, regex[6]).group(1));
@@ -249,14 +254,14 @@ public class CommandProcessor {
                         ManagerMenu.editDiscountCodeField(getMatcher(input, regex[27]).group(1));
                     }
                 } else if (subMenuStatus.equals(SubMenuStatus.ADDDISCOUNTCODE)) {
-                    if (input.matches(regex[15])) {
+                    if (input.matches(regex[27])) {
                         error = false;
-                        ManagerMenu.createNewDiscountCode(getMatcher(input, regex[16]).group(1));
+                        ManagerMenu.createNewDiscountCode(getMatcher(input, regex[27]).group(1));
                     }
                 } else if (subMenuStatus.equals(SubMenuStatus.DETAILDESCOUNTCODE)) {
-                    if (input.matches(regex[15])) {
+                    if (input.matches(regex[27])) {
                         error = false;
-                        ManagerMenu.setDetailToDiscountCode(getMatcher(input, regex[16]).group(1));
+                        ManagerMenu.setDetailToDiscountCode(getMatcher(input, regex[27]).group(1));
                     }
                 } else if (subMenuStatus.equals(SubMenuStatus.DETAILCATEGORY)) {
                     if (input.matches(regex[27])) {
@@ -319,6 +324,9 @@ public class CommandProcessor {
                     } else if (input.matches("view\\s+balance")) {
                         error = false;
                         SellerMenu.processViewBalance();
+                    }else if (input.matches(regex[28])) {
+                        error = false;
+                        SellerMenu.sortBy(getMatcher(input, regex[28]).group(1));
                     }
                 } else if (subMenuStatus == SubMenuStatus.MANAGEPRODUCTS) {
                     if (input.matches(regex[6])) {
@@ -430,6 +438,9 @@ public class CommandProcessor {
                     } else if (input.matches("view\\s+discount\\s+codes")) {
                         error = false;
                         CustomerMenu.processViewDiscountCodes();
+                    }else if (input.matches(regex[28])) {
+                        error = false;
+                        CustomerMenu.sortBy(getMatcher(input, regex[28]).group(1));
                     }
                 } else if (subMenuStatus == SubMenuStatus.VIEWCART) {
                     if (input.matches("show\\s+products")) {

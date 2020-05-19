@@ -142,9 +142,11 @@ public class ProductsMenu {
         if (checkSort(sortID)) {
             if (Sort.ifAvailable(sortID)) {
                 if (sortID.matches("number\\s*Of\\s*View")) {
+                    Sort.setNewArrayOfProductSort(Product.getProductList());
                     sortedList = Sort.scoreSort();
                     OutputHandler.showAllProductAfterSort(sortedList);
                 } else if (sortID.equalsIgnoreCase("score")) {
+                    Sort.setNewArrayOfProductSort(Product.getProductList());
                     sortedList = Sort.numberOfViewsSort();
                     OutputHandler.showAllProductAfterSort(sortedList);
                 } else outputNo = 9;
@@ -176,6 +178,7 @@ public class ProductsMenu {
     //done
     public static void processShowProductsID(String id) throws FileNotFoundException {
         if (Product.isThereProductWithId(id)) {
+            Product.getProductById(id).setNumberOfViews();
             OutputHandler.showProduct(id);
             productId = id;
             CommandProcessor.setMenuStatus(MenuStatus.PRODUCTMENU);

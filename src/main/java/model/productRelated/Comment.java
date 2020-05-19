@@ -76,9 +76,10 @@ public class Comment {
         allComments.add(this);
     }
 
-    public static ArrayList<Comment> getAllComments() {
+    public  ArrayList<Comment> getAllComments() {
         return allComments;
     }
+
 
     public Account getPersonToVote() {
         return personToVote;
@@ -105,11 +106,11 @@ public class Comment {
         }
     }
 
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Comment>>(){}.getType();
-        String json= FileHandling.getGson().toJson(getAllComments(),collectionType);
-        FileHandling.turnToArray(json+" "+"commend.json");
-    }
+//    public  void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<Comment>>(){}.getType();
+//        String json= FileHandling.getGson().toJson(getAllComments(),collectionType);
+//        FileHandling.turnToArray(json+" "+"commend.json");
+//    }
 
     @Override
     public String toString() {

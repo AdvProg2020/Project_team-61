@@ -6,6 +6,7 @@ import model.filtar.Filter;
 import model.off.DiscountCode;
 import model.productRelated.Category;
 import model.productRelated.Product;
+import model.sort.Sort;
 import view.*;
 
 import java.io.FileNotFoundException;
@@ -90,7 +91,7 @@ public class ManagerMenu {
             Product.deleteProduct(productID);
             OutputMassageHandler.showOutputWithString(productID, 2);
         }
-        OutputMassageHandler.showAccountOutput(outputNo);
+        OutputMassageHandler.showManagerOutput(outputNo);
     }
     //------------------------------------------------
 
@@ -105,7 +106,7 @@ public class ManagerMenu {
 
     public static void processCreateDiscountCode() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDDISCOUNTCODE);
-        OutputMassageHandler.showAccountOutput(6);
+        OutputMassageHandler.showManagerOutput(6);
     }
 
     public static void createNewDiscountCode(String discountCodeId) throws IOException {
@@ -116,7 +117,7 @@ public class ManagerMenu {
             CommandProcessor.setSubMenuStatus(SubMenuStatus.DETAILDESCOUNTCODE);
             outputNo = 7;
         } else outputNo = 25;
-        OutputMassageHandler.showAccountOutput(outputNo);
+        OutputMassageHandler.showManagerOutput(outputNo);
     }
 
     public static void setDetailToDiscountCode(String detail) throws ParseException {
@@ -176,6 +177,24 @@ public class ManagerMenu {
         OutputMassageHandler.showManagerOutput(outputNo);
     }
 
+    public static void sortBy(String sort) throws FileNotFoundException {
+        if(sort.matches("(?i)(?:request\\s+date|account\\s+name|category\\s+name|discount\\s+amount)")){
+            if(sort.matches("request\\s+date")){
+                Sort.setNewArrayOfRequest(Request.getAllRequests());
+                Sort.sortRequest();
+            }else if(sort.matches("account\\s+name")){
+                Sort.setNewArrayOfAccountSort(Account.getAllAccounts());
+                Sort.accountSortUserName();
+            }else if(sort.matches("category\\s+name")){
+                Sort.setNewArrayOfCategory(Category.getAllCategories());
+                Sort.categoryNameSort();
+            }else if(sort.matches("discount\\s+amount")){
+                Sort.setNewArrayOfDiscountCodeSort(DiscountCode.getAllDiscountCodes());
+                Sort.sortDiscountCodes();
+            }
+        }
+    }
+
     // gson
     public static void processViewDiscountCodes() throws FileNotFoundException {
         OutputHandler.showDiscountCodes();
@@ -187,7 +206,7 @@ public class ManagerMenu {
         OutputHandler.showDiscountCode(discountCodeID);
         if (checkDiscountCode(discountCodeID)) {
             OutputHandler.showDiscountCode(discountCodeID);
-        } else OutputMassageHandler.showAccountOutput(outputNo);
+        } else OutputMassageHandler.showManagerOutput(outputNo);
     }
 
     public static void editDiscountCode(String discountCodeID) {
@@ -195,7 +214,7 @@ public class ManagerMenu {
             editableDiscountCode = DiscountCode.getDiscountWithId(discountCodeID);
             CommandProcessor.setSubMenuStatus(SubMenuStatus.DISCOUNTCODEFIELD);
             outputNo = 15;
-        } else OutputMassageHandler.showAccountOutput(outputNo);
+        } else OutputMassageHandler.showManagerOutput(outputNo);
     }
 
     public static void discountCodeField(String field) {

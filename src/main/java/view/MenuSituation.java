@@ -101,8 +101,8 @@ public class MenuSituation {
             System.out.println("please enter your password");
         } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.REGISTERATIONDETAILS) {
             accountFields();
-        }else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.ADDFIRM) {
-                firmFields();
+        } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.ADDFIRM) {
+            firmFields();
 
         }//ManagerMenu
         else if (CommandProcessor.getMenuStatus() == MenuStatus.MANAGERMENU) {
@@ -190,7 +190,7 @@ public class MenuSituation {
                 System.out.println("enter number of product you want to remove");
             } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITACCOUNT) {
                 System.out.println("please enter your new value for " + LoginMenu.getField());
-            }else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.RECIVERINFORMATION) {
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.RECIVERINFORMATION) {
                 System.out.println("please enter your current phone number");
             } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.HAVEDISCOUNT) {
                 System.out.println("do you have discount (yes|no)");
@@ -224,19 +224,19 @@ public class MenuSituation {
                 System.out.println("offs\nshow product [productId]\nfiltering\nsorting");
             }
         } else if ((CommandProcessor.getMenuStatus() == MenuStatus.SALEMENU) || (CommandProcessor.getMenuStatus() == MenuStatus.PRODUCTSMENU)) {
-             if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FILTERING) {
+            if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FILTERING) {
                 System.out.println("show available filters\nfilter [an available]\ncurrent filters[]\ndisable filter [a selected filter]");
             } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.SORTING) {
                 System.out.println("show available sorts\nsort [an available sort]\ncurrent sort\ndisable sort");
-             } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.PERIODFILTER) {
-                 System.out.println("enter 2 number to filter");
-             } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FIRMFILTER) {
-                 System.out.println("enter firm name to filter");
-             } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.CATEGORYNAMEFILTER) {
-                 System.out.println("enter category name to filter");
-             } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.PRODUCTNAMEFILTER) {
-                 System.out.println("enter product name to filter");
-             }
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.PERIODFILTER) {
+                System.out.println("enter 2 number to filter");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FIRMFILTER) {
+                System.out.println("enter firm name to filter");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.CATEGORYNAMEFILTER) {
+                System.out.println("enter category name to filter");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.PRODUCTNAMEFILTER) {
+                System.out.println("enter product name to filter");
+            }
         }
         System.out.println("\nback\nhelp");
 
@@ -302,110 +302,110 @@ public class MenuSituation {
             } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITACCOUNT) {
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWPERSONALINFO);
                 System.out.println("you can choose field to edit");
-            } else if (CommandProcessor.getMenuStatus() == MenuStatus.SELLERMENU) {
-                if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
-                    CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
-                    System.out.println("now you are in main menu");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MANAGEPRODUCTS) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                    System.out.println("now you are in seller menu");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.VIEWOFFS) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                    System.out.println("now you are in seller menu");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.VIEWPERSONALINFO) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                    System.out.println("now you are in seller menu");
-                }
-                //
-                else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.PRODUCTFIELD) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                    System.out.println("now you are in seller menu");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITPRODUCT) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTFIELD);
-                    System.out.println("you can choose product field to edit");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITSPECIFICATION) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITPRODUCT);
-                    System.out.println("you can choose new key");
-                    //  } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.ADDPRODUCT) {
-                    //    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                    //      System.out.println("now you are in seller menu");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.SALEFIELD) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWOFFS);
-                    System.out.println("you have access to view offs command");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITSALE) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.SALEFIELD);
-                    System.out.println("you can choose field to edit");
-                    // } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.ADDSALE) {
-                    //      CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWOFFS);
-                    //      System.out.println("");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITSELLERACCOUNT) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWPERSONALINFO);
-                    System.out.println("you can choose field to edit");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FIRMNAME) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWPERSONALINFO);
-                    System.out.println("you can choose field to edit");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FIRMFIELD) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMNAME);
-                    System.out.println("you can choose firm");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITFIRM) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMFIELD);
-                    System.out.println("you can choose firm's field");
-                }
-                //CustomerMenu
-            } else if (CommandProcessor.getMenuStatus() == MenuStatus.CUSTOMERMENU) {
-                if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
-                    CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
-                    System.out.println("you are in main menu");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.VIEWCART) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                    System.out.println("you are in customer menu");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.VIEWORDERS) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                    System.out.println("you are in customer menu");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.VIEWPERSONALINFO) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                    System.out.println("now you are in customer menu");
-                }//
-                else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.INCREASEPRODUCTNUMBER) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
-                    System.out.println("you have access to view cart commands");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.DECREASEPRODUCTNUMBER) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
-                    System.out.println("you have access to view cart commands");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITACCOUNT) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWPERSONALINFO);
-                    System.out.println("you can choose field to change");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.RECIVERINFORMATION) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
-                    System.out.println("you have access to view cart commands");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.HAVEDISCOUNT) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
-                    System.out.println("please enter your current phone number");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.CHECKDISCOUNTCODE) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.HAVEDISCOUNT);
-                    System.out.println("do you have discount (yes|no)");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.PAYMENT) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.CHECKDISCOUNTCODE);
-                    System.out.println("please enter your discount");
-                }
-                //ProductsMenu
-            } else if (CommandProcessor.getMenuStatus() == MenuStatus.PRODUCTSMENU) {
-                if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
-                    CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
-                    System.out.println("you are in main menu");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FILTERING) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                    System.out.println("you are in products menu");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.SORTING) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                    System.out.println("you are in products menu");
-                }
-                //ProductMenu
-            } else if (CommandProcessor.getMenuStatus() == MenuStatus.PRODUCTMENU) {
-                if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
-                    CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
-                    System.out.println("you are in main menu");
-                }
+            }
+        } else if (CommandProcessor.getMenuStatus() == MenuStatus.SELLERMENU) {
+            if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
+                CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+                System.out.println("now you are in main menu");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MANAGEPRODUCTS) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                System.out.println("now you are in seller menu");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.VIEWOFFS) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                System.out.println("now you are in seller menu");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.VIEWPERSONALINFO) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                System.out.println("now you are in seller menu");
+            }
+            //
+            else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.PRODUCTFIELD) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                System.out.println("now you are in seller menu");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITPRODUCT) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTFIELD);
+                System.out.println("you can choose product field to edit");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITSPECIFICATION) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITPRODUCT);
+                System.out.println("you can choose new key");
+                //  } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.ADDPRODUCT) {
+                //    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                //      System.out.println("now you are in seller menu");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.SALEFIELD) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWOFFS);
+                System.out.println("you have access to view offs command");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITSALE) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.SALEFIELD);
+                System.out.println("you can choose field to edit");
+                // } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.ADDSALE) {
+                //      CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWOFFS);
+                //      System.out.println("");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITSELLERACCOUNT) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWPERSONALINFO);
+                System.out.println("you can choose field to edit");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FIRMNAME) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWPERSONALINFO);
+                System.out.println("you can choose field to edit");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FIRMFIELD) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMNAME);
+                System.out.println("you can choose firm");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITFIRM) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMFIELD);
+                System.out.println("you can choose firm's field");
+            }
+            //CustomerMenu
+        } else if (CommandProcessor.getMenuStatus() == MenuStatus.CUSTOMERMENU) {
+            if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
+                CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+                System.out.println("you are in main menu");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.VIEWCART) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                System.out.println("you are in customer menu");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.VIEWORDERS) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                System.out.println("you are in customer menu");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.VIEWPERSONALINFO) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                System.out.println("now you are in customer menu");
+            }//
+            else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.INCREASEPRODUCTNUMBER) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
+                System.out.println("you have access to view cart commands");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.DECREASEPRODUCTNUMBER) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
+                System.out.println("you have access to view cart commands");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITACCOUNT) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWPERSONALINFO);
+                System.out.println("you can choose field to change");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.RECIVERINFORMATION) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
+                System.out.println("you have access to view cart commands");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.HAVEDISCOUNT) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
+                System.out.println("please enter your current phone number");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.CHECKDISCOUNTCODE) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.HAVEDISCOUNT);
+                System.out.println("do you have discount (yes|no)");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.PAYMENT) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.CHECKDISCOUNTCODE);
+                System.out.println("please enter your discount");
+            }
+            //ProductsMenu
+        } else if (CommandProcessor.getMenuStatus() == MenuStatus.PRODUCTSMENU) {
+            if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
+                CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+                System.out.println("you are in main menu");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FILTERING) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                System.out.println("you are in products menu");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.SORTING) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                System.out.println("you are in products menu");
+            }
+            //ProductMenu
+        } else if (CommandProcessor.getMenuStatus() == MenuStatus.PRODUCTMENU) {
+            if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
+                CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+                System.out.println("you are in main menu");
             } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.DIGEST) {
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
                 System.out.println("you are in product menu");
@@ -421,34 +421,34 @@ public class MenuSituation {
             // System.out.println("enter comment content");
             //}
             //SaleMenu
-            else if (CommandProcessor.getMenuStatus() == MenuStatus.SALEMENU) {
-                if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
-                    CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
-                    System.out.println("you are in main menu");
-                }
-            } else if ((CommandProcessor.getMenuStatus() == MenuStatus.SALEMENU) || (CommandProcessor.getMenuStatus() == MenuStatus.PRODUCTSMENU)) {
-                if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
-                    CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
-                    System.out.println("you are in main menu");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FILTERING) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.SORTING) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.PERIODFILTER) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
-                    System.out.println("you have access to filter menu");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FIRMFILTER) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
-                    System.out.println("you have access to filter menu");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.CATEGORYNAMEFILTER) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
-                    System.out.println("you have access to filter menu");
-                } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.PRODUCTNAMEFILTER) {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
-                    System.out.println("you have access to filter menu");
-                }
+        }else if (CommandProcessor.getMenuStatus() == MenuStatus.SALEMENU) {
+            if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
+                CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+                System.out.println("you are in main menu");
+            }
+        } else if ((CommandProcessor.getMenuStatus() == MenuStatus.SALEMENU) || (CommandProcessor.getMenuStatus() == MenuStatus.PRODUCTSMENU)) {
+            if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.MAINMENU) {
+                CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+                System.out.println("you are in main menu");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FILTERING) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.SORTING) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.PERIODFILTER) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
+                System.out.println("you have access to filter menu");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FIRMFILTER) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
+                System.out.println("you have access to filter menu");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.CATEGORYNAMEFILTER) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
+                System.out.println("you have access to filter menu");
+            } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.PRODUCTNAMEFILTER) {
+                CommandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
+                System.out.println("you have access to filter menu");
             }
         }
+
 
     }
 

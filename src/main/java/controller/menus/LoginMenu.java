@@ -8,6 +8,7 @@ import model.firms.Firm;
 import view.*;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class LoginMenu {
     private static int outputNo;
@@ -84,7 +85,7 @@ public class LoginMenu {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWPERSONALINFO);
     }
 
-    public static void processEdit(String field) {
+    public static void processEdit(String field) throws IOException {
         if (field.matches("(?i)(?:username|password|last\\s*name|email|phone\\s*number|firm)")) {
             if (loginAccount.getRole() == "seller") {
                 String id = "seller " + LoginMenu.getLoginAccount().getUsername() + "wants edit account's " + field;

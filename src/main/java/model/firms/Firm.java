@@ -18,7 +18,7 @@ public abstract class Firm {
     public Firm(String name) throws IOException {
         this.name = name;
         allFirms.add(this);
-        writeInJ();
+        //    writeInJ();
     }
 
     public void setDetailToFirm( Double phoneNO, String address, String email){
@@ -33,6 +33,10 @@ public abstract class Firm {
             this.Email= email;
         }
 
+    }
+
+    public static ArrayList<Firm> getAllFirms() {
+        return allFirms;
     }
 
     public String getName() {
@@ -74,10 +78,6 @@ public abstract class Firm {
         return null;
     }
 
-    public static ArrayList<Firm> getAllFirms() {
-        return allFirms;
-    }
-
     public static boolean isThereFirmWithID(String ID){
         for(Firm firm : allFirms){
             if(firm.name.equalsIgnoreCase(ID))return true;
@@ -89,11 +89,11 @@ public abstract class Firm {
         allFirms.remove(getFirmWithID(ID));
     }
 
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Firm>>(){}.getType();
-        String json= FileHandling.getGson().toJson(Firm.allFirms,collectionType);
-        FileHandling.turnToArray(json+" "+"firm.json");
-    }
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<Firm>>(){}.getType();
+//        String json= FileHandling.getGson().toJson(Firm.allFirms,collectionType);
+//        FileHandling.turnToArray(json+" "+"firm.json");
+//    }
 
     @Override
     public String toString() {

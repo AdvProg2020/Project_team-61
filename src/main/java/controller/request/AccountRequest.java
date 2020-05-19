@@ -30,7 +30,7 @@ public class AccountRequest extends Request {
     private Account selectedAccount;
     private ArrayList<AccountRequest> allAccountRequests = new ArrayList<>();
 
-    public AccountRequest(String requestID) {
+    public AccountRequest(String requestID) throws IOException {
         super(requestID);
         allAccountRequests.add(this);
     }
@@ -39,6 +39,7 @@ public class AccountRequest extends Request {
     public void declineRequest() {
         allRequests.remove(this);
         allAccountRequests.remove(this);
+
     }
 
 

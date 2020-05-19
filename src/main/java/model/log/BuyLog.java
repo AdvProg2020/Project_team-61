@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -25,7 +26,7 @@ public class BuyLog extends Log {
         id = logId;
         localDateTimeForLog = LocalDateTime.now();
         allCustomersLog.add(this);
-        writeInJ();
+        //     writeInJ();
     }
 
 
@@ -187,12 +188,22 @@ public class BuyLog extends Log {
     }
 
     //done
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<BuyLog>>() {
-        }.getType();
-        String json = FileHandling.getGson().toJson(BuyLog.getAllCustomersLog(), collectionType);
-        FileHandling.turnToArray(json + " " + "buyLog.json");
-    }
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<BuyLog>>() {
+//        }.getType();
+//        String json = FileHandling.getGson().toJson(BuyLog.getAllCustomersLog(), collectionType);
+//        FileHandling.turnToArray(json + " " + "buyLog.json");
+//    }
+
+
+    public static Comparator<BuyLog> productComparatorForScore = new Comparator<BuyLog>() {
+
+        public int compare(BuyLog o1, BuyLog o2) {
+            return o1.getLocalDateTimeForLog().compareTo(o2.getLocalDateTimeForLog());
+        }
+    };
+
+
 
     @Override
     public String toString() {

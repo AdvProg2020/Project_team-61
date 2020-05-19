@@ -76,12 +76,14 @@ public class Product  {
         this.category=category;
 //        listOfSellers.add(seller);
         allProduct.add(this);
-        writeInJ();
+        // writeInJ();
     }
 
 
     //settersAndGetters----------------------------------------------------------------------------------
-
+    public void setNumberOfViews() {
+        this.numberOfViews=numberOfViews+1;
+    }
 
     public ArrayList<Customer> getListOfBuyers() {
         return listOfBuyers;
@@ -312,11 +314,11 @@ public class Product  {
         }
     };
 
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Product>>(){}.getType();
-        String json= FileHandling.getGson().toJson(Product.getProductList(),collectionType);
-        FileHandling.turnToArray(json+" "+"product.json");
-    }
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<Product>>(){}.getType();
+//        String json= FileHandling.getGson().toJson(Product.getProductList(),collectionType);
+//        FileHandling.turnToArray(json+" "+"product.json");
+//    }
 
     @Override
     public String toString() {
