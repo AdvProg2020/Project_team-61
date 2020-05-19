@@ -291,12 +291,12 @@ public class CustomerMenu {
     }
 
     //GSON
-    public static void processViewBalance() throws FileNotFoundException {
+    public static void processViewBalance()  {
         OutputHandler.showBalance(LoginMenu.getLoginAccount().getUsername());
     }
 
     //GSON
-    public static void processViewDiscountCodes() throws FileNotFoundException {
+    public static void processViewDiscountCodes()  {
         OutputHandler.showDiscountCodes();
     }
 
