@@ -58,11 +58,11 @@ public class CustomerMenu {
 
     //product.......................................................................................
     private static boolean checkProduct(String productID) {
-        // if (productID.matches("((?!^ +$)^.+$)")) {
+         if (productID.matches("\\S+")) {
         if (Product.isThereProductWithId(productID)) {
             return true;
         } else outputNo = 1;
-        // } else outputNo = 0;
+         } else outputNo = 0;
         return false;
     }
 
@@ -96,7 +96,7 @@ public class CustomerMenu {
     }
 
     public static void sortBy(String sort) throws FileNotFoundException {
-        if(sort.matches("(?i)(?:log\\s+date)")){
+        if(sort.matches("(?i)(?:^log\\s+date$)")){
              if(sort.matches("log\\s+date")) {
                  Customer customer= (Customer) LoginMenu.getLoginAccount();
                  Sort.setNewArrayOfBuyLog(customer.getBuyLogsHistory());
@@ -157,7 +157,7 @@ public class CustomerMenu {
     }
 
     public static void haveDiscount(String have) {
-        if (have.matches("(?i)(?:yes|no)")) {
+        if (have.matches("(?i)(?:^yes$|^no$)")) {
             if (have.equalsIgnoreCase("yes")) {
                 hasDiscount = true;
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.CHECKDISCOUNTCODE);

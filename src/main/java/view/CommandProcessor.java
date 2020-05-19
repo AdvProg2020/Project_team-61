@@ -42,36 +42,36 @@ public class CommandProcessor {
         CommandProcessor.internalMenu = internalMenu;
     }
 
-    private String[] regex = {"(?i)create\\s+account\\s+(.+)\\s+(.+)",
-            "(?i)login\\s+(.+)",//1
-            "(?i)edit\\s+(.+)",//2
-            "(?i)remove\\s+product\\s+(.+)",//3
-            "(?i)show\\s+product\\s+(.+)",//4
-            "(?i)compare\\s+(.+)",//5
-            "(?i)view\\s+(.+)",//6
-            "(?i)delete\\s+user(.+)",//7
-            "(?i)remove\\s+(.+)",//8
-            "(?i)view\\s+discount\\s+code(.+)",//9
-            "(?i)edit\\s+discount\\s+code(.+)",//10
-            "(?i)remove\\s+discount\\s+code(.+)",//11
-            "(?i)details\\s+(.+)",//12
-            "(?i)accept\\s+(.+)",//13
-            "(?i)decline\\s+(.+)",//14
-            "(?i)edit\\s+(.+)",//15
-            "(?i)add\\s+(.+)",//16
-            "(?i)remove\\s+(.+)",//17
-            "(?i)view\\s+buyers\\s+(.+)",//18
-            "(?i)increase(.+)",//19
-            "(?i)decrease(.+)",//20
-            "(?i)show\\s+order(.+)",//21
-            "(?i)rate(.+) (\\d+)",//22
-            "(?i)filter(.+)",//23
+    private String[] regex = {"(?i)create\\s+account\\s+(\\S+)\\s+((\\s*\\S+\\s*)+)",
+            "(?i)login\\s+((\\s*\\S+\\s*)+)",//1
+            "(?i)edit\\s+((\\s*\\S+\\s*)+)",//2
+            "(?i)remove\\s+product\\s+((\\s*\\S+\\s*)+)",//3
+            "(?i)show\\s+product\\s+((\\s*\\S+\\s*)+)",//4
+            "(?i)compare\\s+((\\s*\\S+\\s*)+)",//5
+            "(?i)view\\s+((\\s*\\S+\\s*)+)",//6
+            "(?i)delete\\s+user((\\s*\\S+\\s*)+)",//7
+            "(?i)remove\\s+((\\s*\\S+\\s*)+)",//8
+            "(?i)view\\s+discount\\s+code((\\s*\\S+\\s*)+)",//9
+            "(?i)edit\\s+discount\\s+code((\\s*\\S+\\s*)+)",//10
+            "(?i)remove\\s+discount\\s+code((\\s*\\S+\\s*)+)",//11
+            "(?i)details\\s+((\\s*\\S+\\s*)+)",//12
+            "(?i)accept\\s+((\\s*\\S+\\s*)+)",//13
+            "(?i)decline\\s+((\\s*\\S+\\s*)+)",//14
+            "(?i)edit\\s+((\\s*\\S+\\s*)+)",//15
+            "(?i)add\\s+((\\s*\\S+\\s*)+)",//16
+            "(?i)remove\\s+((\\s*\\S+\\s*)+)",//17
+            "(?i)view\\s+buyers\\s+((\\s*\\S+\\s*)+)",//18
+            "(?i)increase((\\s*\\S+\\s*)+)",//19
+            "(?i)decrease((\\s*\\S+\\s*)+)",//20
+            "(?i)show\\s+order((\\s*\\S+\\s*)+)",//21
+            "(?i)rate((\\s*\\S+\\s*)+)\\s+(\\d+)",//22
+            "(?i)filter((\\s*\\S+\\s*)+)",//23
             "(?i)disable\\s+filter",//24
-            "(?i)sort(.+)",//25
+            "(?i)sort((\\s*\\S+\\s*)+)",//25
             "(?i)select\\s+seller",//26
-            "(.+)",//27
+            "((\\s*\\S+\\s*)+)",//27
             "(\\d+)\\s+(\\d+)",//28
-            "(?i)sort\\s+by\\s+(.+)"//29
+            "(?i)sort\\s+by\\s+((\\s*\\S+\\s*)+)"//29
 
     };
 
@@ -468,7 +468,7 @@ public class CommandProcessor {
                         CustomerMenu.showOrder(getMatcher(input, regex[21]).group(1));
                     } else if (input.matches(regex[22])) {
                         error = false;
-                        CustomerMenu.rateProduct(getMatcher(input, regex[22]).group(1), Integer.parseInt(getMatcher(input, regex[22]).group(2)));
+                        CustomerMenu.rateProduct(getMatcher(input, regex[22]).group(1), Integer.parseInt(getMatcher(input, regex[22]).group(3)));
                     }
                 } else if (subMenuStatus == SubMenuStatus.VIEWPERSONALINFO) {
                     if (input.matches(regex[2])) {

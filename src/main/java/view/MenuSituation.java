@@ -238,7 +238,7 @@ public class MenuSituation {
                 System.out.println("enter product name to filter");
             }
         }
-        System.out.println("\nback\nhelp");
+        System.out.println("back\nhelp");
 
     }
 

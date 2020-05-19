@@ -41,7 +41,7 @@ public class ManagerMenu {
     }
 
     private static boolean checkUsername(String username) {
-        if (username.matches("^(?i)(?=.[a-z])(?=.[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
+        if (username.matches("^[a-z0-9_-]{3,15}$")) {
             if (Account.isThereAccountWithUsername(username)) {
                 return true;
             } else outputNo = 35;
@@ -158,13 +158,13 @@ public class ManagerMenu {
                 detailMenu = 4;
             } else outputNo = 14;
         } else if (detailMenu == 4) {
-            if (detail.matches("\\d+")) {
+            if (detail.matches("^\\d{1,2}$")) {
                 newDiscountCode.setDiscountAmount(Integer.parseInt(detail));
                 outputNo = 36;
                 detailMenu = 5;
             } else outputNo = 28;
         } else if (detailMenu == 5) {
-            if (detail.matches("\\d+")) {
+            if (detail.matches("^[a-z0-9_-]{3,15}$")) {
                 if (Account.isThereAccountWithUsername(detail)) {
                     newDiscountCode.addAccount(Account.getAccountWithUsername(detail));
                     outputNo = 37;
@@ -178,7 +178,7 @@ public class ManagerMenu {
     }
 
     public static void sortBy(String sort) throws FileNotFoundException {
-        if(sort.matches("(?i)(?:request\\s+date|account\\s+name|category\\s+name|discount\\s+amount)")){
+        if(sort.matches("(?i)(?:^request\\s+date$|^account\\s+name$|^category\\s+name$|^discount\\s+amount$)")){
             if(sort.matches("request\\s+date")){
                 Sort.setNewArrayOfRequest(Request.getAllRequests());
                 Sort.sortRequest();
@@ -218,7 +218,7 @@ public class ManagerMenu {
     }
 
     public static void discountCodeField(String field) {
-        if (field.matches("(?i)(?:start\\s+Of\\s+Discount\\s+Period|end\\s+Of\\s+Discount\\s+Period|remove\\s+account|add\\s+account|max\\s+Discount\\s+Amount|total\\s+Times\\s+Of\\s+Use|discount\\s+amount)")) {
+        if (field.matches("(?i)(?:^start\\s+Of\\s+Discount\\s+Period$|^end\\s+Of\\s+Discount\\s+Period$|^remove\\s+account$|^add\\s+account$|^max\\s+Discount\\s+Amount$|^total\\s+Times\\s+Of\\s+Use$|^discount\\s+amount$)")) {
             ManagerMenu.field = field;
             CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITDISCOUNTCODE);
             OutputMassageHandler.showOutputWithString(field, 3);
@@ -249,7 +249,7 @@ public class ManagerMenu {
                 } else outputNo = 26;
             } else outputNo = 10;
         } else if (field.matches("(?i)max\\s+Discount\\s+Amount")) {
-            if (edit.matches("\\d+\\.\\d*")) {
+            if (edit.matches("\\d+")) {
                 editableDiscountCode.setMaxDiscountAmount(Double.parseDouble(edit));
                 outputNo = 18;
             } else outputNo = 12;
@@ -259,19 +259,19 @@ public class ManagerMenu {
                 outputNo = 19;
             } else outputNo = 14;
         } else if (field.matches("(?i)discount\\s+amount")) {
-            if (edit.matches("\\d+")) {
+            if (edit.matches("^\\d{1,2}$")) {
                 editableDiscountCode.setDiscountAmount(Integer.parseInt(edit));
                 outputNo = 27;
             } else outputNo = 28;
         } else if (field.matches("(?i)add\\s+account")) {
-            if (edit.matches("\\d+")) {
+            if (edit.matches("^[a-z0-9_-]{3,15}$")) {
                 if (Account.isThereAccountWithUsername(edit)) {
                     editableDiscountCode.addAccount(Account.getAccountWithUsername(edit));
                     outputNo = 29;
                 } else outputNo = 31;
             } else outputNo = 30;
         } else if (field.matches("(?i)remove\\s+account")) {
-            if (edit.matches("\\d+")) {
+            if (edit.matches("^[a-z0-9_-]{3,15}$")) {
                 if (Account.isThereAccountWithUsername(edit)) {
                     editableDiscountCode.removeAccount(Account.getAccountWithUsername(edit));
                     outputNo = 19;
@@ -326,11 +326,11 @@ public class ManagerMenu {
     //------------------------------------------------------------------------------
 
     private static boolean checkCategory(String category) {
-        //if (category.matches("")) {
+      //  if (category.matches("\\S+")) {
         if (Category.isThereCategoryWithName(category)) {
             return true;
         } else outputNo = 23;
-        // } else outputNo = 22;
+       //  } else outputNo = 0;
         return false;
     }
 
@@ -399,7 +399,7 @@ public class ManagerMenu {
 
     public static void setDetailToCategory(String detail) {
         if (detailMenu == 0) {
-            if (detail.matches("\\D+")) {
+            if (detail.matches("\\S+")) {
                 if (!detail.equalsIgnoreCase("finish")) {
                     if (Product.isThereProductWithId(detail)) {
                         newCategory.addProductToCategory(Product.getProductById(detail));
@@ -411,7 +411,7 @@ public class ManagerMenu {
                 }
             } else outputNo = 2;
         } else if (detailMenu == 1) {
-            if (detail.matches("\\D+")) {
+            if (detail.matches("\\S+")) {
                 if (!detail.equalsIgnoreCase("finish")) {
                     newCategory.addTrait(detail);
                     outputNo = 43;

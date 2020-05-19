@@ -351,7 +351,7 @@ public class SellerMenu {
                 } else outputNo = 12;
             } else outputNo = 14;
         } else if (field.matches("(?i)sale\\s*amount")) {
-            if (edit.matches("\\d+\\.?\\d*")) {
+            if (edit.matches("^\\d{1,2}$")) {
                 saleRequest.setSaleAmount(Integer.parseInt(edit));
                 outputNo = 16;
             } else outputNo = 15;
@@ -425,7 +425,7 @@ public class SellerMenu {
                 } else outputNo = 12;
             } else outputNo = 19;
         } else if (detailMenu == 3) {
-            if (detail.matches("\\d+")) {
+            if (detail.matches("^\\d{1,2}$")) {
                 saleRequest.setSaleAmount(Integer.parseInt(detail));
                 detailMenu = 4;
                 outputNo = 22;

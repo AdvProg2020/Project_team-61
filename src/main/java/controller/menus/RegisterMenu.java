@@ -44,7 +44,7 @@ public class RegisterMenu {
     public static void processRegister(String role, String username) throws IOException {
         if (username.matches("^[a-z0-9_-]{3,15}$")) {
             if (!Account.isThereAccountWithUsername(username)) {
-                if (role.matches("(?i)(?:customer|manager|seller)")) {
+                if (role.matches("(?i)(?:^customer$|^manager$|^seller$)")) {
                     RegisterMenu.role = role;
                     RegisterMenu.username = username;
                     registerByRole(role, username);
@@ -89,7 +89,7 @@ public class RegisterMenu {
 
     public static void completeRegisterProcess(String detail) throws IOException, ParseException {
         if (detailMenu == 0) {
-            if (detail.matches(".+")) {
+            if (detail.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{8,10}$")) {
                 password = detail;
                 detailMenu++;
                 outputNo = 4;

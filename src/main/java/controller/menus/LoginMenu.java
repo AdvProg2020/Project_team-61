@@ -86,7 +86,7 @@ public class LoginMenu {
     }
 
     public static void processEdit(String field) throws IOException {
-        if (field.matches("(?i)(?:username|password|last\\s*name|email|phone\\s*number|firm)")) {
+        if (field.matches("(?i)(?:^username$|^password$|^last\\s*name$|^email$|^phone\\s*number$|^firm$)")) {
             if (loginAccount.getRole() == "seller") {
                 String id = "seller " + LoginMenu.getLoginAccount().getUsername() + "wants edit account's " + field;
                 if (accountRequest.isThereRequestFromID(id)) {
@@ -115,7 +115,7 @@ public class LoginMenu {
 
     public static void editAccount(String edit) {
         if (field.equalsIgnoreCase("password")) {
-            if (edit.matches(".+")) {
+            if (edit.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{8,10}$")) {
                 loginAccount.setPassword(edit);
                 outputNo = 17;
             } else outputNo = 3;
@@ -145,7 +145,7 @@ public class LoginMenu {
 
     public static void editSellerField(String edit) {
         if (field.equalsIgnoreCase("password")) {
-            if (edit.matches(".+")) {
+            if (edit.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{8,10}$")) {
                 accountRequest.setPassword(edit);
                 outputNo = 17;
             } else outputNo = 3;
@@ -195,7 +195,7 @@ public class LoginMenu {
     }
 
     public static void firmField(String field) {
-        if (!field.matches("(?i)(?:name|address|email|phone\\s*number)")) {
+        if (!field.matches("(?i)(?:^name$|^address$|^email$|^phone\\s*number$)")) {
             accountRequest.setFirmName(firmName);
             CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITFIRM);
             LoginMenu.field = field;
