@@ -3,12 +3,15 @@ package controller.menus;
 import controller.request.ProductRequest;
 import controller.request.Request;
 import controller.request.SaleRequest;
+import model.accounts.Account;
+import model.accounts.Seller;
 import model.filtar.Filter;
 import model.off.Sale;
 import model.off.SaleStatus;
 import model.productRelated.Category;
 import model.productRelated.Product;
 import model.productRelated.ProductStatus;
+import model.sort.Sort;
 import view.*;
 
 import java.io.FileNotFoundException;
@@ -76,6 +79,8 @@ public class SellerMenu {
         } else OutputMassageHandler.showSellerOutput(outputNo);
     }
 
+
+
     //gson
     public static void viewBuyersProduct(String productID) throws FileNotFoundException {
         if (checkProduct(productID)) {
@@ -105,7 +110,8 @@ public class SellerMenu {
                 product.setProductStatus(ProductStatus.UNDERREVIEWFOREDITING);
                 productRequest = new ProductRequest(id);
                 productRequest.setLastCategory(product.getCategory());
-                productRequest.setSellerName(LoginMenu.getLoginAccount());
+                Seller seller = (Seller) LoginMenu.getLoginAccount();
+                productRequest.setSellerName(seller);
                 productRequest.setProductId(productId);
             } else productRequest = (ProductRequest) Request.getRequestFromID(id);
             SellerMenu.field = field;
@@ -428,6 +434,7 @@ public class SellerMenu {
             if (detail.matches("((?!^ +$)^.+$)")) {
                 if (!detail.equalsIgnoreCase("finish")) {
                     if (checkProductSale(detail)) {
+                        saleRequest.setProduct(detail);
                         saleRequest.addProductToSale(Product.getProductById(detail));
                         outputNo = 22;
                     }
@@ -442,11 +449,30 @@ public class SellerMenu {
         OutputMassageHandler.showSaleOutput(outputNo);
     }
 
+    public static void sortBy(String sort) throws FileNotFoundException {
+        if(sort.matches("(?i)(?:product\\s+view|product\\s+score|log\\s+date)")){
+            if(sort.matches("product\\s+view")) {
+                Seller seller = (Seller) LoginMenu.getLoginAccount();
+                Sort.setNewArrayOfProductSort(seller.getAllProduct());
+                Sort.numberOfViewsSort();
+            }else if(sort.matches("product\\s+score")) {
+                Seller seller = (Seller) LoginMenu.getLoginAccount();
+                Sort.setNewArrayOfProductSort(seller.getAllProduct());
+                Sort.scoreSort();
+            }else if(sort.matches("log\\s+date")) {
+                Seller seller = (Seller) LoginMenu.getLoginAccount();
+                Sort.setNewArrayOfSalelog(seller.getSaleLogsHistory());
+                Sort.saleLogSortDate();
+            }
+        }
+    }
 
     private static boolean checkProductSale(String detail) {
         if (Product.isThereProductWithId(detail)) {
             if (Product.getProductById(productId).getSeller() == LoginMenu.getLoginAccount()) {
-                return true;
+                if( Product.getProductById(productId).getInSale()) {
+                    return true;
+                }else outputNo=0;
             } else outputNo = 5;
         } else outputNo = 8;
         return false;

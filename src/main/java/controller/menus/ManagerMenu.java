@@ -180,12 +180,16 @@ public class ManagerMenu {
     public static void sortBy(String sort) throws FileNotFoundException {
         if(sort.matches("(?i)(?:request\\s+date|account\\s+name|category\\s+name|discount\\s+amount)")){
             if(sort.matches("request\\s+date")){
+                Sort.setNewArrayOfRequest(Request.getAllRequests());
                 Sort.sortRequest();
             }else if(sort.matches("account\\s+name")){
+                Sort.setNewArrayOfAccountSort(Account.getAllAccounts());
                 Sort.accountSortUserName();
             }else if(sort.matches("category\\s+name")){
+                Sort.setNewArrayOfCategory(Category.getAllCategories());
                 Sort.categoryNameSort();
             }else if(sort.matches("discount\\s+amount")){
+                Sort.setNewArrayOfDiscountCodeSort(DiscountCode.getAllDiscountCodes());
                 Sort.sortDiscountCodes();
             }
         }

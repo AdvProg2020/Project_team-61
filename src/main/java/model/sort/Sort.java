@@ -4,6 +4,8 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import controller.request.Request;
 import model.accounts.Account;
+import model.accounts.Customer;
+import model.accounts.Seller;
 import model.log.BuyLog;
 import model.log.SaleLog;
 import model.off.DiscountCode;
@@ -24,14 +26,13 @@ import java.util.Comparator;
 public abstract class Sort {
     public Product product;
     int numberOfSort=0;
-    private static ArrayList<Product> newArrayOfProductSort = Product.getProductList();
-    private static ArrayList<Account> newArrayOfAccountSort = Account.getAllAccounts();
-    private static ArrayList<DiscountCode> newArrayOfDiscountCodeSort = DiscountCode.getAllDiscountCodes();
-    private static ArrayList<Category> newArrayOfCategory = Category.getAllCategories();
-    private static ArrayList<Request> newArrayOfRequest = Request.getAllRequests();
-    private static ArrayList<BuyLog> newArrayOfBuyLog = BuyLog.getAllCustomersLog();
-    private static ArrayList<SaleLog> newArrayOfSalelog = SaleLog.getAllSellersLog();
-
+    private static ArrayList<Product> newArrayOfProductSort = new ArrayList<>();
+    private static ArrayList<Account> newArrayOfAccountSort = new ArrayList<>();
+    private static ArrayList<DiscountCode> newArrayOfDiscountCodeSort = new ArrayList<>();
+    private static ArrayList<Category> newArrayOfCategory = new ArrayList<>();
+    private static ArrayList<Request> newArrayOfRequest = new ArrayList<>();
+    private static ArrayList<BuyLog> newArrayOfBuyLog = new ArrayList<>();
+    private static ArrayList<SaleLog> newArrayOfSalelog = new ArrayList<>();
 
 //    static {
 //        try {
@@ -128,14 +129,14 @@ public abstract class Sort {
         return newArrayOfCategory;
     }
 
-    public ArrayList<BuyLog> buyLogSortDate() throws FileNotFoundException {
+    public static ArrayList<BuyLog> buyLogSortDate() throws FileNotFoundException {
         Collections.sort(newArrayOfBuyLog,BuyLog.productComparatorForScore);
 //        availableSorts.remove(4);
 //        listOfBuyLogSort.add(newArrayOfBuyLog);
         return newArrayOfBuyLog;
     }
 
-    public ArrayList<SaleLog> saleLogSortDate() throws FileNotFoundException {
+    public static ArrayList<SaleLog> saleLogSortDate() throws FileNotFoundException {
         Collections.sort(newArrayOfSalelog,SaleLog.productComparatorForScore);
 //        availableSorts.remove(5);
 //        listOfSaleLogtSort.add(newArrayOfSalelog);

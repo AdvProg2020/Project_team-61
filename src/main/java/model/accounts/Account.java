@@ -59,7 +59,7 @@ public abstract class Account {
         if(firm != null){
             this.firm = firm;
         }
-        writeInJ();
+        //writeInJ();
 
 
     }
@@ -198,11 +198,11 @@ public abstract class Account {
 
 
     //......................................................................
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Account>>(){}.getType();
-        String json= FileHandling.getGson().toJson(Account.allAccounts,collectionType);
-        FileHandling.writeInFile(json,"account.json");
-    }
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<Account>>(){}.getType();
+//        String json= FileHandling.getGson().toJson(Account.allAccounts,collectionType);
+//        FileHandling.writeInFile(json,"account.json");
+//    }
 
     public static Comparator<Account> accountComparatorForUsername = new Comparator<Account>() {
 

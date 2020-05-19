@@ -10,6 +10,7 @@ import model.log.SaleLog;
 import model.off.DiscountCode;
 import model.productRelated.Product;
 import model.productRelated.Score;
+import model.sort.Sort;
 import view.*;
 
 import java.io.FileNotFoundException;
@@ -75,6 +76,7 @@ public class CustomerMenu {
     //GSON
     public static void viewProduct(String productID) throws FileNotFoundException {
         if (checkProduct(productID)) {
+            Product.getProductById(productID).setNumberOfViews();
             OutputHandler.showProduct(productID);
             CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
             CommandProcessor.setMenuStatus(MenuStatus.PRODUCTMENU);
@@ -93,8 +95,15 @@ public class CustomerMenu {
 
     }
 
-    public static void sortBy(String sort){
+    public static void sortBy(String sort) throws FileNotFoundException {
+        if(sort.matches("(?i)(?:log\\s+date)")){
+            if(sort.matches("log\\s+date")) {
+                Customer customer= (Customer) LoginMenu.getLoginAccount();
+                Sort.setNewArrayOfBuyLog(customer.getBuyLogsHistory());
+                Sort.buyLogSortDate();
+            }
 
+        }
     }
 
     public static void increaseLogProduct(String number) {
