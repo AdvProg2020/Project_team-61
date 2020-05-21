@@ -1,0 +1,98 @@
+package view;
+
+public enum SubMenuStatus {
+    MAINMENU,
+
+    //managerMenu
+    MANAGEUSERS,
+    MANAGEALLPRODUCTS,
+    VIEWDISCOUNTCODES,
+    // sub dis
+    DISCOUNTCODEFIELD,
+    EDITDISCOUNTCODE,
+    //main
+    MANAGEREQUESTS,
+    MANAGECATEGORIES,
+    //sub cat
+    CATEGORYFIELD,
+    EDITCATEGORY,
+
+    DETAILCATEGORY,
+    //
+    CREATEMANAGERACCOUNT,
+    ADDDISCOUNTCODE,
+    DETAILDESCOUNTCODE,
+
+
+    //sellerMenu
+    MANAGEPRODUCTS,
+    //sub product
+    PRODUCTFIELD,
+    EDITPRODUCT,
+
+    ADDPRODUCT,
+    //main
+    VIEWOFFS,
+    //sub off
+    SALEFIELD,
+    EDITSALE,
+    EDITSPECIFICATION,
+
+    ADDSALE,
+    TRAIT,
+
+
+    //customerMenu
+    VIEWCART,
+    //sub
+    INCREASEPRODUCTNUMBER,
+    DECREASEPRODUCTNUMBER,
+    //main
+    VIEWORDERS,
+
+
+    //products //sale
+    FILTERING,
+    //
+    PRODUCTNAMEFILTER,
+    CATEGORYNAMEFILTER,
+    FIRMFILTER,
+    PERIODFILTER,
+    //main
+    SORTING,
+
+
+    //product
+    DIGEST,
+    COMMENTS,
+    //sub comment
+    COMMENTSTITLE,
+    COMMENTSCONTENT,
+
+
+    //register
+    REGISTERATIONDETAILS,
+
+    ADDFIRM,
+
+
+    //login
+    PASSWORD,
+
+
+    //edit
+    VIEWPERSONALINFO,
+   // EDIT,
+    EDITSELLERACCOUNT,
+    FIRMNAME,
+    FIRMFIELD,
+    EDITFIRM,
+
+    EDITACCOUNT,
+
+
+    RECIVERINFORMATION,
+    HAVEDISCOUNT,
+    CHECKDISCOUNTCODE,
+    PAYMENT;
+}
