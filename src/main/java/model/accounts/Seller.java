@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Seller extends Account {
-    private Firm firm;
+//    private Firm firm;
     private static ArrayList<SaleLog> saleLogsHistory = new ArrayList<>();
     private static ArrayList<Seller> allSellers = new ArrayList<>();
     private static ArrayList<Product> allProduct = new ArrayList<>();

@@ -1,3 +1,4 @@
+import model.accounts.Account;
 import view.CommandProcessor;
 
 import java.io.IOException;

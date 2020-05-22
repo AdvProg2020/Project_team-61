@@ -18,6 +18,16 @@ public class FileHandling {
 
     public static String fileName;
     public static String jsonString;
+    public static Gson gson = new GsonBuilder().create();
+
+
+
+
+    private static ArrayList<String> fileNames = new ArrayList<>();
+
+    public static ArrayList<String> getFileNames() {
+        return fileNames;
+    }
 
     public static void setFileName(String fileName) {
         FileHandling.fileName = fileName;
@@ -27,7 +37,17 @@ public class FileHandling {
         FileHandling.jsonString = jsonString;
     }
 
-    public static Gson gson = new GsonBuilder().create();
+
+    //others----------------------------------------------------------------------------------------------------------
+
+    public static boolean isFileWithName (String fileName){
+        for (String name : fileNames) {
+            if (name.equals(fileName)){
+                return true;
+            }
+        }
+        return false;
+    }
 
     public static void writeInFile(String json,String fileName) throws IOException {
         FileWriter writer = new FileWriter(fileName);
@@ -43,8 +63,10 @@ public class FileHandling {
         }
     }
 
+
     public static JsonReader readFile(String fileName) throws FileNotFoundException {
         JsonReader reader = new JsonReader(new FileReader(fileName));
+
         return reader;
     }
 

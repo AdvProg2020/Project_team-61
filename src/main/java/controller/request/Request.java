@@ -76,6 +76,7 @@ public  abstract class Request {
         FileHandling.writeInFile(json,"request.json");
     }
 
+
     public static Comparator<Request> productComparatorForScore = new Comparator<Request>() {
 
         public int compare(Request o1, Request o2) {

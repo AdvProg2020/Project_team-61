@@ -8,6 +8,7 @@ import model.log.SaleLog;
 import model.off.DiscountCode;
 import view.FileHandling;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -30,52 +31,50 @@ public abstract class Account {
     Firm firm;
     boolean fast;
     ArrayList<DiscountCode> allDiscountCodes;
-    private  static ArrayList<Account> allAccounts = new ArrayList<>();
-    private static ArrayList<Date> birthdayDates=  new ArrayList<>();
+    private static ArrayList<Account> allAccounts = new ArrayList<>();
+    private static ArrayList<Date> birthdayDates = new ArrayList<>();
 
 
+    public void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate, Firm firm) throws IOException {
 
-    public void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate , Firm firm) throws IOException {
-
-        if(password!= null) {
+        if (password != null) {
             this.password = password;
         }
-        if(name!= null) {
+        if (name != null) {
             this.name = name;
         }
-        if(lastname!= null){
+        if (lastname != null) {
             this.lastname = lastname;
         }
-        if(email != null){
+        if (email != null) {
             this.email = Email;
         }
-        if(phoneNo != 0){
+        if (phoneNo != 0) {
             this.phoneNo = phoneNo;
         }
-        if(birthdayDate != null){
+        if (birthdayDate != null) {
             this.birthdayDate = (Date) birthdayDate;
             birthdayDates.add(birthdayDate);
         }
-        if(firm != null){
+        if (firm != null) {
             this.firm = firm;
         }
-        //writeInJ();
-
+        writeInJ();
 
     }
 
 
     public Account(String username) throws IOException {
         this.username = username;
+        //writeInJ();
         allAccounts.add(this);
-        // writeInJ();
     }
 
-    public void addDiscountCode(DiscountCode discountCode){
+    public void addDiscountCode(DiscountCode discountCode) {
         allDiscountCodes.add(discountCode);
     }
 
-    public void removeDiscountCode(DiscountCode discountCode){
+    public void removeDiscountCode(DiscountCode discountCode) {
         allDiscountCodes.remove(discountCode);
     }
 
@@ -196,13 +195,25 @@ public abstract class Account {
         return credit;
     }
 
+    public static void setAllAccounts(ArrayList<Account> allAccounts) {
+        Account.allAccounts = allAccounts;
+    }
 
     //......................................................................
-//    public static void writeInJ() throws IOException {
-//        Type collectionType = new TypeToken<ArrayList<Account>>(){}.getType();
-//        String json= FileHandling.getGson().toJson(Account.allAccounts,collectionType);
-//        FileHandling.writeInFile(json,"account.json");
-//    }
+    public static void writeInJ() throws IOException {
+        Type collectionType = new TypeToken<ArrayList<Account>>() {
+        }.getType();
+        if (FileHandling.isFileWithName("account.json")) {
+            ArrayList<Account> list = FileHandling.getGson().fromJson(FileHandling.readFile("account.json"), collectionType);
+            Account.setAllAccounts(list);
+            FileHandling.getFileNames().add("account.json");
+        }
+        String json = FileHandling.getGson().toJson(Account.allAccounts, collectionType);
+        FileHandling.writeInFile(json, "account.json");
+        //FileHandling.getFileNames().add("account.json");
+
+    }
+
 
     public static Comparator<Account> accountComparatorForUsername = new Comparator<Account>() {
 
@@ -210,7 +221,8 @@ public abstract class Account {
             String name1 = s1.getName().toUpperCase();
             String name2 = s2.getName().toUpperCase();
             return name1.compareTo(name2);
-        }};
+        }
+    };
 
     @Override
     public String toString() {
