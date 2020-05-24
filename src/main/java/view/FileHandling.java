@@ -59,14 +59,13 @@ public class FileHandling {
             System.exit(-1);
         }finally {
             writer.flush();
-            writer.close();
+            //writer.close();
         }
     }
 
 
     public static JsonReader readFile(String fileName) throws FileNotFoundException {
         JsonReader reader = new JsonReader(new FileReader(fileName));
-
         return reader;
     }
 
