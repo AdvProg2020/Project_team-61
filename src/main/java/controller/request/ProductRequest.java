@@ -32,7 +32,7 @@ public class ProductRequest extends Request {
 
     @Override
     public void declineRequest() {
-        allRequests.remove(this);
+        Request.getAllRequests().remove(this);
         allProductRequests.remove(this);
         Product.getProductList().remove(this);
         Seller.getAllProduct().remove(this);

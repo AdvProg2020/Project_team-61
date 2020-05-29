@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public abstract class Firm {
+public  class Firm {
 
     private String name;
     private double phoneNO;

@@ -55,13 +55,6 @@ public abstract class Filter {
         return numberOfFilter;
     }
 
-    public static ArrayList<Product> getListOfProductFromFile() throws FileNotFoundException {
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
-        }.getType();
-        JsonReader proReader= FileHandling.readFile("product.json");
-        ArrayList<Product> data = FileHandling.getGson().fromJson(proReader, REVIEW_TYPE);
-        return data;
-    }
 
     public static void setNewArrayOfProductFilter(ArrayList<Product> newArrayOfProductFilter) {
         Filter.newArrayOfProductFilter = newArrayOfProductFilter;

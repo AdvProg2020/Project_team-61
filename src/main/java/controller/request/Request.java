@@ -1,7 +1,9 @@
 package controller.request;
 
+import com.google.gson.Gson;
 import com.google.gson.InstanceCreator;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 import com.sun.org.apache.regexp.internal.RE;
 import controller.menus.LoginMenu;
 import model.accounts.Account;
@@ -10,6 +12,9 @@ import model.log.SaleLog;
 import view.FileHandling;
 import view.OutputHandler;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
@@ -17,12 +22,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public  abstract class Request {
+public  class Request {
     private String requestText;
     private String requestDate;
     private Account seller;
-    static ArrayList<Request> allRequests = new ArrayList<>();
+    private static ArrayList<Request> allRequests;
     LocalDateTime now;
+    public static Type RequestType = new TypeToken<ArrayList<Request>>() {
+    }.getType();
 
     public Request(String requestID) throws IOException {
         this.requestText = requestID;
@@ -40,6 +47,10 @@ public  abstract class Request {
         return now;
     }
 
+    public static void setAllRequests(ArrayList<Request> allRequests) {
+        Request.allRequests = allRequests;
+    }
+
     public static ArrayList<Request> getAllRequests() {
         return allRequests;
     }
@@ -48,9 +59,13 @@ public  abstract class Request {
         return requestText;
     }
 
-    public abstract void declineRequest();
+    public void declineRequest() {
 
-    public abstract void acceptRequest() throws IOException;
+    }
+
+    public void acceptRequest() throws IOException {
+
+    }
 
     public static void deleteRequest(String id){
         allRequests.remove(getRequestFromID(id));
@@ -69,13 +84,22 @@ public  abstract class Request {
     }
 
     public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Request>>(){}.getType();
-        String json= FileHandling.getGson().toJson(Request.allRequests,collectionType);
-        FileHandling.setFileName("request.json");
-        FileHandling.setJsonString(json);
-        FileHandling.writeInFile(json,"request.json");
+        FileHandling.setGson(new Gson());
+        String json = FileHandling.getGson().toJson(Request.allRequests, RequestType);
+        FileHandling.writeInFile(json, "request.json");
     }
 
+//    public static void readFile() throws FileNotFoundException {
+//        JsonReader reader = new JsonReader(new FileReader("request.json"));
+//        ArrayList<Request> list = FileHandling.getGson().fromJson(reader,RequestType);
+//        if (null== list){
+//            list = new ArrayList<>();
+//        }
+//        Request.setAllRequests(list);
+//    }
+//
+//    public Request() {
+//    }
 
     public static Comparator<Request> productComparatorForScore = new Comparator<Request>() {
 

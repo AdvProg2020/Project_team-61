@@ -1,6 +1,8 @@
 package model.accounts;
 
+import com.google.gson.InstanceCreator;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 import model.filtar.Filter;
 import model.firms.Firm;
 import model.log.BuyLog;
@@ -9,14 +11,12 @@ import model.off.DiscountCode;
 import view.FileHandling;
 
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.Iterator;
+import java.util.*;
 
-public abstract class Account {
+public class Account {
     String username;
     String name;
     String lastname;
@@ -31,9 +31,13 @@ public abstract class Account {
     Firm firm;
     boolean fast;
     ArrayList<DiscountCode> allDiscountCodes;
-    private static ArrayList<Account> allAccounts = new ArrayList<>();
+    private static ArrayList<Account> allAccounts;
     private static ArrayList<Date> birthdayDates = new ArrayList<>();
+    public static Type AccountType = new TypeToken<ArrayList<Account>>() {
+    }.getType();
 
+    public Account() {
+    }
 
     public void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate, Firm firm) throws IOException {
 
@@ -66,7 +70,6 @@ public abstract class Account {
 
     public Account(String username) throws IOException {
         this.username = username;
-        //writeInJ();
         allAccounts.add(this);
     }
 
@@ -201,19 +204,22 @@ public abstract class Account {
 
     //......................................................................
     public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Account>>() {
-        }.getType();
-        if (FileHandling.isFileWithName("account.json")) {
-            ArrayList<Account> list = FileHandling.getGson().fromJson(FileHandling.readFile("account.json"), collectionType);
-            Account.setAllAccounts(list);
-            FileHandling.getFileNames().add("account.json");
-        }
-        String json = FileHandling.getGson().toJson(Account.allAccounts, collectionType);
+
+        String json = FileHandling.getGson().toJson(Account.allAccounts, AccountType);
         FileHandling.writeInFile(json, "account.json");
-        //FileHandling.getFileNames().add("account.json");
 
     }
 
+//    public static void readFile() throws IOException {
+//        JsonReader reader = new JsonReader(new FileReader("account.json"));
+//        String json = reader.nextString();
+//        System.out.println(json);
+//        ArrayList<Account> list = FileHandling.getGson().fromJson(reader,AccountType);
+//        if (null== list){
+//            list = new ArrayList<Account>();
+//        }
+//        Account.setAllAccounts(list);
+//    }
 
     public static Comparator<Account> accountComparatorForUsername = new Comparator<Account>() {
 

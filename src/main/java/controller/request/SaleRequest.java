@@ -31,7 +31,7 @@ public class SaleRequest extends Request {
 
     @Override
     public void declineRequest() {
-        allRequests.remove(this);
+        Request.getAllRequests().remove(this);
         allSaleRequests.remove(this);
         Request.getAllRequests().remove(this);
     }

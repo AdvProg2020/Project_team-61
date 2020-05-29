@@ -37,7 +37,7 @@ public class AccountRequest extends Request {
 
     @Override
     public void declineRequest() {
-        allRequests.remove(this);
+        Request.getAllRequests().remove(this);
         allAccountRequests.remove(this);
     }
 

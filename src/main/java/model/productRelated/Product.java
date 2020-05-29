@@ -317,16 +317,9 @@ public class Product  {
     };
 
     public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Product>>() {
-        }.getType();
-        if (FileHandling.isFileWithName("product.json")) {
-            ArrayList<Product> list = FileHandling.getGson().fromJson(FileHandling.readFile("product.json"), collectionType);
-            Product.setAllProduct(list);
-            FileHandling.getFileNames().add("product.json");
-        }
-        String json = FileHandling.getGson().toJson(Product.allProduct, collectionType);
-        FileHandling.writeInFile(json, "product.json");
-        //FileHandling.getFileNames().add("account.json");
+        Type collectionType = new TypeToken<ArrayList<Product>>(){}.getType();
+        String json= FileHandling.getGson().toJson(Product.allProduct,collectionType);
+        FileHandling.writeInFile(json,"product.json");
     }
 
     @Override

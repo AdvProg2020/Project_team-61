@@ -78,13 +78,13 @@ public abstract class Sort {
     //if view->1   score ->2
 
 
-    public static ArrayList<Product> getProductFromFile() throws FileNotFoundException {
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
-        }.getType();
-        JsonReader proReader= FileHandling.readFile("product.json");
-        ArrayList<Product> data = FileHandling.getGson().fromJson(proReader, REVIEW_TYPE);
-        return data;
-    }
+//    public static ArrayList<Product> getProductFromFile() throws FileNotFoundException {
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
+//        }.getType();
+//        JsonReader proReader= FileHandling.readFile("product.json");
+//        ArrayList<Product> data = FileHandling.getGson().fromJson(proReader, REVIEW_TYPE);
+//        return data;
+//    }
 
     public static void setNewArrayOfProductSort(ArrayList<Product> newArrayOfProductSort) {
         Sort.newArrayOfProductSort = newArrayOfProductSort;

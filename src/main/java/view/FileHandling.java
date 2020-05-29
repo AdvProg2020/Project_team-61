@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import model.accounts.Account;
 import model.productRelated.Product;
 
 import java.io.FileNotFoundException;
@@ -40,15 +41,6 @@ public class FileHandling {
 
     //others----------------------------------------------------------------------------------------------------------
 
-    public static boolean isFileWithName (String fileName){
-        for (String name : fileNames) {
-            if (name.equals(fileName)){
-                return true;
-            }
-        }
-        return false;
-    }
-
     public static void writeInFile(String json,String fileName) throws IOException {
         FileWriter writer = new FileWriter(fileName);
         try {
@@ -64,11 +56,10 @@ public class FileHandling {
     }
 
 
-    public static JsonReader readFile(String fileName) throws FileNotFoundException {
-        JsonReader reader = new JsonReader(new FileReader(fileName));
-        return reader;
-    }
 
+    public static void setGson(Gson gson) {
+        FileHandling.gson = gson;
+    }
 
     public static Gson getGson() {
         return gson;

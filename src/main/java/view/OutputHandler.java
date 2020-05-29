@@ -497,22 +497,13 @@ public class OutputHandler {
     }
 
     //finish//pr
-    public static void showProduct(String productId) throws FileNotFoundException {
-        Product productToShow=null;
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
-        }.getType();
-        JsonReader proReader=FileHandling.readFile("product.json");
-        ArrayList<Product> data = FileHandling.getGson().fromJson(proReader, REVIEW_TYPE);
-        for (Product product : data) {
-            if (product.getId().equals(productId)){
-                productToShow=product;
-            }
-        }
-        System.out.println(productToShow);
-    }
-
-//    public static void showProduct(String productId){
-//        for (Product product : Product.getProductList()) {
+//    public static void showProduct(String productId) throws FileNotFoundException {
+//        Product productToShow=null;
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
+//        }.getType();
+//        JsonReader proReader=FileHandling.readFile("product.json");
+//        ArrayList<Product> data = FileHandling.getGson().fromJson(proReader, REVIEW_TYPE);
+//        for (Product product : data) {
 //            if (product.getId().equals(productId)){
 //                productToShow=product;
 //            }
@@ -520,19 +511,28 @@ public class OutputHandler {
 //        System.out.println(productToShow);
 //    }
 
+    public static void showProduct(String productId){
+        for (Product product : Product.getProductList()) {
+            if (product.getId().equals(productId)){
+                productToShow=product;
+            }
+        }
+        System.out.println(productToShow);
+    }
+
     //finish//pr
     public static void showTotalPrice(String logId) throws FileNotFoundException {
-        double totalPriceToShow=0;
-        Type REVIEW_TYPE = new TypeToken<ArrayList<BuyLog>>() {
-        }.getType();
-        JsonReader BuyLogReader=FileHandling.readFile("buyLog.json");
-        ArrayList<BuyLog> data = FileHandling.getGson().fromJson(BuyLogReader, REVIEW_TYPE);
-        for (BuyLog buyLog : data) {
+//        double totalPriceToShow=0;
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<BuyLog>>() {
+//        }.getType();
+//        JsonReader BuyLogReader=FileHandling.readFile("buyLog.json");
+//        ArrayList<BuyLog> data = FileHandling.getGson().fromJson(BuyLogReader, REVIEW_TYPE);
+        for (BuyLog buyLog : BuyLog.allCustomersLog) {
             if (buyLog.getId().equals(logId)){
                 //totalPriceToShow=buyLog.getAmountBeforeDis();
             }
         }
-        System.out.println(totalPriceToShow);
+//        System.out.println(totalPriceToShow);
     }
 
     //finish//pr

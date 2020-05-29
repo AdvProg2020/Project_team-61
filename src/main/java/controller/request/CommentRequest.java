@@ -24,7 +24,7 @@ public class CommentRequest extends Request {
 
 
     public void declineRequest() {
-        allRequests.remove(this);
+        Request.getAllRequests().remove(this);
         allCommentRequests.remove(this);
         Comment comment = Comment.getCommentFromId(id);
         comment.setCommentStatus(CommentStatus.NOTAPPROVEDBYTHEMANAGER);

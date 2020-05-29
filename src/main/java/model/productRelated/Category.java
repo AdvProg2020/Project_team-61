@@ -1,5 +1,6 @@
 package model.productRelated;
 import com.google.gson.reflect.TypeToken;
+import model.accounts.Account;
 import view.FileHandling;
 
 import java.io.IOException;
@@ -18,7 +19,7 @@ public class Category{
     public Category(String name) throws IOException {
         this.name = name;
         allCategories.add(this);
-//        writeInJ();
+        writeInJ();
     }
 
     public void addTrait(String trait){
@@ -31,6 +32,10 @@ public class Category{
                 product.getCategorySpecifications().put(tr, null);
             }
         }
+    }
+
+    public static void setAllCategories(ArrayList<Category> allCategories) {
+        Category.allCategories = allCategories;
     }
 
     public static ArrayList<Category> getAllCategories() {
@@ -117,9 +122,9 @@ public class Category{
                 ", allProducts=" + allProducts
                 ;
     }
-//    public static void writeInJ() throws IOException {
-//        Type collectionType = new TypeToken<ArrayList<Category>>(){}.getType();
-//        String json= FileHandling.getGson().toJson(Category.allCategories,collectionType);
-//        FileHandling.turnToArray(json+" "+"category.json");
-//    }
+    public static void writeInJ() throws IOException {
+        Type collectionType = new TypeToken<ArrayList<Category>>(){}.getType();
+        String json= FileHandling.getGson().toJson(Category.allCategories,collectionType);
+        FileHandling.writeInFile(json,"category.json");
+    }
 }
