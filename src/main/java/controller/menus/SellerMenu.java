@@ -211,7 +211,7 @@ public class SellerMenu {
         } else if (detailMenu == 4) {
             if (detail.matches("^(?!\\s*$).+")) {
                 productRequest.setAdditionalDetail(detail);
-                detailMenu = 16;
+                detailMenu = 5;
             } else outputNo = 15;
         } else if (detailMenu == 5) {
             if (detail.matches("\\d+")) {
