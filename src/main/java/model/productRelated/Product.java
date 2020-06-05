@@ -316,6 +316,8 @@ public class Product  {
         }
     };
 
+
+
     public static void writeInJ() throws IOException {
         Type collectionType = new TypeToken<ArrayList<Product>>(){}.getType();
         String json= FileHandling.getGson().toJson(Product.allProduct,collectionType);

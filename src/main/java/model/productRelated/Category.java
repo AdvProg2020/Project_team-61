@@ -26,13 +26,11 @@ public class Category{
         traits.add(trait);
     }
 
-    public static void addKey(){
-        for (Product product : allProducts) {
-            for (String tr : traits) {
-                product.getCategorySpecifications().put(tr, null);
-            }
-        }
+    public static ArrayList<String> getTraits() {
+        return traits;
     }
+
+
 
     public static void setAllCategories(ArrayList<Category> allCategories) {
         Category.allCategories = allCategories;
@@ -77,7 +75,7 @@ public class Category{
             if (category.getName().equalsIgnoreCase(name))
                 return true;
         }
-        return true;
+        return false;
 
     }
 

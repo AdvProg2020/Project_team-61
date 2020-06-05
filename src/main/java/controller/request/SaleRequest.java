@@ -43,6 +43,8 @@ public class SaleRequest extends Request {
         sale.setAllSaleProducts(allSaleProducts);
         sale.setSaleStatus(SaleStatus.CONFIRMED);
         Product.getProductById(product).setInSale(true);
+        Request.getAllRequests().remove(this);
+        allSaleRequests.remove(this);
     }
 
 

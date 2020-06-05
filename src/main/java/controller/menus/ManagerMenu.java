@@ -359,24 +359,24 @@ public class ManagerMenu {
 
     public static void editCategoryField(String edit) {
         if (field.matches("remove\\s*trait")) {
-            if (field.matches("\\D")) {
+            if (field.matches(".+")) {
                 editableCategory.removeTrait(edit);
                 outputNo = 41;
             } else outputNo = 42;
         } else if (field.matches("add\\s*trait")) {
-            if (field.matches("\\D")) {
+            if (field.matches(".+")) {
                 editableCategory.addTrait(edit);
                 outputNo = 43;
             } else outputNo = 42;
         } else if (field.matches("(?i)remove\\s*product")) {
-            if (edit.matches("")) {
+            if (edit.matches(".+")) {
                 if (checkProduct(edit)) {
                     editableCategory.removeProductToCategory(Product.getProductById(edit));
                     outputNo = 40;
                 }
             } else outputNo = 2;
         } else if (field.matches("(?i)add\\s*product")) {
-            if (edit.matches("")) {
+            if (edit.matches(".+")) {
                 if (checkProduct(edit)) {
                     editableCategory.addProductToCategory(Product.getProductById(edit));
                     outputNo = 39;
@@ -392,7 +392,7 @@ public class ManagerMenu {
             newCategory = new Category(category);
             CommandProcessor.setSubMenuStatus(SubMenuStatus.DETAILCATEGORY);
             CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
-            outputNo = 44;
+            outputNo = 38;
         } else outputNo = 34;
         OutputMassageHandler.showManagerOutput(outputNo);
     }
@@ -400,6 +400,23 @@ public class ManagerMenu {
     public static void setDetailToCategory(String detail) {
         if (detailMenu == 0) {
             if (detail.matches("\\D+")) {
+                if (!detail.equalsIgnoreCase("finish")) {
+                    newCategory.addTrait(detail);
+                    outputNo = 43;
+                } else {
+                    CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGECATEGORIES);
+                  //  Category.addKey();
+                    detailMenu = 0;
+                    outputNo = 45;
+                }
+            } else outputNo = 42;
+        }
+        OutputMassageHandler.showManagerOutput(outputNo);
+
+    }
+
+           /* if (detail.matches("\\D+")) {
                 if (!detail.equalsIgnoreCase("finish")) {
                     if (Product.isThereProductWithId(detail)) {
                         newCategory.addProductToCategory(Product.getProductById(detail));
@@ -423,10 +440,8 @@ public class ManagerMenu {
                     outputNo = 45;
                 }
             } else outputNo = 42;
-        }
-        OutputMassageHandler.showManagerOutput(outputNo);
 
-    }
+            */
 
     public static void removeCategory(String category) {
         if (checkCategory(category)) {

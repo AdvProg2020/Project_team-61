@@ -32,7 +32,7 @@ public class SellerMenu {
     private static String productId;
     private static String offId;
     private static String editValue;
-    static ArrayList<String> keys = new ArrayList<String>(Product.getCategorySpecifications().keySet());
+   // static ArrayList<String> keys = new ArrayList<String>(productRequest.getSpecialValue().keySet());
     private static int number = 0;
 
 
@@ -182,7 +182,9 @@ public class SellerMenu {
                             productRequest = new ProductRequest(id);
                             productRequest.setProductId(detail);
                             productRequest.setCompanyName(LoginMenu.getFirm());
-                        } else productRequest = (ProductRequest) Request.getRequestFromID(id);
+                        } else if(Request.getRequestFromID(id) instanceof ProductRequest){
+                            productRequest = (ProductRequest) Request.getRequestFromID(id);
+                        }
                         detailMenu = 1;
                         outputNo = 11;
                     } else outputNo = 27;
@@ -204,6 +206,7 @@ public class SellerMenu {
             if (detail.matches("^(?!\\s*$).+")) {
                 if (Category.isThereCategoryWithName(detail)) {
                     productRequest.setCategoryName(Category.getCategoryWithName(detail));
+                    productRequest.addKey();
                     detailMenu = 4;
                     outputNo = 26;
                 } else outputNo = 25;
@@ -212,13 +215,14 @@ public class SellerMenu {
             if (detail.matches("^(?!\\s*$).+")) {
                 productRequest.setAdditionalDetail(detail);
                 detailMenu = 5;
+                outputNo =0;
             } else outputNo = 15;
         } else if (detailMenu == 5) {
             if (detail.matches("\\d+")) {
                 productRequest.setNumberOfProduct(Integer.parseInt(detail));
                 detailMenu = 0;
                 outputNo = 17;
-                OutputMassageHandler.show(keys.get(0));
+                OutputMassageHandler.show((String) productRequest.getSpecialValue().keySet().toArray()[0]);
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.TRAIT);
             } else outputNo = 8;
         }
@@ -227,6 +231,7 @@ public class SellerMenu {
     }
 
     public static void traitValue(String detail) {
+        ArrayList<String> keys = new ArrayList<String>(productRequest.getSpecialValue().keySet());
         if (!detail.equalsIgnoreCase("finish")) {
             if (number < keys.size() - 2) {
                 if (detail.matches(".+")) {

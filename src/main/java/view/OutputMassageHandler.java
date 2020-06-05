@@ -331,7 +331,7 @@ public class OutputMassageHandler {
 
     public static void showSellerOutput(int output) {
         if (output == 0) {
-            System.out.println("");
+            System.out.println("number");
         } else if (output == 1) {
             System.out.println("there is no product with this productId ");
         } else if (output == 2) {

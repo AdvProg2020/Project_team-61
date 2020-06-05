@@ -38,6 +38,15 @@ public class ProductRequest extends Request {
         Seller.getAllProduct().remove(this);
     }
 
+    public  void addKey(){
+        for (String tr : categoryName.getTraits()) {
+            specialValue.put(tr, null);
+        }
+    }
+
+    public HashMap<String, String> getSpecialValue() {
+        return specialValue;
+    }
 
     @Override
     public void acceptRequest() throws IOException {
@@ -48,6 +57,8 @@ public class ProductRequest extends Request {
         lastCategory.removeProductToCategory(newProduct);
         categoryName.addProductToCategory(newProduct);
         newProduct.setProductStatus(ProductStatus.CONFIRMED);
+        Request.getAllRequests().remove(this);
+        allProductRequests.remove(this);
     }
 
     public void addHashmapValue(String key, String value){

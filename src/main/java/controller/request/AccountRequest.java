@@ -48,6 +48,8 @@ public class AccountRequest extends Request {
         firm = Firm.getFirmWithID(firmName);
         seller.setDetailsToAccount(password, name, lastname, Email, phoneNo, birthdayDate, firm);
         firm.setDetailToFirm(FirmPhoneNO, firmAddress, firmEmail);
+        Request.getAllRequests().remove(this);
+        allAccountRequests.remove(this);
 
     }
 

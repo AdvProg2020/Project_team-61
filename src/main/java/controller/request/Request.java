@@ -38,7 +38,9 @@ public  class Request {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         now = LocalDateTime.now();
         requestDate = dtf.format(now);
-        seller = (Seller) LoginMenu.getLoginAccount();
+        if(LoginMenu.getLoginAccount() instanceof Seller) {
+            seller = (Seller) LoginMenu.getLoginAccount();
+        }
         allRequests.add(this);
         writeInJ();
     }

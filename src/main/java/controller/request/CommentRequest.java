@@ -36,6 +36,8 @@ public class CommentRequest extends Request {
         comment.setDetail(title,content,personToVote,product);
         comment.setCommentStatus(CommentStatus.CONFIRMED);
         product.setComment(comment);
+        Request.getAllRequests().remove(this);
+        allCommentRequests.remove(this);
     }
 
     public void setId(String id) {
