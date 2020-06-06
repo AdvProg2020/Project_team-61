@@ -12,17 +12,17 @@ import java.util.HashMap;
 
 public class ProductRequest extends Request {
 
-    private String productId = null;
-    private String productName = null;
-    private double price = 0;
-    private Seller sellerName = null;
-    private Firm companyName = null;
-    private Category categoryName = null;
-    private Category lastCategory = null;
-    private String additionalDetail = null;
-    private int numberOfProduct = 0;
-    private ArrayList<ProductRequest> allProductRequests = new ArrayList<>();
-    private HashMap<String,String> specialValue = new HashMap<>();
+    private static String productId = null;
+    private static String productName = null;
+    private static double price = 0;
+    private static Seller sellerName = null;
+    private static Firm companyName = null;
+    private static Category categoryName = null;
+    private static Category lastCategory = null;
+    private static String additionalDetail = null;
+    private static int numberOfProduct = 0;
+    private static ArrayList<ProductRequest> allProductRequests = new ArrayList<>();
+    private static HashMap<String,String> specialValue = new HashMap<>();
 
 
     public ProductRequest(String requestID) throws IOException {
@@ -30,12 +30,12 @@ public class ProductRequest extends Request {
         allProductRequests.add(this);
     }
 
-    @Override
-    public void declineRequest() {
-        Request.getAllRequests().remove(this);
-        allProductRequests.remove(this);
-        Product.getProductList().remove(this);
-        Seller.getAllProduct().remove(this);
+
+    public static void declineRequest(Request request) {
+        Request.getAllRequests().remove(request);
+        allProductRequests.remove(request);
+        Product.getProductList().remove(request);
+        Seller.getAllProduct().remove(request);
     }
 
     public  void addKey(){
@@ -48,8 +48,8 @@ public class ProductRequest extends Request {
         return specialValue;
     }
 
-    @Override
-    public void acceptRequest() throws IOException {
+
+    public static void acceptRequest(Request request) throws IOException {
         Product newProduct = Product.getProductById(productId);
         newProduct.setDetailProduct(productName, companyName,price, sellerName,numberOfProduct,categoryName);
         newProduct.setAdditionalDetail(additionalDetail);
@@ -57,8 +57,8 @@ public class ProductRequest extends Request {
         lastCategory.removeProductToCategory(newProduct);
         categoryName.addProductToCategory(newProduct);
         newProduct.setProductStatus(ProductStatus.CONFIRMED);
-        Request.getAllRequests().remove(this);
-        allProductRequests.remove(this);
+        Request.getAllRequests().remove(request);
+        allProductRequests.remove(request);
     }
 
     public void addHashmapValue(String key, String value){

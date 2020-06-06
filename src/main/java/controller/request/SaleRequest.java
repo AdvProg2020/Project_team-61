@@ -11,16 +11,16 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class SaleRequest extends Request {
-    private String offId = null;
-    private Date startOfSalePeriod = null;
-    private Date endOfSalePeriod = null;
-    private int saleAmount = 0;
-    private String product= null;
-    private Account seller = null;
-    private ArrayList<Product> allSaleProducts = new ArrayList<>();
+    private static String offId = null;
+    private static Date startOfSalePeriod = null;
+    private static Date endOfSalePeriod = null;
+    private static int saleAmount = 0;
+    private static String product= null;
+    private static Account seller = null;
+    private static ArrayList<Product> allSaleProducts = new ArrayList<>();
     private SaleStatus saleStatus;
-    private Sale sale;
-    private ArrayList<SaleRequest> allSaleRequests = new ArrayList<>();
+    private static Sale sale;
+    private static ArrayList<SaleRequest> allSaleRequests = new ArrayList<>();
 
 
     public SaleRequest(String requestID) throws IOException {
@@ -29,22 +29,22 @@ public class SaleRequest extends Request {
 
     }
 
-    @Override
-    public void declineRequest() {
-        Request.getAllRequests().remove(this);
-        allSaleRequests.remove(this);
-        Request.getAllRequests().remove(this);
+
+    public static void declineRequest(Request request) {
+        Request.getAllRequests().remove(request);
+        allSaleRequests.remove(request);
+        Request.getAllRequests().remove(request);
     }
 
-    @Override
-    public void acceptRequest() throws IOException {
+
+    public static void acceptRequest(Request request) throws IOException {
         sale= Sale.getSaleWithId(offId);
         sale.setSaleDetails(SaleStatus.CONFIRMED, startOfSalePeriod, endOfSalePeriod, saleAmount, seller);
         sale.setAllSaleProducts(allSaleProducts);
         sale.setSaleStatus(SaleStatus.CONFIRMED);
         Product.getProductById(product).setInSale(true);
-        Request.getAllRequests().remove(this);
-        allSaleRequests.remove(this);
+        Request.getAllRequests().remove(request);
+        allSaleRequests.remove(request);
     }
 
 

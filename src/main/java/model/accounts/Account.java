@@ -36,8 +36,6 @@ public class Account {
     public static Type AccountType = new TypeToken<ArrayList<Account>>() {
     }.getType();
 
-    public Account() {
-    }
 
     public void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate, Firm firm) throws IOException {
 

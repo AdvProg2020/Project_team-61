@@ -54,6 +54,7 @@ public class Product  {
 
     public Product(String productId) {
         this.productId = productId;
+        allProduct.add(this);
         listOfId.add(productId);
     }
 
@@ -75,7 +76,7 @@ public class Product  {
         this.numberOfProducts=numberOfProducts;
         this.category=category;
 //        listOfSellers.add(seller);
-        allProduct.add(this);
+ //       allProduct.add(this);
         writeInJ();
     }
 

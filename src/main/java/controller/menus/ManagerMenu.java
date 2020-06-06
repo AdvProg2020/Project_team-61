@@ -312,14 +312,14 @@ public class ManagerMenu {
 
     public static void acceptRequest(String requestID) throws IOException {
         if (checkRequest(requestID)) {
-            Request.getRequestFromID(requestID).acceptRequest();
+            Request.getRequestFromID(requestID).acceptRequest(requestID);
             OutputMassageHandler.showOutputWithString(requestID, 5);
         } else OutputMassageHandler.showManagerOutput(outputNo);
     }
 
     public static void declineRequest(String requestID) {
         if (checkRequest(requestID)) {
-            Request.getRequestFromID(requestID).declineRequest();
+            Request.getRequestFromID(requestID).declineRequest(requestID);
             OutputMassageHandler.showOutputWithString(requestID, 6);
         } else OutputMassageHandler.showManagerOutput(outputNo);
     }
