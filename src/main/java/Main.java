@@ -2,6 +2,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import controller.request.Request;
 import model.accounts.Account;
+import model.off.Sale;
 import model.productRelated.Category;
 import model.productRelated.Product;
 import view.CommandProcessor;
@@ -48,6 +49,7 @@ public class Main {
         }
 
 
+
         Type registerType = new TypeToken<ArrayList<Request>>(){}.getType();
         try {
             JsonReader reader1 =new JsonReader(new FileReader("request.json"));
@@ -76,6 +78,23 @@ public class Main {
             FileHandling.writeInFile("","account.json");
             Account.setAllAccounts(new ArrayList<>());
         }
+
+
+
+
+        Type saleType = new TypeToken<ArrayList<Sale>>(){}.getType();
+        try {
+            JsonReader reader4 =new JsonReader(new FileReader("sale.json"));
+            ArrayList<Sale> saleArrayList = FileHandling.getGson().fromJson(reader4,saleType);
+            if (null==saleArrayList){
+                saleArrayList=new ArrayList<>();
+            }
+            Sale.setAllSales(saleArrayList);
+        }catch (IOException e){
+            FileHandling.writeInFile("","sale.json");
+            Sale.setAllSales(new ArrayList<>());
+        }
+
 
 
         //Account.readFile();

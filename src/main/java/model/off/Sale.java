@@ -20,11 +20,13 @@ public class Sale{
     private static Account seller;
     private ArrayList <Product> allSaleProducts = new ArrayList<>();
     private static ArrayList <Sale> allSales = new ArrayList<>();
+    public static Type SaleType = new TypeToken<ArrayList<Sale>>() {
+    }.getType();
 
-    public Sale(String offId) {
+    public Sale(String offId) throws IOException {
         this.offId = offId;
         allSales.add(this);
-
+        writeInJ();
     }
     public void setSaleDetails(SaleStatus saleStatus, Date startOfSalePeriod, Date endOfSalePeriod, int saleAmount, Account seller) throws IOException {
         this.saleStatus = saleStatus;
@@ -32,7 +34,11 @@ public class Sale{
         this.endOfSalePeriod = endOfSalePeriod;
         this.saleAmount = saleAmount;
         this.seller = seller;
-//        writeInJ();
+        writeInJ();
+    }
+
+    public static void setAllSales(ArrayList<Sale> allSales) {
+        Sale.allSales = allSales;
     }
 
     public static ArrayList<Sale> getAllSales() {
@@ -117,6 +123,13 @@ public class Sale{
                 return true;}
         }
         return false;
+
+    }
+
+    public static void writeInJ() throws IOException {
+
+        String json = FileHandling.getGson().toJson(Sale.allSales, SaleType);
+        FileHandling.writeInFile(json, "account.json");
 
     }
 
