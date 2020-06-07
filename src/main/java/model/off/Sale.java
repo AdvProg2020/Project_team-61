@@ -93,6 +93,8 @@ public class Sale{
         return null;
     }
 
+
+
     public Sale getSaleWithProduct(Product product){
         for (Sale sale : allSales) {
             for (Product products : sale.getAllSaleProducts()) {
