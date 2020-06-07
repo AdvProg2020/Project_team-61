@@ -53,7 +53,9 @@ public class Product  {
 
 
     public Product(String productId) throws IOException {
-        this.productId = productId;
+        if (productId !=null){
+            this.productId = productId;
+        }
         allProduct.add(this);
         listOfId.add(productId);
         writeInJ();
@@ -70,12 +72,24 @@ public class Product  {
 
     //finish
     public void setDetailProduct (String name , Firm firm , double price , Account seller , int numberOfProducts ,Category category) throws IOException {
-        this.productName = name;
-        this.firm=firm;
-        this.price=price;
-        this.seller=seller;
-        this.numberOfProducts=numberOfProducts;
-        this.category=category;
+        if (name != null){
+            this.productName = name;
+        }
+        if (firm != null){
+            this.firm=firm;
+        }
+        if (price != 0){
+            this.price=price;
+        }
+        if (seller != null){
+            this.seller=seller;
+        }
+        if (numberOfProducts != 0){
+            this.numberOfProducts=numberOfProducts;
+        }
+        if (category != null){
+            this.category=category;
+        }
 //        listOfSellers.add(seller);
  //       allProduct.add(this);
         writeInJ();

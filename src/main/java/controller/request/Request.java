@@ -28,8 +28,8 @@ public  class Request {
     private Account seller;
     private static ArrayList<Request> allRequests;
     LocalDateTime now;
-    public static Type RequestType = new TypeToken<ArrayList<Request>>() {
-    }.getType();
+//    public static Type RequestType = new TypeToken<ArrayList<Request>>() {
+//    }.getType();
 
     public Request(String requestID) throws IOException {
         this.requestText = requestID;
@@ -42,7 +42,7 @@ public  class Request {
             seller = (Seller) LoginMenu.getLoginAccount();
         }
         allRequests.add(this);
-        writeInJ();
+//        writeInJ();
     }
 
     public LocalDateTime getNow() {
@@ -103,11 +103,11 @@ public  class Request {
         return false;
     }
 
-    public static void writeInJ() throws IOException {
-        FileHandling.setGson(new Gson());
-        String json = FileHandling.getGson().toJson(Request.allRequests, RequestType);
-        FileHandling.writeInFile(json, "request.json");
-    }
+//    public static void writeInJ() throws IOException {
+//        FileHandling.setGson(new Gson());
+//        String json = FileHandling.getGson().toJson(Request.allRequests, RequestType);
+//        FileHandling.writeInFile(json, "request.json");
+//    }
 
 //    public static void readFile() throws FileNotFoundException {
 //        JsonReader reader = new JsonReader(new FileReader("request.json"));

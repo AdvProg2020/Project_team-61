@@ -1,13 +1,17 @@
 package controller.request;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
 import model.accounts.Seller;
 import model.firms.Company;
 import model.firms.Factory;
 import model.firms.Firm;
 import model.firms.Workshop;
+import view.FileHandling;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -29,6 +33,13 @@ public class AccountRequest extends Request {
     private static Firm firm;
     private Account selectedAccount;
     private static ArrayList<AccountRequest> allAccountRequests = new ArrayList<>();
+    public static Type accountRequestType = new TypeToken<ArrayList<AccountRequest>>() {
+    }.getType();
+
+
+    public static void setAllAccountRequests(ArrayList<AccountRequest> allAccountRequests) {
+        AccountRequest.allAccountRequests = allAccountRequests;
+    }
 
     public AccountRequest(String requestID) throws IOException {
         super(requestID);
@@ -128,6 +139,13 @@ public class AccountRequest extends Request {
         FirmType = firmType;
         writeInJ();
 
+    }
+
+
+    public static void writeInJ() throws IOException {
+        FileHandling.setGson(new Gson());
+        String json = FileHandling.getGson().toJson(AccountRequest.allAccountRequests, accountRequestType);
+        FileHandling.writeInFile(json, "accountRequest.json");
     }
 
     public void sellerAccountDetails(String username, String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate) {

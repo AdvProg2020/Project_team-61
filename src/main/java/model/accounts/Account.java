@@ -33,7 +33,8 @@ public class Account {
     ArrayList<DiscountCode> allDiscountCodes;
     private static ArrayList<Account> allAccounts;
     private static ArrayList<Date> birthdayDates = new ArrayList<>();
-
+//    public static Type AccountType = new TypeToken<ArrayList<Account>>() {
+//    }.getType();
 
 
     public void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate, Firm firm) throws IOException {
