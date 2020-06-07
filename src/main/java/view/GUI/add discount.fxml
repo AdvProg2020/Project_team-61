@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddDiscount">
+   <children>
+      <MenuBar id="AddDiscountMenuBar" >
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+            <Menu id="menuBack" mnemonicParsing="false" text="Back">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <TextField layoutX="300.0" layoutY="187.0" />
+      <TextField id="textfieldStartDiscount" layoutX="100.0" layoutY="139.0" promptText="start of discount period" />
+      <TextField id="textfieldDI" layoutX="100.0" layoutY="98.0" promptText="discountID" />
+      <TextField id="textFieldTotalUse" layoutX="100.0" layoutY="245.0" promptText="total times of use" />
+      <TextField id="textfieldEndDiscount" layoutX="100.0" layoutY="174.0" promptText="end  of discount period" />
+      <TextField id="textFieldDiscountAmount" layoutX="100.0" layoutY="212.0" promptText="discountAmount" />
+      <Label layoutX="16.0" layoutY="216.0" text="Amount" />
+      <Label layoutX="6.0" layoutY="249.0" prefHeight="17.0" prefWidth="161.0" text="Total times of use" />
+      <Label layoutX="28.0" layoutY="178.0" text="End" />
+      <Label layoutX="28.0" layoutY="143.0" text="Start" />
+      <Label layoutX="23.0" layoutY="102.0" text="Discount Id" />
+      <Button id="createButton" layoutX="100.0" layoutY="287.0" mnemonicParsing="false" text="Create discount"  />
+   </children>
+</AnchorPane>
