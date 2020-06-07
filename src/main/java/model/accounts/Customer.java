@@ -25,8 +25,10 @@ public class Customer extends Account {
     }
 
 
-    public void addLog(BuyLog buyLog){
+    public void addLog(BuyLog buyLog) throws IOException {
         BuyLogsHistory.add(buyLog);
+        writeInJ();
+
     }
 
 //    public static void writeInJ() throws IOException {

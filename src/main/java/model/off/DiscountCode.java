@@ -37,11 +37,11 @@ public class DiscountCode {
         return allDiscountCodes;
     }
 
-    public void addAccount(Account customer){
+    public void addAccount(Account customer) throws IOException {
         allCustomersWithDiscountCode.add(customer);
         customer.addDiscountCode(getDiscountWithId(discountId));
     }
-    public void removeAccount(Account account){
+    public void removeAccount(Account account) throws IOException {
         allCustomersWithDiscountCode.remove(account);
         account.removeDiscountCode(getDiscountWithId(discountId));
     }

@@ -52,10 +52,11 @@ public class Product  {
     private Firm firm;
 
 
-    public Product(String productId) {
+    public Product(String productId) throws IOException {
         this.productId = productId;
         allProduct.add(this);
         listOfId.add(productId);
+        writeInJ();
     }
 
 
@@ -225,7 +226,7 @@ public class Product  {
     //checked
     public static Product getProductById(String id) {
         for (Product product : allProduct) {
-            if (product.getId().equals(id)){
+            if (product.productId.equalsIgnoreCase(id)){
                 return product;
             }
         }

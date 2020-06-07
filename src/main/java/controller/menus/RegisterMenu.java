@@ -147,7 +147,7 @@ public class RegisterMenu {
         }
     }
 
-    public static void createFirm(String detail) {
+    public static void createFirm(String detail) throws IOException {
         if (detailMenu == 0) {
             if (detail.matches(".+")) {
                 accountRequest.setFirmName(detail);
@@ -183,7 +183,7 @@ public class RegisterMenu {
         }OutputMassageHandler.showFirmOutput(outputNo);
     }
 
-    public static void receiverInformation(String detail) {
+    public static void receiverInformation(String detail) throws IOException {
         if (detailMenu == 0) {
             if (detail.matches("\\d+")) {
                 LoginMenu.getLoginAccount().setCurrentPhoneNo(Double.parseDouble(detail));

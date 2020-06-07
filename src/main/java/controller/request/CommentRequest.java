@@ -40,24 +40,34 @@ public class CommentRequest extends Request {
         allCommentRequests.remove(request);
     }
 
-    public void setId(String id) {
+    public void setId(String id) throws IOException {
         this.id = id;
+        writeInJ();
+
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title) throws IOException {
         this.title = title;
+        writeInJ();
+
     }
 
-    public void setContent(String content) {
+    public void setContent(String content) throws IOException {
         this.content = content;
+        writeInJ();
+
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(Product product) throws IOException {
         this.product = product;
+        writeInJ();
+
     }
 
-    public void setPersonToVote(Account personToVote) {
+    public void setPersonToVote(Account personToVote) throws IOException {
         this.personToVote = personToVote;
+        writeInJ();
+
     }
 
 }

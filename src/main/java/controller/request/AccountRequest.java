@@ -42,7 +42,7 @@ public class AccountRequest extends Request {
     }
 
 
-    public static   void acceptRequest(Request request) throws IOException {
+    public static  void acceptRequest(Request request) throws IOException {
         Seller seller = new Seller(username);
         createFirm();
         firm = Firm.getFirmWithID(firmName);
@@ -63,49 +63,71 @@ public class AccountRequest extends Request {
         }
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password) throws IOException {
         this.password = password;
+        writeInJ();
+
     }
 
-    public void setName(String name) {
+    public void setName(String name) throws IOException {
         this.name = name;
+        writeInJ();
+
     }
 
-    public void setLastname(String lastname) {
+    public void setLastname(String lastname) throws IOException {
         this.lastname = lastname;
+        writeInJ();
+
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String email) throws IOException {
         Email = email;
+        writeInJ();
+
     }
 
-    public void setPhoneNo(double phoneNo) {
+    public void setPhoneNo(double phoneNo) throws IOException {
         this.phoneNo = phoneNo;
+        writeInJ();
+
     }
 
-    public void setUsername(String username) {
+    public void setUsername(String username) throws IOException {
         this.username = username;
+        writeInJ();
+
     }
 
     //..........................................................
-    public void setFirmName(String firmName) {
+    public void setFirmName(String firmName) throws IOException {
         this.firmName = firmName;
+        writeInJ();
+
     }
 
-    public void setFirmPhoneNO(double firmPhoneNO) {
+    public void setFirmPhoneNO(double firmPhoneNO) throws IOException {
         FirmPhoneNO = firmPhoneNO;
+        writeInJ();
+
     }
 
-    public void setFirmAddress(String firmAddress) {
+    public void setFirmAddress(String firmAddress) throws IOException {
         this.firmAddress = firmAddress;
+        writeInJ();
+
     }
 
-    public void setFirmEmail(String firmEmail) {
+    public void setFirmEmail(String firmEmail) throws IOException {
         this.firmEmail = firmEmail;
+        writeInJ();
+
     }
 
-    public void setFirmType(String firmType) {
+    public void setFirmType(String firmType) throws IOException {
         FirmType = firmType;
+        writeInJ();
+
     }
 
     public void sellerAccountDetails(String username, String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate) {

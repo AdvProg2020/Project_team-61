@@ -24,8 +24,10 @@ public class Seller extends Account {
         return allProduct;
     }
 
-    public void addLog(SaleLog saleLog) {
+    public void addLog(SaleLog saleLog) throws IOException {
         saleLogsHistory.add(saleLog);
+        writeInJ();
+
     }
 
     public static ArrayList<SaleLog> getSaleLogsHistory() {

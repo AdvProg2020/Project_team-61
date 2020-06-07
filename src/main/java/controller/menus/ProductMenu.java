@@ -78,7 +78,7 @@ public class ProductMenu {
     }
 
 
-    public static void titleOfComment(String title)  {
+    public static void titleOfComment(String title) throws IOException {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
         commentRequest.setTitle(title);
         OutputMassageHandler.showProductsOutput(2);
@@ -86,7 +86,7 @@ public class ProductMenu {
     }
 
 
-    public static void contentOfComment(String content)  {
+    public static void contentOfComment(String content) throws IOException {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
         CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
         commentRequest.setContent(content);

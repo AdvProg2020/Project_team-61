@@ -120,7 +120,7 @@ public class ManagerMenu {
         OutputMassageHandler.showManagerOutput(outputNo);
     }
 
-    public static void setDetailToDiscountCode(String detail) throws ParseException {
+    public static void setDetailToDiscountCode(String detail) throws ParseException, IOException {
         if (detailMenu == 0) {
             if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
                 LocalDateTime currentDate = LocalDateTime.now();
@@ -225,7 +225,7 @@ public class ManagerMenu {
         }
     }
 
-    public static void editDiscountCodeField(String edit) throws ParseException {
+    public static void editDiscountCodeField(String edit) throws ParseException, IOException {
         if (field.matches("(?i)start\\s+Of\\s+Discount\\s+Period")) {
             if (edit.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
                 LocalDateTime currentDate = LocalDateTime.now();
@@ -357,7 +357,7 @@ public class ManagerMenu {
         } else OutputMassageHandler.showManagerOutput(outputNo);
     }
 
-    public static void editCategoryField(String edit) {
+    public static void editCategoryField(String edit) throws IOException {
         if (field.matches("remove\\s*trait")) {
             if (field.matches(".+")) {
                 editableCategory.removeTrait(edit);
@@ -397,7 +397,7 @@ public class ManagerMenu {
         OutputMassageHandler.showManagerOutput(outputNo);
     }
 
-    public static void setDetailToCategory(String detail) {
+    public static void setDetailToCategory(String detail) throws IOException {
         if (detailMenu == 0) {
             if (detail.matches("\\D+")) {
                 if (!detail.equalsIgnoreCase("finish")) {

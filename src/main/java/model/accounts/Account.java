@@ -38,7 +38,6 @@ public class Account {
 
 
     public void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate, Firm firm) throws IOException {
-
         if (password != null) {
             this.password = password;
         }
@@ -71,12 +70,16 @@ public class Account {
         allAccounts.add(this);
     }
 
-    public void addDiscountCode(DiscountCode discountCode) {
+    public void addDiscountCode(DiscountCode discountCode) throws IOException {
         allDiscountCodes.add(discountCode);
+        writeInJ();
+
     }
 
-    public void removeDiscountCode(DiscountCode discountCode) {
+    public void removeDiscountCode(DiscountCode discountCode) throws IOException {
         allDiscountCodes.remove(discountCode);
+        writeInJ();
+
     }
 
     public static boolean isThereAccountWithUsername(String username) {
@@ -127,40 +130,58 @@ public class Account {
     }
 
     //----------------------------------------------------------------
-    public void setName(String name) {
+    public void setName(String name) throws IOException {
         this.name = name;
+        writeInJ();
+
     }
 
-    public void setLastname(String lastname) {
+    public void setLastname(String lastname) throws IOException {
         this.lastname = lastname;
+        writeInJ();
+
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password) throws IOException {
         this.password = password;
+        writeInJ();
+
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String email) throws IOException {
         this.email = email;
+        writeInJ();
+
     }
 
-    public void setPhoneNo(int phoneNo) {
+    public void setPhoneNo(int phoneNo) throws IOException {
         this.phoneNo = phoneNo;
+        writeInJ();
+
     }
 
-    public void setCredit(double credit) {
+    public void setCredit(double credit) throws IOException {
         this.credit = credit;
+        writeInJ();
+
     }
 
-    public void setCurrentPhoneNo(double currentPhoneNo) {
+    public void setCurrentPhoneNo(double currentPhoneNo) throws IOException {
         this.currentPhoneNo = currentPhoneNo;
+        writeInJ();
+
     }
 
-    public void setAddress(String address) {
+    public void setAddress(String address) throws IOException {
         this.address = address;
+        writeInJ();
+
     }
 
-    public void setFast(boolean fast) {
+    public void setFast(boolean fast) throws IOException {
         this.fast = fast;
+        writeInJ();
+
     }
 
     //-----------------------------------------------------------------

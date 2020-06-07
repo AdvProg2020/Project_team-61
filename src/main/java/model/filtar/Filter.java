@@ -8,6 +8,7 @@ import model.productRelated.Product;
 import view.FileHandling;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.Period;
 import java.util.ArrayList;
@@ -99,7 +100,7 @@ public abstract class Filter {
 
     }
 
-    public static void productNameFilter(String productName) throws FileNotFoundException {
+    public static void productNameFilter(String productName) throws IOException {
         ArrayList<Product> help = null;
         help.add(new Product("g"));
         for (Product product : newArrayOfProductFilter) {

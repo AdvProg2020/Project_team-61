@@ -98,20 +98,9 @@ public class Sale{
         return null;
     }
 
-    public void setStartOfSalePeriod(Date startOfSalePeriod) {
-        this.startOfSalePeriod = startOfSalePeriod;
-    }
-
-    public void setEndOfSalePeriod(Date endOfSalePeriod) {
-        this.endOfSalePeriod = endOfSalePeriod;
-    }
-
-    public void setSaleAmount(int saleAmount) {
-        this.saleAmount = saleAmount;
-    }
-
     public void setAllSaleProducts(ArrayList<Product> allSaleProducts) {
         this.allSaleProducts = allSaleProducts;
+
     }
 
     public void setSaleStatus(SaleStatus saleStatus) {

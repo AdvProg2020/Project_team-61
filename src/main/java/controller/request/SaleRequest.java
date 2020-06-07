@@ -53,31 +53,45 @@ public class SaleRequest extends Request {
         allSaleProducts.remove(product);
     }
 
-    public void setSeller(Account seller) {
+    public void setSeller(Account seller) throws IOException {
         this.seller = seller;
+        writeInJ();
+
     }
 
-    public void addProductToSale(Product product) {
+    public void addProductToSale(Product product) throws IOException {
         allSaleProducts.add(product);
+        writeInJ();
+
     }
 
-    public void setOffId(String offId) {
+    public void setOffId(String offId) throws IOException {
         this.offId = offId;
+        writeInJ();
+
     }
 
-    public void setStartOfSalePeriod(Date startOfSalePeriod) {
+    public void setStartOfSalePeriod(Date startOfSalePeriod) throws IOException {
         this.startOfSalePeriod = startOfSalePeriod;
+        writeInJ();
+
     }
 
-    public void setEndOfSalePeriod(Date endOfSalePeriod) {
+    public void setEndOfSalePeriod(Date endOfSalePeriod) throws IOException {
         this.endOfSalePeriod = endOfSalePeriod;
+        writeInJ();
+
     }
 
-    public void setSaleAmount(int saleAmount) {
+    public void setSaleAmount(int saleAmount) throws IOException {
         this.saleAmount = saleAmount;
+        writeInJ();
+
     }
 
-    public void setProduct(String product) {
+    public void setProduct(String product) throws IOException {
         this.product = product;
+        writeInJ();
+
     }
 }

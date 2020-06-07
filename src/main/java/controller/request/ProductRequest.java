@@ -38,7 +38,7 @@ public class ProductRequest extends Request {
         Seller.getAllProduct().remove(request);
     }
 
-    public  void addKey(){
+    public void addKey(){
         for (String tr : categoryName.getTraits()) {
             specialValue.put(tr, null);
         }
@@ -54,44 +54,64 @@ public class ProductRequest extends Request {
         newProduct.setDetailProduct(productName, companyName,price, sellerName,numberOfProduct,categoryName);
         newProduct.setAdditionalDetail(additionalDetail);
         newProduct.getCategorySpecifications().putAll(specialValue);
-        lastCategory.removeProductToCategory(newProduct);
+        if(lastCategory != null) {
+            lastCategory.removeProductToCategory(newProduct);
+        }
         categoryName.addProductToCategory(newProduct);
         newProduct.setProductStatus(ProductStatus.CONFIRMED);
         Request.getAllRequests().remove(request);
         allProductRequests.remove(request);
     }
 
-    public void addHashmapValue(String key, String value){
+    public void addHashmapValue(String key, String value) throws IOException {
         specialValue.put(key,value);
+        writeInJ();
     }
 
-
-    public void setProductId(String productId) {
+    public void setProductId(String productId) throws IOException {
         this.productId = productId;
+        writeInJ();
+
     }
-    public void setProductName(String productName) {
+    public void setProductName(String productName) throws IOException {
         this.productName = productName;
+        writeInJ();
+
     }
-    public void setAdditionalDetail(String additionalDetail) {
+    public void setAdditionalDetail(String additionalDetail) throws IOException {
         this.additionalDetail = additionalDetail;
+        writeInJ();
+
     }
-    public void setSellerName(Seller sellerName) {
+    public void setSellerName(Seller sellerName) throws IOException {
         this.sellerName = sellerName;
+        writeInJ();
+
     }
-    public void setPrice(double price) {
+    public void setPrice(double price) throws IOException {
         this.price = price;
+        writeInJ();
+
     }
-    public void setCompanyName(Firm companyName) {
+    public void setCompanyName(Firm companyName) throws IOException {
         this.companyName = companyName;
+        writeInJ();
+
     }
-    public void setCategoryName(Category categoryName) {
+    public void setCategoryName(Category categoryName) throws IOException {
         this.categoryName = categoryName;
+        writeInJ();
+
     }
-    public void setNumberOfProduct(int numberOfProduct) {
+    public void setNumberOfProduct(int numberOfProduct) throws IOException {
         this.numberOfProduct = numberOfProduct;
+        writeInJ();
+
     }
 
-    public void setLastCategory(Category lastCategory) {
+    public void setLastCategory(Category lastCategory) throws IOException {
         this.lastCategory = lastCategory;
+        writeInJ();
+
     }
 }

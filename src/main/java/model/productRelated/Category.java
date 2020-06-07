@@ -10,7 +10,7 @@ import java.util.Comparator;
 
 public class Category{
     private String name;
-    private static ArrayList <String> traits= new ArrayList<>();
+    private  ArrayList <String> traits= new ArrayList<>();
     private static ArrayList <Category>subCategories = new ArrayList<>();
     private static ArrayList <Product> allProducts = new ArrayList<>();
     private static ArrayList <Category> allCategories = new ArrayList<>();
@@ -22,11 +22,12 @@ public class Category{
         writeInJ();
     }
 
-    public void addTrait(String trait){
+   public void addTrait(String trait) throws IOException {
         traits.add(trait);
+       writeInJ();
     }
 
-    public static ArrayList<String> getTraits() {
+    public  ArrayList<String> getTraits() {
         return traits;
     }
 
@@ -40,8 +41,9 @@ public class Category{
         return allCategories;
     }
 
-    public void removeTrait(String trait){
+    public void removeTrait(String trait) throws IOException {
         traits.remove(trait);
+        writeInJ();
     }
 
     public String getName() {
@@ -79,22 +81,19 @@ public class Category{
 
     }
 
-    public void addProductToCategory(Product product){
+    public void addProductToCategory(Product product) throws IOException {
         allProducts.add(product);
+        writeInJ();
+
     }
-    public void removeProductToCategory(Product product){
+    public void removeProductToCategory(Product product) throws IOException {
         allProducts.remove(product);
+        writeInJ();
+
     }
 
     public static void deleteCategory(String name){
         allCategories.remove(getCategoryWithName(name));
-    }
-
-    public int getCategoryListSize(){
-        return allCategories.size();
-    }
-    public ArrayList<Category> listCategories(){
-        return allCategories;
     }
 
 
