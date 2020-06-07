@@ -8,6 +8,7 @@ import model.productRelated.Product;
 import view.FileHandling;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.Period;
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ public abstract class Filter {
     }
 
     public static void categoryFilter(Category category) throws FileNotFoundException {
-        ArrayList<Product> help=null;
+        ArrayList<Product> help=new ArrayList<>();
         for (Product product : newArrayOfProductFilter) {
             if (product.getCategory().equals(category)){
                 help.add(product);
@@ -86,7 +87,7 @@ public abstract class Filter {
     }
 
     public static void companiesFilter(String companiesName) throws FileNotFoundException {
-        ArrayList<Product> help=null;
+        ArrayList<Product> help=new ArrayList<>();
         for (Product product : newArrayOfProductFilter) {
             if (product.getFirm().getName().equals(companiesName)){
                 help.add(product);
@@ -99,8 +100,8 @@ public abstract class Filter {
 
     }
 
-    public static void productNameFilter(String productName) throws FileNotFoundException {
-        ArrayList<Product> help = null;
+    public static void productNameFilter(String productName) throws IOException {
+        ArrayList<Product> help = new ArrayList<>();
         help.add(new Product("g"));
         for (Product product : newArrayOfProductFilter) {
             if (product.getProductName().equals(productName)){
@@ -115,7 +116,7 @@ public abstract class Filter {
     }
 
     public static void periodFilter(int n, int m) {
-        ArrayList<Product> helper=null;
+        ArrayList<Product> helper=new ArrayList<>();
         for (Product product1 : newArrayOfProductFilter) {
             if (product1.getPrice() > n && product1.getPrice() < m) {
                 helper.add(product1);

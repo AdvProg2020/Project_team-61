@@ -43,10 +43,18 @@ public class Comment {
 //setterAndGetter--------------------------------------------------------------------------------------------
 
     public void setDetail(String title , String content , Account personToVote , Product productToComment){
-        this.title = title;
-        this.content = content;
-        this.personToVote=personToVote;
-        this.productToComment=productToComment;
+        if (title != null){
+            this.title = title;
+        }
+        if (content != null){
+            this.content = content;
+        }
+        if (personToVote != null){
+            this.personToVote=personToVote;
+        }
+        if (productToComment != null){
+            this.productToComment=productToComment;
+        }
         allComments.add(this);
     }
 

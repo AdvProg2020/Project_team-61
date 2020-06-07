@@ -32,7 +32,7 @@ public class SellerMenu {
     private static String productId;
     private static String offId;
     private static String editValue;
-    static ArrayList<String> keys = new ArrayList<String>(Product.getCategorySpecifications().keySet());
+   // static ArrayList<String> keys = new ArrayList<String>(productRequest.getSpecialValue().keySet());
     private static int number = 0;
 
 
@@ -121,7 +121,7 @@ public class SellerMenu {
         OutputMassageHandler.showSellerOutput(outputNo);
     }
 
-    public static void editProductField(String edit) {
+    public static void editProductField(String edit) throws IOException {
         if (field.equalsIgnoreCase("Name")) {
             if (edit.matches("^(?!\\s*$).+")) {
                 productRequest.setProductName(edit);
@@ -159,7 +159,7 @@ public class SellerMenu {
         OutputMassageHandler.showSellerOutput(outputNo);
     }
 
-    public static void editCategorySpecifications(String value) {
+    public static void editCategorySpecifications(String value) throws IOException {
         productRequest.addHashmapValue(editValue, value);
         OutputMassageHandler.showSaleOutput(33);
     }
@@ -182,7 +182,9 @@ public class SellerMenu {
                             productRequest = new ProductRequest(id);
                             productRequest.setProductId(detail);
                             productRequest.setCompanyName(LoginMenu.getFirm());
-                        } else productRequest = (ProductRequest) Request.getRequestFromID(id);
+                        } else if(Request.getRequestFromID(id) instanceof ProductRequest){
+                            productRequest = (ProductRequest) Request.getRequestFromID(id);
+                        }
                         detailMenu = 1;
                         outputNo = 11;
                     } else outputNo = 27;
@@ -204,6 +206,7 @@ public class SellerMenu {
             if (detail.matches("^(?!\\s*$).+")) {
                 if (Category.isThereCategoryWithName(detail)) {
                     productRequest.setCategoryName(Category.getCategoryWithName(detail));
+                    productRequest.addKey();
                     detailMenu = 4;
                     outputNo = 26;
                 } else outputNo = 25;
@@ -211,14 +214,15 @@ public class SellerMenu {
         } else if (detailMenu == 4) {
             if (detail.matches("^(?!\\s*$).+")) {
                 productRequest.setAdditionalDetail(detail);
-                detailMenu = 16;
+                detailMenu = 5;
+                outputNo =0;
             } else outputNo = 15;
         } else if (detailMenu == 5) {
             if (detail.matches("\\d+")) {
                 productRequest.setNumberOfProduct(Integer.parseInt(detail));
                 detailMenu = 0;
                 outputNo = 17;
-                OutputMassageHandler.show(keys.get(0));
+                OutputMassageHandler.show((String) productRequest.getSpecialValue().keySet().toArray()[0]);
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.TRAIT);
             } else outputNo = 8;
         }
@@ -226,24 +230,30 @@ public class SellerMenu {
 
     }
 
-    public static void traitValue(String detail) {
+    public static void traitValue(String detail) throws IOException {
+        ArrayList<String> keys = new ArrayList<>();
+        for (String s : productRequest.getSpecialValue().keySet()) {
+            keys.add(s);
+        }
         if (!detail.equalsIgnoreCase("finish")) {
-            if (number < keys.size() - 2) {
+            if (number < keys.size()-1 ) {
                 if (detail.matches(".+")) {
                     productRequest.addHashmapValue(keys.get(number), detail);
                     outputNo = 30;
                     number++;
                     OutputMassageHandler.show(keys.get(number));
                 } else outputNo = 29;
-            } else if (number < keys.size() - 1) {
+            } else if (number == keys.size() -1) {
                 if (detail.matches(".+")) {
                     productRequest.addHashmapValue(keys.get(number), detail);
                     CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
                     CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                    number=0;
                     outputNo = 28;
                 } else outputNo = 29;
             } else {
                 outputNo = 28;
+                number=0;
                 CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
                 CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
             }
@@ -331,7 +341,7 @@ public class SellerMenu {
         OutputMassageHandler.showSaleOutput(outputNo);
     }
 
-    public static void editOffField(String edit) throws ParseException {
+    public static void editOffField(String edit) throws ParseException, IOException {
         if (field.matches("(?i)start\\s*of\\s*sale\\s*period")) {
             if (edit.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
                 Date currentDate = new Date();

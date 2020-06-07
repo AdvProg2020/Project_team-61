@@ -9,6 +9,7 @@ import view.CommandProcessor;
 import view.*;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ProductsMenu {
@@ -87,7 +88,7 @@ public class ProductsMenu {
         }else OutputMassageHandler.showProductsOutput(14);
     }
 
-    public static void productNameFilter(String product) throws FileNotFoundException {
+    public static void productNameFilter(String product) throws IOException {
         if(Product.isThereProductWithId(product)) {
             Filter.productNameFilter(product);
             OutputHandler.showAllProductAfterFilter();

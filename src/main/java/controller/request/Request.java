@@ -28,8 +28,8 @@ public  class Request {
     private Account seller;
     private static ArrayList<Request> allRequests;
     LocalDateTime now;
-    public static Type RequestType = new TypeToken<ArrayList<Request>>() {
-    }.getType();
+//    public static Type RequestType = new TypeToken<ArrayList<Request>>() {
+//    }.getType();
 
     public Request(String requestID) throws IOException {
         this.requestText = requestID;
@@ -38,9 +38,11 @@ public  class Request {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         now = LocalDateTime.now();
         requestDate = dtf.format(now);
-        seller = (Seller) LoginMenu.getLoginAccount();
+        if(LoginMenu.getLoginAccount() instanceof Seller) {
+            seller = (Seller) LoginMenu.getLoginAccount();
+        }
         allRequests.add(this);
-        writeInJ();
+//        writeInJ();
     }
 
     public LocalDateTime getNow() {
@@ -59,11 +61,29 @@ public  class Request {
         return requestText;
     }
 
-    public void declineRequest() {
+    public static void declineRequest(String request) {
+        if(request.matches("add sale:\\s+\\S+")){
+            SaleRequest.declineRequest(getRequestFromID(request));
+        }else  if(request.matches("\\S+\\s*wants add product\\s+\\S+")){
+            ProductRequest.declineRequest(getRequestFromID(request));
+        }else  if(request.matches("\\S+\\s*wants seller account")){
+            AccountRequest.declineRequest(getRequestFromID(request));
+        }else  if(request.matches("\\S+\\s*comment on\\s*\\S+")){
+            CommentRequest.declineRequest(getRequestFromID(request));
+        }
 
     }
 
-    public void acceptRequest() throws IOException {
+    public void acceptRequest(String request) throws IOException {
+        if(request.matches("add sale:\\s+\\S+")){
+            SaleRequest.acceptRequest(getRequestFromID(request));
+        }else  if(request.matches("\\S+\\s*wants add product\\s+\\S+")){
+            ProductRequest.acceptRequest(getRequestFromID(request));
+        }else  if(request.matches("\\S+\\s*wants seller account")){
+            AccountRequest.acceptRequest(getRequestFromID(request));
+        }else  if(request.matches("\\S+\\s*comment on\\s*\\S+")){
+            CommentRequest.acceptRequest(getRequestFromID(request));
+        }
 
     }
 
@@ -83,11 +103,11 @@ public  class Request {
         return false;
     }
 
-    public static void writeInJ() throws IOException {
-        FileHandling.setGson(new Gson());
-        String json = FileHandling.getGson().toJson(Request.allRequests, RequestType);
-        FileHandling.writeInFile(json, "request.json");
-    }
+//    public static void writeInJ() throws IOException {
+//        FileHandling.setGson(new Gson());
+//        String json = FileHandling.getGson().toJson(Request.allRequests, RequestType);
+//        FileHandling.writeInFile(json, "request.json");
+//    }
 
 //    public static void readFile() throws FileNotFoundException {
 //        JsonReader reader = new JsonReader(new FileReader("request.json"));

@@ -113,7 +113,7 @@ public class LoginMenu {
         OutputMassageHandler.showAccountOutput(outputNo);
     }
 
-    public static void editAccount(String edit) {
+    public static void editAccount(String edit) throws IOException {
         if (field.equalsIgnoreCase("password")) {
             if (edit.matches(".+")) {
                 loginAccount.setPassword(edit);
@@ -143,7 +143,7 @@ public class LoginMenu {
         OutputMassageHandler.showAccountOutput(outputNo);
     }
 
-    public static void editSellerField(String edit) {
+    public static void editSellerField(String edit) throws IOException {
         if (field.equalsIgnoreCase("password")) {
             if (edit.matches(".+")) {
                 accountRequest.setPassword(edit);
@@ -194,7 +194,7 @@ public class LoginMenu {
         OutputMassageHandler.showFirmOutput(outputNo);
     }
 
-    public static void firmField(String field) {
+    public static void firmField(String field) throws IOException {
         if (!field.matches("(?i)(?:name|address|email|phone\\s*number)")) {
             accountRequest.setFirmName(firmName);
             CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITFIRM);
@@ -204,7 +204,7 @@ public class LoginMenu {
         OutputMassageHandler.showFirmOutput(outputNo);
     }
 
-    public static void editFirm(String detail) {
+    public static void editFirm(String detail) throws IOException {
 
         if (field.matches("phone\\s*number")) {
             if (detail.matches("09[0-9]{9}")) {
