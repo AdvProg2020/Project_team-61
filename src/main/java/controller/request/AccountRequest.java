@@ -48,6 +48,7 @@ public class AccountRequest extends Request {
     public AccountRequest(String requestID) throws IOException {
         super(requestID);
         allAccountRequests.add(this);
+        writeInJ();
     }
 
 

@@ -53,35 +53,35 @@ public class Main {
 
 
 
-//        Type registerType = new TypeToken<ArrayList<Request>>(){}.getType();
-//        try {
-//            JsonReader reader1 =new JsonReader(new FileReader("request.json"));
-//            ArrayList<Request> requestArrayList = FileHandling.getGson().fromJson(reader1,registerType);
-//            if (null==requestArrayList){
-//                requestArrayList=new ArrayList<>();
-//            }
-//            Request.setAllRequests(requestArrayList);
-//        }catch (IOException e){
-//            FileHandling.writeInFile("","request.json");
-//            Request.setAllRequests(new ArrayList<>());
-//        }
-//
-//
-//
-//        try {
-//            Type AccountType = new TypeToken<ArrayList<Account>>() {
-//            }.getType();
-//            JsonReader reader = new JsonReader(new FileReader("account.json"));
-//            ArrayList<Account> list = FileHandling.getGson().fromJson(reader,AccountType);
-//            if (null == list){
-//                list = new ArrayList<Account>();
-//            }
-//            Account.setAllAccounts(list);
-//        }catch (IOException e){
-//            FileHandling.writeInFile("","account.json");
-//            Account.setAllAccounts(new ArrayList<>());
-//        }
-//
+        Type registerType = new TypeToken<ArrayList<Request>>(){}.getType();
+        try {
+            JsonReader reader1 =new JsonReader(new FileReader("request.json"));
+            ArrayList<Request> requestArrayList = FileHandling.getGson().fromJson(reader1,registerType);
+            if (null==requestArrayList){
+                requestArrayList=new ArrayList<>();
+            }
+            Request.setAllRequests(requestArrayList);
+        }catch (IOException e){
+            FileHandling.writeInFile("","request.json");
+            Request.setAllRequests(new ArrayList<>());
+        }
+
+
+
+        try {
+            Type AccountType = new TypeToken<ArrayList<Account>>() {
+            }.getType();
+            JsonReader reader = new JsonReader(new FileReader("account.json"));
+            ArrayList<Account> list = FileHandling.getGson().fromJson(reader,AccountType);
+            if (null == list){
+                list = new ArrayList<Account>();
+            }
+            Account.setAllAccounts(list);
+        }catch (IOException e){
+            FileHandling.writeInFile("","account.json");
+            Account.setAllAccounts(new ArrayList<>());
+        }
+
 
 
 

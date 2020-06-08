@@ -26,6 +26,7 @@ public class CommentRequest extends Request {
     public CommentRequest(String requestID) throws IOException {
         super(requestID);
         allCommentRequests.remove(this);
+        writeInJ();
     }
 
 

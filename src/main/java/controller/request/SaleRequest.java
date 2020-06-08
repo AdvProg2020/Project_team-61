@@ -32,7 +32,7 @@ public class SaleRequest extends Request {
     public SaleRequest(String requestID) throws IOException {
         super(requestID);
         allSaleRequests.add(this);
-
+        writeInJ();
     }
 
 

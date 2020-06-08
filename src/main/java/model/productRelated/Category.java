@@ -110,15 +110,15 @@ public class Category{
 
 
 
-    @Override
-    public String toString() {
-        return "Category{" +
-                "name='" + name + '\'' +
-                ", traits='" + traits + '\'' +
-                ", subCategories=" + subCategories +
-                ", allProducts=" + allProducts
-                ;
-    }
+//    @Override
+//    public String toString() {
+//        return "Category{" +
+//                "name='" + name + '\'' +
+//                ", traits='" + traits + '\'' +
+//                ", subCategories=" + subCategories +
+//                ", allProducts=" + allProducts
+//                ;
+//    }
     public static void writeInJ() throws IOException {
         Type collectionType = new TypeToken<ArrayList<Category>>(){}.getType();
         String json= FileHandling.getGson().toJson(Category.allCategories,collectionType);
