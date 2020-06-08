@@ -138,6 +138,10 @@ public class ProductRequest extends Request {
         ProductRequest.allProductRequests = allProductRequests;
     }
 
+    public static ArrayList<ProductRequest> getAllProductRequests() {
+        return allProductRequests;
+    }
+
     public static void writeInJ() throws IOException {
         FileHandling.setGson(new Gson());
         String json = FileHandling.getGson().toJson(ProductRequest.allProductRequests, productRequestType);

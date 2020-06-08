@@ -48,6 +48,9 @@ public class Seller extends Account {
         return firm;
     }
 
+    public static ArrayList<Seller> getAllSellers() {
+        return allSellers;
+    }
 
     public static void writeInJ() throws IOException {
 

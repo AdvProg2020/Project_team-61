@@ -53,7 +53,9 @@ public abstract class Account {
             this.firm = firm;
         }
 //        writeInJ();
-
+        Customer.writeInJ();
+        Manager.writeInJ();
+        Seller.writeInJ();
     }
 
 

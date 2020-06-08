@@ -28,6 +28,10 @@ public class Customer extends Account {
         Customer.allCustomers = allCustomers;
     }
 
+    public static ArrayList<Customer> getAllCustomers() {
+        return allCustomers;
+    }
+
     public ArrayList<BuyLog> getBuyLogsHistory() {
         return BuyLogsHistory;
     }
