@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class AccountRequest extends Request {
-
+    private static String id = null;
     private static String username = null;
     private static String password = null;
     private static String name = null;
@@ -20,7 +20,7 @@ public class AccountRequest extends Request {
     private static  String Email = null;
     private static double phoneNo = 0;
     private static Date birthdayDate = null;
-
+    private static  AccountRequest ar= null;
     private static String firmName = null;
     private static double FirmPhoneNO = 0;
     private static String firmAddress = null;
@@ -33,6 +33,14 @@ public class AccountRequest extends Request {
     public AccountRequest(String requestID) throws IOException {
         super(requestID);
         allAccountRequests.add(this);
+        writeInJ();
+    }
+
+    public static AccountRequest getRequestFromID(String requestID){
+        for(AccountRequest request : allAccountRequests){
+            if (request.id.equalsIgnoreCase(requestID)) return request;
+        }
+        return null;
     }
 
 
@@ -43,24 +51,31 @@ public class AccountRequest extends Request {
 
 
     public static  void acceptRequest(Request request) throws IOException {
-        Seller seller = new Seller(username);
+        ar =AccountRequest.getRequestFromID(request.getRequestText());
+        Seller seller = new Seller(ar.username);
         createFirm();
-        firm = Firm.getFirmWithID(firmName);
-        seller.setDetailsToAccount(password, name, lastname, Email, phoneNo, birthdayDate, firm);
-        firm.setDetailToFirm(FirmPhoneNO, firmAddress, firmEmail);
+        ar.firm = Firm.getFirmWithID(ar.firmName);
+        seller.setDetailsToAccount(ar.password, ar.name, ar.lastname,ar. Email, ar.phoneNo, ar.birthdayDate, ar.firm);
+        ar.firm.setDetailToFirm(ar.FirmPhoneNO, ar.firmAddress, ar.firmEmail);
         Request.getAllRequests().remove(request);
         allAccountRequests.remove(request);
 
     }
 
     private static void createFirm() throws IOException {
-        if (FirmType.equalsIgnoreCase("company")) {
-            Company company = new Company(firmName);
-        } else if (FirmType.equalsIgnoreCase("workshop")) {
-            Workshop workshop = new Workshop(firmName);
-        } else if (FirmType.equalsIgnoreCase("factory")) {
-            Factory factory = new Factory(firmName);
+        if (ar.FirmType.equalsIgnoreCase("company")) {
+            Company company = new Company(ar.firmName);
+        } else if (ar.FirmType.equalsIgnoreCase("workshop")) {
+            Workshop workshop = new Workshop(ar.firmName);
+        } else if (ar.FirmType.equalsIgnoreCase("factory")) {
+            Factory factory = new Factory(ar.firmName);
         }
+    }
+
+
+    public static void setId(String id) throws IOException {
+        AccountRequest.id = id;
+        writeInJ();
     }
 
     public void setPassword(String password) throws IOException {

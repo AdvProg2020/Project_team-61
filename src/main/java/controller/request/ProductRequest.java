@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ProductRequest extends Request {
-
+    private static String id = null;
     private static String productId = null;
     private static String productName = null;
     private static double price = 0;
@@ -28,8 +28,15 @@ public class ProductRequest extends Request {
     public ProductRequest(String requestID) throws IOException {
         super(requestID);
         allProductRequests.add(this);
+        writeInJ();
     }
 
+    public static ProductRequest getRequestFromID(String requestID){
+        for(ProductRequest request : allProductRequests){
+            if (request.id.equalsIgnoreCase(requestID)) return request;
+        }
+        return null;
+    }
 
     public static void declineRequest(Request request) {
         Request.getAllRequests().remove(request);
@@ -50,17 +57,23 @@ public class ProductRequest extends Request {
 
 
     public static void acceptRequest(Request request) throws IOException {
-        Product newProduct = Product.getProductById(productId);
-        newProduct.setDetailProduct(productName, companyName,price, sellerName,numberOfProduct,categoryName);
-        newProduct.setAdditionalDetail(additionalDetail);
-        newProduct.getCategorySpecifications().putAll(specialValue);
-        if(lastCategory != null) {
-            lastCategory.removeProductToCategory(newProduct);
+        ProductRequest pr = ProductRequest.getRequestFromID(request.getRequestText());
+        Product newProduct = Product.getProductById(pr.productId);
+        newProduct.setDetailProduct(pr.productName, pr.companyName,pr.price, pr.sellerName,pr.numberOfProduct,pr.categoryName);
+        newProduct.setAdditionalDetail(pr.additionalDetail);
+        newProduct.getCategorySpecifications().putAll(pr.specialValue);
+        if(pr.lastCategory != null) {
+            pr.lastCategory.removeProductToCategory(newProduct);
         }
-        categoryName.addProductToCategory(newProduct);
+        pr.categoryName.addProductToCategory(newProduct);
         newProduct.setProductStatus(ProductStatus.CONFIRMED);
         Request.getAllRequests().remove(request);
         allProductRequests.remove(request);
+    }
+
+    public static void setId(String id) throws IOException {
+        ProductRequest.id = id;
+        writeInJ();
     }
 
     public void addHashmapValue(String key, String value) throws IOException {

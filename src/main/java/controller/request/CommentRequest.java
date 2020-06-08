@@ -9,30 +9,41 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class CommentRequest extends Request {
-
-    private static String title;
-    private static String content;
-    private static Account personToVote;
-    private static Product product;
-    private static String id;
+    private static String commentId = null;
+    private static String id = null;
+    private static String title= null;
+    private static String content= null;
+    private static Account personToVote= null;
+    private static Product product= null;
+    private static CommentRequest cr= null;
     private static ArrayList<CommentRequest> allCommentRequests = new ArrayList<>();
 
     public CommentRequest(String requestID) throws IOException {
         super(requestID);
         allCommentRequests.remove(this);
+        writeInJ();
+    }
+
+
+    public static CommentRequest getRequestFromID(String requestID){
+        for(CommentRequest request : allCommentRequests){
+            if (request.commentId.equalsIgnoreCase(requestID)) return request;
+        }
+        return null;
     }
 
 
     public static void declineRequest(Request request) {
         Request.getAllRequests().remove(request);
         allCommentRequests.remove(request);
-        Comment comment = Comment.getCommentFromId(id);
+        Comment comment = Comment.getCommentFromId(commentId);
         comment.setCommentStatus(CommentStatus.NOTAPPROVEDBYTHEMANAGER);
     }
 
 
     public static void acceptRequest(Request request) {
-        Comment comment =Comment.getCommentFromId(id);
+        cr = CommentRequest.getRequestFromID(request.getRequestText());
+        Comment comment =Comment.getCommentFromId(commentId);
         comment.setDetail(title,content,personToVote,product);
         comment.setCommentStatus(CommentStatus.CONFIRMED);
         product.setComment(comment);
@@ -40,10 +51,14 @@ public class CommentRequest extends Request {
         allCommentRequests.remove(request);
     }
 
-    public void setId(String id) throws IOException {
-        this.id = id;
+    public static void setId(String id) throws IOException {
+        CommentRequest.id = id;
         writeInJ();
+    }
 
+    public static void setCommentId(String id) throws IOException {
+        CommentRequest.id = id;
+        writeInJ();
     }
 
     public void setTitle(String title) throws IOException {

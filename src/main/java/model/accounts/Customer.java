@@ -20,12 +20,7 @@ public class Customer extends Account {
         super(username);
         role = "customer";
         allCustomers.add(this);
-       writeInJ();
-    }
-
-
-    public static void setAllCustomers(ArrayList<Customer> allCustomers) {
-        Customer.allCustomers = allCustomers;
+        //     writeInJ();
     }
 
     public ArrayList<BuyLog> getBuyLogsHistory() {
@@ -39,12 +34,11 @@ public class Customer extends Account {
 
     }
 
-    public static void writeInJ() throws IOException {
-
-        String json = FileHandling.getGson().toJson(Customer.allCustomers, CustomerType);
-        FileHandling.writeInFile(json, "customer.json");
-
-    }
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<Customer>>(){}.getType();
+//        String json= FileHandling.getGson().toJson(Customer.allCustomers,collectionType);
+//        FileHandling.turnToArray(json+" "+"customer.json");
+//    }
 
     @Override
     public String toString() {

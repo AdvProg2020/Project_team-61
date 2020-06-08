@@ -33,7 +33,8 @@ public class Account {
     ArrayList<DiscountCode> allDiscountCodes;
     private static ArrayList<Account> allAccounts;
     private static ArrayList<Date> birthdayDates = new ArrayList<>();
-
+    public static Type AccountType = new TypeToken<ArrayList<Account>>() {
+    }.getType();
 
 
     public void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate, Firm firm) throws IOException {
@@ -59,7 +60,7 @@ public class Account {
         if (firm != null) {
             this.firm = firm;
         }
-//        writeInJ();
+        writeInJ();
 
     }
 
@@ -71,13 +72,13 @@ public class Account {
 
     public void addDiscountCode(DiscountCode discountCode) throws IOException {
         allDiscountCodes.add(discountCode);
-//        writeInJ();
+        writeInJ();
 
     }
 
     public void removeDiscountCode(DiscountCode discountCode) throws IOException {
         allDiscountCodes.remove(discountCode);
-//        writeInJ();
+        writeInJ();
 
     }
 
@@ -131,55 +132,55 @@ public class Account {
     //----------------------------------------------------------------
     public void setName(String name) throws IOException {
         this.name = name;
-//        writeInJ();
+        writeInJ();
 
     }
 
     public void setLastname(String lastname) throws IOException {
         this.lastname = lastname;
-//        writeInJ();
+        writeInJ();
 
     }
 
     public void setPassword(String password) throws IOException {
         this.password = password;
-//        writeInJ();
+        writeInJ();
 
     }
 
     public void setEmail(String email) throws IOException {
         this.email = email;
-//        writeInJ();
+        writeInJ();
 
     }
 
     public void setPhoneNo(int phoneNo) throws IOException {
         this.phoneNo = phoneNo;
-//        writeInJ();
+        writeInJ();
 
     }
 
     public void setCredit(double credit) throws IOException {
         this.credit = credit;
-//        writeInJ();
+        writeInJ();
 
     }
 
     public void setCurrentPhoneNo(double currentPhoneNo) throws IOException {
         this.currentPhoneNo = currentPhoneNo;
-//        writeInJ();
+        writeInJ();
 
     }
 
     public void setAddress(String address) throws IOException {
         this.address = address;
-//        writeInJ();
+        writeInJ();
 
     }
 
     public void setFast(boolean fast) throws IOException {
         this.fast = fast;
-//        writeInJ();
+        writeInJ();
 
     }
 
@@ -221,12 +222,12 @@ public class Account {
     }
 
     //......................................................................
-//    public static void writeInJ() throws IOException {
-//
-//        String json = FileHandling.getGson().toJson(Account.allAccounts, AccountType);
-//        FileHandling.writeInFile(json, "account.json");
-//
-//    }
+    public static void writeInJ() throws IOException {
+
+        String json = FileHandling.getGson().toJson(Account.allAccounts, AccountType);
+        FileHandling.writeInFile(json, "account.json");
+
+    }
 
 //    public static void readFile() throws IOException {
 //        JsonReader reader = new JsonReader(new FileReader("account.json"));

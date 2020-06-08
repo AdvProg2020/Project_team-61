@@ -100,50 +100,50 @@ public class Main {
 
 
 
-        Type sellerType = new TypeToken<ArrayList<Seller>>(){}.getType();
-        try {
-            JsonReader reader5 =new JsonReader(new FileReader("seller.json"));
-            ArrayList<Seller> sellersArrayList = FileHandling.getGson().fromJson(reader5,sellerType);
-            if (null==sellersArrayList){
-                sellersArrayList=new ArrayList<>();
-            }
-            Seller.setAllSellers(sellersArrayList);
-        }catch (IOException e){
-            FileHandling.writeInFile("","seller.json");
-            Seller.setAllSellers(new ArrayList<>());
-        }
-
-
-        Type managerType = new TypeToken<ArrayList<Manager>>(){}.getType();
-        try {
-            JsonReader reader6 =new JsonReader(new FileReader("manager.json"));
-            ArrayList<Manager> managerArrayList = FileHandling.getGson().fromJson(reader6,managerType);
-            if (null==managerArrayList){
-                managerArrayList=new ArrayList<>();
-            }
-            Manager.setAllManagers(managerArrayList);
-        }catch (IOException e){
-            FileHandling.writeInFile("","manager.json");
-            Manager.setAllManagers(new ArrayList<>());
-        }
-
-
-        Type CustomerType = new TypeToken<ArrayList<Customer>>(){}.getType();
-        try {
-            JsonReader reader7 =new JsonReader(new FileReader("customer.json"));
-            ArrayList<Customer> customerArrayList = FileHandling.getGson().fromJson(reader7,CustomerType);
-            if (null==customerArrayList){
-                customerArrayList=new ArrayList<>();
-            }
-            Customer.setAllCustomers(customerArrayList);
-        }catch (IOException e){
-            FileHandling.writeInFile("","customer.json");
-            Customer.setAllCustomers(new ArrayList<>());
-        }
+//        Type sellerType = new TypeToken<ArrayList<Seller>>(){}.getType();
+//        try {
+//            JsonReader reader5 =new JsonReader(new FileReader("seller.json"));
+//            ArrayList<Seller> sellersArrayList = FileHandling.getGson().fromJson(reader5,sellerType);
+//            if (null==sellersArrayList){
+//                sellersArrayList=new ArrayList<>();
+//            }
+//            Seller.setAllSellers(sellersArrayList);
+//        }catch (IOException e){
+//            FileHandling.writeInFile("","seller.json");
+//            Seller.setAllSellers(new ArrayList<>());
+//        }
+//
+//
+//        Type managerType = new TypeToken<ArrayList<Manager>>(){}.getType();
+//        try {
+//            JsonReader reader6 =new JsonReader(new FileReader("manager.json"));
+//            ArrayList<Manager> managerArrayList = FileHandling.getGson().fromJson(reader6,managerType);
+//            if (null==managerArrayList){
+//                managerArrayList=new ArrayList<>();
+//            }
+//            Manager.setAllManagers(managerArrayList);
+//        }catch (IOException e){
+//            FileHandling.writeInFile("","manager.json");
+//            Manager.setAllManagers(new ArrayList<>());
+//        }
+//
+//
+//        Type CustomerType = new TypeToken<ArrayList<Customer>>(){}.getType();
+//        try {
+//            JsonReader reader7 =new JsonReader(new FileReader("customer.json"));
+//            ArrayList<Customer> customerArrayList = FileHandling.getGson().fromJson(reader7,CustomerType);
+//            if (null==customerArrayList){
+//                customerArrayList=new ArrayList<>();
+//            }
+//            Customer.setAllCustomers(customerArrayList);
+//        }catch (IOException e){
+//            FileHandling.writeInFile("","customer.json");
+//            Customer.setAllCustomers(new ArrayList<>());
+//        }
 
         //Account.readFile();
-       // Request.readFile();
-         CommandProcessor commandProcessor = new CommandProcessor();
+        // Request.readFile();
+        CommandProcessor commandProcessor = new CommandProcessor();
         commandProcessor.run();
 //        Scanner in = new Scanner(System.in);
 //        int a = in.nextInt();
