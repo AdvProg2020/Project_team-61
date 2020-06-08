@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.*;
 
-public class Account {
+public abstract class Account {
     String username;
     String name;
     String lastname;
@@ -61,13 +61,16 @@ public class Account {
             this.firm = firm;
         }
 //        writeInJ();
-
+        Customer.writeInJ();
+        Manager.writeInJ();
+        Seller.writeInJ();
     }
 
 
     public Account(String username) throws IOException {
         this.username = username;
         allAccounts.add(this);
+
     }
 
     public void addDiscountCode(DiscountCode discountCode) throws IOException {

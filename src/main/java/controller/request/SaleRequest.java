@@ -32,7 +32,7 @@ public class SaleRequest extends Request {
     public SaleRequest(String requestID) throws IOException {
         super(requestID);
         allSaleRequests.add(this);
-
+        writeInJ();
     }
 
 
@@ -102,6 +102,10 @@ public class SaleRequest extends Request {
 
     public static void setAllSaleRequests(ArrayList<SaleRequest> allSaleRequests) {
         SaleRequest.allSaleRequests = allSaleRequests;
+    }
+
+    public static ArrayList<SaleRequest> getAllSaleRequests() {
+        return allSaleRequests;
     }
 
     public static void writeInJ() throws IOException {

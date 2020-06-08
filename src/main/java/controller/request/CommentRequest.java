@@ -26,6 +26,7 @@ public class CommentRequest extends Request {
     public CommentRequest(String requestID) throws IOException {
         super(requestID);
         allCommentRequests.remove(this);
+        writeInJ();
     }
 
 
@@ -78,6 +79,10 @@ public class CommentRequest extends Request {
 
     public static void setAllCommentRequests(ArrayList<CommentRequest> allCommentRequests) {
         CommentRequest.allCommentRequests = allCommentRequests;
+    }
+
+    public static ArrayList<CommentRequest> getAllCommentRequests() {
+        return allCommentRequests;
     }
 
     public static void writeInJ() throws IOException {

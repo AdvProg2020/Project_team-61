@@ -141,6 +141,10 @@ public class Main {
             Customer.setAllCustomers(new ArrayList<>());
         }
 
+        Account.setAllAccounts(new ArrayList<>());
+        Account.getAllAccounts().addAll(Customer.getAllCustomers());
+        Account.getAllAccounts().addAll(Manager.getAllManagers());
+        Account.getAllAccounts().addAll(Seller.getAllSellers());
 
         Type AccountReType = new TypeToken<ArrayList<AccountRequest>>(){}.getType();
         try {
@@ -200,6 +204,11 @@ public class Main {
             SaleRequest.setAllSaleRequests(new ArrayList<>());
         }
 
+        Request.setAllRequests(new ArrayList<>());
+        Request.getAllRequests().addAll(AccountRequest.getAllAccountRequests());
+        Request.getAllRequests().addAll(CommentRequest.getAllCommentRequests());
+        Request.getAllRequests().addAll(ProductRequest.getAllProductRequests());
+        Request.getAllRequests().addAll(SaleRequest.getAllSaleRequests());
 
 
         //Account.readFile();

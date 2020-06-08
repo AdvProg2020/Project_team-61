@@ -34,6 +34,7 @@ public class ProductRequest extends Request {
     public ProductRequest(String requestID) throws IOException {
         super(requestID);
         allProductRequests.add(this);
+        writeInJ();
     }
 
 
@@ -123,6 +124,10 @@ public class ProductRequest extends Request {
 
     public static void setAllProductRequests(ArrayList<ProductRequest> allProductRequests) {
         ProductRequest.allProductRequests = allProductRequests;
+    }
+
+    public static ArrayList<ProductRequest> getAllProductRequests() {
+        return allProductRequests;
     }
 
     public static void writeInJ() throws IOException {
