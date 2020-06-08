@@ -7,6 +7,7 @@ import view.FileHandling;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -14,8 +15,8 @@ import java.util.Comparator;
 
 public class DiscountCode {
     private String discountId;
-    private static LocalDateTime startOfDiscountPeriod;
-    private static LocalDateTime endOfDiscountPeriod;
+    private static LocalDate startOfDiscountPeriod;
+    private static LocalDate endOfDiscountPeriod;
     private int discountAmount;
     private double maxDiscountAmount;
     private int totalTimesOfUse;
@@ -46,7 +47,7 @@ public class DiscountCode {
         account.removeDiscountCode(getDiscountWithId(discountId));
     }
 
-    public static void setStartOfDiscountPeriod(LocalDateTime startOfDiscountPeriod) {
+    public static void setStartOfDiscountPeriod(LocalDate startOfDiscountPeriod) {
         DiscountCode.startOfDiscountPeriod = startOfDiscountPeriod;
     }
 
@@ -63,7 +64,7 @@ public class DiscountCode {
     }
 
     public static boolean discountDateValid(){
-        LocalDateTime now = LocalDateTime.now();
+        LocalDate now = LocalDate.now();
         if (now.isAfter(startOfDiscountPeriod) && now.isBefore(endOfDiscountPeriod)){
             return true;
         }
@@ -78,7 +79,7 @@ public class DiscountCode {
         this.totalTimesOfUse = totalTimesOfUse;
     }
 
-    public static void setEndOfDiscountPeriod(LocalDateTime endOfDiscountPeriod) {
+    public static void setEndOfDiscountPeriod(LocalDate endOfDiscountPeriod) {
         DiscountCode.endOfDiscountPeriod = endOfDiscountPeriod;
     }
 
@@ -90,13 +91,13 @@ public class DiscountCode {
         return discountId;
     }
 
-    public static LocalDateTime getStartOfDiscountPeriod() {
-        return startOfDiscountPeriod;
-    }
+   // public static LocalDateTime getStartOfDiscountPeriod() {
+        //return startOfDiscountPeriod;
+    //}
 
-    public static LocalDateTime getEndOfDiscountPeriod() {
-        return endOfDiscountPeriod;
-    }
+    //public static LocalDateTime getEndOfDiscountPeriod() {
+     //   return endOfDiscountPeriod;
+    //}
 
     public double getMaxDiscountAmount() {
         return maxDiscountAmount;

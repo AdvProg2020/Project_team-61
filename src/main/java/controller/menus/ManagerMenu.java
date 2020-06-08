@@ -12,6 +12,7 @@ import view.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -123,10 +124,10 @@ public class ManagerMenu {
     public static void setDetailToDiscountCode(String detail) throws ParseException, IOException {
         if (detailMenu == 0) {
             if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
-                LocalDateTime currentDate = LocalDateTime.now();
+                LocalDate currentDate = LocalDate.now();
                 //Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDateTime inputDate = LocalDateTime.parse(detail, formatter);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/y");
+                LocalDate inputDate = LocalDate.parse(detail, formatter);
                 if (inputDate.isAfter(currentDate)) {
                     newDiscountCode.setStartOfDiscountPeriod(inputDate);
                     outputNo = 9;
@@ -135,10 +136,10 @@ public class ManagerMenu {
             } else outputNo = 8;
         } else if (detailMenu == 1) {
             if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
-                LocalDateTime currentDate = LocalDateTime.now();
+                LocalDate currentDate = LocalDate.now();
                 //Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDateTime inputDate = LocalDateTime.parse(detail, formatter);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/y");
+                LocalDate inputDate = LocalDate.parse(detail, formatter);
                 if (inputDate.isAfter(currentDate)) {
                     newDiscountCode.setEndOfDiscountPeriod(inputDate);
                     outputNo = 11;
@@ -228,10 +229,10 @@ public class ManagerMenu {
     public static void editDiscountCodeField(String edit) throws ParseException, IOException {
         if (field.matches("(?i)start\\s+Of\\s+Discount\\s+Period")) {
             if (edit.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
-                LocalDateTime currentDate = LocalDateTime.now();
+                LocalDate currentDate = LocalDate.now();
                 //Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDateTime inputDate = LocalDateTime.parse(edit, formatter);
+                LocalDate inputDate = LocalDate.parse(edit, formatter);
                 if (inputDate.isAfter(currentDate)) {
                     editableDiscountCode.setStartOfDiscountPeriod(inputDate);
                     outputNo = 16;
@@ -239,10 +240,10 @@ public class ManagerMenu {
             } else outputNo = 8;
         } else if (field.matches("(?i)end\\s+Of\\s+Discount\\s+Period")) {
             if (edit.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
-                LocalDateTime currentDate = LocalDateTime.now();
+                LocalDate currentDate = LocalDate.now();
                 //Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDateTime inputDate = LocalDateTime.parse(edit, formatter);
+                LocalDate inputDate = LocalDate.parse(edit, formatter);
                 if (inputDate.isAfter(currentDate)) {
                     editableDiscountCode.setEndOfDiscountPeriod(inputDate);
                     outputNo = 17;
