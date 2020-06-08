@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class AccountRequest extends Request {
-    private static String id = null;
+
     private static String username = null;
     private static String password = null;
     private static String name = null;
@@ -24,7 +24,7 @@ public class AccountRequest extends Request {
     private static  String Email = null;
     private static double phoneNo = 0;
     private static Date birthdayDate = null;
-    private static  AccountRequest ar= null;
+
     private static String firmName = null;
     private static double FirmPhoneNO = 0;
     private static String firmAddress = null;
@@ -51,46 +51,32 @@ public class AccountRequest extends Request {
         writeInJ();
     }
 
-    public static AccountRequest getRequestFromID(String requestID){
-        for(AccountRequest request : allAccountRequests){
-            if (request.id.equalsIgnoreCase(requestID)) return request;
-        }
-        return null;
+@Override
+    public  void declineRequest() {
+        Request.getAllRequests().remove(this);
+        allAccountRequests.remove(this);
     }
 
-
-    public static void declineRequest(Request request) {
-        Request.getAllRequests().remove(request);
-        allAccountRequests.remove(request);
-    }
-
-
-    public static  void acceptRequest(Request request) throws IOException {
-        ar =AccountRequest.getRequestFromID(request.getRequestText());
-        Seller seller = new Seller(ar.username);
+    @Override
+    public   void acceptRequest() throws IOException {
+        Seller seller = new Seller(username);
         createFirm();
-        ar.firm = Firm.getFirmWithID(ar.firmName);
-        seller.setDetailsToAccount(ar.password, ar.name, ar.lastname,ar. Email, ar.phoneNo, ar.birthdayDate, ar.firm);
-        ar.firm.setDetailToFirm(ar.FirmPhoneNO, ar.firmAddress, ar.firmEmail);
-        Request.getAllRequests().remove(request);
-        allAccountRequests.remove(request);
+        firm = Firm.getFirmWithID(firmName);
+        seller.setDetailsToAccount(password, name, lastname, Email, phoneNo, birthdayDate, firm);
+        firm.setDetailToFirm(FirmPhoneNO, firmAddress, firmEmail);
+        Request.getAllRequests().remove(this);
+        allAccountRequests.remove(this);
 
     }
 
     private static void createFirm() throws IOException {
-        if (ar.FirmType.equalsIgnoreCase("company")) {
-            Company company = new Company(ar.firmName);
-        } else if (ar.FirmType.equalsIgnoreCase("workshop")) {
-            Workshop workshop = new Workshop(ar.firmName);
-        } else if (ar.FirmType.equalsIgnoreCase("factory")) {
-            Factory factory = new Factory(ar.firmName);
+        if (FirmType.equalsIgnoreCase("company")) {
+            Company company = new Company(firmName);
+        } else if (FirmType.equalsIgnoreCase("workshop")) {
+            Workshop workshop = new Workshop(firmName);
+        } else if (FirmType.equalsIgnoreCase("factory")) {
+            Factory factory = new Factory(firmName);
         }
-    }
-
-
-    public static void setId(String id) throws IOException {
-        AccountRequest.id = id;
-        writeInJ();
     }
 
     public void setPassword(String password) throws IOException {

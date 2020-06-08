@@ -13,13 +13,12 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class CommentRequest extends Request {
-    private static String commentId = null;
-    private static String id = null;
-    private static String title= null;
-    private static String content= null;
-    private static Account personToVote= null;
-    private static Product product= null;
-    private static CommentRequest cr= null;
+
+    private static String title;
+    private static String content;
+    private static Account personToVote;
+    private static Product product;
+    private static String id;
     private static ArrayList<CommentRequest> allCommentRequests = new ArrayList<>();
     public static Type commentRequestType = new TypeToken<ArrayList<CommentRequest>>() {
     }.getType();
@@ -30,41 +29,28 @@ public class CommentRequest extends Request {
         writeInJ();
     }
 
-
-    public static CommentRequest getRequestFromID(String requestID){
-        for(CommentRequest request : allCommentRequests){
-            if (request.commentId.equalsIgnoreCase(requestID)) return request;
-        }
-        return null;
-    }
-
-
-    public static void declineRequest(Request request) {
-        Request.getAllRequests().remove(request);
-        allCommentRequests.remove(request);
-        Comment comment = Comment.getCommentFromId(commentId);
+    @Override
+    public  void declineRequest() {
+        Request.getAllRequests().remove(this);
+        allCommentRequests.remove(this);
+        Comment comment = Comment.getCommentFromId(id);
         comment.setCommentStatus(CommentStatus.NOTAPPROVEDBYTHEMANAGER);
     }
 
-
-    public static void acceptRequest(Request request) {
-        cr = CommentRequest.getRequestFromID(request.getRequestText());
-        Comment comment =Comment.getCommentFromId(commentId);
+    @Override
+    public  void acceptRequest() {
+        Comment comment =Comment.getCommentFromId(id);
         comment.setDetail(title,content,personToVote,product);
         comment.setCommentStatus(CommentStatus.CONFIRMED);
         product.setComment(comment);
-        Request.getAllRequests().remove(request);
-        allCommentRequests.remove(request);
+        Request.getAllRequests().remove(this);
+        allCommentRequests.remove(this);
     }
 
-    public static void setId(String id) throws IOException {
-        CommentRequest.id = id;
+    public void setId(String id) throws IOException {
+        this.id = id;
         writeInJ();
-    }
 
-    public static void setCommentId(String id) throws IOException {
-        CommentRequest.id = id;
-        writeInJ();
     }
 
     public void setTitle(String title) throws IOException {

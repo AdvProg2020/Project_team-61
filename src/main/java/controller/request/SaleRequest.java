@@ -3,7 +3,6 @@ package controller.request;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
-import model.log.SaleLog;
 import model.off.Sale;
 import model.off.SaleStatus;
 import model.productRelated.Product;
@@ -16,7 +15,6 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class SaleRequest extends Request {
-    private static String id = null;
     private static String offId = null;
     private static Date startOfSalePeriod = null;
     private static Date endOfSalePeriod = null;
@@ -34,44 +32,31 @@ public class SaleRequest extends Request {
     public SaleRequest(String requestID) throws IOException {
         super(requestID);
         allSaleRequests.add(this);
+
     }
 
-
-
-    public static SaleRequest getRequestFromID(String requestID){
-        for(SaleRequest request : allSaleRequests){
-            if (request.id.equalsIgnoreCase(requestID)) return request;
-        }
-        return null;
+    @Override
+    public  void declineRequest() {
+        Request.getAllRequests().remove(this);
+        allSaleRequests.remove(this);
+        Request.getAllRequests().remove(this);
     }
 
-    public static void declineRequest(Request request) {
-        Request.getAllRequests().remove(request);
-        allSaleRequests.remove(request);
-        Request.getAllRequests().remove(request);
-    }
-
-
-    public static void acceptRequest(Request request) throws IOException {
-        SaleRequest sr = SaleRequest.getRequestFromID(request.getRequestText());
-        sale= Sale.getSaleWithId(sr.offId);
-        sale.setSaleDetails(SaleStatus.CONFIRMED, sr.startOfSalePeriod, sr.endOfSalePeriod, sr.saleAmount, sr.seller);
-        sale.setAllSaleProducts(sr.allSaleProducts);
+    @Override
+    public  void acceptRequest() throws IOException {
+        sale= Sale.getSaleWithId(offId);
+        sale.setSaleDetails(SaleStatus.CONFIRMED, startOfSalePeriod, endOfSalePeriod, saleAmount, seller);
+        sale.setAllSaleProducts(allSaleProducts);
         sale.setSaleStatus(SaleStatus.CONFIRMED);
-        Product.getProductById(sr.product).setInSale(true);
-        Request.getAllRequests().remove(request);
-        allSaleRequests.remove(request);
+        Product.getProductById(product).setInSale(true);
+        Request.getAllRequests().remove(this);
+        allSaleRequests.remove(this);
     }
 
 
 
     public void removeProduct(Product product) {
         allSaleProducts.remove(product);
-    }
-
-    public static void setId(String id) throws IOException {
-        SaleRequest.id = id;
-        writeInJ();
     }
 
     public void setSeller(Account seller) throws IOException {

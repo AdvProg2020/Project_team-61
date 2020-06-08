@@ -304,6 +304,7 @@ public class ManagerMenu {
         OutputHandler.showRequests();
     }
 
+
     public static void detailsRequest(String requestID) throws FileNotFoundException {
         if (checkRequest(requestID)) {
             OutputHandler.showRequest(requestID);
@@ -312,14 +313,14 @@ public class ManagerMenu {
 
     public static void acceptRequest(String requestID) throws IOException {
         if (checkRequest(requestID)) {
-            Request.getRequestFromID(requestID).acceptRequest(requestID);
+            Request.getRequestFromID(requestID).acceptRequest();
             OutputMassageHandler.showOutputWithString(requestID, 5);
         } else OutputMassageHandler.showManagerOutput(outputNo);
     }
 
     public static void declineRequest(String requestID) {
         if (checkRequest(requestID)) {
-            Request.getRequestFromID(requestID).declineRequest(requestID);
+            Request.getRequestFromID(requestID).declineRequest();
             OutputMassageHandler.showOutputWithString(requestID, 6);
         } else OutputMassageHandler.showManagerOutput(outputNo);
     }

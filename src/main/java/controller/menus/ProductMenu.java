@@ -68,7 +68,7 @@ public class ProductMenu {
                 commentRequest = new CommentRequest(id);
                 commentRequest.setPersonToVote(LoginMenu.getLoginAccount());
                 commentRequest.setProduct(selectedProduct);
-                commentRequest.setCommentId(commentId);
+                commentRequest.setId(commentId);
             }else commentRequest = (CommentRequest) Request.getRequestFromID(id);
             outputNo = 1;
             CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);

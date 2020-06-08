@@ -61,31 +61,10 @@ public abstract class Request {
         return requestText;
     }
 
-    public static void declineRequest(String request) {
-        if(request.matches("add sale:\\s+\\S+")){
-            SaleRequest.declineRequest(getRequestFromID(request));
-        }else  if(request.matches("\\S+\\s*wants add product\\s+\\S+")){
-            ProductRequest.declineRequest(getRequestFromID(request));
-        }else  if(request.matches("\\S+\\s*wants seller account")){
-            AccountRequest.declineRequest(getRequestFromID(request));
-        }else  if(request.matches("\\S+\\s*comment on\\s*\\S+")){
-            CommentRequest.declineRequest(getRequestFromID(request));
-        }
+    public abstract void declineRequest() ;
 
-    }
+    public abstract void acceptRequest() throws IOException;
 
-    public void acceptRequest(String request) throws IOException {
-        if(request.matches("add sale:\\s+\\S+")){
-            SaleRequest.acceptRequest(getRequestFromID(request));
-        }else  if(request.matches("\\S+\\s*wants add product\\s+\\S+")){
-            ProductRequest.acceptRequest(getRequestFromID(request));
-        }else  if(request.matches("\\S+\\s*wants seller account")){
-            AccountRequest.acceptRequest(getRequestFromID(request));
-        }else  if(request.matches("\\S+\\s*comment on\\s*\\S+")){
-            CommentRequest.acceptRequest(getRequestFromID(request));
-        }
-
-    }
 
     public static void deleteRequest(String id){
         allRequests.remove(getRequestFromID(id));
