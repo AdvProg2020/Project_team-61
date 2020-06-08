@@ -104,6 +104,10 @@ public class SaleRequest extends Request {
         SaleRequest.allSaleRequests = allSaleRequests;
     }
 
+    public static ArrayList<SaleRequest> getAllSaleRequests() {
+        return allSaleRequests;
+    }
+
     public static void writeInJ() throws IOException {
         FileHandling.setGson(new Gson());
         String json = FileHandling.getGson().toJson(SaleRequest.allSaleRequests, saleRequestType);

@@ -25,6 +25,10 @@ public class Manager extends Account {
         Manager.allManagers = allManagers;
     }
 
+    public static ArrayList<Manager> getAllManagers() {
+        return allManagers;
+    }
+
     public static void writeInJ() throws IOException {
 
         String json = FileHandling.getGson().toJson(Manager.allManagers, ManagerType);

@@ -41,6 +41,10 @@ public class AccountRequest extends Request {
         AccountRequest.allAccountRequests = allAccountRequests;
     }
 
+    public static ArrayList<AccountRequest> getAllAccountRequests() {
+        return allAccountRequests;
+    }
+
     public AccountRequest(String requestID) throws IOException {
         super(requestID);
         allAccountRequests.add(this);

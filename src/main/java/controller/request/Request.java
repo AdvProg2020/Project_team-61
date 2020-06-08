@@ -22,7 +22,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public  class Request {
+public abstract class Request {
     private String requestText;
     private String requestDate;
     private Account seller;

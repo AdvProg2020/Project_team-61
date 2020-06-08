@@ -80,6 +80,10 @@ public class CommentRequest extends Request {
         CommentRequest.allCommentRequests = allCommentRequests;
     }
 
+    public static ArrayList<CommentRequest> getAllCommentRequests() {
+        return allCommentRequests;
+    }
+
     public static void writeInJ() throws IOException {
         FileHandling.setGson(new Gson());
         String json = FileHandling.getGson().toJson(CommentRequest.allCommentRequests, commentRequestType);
