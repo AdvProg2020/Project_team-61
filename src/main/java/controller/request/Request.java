@@ -1,22 +1,9 @@
 package controller.request;
 
-import com.google.gson.Gson;
-import com.google.gson.InstanceCreator;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-import com.sun.org.apache.regexp.internal.RE;
 import controller.menus.LoginMenu;
 import model.accounts.Account;
 import model.accounts.Seller;
-import model.log.SaleLog;
-import view.FileHandling;
-import view.OutputHandler;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;

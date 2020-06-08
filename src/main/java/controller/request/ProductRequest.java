@@ -2,6 +2,7 @@ package controller.request;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import controller.menus.LoginMenu;
 import model.accounts.Seller;
 import model.firms.Firm;
 import model.productRelated.Category;
@@ -34,6 +35,9 @@ public class ProductRequest extends Request {
     public ProductRequest(String requestID) throws IOException {
         super(requestID);
         allProductRequests.add(this);
+        if(LoginMenu.getLoginAccount() instanceof Seller) {
+            sellerName = (Seller) LoginMenu.getLoginAccount();
+        }
         writeInJ();
     }
 

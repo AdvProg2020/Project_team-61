@@ -120,10 +120,16 @@ public class RegisterMenu {
             } else outputNo = 11;
         } else if (detailMenu == 5) {
             if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
-                DateFormat format = new SimpleDateFormat("dd/mm/yyyy");
-                birthdayDate = format.parse(detail);
-                detailMenu = 0;
-                createAccountWithDetails();
+                Date currentDate = new Date();
+                Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
+                if (inputDate.before(currentDate)) {
+//            if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
+//                DateFormat format = new SimpleDateFormat("dd/mm/yyyy");
+ //                   birthdayDate = format.parse(detail);
+                    birthdayDate = inputDate;
+                            detailMenu = 0;
+                    createAccountWithDetails();
+                }else outputNo = 30;
             } else outputNo = 30;
         }OutputMassageHandler.showAccountOutput(outputNo);
 

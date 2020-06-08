@@ -53,35 +53,35 @@ public class Main {
 
 
 
-        Type registerType = new TypeToken<ArrayList<Request>>(){}.getType();
-        try {
-            JsonReader reader1 =new JsonReader(new FileReader("request.json"));
-            ArrayList<Request> requestArrayList = FileHandling.getGson().fromJson(reader1,registerType);
-            if (null==requestArrayList){
-                requestArrayList=new ArrayList<>();
-            }
-            Request.setAllRequests(requestArrayList);
-        }catch (IOException e){
-            FileHandling.writeInFile("","request.json");
-            Request.setAllRequests(new ArrayList<>());
-        }
-
-
-
-        try {
-            Type AccountType = new TypeToken<ArrayList<Account>>() {
-            }.getType();
-            JsonReader reader = new JsonReader(new FileReader("account.json"));
-            ArrayList<Account> list = FileHandling.getGson().fromJson(reader,AccountType);
-            if (null == list){
-                list = new ArrayList<Account>();
-            }
-            Account.setAllAccounts(list);
-        }catch (IOException e){
-            FileHandling.writeInFile("","account.json");
-            Account.setAllAccounts(new ArrayList<>());
-        }
-
+//        Type registerType = new TypeToken<ArrayList<Request>>(){}.getType();
+//        try {
+//            JsonReader reader1 =new JsonReader(new FileReader("request.json"));
+//            ArrayList<Request> requestArrayList = FileHandling.getGson().fromJson(reader1,registerType);
+//            if (null==requestArrayList){
+//                requestArrayList=new ArrayList<>();
+//            }
+//            Request.setAllRequests(requestArrayList);
+//        }catch (IOException e){
+//            FileHandling.writeInFile("","request.json");
+//            Request.setAllRequests(new ArrayList<>());
+//        }
+//
+//
+//
+//        try {
+//            Type AccountType = new TypeToken<ArrayList<Account>>() {
+//            }.getType();
+//            JsonReader reader = new JsonReader(new FileReader("account.json"));
+//            ArrayList<Account> list = FileHandling.getGson().fromJson(reader,AccountType);
+//            if (null == list){
+//                list = new ArrayList<Account>();
+//            }
+//            Account.setAllAccounts(list);
+//        }catch (IOException e){
+//            FileHandling.writeInFile("","account.json");
+//            Account.setAllAccounts(new ArrayList<>());
+//        }
+//
 
 
 
@@ -100,46 +100,46 @@ public class Main {
 
 
 
-//        Type sellerType = new TypeToken<ArrayList<Seller>>(){}.getType();
-//        try {
-//            JsonReader reader5 =new JsonReader(new FileReader("seller.json"));
-//            ArrayList<Seller> sellersArrayList = FileHandling.getGson().fromJson(reader5,sellerType);
-//            if (null==sellersArrayList){
-//                sellersArrayList=new ArrayList<>();
-//            }
-//            Seller.setAllSellers(sellersArrayList);
-//        }catch (IOException e){
-//            FileHandling.writeInFile("","seller.json");
-//            Seller.setAllSellers(new ArrayList<>());
-//        }
-//
-//
-//        Type managerType = new TypeToken<ArrayList<Manager>>(){}.getType();
-//        try {
-//            JsonReader reader6 =new JsonReader(new FileReader("manager.json"));
-//            ArrayList<Manager> managerArrayList = FileHandling.getGson().fromJson(reader6,managerType);
-//            if (null==managerArrayList){
-//                managerArrayList=new ArrayList<>();
-//            }
-//            Manager.setAllManagers(managerArrayList);
-//        }catch (IOException e){
-//            FileHandling.writeInFile("","manager.json");
-//            Manager.setAllManagers(new ArrayList<>());
-//        }
-//
-//
-//        Type CustomerType = new TypeToken<ArrayList<Customer>>(){}.getType();
-//        try {
-//            JsonReader reader7 =new JsonReader(new FileReader("customer.json"));
-//            ArrayList<Customer> customerArrayList = FileHandling.getGson().fromJson(reader7,CustomerType);
-//            if (null==customerArrayList){
-//                customerArrayList=new ArrayList<>();
-//            }
-//            Customer.setAllCustomers(customerArrayList);
-//        }catch (IOException e){
-//            FileHandling.writeInFile("","customer.json");
-//            Customer.setAllCustomers(new ArrayList<>());
-//        }
+        Type sellerType = new TypeToken<ArrayList<Seller>>(){}.getType();
+        try {
+            JsonReader reader5 =new JsonReader(new FileReader("seller.json"));
+            ArrayList<Seller> sellersArrayList = FileHandling.getGson().fromJson(reader5,sellerType);
+            if (null==sellersArrayList){
+                sellersArrayList=new ArrayList<>();
+            }
+            Seller.setAllSellers(sellersArrayList);
+        }catch (IOException e){
+            FileHandling.writeInFile("","seller.json");
+            Seller.setAllSellers(new ArrayList<>());
+        }
+
+
+        Type managerType = new TypeToken<ArrayList<Manager>>(){}.getType();
+        try {
+            JsonReader reader6 =new JsonReader(new FileReader("manager.json"));
+            ArrayList<Manager> managerArrayList = FileHandling.getGson().fromJson(reader6,managerType);
+            if (null==managerArrayList){
+                managerArrayList=new ArrayList<>();
+            }
+            Manager.setAllManagers(managerArrayList);
+        }catch (IOException e){
+            FileHandling.writeInFile("","manager.json");
+            Manager.setAllManagers(new ArrayList<>());
+        }
+
+
+        Type CustomerType = new TypeToken<ArrayList<Customer>>(){}.getType();
+        try {
+            JsonReader reader7 =new JsonReader(new FileReader("customer.json"));
+            ArrayList<Customer> customerArrayList = FileHandling.getGson().fromJson(reader7,CustomerType);
+            if (null==customerArrayList){
+                customerArrayList=new ArrayList<>();
+            }
+            Customer.setAllCustomers(customerArrayList);
+        }catch (IOException e){
+            FileHandling.writeInFile("","customer.json");
+            Customer.setAllCustomers(new ArrayList<>());
+        }
 
         Account.setAllAccounts(new ArrayList<>());
         Account.getAllAccounts().addAll(Customer.getAllCustomers());
