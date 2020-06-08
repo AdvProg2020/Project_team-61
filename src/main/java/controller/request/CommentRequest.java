@@ -1,11 +1,15 @@
 package controller.request;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
 import model.productRelated.Comment;
 import model.productRelated.CommentStatus;
 import model.productRelated.Product;
+import view.FileHandling;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class CommentRequest extends Request {
@@ -17,6 +21,8 @@ public class CommentRequest extends Request {
     private static Product product= null;
     private static CommentRequest cr= null;
     private static ArrayList<CommentRequest> allCommentRequests = new ArrayList<>();
+    public static Type commentRequestType = new TypeToken<ArrayList<CommentRequest>>() {
+    }.getType();
 
     public CommentRequest(String requestID) throws IOException {
         super(requestID);
@@ -83,6 +89,16 @@ public class CommentRequest extends Request {
         this.personToVote = personToVote;
         writeInJ();
 
+    }
+
+    public static void setAllCommentRequests(ArrayList<CommentRequest> allCommentRequests) {
+        CommentRequest.allCommentRequests = allCommentRequests;
+    }
+
+    public static void writeInJ() throws IOException {
+        FileHandling.setGson(new Gson());
+        String json = FileHandling.getGson().toJson(CommentRequest.allCommentRequests, commentRequestType);
+        FileHandling.writeInFile(json, "commentRequest.json");
     }
 
 }

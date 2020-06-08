@@ -1,12 +1,16 @@
 package controller.request;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
 import model.log.SaleLog;
 import model.off.Sale;
 import model.off.SaleStatus;
 import model.productRelated.Product;
+import view.FileHandling;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,6 +27,8 @@ public class SaleRequest extends Request {
     private SaleStatus saleStatus;
     private static Sale sale;
     private static ArrayList<SaleRequest> allSaleRequests = new ArrayList<>();
+    public static Type saleRequestType = new TypeToken<ArrayList<SaleRequest>>() {
+    }.getType();
 
 
     public SaleRequest(String requestID) throws IOException {
@@ -107,6 +113,15 @@ public class SaleRequest extends Request {
     public void setProduct(String product) throws IOException {
         this.product = product;
         writeInJ();
+    }
 
+    public static void setAllSaleRequests(ArrayList<SaleRequest> allSaleRequests) {
+        SaleRequest.allSaleRequests = allSaleRequests;
+    }
+
+    public static void writeInJ() throws IOException {
+        FileHandling.setGson(new Gson());
+        String json = FileHandling.getGson().toJson(SaleRequest.allSaleRequests, saleRequestType);
+        FileHandling.writeInFile(json, "saleRequest.json");
     }
 }

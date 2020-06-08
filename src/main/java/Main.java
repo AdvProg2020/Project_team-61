@@ -1,6 +1,6 @@
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import controller.request.Request;
+import controller.request.*;
 import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Manager;
@@ -140,6 +140,67 @@ public class Main {
 //            FileHandling.writeInFile("","customer.json");
 //            Customer.setAllCustomers(new ArrayList<>());
 //        }
+
+
+        Type AccountReType = new TypeToken<ArrayList<AccountRequest>>(){}.getType();
+        try {
+            JsonReader reader8 =new JsonReader(new FileReader("accountRequest.json"));
+            ArrayList<AccountRequest> accountRequestsArrayList = FileHandling.getGson().fromJson(reader8,AccountReType);
+            if (null==accountRequestsArrayList){
+                accountRequestsArrayList=new ArrayList<>();
+            }
+            AccountRequest.setAllAccountRequests(accountRequestsArrayList);
+        }catch (IOException e){
+            FileHandling.writeInFile("","accountRequest.json");
+            AccountRequest.setAllAccountRequests(new ArrayList<>());
+        }
+
+
+
+
+        Type CommentReType = new TypeToken<ArrayList<CommentRequest>>(){}.getType();
+        try {
+            JsonReader reader9 =new JsonReader(new FileReader("commentRequest.json"));
+            ArrayList<CommentRequest> commentRequests = FileHandling.getGson().fromJson(reader9,CommentReType);
+            if (null==commentRequests){
+                commentRequests=new ArrayList<>();
+            }
+            CommentRequest.setAllCommentRequests(commentRequests);
+        }catch (IOException e){
+            FileHandling.writeInFile("","commentRequest.json");
+            CommentRequest.setAllCommentRequests(new ArrayList<>());
+        }
+
+
+        Type ProductReType = new TypeToken<ArrayList<ProductRequest>>(){}.getType();
+        try {
+            JsonReader reader10 =new JsonReader(new FileReader("productRequest.json"));
+            ArrayList<ProductRequest> productRequests = FileHandling.getGson().fromJson(reader10,ProductReType);
+            if (null==productRequests){
+                productRequests=new ArrayList<>();
+            }
+            ProductRequest.setAllProductRequests(productRequests);
+
+        }catch (IOException e){
+            FileHandling.writeInFile("","productRequest.json");
+            ProductRequest.setAllProductRequests(new ArrayList<>());
+        }
+
+
+        Type SaleReType = new TypeToken<ArrayList<SaleRequest>>(){}.getType();
+        try {
+            JsonReader reader11 =new JsonReader(new FileReader("saleRequest.json"));
+            ArrayList<SaleRequest> saleRequestsArrayList = FileHandling.getGson().fromJson(reader11,SaleReType);
+            if (null==saleRequestsArrayList){
+                saleRequestsArrayList=new ArrayList<>();
+            }
+            SaleRequest.setAllSaleRequests(saleRequestsArrayList);
+        }catch (IOException e){
+            FileHandling.writeInFile("","saleRequest.json");
+            SaleRequest.setAllSaleRequests(new ArrayList<>());
+        }
+
+
 
         //Account.readFile();
         // Request.readFile();
