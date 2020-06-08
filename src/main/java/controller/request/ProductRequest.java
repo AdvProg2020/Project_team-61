@@ -34,6 +34,7 @@ public class ProductRequest extends Request {
     public ProductRequest(String requestID) throws IOException {
         super(requestID);
         allProductRequests.add(this);
+        writeInJ();
     }
 
 
