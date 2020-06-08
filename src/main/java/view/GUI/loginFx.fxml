@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="1005.0" prefWidth="1350.0" style="-fx-background-color: #96B4C7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GUI.LoginFx">
+   <children>
+      <ImageView fitHeight="494.0" fitWidth="962.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/login.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

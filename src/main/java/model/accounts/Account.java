@@ -1,22 +1,14 @@
 package model.accounts;
 
-import com.google.gson.InstanceCreator;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-import model.filtar.Filter;
-import model.firms.Firm;
-import model.log.BuyLog;
-import model.log.SaleLog;
-import model.off.DiscountCode;
-import view.FileHandling;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import model.firms.Firm;
+
+import model.off.DiscountCode;
+
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.*;
 
-public class Account {
+public abstract class Account {
     String username;
     String name;
     String lastname;

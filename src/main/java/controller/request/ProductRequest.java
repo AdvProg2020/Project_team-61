@@ -143,4 +143,6 @@ public class ProductRequest extends Request {
         String json = FileHandling.getGson().toJson(ProductRequest.allProductRequests, productRequestType);
         FileHandling.writeInFile(json, "productRequest.json");
     }
+
+
 }

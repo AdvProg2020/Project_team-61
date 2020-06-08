@@ -22,10 +22,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public  class Request {
+public  abstract class Request {
     private String requestText;
     private String requestDate;
-    private Account seller;
+    private String seller;
     private static ArrayList<Request> allRequests;
     LocalDateTime now;
 //    public static Type RequestType = new TypeToken<ArrayList<Request>>() {
@@ -39,7 +39,7 @@ public  class Request {
         now = LocalDateTime.now();
         requestDate = dtf.format(now);
         if(LoginMenu.getLoginAccount() instanceof Seller) {
-            seller = (Seller) LoginMenu.getLoginAccount();
+            seller =  LoginMenu.getLoginAccount().getUsername();
         }
         allRequests.add(this);
 //        writeInJ();
