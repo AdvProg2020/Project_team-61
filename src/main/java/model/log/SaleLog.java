@@ -1,15 +1,11 @@
 package model.log;
 
-import com.google.gson.reflect.TypeToken;
 import model.productRelated.Product;
-import view.FileHandling;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Iterator;
 
 public class SaleLog extends Log{
 

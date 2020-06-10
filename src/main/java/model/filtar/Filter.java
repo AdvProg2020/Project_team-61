@@ -1,18 +1,12 @@
 package model.filtar;
 
 
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 import model.productRelated.Category;
 import model.productRelated.Product;
-import view.FileHandling;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.time.Period;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public abstract class Filter {
 

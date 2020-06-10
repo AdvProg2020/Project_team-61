@@ -1,6 +1,11 @@
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import controller.request.*;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Manager;
@@ -11,18 +16,36 @@ import model.productRelated.Product;
 import view.CommandProcessor;
 import view.FileHandling;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.nio.file.FileAlreadyExistsException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public class Main {
+public class Main extends Application {
+    private final int widthScene = 1920;
+    private final int heightScene = 1080;
+    static Stage primStage;
+
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+            /*String path = "src/sound/background.mp3";
+            Media media = new Media(new File(path).toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setAutoPlay(true);
+
+             */
+        Parent root = FXMLLoader.load(getClass().getResource("view/sample/accountRelated/firmFx.fxml"));
+        primaryStage.setTitle("market");
+        primaryStage.setScene(new Scene(root, widthScene, heightScene));
+        primStage = primaryStage;
+        primaryStage.show();
+    }
 
     public static void main(String[] args) throws IOException, ParseException {
+
         Type productType = new TypeToken<ArrayList<Product>>(){}.getType();
         try {
             JsonReader reader2 =new JsonReader(new FileReader("product.json"));
@@ -210,11 +233,12 @@ public class Main {
         Request.getAllRequests().addAll(ProductRequest.getAllProductRequests());
         Request.getAllRequests().addAll(SaleRequest.getAllSaleRequests());
 
+        Application.launch(args);
 
         //Account.readFile();
         // Request.readFile();
-        CommandProcessor commandProcessor = new CommandProcessor();
-        commandProcessor.run();
+       // CommandProcessor commandProcessor = new CommandProcessor();
+ //       commandProcessor.run();
 //        Scanner in = new Scanner(System.in);
 //        int a = in.nextInt();
 //        System.out.println(a);

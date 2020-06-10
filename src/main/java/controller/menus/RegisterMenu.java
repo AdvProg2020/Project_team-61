@@ -9,7 +9,6 @@ import view.OutputMassageHandler;
 import view.SubMenuStatus;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -49,12 +48,12 @@ public class RegisterMenu {
                     RegisterMenu.username = username;
                     registerByRole(role, username);
                     subMenuStatus = CommandProcessor.getSubMenuStatus();
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.REGISTERATIONDETAILS);
+            //        CommandProcessor.setSubMenuStatus(SubMenuStatus.REGISTERATIONDETAILS);
                     CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
                 } else outputNo = 26;
             } else outputNo = 1;
         } else outputNo = 36;
-        OutputMassageHandler.showAccountOutput(outputNo);
+      //  OutputMassageHandler.showAccountOutput(outputNo);
     }
 
     private static void registerByRole(String role, String username) throws IOException {

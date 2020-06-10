@@ -1,13 +1,9 @@
 package model.log;
 
-import com.google.gson.reflect.TypeToken;
 import model.productRelated.Product;
-import view.FileHandling;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 
 

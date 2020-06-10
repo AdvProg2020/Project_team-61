@@ -3,7 +3,6 @@ package controller.menus;
 import controller.request.ProductRequest;
 import controller.request.Request;
 import controller.request.SaleRequest;
-import model.accounts.Account;
 import model.accounts.Seller;
 import model.filtar.Filter;
 import model.off.Sale;

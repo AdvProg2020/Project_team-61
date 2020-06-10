@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.sample.accountRelated.ViewAccountFx">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" onMouseClicked="#edit" stroke="BLACK" strokeType="INSIDE" width="1920.0">
+            <fill>
+                <LinearGradient endX="0.8980582524271845" endY="0.6699029126213591" startX="0.05825242718446602">
+                    <stops>
+                        <Stop color="#73d5fc" />
+                        <Stop color="#338dd7" offset="0.3974140380789997" />
+                  <Stop color="#2404bd" offset="0.7652031827223644" />
+                  <Stop color="#34059a" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <ImageView fx:id="accountImg" fitHeight="198.0" fitWidth="271.0" layoutX="77.0" layoutY="204.0" onDragDropped="#picDrop" onDragOver="#picOver" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../icons/face.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="76.0" fitWidth="83.0" layoutX="1681.0" layoutY="14.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../icons/back.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="76.0" fitWidth="76.0" layoutX="1813.0" layoutY="14.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../icons/exit.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="username" layoutX="64.0" layoutY="516.0" prefHeight="49.0" prefWidth="319.0" text="Label" textFill="WHITE">
+            <font>
+                <Font size="33.0" />
+            </font>
+        </Label>
+      <Label fx:id="name" layoutX="748.0" layoutY="193.0" prefHeight="49.0" prefWidth="328.0" text="Label" textFill="WHITE">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label fx:id="phoneNo" layoutX="749.0" layoutY="582.0" prefHeight="49.0" prefWidth="328.0" text="Label" textFill="WHITE">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label fx:id="email" layoutX="749.0" layoutY="680.0" prefHeight="49.0" prefWidth="328.0" text="Label" textFill="WHITE">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label fx:id="role" layoutX="749.0" layoutY="413.0" prefHeight="49.0" prefWidth="328.0" text="Label" textFill="WHITE">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Text layoutX="128.0" layoutY="486.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" wrappingWidth="142.0">
+         <font>
+            <Font name="System Bold Italic" size="28.0" />
+         </font>
+      </Text>
+      <Text layoutX="497.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="127.0">
+         <font>
+            <Font name="System Bold Italic" size="28.0" />
+         </font>
+      </Text>
+      <Text layoutX="497.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name:" wrappingWidth="158.0">
+         <font>
+            <Font name="System Bold Italic" size="28.0" />
+         </font>
+      </Text>
+      <Text layoutX="497.0" layoutY="618.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone number:" wrappingWidth="212.0">
+         <font>
+            <Font name="System Bold Italic" size="28.0" />
+         </font>
+      </Text>
+      <Text layoutX="497.0" layoutY="716.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" wrappingWidth="127.0">
+         <font>
+            <Font name="System Bold Italic" size="28.0" />
+         </font>
+      </Text>
+      <Text layoutX="497.0" layoutY="531.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Birthday date:" wrappingWidth="212.0">
+         <font>
+            <Font name="System Bold Italic" size="28.0" />
+         </font>
+      </Text>
+      <Text layoutX="497.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Role:" wrappingWidth="127.0">
+         <font>
+            <Font name="System Bold Italic" size="28.0" />
+         </font>
+      </Text>
+      <Text layoutX="877.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personal info">
+         <font>
+            <Font name="System Bold Italic" size="44.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="0.8980582524271845" endY="0.6699029126213591" startX="0.05825242718446602">
+               <stops>
+                  <Stop color="#7f0c87" />
+                  <Stop color="#303ac6" offset="0.3974140380789997" />
+                  <Stop color="#1adbf5" offset="0.7652031827223644" />
+                  <Stop color="#eec2c2" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Label fx:id="birthday" layoutX="749.0" layoutY="495.0" prefHeight="49.0" prefWidth="328.0" text="Label" textFill="WHITE">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label fx:id="lastName" layoutX="749.0" layoutY="272.0" prefHeight="49.0" prefWidth="328.0" text="Label" textFill="WHITE">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Button layoutX="1217.0" layoutY="249.0" mnemonicParsing="false" onMouseClicked="#viewCart" prefHeight="57.0" prefWidth="300.0" text="view cart">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#8049da" />
+                  <Stop color="#cd2bb2" offset="0.48366013071895425" />
+                  <Stop color="#34c8d1" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Button>
+      <Button layoutX="1223.0" layoutY="364.0" mnemonicParsing="false" onMouseClicked="#viewCustomerDiscount" prefHeight="57.0" prefWidth="300.0" text="view discount codes">
+         <font>
+            <Font size="27.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#8049da" />
+                  <Stop color="#cd2bb2" offset="0.48366013071895425" />
+                  <Stop color="#34c8d1" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="1223.0" layoutY="472.0" mnemonicParsing="false" onMouseClicked="#viewBougts" prefHeight="57.0" prefWidth="300.0" text="view carts hishory">
+         <font>
+            <Font size="27.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#8049da" />
+                  <Stop color="#cd2bb2" offset="0.48366013071895425" />
+                  <Stop color="#34c8d1" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Text layoutX="497.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creadit:" wrappingWidth="158.0">
+         <font>
+            <Font name="System Bold Italic" size="28.0" />
+         </font>
+      </Text>
+      <Label fx:id="credit" layoutX="748.0" layoutY="343.0" prefHeight="49.0" prefWidth="328.0" text="Label" textFill="WHITE">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Button layoutX="1217.0" layoutY="597.0" mnemonicParsing="false" onMouseClicked="#edit" prefHeight="57.0" prefWidth="300.0" text="Edit">
+         <font>
+            <Font size="27.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#8049da" />
+                  <Stop color="#cd2bb2" offset="0.48366013071895425" />
+                  <Stop color="#34c8d1" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+    </children>
+</AnchorPane>

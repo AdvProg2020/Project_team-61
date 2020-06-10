@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #0d4b68;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.sample.menus.LoginFx">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" layoutY="-1.0" stroke="#0d4b68" strokeType="INSIDE" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="0.6699029126213591" startX="0.47572815533980584" startY="0.1941747572815534">
+               <stops>
+                  <Stop color="#0d4b68" />
+                  <Stop color="#0d4b68" offset="0.007246376811594203" />
+                  <Stop color="#22388c" offset="0.13398692810457516" />
+                  <Stop color="#2289b5" offset="0.2020460358056266" />
+                  <Stop color="#2289b5" offset="0.3137254901960784" />
+                  <Stop color="#85d8ce" offset="0.42235009946007385" />
+                  <Stop color="#2488b2" offset="0.5321824381926684" />
+                  <Stop color="#2488b2" offset="0.5718954248366014" />
+                  <Stop color="#0d4b68" offset="0.6413043478260869" />
+                  <Stop color="#2289b5" offset="0.7330917874396137" />
+                  <Stop color="#2287b5" offset="0.847826086956522" />
+                  <Stop color="#07685b" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6a8ab263" height="550.0" layoutX="350.0" layoutY="140.0" stroke="BLACK" strokeType="INSIDE" width="382.0" AnchorPane.bottomAnchor="390.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="1188.0" AnchorPane.topAnchor="140.0" />
+      <ImageView fitHeight="251.0" fitWidth="359.0" layoutX="1494.0" layoutY="747.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="89.22280883789062" AnchorPane.leftAnchor="1494.0" AnchorPane.rightAnchor="67.0" AnchorPane.topAnchor="746.7771911621094">
+         <image>
+            <Image url="@../icons/face.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="500.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" wrappingWidth="81.6708984375" AnchorPane.bottomAnchor="861.7216796875" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="1338.3291015625" AnchorPane.topAnchor="179.7060546875">
+         <font>
+            <Font name="System Bold Italic" size="29.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#074cc3" />
+                  <Stop color="#c0e1f2" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <TextField fx:id="userLogin" layoutX="407.0" layoutY="261.0" prefHeight="39.0" prefWidth="239.0" promptText="username" AnchorPane.bottomAnchor="780.0" AnchorPane.leftAnchor="407.0" AnchorPane.rightAnchor="1274.0" AnchorPane.topAnchor="261.0" />
+      <Label fx:id="userLoginMs" layoutX="407.0" layoutY="300.0" prefHeight="21.0" prefWidth="239.0" text="x" textAlignment="CENTER" textFill="RED">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="passLoginMs" layoutX="407.0" layoutY="382.0" prefHeight="21.0" prefWidth="239.0" text="x" textAlignment="CENTER" textFill="RED">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="passLogin" layoutX="407.0" layoutY="343.0" prefHeight="39.0" prefWidth="239.0" promptText="password" AnchorPane.bottomAnchor="698.0" AnchorPane.leftAnchor="407.0" AnchorPane.rightAnchor="1274.0" AnchorPane.topAnchor="343.0" />
+      <ImageView fitHeight="75.0" fitWidth="63.0" layoutX="1757.0" layoutY="15.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/back.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="63.0" fitWidth="63.0" layoutX="1836.0" layoutY="15.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/exit.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="57.0" fitWidth="70.0" layoutX="662.0" layoutY="619.0" onMouseClicked="#signUpMenu" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/signup.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="494.0" layoutY="450.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="31.0" prefWidth="89.0" text="Login" textFill="#03abff" AnchorPane.bottomAnchor="599.0" AnchorPane.leftAnchor="494.0" AnchorPane.rightAnchor="1337.0" AnchorPane.topAnchor="450.0" />
+   </children>
+</AnchorPane>

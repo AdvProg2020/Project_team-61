@@ -1,11 +1,8 @@
 package model.productRelated;
 
-import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
-import view.FileHandling;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Score {
@@ -19,7 +16,7 @@ public class Score {
     Product productTOScore;
     Account personToScore;
 
-    //lists
+    //view.sample.lists
     public  static ArrayList<Score> allScores = new ArrayList<>();
 
 

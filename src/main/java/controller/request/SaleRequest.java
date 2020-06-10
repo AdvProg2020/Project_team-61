@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 public class SaleRequest extends Request {
     private static String offId = null;

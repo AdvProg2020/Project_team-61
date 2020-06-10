@@ -2,6 +2,8 @@ package view;
 
 
 public class OutputMassageHandler {
+    private static String text;
+
 
 
     public static void showOutput(int output) {
@@ -466,90 +468,52 @@ public class OutputMassageHandler {
     }
 
 
-    public static void showAccountOutput(int output) {
+    public static String showAccountOutput(int output) {
         if (output == 0) {
-            System.out.println("");
+            return ("");
         } else if (output == 1) {
-            System.out.println("a user exists with this username");
-        } else if (output == 2) {
-            System.out.println("please enter your password");
+            text =("a user exists with this username");
         } else if (output == 3) {
-            System.out.println("password format is invalid");
-        } else if (output == 4) {
-            System.out.println("please enter your name");
+            text =("password format is invalid");
         } else if (output == 5) {
-            System.out.println("name format is invalid");
-        } else if (output == 6) {
-            System.out.println("please enter your lastname");
+            text =("name format is invalid");
         } else if (output == 7) {
-            System.out.println("lastname format is invalid");
-        } else if (output == 8) {
-            System.out.println("please enter your Email");
+            text =("lastname format is invalid");
         } else if (output == 9) {
-            System.out.println("email format is invalid");
-        } else if (output == 10) {
-            System.out.println("please enter your phone number");
+            text =("email format is invalid");
         } else if (output == 11) {
-            System.out.println("phone number format is invalid");
+            text =("phone number format is invalid");
         } else if (output == 12) {
-            System.out.println("register successful");
+            text =("register successful");
         } else if (output == 13) {
-            System.out.println("no user exist with this username");
+            text =("no user exist with this username");
         } else if (output == 14) {
-            System.out.println("your password is wrong");
-        } else if (output == 15) {
-            System.out.println("login successful");
+            text =("your password is wrong");
         } else if (output == 16) {
-            System.out.println("no account field matches with this (username|password|last name|email|phone number|firm)");
-        } else if (output == 17) {
-            System.out.println("password changed");
-        } else if (output == 18) {
-            System.out.println("name changed");
-        } else if (output == 19) {
-            System.out.println("last name changed");
-        } else if (output == 20) {
-            System.out.println("Email changed");
-        } else if (output == 21) {
-            System.out.println("phone number changed");
+            text =("no account field matches with this (username|password|last name|email|phone number|firm)");
         } else if (output == 22) {
-            System.out.println("logout");
+            text =("logout");
         } else if (output == 23) {
-            System.out.println("you cannot create manager profile");
+            text =("you cannot create manager profile");
         } else if (output == 24) {
-            System.out.println("You've logged in before");
+            text =("You've logged in before");
         } else if (output == 25) {
-            System.out.println("you have to login first");
+            text =("you have to login first");
         } else if (output == 26) {
-            System.out.println("no role matches with this");
+            text =("no role matches with this");
         } else if (output == 27) {
-            System.out.println("you can't change firm information");
-        } else if (output == 28) {
-            System.out.println("please enter firm's name you want to change");
-        } else if (output == 29) {
-            System.out.println("please enter your birthday Date");
+            text =("you can't change firm information");
         } else if (output == 30) {
-            System.out.println("birthday Date format is invalid");
-        } else if (output == 31) {
-            System.out.println("please enter firm name");
+            text =("birthday Date format is invalid");
         } else if (output == 32) {
-            System.out.println("username format is invalid");
+            text =("username format is invalid");
         } else if (output == 33) {
-            System.out.println("you can't login");
-        } else if (output == 34) {
-            System.out.println("enter new value");
+            text =("you can't login");
         } else if (output == 35) {
-            System.out.println("there is no account with this user name");
-        } else if (output == 36) {
-            System.out.println("username format is invalid");
-        } else if (output == 37) {
-            System.out.println("enter firm name");
-        } else if (output == 38) {
-            System.out.println("");
-        } else if (output == 39) {
-            System.out.println("");
-        } else if (output == 40) {
-            System.out.println("");
-        }
+            text =("there is no account with this user name");
+        } else if (output == 36)
+            text =("username format is invalid");
+        return text ;
     }
 
     public static void showFirmOutput(int output) {

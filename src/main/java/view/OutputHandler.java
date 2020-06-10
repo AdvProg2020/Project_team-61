@@ -1,7 +1,5 @@
 package view;
 
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 import controller.request.Request;
 import model.accounts.Account;
 import model.accounts.Customer;
@@ -13,11 +11,9 @@ import model.log.SaleLog;
 import model.off.DiscountCode;
 import model.off.Sale;
 import model.productRelated.Category;
-import model.productRelated.Comment;
 import model.productRelated.Product;
 
 import java.io.FileNotFoundException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class OutputHandler {

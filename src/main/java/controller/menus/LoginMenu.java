@@ -37,44 +37,42 @@ public class LoginMenu {
         return login;
     }
 
-    public static void processLogin(String username) {
+    public static int processLogin(String username) {
         if (!login) {
             if (username.matches(".+")) {
                 if (Account.isThereAccountWithUsername(username)) {
                     LoginMenu.username = username;
                     subMenuStatus = CommandProcessor.getSubMenuStatus();
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.PASSWORD);
-                    outputNo = 2;
+                   // CommandProcessor.setSubMenuStatus(SubMenuStatus.PASSWORD);
+                  //  outputNo = 2;
                 } else outputNo = 13;
             } else outputNo = 32;
         } else outputNo = 24;
-        OutputMassageHandler.showAccountOutput(outputNo);
+        return outputNo;
+      //  OutputMassageHandler.showAccountOutput(outputNo);
     }
 
-    public static void checkPassword(String password) {
+    public static int checkPassword(String password) {
         if (password.matches(".+")) {
             if (Account.isThereAccountWithUsernameAndPassword(username, password)) {
                 loginAccount = Account.getAccountWithUsername(username);
                 login = true;
                 findRole();
-                CommandProcessor.setSubMenuStatus(subMenuStatus);
-            } else outputNo = 14;
-        } else outputNo = 3;
-        OutputMassageHandler.showAccountOutput(outputNo);
+               // CommandProcessor.setSubMenuStatus(subMenuStatus);
+            } return outputNo = 14;
+        } return outputNo = 3;
+      //  OutputMassageHandler.showAccountOutput(outputNo);
     }
 
     private static void findRole() {
         String role = loginAccount.getRole();
         MenuStatus menu = null;
         if (role.equalsIgnoreCase("customer")) {
-            outputNo = 15;
             menu = MenuStatus.CUSTOMERMENU;
         } else if (role.equalsIgnoreCase("manager")) {
-            outputNo = 15;
             menu = MenuStatus.MANAGERMENU;
         } else if (role.equalsIgnoreCase("seller")) {
             menu = MenuStatus.SELLERMENU;
-            outputNo = 15;
         }
         CommandProcessor.setMenuStatus(menu);
     }

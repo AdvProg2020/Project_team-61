@@ -184,6 +184,10 @@ public abstract class Account {
         return allAccounts;
     }
 
+    public Date getBirthdayDate() {
+        return birthdayDate;
+    }
+
     public String getAddress() {
         return address;
     }

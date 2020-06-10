@@ -1,27 +1,16 @@
 package model.sort;
 
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 import controller.request.Request;
 import model.accounts.Account;
-import model.accounts.Customer;
-import model.accounts.Seller;
 import model.log.BuyLog;
 import model.log.SaleLog;
 import model.off.DiscountCode;
-import model.off.Sale;
 import model.productRelated.Category;
 import model.productRelated.Product;
-import model.productRelated.Score;
-import view.CommandProcessor;
-import view.FileHandling;
 
 import java.io.FileNotFoundException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 
 public abstract class Sort {
     public Product product;

@@ -1,12 +1,7 @@
 package model.productRelated;
 
-import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
-import model.firms.Company;
-import view.FileHandling;
 
-import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
 

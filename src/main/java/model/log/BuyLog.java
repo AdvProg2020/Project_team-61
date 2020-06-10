@@ -1,22 +1,16 @@
 package model.log;
 
 
-import com.google.gson.reflect.TypeToken;
 import controller.menus.CustomerMenu;
-import model.accounts.Account;
-import model.accounts.Customer;
 import model.accounts.Seller;
 import model.off.DiscountCode;
 import model.productRelated.Product;
-import view.FileHandling;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class BuyLog extends Log {
 
