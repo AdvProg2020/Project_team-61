@@ -16,7 +16,7 @@ public class Score {
     Product productTOScore;
     Account personToScore;
 
-    //view.sample.lists
+    //sample.lists
     public  static ArrayList<Score> allScores = new ArrayList<>();
 
 

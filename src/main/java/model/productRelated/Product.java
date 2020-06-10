@@ -32,7 +32,7 @@ public class Product  {
     private int totalNumberOfBuyers;
     private boolean isBought;
 
-    //view.sample.lists
+    //sample.lists
 //    private  ArrayList<Account> listOfSellers = new ArrayList<Account>();
     private  ArrayList<Customer> listOfBuyers=new ArrayList<>();
     private static ArrayList<Product> allProduct = new ArrayList<Product>();

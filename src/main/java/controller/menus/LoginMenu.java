@@ -59,8 +59,9 @@ public class LoginMenu {
                 login = true;
                 findRole();
                // CommandProcessor.setSubMenuStatus(subMenuStatus);
-            } return outputNo = 14;
-        } return outputNo = 3;
+            } else outputNo = 14;
+        } else outputNo = 3;
+        return outputNo;
       //  OutputMassageHandler.showAccountOutput(outputNo);
     }
 
