@@ -15,6 +15,8 @@ import model.productRelated.Category;
 import model.productRelated.Product;
 import view.CommandProcessor;
 import view.FileHandling;
+import view.GUI.AddProductMenuFX;
+import view.GUI.ProductMenuFX;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -25,10 +27,16 @@ import java.util.Objects;
 
 public class Main extends Application {
 
+    public static Stage stage;
+    public static Scene scene;
+
+
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("mine.fxml")));
-        stage.setScene(new Scene(root));
-        stage.show();
+        ProductMenuFX.showProPage(stage,scene);
+//        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("productsMenu.fxml")));
+//        scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
     }
     public static void main(String[] args) throws IOException, ParseException {
         Application.launch(args);
