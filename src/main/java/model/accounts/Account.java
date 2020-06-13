@@ -65,6 +65,10 @@ public abstract class Account {
 
     }
 
+    public ArrayList<DiscountCode> getAllDiscountCodes() {
+        return allDiscountCodes;
+    }
+
     public void addDiscountCode(DiscountCode discountCode) throws IOException {
         allDiscountCodes.add(discountCode);
 //        writeInJ();

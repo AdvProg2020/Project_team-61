@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FirmFx">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0">
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#8e0e00" />
+                        <Stop color="#1f1c18" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <ImageView fitHeight="276.0" fitWidth="303.0" layoutX="161.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@view/icons/face.png" />
+            </image>
+        </ImageView>
+        <Text layoutX="826.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Firm" wrappingWidth="268.6708984375">
+            <font>
+                <Font size="39.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="WHITE" />
+                        <Stop color="#793838" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <Text layoutX="630.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="142.6708984375">
+            <font>
+                <Font name="System Bold Italic" size="35.0" />
+            </font>
+        </Text>
+        <Text layoutX="630.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone number:" wrappingWidth="358.6708984375">
+            <font>
+                <Font name="System Bold Italic" size="35.0" />
+            </font>
+        </Text>
+        <Text layoutX="630.0" layoutY="437.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" wrappingWidth="142.6708984375">
+            <font>
+                <Font name="System Bold Italic" size="35.0" />
+            </font>
+        </Text>
+        <Text layoutX="630.0" layoutY="531.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address:" wrappingWidth="142.6708984375">
+            <font>
+                <Font name="System Bold Italic" size="35.0" />
+            </font>
+        </Text>
+        <Label fx:id="firmNameCrMs" layoutX="951.0" layoutY="260.0" prefHeight="27.0" prefWidth="403.0" text="Label" textFill="#f2dddd">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <Label fx:id="firmPhoneNoCrMs" layoutX="952.0" layoutY="350.0" prefHeight="40.0" prefWidth="451.0" text="Label" textFill="#f2dddd">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <Label fx:id="firmEmailCrMs" layoutX="952.0" layoutY="446.0" prefHeight="40.0" prefWidth="403.0" text="Label" textFill="#f2dddd">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <Label fx:id="fiemAddressCrMs" layoutX="951.0" layoutY="537.0" prefHeight="40.0" prefWidth="444.0" text="Label" textFill="#f2dddd">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="88.0" fitWidth="103.0" layoutX="1636.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@view/icons/back.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="95.0" fitWidth="115.0" layoutX="1772.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@view/icons/exit.png" />
+            </image>
+        </ImageView>
+      <Text layoutX="180.0" layoutY="503.0" strokeType="OUTSIDE" strokeWidth="0.0" text="please drag your logo here">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <TextField fx:id="firmNameCr" layoutX="951.0" layoutY="220.0" prefHeight="40.0" prefWidth="403.0" promptText="name" />
+      <TextField fx:id="firmPhoneCr" layoutX="951.0" layoutY="309.0" prefHeight="40.0" prefWidth="403.0" promptText="phone number" />
+      <TextField fx:id="firmEmailCr" layoutX="951.0" layoutY="403.0" prefHeight="40.0" prefWidth="403.0" promptText="email" />
+      <TextField fx:id="firmAddressCr" layoutX="951.0" layoutY="497.0" prefHeight="40.0" prefWidth="403.0" promptText="Address" />
+      <Button layoutX="773.0" layoutY="690.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="208.0" text="Done">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#ee8080" />
+                  <Stop color="#bc0000" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+    </children>
+</AnchorPane>

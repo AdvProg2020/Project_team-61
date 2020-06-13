@@ -5,9 +5,12 @@ import controller.request.Request;
 import model.accounts.Account;
 import model.accounts.Seller;
 import model.firms.Firm;
-import view.*;
+import sample.LoginFx;
+import view.CommandProcessor;
+import view.MenuStatus;
+import view.OutputMassageHandler;
+import view.SubMenuStatus;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class LoginMenu {
@@ -42,7 +45,7 @@ public class LoginMenu {
             if (username.matches(".+")) {
                 if (Account.isThereAccountWithUsername(username)) {
                     LoginMenu.username = username;
-                    subMenuStatus = CommandProcessor.getSubMenuStatus();
+                    //subMenuStatus = CommandProcessor.getSubMenuStatus();
                    // CommandProcessor.setSubMenuStatus(SubMenuStatus.PASSWORD);
                   //  outputNo = 2;
                 } else outputNo = 13;
@@ -52,13 +55,15 @@ public class LoginMenu {
       //  OutputMassageHandler.showAccountOutput(outputNo);
     }
 
-    public static int checkPassword(String password) {
+    public static int checkPassword(String password) throws IOException {
         if (password.matches(".+")) {
             if (Account.isThereAccountWithUsernameAndPassword(username, password)) {
                 loginAccount = Account.getAccountWithUsername(username);
                 login = true;
-                findRole();
-               // CommandProcessor.setSubMenuStatus(subMenuStatus);
+               // findRole();
+                String role = loginAccount.getRole();
+                LoginFx.goToMenu(role);
+            // CommandProcessor.setSubMenuStatus(subMenuStatus);
             } else outputNo = 14;
         } else outputNo = 3;
         return outputNo;
@@ -78,13 +83,13 @@ public class LoginMenu {
         CommandProcessor.setMenuStatus(menu);
     }
 
-    //gson
-    public static void viewPersonalInfo() throws FileNotFoundException {
-        OutputHandler.showAccountInformation(loginAccount.getUsername());
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWPERSONALINFO);
-    }
+//    //gson
+//    public static void viewPersonalInfo() throws FileNotFoundException {
+//        OutputHandler.showAccountInformation(loginAccount.getUsername());
+//        CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWPERSONALINFO);
+//    }
 
-    public static void processEdit(String field) throws IOException {
+    public static int processEdit(String field) throws IOException {
         if (field.matches("(?i)(?:username|password|last\\s*name|email|phone\\s*number|firm)")) {
             if (loginAccount.getRole() == "seller") {
                 String id = "seller " + LoginMenu.getLoginAccount().getUsername() + "wants edit account's " + field;
@@ -109,7 +114,8 @@ public class LoginMenu {
             LoginMenu.field = field;
             // OutputMassageHandler.showOutputWithString(field, 3);
         } else outputNo = 16;
-        OutputMassageHandler.showAccountOutput(outputNo);
+        return  outputNo;
+       // OutputMassageHandler.showAccountOutput(outputNo);
     }
 
     public static void editAccount(String edit) throws IOException {
@@ -224,13 +230,13 @@ public class LoginMenu {
     }
 
     public static void processLogout() {
-        if (login) {
+     //   if (login) {
             loginAccount = null;
             login = false;
-            CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-            outputNo = 22;
-        } else outputNo = 25;
-        OutputMassageHandler.showAccountOutput(outputNo);
+          //  CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+          //  CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+         //   outputNo = 22;
+        //} else outputNo = 25;
+      //  OutputMassageHandler.showAccountOutput(outputNo);
     }
 }

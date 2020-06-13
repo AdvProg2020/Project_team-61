@@ -2,7 +2,9 @@ package controller.menus;
 
 import controller.request.AccountRequest;
 import controller.request.Request;
-import model.accounts.*;
+import model.accounts.Account;
+import model.accounts.Customer;
+import model.accounts.Manager;
 import view.CommandProcessor;
 import view.InternalMenu;
 import view.OutputMassageHandler;
@@ -43,14 +45,14 @@ public class RegisterMenu {
     public static int processRegister(String role, String username) throws IOException {
         if (username.matches("^[a-z0-9_-]{3,15}$")) {
             if (!Account.isThereAccountWithUsername(username)) {
-                if (role.matches("(?i)(?:customer|manager|seller)")) {
+              //  if (role.matches("(?i)(?:customer|manager|seller)")) {
                     RegisterMenu.role = role;
                     RegisterMenu.username = username;
                     registerByRole(role, username);
-                    subMenuStatus = CommandProcessor.getSubMenuStatus();
+             //       subMenuStatus = CommandProcessor.getSubMenuStatus();
             //        CommandProcessor.setSubMenuStatus(SubMenuStatus.REGISTERATIONDETAILS);
-                    CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
-                } else outputNo = 26;
+            //        CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
+             //   } else outputNo = 26;
             } else outputNo = 1;
         } else outputNo = 36;
         return outputNo;
@@ -87,7 +89,7 @@ public class RegisterMenu {
         }
     }
 
-    public static void completeRegisterProcess(String detail) throws IOException, ParseException {
+    public static int completeRegisterProcess(String detail) throws IOException, ParseException {
         if (detailMenu == 0) {
             if (detail.matches(".+")) {
                 password = detail;
@@ -132,8 +134,8 @@ public class RegisterMenu {
                 }else outputNo = 30;
             } else outputNo = 30;
         }
-        //OutputMassageHandler.showAccountOutput(outputNo);
-
+        OutputMassageHandler.showAccountOutput(outputNo);
+        return outputNo;
     }
 
     public static void createAccountWithDetails() throws IOException {

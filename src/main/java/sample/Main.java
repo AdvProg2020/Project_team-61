@@ -22,16 +22,17 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Main extends Application {
-    private final int widthScene = 1920;
+    private final int widthScene = 1000;
     private final int heightScene = 1080;
     static Stage primStage;
 
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-     //   System.out.println("Test  = "+Main.class.getClassLoader().getResource("mainMenuFx.fxml"));
+     //   System.out.println("Test  = "+sample.Main.class.getClassLoader().getResource("mainMenuFx.fxml"));
            /* String path = "src/sound/background.mp3";
             Media media = new Media(new File(path).toURI().toString());
             MediaPlayer mediaPlayer = new MediaPlayer(media);
@@ -41,8 +42,8 @@ public class Main extends Application {
 
 
 
-
-        Parent root = FXMLLoader.load(getClass().getResource("src/main/java/sample/mainMenuFx.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(ManiMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+       // Parent root = FXMLLoader.load(Objects.requireNonNull(ManiMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
         primaryStage.setTitle("market");
         primaryStage.setScene(new Scene(root, widthScene, heightScene));
         primStage = primaryStage;

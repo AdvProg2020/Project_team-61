@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.EditAccountFx">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" layoutY="4.0" stroke="BLACK" strokeType="INSIDE" width="1920.0">
+            <fill>
+                <LinearGradient endX="0.8980582524271845" endY="0.7378640776699028">
+                    <stops>
+                        <Stop color="#9e097b" />
+                        <Stop color="#3b07a4" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <ImageView fitHeight="227.0" fitWidth="307.0" layoutX="106.0" layoutY="162.0" onDragDropped="#picDrop" onDragOver="#picOver" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@view/icons/face.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="76.0" fitWidth="83.0" layoutX="1681.0" layoutY="25.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@view/icons/back.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="76.0" fitWidth="76.0" layoutX="1808.0" layoutY="25.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@view/icons/exit.png" />
+            </image>
+        </ImageView>
+        <TextField fx:id="userSign" layoutX="705.0" layoutY="137.0" prefHeight="40.0" prefWidth="271.0" promptText="username" />
+        <PasswordField fx:id="passSign" layoutX="705.0" layoutY="220.0" prefHeight="40.0" prefWidth="271.0" promptText="password" />
+        <TextField fx:id="nameSign" layoutX="705.0" layoutY="297.0" prefHeight="40.0" prefWidth="271.0" promptText="name" />
+        <TextField fx:id="lastNameSign" layoutX="705.0" layoutY="389.0" prefHeight="40.0" prefWidth="271.0" promptText="last name" />
+        <TextField fx:id="phoneNoSign" layoutX="705.0" layoutY="475.0" prefHeight="40.0" prefWidth="271.0" promptText="phone number" />
+        <TextField fx:id="emailSign" layoutX="705.0" layoutY="559.0" prefHeight="40.0" prefWidth="271.0" promptText="Email" />
+        <Text layoutX="1063.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit" wrappingWidth="118.0">
+            <font>
+                <Font name="System Bold Italic" size="38.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#0593ff" />
+                        <Stop color="WHITE" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill></Text>
+        <Label fx:id="userLoginMs" layoutX="705.0" layoutY="177.0" prefHeight="28.0" prefWidth="271.0" text="Label" textFill="RED">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Label>
+        <Label fx:id="passLoginMs" layoutX="705.0" layoutY="260.0" prefHeight="29.0" prefWidth="271.0" text="Label" textFill="RED">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Label>
+        <Label fx:id="nameLoginMs" layoutX="705.0" layoutY="337.0" prefHeight="29.0" prefWidth="271.0" text="Label" textFill="RED">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Label>
+        <Label fx:id="lastNameLoginMs" layoutX="705.0" layoutY="425.0" prefHeight="29.0" prefWidth="271.0" text="Label" textFill="RED">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Label>
+        <Label fx:id="phoneLoginMs" layoutX="705.0" layoutY="515.0" prefHeight="29.0" prefWidth="271.0" text="Label" textFill="RED">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Label>
+        <Label fx:id="emailLoginMs" layoutX="705.0" layoutY="598.0" prefHeight="29.0" prefWidth="271.0" text="Label" textFill="RED">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Label>
+        <Text layoutX="125.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="drag your image here" wrappingWidth="223.6708984375">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Text>
+      <Button layoutX="782.0" layoutY="670.0" mnemonicParsing="false" onMouseClicked="#editAccount" prefHeight="40.0" prefWidth="118.0" text="Edit">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="RED" />
+                  <Stop color="#00a1ff" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+    </children>
+</AnchorPane>

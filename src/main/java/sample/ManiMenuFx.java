@@ -1,41 +1,48 @@
 package sample;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class ManiMenuFx {
+        private Parent root;
 
 
 
         public void users(MouseEvent mouseEvent) throws IOException {
-                goToPage(mouseEvent," ");
+                Parent root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
+                goToPage();
         }
 
+
+
         public void products(MouseEvent mouseEvent) throws IOException {
-                goToPage(mouseEvent," ");
+                Parent root = FXMLLoader.load(Objects.requireNonNull(ProductsMenuFX.class.getClassLoader().getResource("productsMenuFX.fxml")));
+                goToPage();
+
         }
 
         public void sales(MouseEvent mouseEvent) throws IOException {
-                goToPage(mouseEvent," ");
+//                Parent root = FXMLLoader.load(Objects.requireNonNull(className.class.getClassLoader().getResource(name)));
+                goToPage();
+
         }
 
         public void exit(MouseEvent mouseEvent) {
                 System.exit(0);
         }
 
-        private void goToPage(MouseEvent mouseEvent, String name) throws IOException {
-                Parent page2 = FXMLLoader.load(getClass().getResource(name));
-                Scene pageTwoScene = new Scene(page2);
-                Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-                window.setScene(pageTwoScene);
-                window.show();
+        private void goToPage(){
+                Scene pageTwoScene = new Scene(root);
+                //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+                Main.primStage.setScene(pageTwoScene);
+                Main.primStage.show();
         }
+
 
 
 }

@@ -2,12 +2,19 @@
   <library name="Maven: com.fasterxml.jackson.core:jackson-core:2.11.0">
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.11.0/jackson-core-2.11.0.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../../../Program Files/Java/jdk-11.0.2" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.11.0/jackson-core-2.11.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.11.0/jackson-core-2.11.0-sources.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../../../Program Files/Java/jdk-13.0.2/lib" />
+      <root url="file://$PROJECT_DIR$/../../../../Program Files/Java/jdk-11.0.2/lib" />
+      <root url="file://$PROJECT_DIR$/../../../../Program Files (x86)/Java/jdk1.8.0_241" />
     </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/../../../../Program Files (x86)/Java/jdk1.8.0_241" recursive="false" type="SOURCES" />
+    <jarDirectory url="file://$PROJECT_DIR$/../../../../Program Files/Java/jdk-11.0.2/lib" recursive="false" type="SOURCES" />
+    <jarDirectory url="file://$PROJECT_DIR$/../../../../Program Files/Java/jdk-13.0.2/lib" recursive="false" type="SOURCES" />
   </library>
 </component>

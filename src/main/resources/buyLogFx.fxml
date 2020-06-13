@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.BuyLogFx">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0" startY="0.0970873786407767">
+                    <stops>
+                        <Stop color="WHITE" />
+                        <Stop color="#f5f5ef" offset="0.007246376811594203" />
+                  <Stop color="#e3d96f" offset="0.08695652173913043" />
+                  <Stop color="#cfaa1f" offset="0.2536231884057971" />
+                  <Stop color="#ab437c" offset="0.5430520034100598" />
+                  <Stop color="#fcc5e5" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <MenuBar prefHeight="32.0" prefWidth="1920.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <TreeTableView layoutX="528.0" layoutY="177.0" prefHeight="784.0" prefWidth="1307.0" AnchorPane.bottomAnchor="119.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="177.0">
+            <columns>
+                <TreeTableColumn fx:id="buyLogNumber" prefWidth="117.0" text=" Number" />
+                <TreeTableColumn fx:id="buyLogProduct" minWidth="0.0" prefWidth="248.0" text="Product" />
+                <TreeTableColumn fx:id="BuyLogProductNo" minWidth="0.0" prefWidth="227.0" text="Product number" />
+                <TreeTableColumn fx:id="buyLogDate" prefWidth="239.0" text="Date" />
+                <TreeTableColumn fx:id="buyLogReduceAmount" prefWidth="231.0" text="Reduce amount" />
+                <TreeTableColumn fx:id="buyLogRecivedAmount" prefWidth="257.0" text="Recived amount" />
+            </columns>
+        </TreeTableView>
+        <Text layoutX="881.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buy Log">
+            <font>
+                <Font name="System Bold Italic" size="42.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#ff57bf" />
+                        <Stop color="WHITE" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+    </children>
+</AnchorPane>
