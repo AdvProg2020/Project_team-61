@@ -8,8 +8,6 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ProductsMenuFX">
-
-
     <children>
         <SplitPane dividerPositions="0.512987012987013" layoutX="55.0" layoutY="162.0" orientation="VERTICAL" prefHeight="1080.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -28,7 +26,7 @@
                         </Rectangle>
                         <ImageView fitHeight="352.0" fitWidth="533.0" layoutX="569.0" layoutY="25.0" opacity="0.56" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="25.0">
                             <image>
-                                <Image url="" />
+
                             </image>
                         </ImageView>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" height="200.0" layoutX="473.0" layoutY="94.0" opacity="0.27" stroke="BLACK" strokeType="INSIDE" width="724.0">
@@ -57,7 +55,7 @@
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="495.0" prefWidth="1880.0">
                                             <children>
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" height="570.0" layoutY="-2.0" opacity="0.8" stroke="BLACK" strokeType="INSIDE" width="1951.0" AnchorPane.bottomAnchor="-1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.599999999999909" AnchorPane.topAnchor="0.0">
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" height="570.0" layoutY="-2.0"  opacity="0.8" stroke="BLACK" strokeType="INSIDE" width="1951.0" AnchorPane.bottomAnchor="-1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.599999999999909" AnchorPane.topAnchor="0.0">
                                                     <fill>
                                                         <LinearGradient endX="1.0" endY="0.20229000444630632">
                                                             <stops>
@@ -73,14 +71,14 @@
                                                         <Font name="Bookman Old Style" size="19.0" />
                                                     </font>
                                                 </Label>
-                                                <TableView layoutX="246.0" layoutY="80.0" prefHeight="412.0" prefWidth="1518.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="246.0" AnchorPane.rightAnchor="154.0" AnchorPane.topAnchor="80.0">
+                                                <TableView fx:id="tableView" layoutX="246.0" layoutY="80.0" onMouseClicked="#clickedColumn" prefHeight="412.0" prefWidth="1518.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="246.0" AnchorPane.rightAnchor="154.0" AnchorPane.topAnchor="80.0">
                                                     <columns>
-                                                        <TableColumn prefWidth="113.59999996423721" text="id" />
-                                                        <TableColumn prefWidth="252.00009155273438" text="image" />
-                                                        <TableColumn minWidth="0.0" prefWidth="154.4000244140625" text="name" />
-                                                        <TableColumn minWidth="0.0" prefWidth="122.4000244140625" text="price" />
-                                                        <TableColumn minWidth="0.0" prefWidth="132.800048828125" text="seller" />
-                                                        <TableColumn minWidth="0.0" prefWidth="430.39990234375" text="Specifications" />
+                                                        <!--                                                        <TableColumn fx:id="firstColumn" prefWidth="113.59999996423721" text="id" />-->
+                                                        <!--                                                        <TableColumn fx:id="secondColumn" prefWidth="252.00009155273438" text="proImage" />-->
+                                                        <!--                                                        <TableColumn fx:id="productImageViewTableColumn" minWidth="0.0" prefWidth="154.4000244140625" text="name" />-->
+                                                        <!--                                                        <TableColumn fx:id="forthColumn" minWidth="0.0" prefWidth="122.4000244140625" text="price" />-->
+                                                        <!--                                                        <TableColumn fx:id="fifthColumn" minWidth="0.0" prefWidth="132.800048828125" text="seller" />-->
+                                                        <!--                                                        <TableColumn fx:id="sixthColumn" minWidth="0.0" prefWidth="430.39990234375" text="Specifications" />-->
                                                     </columns>
                                                 </TableView>
                                                 <ScrollPane layoutY="83.0" prefHeight="200.0" prefWidth="246.0">

@@ -19,7 +19,7 @@ import java.util.Date;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 import model.off.DiscountCode;
-import org.omg.CORBA.PUBLIC_MEMBER;
+
 
 public class AddDiscountFx {
 

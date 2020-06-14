@@ -64,7 +64,7 @@ public class ProductRequest extends Request {
     @Override
     public  void acceptRequest() throws IOException {
         Product newProduct = Product.getProductById(productId);
-        newProduct.setDetailProduct(productName, companyName,price, sellerName,numberOfProduct,categoryName);
+        newProduct.setDetailProduct(newProduct.getProductImage(),productName,price,categoryName,sellerName,companyName,numberOfProduct);
         newProduct.setAdditionalDetail(additionalDetail);
         newProduct.getCategorySpecifications().putAll(specialValue);
         if(lastCategory != null) {

@@ -1,5 +1,8 @@
 package model.productRelated;
+
 import com.google.gson.reflect.TypeToken;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Seller;
@@ -12,7 +15,8 @@ import view.FileHandling;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.*;
-public class Product  {
+
+public class Product {
     private static String productJson;
 
     //productDetail
@@ -31,16 +35,17 @@ public class Product  {
     private int numberOfViews;
     private int totalNumberOfBuyers;
     private boolean isBought;
+    ImageView productImage;
 
     //sample.lists
 //    private  ArrayList<Account> listOfSellers = new ArrayList<Account>();
-    private  ArrayList<Customer> listOfBuyers=new ArrayList<>();
+    private ArrayList<Customer> listOfBuyers = new ArrayList<>();
     private static ArrayList<Product> allProduct = new ArrayList<Product>();
-    private ArrayList<String> info=new ArrayList<>();
-    public static ArrayList<String> listOfId=new ArrayList<String>();
-    private  ArrayList<Comment> proComments = new ArrayList<Comment>();
+    private ArrayList<String> info = new ArrayList<>();
+    public static ArrayList<String> listOfId = new ArrayList<String>();
+    private ArrayList<Comment> proComments = new ArrayList<Comment>();
     private ArrayList<Score> proScores = new ArrayList<>();
-    private static HashMap<String,String> categorySpecifications = new HashMap<>();
+    private static HashMap<String, String> categorySpecifications = new HashMap<>();
 
 
     //objectsAdded
@@ -53,12 +58,12 @@ public class Product  {
 
 
     public Product(String productId) throws IOException {
-        if (productId !=null){
+        if (productId != null) {
             this.productId = productId;
         }
         allProduct.add(this);
         listOfId.add(productId);
-        writeInJ();
+        //writeInJ();
     }
 
 
@@ -71,32 +76,69 @@ public class Product  {
     }
 
     //finish
-    public void setDetailProduct (String name , Firm firm , double price , Account seller , int numberOfProducts ,Category category) throws IOException {
-        if (name != null){
+    //id,productImage,name,price,category,seller
+    public void setDetailProduct(ImageView productImage, String name, double price, Category categoryr, Account selle, Firm firm, int numberOfProducts) throws IOException {
+        if (name != null) {
             this.productName = name;
         }
-        if (firm != null){
-            this.firm=firm;
+        if (firm != null) {
+            this.firm = firm;
         }
-        if (price != 0){
-            this.price=price;
+        if (price != 0) {
+            this.price = price;
         }
-        if (seller != null){
-            this.seller=seller;
+        if (seller != null) {
+            this.seller = seller;
         }
-        if (numberOfProducts != 0){
-            this.numberOfProducts=numberOfProducts;
+        if (numberOfProducts != 0) {
+            this.numberOfProducts = numberOfProducts;
         }
-        if (category != null){
-            this.category=category;
+        if (category != null) {
+            this.category = category;
+        }
+        if (productImage != null) {
+            this.productImage = productImage;
         }
 //        listOfSellers.add(seller);
- //       allProduct.add(this);
+        //       allProduct.add(this);
         writeInJ();
     }
 
 
     //settersAndGetters----------------------------------------------------------------------------------
+
+
+    public ImageView getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(ImageView productImage) {
+        this.productImage = productImage;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public void setInfo(ArrayList<String> info) {
+        this.info = info;
+    }
+
+    public ArrayList<String> getInfo() {
+        return info;
+    }
 
 
     public static void setAllProduct(ArrayList<Product> allProduct) {
@@ -107,11 +149,11 @@ public class Product  {
         return listOfBuyers;
     }
 
-    public void setIsBought(Boolean isBought){
-        this.isBought=isBought;
+    public void setIsBought(Boolean isBought) {
+        this.isBought = isBought;
     }
 
-    public boolean getIsBought(){
+    public boolean getIsBought() {
         return isBought;
     }
 
@@ -129,13 +171,14 @@ public class Product  {
         proComments.add(comment);
     }
 
-    public String  getId () {
+    public String getId() {
         return productId;
     }
 
     public void setNumberOfProducts(int numberOfProducts) {
         this.numberOfProducts = numberOfProducts;
     }
+
     public int getNumberOfProducts() {
         return numberOfProducts;
     }
@@ -143,25 +186,28 @@ public class Product  {
     public void setPrice(double price) {
         this.price = price;
     }
+
     public double getPrice() {
         return price;
     }
 
-    public int getNumberOfView () {
+    public int getNumberOfView() {
         return numberOfViews;
     }
+
     public void setNumberOfViews() {
-        this.numberOfViews=numberOfViews+1;
+        this.numberOfViews = numberOfViews + 1;
     }
 
-    public double getAverageScore () {
+    public double getAverageScore() {
         for (Product product : allProduct) {
-            if (product.getId().equals(productId)){
+            if (product.getId().equals(productId)) {
                 return product.score.getAverageScore();
             }
         }
         return 0;
     }
+
     public void setAverageScore(double averageScore) {
         this.averageScore = averageScore;
     }
@@ -170,20 +216,23 @@ public class Product  {
         this.additionalDetail = additionalDetail;
 //        setInfo();
     }
+
     public String getAdditionalDetail() {
         return additionalDetail;
     }
 
-    public void setProductStatus (ProductStatus status ){
-        productStatus = status ;
+    public void setProductStatus(ProductStatus status) {
+        productStatus = status;
     }
+
     public ProductStatus getProductStatus() {
         return productStatus;
     }
 
-    public boolean getInSale () {
+    public boolean getInSale() {
         return isInSale;
     }
+
     public void setInSale(boolean inSale) {
         isInSale = inSale;
     }
@@ -208,6 +257,7 @@ public class Product  {
         this.sale = sale;
         setInSale(true);
     }
+
     public Sale getSale() {
         return sale;
     }
@@ -216,6 +266,7 @@ public class Product  {
     public void setTotalNumberOfBuyers(int totalNumberOfBuyers) {
         this.totalNumberOfBuyers = totalNumberOfBuyers;
     }
+
     public int getTotalNumberOfBuyers() {
         return totalNumberOfBuyers;
     }
@@ -236,11 +287,10 @@ public class Product  {
     //othersTobeHandel-------------------------------------------------------------------------------
 
 
-
     //checked
     public static Product getProductById(String id) {
         for (Product product : allProduct) {
-            if (product.productId.equalsIgnoreCase(id)){
+            if (product.productId.equalsIgnoreCase(id)) {
                 return product;
             }
         }
@@ -265,37 +315,37 @@ public class Product  {
 //    }
 
     //finish
-    public static void deleteProduct ( String productId ){
-        Product product=getProductById(productId);
+    public static void deleteProduct(String productId) {
+        Product product = getProductById(productId);
         Iterator iterator = allProduct.iterator();
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             Product product1 = (Product) iterator.next();
-            if(product1.equals(product)) {
+            if (product1.equals(product)) {
                 iterator.remove();
             }
         }
     }
 
     //checked
-    public static boolean isThereProductWithId (String productId){
-        Product product=getProductById(productId);
+    public static boolean isThereProductWithId(String productId) {
+        Product product = getProductById(productId);
         return product != null;
     }
 
     //finish
-    public static ArrayList<Product> getProductList(){
+    public static ArrayList<Product> getProductList() {
         return allProduct;
     }
 
     //finish
-    public int getProductListSize (){
+    public int getProductListSize() {
         return allProduct.size();
     }
 
     //checked
-    public static Product getProductWithName(String name){
+    public static Product getProductWithName(String name) {
         for (Product product : allProduct) {
-            if (product.getProductName().equals(name)){
+            if (product.getProductName().equals(name)) {
                 return product;
             }
         }
@@ -303,7 +353,7 @@ public class Product  {
     }
 
     //finish
-    public void deleteProductByCategory(String categoryId){
+    public void deleteProductByCategory(String categoryId) {
         Category category = Category.getCategoryWithName(categoryId);
         category.getAllProducts().removeAll(category.getAllProducts());
     }
@@ -315,7 +365,7 @@ public class Product  {
 
             int productView1 = s1.getNumberOfView();
             int productView2 = s2.getNumberOfView();
-            return productView1- productView2;
+            return productView1 - productView2;
 
         }
     };
@@ -327,17 +377,26 @@ public class Product  {
 
             double productScore1 = s1.getAverageScore();
             double productScore2 = s2.getAverageScore();
-            return Double.compare(productScore1,productScore2);
+            return Double.compare(productScore1, productScore2);
 
         }
     };
 
+    public static Product getProductWithImage(ImageView imageView) {
+        for (Product product : allProduct) {
+            if (product.getProductImage().equals(imageView)) {
+                return product;
+            }
+        }
+        return null;
+    }
 
 
     public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Product>>(){}.getType();
-        String json= FileHandling.getGson().toJson(Product.allProduct,collectionType);
-        FileHandling.writeInFile(json,"product.json");
+        Type collectionType = new TypeToken<ArrayList<Product>>() {
+        }.getType();
+        String json = FileHandling.getGson().toJson(Product.allProduct, collectionType);
+        FileHandling.writeInFile(json, "product.json");
     }
 
     @Override
