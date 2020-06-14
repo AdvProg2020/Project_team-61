@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AddSaleFx">
+    <children>
+        <ImageView fx:id="discountBackground" fitHeight="1031.0" fitWidth="1059.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/discount-sale-abstract-background-18584125.jpg" />
+            </image></ImageView>
+        <MenuBar fx:id="addSaleMenuBar">
+            <menus>
+                <Menu mnemonicParsing="false" text="Account">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Back">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Logout">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <ImageView fx:id="back" fitHeight="86.0" fitWidth="61.0" layoutX="1362.0" layoutY="243.0" onMouseClicked="#processBack" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/back.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="exit" fitHeight="65.0" fitWidth="75.0" layoutX="1368.0" layoutY="318.0" onMouseClicked="#processExit" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/exit.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="account" fitHeight="81.0" fitWidth="61.0" layoutX="1362.0" layoutY="419.0" onMouseClicked="#gotoAccount" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/accounts.png" />
+            </image>
+        </ImageView>
+        <TextField fx:id="saleIdTextField" layoutX="516.0" layoutY="151.0" prefHeight="25.0" prefWidth="187.0" promptText="Sale Id" />
+        <DatePicker fx:id="startSaleDatePicker" layoutX="516.0" layoutY="203.0" prefHeight="25.0" prefWidth="187.0" promptText="Start of sale period" />
+        <DatePicker fx:id="endSaleDatePicker" layoutX="516.0" layoutY="264.0" prefHeight="25.0" prefWidth="187.0" promptText="End of sale period" />
+        <Label fx:id="saleIdLabel" layoutX="452.0" layoutY="155.0" text="Sale Id:" />
+        <Label fx:id="startSaleDateLabel" layoutX="390.0" layoutY="207.0" text="Start of sale period:" />
+        <Label fx:id="endSaleDate" layoutX="393.0" layoutY="268.0" text="End of sale period:" />
+        <Label fx:id="saleIdAlertLabel" layoutX="582.0" layoutY="176.0" text="Label" textFill="#f00505" />
+        <Label fx:id="startSaleAlertLabel" layoutX="582.0" layoutY="229.0" text="Label" textFill="#ee0707" />
+        <Label fx:id="endSaleAlertLabel" layoutX="582.0" layoutY="290.0" text="Label" textFill="#f70606" />
+        <Button layoutX="720.0" layoutY="652.0" mnemonicParsing="false" onMouseClicked="#createSale" text="Create" />
+        <TreeTableView layoutX="516.0" layoutY="396.0" prefHeight="187.0" prefWidth="187.0">
+            <columns>
+                <TreeTableColumn prefWidth="75.0" text="C1" />
+                <TreeTableColumn prefWidth="75.0" text="C2" />
+            </columns>
+        </TreeTableView>
+        <Label layoutX="446.0" layoutY="396.0" text="Products:" />
+        <Label layoutX="461.0" layoutY="68.0" text="Add Sale Menu">
+            <font>
+                <Font size="40.0" />
+            </font></Label>
+        <Button layoutX="673.0" layoutY="613.0" mnemonicParsing="false" onMouseClicked="#finish" text="Finsih" />
+        <ChoiceBox layoutX="521.0" layoutY="338.0" prefHeight="25.0" prefWidth="187.0" />
+        <Label fx:id="saleStatusLabel" layoutX="431.0" layoutY="342.0" text="Sale Status:" />
+    </children>
+</AnchorPane>
