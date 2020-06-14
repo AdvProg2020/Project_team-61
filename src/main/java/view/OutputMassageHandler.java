@@ -370,7 +370,7 @@ public class OutputMassageHandler {
         return text ;
     }
 
-    public static void showFirmOutput(int output) {
+    public static String showFirmOutput(int output) {
         if (output == 0) {
             text =("");
         } else if (output == 1) {
@@ -396,6 +396,7 @@ public class OutputMassageHandler {
         } else if (output == 18) {
             text =("firm's type format is invalid (company|factory|workshop)");
         }
+        return text;
     }
 
     public static void showReceiverInfo(int output) {

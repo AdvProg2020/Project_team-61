@@ -289,14 +289,6 @@ public class ManagerMenu {
         return false;
     }
 
-
-
-    public static void detailsRequest(String requestID) throws FileNotFoundException {
-        if (checkRequest(requestID)) {
-            OutputHandler.showRequest(requestID);
-        } else OutputMassageHandler.showManagerOutput(outputNo);
-    }
-
     public static void acceptRequest(String requestID) throws IOException {
         if (checkRequest(requestID)) {
             Request.getRequestFromID(requestID).acceptRequest();
@@ -466,6 +458,12 @@ public class ManagerMenu {
     public static void processManageRequests() throws FileNotFoundException {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEREQUESTS);
         OutputHandler.showRequests();
+    }
+
+      public static void detailsRequest(String requestID) throws FileNotFoundException {
+        if (checkRequest(requestID)) {
+            OutputHandler.showRequest(requestID);
+        } else OutputMassageHandler.showManagerOutput(outputNo);
     }
 
             */

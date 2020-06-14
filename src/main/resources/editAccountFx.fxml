@@ -114,15 +114,15 @@
                 <Font size="22.0" />
             </font>
         </Text>
-      <Button layoutX="782.0" layoutY="670.0" mnemonicParsing="false" onMouseClicked="#editAccount" prefHeight="40.0" prefWidth="118.0" text="Edit" AnchorPane.bottomAnchor="370.0" AnchorPane.leftAnchor="782.0" AnchorPane.rightAnchor="1020.0" AnchorPane.topAnchor="670.0">
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="RED" />
-                  <Stop color="#00a1ff" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Button>
+        <Button layoutX="782.0" layoutY="670.0" mnemonicParsing="false" onMouseClicked="#editAccount" prefHeight="40.0" prefWidth="118.0" text="Edit" AnchorPane.bottomAnchor="370.0" AnchorPane.leftAnchor="782.0" AnchorPane.rightAnchor="1020.0" AnchorPane.topAnchor="670.0">
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="RED" />
+                        <Stop color="#00a1ff" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </textFill>
+        </Button>
     </children>
 </AnchorPane>
