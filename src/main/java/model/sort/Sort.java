@@ -1,6 +1,6 @@
 package model.sort;
 
-import controller.request.Request;
+import model.request.Request;
 import model.accounts.Account;
 import model.log.BuyLog;
 import model.log.SaleLog;

@@ -1,4 +1,4 @@
-package controller.request;
+package model.request;
 
 import controller.menus.LoginMenu;
 import model.accounts.Account;
@@ -30,6 +30,14 @@ public abstract class Request {
         }
         allRequests.add(this);
 //        writeInJ();
+    }
+
+    public String getRequestDate() {
+        return requestDate;
+    }
+
+    public Account getSeller() {
+        return seller;
     }
 
     public LocalDateTime getNow() {

@@ -1,4 +1,4 @@
-package controller.request;
+package model.request;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -55,7 +55,7 @@ public class ProductRequest extends Request {
 
     @Override
     public void declineRequest() {
-        Request.getAllRequests().remove(this);
+        getAllRequests().remove(this);
         allProductRequests.remove(this);
         Product.getProductList().remove(this);
         Seller.getAllProduct().remove(this);
@@ -72,7 +72,7 @@ public class ProductRequest extends Request {
         }
         categoryName.addProductToCategory(newProduct);
         newProduct.setProductStatus(ProductStatus.CONFIRMED);
-        Request.getAllRequests().remove(this);
+        getAllRequests().remove(this);
         allProductRequests.remove(this);
     }
 

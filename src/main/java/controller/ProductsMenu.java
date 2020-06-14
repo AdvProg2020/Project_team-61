@@ -1,4 +1,4 @@
-package controller.menus;
+package controller;
 
 import model.firms.Firm;
 import model.productRelated.Category;
@@ -18,18 +18,10 @@ public class ProductsMenu {
     private static String productId;
 
 
-    public static void processProducts() {
-        CommandProcessor.setMenuStatus(MenuStatus.PRODUCTSMENU);
-    }
 
-    //array
-    public static void processViewCategories() throws FileNotFoundException {
-        OutputHandler.showCategories();
-    }
 
     //filter-------------------------------------------------------
 
-    //done
     private static boolean checkFilter(String filterName) {
         //if (filterName.matches("(?i)(?:)")) {
         if (Filter.isThereFilterWithName(filterName)) {
@@ -37,16 +29,6 @@ public class ProductsMenu {
         } else outputNo = 1;
         // } else inputNo = 0;
         return false;
-    }
-
-    //done
-    public static void processFiltering() {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
-    }
-
-    //done
-    public static void showAvailableFilters() {
-        OutputHandler.showAvailableFilters(Filter.getAvailableFilters());
     }
 
 
@@ -100,12 +82,12 @@ public class ProductsMenu {
         OutputHandler.showAllProductAfterFilter();
     }
 
-    //done
+
     public static void currentFilters() {
         OutputHandler.showCurrentFilter(Filter.currentFilters());
     }
 
-    //not done
+
     public static void disableFilter(String filterID) {
         if (checkFilter(filterID)) {
             Filter.disableFilter(filterID);
@@ -117,7 +99,7 @@ public class ProductsMenu {
 
     //sort-----------------------------------------------------------------
 
-    //done
+
     private static boolean checkSort(String sortName) {
         //if (sortName.matches("")) {
         if (Sort.isThereSortWithName(sortName)) {
@@ -127,17 +109,7 @@ public class ProductsMenu {
         return false;
     }
 
-    //done
-    public static void processSorting() {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.SORTING);
-    }
 
-    //done
-    public static void showAvailableSorts() {
-        OutputHandler.showAvailableSorts(Sort.getAvailableSorts());
-    }
-
-    //done
     public static void sort(String sortID) {
         ArrayList<Product> sortedList = null;
         if (checkSort(sortID)) {
@@ -158,10 +130,7 @@ public class ProductsMenu {
         }
     }
 
-    //done
-    public static void currentSorts() {
-        OutputHandler.showCurrentSorts(Sort.currentSorts());
-    }
+
 
 
     public static void disableSort() {
@@ -171,12 +140,8 @@ public class ProductsMenu {
 
     //product--------------------------------------------------
 
-    //done
-    public static void processShowProducts() throws FileNotFoundException {
-        OutputHandler.showProducts(Filter.getNewArrayOfProductFilter());
-    }
 
-    //done
+
     public static void processShowProductsID(String id) throws FileNotFoundException {
         if (Product.isThereProductWithId(id)) {
             Product.getProductById(id).setNumberOfViews();
@@ -186,8 +151,49 @@ public class ProductsMenu {
         } else OutputMassageHandler.showProductsOutput(5);
     }
 
-    //done
+
     public static String getProductId() {
         return productId;
     }
+
+    /*
+    //array
+    public static void processViewCategories() throws FileNotFoundException {
+        OutputHandler.showCategories();
+    }
+
+    public static void processShowProducts() throws FileNotFoundException {
+        OutputHandler.showProducts(Filter.getNewArrayOfProductFilter());
+    }
+
+    public static void processProducts() {
+        CommandProcessor.setMenuStatus(MenuStatus.PRODUCTSMENU);
+    }
+
+
+    public static void processFiltering() {
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.FILTERING);
+    }
+
+
+    public static void showAvailableFilters() {
+        OutputHandler.showAvailableFilters(Filter.getAvailableFilters());
+    }
+
+    public static void processSorting() {
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.SORTING);
+    }
+
+
+    public static void showAvailableSorts() {
+        OutputHandler.showAvailableSorts(Sort.getAvailableSorts());
+    }
+
+    public static void currentSorts() {
+        OutputHandler.showCurrentSorts(Sort.currentSorts());
+    }
+
+     */
+
+
 }

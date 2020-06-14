@@ -1,9 +1,9 @@
 package sample;
 
 import controller.menus.LoginMenu;
-import controller.menus.ProductsMenu;
-import controller.request.CommentRequest;
-import controller.request.Request;
+import controller.ProductsMenu;
+import model.request.CommentRequest;
+import model.request.Request;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

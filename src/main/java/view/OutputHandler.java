@@ -1,6 +1,6 @@
 package view;
 
-import controller.request.Request;
+import model.request.Request;
 import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Seller;

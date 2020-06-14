@@ -1,7 +1,8 @@
-package controller.menus;
+package controller;
 
-import controller.request.CommentRequest;
-import controller.request.Request;
+import controller.menus.LoginMenu;
+import model.request.CommentRequest;
+import model.request.Request;
 import model.log.BuyLog;
 import model.productRelated.Comment;
 import model.productRelated.CommentStatus;

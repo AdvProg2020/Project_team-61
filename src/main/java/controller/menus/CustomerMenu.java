@@ -1,9 +1,9 @@
 package controller.menus;
 
+import controller.ProductMenu;
 import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Seller;
-import model.filtar.Filter;
 import model.log.BuyLog;
 import model.log.Log;
 import model.log.SaleLog;
@@ -41,20 +41,6 @@ public class CustomerMenu {
         return false;
     }
 
-    //gson
-    public static void processViewCart() throws FileNotFoundException {
-        if (isThereBuyLog()) {
-            OutputHandler.showCustomerLog(ProductMenu.getBuyLog().getId());
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
-        } else OutputMassageHandler.showCustomerOutput(outputNo);
-    }
-
-    //gson
-    public static void showTotalPrice() throws FileNotFoundException {
-        if (isThereBuyLog()) {
-            OutputHandler.showTotalPrice(ProductMenu.getBuyLog().getId());
-        } else OutputMassageHandler.showCustomerOutput(outputNo);
-    }
 
     //product.......................................................................................
     private static boolean checkProduct(String productID) {
@@ -66,22 +52,7 @@ public class CustomerMenu {
         return false;
     }
 
-    //gson
-    public static void showProducts() throws FileNotFoundException {
-        if (isThereBuyLog()) {
-            OutputHandler.showProducts(Filter.getNewArrayOfProductFilter());
-        } else OutputMassageHandler.showCustomerOutput(outputNo);
-    }
 
-    //GSON
-    public static void viewProduct(String productID) throws FileNotFoundException {
-        if (checkProduct(productID)) {
-            Product.getProductById(productID).setNumberOfViews();
-            OutputHandler.showProduct(productID);
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-            CommandProcessor.setMenuStatus(MenuStatus.PRODUCTMENU);
-        } else OutputMassageHandler.showCustomerOutput(outputNo);
-    }
 
     public static void increaseProductNumber(String productID) {
         if (isThereBuyLog()) {
@@ -242,20 +213,7 @@ public class CustomerMenu {
         return false;
     }
 
-    //gson
-    public static void processViewOrders() throws FileNotFoundException {
-        OutputHandler.showOrders();
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWORDERS);
-    }
 
-
-    //gson
-    public static void showOrder(String orderID) throws FileNotFoundException {
-        if (checkLog(orderID)) {
-            OutputHandler.showOrder(orderID);
-        }else OutputMassageHandler.showCustomerOutput(outputNo);
-
-    }
 
     //score.............................................................
     public static void rateProduct(String productID, int number) throws IOException {
@@ -290,7 +248,7 @@ public class CustomerMenu {
         return false;
     }
 
-    //GSON
+/*    //GSON
     public static void processViewBalance() throws FileNotFoundException {
         OutputHandler.showBalance(LoginMenu.getLoginAccount().getUsername());
     }
@@ -298,6 +256,55 @@ public class CustomerMenu {
     //GSON
     public static void processViewDiscountCodes() throws FileNotFoundException {
         OutputHandler.showDiscountCodes();
+    }
+
+    //gson
+    public static void processViewCart() throws FileNotFoundException {
+        if (isThereBuyLog()) {
+            OutputHandler.showCustomerLog(ProductMenu.getBuyLog().getId());
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWCART);
+        } else OutputMassageHandler.showCustomerOutput(outputNo);
+    }
+
+    //gson
+    public static void showTotalPrice() throws FileNotFoundException {
+        if (isThereBuyLog()) {
+            OutputHandler.showTotalPrice(ProductMenu.getBuyLog().getId());
+        } else OutputMassageHandler.showCustomerOutput(outputNo);
+    }
+
+    //gson
+    public static void showProducts() throws FileNotFoundException {
+        if (isThereBuyLog()) {
+            OutputHandler.showProducts(Filter.getNewArrayOfProductFilter());
+        } else OutputMassageHandler.showCustomerOutput(outputNo);
+    }
+
+    //GSON
+    public static void viewProduct(String productID) throws FileNotFoundException {
+        if (checkProduct(productID)) {
+            Product.getProductById(productID).setNumberOfViews();
+            OutputHandler.showProduct(productID);
+            CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+            CommandProcessor.setMenuStatus(MenuStatus.PRODUCTMENU);
+        } else OutputMassageHandler.showCustomerOutput(outputNo);
+    }
+
+    //gson
+    public static void processViewOrders() throws FileNotFoundException {
+        OutputHandler.showOrders();
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWORDERS);
+    }
+
+ */
+
+
+    //gson
+    public static void showOrder(String orderID) throws FileNotFoundException {
+        if (checkLog(orderID)) {
+            OutputHandler.showOrder(orderID);
+        }else OutputMassageHandler.showCustomerOutput(outputNo);
+
     }
 
 }

@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -59,5 +60,11 @@ public class EditAccountFx {
 
     public void editAccount(MouseEvent mouseEvent) {
 
+    }
+
+    public void userMenu(ActionEvent actionEvent) {
+    }
+
+    public void logout(ActionEvent actionEvent) {
     }
 }

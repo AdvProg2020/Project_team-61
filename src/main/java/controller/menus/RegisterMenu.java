@@ -1,7 +1,7 @@
 package controller.menus;
 
-import controller.request.AccountRequest;
-import controller.request.Request;
+import model.request.AccountRequest;
+import model.request.Request;
 import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Manager;
@@ -156,7 +156,7 @@ public class RegisterMenu {
         }
     }
 
-    public static void createFirm(String detail) throws IOException {
+    public static int createFirm(String detail) throws IOException {
         if (detailMenu == 0) {
             if (detail.matches(".+")) {
                 accountRequest.setFirmName(detail);
@@ -190,6 +190,7 @@ public class RegisterMenu {
               //  outputNo = 17;
             } else outputNo = 10;
         }
+        return outputNo;
         //OutputMassageHandler.showFirmOutput(outputNo);
     }
 

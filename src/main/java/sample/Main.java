@@ -15,6 +15,7 @@ import model.accounts.Seller;
 import model.off.Sale;
 import model.productRelated.Category;
 import model.productRelated.Product;
+import model.request.*;
 import view.FileHandling;
 
 import java.io.FileReader;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Main extends Application {
-    private final int widthScene = 1000;
+    private final int widthScene = 1920;
     private final int heightScene = 1080;
     static Stage primStage;
 
@@ -42,7 +43,7 @@ public class Main extends Application {
 
 
 
-        Parent root = FXMLLoader.load(Objects.requireNonNull(ManiMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
        // Parent root = FXMLLoader.load(Objects.requireNonNull(ManiMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
         primaryStage.setTitle("market");
         primaryStage.setScene(new Scene(root, widthScene, heightScene));

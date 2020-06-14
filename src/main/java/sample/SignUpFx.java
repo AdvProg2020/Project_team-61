@@ -63,6 +63,7 @@ public class SignUpFx {
     private Label lastNameLoginMs;
 
     private static String role;
+    private static  Parent root;
 
     public static void setRole(String role) {
         SignUpFx.role = role;
@@ -87,26 +88,32 @@ public class SignUpFx {
         dragEvent.consume();
     }
 
+    /*  String username = userSign.getText();
+   String name = nameSign.getText();
+   String lastName = lastNameSign.getText();
+   String phone = phoneNoSign.getText();
+   String password = passSign.getText();
+   String email = emailSign.getText();
+   String birthday = birthdaySign.getText();
+
+  */
     public void signUp(MouseEvent mouseEvent) throws IOException, ParseException {
-        String username = userSign.getText();
-        String name = nameSign.getText();
-        String lastName = lastNameSign.getText();
-        String phone = phoneNoSign.getText();
-        String password = passSign.getText();
-        String email = emailSign.getText();
-        String birthday = birthdaySign.getText();
-        userLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.processRegister(role,username)));
-        passLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(password)));
-        nameLoginMs.setText( OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(name)));
-        lastNameLoginMs.setText( OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(lastName)));
-        emailLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(email)));
-        phoneLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(phone)));
-        birthLoginMs.setText( OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(birthday)));
+        userLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.processRegister(role,userSign.getText())));
+        passLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(passSign.getText())));
+        nameLoginMs.setText( OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(nameSign.getText())));
+        lastNameLoginMs.setText( OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(lastNameSign.getText())));
+        emailLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(emailSign.getText())));
+        phoneLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(phoneNoSign.getText())));
+        birthLoginMs.setText( OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(birthdaySign.getText())));
         goToMenu();
     }
 
     private void goToMenu() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
+        if(role == "seller") {
+            root = FXMLLoader.load(Objects.requireNonNull(FirmFx.class.getClassLoader().getResource("firmFx.fxml")));
+        }else {
+            root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
+        }
         Scene pageTwoScene = new Scene(root);
         // Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         Main.primStage.setScene(pageTwoScene);

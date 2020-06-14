@@ -1,13 +1,12 @@
 package controller.menus;
 
-import controller.request.AccountRequest;
-import controller.request.Request;
+import model.request.AccountRequest;
+import model.request.Request;
 import model.accounts.Account;
 import model.accounts.Seller;
 import model.firms.Firm;
 import sample.LoginFx;
 import view.CommandProcessor;
-import view.MenuStatus;
 import view.OutputMassageHandler;
 import view.SubMenuStatus;
 
@@ -70,18 +69,18 @@ public class LoginMenu {
       //  OutputMassageHandler.showAccountOutput(outputNo);
     }
 
-    private static void findRole() {
-        String role = loginAccount.getRole();
-        MenuStatus menu = null;
-        if (role.equalsIgnoreCase("customer")) {
-            menu = MenuStatus.CUSTOMERMENU;
-        } else if (role.equalsIgnoreCase("manager")) {
-            menu = MenuStatus.MANAGERMENU;
-        } else if (role.equalsIgnoreCase("seller")) {
-            menu = MenuStatus.SELLERMENU;
-        }
-        CommandProcessor.setMenuStatus(menu);
-    }
+//    private static void findRole() {
+//        String role = loginAccount.getRole();
+//        MenuStatus menu = null;
+//        if (role.equalsIgnoreCase("customer")) {
+//            menu = MenuStatus.CUSTOMERMENU;
+//        } else if (role.equalsIgnoreCase("manager")) {
+//            menu = MenuStatus.MANAGERMENU;
+//        } else if (role.equalsIgnoreCase("seller")) {
+//            menu = MenuStatus.SELLERMENU;
+//        }
+//        CommandProcessor.setMenuStatus(menu);
+//    }
 
 //    //gson
 //    public static void viewPersonalInfo() throws FileNotFoundException {
@@ -90,7 +89,7 @@ public class LoginMenu {
 //    }
 
     public static int processEdit(String field) throws IOException {
-        if (field.matches("(?i)(?:username|password|last\\s*name|email|phone\\s*number|firm)")) {
+       // if (field.matches("(?i)(?:username|password|last\\s*name|email|phone\\s*number|firm)")) {
             if (loginAccount.getRole() == "seller") {
                 String id = "seller " + LoginMenu.getLoginAccount().getUsername() + "wants edit account's " + field;
                 if (accountRequest.isThereRequestFromID(id)) {
@@ -113,7 +112,7 @@ public class LoginMenu {
             }
             LoginMenu.field = field;
             // OutputMassageHandler.showOutputWithString(field, 3);
-        } else outputNo = 16;
+        //} else outputNo = 16;
         return  outputNo;
        // OutputMassageHandler.showAccountOutput(outputNo);
     }

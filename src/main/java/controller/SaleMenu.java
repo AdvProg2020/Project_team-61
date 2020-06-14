@@ -1,4 +1,4 @@
-package controller.menus;
+package controller;
 
 import view.CommandProcessor;
 import view.MenuStatus;

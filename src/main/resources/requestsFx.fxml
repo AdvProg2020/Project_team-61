@@ -25,31 +25,29 @@
         </Rectangle>
         <MenuBar prefHeight="32.0" prefWidth="1920.0">
             <menus>
-                <Menu mnemonicParsing="false" text="File">
+                <Menu mnemonicParsing="false" text="User menu">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Close" />
+                        <MenuItem mnemonicParsing="false" onAction="#userMenu" text="your menu" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
+            <Menu mnemonicParsing="false" text="Back">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#back" text="previous" />
+              </items>
+            </Menu>
+                <Menu mnemonicParsing="false" text="Logout">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="leave" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Help">
+                <Menu mnemonicParsing="false" text="Exit">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
+                        <MenuItem mnemonicParsing="false" text="exit" />
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
-        <TreeTableView layoutX="528.0" layoutY="177.0" prefHeight="784.0" prefWidth="1307.0" AnchorPane.bottomAnchor="119.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="313.0" AnchorPane.topAnchor="177.0">
-            <columns>
-                <TreeTableColumn fx:id="requestId" prefWidth="433.0" text="ID" />
-                <TreeTableColumn fx:id="requestSeller" prefWidth="456.0" text="Seller" />
-                <TreeTableColumn fx:id="requestDate" minWidth="0.0" prefWidth="417.0" text="Date" />
-            </columns>
-        </TreeTableView>
-        <Text layoutX="873.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Requests">
+        <Text layoutX="873.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Requests" AnchorPane.bottomAnchor="970.458984375" AnchorPane.leftAnchor="873.0" AnchorPane.rightAnchor="873.791015625" AnchorPane.topAnchor="53.677734375">
             <font>
                 <Font name="System Bold Italic" size="42.0" />
             </font>
@@ -62,5 +60,54 @@
                 </LinearGradient>
             </fill>
         </Text>
+      <TableView fx:id="requests" layoutX="294.0" layoutY="131.0" prefHeight="754.0" prefWidth="1346.0">
+        <columns>
+          <TableColumn fx:id="requestId" prefWidth="454.0" text="ID" />
+          <TableColumn fx:id="requestSeller" minWidth="0.0" prefWidth="425.0" text="Seller" />
+            <TableColumn fx:id="requestDate" minWidth="0.0" prefWidth="466.0" text="Date" />
+        </columns>
+      </TableView>
+      <Button layoutX="1310.0" layoutY="918.0" mnemonicParsing="false" onMouseClicked="#showRequest" text="Show" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="1310.0" AnchorPane.rightAnchor="522.0" AnchorPane.topAnchor="918.0">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#2b00ff" />
+                  <Stop color="#ff00df" offset="0.5228758169934641" />
+                  <Stop color="RED" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Button layoutX="1437.0" layoutY="918.0" mnemonicParsing="false" onMouseClicked="#acceptRequest" text="Accept" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="1437.0" AnchorPane.rightAnchor="395.0" AnchorPane.topAnchor="918.0">
+         <font>
+            <Font size="19.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#2b00ff" />
+                  <Stop color="#ff00df" offset="0.5228758169934641" />
+                  <Stop color="RED" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="1552.0" layoutY="918.0" mnemonicParsing="false" onMouseClicked="#declineRequest" text="Decline" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="1552.0" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="918.0">
+         <font>
+            <Font size="19.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#2b00ff" />
+                  <Stop color="#ff00df" offset="0.5228758169934641" />
+                  <Stop color="RED" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
     </children>
 </AnchorPane>

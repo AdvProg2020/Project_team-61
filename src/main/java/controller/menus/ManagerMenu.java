@@ -1,8 +1,7 @@
 package controller.menus;
 
-import controller.request.Request;
+import model.request.Request;
 import model.accounts.Account;
-import model.filtar.Filter;
 import model.off.DiscountCode;
 import model.productRelated.Category;
 import model.productRelated.Product;
@@ -49,12 +48,6 @@ public class ManagerMenu {
         return false;
     }
 
-    //gson
-    public static void view(String username) throws FileNotFoundException {
-        if (checkUsername(username)) {
-            OutputHandler.showAccountInformation(username);
-        } else OutputMassageHandler.showAccountOutput(outputNo);
-    }
 
     public static void deleteUser(String username) {
         if (checkUsername(username)) {
@@ -70,11 +63,6 @@ public class ManagerMenu {
     }
     //--------------------------------------------------------------------
 
-    //gson
-    public static void processManageAllProducts() throws FileNotFoundException {
-        OutputHandler.showProducts(Filter.getNewArrayOfProductFilter());
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEALLPRODUCTS);
-    }
 
     private static boolean checkProduct(String productID) {
         // if (productID.matches("")) {
@@ -203,19 +191,6 @@ public class ManagerMenu {
         }
     }
 
-    // gson
-    public static void processViewDiscountCodes() throws FileNotFoundException {
-        OutputHandler.showDiscountCodes();
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWDISCOUNTCODES);
-    }
-
-    //gson
-    public static void viewDiscountCode(String discountCodeID) throws FileNotFoundException {
-        OutputHandler.showDiscountCode(discountCodeID);
-        if (checkDiscountCode(discountCodeID)) {
-            OutputHandler.showDiscountCode(discountCodeID);
-        } else OutputMassageHandler.showManagerOutput(outputNo);
-    }
 
     public static void editDiscountCode(String discountCodeID) {
         if (checkDiscountCode(discountCodeID)) {
@@ -314,11 +289,6 @@ public class ManagerMenu {
         return false;
     }
 
-    /// gson
-    public static void processManageRequests() throws FileNotFoundException {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEREQUESTS);
-        OutputHandler.showRequests();
-    }
 
 
     public static void detailsRequest(String requestID) throws FileNotFoundException {
@@ -351,11 +321,6 @@ public class ManagerMenu {
         return false;
     }
 
-    // gson
-    public static void processManageCategories() throws FileNotFoundException {
-        OutputHandler.showCategories();
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGECATEGORIES);
-    }
 
     public static void editCategory(String category) {
         if (checkCategory(category)) {
@@ -433,6 +398,13 @@ public class ManagerMenu {
 
     }
 
+    public static void removeCategory(String category) {
+        if (checkCategory(category)) {
+            Category.deleteCategory(category);
+            OutputMassageHandler.showOutputWithString(category, 7);
+        } else OutputMassageHandler.showManagerOutput(outputNo);
+    }
+
            /* if (detail.matches("\\D+")) {
                 if (!detail.equalsIgnoreCase("finish")) {
                     if (Product.isThereProductWithId(detail)) {
@@ -458,13 +430,45 @@ public class ManagerMenu {
                 }
             } else outputNo = 42;
 
-            */
+    //gson
+    public static void view(String username) throws FileNotFoundException {
+        if (checkUsername(username)) {
+            OutputHandler.showAccountInformation(username);
+        } else OutputMassageHandler.showAccountOutput(outputNo);
+    }
 
-    public static void removeCategory(String category) {
-        if (checkCategory(category)) {
-            Category.deleteCategory(category);
-            OutputMassageHandler.showOutputWithString(category, 7);
+    //gson
+    public static void processManageAllProducts() throws FileNotFoundException {
+        OutputHandler.showProducts(Filter.getNewArrayOfProductFilter());
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEALLPRODUCTS);
+    }
+
+    // gson
+    public static void processViewDiscountCodes() throws FileNotFoundException {
+        OutputHandler.showDiscountCodes();
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWDISCOUNTCODES);
+    }
+
+    //gson
+    public static void viewDiscountCode(String discountCodeID) throws FileNotFoundException {
+        OutputHandler.showDiscountCode(discountCodeID);
+        if (checkDiscountCode(discountCodeID)) {
+            OutputHandler.showDiscountCode(discountCodeID);
         } else OutputMassageHandler.showManagerOutput(outputNo);
     }
+
+    // gson
+    public static void processManageCategories() throws FileNotFoundException {
+        OutputHandler.showCategories();
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGECATEGORIES);
+    }
+    /// gson
+    public static void processManageRequests() throws FileNotFoundException {
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEREQUESTS);
+        OutputHandler.showRequests();
+    }
+
+            */
+
 
 }
