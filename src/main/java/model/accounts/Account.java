@@ -20,7 +20,7 @@ public abstract class Account {
     double currentPhoneNo;
     String address;
     Date birthdayDate;
-    Firm firm;
+    public Firm firm;
     boolean fast;
     ArrayList<DiscountCode> allDiscountCodes;
     private static ArrayList<Account> allAccounts;
@@ -157,6 +157,10 @@ public abstract class Account {
         this.phoneNo = phoneNo;
 //        writeInJ();
 
+    }
+
+    public Firm getFirm() {
+        return firm;
     }
 
     public void setCredit(double credit) throws IOException {

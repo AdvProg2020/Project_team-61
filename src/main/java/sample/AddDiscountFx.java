@@ -1,17 +1,28 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import model.off.DiscountCode;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
+import javafx.scene.control.PasswordField;
+import javafx.stage.Stage;
+import model.off.DiscountCode;
+
 
 public class AddDiscountFx {
+
 
 
     private DiscountCode newDiscountCode;
@@ -33,68 +44,64 @@ public class AddDiscountFx {
     public DatePicker StartOfDiscountDatePicker;
     @FXML
     public Label discountIdAlertLabel;
-    @FXML
-    public Label StartDiscountAlertLabel;
-    @FXML
-    public Label EndDiscountAlertLabel;
-
-    public void setDiscountIdTextField() {
-        String input = discountIdTextField.getText();
+    @FXML public Label StartDiscountAlertLabel;
+    @FXML public Label EndDiscountAlertLabel;
+    public void setDiscountIdTextField(){
+        String input=discountIdTextField.getText();
         //newDiscountCode.
     }
-
-    public void setDiscountAmount() {
-        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(5, 100, 1, 5);
-        discountAmountSpinner = new Spinner();
+    public void setDiscountAmount(){
+        SpinnerValueFactory<Integer> valueFactory=new SpinnerValueFactory.IntegerSpinnerValueFactory(5,100,1,5);
+        discountAmountSpinner=new Spinner();
         discountAmountSpinner.setValueFactory(valueFactory);
         discountAmountSpinner.setEditable(true);
         newDiscountCode.setDiscountAmount(Integer.parseInt(discountAmountSpinner.getValue().toString()));
 
     }
-
     //?annonation lazeme?
     @FXML
-    public void setTimesOfUseSpinner() {
-        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, 2, 1);
-        timesOfUseSpinner = new Spinner();
+    public void setTimesOfUseSpinner(){
+        SpinnerValueFactory<Integer> valueFactory=new SpinnerValueFactory.IntegerSpinnerValueFactory(1,30,2,1) ;
+        timesOfUseSpinner=new Spinner();
         timesOfUseSpinner.setValueFactory(valueFactory);
         timesOfUseSpinner.setEditable(true);
         newDiscountCode.setTotalTimesOfUse(Integer.parseInt(timesOfUseSpinner.getValue().toString()));
 
     }
-
     @FXML
-    public void setStartOfDiscountDate() {
-        if (discountIdTextField.getText() == null) {
+    public void setStartOfDiscountDate(){
+        if (discountIdTextField.getText()==null){
             StartOfDiscountDatePicker.setDisable(true);
-        } else {
+        }
+        else {
             LocalDate inputLocalDate;
-            inputLocalDate = StartOfDiscountDatePicker.getValue();
+            inputLocalDate =StartOfDiscountDatePicker.getValue();
             Date inputDate;
-            Date now = new Date();
+            Date now=new Date();
             ZoneId defaultZoneId = ZoneId.systemDefault();
             inputDate = Date.from(inputLocalDate.atStartOfDay(defaultZoneId).toInstant());
-            if (now.after(inputDate)) {
+            if (now.after(inputDate)){
                 StartDiscountAlertLabel.setText("Your date must be after today!");
-            } else
+            }else
                 newDiscountCode.setStartOfDiscountPeriod(inputDate);
         }
 
     }
-
-    public void setEndOfDiscountDate() {
-        if (StartOfDiscountDatePicker.getValue() == null) {
+    public void setEndOfDiscountDate(){
+        if (StartOfDiscountDatePicker.getValue()==null){
             EndOfDiscountDatePicker.setDisable(true);
-        } else {
+        }
+        else {
             LocalDate inputLocalDate;
-            inputLocalDate = StartOfDiscountDatePicker.getValue();
+            inputLocalDate =StartOfDiscountDatePicker.getValue();
             Date inputDate;
-            Date now = new Date();
+            Date now=new Date();
             ZoneId defaultZoneId = ZoneId.systemDefault();
             inputDate = Date.from(inputLocalDate.atStartOfDay(defaultZoneId).toInstant());
-            if (inputDate.before(now) || inputDate.before(newDiscountCode.getStartOfDiscountPeriod())) {
+            if (inputDate.before(now)||inputDate.before(newDiscountCode.getStartOfDiscountPeriod())){
                 EndDiscountAlertLabel.setText("End of Discount Date period is invalid!");
-            } else
+            }
+            else
                 newDiscountCode.setEndOfDiscountPeriod(inputDate);
         }
 

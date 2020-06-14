@@ -36,6 +36,7 @@ public class Seller extends Account {
     }
 
 
+
     public static void setAllSellers(ArrayList<Seller> allSellers) {
         Seller.allSellers = allSellers;
     }
