@@ -20,21 +20,15 @@ public class SellerMenuFx {
     public static final ObservableList data = FXCollections.observableArrayList();
     private static Parent root;
     
-    public void logout(ActionEvent actionEvent) {
-    }
-
-    public void back(ActionEvent actionEvent) {
-    }
-
-    public void exit(ActionEvent actionEvent) {
-    }
 
     public void viewPersonalInfo(MouseEvent mouseEvent) throws IOException {
+        ViewAccountFx.setAccount(LoginMenu.getLoginAccount());
          root = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
         goToPage();
     }
 
     public void viewCompanyInfo(MouseEvent mouseEvent) throws IOException {
+        ViewFirmFx.setAccount(LoginMenu.getLoginAccount());
          root = FXMLLoader.load(Objects.requireNonNull(ViewFirmFx.class.getClassLoader().getResource("viewFirmFx.fxml")));
         goToPage();
     }
@@ -103,5 +97,17 @@ public class SellerMenuFx {
         Stage massage = new Stage();
         massage.setScene(new Scene(rot, 500, 500));
         massage.show();
+    }
+
+    public void logout(ActionEvent actionEvent) {
+    }
+
+    public void back(ActionEvent actionEvent) {
+    }
+
+    public void exit(ActionEvent actionEvent) {
+    }
+
+    public void UserMenu(ActionEvent actionEvent) {
     }
 }

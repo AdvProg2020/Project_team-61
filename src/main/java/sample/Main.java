@@ -2,33 +2,32 @@ package sample;
 
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
 import model.off.Sale;
 import model.productRelated.Category;
-import model.productRelated.Product;
-import view.CommandProcessor;
+import model.request.*;
 import view.FileHandling;
-
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.util.ArrayList;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import model.request.*;
 import java.util.Objects;
 
+//import controller.request.*;
+
 public class Main extends Application {
-//    private final int widthScene = 1920;
-//    private final int heightScene = 1080;
+    private final int widthScene = 1500;
+    private final int heightScene = 900;
     static Stage primStage;
 
 
@@ -42,12 +41,12 @@ public class Main extends Application {
 
             */
 
-
-
-        Parent root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("addProduct.fxml")));
-       // Parent root = FXMLLoader.load(Objects.requireNonNull(ManiMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+     //   Parent root = FXMLLoader.load(getClass().getResource("mainMenuFx.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(UsersFx.class.getClassLoader().getResource("usersFx.fxml")));
+          //  Parent root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
+        // Parent root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
         primaryStage.setTitle("market");
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setScene(new Scene(root, widthScene, heightScene));
         primStage = primaryStage;
         primaryStage.show();
 
@@ -57,9 +56,9 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws IOException, ParseException {
+       // Application.launch(args);
 
-        Application.launch(args);
-        Type productType = new TypeToken<ArrayList<Product>>(){}.getType();
+       /* Type productType = new TypeToken<ArrayList<Product>>(){}.getType();
         try {
             JsonReader reader2 =new JsonReader(new FileReader("product.json"));
             ArrayList<Product> productArrayList = FileHandling.getGson().fromJson(reader2,productType);
@@ -71,6 +70,10 @@ public class Main extends Application {
             FileHandling.writeInFile("","product.json");
             Product.setAllProduct(new ArrayList<>());
         }
+
+        */
+
+
 
 
 
@@ -89,35 +92,35 @@ public class Main extends Application {
 
 
 
-        Type registerType = new TypeToken<ArrayList<Request>>(){}.getType();
-        try {
-            JsonReader reader1 =new JsonReader(new FileReader("request.json"));
-            ArrayList<Request> requestArrayList = FileHandling.getGson().fromJson(reader1,registerType);
-            if (null==requestArrayList){
-                requestArrayList=new ArrayList<>();
-            }
-            Request.setAllRequests(requestArrayList);
-        }catch (IOException e){
-            FileHandling.writeInFile("","request.json");
-            Request.setAllRequests(new ArrayList<>());
-        }
-
-
-
-        try {
-            Type AccountType = new TypeToken<ArrayList<Account>>() {
-            }.getType();
-            JsonReader reader = new JsonReader(new FileReader("account.json"));
-            ArrayList<Account> list = FileHandling.getGson().fromJson(reader,AccountType);
-            if (null == list){
-                list = new ArrayList<Account>();
-            }
-            Account.setAllAccounts(list);
-        }catch (IOException e){
-            FileHandling.writeInFile("","account.json");
-            Account.setAllAccounts(new ArrayList<>());
-        }
-
+//        Type registerType = new TypeToken<ArrayList<Request>>(){}.getType();
+//        try {
+//            JsonReader reader1 =new JsonReader(new FileReader("request.json"));
+//            ArrayList<Request> requestArrayList = FileHandling.getGson().fromJson(reader1,registerType);
+//            if (null==requestArrayList){
+//                requestArrayList=new ArrayList<>();
+//            }
+//            Request.setAllRequests(requestArrayList);
+//        }catch (IOException e){
+//            FileHandling.writeInFile("","request.json");
+//            Request.setAllRequests(new ArrayList<>());
+//        }
+//
+//
+//
+//        try {
+//            Type AccountType = new TypeToken<ArrayList<Account>>() {
+//            }.getType();
+//            JsonReader reader = new JsonReader(new FileReader("account.json"));
+//            ArrayList<Account> list = FileHandling.getGson().fromJson(reader,AccountType);
+//            if (null == list){
+//                list = new ArrayList<Account>();
+//            }
+//            Account.setAllAccounts(list);
+//        }catch (IOException e){
+//            FileHandling.writeInFile("","account.json");
+//            Account.setAllAccounts(new ArrayList<>());
+//        }
+//
 
 
 
@@ -212,7 +215,7 @@ public class Main extends Application {
         }
 
 
-        Type ProductReType = new TypeToken<ArrayList<ProductRequest>>(){}.getType();
+      /*  Type ProductReType = new TypeToken<ArrayList<ProductRequest>>(){}.getType();
         try {
             JsonReader reader10 =new JsonReader(new FileReader("productRequest.json"));
             ArrayList<ProductRequest> productRequests = FileHandling.getGson().fromJson(reader10,ProductReType);
@@ -225,6 +228,8 @@ public class Main extends Application {
             FileHandling.writeInFile("","productRequest.json");
             ProductRequest.setAllProductRequests(new ArrayList<>());
         }
+
+       */
 
 
         Type SaleReType = new TypeToken<ArrayList<SaleRequest>>(){}.getType();
@@ -246,9 +251,41 @@ public class Main extends Application {
         Request.getAllRequests().addAll(ProductRequest.getAllProductRequests());
         Request.getAllRequests().addAll(SaleRequest.getAllSaleRequests());
 
+        Application.launch(args);
 
         //Account.readFile();
         // Request.readFile();
-        CommandProcessor commandProcessor = new CommandProcessor();
-//        commandProcessor.run();
-}}
+       // CommandProcessor commandProcessor = new CommandProcessor();
+ //       commandProcessor.run();
+//        Scanner in = new Scanner(System.in);
+//        int a = in.nextInt();
+//        System.out.println(a);
+    }
+    /* public void run(){
+
+        System.out.println("view personal info\nedit[field]\nmanage users\nmanage all products\ncreate discount code\nview discount codes\nmange requests\nmanage categories");
+        System.out.println("create account [type][username]\nlogin [username]\nlogout\nback\nhelp");
+        System.out.println("view personal info\nview company information\nview sales history\nmanage products\nadd product\nremove product [product Id]\nshow categories\nview offs\nview balance");
+        System.out.println("view personal info\nview cart\npurchase\nview orders\nview balance\nview discount codes");
+        System.out.println("products\nview categories\nfiltering\nsoting\nshow products\nshow products [productsId]");
+        System.out.println("digest\nattributes\ncompare [productID]\nComments");
+         System.out.println("offs\nshow product [productId]");
+        System.out.println("view [username]\ndelete user [username]\ncreate manager profile");
+        System.out.println("remove [productId]");
+        System.out.println("view discount code [code]\nedit discount code [code]\nremove discount code [code]");
+        System.out.println("details [requestId]\naccept [requestId]\ndecline [requestId]");
+        System.out.println("edit [category]\nadd [category]\nremove [category]");
+        System.out.println("edit [field]");
+        System.out.println("view [productId]\nview buyers [productId]\nedit [productId]");
+        System.out.println("view [offId]\nedit [offId]\nadd off");
+        System.out.println("edit [field]");
+        System.out.println("show products\nview [productId]\nincrease [productId]\ndecrease [productId]\nshow total price\npurchase");
+        System.out.println("show order [orderId]\nrate [productId] [1-5]");
+        System.out.println("show available filters\nfilter [an available]\ncurrent filters[]\ndisable filter [a selected filter]");
+        System.out.println("show available sorts\nsort [an available sort]\ncurrent sort\ndisable sort");
+        System.out.println("add to cart\nselect seller [seller_username]");
+        System.out.println("Add comment\nTitle:\nContent:");
+    }
+
+     */
+}

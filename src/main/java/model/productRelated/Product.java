@@ -1,8 +1,6 @@
 package model.productRelated;
 
 import com.google.gson.reflect.TypeToken;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Seller;
@@ -14,7 +12,10 @@ import view.FileHandling;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class Product {
     private static String productJson;

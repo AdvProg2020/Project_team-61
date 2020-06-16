@@ -3,15 +3,14 @@ package sample;
 import controller.menus.RegisterMenu;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import view.OutputMassageHandler;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class FirmFx {
     @FXML
@@ -39,23 +38,20 @@ public class FirmFx {
             String firmEmail = firmEmailCr.getText();
             String firmAddress = firmAddressCr.getText();
             String firmPhone = firmPhoneCr.getText();
-            RegisterMenu.createFirm(firmName);
-            RegisterMenu.createFirm(firmPhone);
-            RegisterMenu.createFirm(firmAddress);
+            firmNameCrMs.setText(OutputMassageHandler.showFirmOutput(RegisterMenu.createFirm(firmName)));
+            firmPhoneNoCrMs.setText(OutputMassageHandler.showFirmOutput(RegisterMenu.createFirm(firmPhone)));
+            firmAddressCrMs.setText(OutputMassageHandler.showFirmOutput(RegisterMenu.createFirm(firmAddress)));
             RegisterMenu.createFirm(type);
-            RegisterMenu.createFirm(firmEmail);
+            firmEmailCrMs.setText(OutputMassageHandler.showFirmOutput(RegisterMenu.createFirm(firmEmail)));
             type = null;
         }
     }
 
     public void userMenu(ActionEvent actionEvent) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
-        goToPage();
     }
 
     public void logout(ActionEvent actionEvent) {
     }
-
 
     public void back(ActionEvent actionEvent) {
     }

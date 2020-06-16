@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewSaleFx">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#e4ff00" />
+                        <Stop color="#e4ff00" offset="0.007246376811594203" />
+                        <Stop color="#007aff" offset="0.4746376811594203" />
+                        <Stop color="#000bff" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.bottomAnchor="1050.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="User menu">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#userMenu" text="your menu" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Logout">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Back">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Label fx:id="saleIdLabel" layoutX="566.0" layoutY="235.0" prefHeight="21.0" prefWidth="253.0" text="Label" textFill="#0a0a0a">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+        <Label fx:id="startSaleLabel" layoutX="566.0" layoutY="322.0" prefHeight="21.0" prefWidth="253.0" text="Label">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+        <Label fx:id="endSaleLabel" layoutX="563.0" layoutY="414.0" prefHeight="21.0" prefWidth="260.0" text="Label" textFill="#070707">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+        <Label layoutX="792.0" layoutY="57.0" text="View sale ">
+            <font>
+                <Font name="System Bold Italic" size="40.0" />
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#ff9500" />
+                        <Stop color="#e1256d" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </textFill></Label>
+        <Label fx:id="saleAmountLabel" layoutX="566.0" layoutY="496.0" prefHeight="21.0" prefWidth="253.0" text="Label">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+        <Text layoutX="298.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sale Id:">
+            <font>
+                <Font size="27.0" />
+            </font>
+        </Text>
+        <Text layoutX="298.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start of sale period:">
+            <font>
+                <Font size="27.0" />
+            </font>
+        </Text>
+        <Text layoutX="298.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End of sale period:">
+            <font>
+                <Font size="27.0" />
+            </font>
+        </Text>
+        <Text layoutX="306.0" layoutY="516.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sale amount:">
+            <font>
+                <Font size="27.0" />
+            </font>
+        </Text>
+        <TableView fx:id="saleProducts" layoutX="887.0" layoutY="191.0" prefHeight="631.0" prefWidth="506.0">
+            <columns>
+                <TableColumn fx:id="saleProduct" prefWidth="505.0" text="Products" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>

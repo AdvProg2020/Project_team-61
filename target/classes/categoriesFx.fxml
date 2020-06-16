@@ -23,31 +23,31 @@
                 </LinearGradient>
             </fill>
         </Rectangle>
-        <MenuBar prefHeight="32.0" prefWidth="1920.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.bottomAnchor="1050.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
             <menus>
-                <Menu mnemonicParsing="false" text="File">
+                <Menu mnemonicParsing="false" text="User menu">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Close" />
+                        <MenuItem mnemonicParsing="false" onAction="#userMenu" text="your menu" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
+                <Menu mnemonicParsing="false" text="Logout">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Help">
+                <Menu mnemonicParsing="false" text="Back">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
-        <TreeTableView layoutX="528.0" layoutY="180.0" prefHeight="781.0" prefWidth="1112.0" AnchorPane.bottomAnchor="119.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="408.0" AnchorPane.topAnchor="180.0">
-            <columns>
-            <TreeTableColumn prefWidth="1111.0" text="Name" />
-            </columns>
-        </TreeTableView>
-        <Text fx:id="categoryName" layoutX="856.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categories">
+        <Text layoutX="856.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categories">
             <font>
                 <Font name="System Bold Italic" size="42.0" />
             </font>
@@ -60,5 +60,46 @@
                 </LinearGradient>
             </fill>
         </Text>
+      <Button layoutX="1247.0" layoutY="988.0" mnemonicParsing="false" onMouseClicked="#editCategories" prefHeight="32.0" prefWidth="75.0" text="Edit">
+         <textFill>
+            <LinearGradient endX="0.7815533980582524" endY="0.5097087378640777" startX="0.30097087378640774" startY="0.23786407766990292">
+               <stops>
+                  <Stop color="#4a00ff" />
+                  <Stop color="#4a00ff" offset="0.007246376811594203" />
+                  <Stop color="#eb0000" offset="0.5543478260869565" />
+                  <Stop color="#3700ff" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="1345.0" layoutY="988.0" mnemonicParsing="false" onMouseClicked="#removeCategories" prefHeight="32.0" prefWidth="75.0" text="Remove">
+         <textFill>
+            <LinearGradient endX="0.7815533980582524" endY="0.5097087378640777" startX="0.30097087378640774" startY="0.23786407766990292">
+               <stops>
+                  <Stop color="#4a00ff" />
+                  <Stop color="#4a00ff" offset="0.007246376811594203" />
+                  <Stop color="#eb0000" offset="0.5543478260869565" />
+                  <Stop color="#3700ff" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="1437.0" layoutY="988.0" mnemonicParsing="false" onMouseClicked="#addCategories" prefHeight="32.0" prefWidth="75.0" text="Add">
+         <textFill>
+            <LinearGradient endX="0.7815533980582524" endY="0.5097087378640777" startX="0.30097087378640774" startY="0.23786407766990292">
+               <stops>
+                  <Stop color="#4a00ff" />
+                  <Stop color="#4a00ff" offset="0.007246376811594203" />
+                  <Stop color="#eb0000" offset="0.5543478260869565" />
+                  <Stop color="#3700ff" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <TableView fx:id="categories" layoutX="367.0" layoutY="142.0" prefHeight="835.0" prefWidth="1187.0">
+        <columns>
+          <TableColumn fx:id="categoriesName" prefWidth="1186.0" text="Name" />
+        </columns>
+      </TableView>
     </children>
 </AnchorPane>

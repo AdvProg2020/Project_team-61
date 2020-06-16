@@ -31,9 +31,6 @@ public class RegisterMenu {
     private static Date birthdayDate;
     private static SubMenuStatus subMenuStatus;
 
-    public static int getDetailMenu() {
-        return detailMenu;
-    }
 
     public static void setManagerWant(boolean managerWant) {
         RegisterMenu.managerWant = managerWant;
@@ -92,19 +89,19 @@ public class RegisterMenu {
 
     public static int completeRegisterProcess(String detail) throws IOException, ParseException {
         if (detailMenu == 0) {
-            if (detail.matches(".+")) {
+            if (detail.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{8,10}$")) {
                 password = detail;
                 detailMenu++;
                 outputNo = 0;
             } else outputNo = 3;
         } else if (detailMenu == 1) {
-            if (detail.matches(".+")) {
+            if (detail.matches("(\\s*\\S+\\s*)+")) {
                 name = detail;
                 detailMenu++;
                 outputNo = 0;
             } else outputNo = 5;
         } else if (detailMenu == 2) {
-            if (detail.matches(".+")) {
+            if (detail.matches("(\\s*\\S+\\s*)+")) {
                 lastName = detail;
                 detailMenu++;
                 outputNo = 0;
@@ -159,7 +156,7 @@ public class RegisterMenu {
 
     public static int createFirm(String detail) throws IOException {
         if (detailMenu == 0) {
-            if (detail.matches(".+")) {
+            if (detail.matches("(\\s*\\S+\\s*)+")) {
                 accountRequest.setFirmName(detail);
                 detailMenu++;
                 outputNo = 0;
@@ -171,13 +168,13 @@ public class RegisterMenu {
                 outputNo = 0;
             } else outputNo = 6;
         } else if (detailMenu == 2) {
-            if (detail.matches(".+")) {
+            if (detail.matches("(\\s*\\S+\\s*)+")) {
                 accountRequest.setFirmAddress(detail);
                 detailMenu = 3;
                 outputNo = 0;
             } else outputNo = 8;
         }else if (detailMenu == 3) {
-            if (detail.matches("(?i)(?:company|factory|workshop)")) {
+            if (detail.matches("(?i)(?:company|factory|work\\s*shop)")) {
                 accountRequest.setFirmType(detail);
                 detailMenu = 4;
                 outputNo = 0;
@@ -225,6 +222,13 @@ public class RegisterMenu {
        // OutputMassageHandler.showReceiverInfo(outputNo);
 
     }
+
+    /*
+      public static int getDetailMenu() {
+        return detailMenu;
+    }
+
+     */
 
 
 }

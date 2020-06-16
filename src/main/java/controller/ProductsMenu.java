@@ -18,8 +18,6 @@ public class ProductsMenu {
     private static String productId;
 
 
-
-
     //filter-------------------------------------------------------
 
     private static boolean checkFilter(String filterName) {

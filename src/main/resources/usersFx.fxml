@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UsersFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1077.0" prefWidth="1918.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UsersFx">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <fill>
@@ -24,26 +24,31 @@
                 </LinearGradient>
             </fill>
         </Rectangle>
-        <MenuBar prefHeight="32.0" prefWidth="1920.0">
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.bottomAnchor="1050.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
             <menus>
-                <Menu mnemonicParsing="false" text="File">
+                <Menu mnemonicParsing="false" text="User menu">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Close" />
+                        <MenuItem mnemonicParsing="false" onAction="#userMenu" text="your menu" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
+                <Menu mnemonicParsing="false" text="Logout">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Help">
+                <Menu mnemonicParsing="false" text="Back">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
-        <Text layoutX="901.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Users">
+        <Text layoutX="907.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Users" AnchorPane.bottomAnchor="952.458984375" AnchorPane.leftAnchor="907.0" AnchorPane.rightAnchor="905.1181640625" AnchorPane.topAnchor="68.677734375">
             <font>
                 <Font name="System Bold Italic" size="42.0" />
             </font>
@@ -56,7 +61,7 @@
                 </LinearGradient>
             </fill>
         </Text>
-        <TableView fx:id="usersList" layoutX="243.0" layoutY="147.0" prefHeight="783.0" prefWidth="1477.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="243.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="147.0">
+        <TableView fx:id="usersList" layoutX="243.0" layoutY="147.0" prefHeight="783.0" prefWidth="1477.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="243.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="147.0">
             <columns>
                 <TableColumn fx:id="UserNumber" prefWidth="96.0" text="Number" />
                 <TableColumn fx:id="UserId" prefWidth="216.0" text="Username" />
@@ -67,7 +72,7 @@
                 <TableColumn fx:id="userEmail" prefWidth="254.0" text="Email" />
             </columns>
         </TableView>
-        <Button layoutX="1625.0" layoutY="961.0" mnemonicParsing="false" onMouseClicked="#deleteUser" prefHeight="39.0" prefWidth="90.0" text="Delete">
+        <Button layoutX="1625.0" layoutY="961.0" mnemonicParsing="false" onMouseClicked="#deleteUser" prefHeight="39.0" prefWidth="90.0" text="Delete" AnchorPane.bottomAnchor="77.0" AnchorPane.leftAnchor="1385.0" AnchorPane.rightAnchor="443.0" AnchorPane.topAnchor="961.0">
             <textFill>
                 <LinearGradient endX="1.0" endY="1.0">
                     <stops>
@@ -77,7 +82,7 @@
                 </LinearGradient>
             </textFill>
         </Button>
-        <Button layoutX="1385.0" layoutY="961.0" mnemonicParsing="false" onMouseClicked="#viewUser" prefHeight="39.0" prefWidth="90.0" text="View">
+        <Button layoutX="1628.0" layoutY="961.0" mnemonicParsing="false" onMouseClicked="#viewUser" prefHeight="39.0" prefWidth="90.0" text="View" AnchorPane.bottomAnchor="77.0" AnchorPane.leftAnchor="1628.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="961.0">
             <textFill>
                 <LinearGradient endX="1.0" endY="1.0">
                     <stops>
@@ -87,7 +92,7 @@
                 </LinearGradient>
             </textFill>
         </Button>
-        <Button layoutX="1493.0" layoutY="961.0" mnemonicParsing="false" onMouseClicked="#AddManager" prefHeight="39.0" prefWidth="115.0" text="Add manager">
+        <Button layoutX="1494.0" layoutY="961.0" mnemonicParsing="false" onMouseClicked="#AddManager" prefHeight="39.0" prefWidth="115.0" text="Add manager" AnchorPane.bottomAnchor="77.0" AnchorPane.leftAnchor="1494.0" AnchorPane.rightAnchor="309.0" AnchorPane.topAnchor="961.0">
             <textFill>
                 <LinearGradient endX="1.0" endY="1.0">
                     <stops>

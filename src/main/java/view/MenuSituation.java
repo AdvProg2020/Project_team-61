@@ -1,11 +1,7 @@
 package view;
 
-import controller.menus.ManagerMenu;
-import controller.menus.RegisterMenu;
-import controller.menus.SellerMenu;
-
 public class MenuSituation {
-    private int outputNo;
+ /*   private int outputNo;
 
     private static void accountFields() {
         if (RegisterMenu.getDetailMenu() == 0) {
@@ -450,6 +446,8 @@ public class MenuSituation {
 
 
     }
+
+  */
 
 
 }

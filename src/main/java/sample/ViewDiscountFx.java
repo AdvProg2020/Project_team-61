@@ -1,25 +1,56 @@
 package sample;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 
 import java.awt.*;
 
     public class ViewDiscountFx {
-        @FXML public Label discountInformationLabel;
-        @FXML public Label discountIdInfo;
-        @FXML public Label discountIdView;
-        @FXML public Label startDiscountInfo;
-        @FXML public Label startDiscountView;
-        @FXML public Label endDiscountView;
-        @FXML public Label endDiscountInfo;
-        @FXML public Label discountAmountInfo;
-        @FXML public Label discountAmountView;
-        @FXML public Label allAccountsView;
-        @FXML public ListView allAccountsInfo;
-        @FXML public Label maxAmountView;
-        @FXML public Label maxAmountInfo;
-        @FXML public Label timesOfUseView;
-        @FXML public Label timesOfUseInfo;
-}
+        @FXML
+        private Label startDiscountInfo;
+
+        @FXML
+        private Label maxAmountInfo;
+
+        @FXML
+        private Label timesOfUseInfo;
+
+        @FXML
+        private Label discountInformationLabel;
+
+        @FXML
+        private Label discountIdInfo;
+
+        @FXML
+        private Label discountAmountInfo;
+
+        @FXML
+        private Label endDiscountInfo;
+
+        @FXML
+        private ListView<?> allAccountsInfo;
+
+
+        private void remove(){
+
+        }
+
+        public void back(MouseEvent mouseEvent) {
+            remove();
+        }
+
+        public void exit(MouseEvent mouseEvent) {
+            remove();
+        }
+
+        public void userMenu(ActionEvent actionEvent) {
+        }
+
+        public void logout(ActionEvent actionEvent) {
+            remove();
+        }
+
+    }
