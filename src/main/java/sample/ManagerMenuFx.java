@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import model.off.DiscountCode;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -26,6 +27,7 @@ public class ManagerMenuFx {
     }
 
     public void viewPersonalInfo(MouseEvent mouseEvent) throws IOException {
+        ViewAccountFx.setAccount(LoginMenu.getLoginAccount());
          root = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
         goToPage();
     }
@@ -36,6 +38,7 @@ public class ManagerMenuFx {
     }
 
     public void viewDiscount(MouseEvent mouseEvent) throws IOException {
+        DiscountCodesFx.setDiscounts(DiscountCode.getAllDiscountCodes());
          root = FXMLLoader.load(Objects.requireNonNull(ViewDiscountFx.class.getClassLoader().getResource("viewDiscountFx.fxml")));
         goToPage();
     }

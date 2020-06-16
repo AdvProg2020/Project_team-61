@@ -4,13 +4,10 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FirmFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/12.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FirmFx">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0">
             <fill>

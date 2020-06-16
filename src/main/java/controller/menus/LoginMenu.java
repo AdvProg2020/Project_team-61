@@ -35,7 +35,7 @@ public class LoginMenu {
 
     public static int processLogin(String username) {
         if (!login) {
-            if (username.matches(".+")) {
+            if (username.matches("(\\s*\\S+\\s*)+")) {
                 if (Account.isThereAccountWithUsername(username)) {
                     LoginMenu.username = username;
                     outputNo = 0;
@@ -49,7 +49,7 @@ public class LoginMenu {
     }
 
     public static int checkPassword(String password) throws IOException {
-        if (password.matches(".+")) {
+        if (password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{8,10}$")) {
             if (Account.isThereAccountWithUsernameAndPassword(username, password)) {
                 loginAccount = Account.getAccountWithUsername(username);
                 login = true;
@@ -84,19 +84,19 @@ public class LoginMenu {
 
     public static int editAccount(String edit, String field) throws IOException {
         if (field.equalsIgnoreCase("password")) {
-            if (edit.matches(".+")) {
+            if (edit.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{8,10}$")) {
                 loginAccount.setPassword(edit);
                 outputNo = 0;
                // outputNo = 17;
             } else outputNo = 3;
         } else if (field.equalsIgnoreCase("name")) {
-            if (edit.matches(".+")) {
+            if (edit.matches("(\\s*\\S+\\s*)+")) {
                 loginAccount.setName(edit);
                 outputNo = 0;
                // outputNo = 18;
             } else outputNo = 5;
         } else if (field.matches("last\\s*name")) {
-            if (edit.matches(".+")) {
+            if (edit.matches("(\\s*\\S+\\s*)+")) {
                 loginAccount.setLastname(edit);
                 outputNo = 0;
                // outputNo = 19;
@@ -120,17 +120,17 @@ public class LoginMenu {
 
     public static int editSellerField(String edit, String field) throws IOException {
         if (field.equalsIgnoreCase("password")) {
-            if (edit.matches(".+")) {
+            if (edit.matches("(\\s*\\S+\\s*)+")) {
                 accountRequest.setPassword(edit);
                 outputNo = 0;
             } else outputNo = 3;
         } else if (field.equalsIgnoreCase("name")) {
-            if (edit.matches(".+")) {
+            if (edit.matches("(\\s*\\S+\\s*)+")) {
                 accountRequest.setName(edit);
                 outputNo = 0;
             } else outputNo = 5;
         } else if (field.matches("last\\s*name")) {
-            if (edit.matches(".+")) {
+            if (edit.matches("(\\s*\\S+\\s*)+")) {
                 accountRequest.setLastname(edit);
                 outputNo = 0;
             } else outputNo = 7;
@@ -181,7 +181,7 @@ public class LoginMenu {
                 outputNo = 7;
             } else outputNo = 6;
         } else if (field.equalsIgnoreCase("address")) {
-            if (detail.matches(".+")) {
+            if (detail.matches("(\\s*\\S+\\s*)+")) {
                 accountRequest.setFirmAddress(detail);
                 outputNo = 9;
             } else outputNo = 8;

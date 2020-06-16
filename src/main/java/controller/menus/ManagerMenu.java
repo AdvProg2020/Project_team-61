@@ -33,11 +33,6 @@ public class ManagerMenu {
         return detailMenu;
     }
 
-    //gson
-    public static void processManageUsers() throws FileNotFoundException {
-        OutputHandler.showAccounts();
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEUSERS);
-    }
 
     private static boolean checkUsername(String username) {
         if (username.matches("^(?i)(?=.[a-z])(?=.[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
@@ -49,19 +44,14 @@ public class ManagerMenu {
     }
 
 
-    public static void deleteUser(String username) {
+    public static int deleteUser(String username) {
         if (checkUsername(username)) {
             Account.deleteAccount(username);
-            OutputMassageHandler.showOutputWithString(username, 1);
-        } else OutputMassageHandler.showAccountOutput(outputNo);
+            outputNo = 37;
+            //   OutputMassageHandler.showOutputWithString(username, 1);
+        }  //OutputMassageHandler.showAccountOutput(outputNo);
+        return outputNo;
     }
-
-    public static void createManagerProfile() {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.CREATEMANAGERACCOUNT);
-        RegisterMenu.setManagerWant(true);
-        OutputMassageHandler.showManagerOutput(1);
-    }
-    //--------------------------------------------------------------------
 
 
     private static boolean checkProduct(String productID) {
@@ -74,12 +64,14 @@ public class ManagerMenu {
         return false;
     }
 
-    public static void removeProduct(String productID) {
+    public static int removeProduct(String productID) {
         if (checkProduct(productID)) {
             Product.deleteProduct(productID);
-            OutputMassageHandler.showOutputWithString(productID, 2);
+            outputNo = 1;
+          //  OutputMassageHandler.showOutputWithString(2);
         }
-        OutputMassageHandler.showManagerOutput(outputNo);
+        return outputNo;
+       // OutputMassageHandler.showManagerOutput(outputNo);
     }
     //------------------------------------------------
 
@@ -90,11 +82,6 @@ public class ManagerMenu {
         } else outputNo = 5;
         // } else outputNo = 4;
         return false;
-    }
-
-    public static void processCreateDiscountCode() {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDDISCOUNTCODE);
-        OutputMassageHandler.showManagerOutput(6);
     }
 
     public static void createNewDiscountCode(String discountCodeId) throws IOException {
@@ -203,8 +190,7 @@ public class ManagerMenu {
     public static void discountCodeField(String field) {
         if (field.matches("(?i)(?:start\\s+Of\\s+Discount\\s+Period|end\\s+Of\\s+Discount\\s+Period|remove\\s+account|add\\s+account|max\\s+Discount\\s+Amount|total\\s+Times\\s+Of\\s+Use|discount\\s+amount)")) {
             ManagerMenu.field = field;
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITDISCOUNTCODE);
-            OutputMassageHandler.showOutputWithString(field, 3);
+          //  CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITDISCOUNTCODE);
         }
     }
 
@@ -272,11 +258,13 @@ public class ManagerMenu {
         OutputMassageHandler.showManagerOutput(outputNo);
     }
 
-    public static void removeDiscountCode(String discountCodeID) {
+    public static int removeDiscountCode(String discountCodeID) {
         if (checkDiscountCode(discountCodeID)) {
             DiscountCode.deleteDiscount(discountCodeID);
-            OutputMassageHandler.showOutputWithString(discountCodeID, 4);
-        } else OutputMassageHandler.showManagerOutput(outputNo);
+            outputNo =6;
+           // OutputMassageHandler.showOutputWithString(discountCodeID, 4);
+        } //else OutputMassageHandler.showManagerOutput(outputNo);
+        return outputNo;
     }
 
     //-------------------------------------------------------------------------------------
@@ -289,18 +277,22 @@ public class ManagerMenu {
         return false;
     }
 
-    public static void acceptRequest(String requestID) throws IOException {
+    public static int acceptRequest(String requestID) throws IOException {
         if (checkRequest(requestID)) {
             Request.getRequestFromID(requestID).acceptRequest();
-            OutputMassageHandler.showOutputWithString(requestID, 5);
-        } else OutputMassageHandler.showManagerOutput(outputNo);
+            outputNo=5;
+          //  OutputMassageHandler.showOutputWithString(requestID, 5);
+        } //else OutputMassageHandler.showManagerOutput(outputNo);
+        return outputNo;
     }
 
-    public static void declineRequest(String requestID) {
+    public static int declineRequest(String requestID) {
         if (checkRequest(requestID)) {
             Request.getRequestFromID(requestID).declineRequest();
-            OutputMassageHandler.showOutputWithString(requestID, 6);
-        } else OutputMassageHandler.showManagerOutput(outputNo);
+            outputNo =6;
+           // OutputMassageHandler.showOutputWithString(requestID, 6);
+        } //else OutputMassageHandler.showManagerOutput(outputNo);
+        return outputNo;
     }
     //------------------------------------------------------------------------------
 
@@ -323,12 +315,14 @@ public class ManagerMenu {
         OutputMassageHandler.showManagerOutput(outputNo);
     }
 
-    public static void categoryField(String field) {
+    public static int categoryField(String field) {
         if (field.matches("(?i)(?:add\\s*product|remove\\s*product|remove\\s*trait|add\\s*trait)")) {
             ManagerMenu.field = field;
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITCATEGORY);
-            OutputMassageHandler.showOutputWithString(field, 3);
-        } else OutputMassageHandler.showManagerOutput(outputNo);
+            outputNo =0;
+           // CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITCATEGORY);
+            //OutputMassageHandler.showOutputWithString(field, 3);
+        } //else OutputMassageHandler.showManagerOutput(outputNo);
+        return outputNo;
     }
 
     public static void editCategoryField(String edit) throws IOException {
@@ -364,8 +358,8 @@ public class ManagerMenu {
     public static void addCategory(String category) throws IOException {
         if (!(Category.isThereCategoryWithName(category))) {
             newCategory = new Category(category);
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.DETAILCATEGORY);
-            CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
+          //  CommandProcessor.setSubMenuStatus(SubMenuStatus.DETAILCATEGORY);
+          //  CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
             outputNo = 38;
         } else outputNo = 34;
         OutputMassageHandler.showManagerOutput(outputNo);
@@ -378,8 +372,8 @@ public class ManagerMenu {
                     newCategory.addTrait(detail);
                     outputNo = 43;
                 } else {
-                    CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGECATEGORIES);
+                //    CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                //    CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGECATEGORIES);
                   //  Category.addKey();
                     detailMenu = 0;
                     outputNo = 45;
@@ -390,11 +384,13 @@ public class ManagerMenu {
 
     }
 
-    public static void removeCategory(String category) {
+    public static int removeCategory(String category) {
         if (checkCategory(category)) {
             Category.deleteCategory(category);
-            OutputMassageHandler.showOutputWithString(category, 7);
-        } else OutputMassageHandler.showManagerOutput(outputNo);
+            outputNo =13;
+            //OutputMassageHandler.showOutputWithString(category, 7);
+        }// else OutputMassageHandler.showManagerOutput(outputNo);
+        return outputNo;
     }
 
            /* if (detail.matches("\\D+")) {
@@ -464,6 +460,23 @@ public class ManagerMenu {
         if (checkRequest(requestID)) {
             OutputHandler.showRequest(requestID);
         } else OutputMassageHandler.showManagerOutput(outputNo);
+    }
+
+   //gson
+    public static void processManageUsers() throws FileNotFoundException {
+        OutputHandler.showAccounts();
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEUSERS);
+    }
+
+       public static void createManagerProfile() {
+      //  CommandProcessor.setSubMenuStatus(SubMenuStatus.CREATEMANAGERACCOUNT);
+        RegisterMenu.setManagerWant(true);
+        OutputMassageHandler.showManagerOutput(1);
+    }
+
+      public static void processCreateDiscountCode() {
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDDISCOUNTCODE);
+        OutputMassageHandler.showManagerOutput(6);
     }
 
             */

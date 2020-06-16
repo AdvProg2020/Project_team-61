@@ -51,11 +51,7 @@ public class EditAccountFx {
     @FXML
     private Label lastNameLoginMs;
 
-    public void back(MouseEvent mouseEvent) {
-    }
 
-    public void exit(MouseEvent mouseEvent) {
-    }
 
     public void picOver(DragEvent dragEvent) {
     }
@@ -86,5 +82,11 @@ public class EditAccountFx {
     }
 
     public void logout(ActionEvent actionEvent) {
+    }
+
+    public void back(MouseEvent mouseEvent) {
+    }
+
+    public void exit(MouseEvent mouseEvent) {
     }
 }

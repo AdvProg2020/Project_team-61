@@ -53,55 +53,61 @@ public class OutputMassageHandler {
     }
 
 
-    public static void showManagerOutput(int output) {
+    public static String showManagerOutput(int output) {
         if (output == 0) {
-            System.out.println("");
+            text =("");
+        } else if (output == 1) {
+            text =("product removed");
         } else if (output == 2) {
-            System.out.println("product Id format is invalid");
+            text =("product Id format is invalid");
         } else if (output == 3) {
-            System.out.println("no product exist with this Id");
+            text =("no product exist with this Id");
         } else if (output == 4) {
-            System.out.println("discount code Id format is inavlid");
+            text =("discount code Id format is inavlid");
         } else if (output == 5) {
-            System.out.println("there is no discount code with this Id");
+            text =("there is no discount code with this Id");
+        } else if (output == 6) {
+            text =("discount code removed");
         } else if (output == 8) {
-            System.out.println("start of discount period format is invalid");
+            text =("start of discount period format is invalid");
         } else if (output == 10) {
-            System.out.println("end of discount period format is invalid");
+            text =("end of discount period format is invalid");
         } else if (output == 12) {
-            System.out.println("maximum discount amount format is invalid");
+            text =("maximum discount amount format is invalid");
+        } else if (output == 13) {
+            text =("category removed");
         } else if (output == 14) {
-            System.out.println("total time of use format is invalid");
+            text =("total time of use format is invalid");
         } else if (output == 16) {
-            System.out.println("start of discount period changed");
+            text =("start of discount period changed");
         } else if (output == 17) {
-            System.out.println("end of discount period changed");
+            text =("end of discount period changed");
         } else if (output == 18) {
-            System.out.println("maximum discount amount changed");
+            text =("maximum discount amount changed");
         } else if (output == 19) {
-            System.out.println("total time of use changed");
+            text =("total time of use changed");
         } else if (output == 20) {
-            System.out.println("request format is invalid");
+            text =("request format is invalid");
         } else if (output == 21) {
-            System.out.println("no request exist with this ID");
+            text =("no request exist with this ID");
         } else if (output == 22) {
-            System.out.println("category format is invalid");
+            text =("category format is invalid");
         } else if (output == 23) {
-            System.out.println("no category exist with this name");
+            text =("no category exist with this name");
         } else if (output == 24) {
-            System.out.println("total time of use format is invalid");
+            text =("total time of use format is invalid");
         }else if (output == 25) {
-            System.out.println("there is discount code with this id");
+            text =("there is discount code with this id");
         } else if (output == 26) {
-            System.out.println("date must be after current date");
+            text =("date must be after current date");
         } else if (output == 27) {
-            System.out.println("discount amount changed");
+            text =("discount amount changed");
         } else if (output == 28) {
-            System.out.println("discount amount format is invalid");
+            text =("discount amount format is invalid");
         } else if (output == 29) {
-            System.out.println("account added to list");
+            text =("account added to list");
         }else if (output == 30) {
-            System.out.println("username format is invalid");
+            text =("username format is invalid");
         } else if (output == 31) {
             System.out.println("there is no account with this username");
         } else if (output == 32) {
@@ -127,6 +133,7 @@ public class OutputMassageHandler {
         } else if (output == 46) {
             System.out.println("there is no product with this id");
         }
+        return text;
     }
 
     public static void showCategoryOutput(int output) {
@@ -282,9 +289,9 @@ public class OutputMassageHandler {
         }
     }
 
-    public static void showSaleOutput(int output) {
+    public static String showSaleOutput(int output) {
         if (output == 0) {
-            System.out.println("");
+            text =("");
         } else if (output == 1) {
             text =("there is no sale with this name");
         } else if (output == 3) {
@@ -297,8 +304,6 @@ public class OutputMassageHandler {
             text =("there is no product with this id");
         } else if (output == 9) {
             text =("start of sale period format is invalid");
-        } else if (output == 10) {
-            text =("please enter start of sale period date");
         } else if (output == 11) {
             text =("start of sale period request sent");
         } else if (output == 12) {
@@ -318,6 +323,7 @@ public class OutputMassageHandler {
         } else if (output == 19) {
             text =("product id format is invalid");
         }
+        return text;
 
     }
 
@@ -365,8 +371,11 @@ public class OutputMassageHandler {
             text =("you can't login");
         } else if (output == 35) {
             text =("there is no account with this user name");
-        } else if (output == 36)
+        } else if (output == 36){
             text =("username format is invalid");
+        } else if (output == 37) {
+            text =("account deleted");
+        }
         return text ;
     }
 
@@ -415,25 +424,48 @@ public class OutputMassageHandler {
         }
     }
 
-    public static void showOutputWithString(String string, int output) {
+    public static String showOutputWithString( int output) {
         if (output == 1) {
-            System.out.println("username " + string + " deleted");
+            text =("account deleted");
         } else if (output == 2) {
-            System.out.println("product " + string + " removed");
-        } else if (output == 3) {
-            System.out.println("please enter your new  " + string);
+            text =("product  removed");
         } else if (output == 4) {
-            System.out.println("discount code " + string + " removed");
+            text =("discount code removed");
         } else if (output == 5) {
-            System.out.println("request " + string + " accepted");
+            text =("request  accepted");
         } else if (output == 6) {
-            System.out.println("request " + string + " declined");
+            text =("request declined");
         } else if (output == 7) {
-            System.out.println("category " + string + " removed");
+            text =("category  removed");
         } else if (output == 8) {
-            System.out.println("your credit " + string);
+            text =("your credit ");
         }
+        return text;
     }
+
+
+ /*   public static String showOutputWithString(String string, int output) {
+        if (output == 1) {
+            text =("username " + string + " deleted");
+        } else if (output == 2) {
+            text =("product " + string + " removed");
+        } else if (output == 3) {
+            text =("please enter your new  " + string);
+        } else if (output == 4) {
+            text =("discount code " + string + " removed");
+        } else if (output == 5) {
+            text =("request " + string + " accepted");
+        } else if (output == 6) {
+            text =("request " + string + " declined");
+        } else if (output == 7) {
+            text =("category " + string + " removed");
+        } else if (output == 8) {
+            text =("your credit " + string);
+        }
+        return text;
+    }
+
+  */
 
     public static void show(String show){
         System.out.println(show);

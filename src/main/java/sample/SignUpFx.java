@@ -60,13 +60,6 @@ public class SignUpFx {
 
     }
 
-    public void back(MouseEvent mouseEvent) {
-
-    }
-
-    public void exit(MouseEvent mouseEvent) {
-        System.exit(0);
-    }
 
     public void picOver(DragEvent dragEvent) {
         if (dragEvent.getDragboard().hasContent(DataFormat.IMAGE)) {
@@ -116,4 +109,13 @@ public class SignUpFx {
     public void customerRole(MouseEvent mouseEvent) {
         role = "customer";
     }
+
+    public void back(MouseEvent mouseEvent) {
+
+    }
+
+    public void exit(MouseEvent mouseEvent) {
+        System.exit(0);
+    }
+
 }

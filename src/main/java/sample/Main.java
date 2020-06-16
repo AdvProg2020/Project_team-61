@@ -2,7 +2,6 @@ package sample;
 
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import controller.request.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,7 +13,6 @@ import model.accounts.Manager;
 import model.accounts.Seller;
 import model.off.Sale;
 import model.productRelated.Category;
-import model.productRelated.Product;
 import model.request.*;
 import view.FileHandling;
 
@@ -24,6 +22,8 @@ import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Objects;
+
+//import controller.request.*;
 
 public class Main extends Application {
     private final int widthScene = 1920;
@@ -42,9 +42,9 @@ public class Main extends Application {
             */
 
 
-
-        Parent root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
-       // Parent root = FXMLLoader.load(Objects.requireNonNull(ManiMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+     //   Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
+      //  Parent root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
         primaryStage.setTitle("market");
         primaryStage.setScene(new Scene(root, widthScene, heightScene));
         primStage = primaryStage;
@@ -56,8 +56,9 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws IOException, ParseException {
+       // Application.launch(args);
 
-        Type productType = new TypeToken<ArrayList<Product>>(){}.getType();
+       /* Type productType = new TypeToken<ArrayList<Product>>(){}.getType();
         try {
             JsonReader reader2 =new JsonReader(new FileReader("product.json"));
             ArrayList<Product> productArrayList = FileHandling.getGson().fromJson(reader2,productType);
@@ -69,6 +70,10 @@ public class Main extends Application {
             FileHandling.writeInFile("","product.json");
             Product.setAllProduct(new ArrayList<>());
         }
+
+        */
+
+
 
 
 
@@ -210,7 +215,7 @@ public class Main extends Application {
         }
 
 
-        Type ProductReType = new TypeToken<ArrayList<ProductRequest>>(){}.getType();
+      /*  Type ProductReType = new TypeToken<ArrayList<ProductRequest>>(){}.getType();
         try {
             JsonReader reader10 =new JsonReader(new FileReader("productRequest.json"));
             ArrayList<ProductRequest> productRequests = FileHandling.getGson().fromJson(reader10,ProductReType);
@@ -223,6 +228,8 @@ public class Main extends Application {
             FileHandling.writeInFile("","productRequest.json");
             ProductRequest.setAllProductRequests(new ArrayList<>());
         }
+
+       */
 
 
         Type SaleReType = new TypeToken<ArrayList<SaleRequest>>(){}.getType();

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SaleLogsFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SaleLogsFx">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <fill>
@@ -22,26 +23,26 @@
                 </LinearGradient>
             </fill>
         </Rectangle>
-        <MenuBar prefHeight="32.0" prefWidth="1920.0">
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.bottomAnchor="1050.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
             <menus>
-                <Menu fx:id="saleLogsAccount" mnemonicParsing="false" text="Account">
+                <Menu mnemonicParsing="false" text="User menu">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Close" />
+                        <MenuItem mnemonicParsing="false" onAction="#userMenu" text="your menu" />
                     </items>
                 </Menu>
-                <Menu fx:id="saleLogsBack" mnemonicParsing="false" text="Back">
+                <Menu mnemonicParsing="false" text="Logout">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
                     </items>
                 </Menu>
-                <Menu fx:id="SaleLogsLogot" mnemonicParsing="false" text="Logout">
+                <Menu mnemonicParsing="false" text="Back">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
                     </items>
                 </Menu>
-                <Menu fx:id="SaleLogsExit" mnemonicParsing="false" text="Exit">
+                <Menu mnemonicParsing="false" text="Exit">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
                     </items>
                 </Menu>
             </menus>
@@ -59,7 +60,7 @@
                 </LinearGradient>
             </fill>
         </Text>
-        <TableView fx:id="saleLogsTableView" layoutX="306.0" layoutY="-11.0" prefHeight="200.0" prefWidth="1314.0" AnchorPane.bottomAnchor="117.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="119.0">
+        <TableView fx:id="saleLogsTableView" layoutX="307.0" layoutY="138.0" prefHeight="200.0" prefWidth="1314.0" AnchorPane.bottomAnchor="98.0" AnchorPane.leftAnchor="307.0" AnchorPane.rightAnchor="293.0" AnchorPane.topAnchor="138.0">
             <columns>
                 <TableColumn fx:id="saleLogsId" minWidth="220.0" prefWidth="75.0" text="ID" />
                 <TableColumn fx:id="saleLogsCustomer" minWidth="220.0" prefWidth="75.0" text="Customer" />

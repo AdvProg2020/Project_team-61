@@ -3,6 +3,7 @@ package sample;
 import controller.menus.LoginMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +11,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import model.accounts.Account;
+import model.accounts.Customer;
+import model.accounts.Seller;
+import model.request.AccountRequest;
+import model.request.Request;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -45,47 +52,131 @@ public class ViewAccountFx {
 
     public static final ObservableList data = FXCollections.observableArrayList();
     private static Parent root;
+    private static Account account;
+    private static Request request;
+
+    public static void setAccount(Account account) {
+        ViewAccountFx.account = account;
+    }
+
+    public static void setRequest(Request request) {
+        ViewAccountFx.request = request;
+    }
 
     @FXML
     public void initialize()  {
-        Account account = LoginMenu.getLoginAccount();
-        username.setText(account.getUsername());
-        name.setText(account.getName());
-        lastName.setText(account.getLastname());
-        role.setText(account.getRole());
-        phoneNo.setText(String.valueOf(account.getPhoneNo()));
-        email.setText(account.getEmail());
-        credit.setText(String.valueOf(account.getCredit()));
-        birthday.setText(String.valueOf(account.getBirthdayDate()));
-
+        if (request == null) {
+ //           Account curAccount = null;
+//            if (account != null) {
+//                curAccount = account;
+//            }
+            Account curAccount = account;
+            username.setText(curAccount.getUsername());
+            name.setText(curAccount.getName());
+            lastName.setText(curAccount.getLastname());
+            role.setText(curAccount.getRole());
+            phoneNo.setText(String.valueOf(curAccount.getPhoneNo()));
+            email.setText(curAccount.getEmail());
+            credit.setText(String.valueOf(curAccount.getCredit()));
+            birthday.setText(String.valueOf(curAccount.getBirthdayDate()));
+        }else showRequest();
     }
 
-    public void edit(MouseEvent mouseEvent) {
+    private void showRequest() {
+        AccountRequest accountRequest = null;
+        if (request instanceof AccountRequest){
+             accountRequest = (AccountRequest) request;
+        }
+        username.setText(accountRequest.getUsername());
+        name.setText(accountRequest.getName());
+        lastName.setText(accountRequest.getLastname());
+        role.setText("seller");
+        phoneNo.setText(String.valueOf(accountRequest.getPhoneNo()));
+        email.setText(accountRequest.getEmail());
+        credit.setText(String.valueOf(null));
+        birthday.setText(String.valueOf(accountRequest.getBirthdayDate()));
     }
 
-    public void back(MouseEvent mouseEvent) {
-    }
 
-    public void exit(MouseEvent mouseEvent) {
-    }
 
     public void viewCart(MouseEvent mouseEvent) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(SaleLogFx.class.getClassLoader().getResource("saleLogFx.fxml")));
-        goToPage();
+        if(LoginMenu.getLoginAccount() instanceof Customer) {
+            root = FXMLLoader.load(Objects.requireNonNull(SaleLogFx.class.getClassLoader().getResource("saleLogFx.fxml")));
+            goToPage();
+        }else show("you can't see cart");
     }
 
-    public void viewCustomerDiscount(MouseEvent mouseEvent) {
+    ///////////////////////
+    public void viewCustomerDiscount(MouseEvent mouseEvent) throws IOException {
+        if(LoginMenu.getLoginAccount() instanceof Customer) {
+            DiscountCodesFx.setDiscounts(LoginMenu.getLoginAccount().getAllDiscountCodes());
+            root = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("DiscountCodesFx.fxml")));
+            goToPage();
+        }else show("you can't see discounts");
     }
 
-    public void viewBougts(MouseEvent mouseEvent) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
-        goToPage();
+
+    public void viewLogs(MouseEvent mouseEvent) throws IOException {
+        if(LoginMenu.getLoginAccount() instanceof Customer) {
+            root = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
+            goToPage();
+        }else if(LoginMenu.getLoginAccount() instanceof Seller){
+            root = FXMLLoader.load(Objects.requireNonNull(BuyLogsFx.class.getClassLoader().getResource("vuyLogsFx.fxml")));
+            goToPage();
+        } else show("you can't see logs");
     }
+
 
     private static void goToPage(){
+        remove();
         Scene pageTwoScene = new Scene(root);
         //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         Main.primStage.setScene(pageTwoScene);
         Main.primStage.show();
     }
+
+    private void show(String text) {
+        Label label = new Label();
+        StackPane root = new StackPane();
+        root.getChildren().add(label);
+        label.setText(text);
+        Stage massage = new Stage();
+        massage.setScene(new Scene(root, 500, 500));
+        massage.show();
+    }
+    private static void remove(){
+        account = null;
+        request = null;
+    }
+
+    public void viewFirm(MouseEvent mouseEvent) throws IOException {
+        if(LoginMenu.getLoginAccount() instanceof Seller){
+            ViewFirmFx.setAccount(LoginMenu.getLoginAccount());
+        }else {
+            ViewFirmFx.setRequest(request);
+        }
+        root = FXMLLoader.load(Objects.requireNonNull(ViewFirmFx.class.getClassLoader().getResource("viewFirmFx.fxml")));
+        goToPage();
+    }
+
+    public void edit(MouseEvent mouseEvent) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(EditAccountFx.class.getClassLoader().getResource("editAccountFx.fxml")));
+        goToPage();
+    }
+
+    public void back(MouseEvent mouseEvent) {
+
+    }
+
+    public void exit(MouseEvent mouseEvent) {
+
+    }
+
+    public void userMenu(ActionEvent actionEvent) {
+    }
+
+    public void logout(ActionEvent actionEvent) {
+
+    }
+
 }

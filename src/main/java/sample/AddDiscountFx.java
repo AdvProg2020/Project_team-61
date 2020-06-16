@@ -1,31 +1,40 @@
 package sample;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
-
-import javafx.scene.control.PasswordField;
-import javafx.stage.Stage;
-import model.off.DiscountCode;
 
 
 public class AddDiscountFx {
 
+    @FXML
+    private TextField maxAmountDiscount;
 
+    @FXML
+    private TextField startAddDiscount;
 
-    private DiscountCode newDiscountCode;
+    @FXML
+    private TextField endAddDiscount;
+
+    @FXML
+    private Label discountInformationLabel;
+
+    @FXML
+    private TextField addDiscountId;
+
+    @FXML
+    private TextField addDiscountTimesOfUse;
+
+    @FXML
+    private ListView<?> allAccountsInfo;
+
+    @FXML
+    private TextField addDiscountAmount;
+
+  /*  private DiscountCode newDiscountCode;
     @FXML
     public ImageView Exit;
     @FXML
@@ -126,6 +135,21 @@ public class AddDiscountFx {
     @FXML
     @FXML*/
 
+
+    public void back(MouseEvent mouseEvent) {
+
+    }
+
+    public void exit(MouseEvent mouseEvent) {
+
+    }
+
+    public void userMenu(ActionEvent actionEvent) {
+    }
+
+    public void logout(ActionEvent actionEvent) {
+
+    }
 
 }
 

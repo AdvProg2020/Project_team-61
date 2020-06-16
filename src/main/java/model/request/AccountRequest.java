@@ -162,5 +162,47 @@ public class AccountRequest extends Request {
         this.phoneNo = phoneNo;
     }
 
+    public static String getUsername() {
+        return username;
+    }
 
+    public static String getName() {
+        return name;
+    }
+
+    public static String getLastname() {
+        return lastname;
+    }
+
+    public static String getEmail() {
+        return Email;
+    }
+
+    public static double getPhoneNo() {
+        return phoneNo;
+    }
+
+    public static Date getBirthdayDate() {
+        return birthdayDate;
+    }
+
+    public static String getFirmName() {
+        return firmName;
+    }
+
+    public static double getFirmPhoneNO() {
+        return FirmPhoneNO;
+    }
+
+    public static String getFirmAddress() {
+        return firmAddress;
+    }
+
+    public static String getFirmEmail() {
+        return firmEmail;
+    }
+
+    public static String getFirmType() {
+        return FirmType;
+    }
 }

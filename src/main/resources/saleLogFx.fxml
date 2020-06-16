@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SaleLogFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SaleLogFx">
     <children>
-        <Rectangle fx:id="saleLogNumber" arcHeight="5.0" arcWidth="5.0" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Rectangle  arcHeight="5.0" arcWidth="5.0" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <fill>
                 <LinearGradient endX="1.0" endY="1.0" startY="0.0970873786407767">
                     <stops>
@@ -22,40 +23,30 @@
                 </LinearGradient>
             </fill>
         </Rectangle>
-        <MenuBar prefHeight="32.0" prefWidth="1920.0">
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.bottomAnchor="1050.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
-                <Menu fx:id="saleLogAccountMenu" mnemonicParsing="false" text="Account">
+                <Menu mnemonicParsing="false" text="User menu">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Close" />
+                        <MenuItem mnemonicParsing="false" onAction="#userMenu" text="your menu" />
                     </items>
                 </Menu>
-                <Menu fx:id="saleLogBackMenu" mnemonicParsing="false" text="Back">
+                <Menu mnemonicParsing="false" text="Logout">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
                     </items>
                 </Menu>
-                <Menu fx:id="saleLogLogoutMenu" mnemonicParsing="false" text="Logout">
+                <Menu mnemonicParsing="false" text="Back">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
                     </items>
                 </Menu>
-                <Menu fx:id="saleLogExitMenu" mnemonicParsing="false" text="Exit">
+                <Menu mnemonicParsing="false" text="Exit">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
-        <TreeTableView layoutX="528.0" layoutY="177.0" prefHeight="784.0" prefWidth="1307.0" AnchorPane.bottomAnchor="119.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="177.0">
-            <columns>
-                <TreeTableColumn fx:id="saleLogNumber" prefWidth="117.0" text=" Number" />
-                <TreeTableColumn fx:id="saleLog" minWidth="0.0" prefWidth="248.0" text="Product" />
-                <TreeTableColumn fx:id="saleLogProductNo" minWidth="0.0" prefWidth="227.0" text="Product number" />
-                <TreeTableColumn fx:id="saleLogDate" prefWidth="239.0" text="Date" />
-                <TreeTableColumn fx:id="saleLogReduceAmount" prefWidth="231.0" text="Reduce amount" />
-                <TreeTableColumn fx:id="SaleLogRecivedAmount" prefWidth="257.0" text="Recived amount" />
-            </columns>
-        </TreeTableView>
         <Text layoutX="868.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sale Log">
             <font>
                 <Font name="System Bold Italic" size="42.0" />
@@ -69,7 +60,7 @@
                 </LinearGradient>
             </fill>
         </Text>
-        <TableView layoutX="43.0" layoutY="70.0" prefHeight="200.0" prefWidth="1320.0" AnchorPane.bottomAnchor="117.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="119.0">
+        <TableView fx:id="saleLogs" layoutX="290.0" layoutY="132.0" prefHeight="200.0" prefWidth="1320.0" AnchorPane.bottomAnchor="104.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="132.0">
             <columns>
                 <TableColumn fx:id="saleLogNumber" minWidth="220.0" prefWidth="75.0" text="Number" />
                 <TableColumn fx:id="saleLogProduct" minWidth="220.0" prefWidth="75.0" text="Product" />
@@ -79,23 +70,5 @@
                 <TableColumn fx:id="saleLogRecievedAmount" minWidth="220.0" prefWidth="75.0" text="Recieved amount" />
             </columns>
         </TableView>
-        <Button layoutX="1568.0" layoutY="1003.0" mnemonicParsing="false" text="Button">
-            <textFill>
-                <LinearGradient endX="1.0" endY="1.0">
-                    <stops>
-                        <Stop>
-                            <color>
-                                <Color red="0.7602823972702026" green="0.19249999523162842" blue="0.7699999809265137" />
-                            </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                            <color>
-                                <Color red="0.08009999990463257" green="0.28841570019721985" blue="0.8899999856948853" />
-                            </color>
-                        </Stop>
-                    </stops>
-                </LinearGradient>
-            </textFill>
-        </Button>
     </children>
 </AnchorPane>

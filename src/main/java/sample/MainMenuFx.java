@@ -11,8 +11,6 @@ import java.util.Objects;
 public class MainMenuFx {
         private Parent root;
 
-
-
         public void users(MouseEvent mouseEvent) throws IOException {
                  root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
                 goToPage();

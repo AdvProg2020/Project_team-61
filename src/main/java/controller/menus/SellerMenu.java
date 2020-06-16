@@ -213,20 +213,20 @@ public class SellerMenu {
             } else if (number == keys.size() -1) {
                 if (detail.matches(".+")) {
                     productRequest.addHashmapValue(keys.get(number), detail);
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                    CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                    //CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                   // CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
                     number=0;
                     outputNo = 28;
                 } else outputNo = 29;
             } else {
                 outputNo = 28;
                 number=0;
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+               // CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+               // CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
             }
         } else {
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-            CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+           // CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+           // CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
             outputNo = 28;
         }
         OutputMassageHandler.showSellerOutput(outputNo);
@@ -244,8 +244,6 @@ public class SellerMenu {
     }
     //----------------------------------------------------------------------------------------
 
-
-    //---------------------------------------------------------------------------------------
     private static boolean checkSale(String offID) {
         //if (offID.matches("")) {
         if (Sale.isThereSaleWithId(offID)) {
@@ -254,19 +252,6 @@ public class SellerMenu {
         // } else outputNo = 0;
         OutputMassageHandler.showAccountOutput(outputNo);
         return false;
-
-    }
-
-    //array
-    public static void processViewOffs() throws FileNotFoundException {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWOFFS);
-        OutputHandler.showOffs();
-    }
-
-    public static void viewOff(String offID) throws FileNotFoundException {
-        if (checkSale(offID)) {
-            OutputHandler.showOff(offID);
-        }
 
     }
 
@@ -346,11 +331,7 @@ public class SellerMenu {
         OutputMassageHandler.showSaleOutput(outputNo);
     }
 
-    public static void addOff() {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDSALE);
-        CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
-        OutputMassageHandler.showSaleOutput(6);
-    }
+
 
     private static boolean checkSaleId(String detail) throws IOException {
         if (!Sale.isThereSaleWithId(detail)) {
@@ -369,12 +350,12 @@ public class SellerMenu {
         return false;
     }
 
-    public static void setDetailsToSale(String detail) throws ParseException, IOException {
+    public static int setDetailsToSale(String detail) throws ParseException, IOException {
         if (detailMenu == 0) {
             if (detail.matches("^(?!\\s*$).+")) {
                 if (checkSaleId(detail)) {
                     detailMenu = 1;
-                    outputNo = 10;
+                    outputNo = 0;
                 }
             } else outputNo = 9;
         } else if (detailMenu == 1) {
@@ -384,7 +365,7 @@ public class SellerMenu {
                 if (inputDate.after(currentDate)) {
                     saleRequest.setStartOfSalePeriod(inputDate);
                     detailMenu = 2;
-                    outputNo = 20;
+                    outputNo = 0;
                 } else outputNo = 12;
             } else outputNo = 9;
         } else if (detailMenu == 2) {
@@ -394,14 +375,14 @@ public class SellerMenu {
                 if (inputDate.after(currentDate)) {
                     saleRequest.setEndOfSalePeriod(inputDate);
                     detailMenu = 3;
-                    outputNo = 21;
+                    outputNo = 0;
                 } else outputNo = 12;
             } else outputNo = 19;
         } else if (detailMenu == 3) {
             if (detail.matches("\\d+")) {
                 saleRequest.setSaleAmount(Integer.parseInt(detail));
                 detailMenu = 4;
-                outputNo = 22;
+                outputNo = 0;
             } else outputNo = 15;
         } else if (detailMenu == 4) {
             if (detail.matches("((?!^ +$)^.+$)")) {
@@ -409,17 +390,17 @@ public class SellerMenu {
                     if (checkProductSale(detail)) {
                         saleRequest.setProduct(detail);
                         saleRequest.addProductToSale(Product.getProductById(detail));
-                        outputNo = 22;
+                        outputNo = 18;
                     }
                 } else {
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEPRODUCTS);
-                    CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                  //  CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEPRODUCTS);
+                  //  CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
                     detailMenu = 0;
-                    outputNo = 24;
+                    outputNo = 0;
                 }
             } else outputNo = 19;
-        }
-        OutputMassageHandler.showSaleOutput(outputNo);
+        }return outputNo;
+       // OutputMassageHandler.showSaleOutput(outputNo);
     }
 
     public static void sortBy(String sort) throws FileNotFoundException {
@@ -496,6 +477,23 @@ public class SellerMenu {
         OutputHandler.showCategories();
     }
 
+   //array
+    public static void processViewOffs() throws FileNotFoundException {
+        CommandProcessor.setSubMenuStatus(SubMenuStatus.VIEWOFFS);
+        OutputHandler.showOffs();
+    }
+
+    public static void viewOff(String offID) throws FileNotFoundException {
+        if (checkSale(offID)) {
+            OutputHandler.showOff(offID);
+        }
+
+    }
+        public static void addOff() {
+     //   CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDSALE);
+     //   CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
+        OutputMassageHandler.showSaleOutput(6);
+    }
    */
 
 
