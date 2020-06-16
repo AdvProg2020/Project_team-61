@@ -1,1 +1,1 @@
-[]
+[{"productId":"1","productName":"mypro","price":2.0,"productStatus":"UNDERREVIEWFORCONSTRUCTION","category":{"name":"mycat","traits":["adbf"]},"averageScore":0.0,"numberOfProducts":1,"isInSale":false,"numberOfViews":0,"totalNumberOfBuyers":0,"isBought":false,"listOfBuyers":[],"info":[],"proComments":[],"proScores":[]},{"productId":"ha","price":0.0,"averageScore":0.0,"numberOfProducts":0,"isInSale":false,"numberOfViews":0,"totalNumberOfBuyers":0,"isBought":false,"listOfBuyers":[],"info":[],"proComments":[],"proScores":[]}]

@@ -77,23 +77,7 @@ public abstract class Request {
         return false;
     }
 
-//    public static void writeInJ() throws IOException {
-//        FileHandling.setGson(new Gson());
-//        String json = FileHandling.getGson().toJson(Request.allRequests, RequestType);
-//        FileHandling.writeInFile(json, "request.json");
-//    }
 
-//    public static void readFile() throws FileNotFoundException {
-//        JsonReader reader = new JsonReader(new FileReader("request.json"));
-//        ArrayList<Request> list = FileHandling.getGson().fromJson(reader,RequestType);
-//        if (null== list){
-//            list = new ArrayList<>();
-//        }
-//        Request.setAllRequests(list);
-//    }
-//
-//    public Request() {
-//    }
 
     public static Comparator<Request> productComparatorForScore = new Comparator<Request>() {
 
