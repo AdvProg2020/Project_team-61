@@ -1,5 +1,6 @@
 package sample;
 
+import controller.menus.RegisterMenu;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,12 +33,19 @@ public class FirmFx {
     private String type;
     private static Parent root;
 
-    public void addFirm(MouseEvent mouseEvent) {
-        String firmName = firmNameCr.getText();
-        String firmEmail = firmEmailCr.getText();
-        String firmNAddress = firmAddressCr.getText();
-        String firmPhone = firmPhoneCr.getText();
-
+    public void addFirm(MouseEvent mouseEvent) throws IOException {
+        if(type != null) {
+            String firmName = firmNameCr.getText();
+            String firmEmail = firmEmailCr.getText();
+            String firmAddress = firmAddressCr.getText();
+            String firmPhone = firmPhoneCr.getText();
+            RegisterMenu.createFirm(firmName);
+            RegisterMenu.createFirm(firmPhone);
+            RegisterMenu.createFirm(firmAddress);
+            RegisterMenu.createFirm(type);
+            RegisterMenu.createFirm(firmEmail);
+            type = null;
+        }
     }
 
     public void userMenu(ActionEvent actionEvent) throws IOException {

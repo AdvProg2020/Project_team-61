@@ -2,7 +2,7 @@ package sample;
 
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-//import controller.request.*;
+import controller.request.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,8 +26,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Main extends Application {
-//    private final int widthScene = 1920;
-//    private final int heightScene = 1080;
+    private final int widthScene = 1920;
+    private final int heightScene = 1080;
     static Stage primStage;
 
 
@@ -43,10 +43,10 @@ public class Main extends Application {
 
 
 
-        Parent root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("addProduct.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
        // Parent root = FXMLLoader.load(Objects.requireNonNull(ManiMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
         primaryStage.setTitle("market");
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setScene(new Scene(root, widthScene, heightScene));
         primStage = primaryStage;
         primaryStage.show();
 

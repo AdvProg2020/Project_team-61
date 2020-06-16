@@ -1,6 +1,5 @@
 package view;
 
-import controller.menus.LoginMenu;
 import controller.menus.ManagerMenu;
 import controller.menus.RegisterMenu;
 import controller.menus.SellerMenu;
@@ -165,13 +164,13 @@ public class MenuSituation {
             } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.ADDSALE) {
                 System.out.println("you can choose field to change category");
             } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITSELLERACCOUNT) {
-                System.out.println("please enter your new value for " + LoginMenu.getField());
+                System.out.println("please enter your new value  " );
             } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FIRMNAME) {
                 System.out.println("enter firm's name");
             } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.FIRMFIELD) {
                 System.out.println("enter field you want to change");
             } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITFIRM) {
-                System.out.println("please enter your new value for " + LoginMenu.getField());
+                System.out.println("please enter your new value ");
             }
             //CustomerMenu
         } else if (CommandProcessor.getMenuStatus() == MenuStatus.CUSTOMERMENU) {
@@ -189,7 +188,7 @@ public class MenuSituation {
             } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.DECREASEPRODUCTNUMBER) {
                 System.out.println("enter number of product you want to remove");
             } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.EDITACCOUNT) {
-                System.out.println("please enter your new value for " + LoginMenu.getField());
+                System.out.println("please enter your new value");
             } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.RECIVERINFORMATION) {
                 System.out.println("please enter your current phone number");
             } else if (CommandProcessor.getSubMenuStatus() == SubMenuStatus.HAVEDISCOUNT) {

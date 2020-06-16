@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SaleLogsFx">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0" startY="0.0970873786407767">
+                    <stops>
+                        <Stop color="#70c8e5" />
+                        <Stop color="#70c8e5" offset="0.007246376811594203" />
+                        <Stop color="#70c8e5" offset="0.007246376811594203" />
+                        <Stop color="#1d3ecf" offset="0.2536231884057971" />
+                        <Stop color="#ab437c" offset="0.5430520034100598" />
+                        <Stop color="#fcc5e5" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <MenuBar prefHeight="32.0" prefWidth="1920.0">
+            <menus>
+                <Menu fx:id="saleLogsAccount" mnemonicParsing="false" text="Account">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                    </items>
+                </Menu>
+                <Menu fx:id="saleLogsBack" mnemonicParsing="false" text="Back">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                    </items>
+                </Menu>
+                <Menu fx:id="SaleLogsLogot" mnemonicParsing="false" text="Logout">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+                <Menu fx:id="SaleLogsExit" mnemonicParsing="false" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Text layoutX="868.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sale Logs">
+            <font>
+                <Font name="System Bold Italic" size="42.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#ff57bf" />
+                        <Stop color="WHITE" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <TableView fx:id="saleLogsTableView" layoutX="306.0" layoutY="-11.0" prefHeight="200.0" prefWidth="1314.0" AnchorPane.bottomAnchor="117.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="119.0">
+            <columns>
+                <TableColumn fx:id="saleLogsId" minWidth="220.0" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="saleLogsCustomer" minWidth="220.0" prefWidth="75.0" text="Customer" />
+                <TableColumn fx:id="saleLogsDeliveryStatus" minWidth="220.0" prefWidth="75.0" text="Delivery Status" />
+                <TableColumn fx:id="saleLogsDate" minWidth="220.0" prefWidth="75.0" text="Date" />
+                <TableColumn fx:id="saleLogsReducedAmount" minWidth="220.0" prefWidth="75.0" text="Reduced Amount " />
+                <TableColumn fx:id="saleLogsRecievedAmount" minWidth="220.0" prefWidth="75.0" text="Recieved Amount" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>

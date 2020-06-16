@@ -1,13 +1,10 @@
 package controller.menus;
 
-import model.request.AccountRequest;
-import model.request.Request;
 import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Manager;
-import view.CommandProcessor;
-import view.InternalMenu;
-import view.OutputMassageHandler;
+import model.request.AccountRequest;
+import model.request.Request;
 import view.SubMenuStatus;
 
 import java.io.IOException;
@@ -62,17 +59,20 @@ public class RegisterMenu {
     private static void registerByRole(String role, String username) throws IOException {
         if (role.equalsIgnoreCase("customer")) {
             customer = new Customer(username);
-            outputNo = 2;
+            outputNo = 0;
         } else if (role.equalsIgnoreCase("manager")) {
             createManagerAccount(username);
         } else if (role.equalsIgnoreCase("seller")) {
             String id =username + " wants seller account";
             if(!Request.isThereRequestFromID(id)) {
                 accountRequest = new AccountRequest(id);
-            }else accountRequest= (AccountRequest) Request.getRequestFromID(id);
-            outputNo = 2;
+            }else {
+                if(Request.getRequestFromID(id) instanceof  AccountRequest)
+                accountRequest= (AccountRequest) Request.getRequestFromID(id);
+            }
+            outputNo = 0;
         }
-        // OutputMassageHandler.showAccountOutput(outputNo);
+       //  OutputMassageHandler.showAccountOutput(outputNo);
 
     }
 
@@ -81,10 +81,11 @@ public class RegisterMenu {
             manager = new Manager(username);
             headManager = false;
             managerWant = false;
-            outputNo = 2;
+            outputNo = 0;
+          //  outputNo = 2;
         } else {
-            CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+          //  CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+           // CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
             outputNo = 23;
         }
     }
@@ -94,31 +95,31 @@ public class RegisterMenu {
             if (detail.matches(".+")) {
                 password = detail;
                 detailMenu++;
-             //   outputNo = 4;
+                outputNo = 0;
             } else outputNo = 3;
         } else if (detailMenu == 1) {
             if (detail.matches(".+")) {
                 name = detail;
                 detailMenu++;
-              //  outputNo = 6;
+                outputNo = 0;
             } else outputNo = 5;
         } else if (detailMenu == 2) {
             if (detail.matches(".+")) {
                 lastName = detail;
                 detailMenu++;
-               // outputNo = 8;
+                outputNo = 0;
             } else outputNo = 7;
         } else if (detailMenu == 3) {
             if (detail.matches("^(.+)@(.+)$")) {
                 Email = detail;
                 detailMenu++;
-               // outputNo = 10;
+                outputNo = 0;
             } else outputNo = 9;
         } else if (detailMenu == 4) {
             if (detail.matches("09[0-9]{9}")) {
                 phoneNo = Double.parseDouble(detail);
                 detailMenu = 5;
-              //  outputNo = 29;
+                outputNo = 0;
             } else outputNo = 11;
         } else if (detailMenu == 5) {
             if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
@@ -134,24 +135,24 @@ public class RegisterMenu {
                 }else outputNo = 30;
             } else outputNo = 30;
         }
-        OutputMassageHandler.showAccountOutput(outputNo);
+       //OutputMassageHandler.showAccountOutput(outputNo);
         return outputNo;
     }
 
     public static void createAccountWithDetails() throws IOException {
         if (role.equalsIgnoreCase("seller")) {
             accountRequest.sellerAccountDetails(username, password, name, lastName, Email, phoneNo, birthdayDate);
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDFIRM);
+         //   CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDFIRM);
             outputNo=31;
         } else if(role.equalsIgnoreCase("customer")) {
             customer.setDetailsToAccount(password, name, lastName, Email, phoneNo, birthdayDate , null);
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-            CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+          //  CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+          //  CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
             outputNo = 12;
         }else if(role.equalsIgnoreCase("manager")) {
             manager.setDetailsToAccount(password, name, lastName, Email, phoneNo, birthdayDate , null);
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-            CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+          //  CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+          //  CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
             outputNo = 12;
         }
     }
@@ -161,51 +162,51 @@ public class RegisterMenu {
             if (detail.matches(".+")) {
                 accountRequest.setFirmName(detail);
                 detailMenu++;
-             //   outputNo = 14;
+                outputNo = 0;
             } else outputNo = 3;
         } else if (detailMenu == 1) {
             if (detail.matches("09[0-9]{9}")) {
                 accountRequest.setPhoneNo(Double.parseDouble(detail));
                 detailMenu++;
-             //   outputNo = 16;
+                outputNo = 0;
             } else outputNo = 6;
         } else if (detailMenu == 2) {
             if (detail.matches(".+")) {
                 accountRequest.setFirmAddress(detail);
                 detailMenu = 3;
-               // outputNo = 19;
+                outputNo = 0;
             } else outputNo = 8;
         }else if (detailMenu == 3) {
             if (detail.matches("(?i)(?:company|factory|workshop)")) {
                 accountRequest.setFirmType(detail);
                 detailMenu = 4;
-              //  outputNo = 15;
+                outputNo = 0;
             } else outputNo = 18;
         } else if (detailMenu == 4) {
             if (detail.matches("^(.+)@(.+)$")) {
                 accountRequest.setFirmEmail(detail);
                 detailMenu = 0;
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
-              //  outputNo = 17;
+              //  CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+             //   CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                outputNo = 0;
             } else outputNo = 10;
         }
         return outputNo;
-        //OutputMassageHandler.showFirmOutput(outputNo);
+       // OutputMassageHandler.showFirmOutput(outputNo);
     }
 
-    public static void receiverInformation(String detail) throws IOException {
+    public static int receiverInformation(String detail) throws IOException {
         if (detailMenu == 0) {
             if (detail.matches("\\d+")) {
                 LoginMenu.getLoginAccount().setCurrentPhoneNo(Double.parseDouble(detail));
                 detailMenu = 1;
-              //  outputNo = 2;
+                outputNo = 0;
             } else outputNo = 1;
         } else if (detailMenu == 1) {
             if (detail.matches("\\d{1,5}\\s\\w.\\s(\\b\\w*\\b\\s){1,2}\\w*\\.")) {
                 LoginMenu.getLoginAccount().setAddress(detail);
                 detailMenu = 2;
-             //   outputNo = 4;
+                outputNo = 0;
             } else outputNo = 3;
         } else if (detailMenu == 2) {
             if (detail.matches("(?i)(?:yes|no)")) {
@@ -215,11 +216,12 @@ public class RegisterMenu {
                     LoginMenu.getLoginAccount().setFast(false);
                 }
                 detailMenu = 0;
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.HAVEDISCOUNT);
+                //CommandProcessor.setSubMenuStatus(SubMenuStatus.HAVEDISCOUNT);
                 //CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
               //  outputNo = 6;
             } else outputNo = 5;
         }
+        return outputNo;
        // OutputMassageHandler.showReceiverInfo(outputNo);
 
     }

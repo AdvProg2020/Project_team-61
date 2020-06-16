@@ -22,43 +22,30 @@ public class SignUpFx {
 
     @FXML
     private TextField phoneNoSign;
-
     @FXML
     private TextField userSign;
-
     @FXML
     private TextField lastNameSign;
-
     @FXML
     private PasswordField passSign;
-
     @FXML
     private TextField emailSign;
-
     @FXML
     private TextField nameSign;
-
     @FXML
     private TextField birthdaySign;
-
     @FXML
     private Label emailLoginMs;
-
     @FXML
     private Label userLoginMs;
-
     @FXML
     private Label birthLoginMs;
-
     @FXML
     private Label nameLoginMs;
-
     @FXML
     private Label phoneLoginMs;
-
     @FXML
     private Label passLoginMs;
-
     @FXML
     private Label lastNameLoginMs;
 

@@ -1,6 +1,7 @@
 package sample;
 
-import model.request.Request;
+import controller.menus.ManagerMenu;
+import model.request.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -67,16 +68,33 @@ public class RequestsFx {
     }
 
     public void showRequest(MouseEvent mouseEvent) {
-        Request request = requests.getSelectionModel().getSelectedItem();
+        if(requests.getSelectionModel().getSelectedItem() != null) {
+            Request request = requests.getSelectionModel().getSelectedItem();
+            if (request instanceof AccountRequest) {
+
+            } else if (request instanceof ProductRequest) {
+
+            } else if (request instanceof CommentRequest) {
+
+            } else if (request instanceof SaleRequest) {
+
+            }
+
+        }
     }
 
     public void declineRequest(MouseEvent mouseEvent) {
-        Request request = requests.getSelectionModel().getSelectedItem();
-
+        if(requests.getSelectionModel().getSelectedItem() != null) {
+            Request request = requests.getSelectionModel().getSelectedItem();
+            ManagerMenu.declineRequest(request.getRequestText());
+        }
     }
 
-    public void acceptRequest(MouseEvent mouseEvent) {
-        Request request = requests.getSelectionModel().getSelectedItem();
+    public void acceptRequest(MouseEvent mouseEvent) throws IOException {
+        if(requests.getSelectionModel().getSelectedItem() != null) {
+            Request request = requests.getSelectionModel().getSelectedItem();
+            ManagerMenu.acceptRequest(request.getRequestText());
+        }
 
     }
 }
