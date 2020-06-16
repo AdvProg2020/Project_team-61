@@ -35,7 +35,7 @@ public class Product {
     private int numberOfViews;
     private int totalNumberOfBuyers;
     private boolean isBought;
-    ImageView productImage;
+    String productImageId;
 
     //sample.lists
 //    private  ArrayList<Account> listOfSellers = new ArrayList<Account>();
@@ -77,7 +77,7 @@ public class Product {
 
     //finish
     //id,productImage,name,price,category,seller
-    public void setDetailProduct(ImageView productImage, String name, double price, Category categoryr, Account selle, Firm firm, int numberOfProducts) throws IOException {
+    public void setDetailProduct(String productImageId, String name, double price, Category categoryr, Account selle, Firm firm, int numberOfProducts) throws IOException {
         if (name != null) {
             this.productName = name;
         }
@@ -96,8 +96,8 @@ public class Product {
         if (category != null) {
             this.category = category;
         }
-        if (productImage != null) {
-            this.productImage = productImage;
+        if (productImageId != null) {
+            this.productImageId = productImageId;
         }
 //        listOfSellers.add(seller);
         //       allProduct.add(this);
@@ -108,12 +108,12 @@ public class Product {
     //settersAndGetters----------------------------------------------------------------------------------
 
 
-    public ImageView getProductImage() {
-        return productImage;
+    public String getProductImage() {
+        return productImageId;
     }
 
-    public void setProductImage(ImageView productImage) {
-        this.productImage = productImage;
+    public void setProductImage(String productImage) {
+        this.productImageId = productImage;
     }
 
     public void setCategory(Category category) {
@@ -382,9 +382,10 @@ public class Product {
         }
     };
 
-    public static Product getProductWithImage(ImageView imageView) {
+    public static Product getProductWithImage(String imageView) {
         for (Product product : allProduct) {
-            if (product.getProductImage().equals(imageView)) {
+            if (product.getProductImage().equals(imageView)){
+
                 return product;
             }
         }

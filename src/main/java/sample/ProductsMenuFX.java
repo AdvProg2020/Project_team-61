@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 import model.productRelated.Product;
 
 import javax.management.AttributeList;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,7 @@ public class ProductsMenuFX {
         public TableColumn<Product, String> firstColumn = new TableColumn<>("id");
 
         @FXML
-        public TableColumn<Product,ImageView> productImageViewTableColumn = new TableColumn<>("proImage");
+        public TableColumn<Product,String> productImageViewTableColumn = new TableColumn<>("proImage");
 
         @FXML
         public TableColumn<Product, String> secondColumn = new TableColumn<>("name");
@@ -48,7 +50,7 @@ public class ProductsMenuFX {
 
 
         @FXML
-        public TableColumn<Product, String> sixthColumn = new TableColumn<>("Specifications");
+        public TableColumn<Product, String> sixthColumn = new TableColumn<>("additionalDetail");
         @FXML
         public static  ObservableList<Product> data = FXCollections.observableArrayList();
         public static FilteredList<Product> filteredList = new FilteredList<>(data , b->true);
@@ -82,7 +84,7 @@ public class ProductsMenuFX {
 
                 firstColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("id"));
                 secondColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
-                productImageViewTableColumn.setCellValueFactory(new PropertyValueFactory<Product,ImageView>("productImage"));
+                productImageViewTableColumn.setCellValueFactory(new PropertyValueFactory<Product,String>("productImageId"));
                 forthColumn.setCellValueFactory(new PropertyValueFactory<Product,Double>("price"));
                 fifthColumn.setCellValueFactory(new PropertyValueFactory<Product,String>("category"));
                 sixthColumn.setCellValueFactory(new PropertyValueFactory<Product,String>("seller"));
@@ -129,10 +131,31 @@ public class ProductsMenuFX {
                 FXMLLoader fxmlLoader = new FXMLLoader(ProductsMenuFX.class.getResource("fxFile/sample3.fxml"));
                 thisStage = new Stage();
                 AnchorPane pane = fxmlLoader.load();
-                pane.getChildren().add(product.getProductImage());
+                for (Product product1 : Product.getProductList()) {
+                        Label label = new Label(product.getProductName());
+                        label.setLayoutX(100*(Product.getProductList().indexOf(product1)+1));
+                        label.setLayoutY(100*(Product.getProductList().indexOf(product1)+1));
+                        TextField textField = new TextField();
+                        textField.setLayoutX(300);
+                        textField.setLayoutY(200);
+                        pane.getChildren().addAll(textField,label);
+                }
+
+                File file = new File(product.getProductImage());
+                Image image = new Image(new FileInputStream(file));
+                ImageView imageView = new ImageView(image);
+                pane.getChildren().add(imageView);
+                imageView.prefHeight(50);
+                imageView.prefWidth(50);
+                imageView.setX(60);
+                imageView.setY(60);
+                imageView.setFitWidth(100);
+                imageView.setFitHeight(100);
+
                 prevScene = new Scene(pane);
                 thisStage.setScene(prevScene);
                 thisStage.show();
+
         }
 
         public void clickedColumn(MouseEvent mouseEvent) throws IOException {
@@ -140,13 +163,10 @@ public class ProductsMenuFX {
                 int row = tablePosition.getRow();
                 Product item = tableView.getItems().get(row);
                 TableColumn tableColumn = tablePosition.getTableColumn();
-                ImageView imageView = (ImageView) tableColumn.getCellObservableValue(item).getValue();
-
-                imageView.setVisible(true);
-                Image image = imageView.getImage();
-                String url = image.getUrl();
-                gotoProductPage(Product.getProductWithImage(imageView));
-                imageView.setImage(new Image(url));
-                imageView.setVisible(true);
+//        ImageView imageView = (ImageView) tableColumn.getCellObservableValue(item).getValue();
+                String im = (String) tableColumn.getCellObservableValue(item).getValue();
+//        imageView.setVisible(true);
+                gotoProductPage(Product.getProductWithImage(im));
+//        imageView.setVisible(true);
         }
 }
