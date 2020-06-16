@@ -78,7 +78,7 @@ public class UsersFx {
         userEmail.setCellValueFactory(new PropertyValueFactory<Account, String>("email"));
 
         initializeObserverList();
-        usersList.getColumns().addAll(UserId,userName,userLast,userBirth,userPhoneNo,userEmail);
+      //  usersList.getColumns().addAll(UserId,userName,userLast,userBirth,userPhoneNo,userEmail);
         usersList.setEditable(true);
         usersList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         usersList.getSelectionModel().setCellSelectionEnabled(true);

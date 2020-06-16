@@ -26,8 +26,8 @@ import java.util.Objects;
 //import controller.request.*;
 
 public class Main extends Application {
-    private final int widthScene = 1920;
-    private final int heightScene = 1080;
+    private final int widthScene = 1500;
+    private final int heightScene = 900;
     static Stage primStage;
 
 
@@ -41,10 +41,10 @@ public class Main extends Application {
 
             */
 
-
-     //   Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
-            Parent root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
-      //  Parent root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+     //   Parent root = FXMLLoader.load(getClass().getResource("mainMenuFx.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(UsersFx.class.getClassLoader().getResource("usersFx.fxml")));
+          //  Parent root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
+        // Parent root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
         primaryStage.setTitle("market");
         primaryStage.setScene(new Scene(root, widthScene, heightScene));
         primStage = primaryStage;
