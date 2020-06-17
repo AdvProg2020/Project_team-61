@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.productRelated.Category;
 import model.productRelated.Product;
 
 import java.io.File;
@@ -57,6 +58,8 @@ public class ProductsMenuFX {
         public static Scene prevScene ;
         public static Stage thisStage;
         public TextField searchField;
+        public ListView categoriesListView = new ListView();
+        public ObservableList<String> dataCat = FXCollections.observableArrayList();
 
         public static void showProPage(Stage stage, Scene scene) throws IOException {
                 AnchorPane root = FXMLLoader.load(Objects.requireNonNull(AddProductMenuFX.class.getClassLoader().getResource("sample/fxFile/sample.fxml")));
@@ -145,4 +148,12 @@ public class ProductsMenuFX {
                 gotoProductPage(Product.getProductWithImage(im));
 //        imageView.setVisible(true);
         }
+
+        public void dataInListView(){
+                for (Category category : Category.getAllCategories()) {
+                        dataCat.add(category.getName());
+                }
+                categoriesListView.setItems(dataCat);
+        }
+
 }

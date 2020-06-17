@@ -1,135 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ProductMenuFX">
+<AnchorPane fx:id="productPagePane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ProductMenuFX">
     <children>
-        <SplitPane dividerPositions="0.5588972431077694" layoutX="-1.0" layoutY="26.0" orientation="VERTICAL" prefHeight="800.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <items>
-                <AnchorPane fx:id="topSplitPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="1278.0">
+        <ScrollPane layoutX="-37.0" prefHeight="473.0" prefWidth="778.0">
+            <content>
+                <AnchorPane fx:id="scrollPane" minHeight="0.0" minWidth="0.0" onMouseClicked="#makeUpPage" prefHeight="560.0" prefWidth="817.0">
                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="574.0" layoutX="926.0" layoutY="25.0" stroke="#df0a0a" strokeType="INSIDE" width="1918.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
-                            <fill>
-                                <LinearGradient endX="1.0" endY="1.0">
-                                    <stops>
-                                        <Stop color="#3600a1" />
-                                        <Stop color="#cf3100" offset="1.0" />
-                                    </stops>
-                                </LinearGradient>
-                            </fill></Rectangle>
-                        <Button fx:id="addToCardButton" layoutX="1042.0" layoutY="342.0" mnemonicParsing="false" onAction="#addProductToCard" prefHeight="26.0" prefWidth="148.0" text="Add To Card">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="189.0" layoutX="66.0" layoutY="37.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                        <ImageView fx:id="productPic" fitHeight="172.0" fitWidth="200.0" layoutX="66.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="productNameLabel" layoutX="551.0" layoutY="23.0" prefHeight="34.0" prefWidth="147.0" text="Product Name" textAlignment="JUSTIFY">
                             <font>
-                                <Font name="Bookman Old Style" size="12.0" />
-                            </font>
-                        </Button>
-                        <ImageView fitHeight="192.0" fitWidth="231.0" layoutX="959.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="198.39999999999998" AnchorPane.leftAnchor="959.0" AnchorPane.rightAnchor="88.40000000000009" AnchorPane.topAnchor="136.0" />
-                        <TextArea fx:id="productImageRectangle" layoutX="1274.0" layoutY="131.0" prefHeight="266.0" prefWidth="253.0" />
-                        <Label layoutX="1000.0" layoutY="70.0" prefHeight="40.0" prefWidth="289.0" text="ProductName" AnchorPane.rightAnchor="-11.199999999999818" AnchorPane.topAnchor="70.0">
-                            <textFill>
-                                <LinearGradient endX="1.0" endY="1.0">
-                                    <stops>
-                                        <Stop color="WHITE" />
-                                        <Stop color="WHITE" offset="1.0" />
-                                    </stops>
-                                </LinearGradient>
-                            </textFill></Label>
-                        <!--                  <Button fx:id="addCommentButton" layoutX="333.0" layoutY="341.0" mnemonicParsing="false" onAction="#addCommnet" text="add comment" />-->
-                        <!--                  <Button fx:id="scoreButton" layoutX="261.0" layoutY="341.0" mnemonicParsing="false" onAction="#scoreOnProduct" text="score!" />-->
-                        <TextArea fx:id="productProperties" layoutX="1580.0" layoutY="136.0" prefHeight="256.0" prefWidth="277.0" />
-                        <Label fx:id="productFinishedError" layoutX="1042.0" layoutY="386.0" text="Label" />
-                        <Button fx:id="addCommentButton"  layoutX="871.0" layoutY="342.0" mnemonicParsing="false" onAction="#addCommnet" prefHeight="26.0" prefWidth="148.0" text="Add Comment">
+                                <Font size="23.0" />
+                            </font></Label>
+                        <Button fx:id="addToCardButton" layoutX="73.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleAddProductToLog" text="Add To Card" />
+                        <Button fx:id="commentButton" layoutX="166.0" layoutY="254.0" mnemonicParsing="false" onAction="#popUpAddComment" prefHeight="26.0" prefWidth="89.0" text="Comment" />
+                        <Button fx:id="scoreButton" layoutX="269.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleScore" prefHeight="26.0" prefWidth="64.0" text="Score" />
+                        <Label fx:id="didntBuyToScoreOrProductIsFinish" layoutX="100.0" layoutY="288.0" prefHeight="18.0" prefWidth="225.0" text="didntBuyToScore\\ProductIsFinish" visible="false">
                             <font>
-                                <Font name="Bookman Old Style" size="12.0" />
+                                <Font size="15.0" />
                             </font>
-                        </Button>
-                        <Button fx:id="addScoreButton" layoutX="685.0" layoutY="341.0" mnemonicParsing="false" onAction="#addScore" prefHeight="26.0" prefWidth="148.0" text="Score">
-                            <font>
-                                <Font name="Bookman Old Style" size="12.0" />
-                            </font>
-                        </Button>
+                        </Label>
                     </children>
                 </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="292.0" prefWidth="1276.0">
-                    <children>
-                        <TabPane layoutX="-2.0" layoutY="-8.0" prefHeight="266.4" prefWidth="1278.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <tabs>
-                                <Tab fx:id="specificationsTab" text="Specifications">
-                                    <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                            <children>
-                                                <Rectangle fx:id="specificationPane" arcHeight="5.0" arcWidth="5.0" height="445.0" stroke="BLACK" strokeType="INSIDE" width="1918.0">
-                                                    <fill>
-                                                        <LinearGradient endX="1.0" endY="1.0">
-                                                            <stops>
-                                                                <Stop color="#47a6ff" />
-                                                                <Stop color="#9fe595" offset="1.0" />
-                                                            </stops>
-                                                        </LinearGradient>
-                                                    </fill>
-                                                </Rectangle>
-                                                <TextArea fx:id="specificatonTextbox" layoutX="184.0" layoutY="44.0" prefHeight="235.0" prefWidth="940.0" />
-                                            </children>
-                                        </AnchorPane>
-                                    </content>
-                                </Tab>
-                                <Tab fx:id="commentTab" text="Comments">
-                                    <content>
-                                        <AnchorPane fx:id="commentsPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                            <children>
-                                                <TextArea fx:id="commentTitleField" layoutX="158.0" layoutY="63.0" prefHeight="62.0" prefWidth="720.0" />
-                                                <TextArea fx:id="commnetContentField" layoutX="159.0" layoutY="152.0" prefHeight="226.0" prefWidth="717.0" />
-                                                <Label layoutX="78.0" layoutY="77.0" prefHeight="26.0" prefWidth="41.0" text="title :" />
-                                                <Label layoutX="77.0" layoutY="222.0" prefHeight="26.0" prefWidth="62.0" text="content :" />
-                                            </children></AnchorPane>
-                                    </content>
-                                </Tab>
-                                <Tab fx:id="averageScoreTab" text="Average Score">
-                                    <content>
-                                        <AnchorPane fx:id="averageScorePane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                    </content>
-                                </Tab>
-                            </tabs>
-                        </TabPane>
-                    </children>
-                </AnchorPane>
-            </items>
-        </SplitPane>
-        <MenuBar layoutX="-1.0" layoutY="2.0" prefWidth="1920.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <menus>
-                <Menu mnemonicParsing="false" text="File">
-                    <items>
-                        <MenuItem fx:id="account" mnemonicParsing="false" text="my account" />
-                        <MenuItem fx:id="back" mnemonicParsing="false" text="Back" />
-                        <MenuItem fx:id="logout" mnemonicParsing="false" text="Logout" />
-                        <MenuItem fx:id="exit" mnemonicParsing="false" text="EXIT" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                    <items>
-                        <MenuItem fx:id="deleteProduct" mnemonicParsing="false" text="Delete Product" />
-                        <MenuItem fx:id="editProduct" mnemonicParsing="false" text="Edit Product" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
+            </content>
+        </ScrollPane>
     </children>
 </AnchorPane>

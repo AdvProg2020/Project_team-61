@@ -2,6 +2,7 @@ package sample;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,12 +15,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.productRelated.Comment;
 import model.productRelated.Product;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class ProductMenuFX {
@@ -37,6 +40,9 @@ public class ProductMenuFX {
     public Button sendCommentButton;
     public AnchorPane addCommentSectionPane;
     public Label nullAddCommentError;
+    public TextArea productCategoryDetail;
+    public TextArea productDetail;
+    public TableView commentTableView = new TableView();
     @FXML
     private Label productNameLabel;
     @FXML
@@ -48,15 +54,17 @@ public class ProductMenuFX {
     @FXML
     private Label didntBuyToScoreOrProductIsFinish;
 
+    @FXML
+    public TableColumn<Product, ArrayList<Comment>> titleColumn = new TableColumn<>("title");
+
+    @FXML
+    public TableColumn<Product, ArrayList<Comment>> contentColumn = new TableColumn<>("content");
+    @FXML
+    public static ObservableList<Comment> data = FXCollections.observableArrayList();
+
 
     public static void showProPage(Stage stage, Scene scene, Product product) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ProductsMenuFX.class.getResource("fxFile/sample3.fxml"));
-        thisStage = new Stage();
-        AnchorPane pane = fxmlLoader.load();
         productInPage = product;
-        prevScene = new Scene(pane);
-        thisStage.setScene(prevScene);
-        thisStage.show();
     }
 
 
@@ -96,18 +104,34 @@ public class ProductMenuFX {
     public void handleSendComment(ActionEvent actionEvent) {
         String title = titleTextField.getText();
         String content = commentTextField.getText();
-        if (title != null){
-            if (content != null){
-                //add Comment Process
-            }
-            else{
+        if (title != null) {
+            if (content != null) {
+//                productInPage.com(title, content);
+            } else {
                 nullAddCommentError.setText("content is empty");
                 nullAddCommentError.setVisible(true);
             }
-        }
-        else {
+        } else {
             nullAddCommentError.setText("title is empty");
             nullAddCommentError.setVisible(true);
         }
+    }
+
+    @FXML
+    public void initialize() throws IOException {
+        titleColumn.setCellValueFactory(new PropertyValueFactory<Product, ArrayList<Comment>>("title"));
+        contentColumn.setCellValueFactory(new PropertyValueFactory<Product, ArrayList<Comment>>("content"));
+        initializeObserverList();
+        commentTableView.getColumns().addAll(titleColumn, contentColumn);
+        commentTableView.setItems(data);
+
+    }
+
+    private void initializeObserverList() {
+//        if (productInPage.getAllCommentsOnProduct().size() != 0) {
+//            data.addAll(productInPage.getAllCommentsOnProduct());
+//        } else {
+//            System.out.println("no");
+//        }
     }
 }
