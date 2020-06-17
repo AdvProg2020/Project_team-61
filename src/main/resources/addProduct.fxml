@@ -49,26 +49,26 @@
         <Label layoutX="376.0" layoutY="473.0" text="additional detail" />
         <TextField fx:id="categoryNameTextField" layoutX="470.0" layoutY="332.0" prefHeight="35.0" prefWidth="287.0" />
         <Label layoutX="409.0" layoutY="350.0" text="category" />
-      <MenuBar layoutX="107.0" layoutY="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <menus>
-            <Menu mnemonicParsing="false" text="File">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="ACCOUNT" />
-                  <MenuItem mnemonicParsing="false" text="EXIT" />
-                  <MenuItem mnemonicParsing="false" text="BACK" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Logout">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="logout" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Help">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="About" />
-               </items>
-            </Menu>
-         </menus>
-      </MenuBar>
+        <MenuBar layoutX="107.0" layoutY="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="ACCOUNT" />
+                        <MenuItem mnemonicParsing="false" text="EXIT" />
+                        <MenuItem mnemonicParsing="false" text="BACK" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Logout">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="logout" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
     </children>
 </AnchorPane>
