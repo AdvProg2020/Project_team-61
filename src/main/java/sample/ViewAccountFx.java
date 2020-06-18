@@ -23,32 +23,15 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class ViewAccountFx {
-    @FXML
-    private Label birthday;
-
-    @FXML
-    private Label lastName;
-
-    @FXML
-    private Label role;
-
-    @FXML
-    private Label name;
-
-    @FXML
-    private ImageView accountImg;
-
-    @FXML
-    private Label credit;
-
-    @FXML
-    private Label phoneNo;
-
-    @FXML
-    private Label email;
-
-    @FXML
-    private Label username;
+    @FXML private Label birthday;
+    @FXML private Label lastName;
+    @FXML private Label role;
+    @FXML private Label name;
+    @FXML private ImageView accountImg;
+    @FXML private Label credit;
+    @FXML private Label phoneNo;
+    @FXML private Label email;
+    @FXML private Label username;
 
     public static final ObservableList data = FXCollections.observableArrayList();
     private static Parent root;

@@ -12,6 +12,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import model.accounts.Customer;
+import model.log.BuyLog;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -20,41 +22,35 @@ public class CustomerMenuFx {
     public static final ObservableList data = FXCollections.observableArrayList();
     private static Parent root;
 
-    public void logout(ActionEvent actionEvent) {
-    }
-
-    public void back(ActionEvent actionEvent) {
-    }
-
-
-    public void exit(ActionEvent actionEvent) {
-    }
 
     public void viewPersonalInfo(MouseEvent mouseEvent) throws IOException {
+        ViewAccountFx.setAccount(LoginMenu.getLoginAccount());
          root = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
         goToPage();
     }
 
     public void viewBalance(MouseEvent mouseEvent) throws IOException {
-      //  Parent root = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
-       // goToPage();
-        String balance = String.valueOf(LoginMenu.getLoginAccount().getCredit());
+        String balance = "your credit is: "+ String.valueOf(LoginMenu.getLoginAccount().getCredit());
         show("balance: "+balance);
     }
 
     public void viewCart(MouseEvent mouseEvent) throws IOException {
-         root = FXMLLoader.load(Objects.requireNonNull(SaleLogFx.class.getClassLoader().getResource("saleLogFx.fxml")));
+        if(LoginMenu.getLoginAccount() instanceof Customer) {
+           // BuyLogFx.setCurBuyLog(LoginMenu.getLoginAccount().);
+        }
+         root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("buyLogFx.fxml")));
         goToPage();
     }
 
     public void viewOrders(MouseEvent mouseEvent) throws IOException {
-         root = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
+        if(LoginMenu.getLoginAccount() instanceof Customer) {
+            BuyLogsFx.setAllBuyLogs(((Customer) LoginMenu.getLoginAccount()).getBuyLogsHistory());
+        }
+         root = FXMLLoader.load(Objects.requireNonNull(BuyLogsFx.class.getClassLoader().getResource("buyLogsFx.fxml")));
         goToPage();
     }
 
     public void viewCustomerDiscount(MouseEvent mouseEvent) throws IOException {
-       // Parent root = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
-       // goToPage();
         data.clear();
         data.addAll(LoginMenu.getLoginAccount().getAllDiscountCodes());
         showList();
@@ -86,5 +82,16 @@ public class CustomerMenuFx {
         massage.setScene(new Scene(rot, 500, 500));
         massage.show();
     }
+
+    public void logout(ActionEvent actionEvent) {
+    }
+
+    public void back(ActionEvent actionEvent) {
+    }
+
+
+    public void exit(ActionEvent actionEvent) {
+    }
+
 
 }

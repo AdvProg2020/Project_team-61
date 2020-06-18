@@ -7,9 +7,9 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SaleLogsFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="848.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SaleLogsFx">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="848.0" stroke="BLACK" strokeType="INSIDE" width="1600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <fill>
                 <LinearGradient endX="1.0" endY="1.0" startY="0.0970873786407767">
                     <stops>
@@ -23,7 +23,7 @@
                 </LinearGradient>
             </fill>
         </Rectangle>
-        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.bottomAnchor="1050.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1600.0">
             <menus>
                 <Menu mnemonicParsing="false" text="User menu">
                     <items>
@@ -47,7 +47,7 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <Text layoutX="868.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sale Logs">
+        <Text layoutX="708.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sale Logs">
             <font>
                 <Font name="System Bold Italic" size="42.0" />
             </font>
@@ -60,15 +60,26 @@
                 </LinearGradient>
             </fill>
         </Text>
-        <TableView fx:id="saleLogsTableView" layoutX="307.0" layoutY="138.0" prefHeight="200.0" prefWidth="1314.0" AnchorPane.bottomAnchor="98.0" AnchorPane.leftAnchor="307.0" AnchorPane.rightAnchor="293.0" AnchorPane.topAnchor="138.0">
+        <TableView fx:id="saleLogsTableView" layoutX="249.0" layoutY="142.0" prefHeight="555.0" prefWidth="1102.0">
             <columns>
-                <TableColumn fx:id="saleLogsId" minWidth="220.0" prefWidth="75.0" text="ID" />
-                <TableColumn fx:id="saleLogsCustomer" minWidth="220.0" prefWidth="75.0" text="Customer" />
-                <TableColumn fx:id="saleLogsDeliveryStatus" minWidth="220.0" prefWidth="75.0" text="Delivery Status" />
-                <TableColumn fx:id="saleLogsDate" minWidth="220.0" prefWidth="75.0" text="Date" />
-                <TableColumn fx:id="saleLogsReducedAmount" minWidth="220.0" prefWidth="75.0" text="Reduced Amount " />
-                <TableColumn fx:id="saleLogsRecievedAmount" minWidth="220.0" prefWidth="75.0" text="Recieved Amount" />
+                <TableColumn fx:id="saleLogsId" minWidth="159.0" prefWidth="159.0" text="ID" />
+                <TableColumn fx:id="saleLogsCustomer" minWidth="163.0" prefWidth="163.0" text="Customer" />
+                <TableColumn fx:id="saleLogsDeliveryStatus" minWidth="138.0" prefWidth="168.0" text="Delivery Status" />
+                <TableColumn fx:id="saleLogsDate" minWidth="155.0" prefWidth="155.0" text="Date" />
+                <TableColumn fx:id="saleLogsReducedAmount" minWidth="220.0" prefWidth="256.0" text="Reduced Amount " />
+                <TableColumn fx:id="saleLogsRecievedAmount" minWidth="220.0" prefWidth="226.0" text="Recieved Amount" />
             </columns>
         </TableView>
+      <Button layoutX="1241.0" layoutY="721.0" mnemonicParsing="false" onMouseClicked="#viewSaleLogs" prefHeight="40.0" prefWidth="110.0" text="View">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#08a9ff" />
+                  <Stop color="#ff00dd" offset="0.49673202614379086" />
+                  <Stop color="RED" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
     </children>
 </AnchorPane>

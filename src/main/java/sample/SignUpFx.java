@@ -78,28 +78,40 @@ public class SignUpFx {
 
   */
     public void signUp(MouseEvent mouseEvent) throws IOException, ParseException {
-        String username = userSign.getText();
-        String name = nameSign.getText();
-        String lastName = lastNameSign.getText();
-        String phone = phoneNoSign.getText();
-        String password = passSign.getText();
-        String email = emailSign.getText();
-        String birthday = birthdaySign.getText();
-
-        String o = OutputMassageHandler.showAccountOutput(RegisterMenu.processRegister(role, username));
-        userLoginMs.setText(o);
-        passLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(password)));
-        nameLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(nameSign.getText())));
-        lastNameLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(lastNameSign.getText())));
-        emailLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(emailSign.getText())));
-        phoneLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(phoneNoSign.getText())));
-        birthLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(birthdaySign.getText())));
-     //   goToMenu();
+        if (role != null) {
+            if (RegisterMenu.getSignUpNo() == 0) {
+                userLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.processRegister(role, userSign.getText())));
+            }
+            if (RegisterMenu.getSignUpNo() == 1) {
+                passLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(passSign.getText(), 0)));
+                if (RegisterMenu.getDetailMenu() == 1) {
+                    nameLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(nameSign.getText(), 1)));
+                }
+                if (RegisterMenu.getDetailMenu() == 2) {
+                    lastNameLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(lastNameSign.getText(), 2)));
+                }
+                if (RegisterMenu.getDetailMenu() == 3) {
+                    emailLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(emailSign.getText(), 3)));
+                }
+                if (RegisterMenu.getDetailMenu() == 4) {
+                    phoneLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(phoneNoSign.getText(), 4)));
+                }
+                if (RegisterMenu.getDetailMenu() == 5) {
+                    birthLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(birthdaySign.getText(), 5)));
+                }
+            }
+            if (role != null && RegisterMenu.getSignUpNo() == 6) {
+                RegisterMenu.setSignUpNo(0);
+                goToMenu();
+            } else RegisterMenu.setSignUpNo(1);
+        } else userLoginMs.setText("you have to select your role first");
     }
 
     private void goToMenu() throws IOException {
         if (role == "seller") {
             root = FXMLLoader.load(Objects.requireNonNull(FirmFx.class.getClassLoader().getResource("firmFx.fxml")));
+        } else if (role.equalsIgnoreCase("manager") && !RegisterMenu.isHeadManager()) {
+            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
         } else {
             root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
         }
@@ -119,6 +131,13 @@ public class SignUpFx {
         role = "customer";
     }
 
+    public void managerRole(MouseEvent mouseEvent) {
+        if (RegisterMenu.isHeadManager()) {
+            role = "manager";
+            RegisterMenu.setHeadManager(false);
+        }
+    }
+
     public void back(MouseEvent mouseEvent) {
 
     }
@@ -126,5 +145,6 @@ public class SignUpFx {
     public void exit(MouseEvent mouseEvent) {
         System.exit(0);
     }
+
 
 }

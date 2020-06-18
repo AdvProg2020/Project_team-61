@@ -2,6 +2,7 @@ package sample;
 
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import controller.menus.SellerMenu;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +12,7 @@ import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
+import model.log.BuyLog;
 import model.off.Sale;
 import model.productRelated.Category;
 import model.request.*;
@@ -26,8 +28,8 @@ import java.util.Objects;
 //import controller.request.*;
 
 public class Main extends Application {
-    private final int widthScene = 1500;
-    private final int heightScene = 900;
+    private final int widthScene = 1700;
+    private final int heightScene = 850;
     static Stage primStage;
 
 
@@ -42,9 +44,9 @@ public class Main extends Application {
             */
 
      //   Parent root = FXMLLoader.load(getClass().getResource("mainMenuFx.fxml"));
-        Parent root = FXMLLoader.load(Objects.requireNonNull(UsersFx.class.getClassLoader().getResource("usersFx.fxml")));
-          //  Parent root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
-        // Parent root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+       // Parent root = FXMLLoader.load(Objects.requireNonNull(UsersFx.class.getClassLoader().getResource("usersFx.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(SaleLogFx.class.getClassLoader().getResource("saleLogFx.fxml")));
+       //  Parent root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
         primaryStage.setTitle("market");
         primaryStage.setScene(new Scene(root, widthScene, heightScene));
         primStage = primaryStage;

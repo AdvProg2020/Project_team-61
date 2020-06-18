@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -15,7 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0d4b68;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoginFx">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0d4b68;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoginFx">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" layoutY="-1.0" stroke="#0d4b68" strokeType="INSIDE" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <fill>
@@ -37,7 +44,7 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <MenuBar layoutY="0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.bottomAnchor="1050.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+      <MenuBar layoutY="0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <menus>
             <Menu mnemonicParsing="false" text="Sign up">
                <items>
@@ -57,7 +64,7 @@
          </menus>
       </MenuBar>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6a8ab263" height="550.0" layoutX="350.0" layoutY="140.0" stroke="BLACK" strokeType="INSIDE" width="382.0" AnchorPane.bottomAnchor="390.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="1188.0" AnchorPane.topAnchor="140.0" />
-      <ImageView fitHeight="251.0" fitWidth="359.0" layoutX="1494.0" layoutY="747.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="89.22280883789062" AnchorPane.leftAnchor="1494.0" AnchorPane.rightAnchor="67.0" AnchorPane.topAnchor="746.7771911621094" />
+      <ImageView fitHeight="251.0" fitWidth="359.0" layoutX="1506.0" layoutY="785.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="1506.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="785.0" />
       <Text layoutX="500.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" wrappingWidth="81.6708984375" AnchorPane.bottomAnchor="870.7216796875" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="1338.3291015625" AnchorPane.topAnchor="177.7060546875">
          <font>
             <Font name="System Bold Italic" size="29.0" />
@@ -71,7 +78,7 @@
             </LinearGradient>
          </fill>
       </Text>
-      <TextField fx:id="userLogin" layoutX="407.0" layoutY="262.0" prefHeight="39.0" prefWidth="239.0" promptText="username" AnchorPane.bottomAnchor="779.0" AnchorPane.leftAnchor="407.0" AnchorPane.rightAnchor="1274.0" AnchorPane.topAnchor="262.0" />
+      <TextField fx:id="userLogin" layoutX="407.0" layoutY="262.0" prefHeight="39.0" prefWidth="239.0" promptText="username" />
       <Label fx:id="userLoginMs" layoutX="407.0" layoutY="300.0" prefHeight="21.0" prefWidth="239.0" text="x" textAlignment="CENTER" textFill="RED">
          <font>
             <Font size="21.0" />
@@ -82,10 +89,9 @@
             <Font size="21.0" />
          </font>
       </Label>
-      <PasswordField fx:id="passLogin" layoutX="407.0" layoutY="343.0" prefHeight="39.0" prefWidth="239.0" promptText="password" AnchorPane.bottomAnchor="698.0" AnchorPane.leftAnchor="407.0" AnchorPane.rightAnchor="1274.0" AnchorPane.topAnchor="343.0" />
-      <ImageView fitHeight="75.0" fitWidth="63.0" layoutX="1757.0" layoutY="15.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="63.0" fitWidth="63.0" layoutX="1836.0" layoutY="15.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true" />
+      <PasswordField fx:id="passLogin" layoutX="407.0" layoutY="343.0" prefHeight="39.0" prefWidth="239.0" promptText="password" />
       <ImageView fitHeight="57.0" fitWidth="70.0" layoutX="662.0" layoutY="619.0" onMouseClicked="#signUpMenu" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="494.0" layoutY="450.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="31.0" prefWidth="89.0" text="Login" textFill="#03abff" AnchorPane.bottomAnchor="599.0" AnchorPane.leftAnchor="494.0" AnchorPane.rightAnchor="1337.0" AnchorPane.topAnchor="450.0" />
+      <Button layoutX="489.0" layoutY="486.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="39.0" prefWidth="104.0" text="Login" textFill="#03abff" />
+      <Button layoutX="364.0" layoutY="644.0" mnemonicParsing="false" onMouseClicked="#signUpMenu" prefHeight="32.0" prefWidth="82.0" text="Sign up" textFill="#03abff" />
    </children>
 </AnchorPane>

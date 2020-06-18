@@ -6,31 +6,31 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import model.log.BuyLog;
+
+import java.util.ArrayList;
 
 public class BuyLogsFx {
 
-    @FXML
-    private TableColumn<BuyLog, ?> buyLogsSeller;
+    @FXML private TableColumn<BuyLog, ?> buyLogsSeller;
+    @FXML private TableView<BuyLog> buyLogs;
+    @FXML private TableColumn<BuyLog, ?> buyLogsDeliveryStatus;
+    @FXML private TableColumn<BuyLog, ?> buyLogsDate;
+    @FXML private TableColumn<BuyLog, ?> buyLogsReduceAmount;
+    @FXML private TableColumn<BuyLog, ?> buyLogsId;
+    @FXML private TableColumn<BuyLog, ?> buyLogsRecievedAmount;
 
-    @FXML
-    private TableView<BuyLog> buyLogs;
-
-    @FXML
-    private TableColumn<BuyLog, ?> buyLogsDeliveryStatus;
-
-    @FXML
-    private TableColumn<BuyLog, ?> buyLogsDate;
-
-    @FXML
-    private TableColumn<BuyLog, ?> buyLogsReduceAmount;
-
-    @FXML
-    private TableColumn<BuyLog, ?> buyLogsId;
-
-    @FXML
-    private TableColumn<BuyLog, ?> buyLogsRecievedAmount;
+    private static ArrayList<BuyLog> allBuyLogs = new ArrayList<>();
     public static ObservableList<BuyLog> data = FXCollections.observableArrayList();
+
+    public static ArrayList<BuyLog> getAllBuyLogs() {
+        return allBuyLogs;
+    }
+
+    public static void setAllBuyLogs(ArrayList<BuyLog> allBuyLogs) {
+        BuyLogsFx.allBuyLogs = allBuyLogs;
+    }
 
     public static void initializeObserverList() {
         data.clear();
@@ -72,4 +72,6 @@ public class BuyLogsFx {
     }
 
 
+    public void viewBuyLogs(MouseEvent mouseEvent) {
+    }
 }

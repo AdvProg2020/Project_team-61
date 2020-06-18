@@ -44,7 +44,7 @@ public class ManagerMenuFx {
     }
 
     public void createDiscount(MouseEvent mouseEvent) throws IOException {
-         root = FXMLLoader.load(Objects.requireNonNull(AddSaleFx.class.getClassLoader().getResource("AddSaleFx.fxml")));
+         root = FXMLLoader.load(Objects.requireNonNull(AddDiscountFx.class.getClassLoader().getResource("addDiscountFx.fxml")));
         goToPage();
     }
 

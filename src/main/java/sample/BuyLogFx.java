@@ -27,9 +27,18 @@ public class BuyLogFx {
 
     @FXML
     private TableColumn<BuyLog, ?> buyLogReduceAmount;
+    private static BuyLog curBuyLog;
     public static ObservableList<BuyLog> data = FXCollections.observableArrayList();
 
-  /*  public static void initializeObserverList() {
+    public static BuyLog getCurBuyLog() {
+        return curBuyLog;
+    }
+
+    public static void setCurBuyLog(BuyLog curBuyLog) {
+        BuyLogFx.curBuyLog = curBuyLog;
+    }
+
+    /*  public static void initializeObserverList() {
         data.clear();
         data.addAll(ProductMenu.getBuyLog());
     }

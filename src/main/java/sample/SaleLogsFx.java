@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 
 public class SaleLogsFx {
     
@@ -38,5 +39,8 @@ public class SaleLogsFx {
     }
 
     public void exit(ActionEvent actionEvent) {
+    }
+
+    public void viewSaleLogs(MouseEvent mouseEvent) {
     }
 }
