@@ -141,20 +141,7 @@ public class OutputHandler {
 */
     //..................................................................
 
-    //finish//pr
-//    public static void showAccountInformation(String username) throws FileNotFoundException {
-//        Account accountToShow=null;
-//        Type REVIEW_TYPE = new TypeToken<ArrayList<Account>>() {
-//        }.getType();
-//        JsonReader sellerReader=FileHandling.readFile("account.json");
-//        ArrayList<Account> data = FileHandling.getGson().fromJson(sellerReader, REVIEW_TYPE);
-//        for (Account account : data) {
-//            if (account.getUsername().equals(username)){
-//                accountToShow=account;
-//            }
-//        }
-//        System.out.println(accountToShow);
-//    }
+
 
     public static void showAccountInformation(String username){
         Account accountToShow=null;
@@ -167,16 +154,6 @@ public class OutputHandler {
     }
 
 
-    //finish//pr
-//    public static void showAccounts() throws FileNotFoundException {
-//        Type REVIEW_TYPE = new TypeToken<ArrayList<Account>>() {
-//        }.getType();
-//        JsonReader sellerReader=FileHandling.readFile("account.json");
-//        ArrayList<Account> data = FileHandling.getGson().fromJson(sellerReader, REVIEW_TYPE);
-//        for (Account account : data) {
-//            System.out.println(account);
-//        }
-//    }
 
     public static void showAccounts(){
         for (Account account : Account.getAllAccounts()) {
@@ -184,16 +161,6 @@ public class OutputHandler {
         }
     }
 
-    //finish//pr
-//    public static void showDiscountCodes() throws FileNotFoundException {
-//        Type REVIEW_TYPE = new TypeToken<ArrayList<DiscountCode>>() {
-//        }.getType();
-//        JsonReader discountReader=FileHandling.readFile("discountCode.json");
-//        ArrayList<DiscountCode> data = FileHandling.getGson().fromJson(discountReader, REVIEW_TYPE);
-//        for (DiscountCode discountCode : data) {
-//            System.out.println(discountCode);
-//        }
-//    }
 
     public static void showDiscountCodes(){
         for (DiscountCode discountCode : DiscountCode.getAllDiscountCodes()) {
@@ -202,20 +169,6 @@ public class OutputHandler {
     }
 
 
-    //finish//pr
-//    public static void showDiscountCode(String discountId) throws FileNotFoundException {
-//        DiscountCode discountCodeToShow=null;
-//        Type REVIEW_TYPE = new TypeToken<ArrayList<DiscountCode>>() {
-//        }.getType();
-//        JsonReader discountReader=FileHandling.readFile("discountCode.json");
-//        ArrayList<DiscountCode> data = FileHandling.getGson().fromJson(discountReader, REVIEW_TYPE);
-//        for (DiscountCode discountCode : data) {
-//            if (discountCode.getDiscountId().equals(discountId)){
-//                discountCodeToShow=discountCode;
-//            }
-//        }
-//        System.out.println(discountCodeToShow);
-//    }
 
     public static void showDiscountCode(String discountId){
         DiscountCode discountCodeToShow=null;
@@ -227,20 +180,6 @@ public class OutputHandler {
         System.out.println(discountCodeToShow);
     }
 
-    //finish//pr
-//    public static void showRequest(String requestId) throws FileNotFoundException {
-//        Request requestToShow=null;
-//        Type REVIEW_TYPE = new TypeToken<ArrayList<Request>>() {
-//        }.getType();
-//        JsonReader requestReader=FileHandling.readFile("request.json");
-//        ArrayList<Request> data = FileHandling.getGson().fromJson(requestReader, REVIEW_TYPE);
-//        for (Request request : data) {
-//            if (request.getRequestText().equals(requestId)){
-//                requestToShow=request;
-//            }
-//        }
-//        System.out.println(requestToShow);
-//    }
 
     public static void showRequest(String requestId){
         Request requestToShow=null;
@@ -251,17 +190,6 @@ public class OutputHandler {
         }
         System.out.println(requestToShow);
     }
-
-    //finish//pr
-//    public static void showRequests() throws FileNotFoundException {
-//        Type REVIEW_TYPE = new TypeToken<ArrayList<Request>>() {
-//        }.getType();
-//        JsonReader requestReader=FileHandling.readFile("request.json");
-//        ArrayList<Request> data = FileHandling.getGson().fromJson(requestReader, REVIEW_TYPE);
-//        for (Request request : data) {
-//            System.out.println(request);
-//        }
-//    }
 
     public static void showRequests(){
         for (Request request : Request.getAllRequests()) {
@@ -331,23 +259,6 @@ public class OutputHandler {
 
     //naaaaaaaaaaaaaaaaaaaagheeeeeeeeeeeeeeeeeeeessssssssssssssssssssssssssssss
 
-//    public static void showSalesHistory(String username) throws FileNotFoundException {
-//        ArrayList<SaleLog> saleLogs=null;
-//        Type REVIEW_TYPE = new TypeToken<ArrayList<Account>>() {
-//        }.getType();
-//        JsonReader accountReader=FileHandling.readFile("account.json");
-//        ArrayList<Account> data = FileHandling.getGson().fromJson(accountReader, REVIEW_TYPE);
-//        for (Account account : data) {
-//            if (account instanceof Seller){
-//                if (((Seller)account).getUsername().equals(username)){
-//                    saleLogs=((Seller) account).getSaleLogsHistory();
-//                }
-//            }
-//        }
-//        for (SaleLog saleLog : saleLogs) {
-//            System.out.println(saleLog);
-//        }
-//    }
 
     public static void showSalesHistory(String username){
         ArrayList<SaleLog> saleLogs=null;
@@ -531,20 +442,6 @@ public class OutputHandler {
 //        System.out.println(totalPriceToShow);
     }
 
-    //finish//pr
-//    public static void showBalance(String username) throws FileNotFoundException {
-//        Account accountToShow=null;
-//        Type REVIEW_TYPE = new TypeToken<ArrayList<Account>>() {
-//        }.getType();
-//        JsonReader sellerReader=FileHandling.readFile("account.json");
-//        ArrayList<Account> data = FileHandling.getGson().fromJson(sellerReader, REVIEW_TYPE);
-//        for (Account account : data) {
-//            if (account.getUsername().equals(username)){
-//                accountToShow=account;
-//            }
-//        }
-//        System.out.println(accountToShow.getCredit());
-//    }
 
     public static void showBalance(String username){
         Account accountToShow=null;

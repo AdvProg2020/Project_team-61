@@ -131,7 +131,7 @@ public class Sale{
     public static void writeInJ() throws IOException {
 
         String json = FileHandling.getGson().toJson(Sale.allSales, SaleType);
-        FileHandling.writeInFile(json, "account.json");
+        FileHandling.writeInFile(json, "sale.json");
 
     }
 

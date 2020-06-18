@@ -1,174 +1,137 @@
 package sample;
 
-import controller.ProductsMenu;
-import controller.menus.LoginMenu;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.CacheHint;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import model.log.BuyLog;
 import model.productRelated.Comment;
-import model.productRelated.CommentStatus;
 import model.productRelated.Product;
-import model.request.CommentRequest;
-import model.request.Request;
-import view.*;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
-import java.util.UUID;
 
 public class ProductMenuFX {
-
-    public Button addToCardButton;
-    public AnchorPane productMenuPane;
-    public AnchorPane topSplitPane;
-    public TextArea productImageRectangle;
-    public TextArea productProperties;
-    public Tab specificationsTab;
-    public Rectangle specificationPane;
-    public TextArea specificatonTextbox;
-    public AnchorPane commentsPane;
-    public Tab averageScoreTab;
-    public AnchorPane averageScorePane;
-    public Label productFinishedError;
-    public Tab commentTab;
-    public MenuItem account;
-    public MenuItem back;
-    public MenuItem logout;
-    public MenuItem exit;
-    public MenuItem deleteProduct;
-    public MenuItem editProduct;
-    public TextArea commentTitleField;
-    public TextArea commnetContentField;
-
-    private static int outputNo =0;
-    private static Product selectedProduct;
-    private static BuyLog buyLog;
-    private static CommentRequest commentRequest;
-    public Button addCommentButton;
-    public Button addScoreButton;
-
-
-    public static void showProPage(Stage stage , Scene scene) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(AddProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
-        //  Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenuFX.fxml")));
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+    @FXML
+    public AnchorPane productPagePane;
+    @FXML
+    public ImageView productPic;
+    public static Scene prevScene;
+    public static Stage thisStage = new Stage();
+    public static Product productInPage;
+    public AnchorPane scrollPane;
+    public TextArea commentTextField;
+    public TextField titleTextField;
+    public Button backButtonAddComment;
+    public Button sendCommentButton;
+    public AnchorPane addCommentSectionPane;
+    public Label nullAddCommentError;
+    public TextArea productCategoryDetail;
+    public TextArea productDetail;
+    public TableView commentTableView = new TableView();
+    @FXML
+    private Label productNameLabel;
+    @FXML
+    private Button addToCardButton;
+    @FXML
+    private Button commentButton;
+    @FXML
+    private Button scoreButton;
+    @FXML
+    private Label didntBuyToScoreOrProductIsFinish;
 
     @FXML
-    public void addProductToCard(ActionEvent actionEvent) {
-        System.out.println("hah");
-    }
+    public TableColumn<Product, ArrayList<Comment>> titleColumn = new TableColumn<>("title");
 
     @FXML
-    public void goToAccount(ActionEvent actionEvent) {
+    public TableColumn<Product, ArrayList<Comment>> contentColumn = new TableColumn<>("content");
+    @FXML
+    public static ObservableList<Comment> data = FXCollections.observableArrayList();
+
+
+    public static void showProPage(Stage stage, Scene scene, Product product) throws IOException {
+        productInPage = product;
     }
+
+
+    public void makeUpPage() throws FileNotFoundException {
+        productNameLabel.setText(productInPage.getProductName());
+        File file = new File(productInPage.getProductImage());
+        Image image = new Image(new FileInputStream(file));
+        productPic.setImage(image);
+    }
+
 
     @FXML
-    public void backToPreviousPage(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    public void Logout(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    public void exitUser(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    public void addCommnet(ActionEvent actionEvent) throws IOException {
-        addComments();
-    }
-
-    @FXML
-    public void scoreOnProduct(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    public void addScore(ActionEvent actionEvent) {
+    void popUpAddComment(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("sample/fxFile/comment.fxml")));
+        thisStage = new Stage();
+        prevScene = new Scene(root);
+        thisStage.setScene(prevScene);
+        thisStage.show();
     }
 
 
-    public  BuyLog getBuyLog() {
-        return buyLog;
+    public void handleAddProductToLog(ActionEvent actionEvent) {
+
     }
 
-    //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-    public  void processDigest() throws FileNotFoundException {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
-        selectedProduct = Product.getProductById(ProductsMenu.getProductId());
-        OutputHandler.digest(selectedProduct.getId());
+    public void handleScore(ActionEvent actionEvent) {
+
     }
 
-    public  void addToCart() throws IOException {
-        String uniqueID = UUID.randomUUID().toString();
-        if (BuyLog.getFirstProduct()) {
-            buyLog = new BuyLog(uniqueID);
+    public void handleBackAddCommentButton(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("sample/fxFile/sample3.fxml")));
+        prevScene = new Scene(root);
+        thisStage.setScene(prevScene);
+        thisStage.show();
+    }
+
+    public void handleSendComment(ActionEvent actionEvent) {
+        String title = titleTextField.getText();
+        String content = commentTextField.getText();
+        if (title != null) {
+            if (content != null) {
+//                productInPage.com(title, content);
+            } else {
+                nullAddCommentError.setText("content is empty");
+                nullAddCommentError.setVisible(true);
+            }
+        } else {
+            nullAddCommentError.setText("title is empty");
+            nullAddCommentError.setVisible(true);
         }
-        buyLog.addProductToBuyLog(ProductsMenu.getProductId(), 1);
     }
 
+    @FXML
+    public void initialize() throws IOException {
+        titleColumn.setCellValueFactory(new PropertyValueFactory<Product, ArrayList<Comment>>("title"));
+        contentColumn.setCellValueFactory(new PropertyValueFactory<Product, ArrayList<Comment>>("content"));
+        initializeObserverList();
+        commentTableView.getColumns().addAll(titleColumn, contentColumn);
+        commentTableView.setItems(data);
 
-    //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4
-    public  void processAttributes() throws FileNotFoundException {
-        OutputHandler.attributes(selectedProduct.getId());
     }
 
-    public  void processCompare(String productID) throws FileNotFoundException {
-        if (Product.isThereProductWithId(productID)) {
-            OutputHandler.compareProducts(selectedProduct.getId(), productID);
-        } else OutputMassageHandler.showProductOutput(4);
+    private void initializeObserverList() {
+//        if (productInPage.getAllCommentsOnProduct().size() != 0) {
+//            data.addAll(productInPage.getAllCommentsOnProduct());
+//        } else {
+//            System.out.println("no");
+//        }
     }
-
-    //comment--------------------------------------------------------------------
-    public  void processComments() throws FileNotFoundException {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
-        OutputHandler.showCommentOnOneProduct(selectedProduct.getId());
-    }
-
-
-    public  void addComments() throws IOException {
-        String commentId = LoginMenu.getLoginAccount() + " comment on " + selectedProduct;
-        if(!Comment.isThereCommentWithId(commentId)) {
-            String id= LoginMenu.getLoginAccount()+ "comment";
-            if (!Request.isThereRequestFromID(id)) {
-                Comment comment = new Comment(id);
-                comment.setCommentStatus(CommentStatus.WAITINGFORAPPROVAL);
-                commentRequest = new CommentRequest(id);
-                commentRequest.setPersonToVote(LoginMenu.getLoginAccount());
-                commentRequest.setProduct(selectedProduct);
-                commentRequest.setId(commentId);
-            }else commentRequest = (CommentRequest) Request.getRequestFromID(id);
-            outputNo = 1;
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
-            CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
-        }else outputNo= 3;
-        OutputMassageHandler.showProductsOutput(outputNo);
-    }
-
-
-    public void titleOfComment(String title) throws IOException {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
-        commentRequest.setTitle(commentTitleField.getText());
-        OutputMassageHandler.showProductsOutput(2);
-    }
-
-
-    public  void contentOfComment(String content) throws IOException {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
-        CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
-        commentRequest.setContent(commnetContentField.getText());
-    }
-
-
 }

@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 
-//import java.awt.*;
+
 
     public class ViewDiscountFx {
         @FXML

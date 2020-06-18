@@ -1,5 +1,6 @@
 package sample;
 
+import controller.ProductMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -14,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.productRelated.Category;
 import model.productRelated.Product;
 
 import java.io.File;
@@ -56,6 +58,8 @@ public class ProductsMenuFX {
         public static Scene prevScene ;
         public static Stage thisStage;
         public TextField searchField;
+        public ListView categoriesListView = new ListView();
+        public ObservableList<String> dataCat = FXCollections.observableArrayList();
 
         public static void showProPage(Stage stage, Scene scene) throws IOException {
                 AnchorPane root = FXMLLoader.load(Objects.requireNonNull(AddProductMenuFX.class.getClassLoader().getResource("sample/fxFile/sample.fxml")));
@@ -124,34 +128,13 @@ public class ProductsMenuFX {
         }
 
         public static void gotoProductPage(Product product) throws IOException {
-                FXMLLoader fxmlLoader = new FXMLLoader(ProductsMenuFX.class.getResource("fxFile/sample3.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(ProductsMenuFX.class.getResource("/productMenu.fxml"));
                 thisStage = new Stage();
                 AnchorPane pane = fxmlLoader.load();
-                for (Product product1 : Product.getProductList()) {
-                        Label label = new Label(product.getProductName());
-                        label.setLayoutX(100*(Product.getProductList().indexOf(product1)+1));
-                        label.setLayoutY(100*(Product.getProductList().indexOf(product1)+1));
-                        TextField textField = new TextField();
-                        textField.setLayoutX(300);
-                        textField.setLayoutY(200);
-                        pane.getChildren().addAll(textField,label);
-                }
-
-                File file = new File(product.getProductImage());
-                Image image = new Image(new FileInputStream(file));
-                ImageView imageView = new ImageView(image);
-                pane.getChildren().add(imageView);
-                imageView.prefHeight(50);
-                imageView.prefWidth(50);
-                imageView.setX(60);
-                imageView.setY(60);
-                imageView.setFitWidth(100);
-                imageView.setFitHeight(100);
-
                 prevScene = new Scene(pane);
                 thisStage.setScene(prevScene);
+                ProductMenuFX.productInPage = product;
                 thisStage.show();
-
         }
 
         public void clickedColumn(MouseEvent mouseEvent) throws IOException {
@@ -165,4 +148,12 @@ public class ProductsMenuFX {
                 gotoProductPage(Product.getProductWithImage(im));
 //        imageView.setVisible(true);
         }
+
+        public void dataInListView(){
+                for (Category category : Category.getAllCategories()) {
+                        dataCat.add(category.getName());
+                }
+                categoriesListView.setItems(dataCat);
+        }
+
 }

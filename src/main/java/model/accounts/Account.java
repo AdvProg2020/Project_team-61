@@ -229,23 +229,7 @@ public abstract class Account {
     }
 
     //......................................................................
-//    public static void writeInJ() throws IOException {
-//
-//        String json = FileHandling.getGson().toJson(Account.allAccounts, AccountType);
-//        FileHandling.writeInFile(json, "account.json");
-//
-//    }
 
-//    public static void readFile() throws IOException {
-//        JsonReader reader = new JsonReader(new FileReader("account.json"));
-//        String json = reader.nextString();
-//        System.out.println(json);
-//        ArrayList<Account> list = FileHandling.getGson().fromJson(reader,AccountType);
-//        if (null== list){
-//            list = new ArrayList<Account>();
-//        }
-//        Account.setAllAccounts(list);
-//    }
 
     public static Comparator<Account> accountComparatorForUsername = new Comparator<Account>() {
 
