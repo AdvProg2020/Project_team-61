@@ -10,9 +10,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.EditFirmFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.EditFirmFx">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="882.0" stroke="BLACK" strokeType="INSIDE" width="1605.0">
             <fill>
                 <LinearGradient endX="1.0" endY="1.0">
                     <stops>
@@ -22,7 +22,7 @@
                 </LinearGradient>
             </fill>
         </Rectangle>
-        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.bottomAnchor="1050.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <menus>
                 <Menu mnemonicParsing="false" text="User menu">
                     <items>
@@ -104,12 +104,12 @@
                 <Font size="20.0" />
             </font>
         </Label>
-        <ImageView fitHeight="74.0" fitWidth="69.0" layoutX="1700.0" layoutY="979.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="74.0" fitWidth="69.0" layoutX="1440.0" layoutY="783.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@view/icons/back.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="74.0" fitWidth="72.0" layoutX="1790.0" layoutY="979.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="74.0" fitWidth="72.0" layoutX="1513.0" layoutY="783.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@view/icons/exit.png" />
             </image>

@@ -9,9 +9,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CategoriesFX">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CategoriesFX">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="882.0" stroke="BLACK" strokeType="INSIDE" width="1605.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <fill>
                 <LinearGradient endX="1.0" endY="1.0" startX="0.12135922330097089" startY="0.0970873786407767">
                     <stops>
@@ -23,7 +23,7 @@
                 </LinearGradient>
             </fill>
         </Rectangle>
-        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.bottomAnchor="1050.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <menus>
                 <Menu mnemonicParsing="false" text="User menu">
                     <items>
@@ -47,7 +47,7 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <Text layoutX="856.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categories">
+        <Text layoutX="698.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categories">
             <font>
                 <Font name="System Bold Italic" size="42.0" />
             </font>
@@ -60,7 +60,7 @@
                 </LinearGradient>
             </fill>
         </Text>
-      <Button layoutX="1247.0" layoutY="988.0" mnemonicParsing="false" onMouseClicked="#editCategories" prefHeight="32.0" prefWidth="75.0" text="Edit">
+      <Button layoutX="1143.0" layoutY="788.0" mnemonicParsing="false" onMouseClicked="#editCategories" prefHeight="32.0" prefWidth="75.0" text="Edit">
          <textFill>
             <LinearGradient endX="0.7815533980582524" endY="0.5097087378640777" startX="0.30097087378640774" startY="0.23786407766990292">
                <stops>
@@ -72,7 +72,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button layoutX="1345.0" layoutY="988.0" mnemonicParsing="false" onMouseClicked="#removeCategories" prefHeight="32.0" prefWidth="75.0" text="Remove">
+      <Button layoutX="1237.0" layoutY="788.0" mnemonicParsing="false" onMouseClicked="#removeCategories" prefHeight="32.0" prefWidth="75.0" text="Remove">
          <textFill>
             <LinearGradient endX="0.7815533980582524" endY="0.5097087378640777" startX="0.30097087378640774" startY="0.23786407766990292">
                <stops>
@@ -84,7 +84,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button layoutX="1437.0" layoutY="988.0" mnemonicParsing="false" onMouseClicked="#addCategories" prefHeight="32.0" prefWidth="75.0" text="Add">
+      <Button layoutX="1337.0" layoutY="788.0" mnemonicParsing="false" onMouseClicked="#addCategories" prefHeight="32.0" prefWidth="75.0" text="Add">
          <textFill>
             <LinearGradient endX="0.7815533980582524" endY="0.5097087378640777" startX="0.30097087378640774" startY="0.23786407766990292">
                <stops>
@@ -96,9 +96,9 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <TableView fx:id="categories" layoutX="367.0" layoutY="142.0" prefHeight="835.0" prefWidth="1187.0">
+      <TableView fx:id="categories" layoutX="273.0" layoutY="107.0" prefHeight="668.0" prefWidth="1059.0">
         <columns>
-          <TableColumn fx:id="categoriesName" prefWidth="1186.0" text="Name" />
+          <TableColumn fx:id="categoriesName" prefWidth="1058.0" text="Name" />
         </columns>
       </TableView>
     </children>

@@ -153,13 +153,14 @@ public class AccountRequest extends Request {
         FileHandling.writeInFile(json, "accountRequest.json");
     }
 
-    public void sellerAccountDetails(String username, String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate) {
+    public void sellerAccountDetails(String username, String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate) throws IOException {
         this.username = username;
         this.password = password;
         this.name = name;
         this.lastname = lastname;
         this.Email = Email;
         this.phoneNo = phoneNo;
+        writeInJ();
     }
 
     public static String getUsername() {

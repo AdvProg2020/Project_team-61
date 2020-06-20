@@ -1,6 +1,7 @@
 package sample;
 
 import controller.menus.RegisterMenu;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,34 +21,20 @@ import java.util.Objects;
 
 public class SignUpFx {
 
-    @FXML
-    private TextField phoneNoSign;
-    @FXML
-    private TextField userSign;
-    @FXML
-    private TextField lastNameSign;
-    @FXML
-    private PasswordField passSign;
-    @FXML
-    private TextField emailSign;
-    @FXML
-    private TextField nameSign;
-    @FXML
-    private TextField birthdaySign;
-    @FXML
-    private Label emailLoginMs;
-    @FXML
-    private Label userLoginMs;
-    @FXML
-    private Label birthLoginMs;
-    @FXML
-    private Label nameLoginMs;
-    @FXML
-    private Label phoneLoginMs;
-    @FXML
-    private Label passLoginMs;
-    @FXML
-    private Label lastNameLoginMs;
+    @FXML private TextField phoneNoSign;
+    @FXML private TextField userSign;
+    @FXML private TextField lastNameSign;
+    @FXML private PasswordField passSign;
+    @FXML private TextField emailSign;
+    @FXML private TextField nameSign;
+    @FXML private TextField birthdaySign;
+    @FXML private Label emailLoginMs;
+    @FXML private Label userLoginMs;
+    @FXML private Label birthLoginMs;
+    @FXML private Label nameLoginMs;
+    @FXML private Label phoneLoginMs;
+    @FXML private Label passLoginMs;
+    @FXML private Label lastNameLoginMs;
 
     private static String role;
     private static Parent root;
@@ -102,6 +89,7 @@ public class SignUpFx {
             }
             if (role != null && RegisterMenu.getSignUpNo() == 6) {
                 RegisterMenu.setSignUpNo(0);
+                RegisterMenu.setDetailMenu(0);
                 goToMenu();
             } else RegisterMenu.setSignUpNo(1);
         } else userLoginMs.setText("you have to select your role first");
@@ -134,17 +122,18 @@ public class SignUpFx {
     public void managerRole(MouseEvent mouseEvent) {
         if (RegisterMenu.isHeadManager()) {
             role = "manager";
-            RegisterMenu.setHeadManager(false);
+            //RegisterMenu.setHeadManager(false);
         }
     }
-
-    public void back(MouseEvent mouseEvent) {
-
+    public void userMenu(ActionEvent actionEvent) {
     }
 
-    public void exit(MouseEvent mouseEvent) {
-        System.exit(0);
+    public void logout(ActionEvent actionEvent) {
     }
 
+    public void back(ActionEvent actionEvent) {
+    }
 
+    public void exit(ActionEvent actionEvent) {
+    }
 }

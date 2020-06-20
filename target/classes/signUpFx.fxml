@@ -8,9 +8,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SignUpFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1649.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SignUpFx">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="1087.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" width="1920.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="890.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" width="1649.0">
          <fill>
             <LinearGradient endX="0.8980582524271845" endY="0.7378640776699028">
                <stops>
@@ -20,6 +20,30 @@
             </LinearGradient>
          </fill>
       </Rectangle>
+      <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="User menu">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#userMenu" text="your menu" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" onAction="#logout" text="Logout">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Back">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Exit">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
       <Text layoutX="242.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="drag your image here" wrappingWidth="212.6708984375">
          <font>
             <Font size="22.0" />

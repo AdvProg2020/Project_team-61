@@ -109,29 +109,29 @@ public class OutputMassageHandler {
         }else if (output == 30) {
             text =("username format is invalid");
         } else if (output == 31) {
-            System.out.println("there is no account with this username");
+            text =("there is no account with this username");
         } else if (output == 32) {
-            System.out.println("account removed from list");
+            text =("account removed from list");
         } else if (output == 34) {
-            System.out.println("there is a category with this name");
+            text =("there is a category with this name");
         } else if (output == 36) {
-            System.out.println("please enter username you want to add to discount code list (if you enter finish process end)");
+            text =("please enter username you want to add to discount code list (if you enter finish process end)");
         } else if (output == 37) {
-            System.out.println("discount code add");
+            text =("discount code add");
         } else if (output == 39) {
-            System.out.println("product add to category");
+            text =("product add to category");
         } else if (output == 40) {
-            System.out.println("product removed from category");
+            text =("product removed from category");
         } else if (output == 41) {
-            System.out.println("trait removed");
+            text =("trait removed");
         } else if (output == 42) {
-            System.out.println("trait format is invalid");
+            text =("trait format is invalid");
         } else if (output == 43) {
-            System.out.println("trait add");
+            text =("trait add");
         } else if (output == 45) {
-            System.out.println("category add");
+            text =("category add");
         } else if (output == 46) {
-            System.out.println("there is no product with this id");
+            text =("there is no product with this id");
         }
         return text;
     }
@@ -375,6 +375,8 @@ public class OutputMassageHandler {
             text =("username format is invalid");
         } else if (output == 37) {
             text =("account deleted");
+        }else if (output == 18) {
+            text =("product removed");
         }
         return text ;
     }

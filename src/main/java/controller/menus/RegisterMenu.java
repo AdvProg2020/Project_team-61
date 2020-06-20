@@ -133,13 +133,13 @@ public class RegisterMenu {
                 outputNo = 0;
             } else outputNo = 7;
         } else if (detailMen == 3) {
-            if (detail.matches("^(.+)@(.+)$")) {
+            if (detail.matches(".+")) {
                 Email = detail;
                 detailMenu=4;
                 outputNo = 0;
             } else outputNo = 9;
         } else if (detailMen == 4) {
-            if (detail.matches("09[0-9]{9}")) {
+            if (detail.matches(".+")) {
                 phoneNo = Double.parseDouble(detail);
                 detailMenu=5;
                 outputNo = 0;
@@ -181,32 +181,32 @@ public class RegisterMenu {
         }
     }
 
-    public static int createFirm(String detail) throws IOException {
-        if (detailMenu == 0) {
+    public static int createFirm(String detail , int detailMen) throws IOException {
+        if (detailMen == 0) {
             if (detail.matches("(\\s*\\S+\\s*)+")) {
                 accountRequest.setFirmName(detail);
                 detailMenu++;
                 outputNo = 0;
             } else outputNo = 3;
-        } else if (detailMenu == 1) {
+        } else if (detailMen == 1) {
             if (detail.matches("09[0-9]{9}")) {
                 accountRequest.setPhoneNo(Double.parseDouble(detail));
                 detailMenu++;
                 outputNo = 0;
             } else outputNo = 6;
-        } else if (detailMenu == 2) {
+        } else if (detailMen == 2) {
             if (detail.matches("(\\s*\\S+\\s*)+")) {
                 accountRequest.setFirmAddress(detail);
                 detailMenu = 3;
                 outputNo = 0;
             } else outputNo = 8;
-        }else if (detailMenu == 3) {
+        }else if (detailMen == 3) {
             if (detail.matches("(?i)(?:company|factory|work\\s*shop)")) {
                 accountRequest.setFirmType(detail);
                 detailMenu = 4;
                 outputNo = 0;
             } else outputNo = 18;
-        } else if (detailMenu == 4) {
+        } else if (detailMen == 4) {
             if (detail.matches("^(.+)@(.+)$")) {
                 accountRequest.setFirmEmail(detail);
                 detailMenu = 0;

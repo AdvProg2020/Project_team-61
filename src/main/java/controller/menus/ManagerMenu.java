@@ -1,5 +1,6 @@
 package controller.menus;
 
+import model.accounts.Manager;
 import model.request.Request;
 import model.accounts.Account;
 import model.off.DiscountCode;
@@ -24,6 +25,15 @@ public class ManagerMenu {
     private static int detailMenu = 0;
     private static DiscountCode newDiscountCode;
     private static Category newCategory;
+    private static int create = 0;
+
+    public static int getCreate() {
+        return create;
+    }
+
+    public static void setCreate(int create) {
+        ManagerMenu.create = create;
+    }
 
     public static String getField() {
         return field;
@@ -33,9 +43,12 @@ public class ManagerMenu {
         return detailMenu;
     }
 
+    public static void setDetailMenu(int detailMenu) {
+        ManagerMenu.detailMenu = detailMenu;
+    }
 
     private static boolean checkUsername(String username) {
-        if (username.matches("^(?i)(?=.[a-z])(?=.[0-9])[a-z0-9#.!@$*&_]{5,12}$")) {
+        if (username.matches(".+")) {
             if (Account.isThereAccountWithUsername(username)) {
                 return true;
             } else outputNo = 35;
@@ -84,80 +97,74 @@ public class ManagerMenu {
         return false;
     }
 
-    public static void createNewDiscountCode(String discountCodeId) throws IOException {
+    public static int createNewDiscountCode(String discountCodeId) throws IOException {
         if (!DiscountCode.isThereDiscountWithId(discountCodeId)) {
             newDiscountCode = new DiscountCode(discountCodeId);
             newDiscountCode.setManager(LoginMenu.getLoginAccount());
-            CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.DETAILDESCOUNTCODE);
-            outputNo = 7;
+            create = 1;
+            if(LoginMenu.getLoginAccount() instanceof Manager) {
+                ((Manager) LoginMenu.getLoginAccount()).addDiscount(newDiscountCode);
+            }
+         //   CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
+          //  CommandProcessor.setSubMenuStatus(SubMenuStatus.DETAILDESCOUNTCODE);
+            outputNo = 0;
         } else outputNo = 25;
-        OutputMassageHandler.showManagerOutput(outputNo);
+        return outputNo;
+       // OutputMassageHandler.showManagerOutput(outputNo);
     }
 
-    public static void setDetailToDiscountCode(String detail) throws ParseException, IOException {
-        if (detailMenu == 0) {
+    public static int setDetailToDiscountCode(String detail, int detailMen) throws ParseException, IOException {
+        if (detailMen == 0) {
             if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
                 Date currentDate = new Date();
                 Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
                 if (inputDate.after(currentDate)) {
-//            if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
-//                LocalDateTime currentDate = LocalDateTime.now();
-//                //Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
-//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//                LocalDateTime inputDate = LocalDateTime.parse(detail, formatter);
-//                if (inputDate.isAfter(currentDate)) {
                     newDiscountCode.setStartOfDiscountPeriod(inputDate);
-                    outputNo = 9;
+                    outputNo = 0;
                     detailMenu = 1;
                 } else outputNo = 26;
             } else outputNo = 8;
-        } else if (detailMenu == 1) {
+        } else if (detailMen == 1) {
             if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
                 Date currentDate = new Date();
                 Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
                 if (inputDate.after(currentDate)) {
-//            if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
-//                LocalDateTime currentDate = LocalDateTime.now();
-//                //Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
-//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//                LocalDateTime inputDate = LocalDateTime.parse(detail, formatter);
-//                if (inputDate.isAfter(currentDate)) {
                     newDiscountCode.setEndOfDiscountPeriod(inputDate);
-                    outputNo = 11;
+                    outputNo = 0;
                     detailMenu = 2;
                 } else outputNo = 26;
             } else outputNo = 10;
-        } else if (detailMenu == 2) {
+        } else if (detailMen == 2) {
             if (detail.matches("\\d+")) {
                 newDiscountCode.setMaxDiscountAmount(Double.parseDouble(detail));
-                outputNo = 13;
+                outputNo = 0;
                 detailMenu = 3;
             } else outputNo = 12;
-        } else if (detailMenu == 3) {
+        } else if (detailMen == 3) {
             if (detail.matches("\\d+")) {
                 newDiscountCode.setTotalTimesOfUse(Integer.parseInt(detail));
-                outputNo = 35;
+                outputNo = 0;
                 detailMenu = 4;
             } else outputNo = 14;
-        } else if (detailMenu == 4) {
+        } else if (detailMen == 4) {
             if (detail.matches("\\d+")) {
                 newDiscountCode.setDiscountAmount(Integer.parseInt(detail));
-                outputNo = 36;
+               outputNo = 0;
                 detailMenu = 5;
             } else outputNo = 28;
-        } else if (detailMenu == 5) {
+        } else if (detailMen == 5) {
             if (detail.matches("\\s+")) {
-                if (Account.isThereAccountWithUsername(detail)) {
+               // if (Account.isThereAccountWithUsername(detail)) {
                     newDiscountCode.addAccount(Account.getAccountWithUsername(detail));
                     outputNo = 37;
                     detailMenu = 0;
-                    CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                    CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
-                } else outputNo = 31;
+                   // CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                   // CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+              //  } else outputNo = 31;
             } else outputNo = 30;
         }
-        OutputMassageHandler.showManagerOutput(outputNo);
+        return outputNo;
+       //OutputMassageHandler.showManagerOutput(outputNo);
     }
 
     public static void sortBy(String sort) throws FileNotFoundException {
@@ -182,17 +189,12 @@ public class ManagerMenu {
     public static void editDiscountCode(String discountCodeID) {
         if (checkDiscountCode(discountCodeID)) {
             editableDiscountCode = DiscountCode.getDiscountWithId(discountCodeID);
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.DISCOUNTCODEFIELD);
+            //CommandProcessor.setSubMenuStatus(SubMenuStatus.DISCOUNTCODEFIELD);
             outputNo = 15;
         } else OutputMassageHandler.showManagerOutput(outputNo);
     }
 
-    public static void discountCodeField(String field) {
-        if (field.matches("(?i)(?:start\\s+Of\\s+Discount\\s+Period|end\\s+Of\\s+Discount\\s+Period|remove\\s+account|add\\s+account|max\\s+Discount\\s+Amount|total\\s+Times\\s+Of\\s+Use|discount\\s+amount)")) {
-            ManagerMenu.field = field;
-          //  CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITDISCOUNTCODE);
-        }
-    }
+
 
     public static void editDiscountCodeField(String edit) throws ParseException, IOException {
         if (field.matches("(?i)start\\s+Of\\s+Discount\\s+Period")) {
@@ -200,12 +202,6 @@ public class ManagerMenu {
                 Date currentDate = new Date();
                 Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(edit);
                 if (inputDate.after(currentDate)) {
-//            if (edit.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
-//                LocalDateTime currentDate = LocalDateTime.now();
-//                //Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
-//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//                LocalDateTime inputDate = LocalDateTime.parse(edit, formatter);
-//                if (inputDate.isAfter(currentDate)) {
                     editableDiscountCode.setStartOfDiscountPeriod(inputDate);
                     outputNo = 16;
                 } else outputNo = 26;
@@ -215,12 +211,6 @@ public class ManagerMenu {
                 Date currentDate = new Date();
                 Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(edit);
                 if (inputDate.after(currentDate)) {
-//            if (edit.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
-//                LocalDateTime currentDate = LocalDateTime.now();
-//                //Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
-//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//                LocalDateTime inputDate = LocalDateTime.parse(edit, formatter);
-//                if (inputDate.isAfter(currentDate)) {
                     editableDiscountCode.setEndOfDiscountPeriod(inputDate);
                     outputNo = 17;
                 } else outputNo = 26;
@@ -258,9 +248,12 @@ public class ManagerMenu {
         OutputMassageHandler.showManagerOutput(outputNo);
     }
 
-    public static int removeDiscountCode(String discountCodeID) {
+    public static int removeDiscountCode(String discountCodeID) throws IOException {
         if (checkDiscountCode(discountCodeID)) {
             DiscountCode.deleteDiscount(discountCodeID);
+            if(LoginMenu.getLoginAccount() instanceof Manager) {
+                ((Manager) LoginMenu.getLoginAccount()).removeDiscount(newDiscountCode);
+            }
             outputNo =6;
            // OutputMassageHandler.showOutputWithString(discountCodeID, 4);
         } //else OutputMassageHandler.showManagerOutput(outputNo);
@@ -355,32 +348,34 @@ public class ManagerMenu {
 
     }
 
-    public static void addCategory(String category) throws IOException {
+    public static int addCategory(String category) throws IOException {
         if (!(Category.isThereCategoryWithName(category))) {
             newCategory = new Category(category);
           //  CommandProcessor.setSubMenuStatus(SubMenuStatus.DETAILCATEGORY);
           //  CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
-            outputNo = 38;
+            create = 1;
+            outputNo = 0;
         } else outputNo = 34;
-        OutputMassageHandler.showManagerOutput(outputNo);
+        return outputNo;
+       // OutputMassageHandler.showManagerOutput(outputNo);
     }
 
-    public static void setDetailToCategory(String detail) throws IOException {
+    public static int setDetailToCategory(String detail) throws IOException {
         if (detailMenu == 0) {
             if (detail.matches("\\D+")) {
-                if (!detail.equalsIgnoreCase("finish")) {
+              //  if (!detail.equalsIgnoreCase("finish")) {
                     newCategory.addTrait(detail);
-                    outputNo = 43;
-                } else {
+                 //   outputNo = 43;
+             //   } else {
                 //    CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
                 //    CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGECATEGORIES);
                   //  Category.addKey();
-                    detailMenu = 0;
-                    outputNo = 45;
-                }
+                 //   detailMenu = 0;
+                    outputNo = 0;
+              //  }
             } else outputNo = 42;
-        }
-        OutputMassageHandler.showManagerOutput(outputNo);
+        }return outputNo;
+       // OutputMassageHandler.showManagerOutput(outputNo);
 
     }
 
@@ -474,11 +469,37 @@ public class ManagerMenu {
         OutputMassageHandler.showManagerOutput(1);
     }
 
+ public static void discountCodeField(String field) {
+        if (field.matches("(?i)(?:start\\s+Of\\s+Discount\\s+Period|end\\s+Of\\s+Discount\\s+Period|remove\\s+account|add\\s+account|max\\s+Discount\\s+Amount|total\\s+Times\\s+Of\\s+Use|discount\\s+amount)")) {
+            ManagerMenu.field = field;
+          //  CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITDISCOUNTCODE);
+        }
+    }
       public static void processCreateDiscountCode() {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDDISCOUNTCODE);
         OutputMassageHandler.showManagerOutput(6);
     }
 
+    //            if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
+//                LocalDateTime currentDate = LocalDateTime.now();
+//                //Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
+//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//                LocalDateTime inputDate = LocalDateTime.parse(detail, formatter);
+//                if (inputDate.isAfter(currentDate)) {
+
+/            if (edit.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
+//                LocalDateTime currentDate = LocalDateTime.now();
+//                //Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
+//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//                LocalDateTime inputDate = LocalDateTime.parse(edit, formatter);
+//                if (inputDate.isAfter(currentDate)) {
+
+//            if (edit.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
+//                LocalDateTime currentDate = LocalDateTime.now();
+//                //Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
+//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//                LocalDateTime inputDate = LocalDateTime.parse(edit, formatter);
+//                if (inputDate.isAfter(currentDate)) {
             */
 
 

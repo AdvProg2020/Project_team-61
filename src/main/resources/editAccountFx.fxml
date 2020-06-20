@@ -10,9 +10,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.EditAccountFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.EditAccountFx">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" layoutY="4.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="882.0" layoutY="4.0" stroke="BLACK" strokeType="INSIDE" width="1605.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <fill>
                 <LinearGradient endX="0.8980582524271845" endY="0.7378640776699028">
                     <stops>
@@ -22,7 +22,7 @@
                 </LinearGradient>
             </fill>
         </Rectangle>
-        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.bottomAnchor="1050.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1605.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <menus>
                 <Menu mnemonicParsing="false" text="User menu">
                     <items>
@@ -46,28 +46,12 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <ImageView fitHeight="227.0" fitWidth="307.0" layoutX="106.0" layoutY="162.0" onDragDropped="#picDrop" onDragOver="#picOver" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="691.0" AnchorPane.leftAnchor="106.0" AnchorPane.rightAnchor="1629.1237182617188" AnchorPane.topAnchor="162.0">
-            <image>
-                <Image url="@view/icons/face.png" />
-            </image>
-        </ImageView>
-        <ImageView fitHeight="76.0" fitWidth="83.0" layoutX="1747.0" layoutY="62.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@view/icons/back.png" />
-            </image>
-        </ImageView>
-        <ImageView fitHeight="76.0" fitWidth="76.0" layoutX="1837.0" layoutY="63.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@view/icons/exit.png" />
-            </image>
-        </ImageView>
-        <TextField fx:id="userSign" layoutX="705.0" layoutY="137.0" prefHeight="40.0" prefWidth="271.0" promptText="username" AnchorPane.bottomAnchor="903.0" AnchorPane.leftAnchor="705.0" AnchorPane.rightAnchor="944.0" AnchorPane.topAnchor="137.0" />
-        <PasswordField fx:id="passSign" layoutX="705.0" layoutY="220.0" prefHeight="40.0" prefWidth="271.0" promptText="password" />
-        <TextField fx:id="nameSign" layoutX="705.0" layoutY="297.0" prefHeight="40.0" prefWidth="271.0" promptText="name" />
-        <TextField fx:id="lastNameSign" layoutX="705.0" layoutY="389.0" prefHeight="40.0" prefWidth="271.0" promptText="last name" />
-        <TextField fx:id="phoneNoSign" layoutX="705.0" layoutY="475.0" prefHeight="40.0" prefWidth="271.0" promptText="phone number" />
-        <TextField fx:id="emailSign" layoutX="705.0" layoutY="559.0" prefHeight="40.0" prefWidth="271.0" promptText="Email" />
-        <Text layoutX="1063.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit" wrappingWidth="118.0">
+        <PasswordField fx:id="passSign" layoutX="706.0" layoutY="196.0" prefHeight="40.0" prefWidth="271.0" promptText="password" />
+        <TextField fx:id="nameSign" layoutX="705.0" layoutY="290.0" prefHeight="40.0" prefWidth="271.0" promptText="name" />
+        <TextField fx:id="lastNameSign" layoutX="705.0" layoutY="378.0" prefHeight="40.0" prefWidth="271.0" promptText="last name" />
+        <TextField fx:id="phoneNoSign" layoutX="705.0" layoutY="461.0" prefHeight="40.0" prefWidth="271.0" promptText="phone number" />
+        <TextField fx:id="emailSign" layoutX="705.0" layoutY="551.0" prefHeight="40.0" prefWidth="271.0" promptText="Email" />
+        <Text layoutX="769.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit" wrappingWidth="106.0">
             <font>
                 <Font name="System Bold Italic" size="38.0" />
             </font>
@@ -79,12 +63,7 @@
                     </stops>
                 </LinearGradient>
             </fill></Text>
-        <Label fx:id="userLoginMs" layoutX="705.0" layoutY="177.0" prefHeight="28.0" prefWidth="271.0" text="Label" textFill="RED">
-            <font>
-                <Font size="19.0" />
-            </font>
-        </Label>
-        <Label fx:id="passLoginMs" layoutX="705.0" layoutY="260.0" prefHeight="29.0" prefWidth="271.0" text="Label" textFill="RED">
+        <Label fx:id="passLoginMs" layoutX="705.0" layoutY="251.0" prefHeight="29.0" prefWidth="271.0" text="Label" textFill="RED">
             <font>
                 <Font size="19.0" />
             </font>
@@ -109,12 +88,17 @@
                 <Font size="19.0" />
             </font>
         </Label>
-        <Text layoutX="106.0" layoutY="448.0" strokeType="OUTSIDE" strokeWidth="0.0" text="drag your image here" wrappingWidth="223.6708984375" AnchorPane.bottomAnchor="626.478515625" AnchorPane.leftAnchor="106.0" AnchorPane.rightAnchor="1590.3291015625" AnchorPane.topAnchor="424.259765625">
+        <Text layoutX="270.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="drag your image here" wrappingWidth="223.6708984375">
             <font>
                 <Font size="22.0" />
             </font>
         </Text>
-        <Button layoutX="782.0" layoutY="670.0" mnemonicParsing="false" onMouseClicked="#editAccount" prefHeight="40.0" prefWidth="118.0" text="Edit" AnchorPane.bottomAnchor="370.0" AnchorPane.leftAnchor="782.0" AnchorPane.rightAnchor="1020.0" AnchorPane.topAnchor="670.0">
+        <ImageView fitHeight="259.0" fitWidth="224.0" layoutX="276.0" layoutY="236.0" onDragDropped="#picDropEdit" onDragOver="#picOverEdit" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@view/icons/face.png" />
+            </image>
+        </ImageView>
+        <Button layoutX="782.0" layoutY="670.0" mnemonicParsing="false" onMouseClicked="#editAccount" prefHeight="40.0" prefWidth="118.0" text="Edit">
             <textFill>
                 <LinearGradient endX="1.0" endY="1.0">
                     <stops>

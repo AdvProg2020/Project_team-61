@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class CustomerMenuFx {
-    public static final ObservableList data = FXCollections.observableArrayList();
+    public static  ObservableList data = FXCollections.observableArrayList();
     private static Parent root;
 
 

@@ -1,42 +1,83 @@
 package sample;
 
 import controller.menus.ManagerMenu;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import model.accounts.Account;
 import model.productRelated.Category;
 import view.OutputMassageHandler;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Objects;
 
 public class CategoriesFX {
 
-    @FXML
-    private TableColumn<Category, ?> categoriesName;
-
-    @FXML
-    private TableView<Category> categories;
+    @FXML private TableColumn<Category, String> categoriesName;
+    @FXML private TableView<Category> categories;
     private static Parent root;
 
+    public static ObservableList list = FXCollections.observableArrayList();
 
-    public void editCategories(MouseEvent mouseEvent) {
+
+    @FXML
+    public void initialize() throws IOException {
+        makeTree();
+    }
+
+    public static void makeList() {
+        list.clear();
+        list.addAll(Category.getAllCategories());
+    }
+
+    private void makeTree() {
+        categoriesName.setCellValueFactory(new PropertyValueFactory<Category, String>("name"));
+
+
+        makeList();
+        //  usersList.getColumns().addAll(UserId,userName,userLast,userBirth,userPhoneNo,userEmail);
+        categories.setEditable(true);
+        categories.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        categories.getSelectionModel().setCellSelectionEnabled(true);
+
+        categories.setItems(list);
+    }
+
+
+    public void editCategories(MouseEvent mouseEvent) throws IOException {
+       // if(categories.getSelectionModel().getSelectedItem() != null) {
+           // Category curCat = categories.getSelectionModel().getSelectedItem();
+
+        root = FXMLLoader.load(Objects.requireNonNull(AddCategoryFx.class.getClassLoader().getResource("addCategoryFx.fxml")));
+            goToPage();
+       // }else usersMs.setText("you have to select first");
     }
 
     public void removeCategories(MouseEvent mouseEvent) {
-        Category cat = (Category) categories.getSelectionModel().getSelectedItem();
-        OutputMassageHandler.showManagerOutput(ManagerMenu.removeCategory(cat.getName()));
+        if(categories.getSelectionModel().getSelectedItem() != null) {
+            Category curCat = categories.getSelectionModel().getSelectedItem();
+            OutputMassageHandler.showManagerOutput(ManagerMenu.removeCategory(curCat.getName()));
+            makeTree();
+        }
     }
 
     public void addCategories(MouseEvent mouseEvent) throws IOException {
-         root = FXMLLoader.load(getClass().getResource("addCategory.fxml"));
+        root = FXMLLoader.load(Objects.requireNonNull(AddCategoryFx.class.getClassLoader().getResource("addCategoryFx.fxml")));
+        goToPage();
     }
 
 

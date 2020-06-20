@@ -22,8 +22,9 @@ public class DiscountCode {
     public DiscountCode(String discountId) throws IOException {
         this.discountId = discountId;
         allDiscountCodes.add(this);
-     //   writeInJ();
+       // writeInJ();
     }
+
 
     public int getDiscountAmount() {
         return discountAmount;

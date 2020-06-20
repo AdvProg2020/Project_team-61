@@ -82,7 +82,6 @@ public abstract class Account {
     }
 
     public static boolean isThereAccountWithUsername(String username) {
-
         for (Account account : allAccounts) {
             if (account.username.equalsIgnoreCase(username)) return true;
         }
@@ -99,6 +98,7 @@ public abstract class Account {
 
     public static void deleteAccount(String username) {
         allAccounts.remove(getAccountWithUsername(username));
+
     }
 
     public static boolean isThereAccountWithUsernameAndPassword(String username, String password) {

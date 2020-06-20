@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.accounts.Account;
+import model.firms.Firm;
 import view.OutputMassageHandler;
 
 import java.io.IOException;
@@ -27,49 +28,30 @@ import java.util.Objects;
 
 public class UsersFx {
 
-    @FXML
-    private TableView<Account> usersList;
+    @FXML private TableView<Account> usersList;
+    @FXML private TableColumn<Account, String> UserId;
+    @FXML private TableColumn<Account, Double> userPhoneNo;
+    @FXML private TableColumn<Account, String> userEmail;
+    @FXML private TableColumn<Account, String> userLast;
+    @FXML private TableColumn<Account, Date> userBirth;
+    @FXML private TableColumn<Account, String> userName;
+    @FXML private Label usersMs;
 
-    @FXML
-    private TableColumn<Account, String> UserId;
-
-    @FXML
-    private TableColumn<Account, Double> userPhoneNo;
-
-    @FXML
-    private TableColumn<Account, String> userEmail;
-
-    @FXML
-    private TableColumn<Account, String> userLast;
-
-    @FXML
-    private TableColumn<Account, Date> userBirth;
-
-    @FXML
-    private TableColumn<Account, String> userName;
-
-    @FXML
-    private TableColumn<Account, String> UserNumber;
-
-    public static final ObservableList list = FXCollections.observableArrayList();
+    public static  ObservableList list = FXCollections.observableArrayList();
     private static Parent root;
     private static ArrayList<Account> accounts = new ArrayList<>();
 
     @FXML
     public void initialize() throws IOException {
         makeTree();
-
     }
 
-   
-
-    public static void initializeObserverList() {
+    public static void makeList() {
         list.clear();
         list.addAll(Account.getAllAccounts());
     }
 
     private void makeTree() {
-       // UserNumber.setCellValueFactory(new PropertyValueFactory<Account, String>("Number"));
         UserId.setCellValueFactory(new PropertyValueFactory<Account, String>("username"));
         userName.setCellValueFactory(new PropertyValueFactory<Account, String>("name"));
         userLast.setCellValueFactory(new PropertyValueFactory<Account, String>("lastname"));
@@ -77,7 +59,7 @@ public class UsersFx {
         userPhoneNo.setCellValueFactory(new PropertyValueFactory<Account, Double>("phoneNo"));
         userEmail.setCellValueFactory(new PropertyValueFactory<Account, String>("email"));
 
-        initializeObserverList();
+        makeList();
       //  usersList.getColumns().addAll(UserId,userName,userLast,userBirth,userPhoneNo,userEmail);
         usersList.setEditable(true);
         usersList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -86,27 +68,22 @@ public class UsersFx {
         usersList.setItems(list);
     }
 
-    private void makeList() throws IOException {
-        List<Account> allAccounts = new ArrayList<>();
-        allAccounts.addAll(Account.getAllAccounts());
-        list.clear();
-        for (int i = 0; i < allAccounts.size() ; i++) {
-            list.addAll(i, allAccounts.get(i).getUsername(),allAccounts.get(i).getName(),allAccounts.get(i).getLastname(),allAccounts.get(i).getBirthdayDate(),allAccounts.get(i).getPhoneNo(),allAccounts.get(i).getEmail());
-        }
 
-    }
     public void viewUser(MouseEvent mouseEvent) throws IOException {
-        Account a = usersList.getSelectionModel().getSelectedItem();
-        ViewAccountFx.setAccount(a);
-        root = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
-        goToPage();
+        if(usersList.getSelectionModel().getSelectedItem() != null) {
+            Account a = usersList.getSelectionModel().getSelectedItem();
+            ViewAccountFx.setAccount(a);
+            root = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
+            goToPage();
+        }else usersMs.setText("you have to select first");
     }
 
     public void deleteUser(MouseEvent mouseEvent) {
         if(usersList.getSelectionModel().getSelectedItem() != null) {
             Account a = usersList.getSelectionModel().getSelectedItem();
-          show( OutputMassageHandler.showAccountOutput( ManagerMenu.deleteUser(a.getUsername())));
-        }
+            usersMs.setText( OutputMassageHandler.showAccountOutput( ManagerMenu.deleteUser(a.getUsername())));
+            makeTree();
+        }else usersMs.setText("you have to select first");
     }
 
     public void AddManager(MouseEvent mouseEvent) throws IOException {
@@ -132,6 +109,15 @@ public class UsersFx {
         massage.show();
     }
 
+//    private void makeList() throws IOException {
+//        List<Account> allAccounts = new ArrayList<>();
+//        allAccounts.addAll(Account.getAllAccounts());
+//        list.clear();
+//        for (int i = 0; i < allAccounts.size() ; i++) {
+//            list.addAll(i, allAccounts.get(i).getUsername(),allAccounts.get(i).getName(),allAccounts.get(i).getLastname(),allAccounts.get(i).getBirthdayDate(),allAccounts.get(i).getPhoneNo(),allAccounts.get(i).getEmail());
+//        }
+//
+//    }
 
     public void userMenu(ActionEvent actionEvent) {
     }

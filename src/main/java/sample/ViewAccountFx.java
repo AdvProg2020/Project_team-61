@@ -15,6 +15,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.accounts.Account;
 import model.accounts.Customer;
+import model.accounts.Manager;
 import model.accounts.Seller;
 import model.request.AccountRequest;
 import model.request.Request;
@@ -76,7 +77,7 @@ public class ViewAccountFx {
         role.setText("seller");
         phoneNo.setText(String.valueOf(accountRequest.getPhoneNo()));
         email.setText(accountRequest.getEmail());
-        credit.setText(String.valueOf(null));
+        credit.setText(null);
         birthday.setText(String.valueOf(accountRequest.getBirthdayDate()));
     }
 
@@ -135,7 +136,7 @@ public class ViewAccountFx {
     public void viewFirm(MouseEvent mouseEvent) throws IOException {
         if(LoginMenu.getLoginAccount() instanceof Seller){
             ViewFirmFx.setAccount(LoginMenu.getLoginAccount());
-        }else {
+        }else if(LoginMenu.getLoginAccount() instanceof Manager){
             ViewFirmFx.setRequest(request);
         }
         root = FXMLLoader.load(Objects.requireNonNull(ViewFirmFx.class.getClassLoader().getResource("viewFirmFx.fxml")));

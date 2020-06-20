@@ -30,7 +30,9 @@ public class Category{
         return traits;
     }
 
-
+    public void setTraits(ArrayList<String> traits) {
+        this.traits = traits;
+    }
 
     public static void setAllCategories(ArrayList<Category> allCategories) {
         Category.allCategories = allCategories;
