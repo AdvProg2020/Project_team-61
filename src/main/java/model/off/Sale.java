@@ -18,18 +18,15 @@ public class Sale{
     private Date endOfSalePeriod;
     private int saleAmount;
     private static Account seller;
+    private ArrayList <Product> allSaleProducts = new ArrayList<>();
+    private static ArrayList <Sale> allSales = new ArrayList<>();
+    public static Type SaleType = new TypeToken<ArrayList<Sale>>() {
+    }.getType();
 
-    public static ArrayList<Sale> getAllSales() {
-        return allSales;
-    }
-
-    private ArrayList <Product> allSaleProducts;
-    private static ArrayList <Sale> allSales;
-
-    public Sale(String offId) {
+    public Sale(String offId) throws IOException {
         this.offId = offId;
         allSales.add(this);
-
+        writeInJ();
     }
     public void setSaleDetails(SaleStatus saleStatus, Date startOfSalePeriod, Date endOfSalePeriod, int saleAmount, Account seller) throws IOException {
         this.saleStatus = saleStatus;
@@ -38,6 +35,14 @@ public class Sale{
         this.saleAmount = saleAmount;
         this.seller = seller;
         writeInJ();
+    }
+
+    public static void setAllSales(ArrayList<Sale> allSales) {
+        Sale.allSales = allSales;
+    }
+
+    public static ArrayList<Sale> getAllSales() {
+        return allSales;
     }
 
     public String getOffId() {
@@ -65,6 +70,7 @@ public class Sale{
         return allSales;
     }
 
+
     public static Sale getSaleWithId(String id){
         for (Sale sale : allSales) {
             if (sale.getOffId().equals(id)) {
@@ -79,28 +85,15 @@ public class Sale{
 
     public Sale getSaleWithSeller(Seller seller){
         for (Sale sale:allSales){
-            if ((sale.getSeller()).equals(seller)){
+            if ((sale.getSeller())==(seller)){
                 return sale;
             }
 
         }
         return null;
     }
-    public static boolean saleDateValid( Date start,Date end){
-        Date currentDate=new Date();
-        if(start.after(currentDate) && end.after(currentDate)&& end.after(start) ){
-            return  true;
-        }
-        return false;
-    }
-    public void deleteExpiredDiscount(){
-        Date currentDate=new Date();
-        for (Sale sale : allSales) {
-            if (sale.getEndOfDiscountPeriod().before(currentDate)){
-                allSales.remove(sale);
-            }
-        }
-    }
+
+
 
     public Sale getSaleWithProduct(Product product){
         for (Sale sale : allSales) {
@@ -113,20 +106,9 @@ public class Sale{
         return null;
     }
 
-    public void setStartOfSalePeriod(Date startOfSalePeriod) {
-        this.startOfSalePeriod = startOfSalePeriod;
-    }
-
-    public void setEndOfSalePeriod(Date endOfSalePeriod) {
-        this.endOfSalePeriod = endOfSalePeriod;
-    }
-
-    public void setSaleAmount(int saleAmount) {
-        this.saleAmount = saleAmount;
-    }
-
     public void setAllSaleProducts(ArrayList<Product> allSaleProducts) {
         this.allSaleProducts = allSaleProducts;
+
     }
 
     public void setSaleStatus(SaleStatus saleStatus) {
@@ -136,15 +118,6 @@ public class Sale{
     public static void deleteSale(String id){
         allSales.remove(id);
     }
-    //!
-    public ArrayList<Double> calculatePriceAfterSale(){
-        ArrayList<Double> prices = new ArrayList<>();
-        for (Product saleProduct : allSaleProducts) {
-           double price=saleProduct.getPrice()*(1-(saleAmount/100));
-           prices.add(price);
-        }
-        return prices;
-            }
 
     public boolean isTheProductInAnotherSale(Product product) {
         for (Sale sale : allSales) {
@@ -156,10 +129,17 @@ public class Sale{
     }
 
     public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Sale>>(){}.getType();
-        String json= FileHandling.getGson().toJson(Sale.allSales,collectionType);
-        FileHandling.turnToArray(json+" "+"sale.json");
+
+        String json = FileHandling.getGson().toJson(Sale.allSales, SaleType);
+        FileHandling.writeInFile(json, "sale.json");
+
     }
+
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<Sale>>(){}.getType();
+//        String json= FileHandling.getGson().toJson(Sale.allSales,collectionType);
+//        FileHandling.turnToArray(json+" "+"sale.json");
+//    }
 
     @Override
     public String toString() {

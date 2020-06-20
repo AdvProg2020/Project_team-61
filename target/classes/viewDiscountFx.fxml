@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import java.lang.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewDiscountFx">
+    <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1545.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#ffec1f" />
+                  <Stop color="#f000b4" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.bottomAnchor="1050.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="User menu">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#userMenu" text="your menu" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Logout">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Back">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Label layoutX="628.0" layoutY="67.0" prefHeight="40.0" prefWidth="238.0" text="Discount code">
+            <font>
+                <Font name="System Bold Italic" size="34.0" />
+            </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#fc0aa7" />
+                  <Stop color="#03b5ff" offset="0.5228758169934641" />
+                  <Stop color="#ff8205" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill></Label>
+        <Label fx:id="discountIdInfo" layoutX="840.0" layoutY="150.0" prefHeight="32.0" prefWidth="374.0" text="Label">
+         <font>
+            <Font size="25.0" />
+         </font></Label>
+        <Label fx:id="startDiscountInfo" layoutX="840.0" layoutY="208.0" prefHeight="40.0" prefWidth="374.0" text="Label">
+         <font>
+            <Font size="28.0" />
+         </font></Label>
+        <Label fx:id="endDiscountInfo" layoutX="840.0" layoutY="264.0" prefHeight="40.0" prefWidth="374.0" text="Label">
+         <font>
+            <Font size="28.0" />
+         </font></Label>
+        <Label fx:id="discountAmountInfo" layoutX="840.0" layoutY="319.0" prefHeight="40.0" prefWidth="374.0" text="Label">
+         <font>
+            <Font size="28.0" />
+         </font></Label>
+        <ListView fx:id="allAccountsInfo" layoutX="588.0" layoutY="517.0" prefHeight="364.0" prefWidth="374.0" />
+        <Label fx:id="timesOfUseInfo" layoutX="839.0" layoutY="383.0" prefHeight="40.0" prefWidth="384.0" text="Label">
+         <font>
+            <Font size="28.0" />
+         </font></Label>
+        <Label fx:id="maxAmountInfo" layoutX="840.0" layoutY="441.0" prefHeight="40.0" prefWidth="384.0" text="Label">
+         <font>
+            <Font size="28.0" />
+         </font></Label>
+      <Text layoutX="542.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discount Id:">
+         <font>
+            <Font name="System Bold Italic" size="29.0" />
+         </font>
+      </Text>
+      <Text layoutX="538.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of start:">
+         <font>
+            <Font name="System Bold Italic" size="29.0" />
+         </font>
+      </Text>
+      <Text layoutX="535.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Time Of Use:">
+         <font>
+            <Font name="System Bold Italic" size="29.0" />
+         </font>
+      </Text>
+      <Text layoutX="542.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount:">
+         <font>
+            <Font name="System Bold Italic" size="29.0" />
+         </font>
+      </Text>
+      <Text layoutX="540.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of end:">
+         <font>
+            <Font name="System Bold Italic" size="29.0" />
+         </font>
+      </Text>
+      <Text layoutX="532.0" layoutY="462.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maximum Amount:">
+         <font>
+            <Font name="System Bold Italic" size="29.0" />
+         </font>
+      </Text>
+      <Text layoutX="389.0" layoutY="551.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All Accounts:">
+         <font>
+            <Font name="System Bold Italic" size="29.0" />
+         </font>
+      </Text>
+    </children>
+</AnchorPane>

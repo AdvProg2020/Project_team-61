@@ -2,27 +2,36 @@ package view;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-import model.productRelated.Product;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class FileHandling {
 
+    public static String fileName;
+    public static String jsonString;
     public static Gson gson = new GsonBuilder().create();
 
-    public static void turnToArray(String arrayAndFile) throws IOException {
-        ArrayList<String> parts = new ArrayList<String>(
-                Arrays.asList(arrayAndFile.split(" ")));
-        writeInFile(parts.get(0),parts.get(1));
+
+
+
+    private static ArrayList<String> fileNames = new ArrayList<>();
+
+    public static ArrayList<String> getFileNames() {
+        return fileNames;
     }
+
+    public static void setFileName(String fileName) {
+        FileHandling.fileName = fileName;
+    }
+
+    public static void setJsonString(String jsonString) {
+        FileHandling.jsonString = jsonString;
+    }
+
+
+    //others----------------------------------------------------------------------------------------------------------
 
     public static void writeInFile(String json,String fileName) throws IOException {
         FileWriter writer = new FileWriter(fileName);
@@ -34,15 +43,15 @@ public class FileHandling {
             System.exit(-1);
         }finally {
             writer.flush();
-            writer.close();
+            //writer.close();
         }
     }
 
-    public static JsonReader readFile(String fileName) throws FileNotFoundException {
-        JsonReader reader = new JsonReader(new FileReader(fileName));
-        return reader;
-    }
 
+
+    public static void setGson(Gson gson) {
+        FileHandling.gson = gson;
+    }
 
     public static Gson getGson() {
         return gson;

@@ -1,19 +1,12 @@
 package model.accounts;
 
-import com.google.gson.reflect.TypeToken;
-import model.log.BuyLog;
-import model.log.SaleLog;
-import model.off.DiscountCode;
-import model.productRelated.Product;
-import view.FileHandling;
 
-import javax.xml.crypto.Data;
+import model.firms.Firm;
+
+import model.off.DiscountCode;
+
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.Iterator;
+import java.util.*;
 
 public abstract class Account {
     String username;
@@ -27,39 +20,68 @@ public abstract class Account {
     double currentPhoneNo;
     String address;
     Date birthdayDate;
-    int usedDiscount=0;
+    public Firm firm;
+    boolean fast;
     ArrayList<DiscountCode> allDiscountCodes;
-    private static ArrayList<SaleLog> allSaleLogs;
-    private static ArrayList<BuyLog> allBuyLogs;
-    private  static ArrayList<Account> allAccounts;
+    private static ArrayList<Account> allAccounts;
+    private static ArrayList<Date> birthdayDates = new ArrayList<>();
+//    public static Type AccountType = new TypeToken<ArrayList<Account>>() {
+//    }.getType();
 
-    public  void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo, Data birthdayDate) throws IOException {
 
-        this.password = password;
-        this.name = name;
-        this.lastname = lastname;
-        this.email = Email;
-        this.phoneNo = phoneNo;
-        this.birthdayDate = (Date) birthdayDate;
-        writeInJ();
+    public void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate, Firm firm) throws IOException {
+        if (password != null) {
+            this.password = password;
+        }
+        if (name != null) {
+            this.name = name;
+        }
+        if (lastname != null) {
+            this.lastname = lastname;
+        }
+        if (email != null) {
+            this.email = Email;
+        }
+        if (phoneNo != 0) {
+            this.phoneNo = phoneNo;
+        }
+        if (birthdayDate != null) {
+            this.birthdayDate = (Date) birthdayDate;
+            birthdayDates.add(birthdayDate);
+        }
+        if (firm != null) {
+            this.firm = firm;
+        }
+//        writeInJ();
+        Customer.writeInJ();
+        Manager.writeInJ();
+        Seller.writeInJ();
     }
 
 
-    public Account(String username) {
+    public Account(String username) throws IOException {
         this.username = username;
         allAccounts.add(this);
+
     }
 
-    public void addDiscountCode(DiscountCode discountCode){
+    public ArrayList<DiscountCode> getAllDiscountCodes() {
+        return allDiscountCodes;
+    }
+
+    public void addDiscountCode(DiscountCode discountCode) throws IOException {
         allDiscountCodes.add(discountCode);
+//        writeInJ();
+
     }
 
-    public void removeDiscountCode(DiscountCode discountCode){
+    public void removeDiscountCode(DiscountCode discountCode) throws IOException {
         allDiscountCodes.remove(discountCode);
+//        writeInJ();
+
     }
 
     public static boolean isThereAccountWithUsername(String username) {
-
         for (Account account : allAccounts) {
             if (account.username.equalsIgnoreCase(username)) return true;
         }
@@ -76,6 +98,7 @@ public abstract class Account {
 
     public static void deleteAccount(String username) {
         allAccounts.remove(getAccountWithUsername(username));
+
     }
 
     public static boolean isThereAccountWithUsernameAndPassword(String username, String password) {
@@ -87,9 +110,6 @@ public abstract class Account {
 
     }
 
-    public void increaseDiscountUsed(){
-        usedDiscount++;
-    }
 
     public Account listUsers() {
         Iterator iterator = allAccounts.iterator();
@@ -109,48 +129,71 @@ public abstract class Account {
     }
 
     //----------------------------------------------------------------
-    public void setName(String name) {
+    public void setName(String name) throws IOException {
         this.name = name;
+//        writeInJ();
+
     }
 
-    public void setLastname(String lastname) {
+    public void setLastname(String lastname) throws IOException {
         this.lastname = lastname;
+//        writeInJ();
+
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password) throws IOException {
         this.password = password;
+//        writeInJ();
+
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String email) throws IOException {
         this.email = email;
+//        writeInJ();
+
     }
 
-    public void setPhoneNo(int phoneNo) {
+    public void setPhoneNo(int phoneNo) throws IOException {
         this.phoneNo = phoneNo;
+//        writeInJ();
+
     }
 
-    public void setCredit(double credit) {
+    public Firm getFirm() {
+        return firm;
+    }
+
+    public void setCredit(double credit) throws IOException {
         this.credit = credit;
+//        writeInJ();
+
     }
 
-    public void setCurrentPhoneNo(double currentPhoneNo) {
+    public void setCurrentPhoneNo(double currentPhoneNo) throws IOException {
         this.currentPhoneNo = currentPhoneNo;
+//        writeInJ();
+
     }
 
-    public void setAddress(String address) {
+    public void setAddress(String address) throws IOException {
         this.address = address;
+//        writeInJ();
+
     }
 
+    public void setFast(boolean fast) throws IOException {
+        this.fast = fast;
+//        writeInJ();
+
+    }
 
     //-----------------------------------------------------------------
-
-
     public static ArrayList<Account> getAllAccounts() {
         return allAccounts;
     }
 
-    public static ArrayList<BuyLog> getAllBuyLogs() {
-        return allBuyLogs;
+    public Date getBirthdayDate() {
+        return birthdayDate;
     }
 
     public String getAddress() {
@@ -181,15 +224,12 @@ public abstract class Account {
         return credit;
     }
 
-    public int getUsedDiscount() {
-        return usedDiscount;
+    public static void setAllAccounts(ArrayList<Account> allAccounts) {
+        Account.allAccounts = allAccounts;
     }
 
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Account>>(){}.getType();
-        String json= FileHandling.getGson().toJson(Account.allAccounts,collectionType);
-        FileHandling.turnToArray(json+" "+"account.json");
-    }
+    //......................................................................
+
 
     public static Comparator<Account> accountComparatorForUsername = new Comparator<Account>() {
 
@@ -197,7 +237,8 @@ public abstract class Account {
             String name1 = s1.getName().toUpperCase();
             String name2 = s2.getName().toUpperCase();
             return name1.compareTo(name2);
-        }};
+        }
+    };
 
     @Override
     public String toString() {
@@ -213,7 +254,6 @@ public abstract class Account {
                 ", currentPhoneNo=" + currentPhoneNo +
                 ", address='" + address + '\'' +
                 ", birthdayDate=" + birthdayDate +
-                ", usedDiscount=" + usedDiscount +
                 ", allDiscountCodes=" + allDiscountCodes +
                 '}';
     }

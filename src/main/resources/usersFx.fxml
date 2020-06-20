@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UsersFx">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="849.0" layoutX="1.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="1605.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0" startX="0.15533980582524273" startY="0.0970873786407767">
+                    <stops>
+                        <Stop color="#4976bf" />
+                        <Stop color="#4976bf" offset="0.007246376811594203" />
+                        <Stop color="#5e51d7" offset="0.15579710144927536" />
+                        <Stop color="#ab437c" offset="0.47058823529411775" />
+                        <Stop color="#fcc5e5" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <MenuBar layoutX="-1.0" layoutY="1.0" prefHeight="36.0" prefWidth="1605.0" AnchorPane.bottomAnchor="845.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="User menu">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#userMenu" text="your menu" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Logout">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Back">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Text layoutX="749.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Users" AnchorPane.bottomAnchor="770.458984375" AnchorPane.leftAnchor="749.0" AnchorPane.rightAnchor="750.1181640625" AnchorPane.topAnchor="55.677734375">
+            <font>
+                <Font name="System Bold Italic" size="42.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#ff57bf" />
+                        <Stop color="WHITE" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <TableView fx:id="usersList" layoutX="121.0" layoutY="139.0" prefHeight="612.0" prefWidth="1244.0">
+            <columns>
+                <TableColumn fx:id="UserId" prefWidth="155.0" text="Username" />
+                <TableColumn fx:id="userName" prefWidth="196.0" text="Name" />
+                <TableColumn fx:id="userLast" prefWidth="203.0" text="Last name" />
+                <TableColumn fx:id="userBirth" prefWidth="189.0" text="Birthday date" />
+                <TableColumn fx:id="userPhoneNo" prefWidth="251.0" text="Phone number" />
+                <TableColumn fx:id="userEmail" prefWidth="249.0" text="Email" />
+            </columns>
+        </TableView>
+      <Button layoutX="1275.0" layoutY="773.0" mnemonicParsing="false" onMouseClicked="#viewUser" prefHeight="39.0" prefWidth="90.0" text="View">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#6a00ff" />
+                  <Stop color="RED" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="1168.0" layoutY="773.0" mnemonicParsing="false" onMouseClicked="#deleteUser" prefHeight="39.0" prefWidth="90.0" text="Delete">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#6a00ff" />
+                  <Stop color="RED" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="1037.0" layoutY="773.0" mnemonicParsing="false" onMouseClicked="#AddManager" prefHeight="39.0" prefWidth="115.0" text="Add manager">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#6a00ff" />
+                  <Stop color="RED" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Label fx:id="usersMs" layoutX="121.0" layoutY="766.0" prefHeight="53.0" prefWidth="860.0" text="Label" textFill="WHITE">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>

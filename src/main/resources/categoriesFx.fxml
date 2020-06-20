@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CategoriesFX">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="882.0" stroke="BLACK" strokeType="INSIDE" width="1605.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0" startX="0.12135922330097089" startY="0.0970873786407767">
+                    <stops>
+                        <Stop color="#ffc387" />
+                        <Stop color="#c66422" offset="0.11956521739130435" />
+                  <Stop color="#ab437c" offset="0.48145780051150905" />
+                  <Stop color="#fcc5e5" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="User menu">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#userMenu" text="your menu" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Logout">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Back">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Text layoutX="698.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categories">
+            <font>
+                <Font name="System Bold Italic" size="42.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#ff57bf" />
+                        <Stop color="WHITE" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+      <Button layoutX="1143.0" layoutY="788.0" mnemonicParsing="false" onMouseClicked="#editCategories" prefHeight="32.0" prefWidth="75.0" text="Edit">
+         <textFill>
+            <LinearGradient endX="0.7815533980582524" endY="0.5097087378640777" startX="0.30097087378640774" startY="0.23786407766990292">
+               <stops>
+                  <Stop color="#4a00ff" />
+                  <Stop color="#4a00ff" offset="0.007246376811594203" />
+                  <Stop color="#eb0000" offset="0.5543478260869565" />
+                  <Stop color="#3700ff" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="1237.0" layoutY="788.0" mnemonicParsing="false" onMouseClicked="#removeCategories" prefHeight="32.0" prefWidth="75.0" text="Remove">
+         <textFill>
+            <LinearGradient endX="0.7815533980582524" endY="0.5097087378640777" startX="0.30097087378640774" startY="0.23786407766990292">
+               <stops>
+                  <Stop color="#4a00ff" />
+                  <Stop color="#4a00ff" offset="0.007246376811594203" />
+                  <Stop color="#eb0000" offset="0.5543478260869565" />
+                  <Stop color="#3700ff" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="1337.0" layoutY="788.0" mnemonicParsing="false" onMouseClicked="#addCategories" prefHeight="32.0" prefWidth="75.0" text="Add">
+         <textFill>
+            <LinearGradient endX="0.7815533980582524" endY="0.5097087378640777" startX="0.30097087378640774" startY="0.23786407766990292">
+               <stops>
+                  <Stop color="#4a00ff" />
+                  <Stop color="#4a00ff" offset="0.007246376811594203" />
+                  <Stop color="#eb0000" offset="0.5543478260869565" />
+                  <Stop color="#3700ff" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <TableView fx:id="categories" layoutX="273.0" layoutY="107.0" prefHeight="668.0" prefWidth="1059.0">
+        <columns>
+          <TableColumn fx:id="categoriesName" prefWidth="1058.0" text="Name" />
+        </columns>
+      </TableView>
+    </children>
+</AnchorPane>

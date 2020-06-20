@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1649.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SignUpFx">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="890.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" width="1649.0">
+         <fill>
+            <LinearGradient endX="0.8980582524271845" endY="0.7378640776699028">
+               <stops>
+                  <Stop color="#9e097b" />
+                  <Stop color="#3b07a4" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="User menu">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#userMenu" text="your menu" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" onAction="#logout" text="Logout">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Back">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Exit">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Text layoutX="242.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="drag your image here" wrappingWidth="212.6708984375">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="274.0" fitWidth="249.0" layoutX="242.0" layoutY="145.0" onDragDropped="#picDrop" onDragOver="#picOver" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@view/icons/face.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="userSign" layoutX="705.0" layoutY="137.0" prefHeight="40.0" prefWidth="271.0" promptText="username" />
+      <PasswordField fx:id="passSign" layoutX="705.0" layoutY="220.0" prefHeight="40.0" prefWidth="271.0" promptText="password" />
+      <TextField fx:id="nameSign" layoutX="705.0" layoutY="297.0" prefHeight="40.0" prefWidth="271.0" promptText="name" />
+      <TextField fx:id="lastNameSign" layoutX="705.0" layoutY="389.0" prefHeight="40.0" prefWidth="271.0" promptText="last name" />
+      <TextField fx:id="phoneNoSign" layoutX="705.0" layoutY="564.0" prefHeight="40.0" prefWidth="271.0" promptText="phone number" />
+      <TextField fx:id="emailSign" layoutX="705.0" layoutY="476.0" prefHeight="40.0" prefWidth="271.0" promptText="Email" />
+      <TextField fx:id="birthdaySign" layoutX="705.0" layoutY="661.0" prefHeight="40.0" prefWidth="271.0" promptText="birthday date" />
+      <Text layoutX="766.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign up" wrappingWidth="150.0">
+         <font>
+            <Font name="System Bold Italic" size="38.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#0593ff" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill></Text>
+      <Label fx:id="userLoginMs" layoutX="705.0" layoutY="177.0" prefHeight="28.0" prefWidth="271.0" textFill="RED">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="passLoginMs" layoutX="705.0" layoutY="260.0" prefHeight="29.0" prefWidth="271.0" textFill="RED">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="nameLoginMs" layoutX="705.0" layoutY="337.0" prefHeight="29.0" prefWidth="271.0" textFill="RED">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="lastNameLoginMs" layoutX="705.0" layoutY="425.0" prefHeight="29.0" prefWidth="271.0" textFill="RED">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="phoneLoginMs" layoutX="705.0" layoutY="604.0" prefHeight="29.0" prefWidth="271.0" textFill="RED">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="emailLoginMs" layoutX="705.0" layoutY="516.0" prefHeight="29.0" prefWidth="271.0" textFill="RED">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="birthLoginMs" layoutX="705.0" layoutY="702.0" prefHeight="29.0" prefWidth="271.0" textFill="RED">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Button layoutX="236.0" layoutY="465.0" mnemonicParsing="false" onMouseClicked="#customerRole" prefHeight="31.0" prefWidth="112.0" text="Customer">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="RED" />
+                  <Stop color="#2c037c" offset="0.47385620915032683" />
+                  <Stop color="#00a1ff" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="370.0" layoutY="465.0" mnemonicParsing="false" onMouseClicked="#sellerRole" prefHeight="31.0" prefWidth="112.0" text="Seller">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="RED" />
+                  <Stop color="#2c037c" offset="0.47385620915032683" />
+                  <Stop color="#00a1ff" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="789.0" layoutY="792.0" mnemonicParsing="false" onMouseClicked="#signUp" prefHeight="40.0" prefWidth="119.0" text="Create">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="RED" />
+                  <Stop color="#1e00ff" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill></Button>
+      <Button layoutX="314.0" layoutY="515.0" mnemonicParsing="false" onMouseClicked="#managerRole" prefHeight="31.0" prefWidth="112.0" text="Manager">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="RED" />
+                  <Stop color="#2c037c" offset="0.47385620915032683" />
+                  <Stop color="#00a1ff" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+   </children>
+</AnchorPane>

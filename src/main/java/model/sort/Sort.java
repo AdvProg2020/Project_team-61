@@ -1,40 +1,65 @@
 package model.sort;
 
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
+import model.request.Request;
 import model.accounts.Account;
 import model.log.BuyLog;
 import model.log.SaleLog;
-import model.off.Sale;
+import model.off.DiscountCode;
+import model.productRelated.Category;
 import model.productRelated.Product;
-import model.productRelated.Score;
-import view.CommandProcessor;
-import view.FileHandling;
 
 import java.io.FileNotFoundException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 
 public abstract class Sort {
     public Product product;
     int numberOfSort=0;
-    private static ArrayList<Product> newArrayOfProductSort;
+    private static ArrayList<Product> newArrayOfProductSort = new ArrayList<>();
+    private static ArrayList<Account> newArrayOfAccountSort = new ArrayList<>();
+    private static ArrayList<DiscountCode> newArrayOfDiscountCodeSort = new ArrayList<>();
+    private static ArrayList<Category> newArrayOfCategory = new ArrayList<>();
+    private static ArrayList<Request> newArrayOfRequest = new ArrayList<>();
+    private static ArrayList<BuyLog> newArrayOfBuyLog = new ArrayList<>();
+    private static ArrayList<SaleLog> newArrayOfSalelog = new ArrayList<>();
 
-    static {
-        try {
-            newArrayOfProductSort = getProductFromFile();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+//    static {
+//        try {
+//            newArrayOfProductSort = getProductFromFile();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+
+    public static void setNewArrayOfAccountSort(ArrayList<Account> newArrayOfAccountSort) {
+        Sort.newArrayOfAccountSort = newArrayOfAccountSort;
     }
 
-    private static ArrayList<ArrayList<Product>> listOfSorts = new ArrayList<>();
+    public static void setNewArrayOfBuyLog(ArrayList<BuyLog> newArrayOfBuyLog) {
+        Sort.newArrayOfBuyLog = newArrayOfBuyLog;
+    }
+
+    public static void setNewArrayOfCategory(ArrayList<Category> newArrayOfCategory) {
+        Sort.newArrayOfCategory = newArrayOfCategory;
+    }
+
+    public static void setNewArrayOfDiscountCodeSort(ArrayList<DiscountCode> newArrayOfDiscountCodeSort) {
+        Sort.newArrayOfDiscountCodeSort = newArrayOfDiscountCodeSort;
+    }
+
+    public static void setNewArrayOfRequest(ArrayList<Request> newArrayOfRequest) {
+        Sort.newArrayOfRequest = newArrayOfRequest;
+    }
+
+    public static void setNewArrayOfSalelog(ArrayList<SaleLog> newArrayOfSalelog) {
+        Sort.newArrayOfSalelog = newArrayOfSalelog;
+    }
+
+    private static ArrayList<ArrayList<Product>> listOfProSorts = new ArrayList<>();
     private static ArrayList<String> availableSorts=new ArrayList<>();
 
-    public Sort(ArrayList<String> availableSorts) throws FileNotFoundException {
+    public Sort(ArrayList<String> availableSorts) {
         availableSorts.add("numberOfView");
         availableSorts.add("score");
     }
@@ -42,12 +67,16 @@ public abstract class Sort {
     //if view->1   score ->2
 
 
-    public static ArrayList<Product> getProductFromFile() throws FileNotFoundException {
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
-        }.getType();
-        JsonReader proReader= FileHandling.readFile("product.json");
-        ArrayList<Product> data = FileHandling.getGson().fromJson(proReader, REVIEW_TYPE);
-        return data;
+//    public static ArrayList<Product> getProductFromFile() throws FileNotFoundException {
+//        Type REVIEW_TYPE = new TypeToken<ArrayList<Product>>() {
+//        }.getType();
+//        JsonReader proReader= FileHandling.readFile("product.json");
+//        ArrayList<Product> data = FileHandling.getGson().fromJson(proReader, REVIEW_TYPE);
+//        return data;
+//    }
+
+    public static void setNewArrayOfProductSort(ArrayList<Product> newArrayOfProductSort) {
+        Sort.newArrayOfProductSort = newArrayOfProductSort;
     }
 
     //sorts----------------------------------------------------------------------
@@ -61,81 +90,75 @@ public abstract class Sort {
         return availableSorts;
     }
 
-    public ArrayList<Product> numberOfViewsSort() {
+    public static ArrayList<Product> numberOfViewsSort() {
         Collections.sort(newArrayOfProductSort,Product.productComparatorForView);
-        listOfSorts.add(newArrayOfProductSort);
+        listOfProSorts.add(newArrayOfProductSort);
         availableSorts.remove(0);
         return newArrayOfProductSort;
     }
 
-    public ArrayList<Product> scoreSort() {
+    public static ArrayList<Product> scoreSort() {
         Collections.sort(newArrayOfProductSort,Product.productComparatorForScore);
-        listOfSorts.add(newArrayOfProductSort);
+        listOfProSorts.add(newArrayOfProductSort);
         availableSorts.remove(1);
         return newArrayOfProductSort;
     }
 
-    public ArrayList<Account> accountSortUserName() throws FileNotFoundException {
-        Type REVIEW_TYPE = new TypeToken<ArrayList<Account>>() {
-        }.getType();
-        JsonReader sellerReader=FileHandling.readFile("account.json");
-        ArrayList<Account> data = FileHandling.getGson().fromJson(sellerReader, REVIEW_TYPE);
-        Collections.sort(data,Account.accountComparatorForUsername);
-        return data;
+    public static ArrayList<Account> accountSortUserName() throws FileNotFoundException {
+        Collections.sort(newArrayOfAccountSort,Account.accountComparatorForUsername);
+//        listOfAccountfSorts.add(newArrayOfAccountSort);
+//        availableSorts.remove(2);
+        return newArrayOfAccountSort;
     }
 
-    public ArrayList<BuyLog> accountSortLogs() throws FileNotFoundException {
-        Type REVIEW_TYPE = new TypeToken<ArrayList<BuyLog>>() {
-        }.getType();
-        JsonReader BuyLogReader=FileHandling.readFile("buyLog.json");
-        ArrayList<BuyLog> data = FileHandling.getGson().fromJson(BuyLogReader, REVIEW_TYPE);
-        Collections.sort(data, new Comparator<BuyLog>() {
-            public int compare(BuyLog o1, BuyLog o2) {
-                return o1.getLocalDateTimeForLog().compareTo(o2.getLocalDateTimeForLog());
-            }
-        });
-        return data;
+    public static ArrayList<Category> categoryNameSort(){
+        Collections.sort(newArrayOfCategory,Category.productComparatorForView);
+//        availableSorts.remove(3);
+//        listOfCatSort.add(newArrayOfCategory);
+        return newArrayOfCategory;
     }
 
-    public ArrayList<BuyLog> buyLogSortDate() throws FileNotFoundException {
-        Type REVIEW_TYPE = new TypeToken<ArrayList<BuyLog>>() {
-        }.getType();
-        JsonReader BuyLogReader=FileHandling.readFile("buyLog.json");
-        ArrayList<BuyLog> data = FileHandling.getGson().fromJson(BuyLogReader, REVIEW_TYPE);
-        Collections.sort(data, new Comparator<BuyLog>() {
-            public int compare(BuyLog o1, BuyLog o2) {
-                return o1.getLocalDateTimeForLog().compareTo(o2.getLocalDateTimeForLog());
-            }
-        });
-        return data;
+    public static ArrayList<BuyLog> buyLogSortDate() throws FileNotFoundException {
+        Collections.sort(newArrayOfBuyLog,BuyLog.productComparatorForScore);
+//        availableSorts.remove(4);
+//        listOfBuyLogSort.add(newArrayOfBuyLog);
+        return newArrayOfBuyLog;
     }
 
-    public ArrayList<SaleLog> saleLogSortDate() throws FileNotFoundException {
-        Type REVIEW_TYPE = new TypeToken<ArrayList<SaleLog>>() {
-        }.getType();
-        JsonReader SaleLogReader=FileHandling.readFile("saleLog.json");
-        ArrayList<SaleLog> data = FileHandling.getGson().fromJson(SaleLogReader, REVIEW_TYPE);
-        Collections.sort(data, new Comparator<SaleLog>() {
-            public int compare(SaleLog o1, SaleLog o2) {
-                return o1.getLocalDateTimeForSaleLog().compareTo(o2.getLocalDateTimeForSaleLog());
-            }
-        });
-        return data;
+    public static ArrayList<SaleLog> saleLogSortDate() throws FileNotFoundException {
+        Collections.sort(newArrayOfSalelog,SaleLog.productComparatorForScore);
+//        availableSorts.remove(5);
+//        listOfSaleLogtSort.add(newArrayOfSalelog);
+        return newArrayOfSalelog;
+    }
+
+    public static ArrayList<DiscountCode> sortDiscountCodes(){
+        Collections.sort(newArrayOfDiscountCodeSort,DiscountCode.productComparatorForView);
+//        availableSorts.remove(6);
+//        listOfDiSort.add(newArrayOfDiscountCodeSort);
+        return newArrayOfDiscountCodeSort;
+    }
+
+    public static ArrayList<Request> sortRequest(){
+        Collections.sort(newArrayOfRequest,Request.productComparatorForScore);
+//        availableSorts.remove(7);
+//        listOfRequestSort.add(newArrayOfRequest);
+        return newArrayOfRequest;
     }
 
     //other---------------------------------------------------------------------------
 
     //finish
     public static ArrayList<Product> disableSort(){
-        listOfSorts.remove(listOfSorts.size()-1);
-        return listOfSorts.get(listOfSorts.size()-1);
+        listOfProSorts.remove(listOfProSorts.size()-1);
+        return listOfProSorts.get(listOfProSorts.size()-1);
     }
 
     //finish
     public static ArrayList<String> currentSorts() {
         ArrayList<String> current=new ArrayList<>();
         for (int i = 1; i <= 3; i++) {
-            if (listOfSorts.get(i)!=null){
+            if (listOfProSorts.get(i)!=null){
                 if (i==1){
                     current.add("view");
                 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="productPagePane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ProductMenuFX">
+    <children>
+        <ScrollPane layoutX="-37.0" prefHeight="473.0" prefWidth="778.0">
+            <content>
+                <AnchorPane fx:id="scrollPane" minHeight="0.0" minWidth="0.0" onMouseClicked="#makeUpPage" prefHeight="560.0" prefWidth="817.0">
+                    <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="189.0" layoutX="66.0" layoutY="37.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                        <ImageView fx:id="productPic" fitHeight="172.0" fitWidth="200.0" layoutX="66.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="productNameLabel" layoutX="551.0" layoutY="23.0" prefHeight="34.0" prefWidth="147.0" text="Product Name" textAlignment="JUSTIFY">
+                            <font>
+                                <Font size="23.0" />
+                            </font></Label>
+                        <Button fx:id="addToCardButton" layoutX="73.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleAddProductToLog" text="Add To Card" />
+                        <Button fx:id="commentButton" layoutX="166.0" layoutY="254.0" mnemonicParsing="false" onAction="#popUpAddComment" prefHeight="26.0" prefWidth="89.0" text="Comment" />
+                        <Button fx:id="scoreButton" layoutX="269.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleScore" prefHeight="26.0" prefWidth="64.0" text="Score" />
+                        <Label fx:id="didntBuyToScoreOrProductIsFinish" layoutX="100.0" layoutY="288.0" prefHeight="18.0" prefWidth="225.0" text="didntBuyToScore\\ProductIsFinish" visible="false">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

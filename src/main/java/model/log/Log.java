@@ -1,13 +1,9 @@
 package model.log;
 
-import com.google.gson.reflect.TypeToken;
 import model.productRelated.Product;
-import view.FileHandling;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 
 
@@ -17,8 +13,8 @@ public abstract class Log{
     //detail
     String logId;
     DeliveryStatus deliveryStatus;
-    boolean itsDone;
     Product product;
+    private  boolean ItsFinal;
 
     //list
     private static ArrayList<Log> allLogs = new ArrayList<Log>();
@@ -27,7 +23,7 @@ public abstract class Log{
     public Log(String logId) throws IOException {
         this.logId=logId;
         allLogs.add(this);
-        writeInJ();
+ //       writeInJ();
     }
 
     //setterAndGetters-----------------------------------------------------------------------
@@ -37,6 +33,11 @@ public abstract class Log{
     }
 
     //others--------------------------------------------------------------------------------
+
+
+    public void setItsFinal(boolean itsFinal) {
+        ItsFinal = itsFinal;
+    }
 
     //finish
     public void deleteLog (String id){
@@ -50,7 +51,7 @@ public abstract class Log{
     }
 
     //finish
-    public Log getLogWithId (String logId){
+    public static Log getLogWithId(String logId){
         for (Log allLog : allLogs) {
             if (allLog.logId.equals(logId)){
                 return allLog;
@@ -69,19 +70,19 @@ public abstract class Log{
         return false;
     }
 
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Log>>(){}.getType();
-        String json= FileHandling.getGson().toJson(Log.allLogs,collectionType);
-        FileHandling.turnToArray(json+" "+"log.json");
-    }
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<Log>>(){}.getType();
+//        String json= FileHandling.getGson().toJson(Log.allLogs,collectionType);
+//        FileHandling.turnToArray(json+" "+"log.json");
+//    }
 
     @Override
     public String toString() {
         return "Log{" +
                 "logId='" + logId + '\'' +
                 ", deliveryStatus=" + deliveryStatus +
-                ", itsDone=" + itsDone +
                 ", product=" + product +
+                ", ItsFinal=" + ItsFinal +
                 '}';
     }
 }

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="848.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.BuyLogsFx">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="848.0" stroke="BLACK" strokeType="INSIDE" width="1600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0" startY="0.0970873786407767">
+                    <stops>
+                        <Stop color="#70c8e5" />
+                        <Stop color="#70c8e5" offset="0.007246376811594203" />
+                        <Stop color="#75cde8" offset="0.014492753623188406" />
+                        <Stop color="#cf9f1f" offset="0.2536231884057971" />
+                        <Stop color="#ab437c" offset="0.5430520034100598" />
+                        <Stop color="#fcc5e5" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1600.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="User menu">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#userMenu" text="your menu" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Logout">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Back">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Text layoutX="713.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buy Logs">
+            <font>
+                <Font name="System Bold Italic" size="42.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#ff57bf" />
+                        <Stop color="WHITE" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <TableView fx:id="buyLogs" layoutX="183.0" layoutY="149.0" prefHeight="564.0" prefWidth="1248.0">
+            <columns>
+                <TableColumn fx:id="buyLogsId" minWidth="184.0" prefWidth="184.0" text="ID" />
+                <TableColumn fx:id="buyLogsSeller" minWidth="203.0" prefWidth="203.0" text="Seller" />
+                <TableColumn fx:id="buyLogsDeliveryStatus" minWidth="198.0" prefWidth="198.0" text="Delivery Status" />
+                <TableColumn fx:id="buyLogsDate" minWidth="182.0" prefWidth="222.0" text="Date" />
+                <TableColumn fx:id="buyLogsReduceAmount" minWidth="169.0" prefWidth="169.0" text="Reduce amount" />
+                <TableColumn fx:id="buyLogsRecievedAmount" minWidth="220.0" prefWidth="271.0" text="Recieved Amount" />
+            </columns>
+        </TableView>
+      <Button layoutX="1356.0" layoutY="743.0" mnemonicParsing="false" onMouseClicked="#viewBuyLogs" prefHeight="31.0" prefWidth="75.0" text="View">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#ff5e00" />
+                  <Stop color="RED" offset="0.5424836601307189" />
+                  <Stop color="RED" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+    </children>
+</AnchorPane>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="842.0" prefWidth="1627.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SellerMenuFx">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="842.0" layoutX="-136.0" layoutY="-6.0" stroke="BLACK" strokeType="INSIDE" width="1627.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#5f2c82" />
+                  <Stop color="#32a49f" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <MenuBar prefHeight="32.0" prefWidth="1627.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="User menu">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#UserMenu" text="your menu" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Logout">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Back">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Exit">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <Button layoutX="625.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#viewPersonalInfo" prefHeight="54.0" prefWidth="328.0" text="view personal info">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.05339805825242718">
+               <stops>
+                  <Stop color="#ff8500" />
+                  <Stop color="#00afff" offset="0.28104575163398693" />
+                  <Stop color="#1850d9" offset="0.48366013071895425" />
+                  <Stop color="#c016da" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <Button layoutX="921.0" layoutY="246.0" mnemonicParsing="false" onMouseClicked="#viewCompanyInfo" prefHeight="54.0" prefWidth="328.0" text="view company information">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.05339805825242718">
+               <stops>
+                  <Stop color="#ff8500" />
+                  <Stop color="#00afff" offset="0.28104575163398693" />
+                  <Stop color="#1850d9" offset="0.48366013071895425" />
+                  <Stop color="#c016da" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="624.0" layoutY="356.0" mnemonicParsing="false" onMouseClicked="#viewSalesHistory" prefHeight="54.0" prefWidth="328.0" text="view sales history">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.05339805825242718">
+               <stops>
+                  <Stop color="#ff8500" />
+                  <Stop color="#00afff" offset="0.28104575163398693" />
+                  <Stop color="#1850d9" offset="0.48366013071895425" />
+                  <Stop color="#c016da" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="625.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#manageProducts" prefHeight="54.0" prefWidth="328.0" text="manage products">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.05339805825242718">
+               <stops>
+                  <Stop color="#ff8500" />
+                  <Stop color="#00afff" offset="0.28104575163398693" />
+                  <Stop color="#1850d9" offset="0.48366013071895425" />
+                  <Stop color="#c016da" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="1079.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#addProduct" prefHeight="54.0" prefWidth="328.0" text="add product">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.05339805825242718">
+               <stops>
+                  <Stop color="#ff8500" />
+                  <Stop color="#00afff" offset="0.28104575163398693" />
+                  <Stop color="#1850d9" offset="0.48366013071895425" />
+                  <Stop color="#c016da" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="156.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#removeProduct" prefHeight="54.0" prefWidth="328.0" text="remove product">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.05339805825242718">
+               <stops>
+                  <Stop color="#ff8500" />
+                  <Stop color="#00afff" offset="0.28104575163398693" />
+                  <Stop color="#1850d9" offset="0.48366013071895425" />
+                  <Stop color="#c016da" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="1012.0" layoutY="356.0" mnemonicParsing="false" onMouseClicked="#showCategories" prefHeight="54.0" prefWidth="328.0" text="show categories">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.05339805825242718">
+               <stops>
+                  <Stop color="#ff8500" />
+                  <Stop color="#00afff" offset="0.28104575163398693" />
+                  <Stop color="#1850d9" offset="0.48366013071895425" />
+                  <Stop color="#c016da" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="208.0" layoutY="356.0" mnemonicParsing="false" onMouseClicked="#viewOffs" prefHeight="54.0" prefWidth="328.0" text="view offs">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.05339805825242718">
+               <stops>
+                  <Stop color="#ff8500" />
+                  <Stop color="#00afff" offset="0.28104575163398693" />
+                  <Stop color="#1850d9" offset="0.48366013071895425" />
+                  <Stop color="#c016da" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="347.0" layoutY="246.0" mnemonicParsing="false" onMouseClicked="#viewBalance" prefHeight="54.0" prefWidth="328.0" text="view balance">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.05339805825242718">
+               <stops>
+                  <Stop color="#ff8500" />
+                  <Stop color="#00afff" offset="0.28104575163398693" />
+                  <Stop color="#1850d9" offset="0.48366013071895425" />
+                  <Stop color="#c016da" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Text layoutX="669.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seller menu">
+         <font>
+            <Font name="System Bold Italic" size="43.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#ff9d0b" />
+                  <Stop color="#ff9d0b" offset="0.007246376811594203" />
+                  <Stop color="#0e6ec7" offset="0.5398550724637681" />
+                  <Stop color="#ff00b2" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+   </children>
+</AnchorPane>

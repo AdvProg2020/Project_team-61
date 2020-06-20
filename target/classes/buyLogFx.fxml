@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="848.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.BuyLogFx">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="848.0" stroke="BLACK" strokeType="INSIDE" width="1600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0" startY="0.0970873786407767">
+                    <stops>
+                        <Stop color="WHITE" />
+                        <Stop color="#f5f5ef" offset="0.007246376811594203" />
+                        <Stop color="#e3d96f" offset="0.08695652173913043" />
+                        <Stop color="#cfaa1f" offset="0.2536231884057971" />
+                        <Stop color="#ab437c" offset="0.5430520034100598" />
+                        <Stop color="#fcc5e5" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1600.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="User menu">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#userMenu" text="your menu" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Logout">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Back">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Text layoutX="702.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buy Log">
+            <font>
+                <Font name="System Bold Italic" size="42.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#ff57bf" />
+                        <Stop color="WHITE" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <TableView fx:id="buyLog" editable="true" layoutX="194.0" layoutY="170.0" prefHeight="598.0" prefWidth="1213.0">
+            <columns>
+                <TableColumn fx:id="buyLogProduct" minWidth="220.0" prefWidth="75.0" text="Product" />
+                <TableColumn fx:id="buyLogProductNumber" minWidth="220.0" prefWidth="75.0" text="ProductNumber" />
+                <TableColumn fx:id="buyLogDate" minWidth="220.0" prefWidth="273.0" text="Date" />
+                <TableColumn fx:id="buyLogReduceAmount" minWidth="220.0" prefWidth="252.0" text="Reduce amount" />
+                <TableColumn fx:id="buyLogRecievedAmount" minWidth="220.0" prefWidth="247.0" text="Recieved amount" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>

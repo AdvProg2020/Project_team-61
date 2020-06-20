@@ -1,42 +1,54 @@
 package model.off;
 
-import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
-import model.productRelated.Product;
-import view.FileHandling;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
+
 
 public class DiscountCode {
     private String discountId;
-    private Date startOfDiscountPeriod;
-    private Date endOfDiscountPeriod;
+    private static Date startOfDiscountPeriod;
+    private static Date endOfDiscountPeriod;
     private int discountAmount;
     private double maxDiscountAmount;
     private int totalTimesOfUse;
+    private Account manager;
     private static ArrayList<Account> allCustomersWithDiscountCode = new ArrayList<Account>();
-    private static ArrayList<DiscountCode> allDiscountCodes;
+    private static ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
 
     public DiscountCode(String discountId) throws IOException {
         this.discountId = discountId;
         allDiscountCodes.add(this);
-        writeInJ();
+       // writeInJ();
     }
 
-    public void addAccount(Account customer){
+
+    public int getDiscountAmount() {
+        return discountAmount;
+    }
+
+    public static ArrayList<DiscountCode> getAllDiscountCodes() {
+        return allDiscountCodes;
+    }
+
+    public void addAccount(Account customer) throws IOException {
         allCustomersWithDiscountCode.add(customer);
         customer.addDiscountCode(getDiscountWithId(discountId));
     }
-    public void removeAccount(Account account){
+    public void removeAccount(Account account) throws IOException {
         allCustomersWithDiscountCode.remove(account);
         account.removeDiscountCode(getDiscountWithId(discountId));
     }
 
-    public void setStartOfDiscountPeriod(Date startOfDiscountPeriod) {
-        this.startOfDiscountPeriod = startOfDiscountPeriod;
+    public static void setStartOfDiscountPeriod(Date startOfDiscountPeriod) {
+        DiscountCode.startOfDiscountPeriod = startOfDiscountPeriod;
+    }
+
+    public void setManager(Account manager) {
+        this.manager = manager;
     }
 
     public static boolean discountMatchAccount(String username){
@@ -47,20 +59,12 @@ public class DiscountCode {
         return false;
     }
 
-    public static boolean discountDateValid( Date start,Date end){
-        Date currentDate=new Date();
-        if(start.after(currentDate) && end.after(currentDate)&& end.after(start) ){
-            return  true;
+    public static boolean discountDateValid(){
+        Date now = new Date();
+        if (startOfDiscountPeriod.after(now) && endOfDiscountPeriod.before(now)){
+            return true;
         }
         return false;
-    }
-    public void deleteExpiredDiscount(){
-        Date currentDate=new Date();
-        for (DiscountCode discountCode : allDiscountCodes) {
-            if (discountCode.getEndOfDiscountPeriod().before(currentDate)){
-                allDiscountCodes.remove(discountCode);
-            }
-        }
     }
 
     public void setDiscountAmount(int discountAmount) {
@@ -71,8 +75,8 @@ public class DiscountCode {
         this.totalTimesOfUse = totalTimesOfUse;
     }
 
-    public void setEndOfDiscountPeriod(Date endOfDiscountPeriod) {
-        this.endOfDiscountPeriod = endOfDiscountPeriod;
+    public static void setEndOfDiscountPeriod(Date endOfDiscountPeriod) {
+        DiscountCode.endOfDiscountPeriod = endOfDiscountPeriod;
     }
 
     public void setMaxDiscountAmount(double maxDiscountAmount) {
@@ -83,11 +87,11 @@ public class DiscountCode {
         return discountId;
     }
 
-    public Date getStartOfDiscountPeriod() {
+    public static Date getStartOfDiscountPeriod() {
         return startOfDiscountPeriod;
     }
 
-    public Date getEndOfDiscountPeriod() {
+    public static Date getEndOfDiscountPeriod() {
         return endOfDiscountPeriod;
     }
 
@@ -98,6 +102,7 @@ public class DiscountCode {
     public int getTotalTimesOfUse() {
         return totalTimesOfUse;
     }
+
 
     public ArrayList<Account> getAllCustomersWithDiscountCode() {
         return allCustomersWithDiscountCode;
@@ -120,27 +125,47 @@ public class DiscountCode {
         }
         return null;
     }
+
     public void giveDiscountToRandomCustomers(){
 
     }
+
     public void giveDiscountInBirthday(){
 
     }
 
+    public double calculate(double price){
+        if (price < maxDiscountAmount){
+            price = price-((price*discountAmount)/100);
+        }
+        else if (price > maxDiscountAmount){
+            double amountCant = price-maxDiscountAmount;
+            price = price - ((maxDiscountAmount*discountAmount)/100);
+        }
+        return price;
+    }
+
     public static void deleteDiscount(String id) {
         allDiscountCodes.remove(getDiscountWithId(id));
-
-    }
-    public double CalculatePriceAfterDiscount(double totalPrice){
-        totalPrice*=(1-this.discountAmount/100);
-        return totalPrice;
     }
 
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<DiscountCode>>(){}.getType();
-        String json= FileHandling.getGson().toJson(DiscountCode.allDiscountCodes,collectionType);
-        FileHandling.turnToArray(json+" "+"discountCode.json");
-    }
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<DiscountCode>>(){}.getType();
+//        String json= FileHandling.getGson().toJson(DiscountCode.allDiscountCodes,collectionType);
+//        FileHandling.turnToArray(json+" "+"discountCode.json");
+//    }
+
+
+    public static Comparator<DiscountCode> productComparatorForView = new Comparator<DiscountCode>() {
+
+        public int compare(DiscountCode s1, DiscountCode s2) {
+
+            int productView1 = s1.getDiscountAmount();
+            int productView2 = s2.getDiscountAmount();
+            return productView1- productView2;
+
+        }
+    };
 
 
     @Override

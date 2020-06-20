@@ -1,11 +1,7 @@
 package model.productRelated;
 
-import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
-import view.FileHandling;
 
-import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -16,6 +12,7 @@ public class Comment {
     String title;
     String content;
     CommentStatus commentStatus;
+    String id;
 
     //objectAdded
     Product productToComment;
@@ -25,29 +22,54 @@ public class Comment {
     //list
     public static ArrayList<Comment> allComments = new ArrayList<Comment>();
 
+    public Comment(String id) {
+        this.id = id;
+    }
 
-    public Comment(Product productToCommit, Account personToVote) {
-        this.productToComment = productToCommit;
-        this.personToVote = personToVote;
+    public static boolean isThereCommentWithId(String id) {
 
+        for (Comment comment : allComments) {
+            if (comment.id.equalsIgnoreCase(id)) return true;
+        }
+        return false;
     }
 
 
+//setterAndGetter--------------------------------------------------------------------------------------------
 
+    public void setDetail(String title , String content , Account personToVote , Product productToComment){
+        if (title != null){
+            this.title = title;
+        }
+        if (content != null){
+            this.content = content;
+        }
+        if (personToVote != null){
+            this.personToVote=personToVote;
+        }
+        if (productToComment != null){
+            this.productToComment=productToComment;
+        }
+        allComments.add(this);
+    }
 
+    public String getId() {
+        return id;
+    }
 
-
-
-
-
-
-
-
-    //setterAndGetter--------------------------------------------------------------------------------------------
+    public static Comment getCommentFromId(String id){
+        for (Comment comment : allComments) {
+            if (comment.getId().equals(id)){
+                return comment;
+            }
+        }
+        return null;
+    }
 
     public void setTitle(String title) {
         this.title = title;
     }
+
 
     public void setContent(String content) {
         this.content = content;
@@ -57,9 +79,10 @@ public class Comment {
         allComments.add(this);
     }
 
-    public static ArrayList<Comment> getAllComments() {
+    public  ArrayList<Comment> getAllComments() {
         return allComments;
     }
+
 
     public Account getPersonToVote() {
         return personToVote;
@@ -86,11 +109,11 @@ public class Comment {
         }
     }
 
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Comment>>(){}.getType();
-        String json= FileHandling.getGson().toJson(getAllComments(),collectionType);
-        FileHandling.turnToArray(json+" "+"commend.json");
-    }
+//    public  void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<Comment>>(){}.getType();
+//        String json= FileHandling.getGson().toJson(getAllComments(),collectionType);
+//        FileHandling.turnToArray(json+" "+"commend.json");
+//    }
 
     @Override
     public String toString() {

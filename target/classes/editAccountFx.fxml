@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.EditAccountFx">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="882.0" layoutY="4.0" stroke="BLACK" strokeType="INSIDE" width="1605.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <fill>
+                <LinearGradient endX="0.8980582524271845" endY="0.7378640776699028">
+                    <stops>
+                        <Stop color="#9e097b" />
+                        <Stop color="#3b07a4" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1605.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="User menu">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#userMenu" text="your menu" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Logout">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Back">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <PasswordField fx:id="passSign" layoutX="706.0" layoutY="196.0" prefHeight="40.0" prefWidth="271.0" promptText="password" />
+        <TextField fx:id="nameSign" layoutX="705.0" layoutY="290.0" prefHeight="40.0" prefWidth="271.0" promptText="name" />
+        <TextField fx:id="lastNameSign" layoutX="705.0" layoutY="378.0" prefHeight="40.0" prefWidth="271.0" promptText="last name" />
+        <TextField fx:id="phoneNoSign" layoutX="705.0" layoutY="461.0" prefHeight="40.0" prefWidth="271.0" promptText="phone number" />
+        <TextField fx:id="emailSign" layoutX="705.0" layoutY="551.0" prefHeight="40.0" prefWidth="271.0" promptText="Email" />
+        <Text layoutX="769.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit" wrappingWidth="106.0">
+            <font>
+                <Font name="System Bold Italic" size="38.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#0593ff" />
+                        <Stop color="WHITE" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill></Text>
+        <Label fx:id="passLoginMs" layoutX="705.0" layoutY="251.0" prefHeight="29.0" prefWidth="271.0" text="Label" textFill="RED">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Label>
+        <Label fx:id="nameLoginMs" layoutX="705.0" layoutY="337.0" prefHeight="29.0" prefWidth="271.0" text="Label" textFill="RED">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Label>
+        <Label fx:id="lastNameLoginMs" layoutX="705.0" layoutY="425.0" prefHeight="29.0" prefWidth="271.0" text="Label" textFill="RED">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Label>
+        <Label fx:id="phoneLoginMs" layoutX="705.0" layoutY="515.0" prefHeight="29.0" prefWidth="271.0" text="Label" textFill="RED">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Label>
+        <Label fx:id="emailLoginMs" layoutX="705.0" layoutY="598.0" prefHeight="29.0" prefWidth="271.0" text="Label" textFill="RED">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Label>
+        <Text layoutX="270.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="drag your image here" wrappingWidth="223.6708984375">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Text>
+        <ImageView fitHeight="259.0" fitWidth="224.0" layoutX="276.0" layoutY="236.0" onDragDropped="#picDropEdit" onDragOver="#picOverEdit" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@view/icons/face.png" />
+            </image>
+        </ImageView>
+        <Button layoutX="782.0" layoutY="670.0" mnemonicParsing="false" onMouseClicked="#editAccount" prefHeight="40.0" prefWidth="118.0" text="Edit">
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="RED" />
+                        <Stop color="#00a1ff" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </textFill>
+        </Button>
+    </children>
+</AnchorPane>

@@ -1,73 +1,52 @@
 package model.log;
 
 
-import com.google.gson.reflect.TypeToken;
+import controller.menus.CustomerMenu;
+import model.accounts.Seller;
+import model.off.DiscountCode;
 import model.productRelated.Product;
-import view.FileHandling;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class BuyLog extends Log {
 
 
-
     public BuyLog(String logId) throws IOException {
         super(logId);
-        id=logId;
-        localDateTimeForLog=LocalDateTime.now();
+        id = logId;
+        localDateTimeForLog = LocalDateTime.now();
         allCustomersLog.add(this);
+   //     writeInJ();
     }
 
 
-    private String id;
     //detail
-    private double amountBeforeDis;
-    double amountAfterDis;
-    String buyerName;
-    int numberOfChosenPro;
-    private static boolean ifItsFinal;
-    boolean isBought;
-    private static boolean firstProduct=true;
+    private String id;
     public static LocalDateTime localDateTimeForLog;
+    public double paidAmount;
+
+    int numberOfChosenPro;
+    private static boolean firstProduct = true;
+    double amountAfterDis;
+    public double holePrice;
+    public double price;
+
 
     //list
-    private static ArrayList<Product> listOfOneProduct = new ArrayList<Product>();
-    private static ArrayList<ArrayList<Product>> allBoughtProduct = new ArrayList<>();
+    private HashMap<Product, Integer> allBoughtProduct = new HashMap<>();
+    private  HashMap<Product, Integer> chosenProduct = new HashMap<>();
     public static ArrayList<BuyLog> allCustomersLog = new ArrayList<BuyLog>();
-    public static HashMap<ArrayList<Product>, Double> productWithPriceWithSale=new HashMap<>();
-    public static HashMap<ArrayList<Product>, Double> productWithPriceWithoutSale=new HashMap<>();
+
 
     //setterAndGetter----------------------------------------------------
-
-    public void setBuyLogDetail(String buyerName) throws IOException {
-        this.buyerName = buyerName;
-        allCustomersLog.add(this);
-        writeInJ();
-    }
 
     public String getId() {
         return id;
     }
-
-    public double getAmountBeforeDis() {
-        return amountBeforeDis;
-    }
-
-    public void setIsBought(boolean bought) {
-        isBought = bought;
-    }
-
-    public boolean getIsBought() {
-        return isBought;
-    }
-
-
 
     public static LocalDateTime getLocalDateTimeForLog() {
         return localDateTimeForLog;
@@ -77,98 +56,160 @@ public class BuyLog extends Log {
         return allCustomersLog;
     }
 
-    public static boolean getFirstProduct(){
+    public static boolean getFirstProduct() {
         return firstProduct;
     }
+
+    public  HashMap<Product, Integer> getChosenProduct() {
+        return chosenProduct;
+    }
+
+    public double calculateHolePrice(){
+        if (CustomerMenu.isHasDiscount()) {
+            DiscountCode discountCode= DiscountCode.getDiscountWithId(CustomerMenu.getDiscountID());
+            holePrice = discountCode.calculate(totalPrice());
+            discountCode.setTotalTimesOfUse(discountCode.getTotalTimesOfUse() - 1);
+        } else {
+            holePrice = totalPrice();
+        }
+        return holePrice;
+    }
+
+    public void setAllBoughtProduct(HashMap<Product, Integer> allBoughtProduct) {
+        this.allBoughtProduct = allBoughtProduct;
+    }
+
+    public HashMap<Product, Integer> getAllBoughtProduct() {
+        return allBoughtProduct;
+    }
+
     //other--------------------------------------------------------------
 
-
-    //finish
-    public static boolean isBought(String productId) {
-        return ifItsFinal;
+    //done
+    public static BuyLog getBuyLogWithName(String buyLogId) {
+        for (BuyLog log : allCustomersLog) {
+            if (log.getId().equals(buyLogId)) {
+                return log;
+            }
+        }
+        return null;
     }
 
-
+    //done
     public void addProductToBuyLog(String productId, int amount) {
         Product product = Product.getProductById(productId);
-        for (int i = 0; i < amount; i++) {
-            assert product != null;
-            if (product.getNumberOfProducts() != 0) {
-                listOfOneProduct.add(product);
-                numberOfChosenPro++;
-            }
+        if (product.getNumberOfProducts() > amount) {
+            numberOfChosenPro = +numberOfChosenPro + amount;
+            product.setNumberOfProducts(product.getNumberOfProducts() - amount);
+            chosenProduct.put(product, amount);
         }
-        allBoughtProduct.add(listOfOneProduct);
-        product.setTotalNumberOfBuyers(product.getTotalNumberOfBuyers() + 1);
-        firstProduct=false;
-        ifItsFinal = true;
+
+        else if (product.getNumberOfProducts() == amount) {
+            numberOfChosenPro = +numberOfChosenPro + amount;
+            product.setNumberOfProducts(0);
+            product.setIsBought(true);
+            chosenProduct.put(product, amount);
+        }
+        else if (product.getNumberOfProducts() < amount) {
+            numberOfChosenPro = +numberOfChosenPro + product.getNumberOfProducts();
+            product.setNumberOfProducts(0);
+            chosenProduct.put(product, product.getNumberOfProducts());
+            product.setIsBought(true);
+        }
     }
 
-    public double holePriceWithOutDiscount() {
-        double price = 0;
-        for (ArrayList<Product> productArrayList : allBoughtProduct) {
-            for (Product product1 : productArrayList) {
-                price = +product1.getPrice();
+    public ArrayList<Seller> getSellers(){
+        ArrayList<Seller> sellers=null;
+        for (Product p : allBoughtProduct.keySet()){
+            if (!sellers.contains(p.getSeller())){
+                sellers.add((Seller) p.getSeller());
             }
+        }
+        return sellers;
+    }
+
+    //done
+    public double totalPrice() {
+        for (Product p : chosenProduct.keySet()) {
+            price = +chosenProduct.get(p) * p.getPrice();
         }
         return price;
     }
 
-    public double holePriceWithDiscount() {
-        double price = 0;
-        for (ArrayList<Product> productArrayList : allBoughtProduct) {
-            for (Product product1 : productArrayList) {
-//                if () {
-//
-//                }
+
+    public boolean checkIfProductIsBought(String productId) {
+        for (Product p : allBoughtProduct.keySet()) {
+            if (p.getId().equals(productId)) {
+                return true;
             }
         }
-        return price;
+        return false;
     }
 
 
-    public void reduceNumberOfProduct() {
-        for (ArrayList<Product> productArrayList : allBoughtProduct) {
-            for (Product product1 : listOfOneProduct) {
-                product1.setNumberOfProducts(product1.getNumberOfProducts() - 1);
-            }
-        }
-    }
-
-    public static void deleteProductFromBuyLog(String productId) {
+    public void increaseNumberOfProduct(String productId, int amount) {
         Product product = Product.getProductById(productId);
-        ArrayList<Product> help = null;
-        Iterator iterator = listOfOneProduct.iterator();
-        while (iterator.hasNext()) {
-            Product product1 = (Product) iterator.next();
-            if (product1.equals(product)) {
-                help.add(product1);
-                iterator.remove();
-            }
+        int numberOfPro = chosenProduct.get(product);
+        if (product.getNumberOfProducts() > amount) {
+            chosenProduct.put(product, chosenProduct.get(product) + amount);
+            product.setNumberOfProducts(product.getNumberOfProducts() - amount);
+        } else if (product.getNumberOfProducts() == amount) {
+            chosenProduct.put(product, chosenProduct.get(product)+amount);
+            product.setNumberOfProducts(0);
+            product.setIsBought(true);
+        } else if (product.getNumberOfProducts() < amount) {
+            chosenProduct.put(product, chosenProduct.get(product)+product.getNumberOfProducts());
+            product.setNumberOfProducts(0);
+            product.setIsBought(true);
         }
-        allBoughtProduct.remove(help);
     }
 
+    //done
+    public void reduceNumberOfProduct(String productId, int amount) {
+        Product product = Product.getProductById(productId);
+        int numberOfPro = chosenProduct.get(product);
+        if (amount < numberOfPro) {
+            chosenProduct.put(product, chosenProduct.get(product) - amount);
+            product.setNumberOfProducts(product.getNumberOfProducts() + amount);
+        } else if (amount == numberOfPro) {
+            chosenProduct.remove(product);
+            product.setNumberOfProducts(product.getNumberOfProducts() + amount);
+        } else if (amount > chosenProduct.get(product)) {
+            product.setNumberOfProducts(chosenProduct.get(product));
+            chosenProduct.remove(product);
+        }
 
-    public  int compareTo(BuyLog buyLog) {
-        return getLocalDateTimeForLog().compareTo(getLocalDateTimeForLog());
     }
 
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<BuyLog>>(){}.getType();
-        String json= FileHandling.getGson().toJson(BuyLog.getAllCustomersLog(),collectionType);
-        FileHandling.turnToArray(json+" "+"buyLog.json");
-    }
+    //done
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<BuyLog>>() {
+//        }.getType();
+//        String json = FileHandling.getGson().toJson(BuyLog.getAllCustomersLog(), collectionType);
+//        FileHandling.turnToArray(json + " " + "buyLog.json");
+//    }
+
+
+    public static Comparator<BuyLog> productComparatorForScore = new Comparator<BuyLog>() {
+
+        public int compare(BuyLog o1, BuyLog o2) {
+            return o1.getLocalDateTimeForLog().compareTo(o2.getLocalDateTimeForLog());
+        }
+    };
+
+
 
     @Override
     public String toString() {
         return "BuyLog{" +
                 "id='" + id + '\'' +
-                ", amountBeforeDis=" + amountBeforeDis +
-                ", amountAfterDis=" + amountAfterDis +
-                ", buyerName='" + buyerName + '\'' +
+                ", paidAmount=" + paidAmount +
                 ", numberOfChosenPro=" + numberOfChosenPro +
-                ", isBought=" + isBought +
+                ", amountAfterDis=" + amountAfterDis +
+                ", holePrice=" + holePrice +
+                ", price=" + price +
+                ", allBoughtProduct=" + allBoughtProduct +
+                ", chosenProduct=" + chosenProduct +
                 '}';
     }
 }

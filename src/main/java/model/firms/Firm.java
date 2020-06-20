@@ -1,32 +1,38 @@
 package model.firms;
 
-import com.google.gson.reflect.TypeToken;
-import model.productRelated.Product;
-import view.FileHandling;
-
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public abstract class Firm {
+public  class Firm {
 
     private String name;
     private double phoneNO;
     private String address;
     private String Email;
-    private static ArrayList<Firm> allFirms;
+    private static ArrayList<Firm> allFirms = new ArrayList<>();
 
     public Firm(String name) throws IOException {
         this.name = name;
         allFirms.add(this);
-        writeInJ();
+    //    writeInJ();
     }
 
-    public void setDetailToFirm(String name, Double phoneNO, String address, String email){
-        this.name= name;
-        this.phoneNO=phoneNO;
-        this.address= address;
-        this.Email= email;
+    public void setDetailToFirm( Double phoneNO, String address, String email){
+
+        if( phoneNO != null){
+            this.phoneNO=phoneNO;
+        }
+        if (address != null){
+            this.address= address;
+        }
+        if(email != null){
+            this.Email= email;
+        }
+
+    }
+
+    public static ArrayList<Firm> getAllFirms() {
+        return allFirms;
     }
 
     public String getName() {
@@ -79,11 +85,11 @@ public abstract class Firm {
         allFirms.remove(getFirmWithID(ID));
     }
 
-    public static void writeInJ() throws IOException {
-        Type collectionType = new TypeToken<ArrayList<Firm>>(){}.getType();
-        String json= FileHandling.getGson().toJson(Firm.allFirms,collectionType);
-        FileHandling.turnToArray(json+" "+"firm.json");
-    }
+//    public static void writeInJ() throws IOException {
+//        Type collectionType = new TypeToken<ArrayList<Firm>>(){}.getType();
+//        String json= FileHandling.getGson().toJson(Firm.allFirms,collectionType);
+//        FileHandling.turnToArray(json+" "+"firm.json");
+//    }
 
     @Override
     public String toString() {

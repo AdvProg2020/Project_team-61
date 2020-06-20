@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="879.0" prefWidth="1684.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ProductsFx">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="879.0" layoutX="-200.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" width="1684.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0" startX="0.15533980582524273" startY="0.0970873786407767">
+                    <stops>
+                        <Stop color="#ebda97" />
+                        <Stop color="#70e7eb" offset="0.26811594202898553" />
+                        <Stop color="#f26eb6" offset="0.6843563512361467" />
+                        <Stop color="#fcc5e5" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="User menu">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#userMenu" text="your menu" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Logout">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Back">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Text layoutX="756.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Products">
+            <font>
+                <Font name="System Bold Italic" size="42.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#ff57bf" />
+                        <Stop color="WHITE" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <TableView fx:id="products" layoutX="247.0" layoutY="120.0" prefHeight="639.0" prefWidth="1248.0">
+            <columns>
+                <TableColumn fx:id="productId" prefWidth="171.0" text="ID" />
+                <TableColumn fx:id="productName" prefWidth="189.0" text="Name" />
+                <TableColumn fx:id="productPrice" prefWidth="180.0" text="Price" />
+                <TableColumn fx:id="productNumber" prefWidth="179.0" text="Number" />
+                <TableColumn fx:id="productNumberView" prefWidth="197.0" text="Number of view" />
+                <TableColumn fx:id="productAdditional" prefWidth="175.0" text="Additional details" />
+                <TableColumn fx:id="productScore" prefWidth="161.0" text="Score" />
+            </columns>
+        </TableView>
+        <Button layoutX="1087.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsView" text="view">
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#3000ff" />
+                        <Stop color="#ff006a" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </textFill>
+            <font>
+                <Font size="17.0" />
+            </font>
+        </Button>
+        <Button layoutX="1169.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsViewBuyers" text="view buyers">
+            <font>
+                <Font size="17.0" />
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#3000ff" />
+                        <Stop color="#ff006a" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </textFill>
+        </Button>
+        <Button layoutX="1307.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsEdit" text="Edit">
+            <font>
+                <Font size="17.0" />
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#3000ff" />
+                        <Stop color="#ff006a" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </textFill>
+        </Button>
+        <Button layoutX="1383.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsRemove" text="Remove">
+            <font>
+                <Font size="17.0" />
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#3000ff" />
+                        <Stop color="#ff006a" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </textFill>
+        </Button>
+        <Label fx:id="productsMs" layoutX="249.0" layoutY="775.0" prefHeight="21.0" prefWidth="743.0" text="Label" textFill="#ff0396">
+            <font>
+                <Font size="29.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

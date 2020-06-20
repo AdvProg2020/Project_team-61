@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="883.0" prefWidth="1628.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainMenuFx">
+    <children>
+        <ImageView fitHeight="1080.0" fitWidth="1500.0" layoutX="3.0" onMouseClicked="#users" pickOnBounds="true" preserveRatio="true" style="ba: #F5E5A4;" AnchorPane.topAnchor="0.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="882.0" layoutX="-1.0" stroke="BLACK" strokeType="INSIDE" width="1628.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#ffd60b" />
+                        <Stop color="#ffbbbb" offset="0.49673202614379086" />
+                        <Stop color="#ff8c11" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <Button layoutX="633.0" layoutY="435.0" mnemonicParsing="false" onMouseClicked="#users" prefHeight="34.0" prefWidth="282.0" style="-fx-background-color: #F5E5A4; -fx-border-radius: 25;" text="Users" textFill="#ff8c00">
+            <font>
+                <Font name="System Bold Italic" size="27.0" />
+            </font>
+        </Button>
+        <Button layoutX="636.0" layoutY="524.0" mnemonicParsing="false" onMouseClicked="#products" prefHeight="37.0" prefWidth="282.0" style="-fx-background-color: #F5E5A4; -fx-border-radius: 25;" text="Products" textFill="#ff8c00">
+            <font>
+                <Font name="System Bold Italic" size="24.0" />
+            </font>
+        </Button>
+        <Button layoutX="633.0" layoutY="602.0" mnemonicParsing="false" onMouseClicked="#sales" prefHeight="44.0" prefWidth="282.0" style="-fx-background-color: #F5E5A4; -fx-border-radius: 25;" text="Sales" textFill="#ff8c00">
+            <font>
+                <Font name="System Bold Italic" size="26.0" />
+            </font>
+        </Button>
+        <Button layoutX="633.0" layoutY="684.0" mnemonicParsing="false" onMouseClicked="#exit" prefHeight="51.0" prefWidth="288.0" style="-fx-background-color: #F5E5A4; -fx-border-radius: 25;" text="Exit" textFill="#ff8c00">
+            <font>
+                <Font name="System Bold Italic" size="23.0" />
+            </font>
+        </Button>
+        <ImageView fitHeight="166.0" fitWidth="263.0" layoutX="642.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true" />
+        <Text layoutX="633.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="merkato" wrappingWidth="281.6708984375">
+            <font>
+                <Font name="System Bold Italic" size="67.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0" startX="0.28640776699029125" startY="0.19902912621359223">
+                    <stops>
+                        <Stop color="#ff7c7c" />
+                        <Stop color="#ff7c7c" offset="0.007246376811594203" />
+                        <Stop color="#ff9d00" offset="0.29283887468030695" />
+                        <Stop color="RED" offset="0.5434782608695652" />
+                        <Stop color="#e5104a" offset="0.782608695652174" />
+                        <Stop color="#ff0090" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+    </children>
+</AnchorPane>
