@@ -72,7 +72,7 @@
                 <TableColumn fx:id="productScore" prefWidth="161.0" text="Score" />
             </columns>
         </TableView>
-        <Button layoutX="1087.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsView" text="view">
+        <Button layoutX="1158.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsView" text="view">
             <textFill>
                 <LinearGradient endX="1.0" endY="1.0">
                     <stops>
@@ -85,7 +85,7 @@
                 <Font size="17.0" />
             </font>
         </Button>
-        <Button layoutX="1169.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsViewBuyers" text="view buyers">
+        <Button layoutX="1225.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsViewBuyers" text="view buyers">
             <font>
                 <Font size="17.0" />
             </font>
@@ -98,7 +98,7 @@
                 </LinearGradient>
             </textFill>
         </Button>
-        <Button layoutX="1307.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsEdit" text="Edit">
+        <Button layoutX="1350.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsEdit" text="Edit">
             <font>
                 <Font size="17.0" />
             </font>
@@ -111,7 +111,7 @@
                 </LinearGradient>
             </textFill>
         </Button>
-        <Button layoutX="1383.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsRemove" text="Remove">
+        <Button layoutX="1410.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsRemove" text="Remove">
             <font>
                 <Font size="17.0" />
             </font>
@@ -129,5 +129,31 @@
                 <Font size="29.0" />
             </font>
         </Label>
+        <Button layoutX="1051.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productssortView" text="Sort view">
+            <font>
+                <Font size="17.0" />
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#3000ff" />
+                        <Stop color="#ff006a" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </textFill>
+        </Button>
+        <Button layoutX="927.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsSortScore" text="Sort score">
+            <font>
+                <Font size="17.0" />
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#3000ff" />
+                        <Stop color="#ff006a" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </textFill>
+        </Button>
     </children>
 </AnchorPane>

@@ -131,7 +131,9 @@ public abstract class Account {
     //----------------------------------------------------------------
     public void setName(String name) throws IOException {
         this.name = name;
-//        writeInJ();
+        Customer.writeInJ();
+        Manager.writeInJ();
+        Seller.writeInJ();
 
     }
 

@@ -36,16 +36,22 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
      //   System.out.println("Test  = "+sample.Main.class.getClassLoader().getResource("mainMenuFx.fxml"));
-           /* String path = "src/sound/background.mp3";
+         /*   String path = "src/sound/background.mp3";
             Media media = new Media(new File(path).toURI().toString());
             MediaPlayer mediaPlayer = new MediaPlayer(media);
             mediaPlayer.setAutoPlay(true);
+            if(Manager.getAllManagers().size() != 0){
+                SignUpFx.setRole("manager");
+                Parent root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("signUpFx.fxml")));
+            }
 
-            */
+          */
+
+
 
      //   Parent root = FXMLLoader.load(getClass().getResource("mainMenuFx.fxml"));
-       // Parent root = FXMLLoader.load(Objects.requireNonNull(AddCategoryFx.class.getClassLoader().getResource("AddCategoryFx.fxml")));
-     //       Parent root = FXMLLoader.load(Objects.requireNonNull(RequestsFx.class.getClassLoader().getResource("requestsFx.fxml")));
+      //  Parent root = FXMLLoader.load(Objects.requireNonNull(AddDiscountFx.class.getClassLoader().getResource("addDiscountFx.fxml")));
+       //     Parent root = FXMLLoader.load(Objects.requireNonNull(RequestsFx.class.getClassLoader().getResource("requestsFx.fxml")));
         Parent root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
         primaryStage.setTitle("market");
         primaryStage.setScene(new Scene(root, widthScene, heightScene));

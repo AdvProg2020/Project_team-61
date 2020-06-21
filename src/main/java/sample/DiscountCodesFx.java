@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import model.accounts.Account;
 import model.off.DiscountCode;
+import model.sort.Sort;
 import view.OutputMassageHandler;
 
 import java.io.IOException;
@@ -61,11 +62,7 @@ public class DiscountCodesFx {
         makeTree();
     }
 
-    public static void initializeObserverList() throws IOException {
-        data.clear();
-      //  data.addAll(discounts);
-        data.addAll(new DiscountCode("ssss"),new DiscountCode("sss"));
-    }
+
 
 
     public void makeTree() throws IOException {
@@ -77,8 +74,8 @@ public class DiscountCodesFx {
         discountTotalTime.setCellValueFactory(new PropertyValueFactory<DiscountCode,Number>("totalTimesOfUse"));
 
 
-        initializeObserverList();
-       // discountCodes.getColumns().addAll(discountId,discountAmount,discountStart,discountEnd,maxDiscountAmount,discountTotalTime);
+        data.clear();
+        data.addAll(discounts);
         discountCodes.setEditable(true);
         discountCodes.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         discountCodes.getSelectionModel().setCellSelectionEnabled(true);
@@ -115,6 +112,23 @@ public class DiscountCodesFx {
         Main.primStage.show();
     }
 
+    public void sortDiscount(MouseEvent mouseEvent) {
+        discountId.setCellValueFactory(new PropertyValueFactory<DiscountCode, String>("discountId"));
+        discountAmount.setCellValueFactory(new PropertyValueFactory<DiscountCode, Number>("discountAmount"));
+        discountStart.setCellValueFactory(new PropertyValueFactory<DiscountCode, String>("startOfDiscountPeriod"));
+        discountEnd.setCellValueFactory(new PropertyValueFactory<DiscountCode,String>("endOfDiscountPeriod"));
+        maxDiscountAmount.setCellValueFactory(new PropertyValueFactory<DiscountCode,Number>("maxDiscountAmount"));
+        discountTotalTime.setCellValueFactory(new PropertyValueFactory<DiscountCode,Number>("totalTimesOfUse"));
+        data.clear();
+        Sort.setNewArrayOfDiscountCodeSort(DiscountCode.getAllDiscountCodes());
+        data.addAll(   Sort.sortDiscountCodes());
+        discountCodes.setEditable(true);
+        discountCodes.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        discountCodes.getSelectionModel().setCellSelectionEnabled(true);
+        discountCodes.setItems(data);
+
+    }
+
     public static void setDiscounts(ArrayList<DiscountCode> discounts) {
         DiscountCodesFx.discounts = discounts;
     }
@@ -130,6 +144,7 @@ public class DiscountCodesFx {
 
     public void exit(ActionEvent actionEvent) {
     }
+
 
 
 }

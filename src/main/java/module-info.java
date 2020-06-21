@@ -12,4 +12,5 @@
     opens model.accounts to javafx.base;
         opens model.off to javafx.base;
         opens model.request to javafx.base;
+        opens model.productRelated to javafx.base;
 }

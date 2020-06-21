@@ -109,5 +109,19 @@
             </LinearGradient>
          </textFill>
       </Button>
+      <Button layoutX="909.0" layoutY="788.0" mnemonicParsing="false" onMouseClicked="#sortRequest" text="Sort date">
+         <font>
+            <Font size="19.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#2b00ff" />
+                  <Stop color="#ff00df" offset="0.5228758169934641" />
+                  <Stop color="RED" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
     </children>
 </AnchorPane>

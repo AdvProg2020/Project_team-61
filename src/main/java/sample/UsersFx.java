@@ -18,8 +18,10 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.accounts.Account;
 import model.firms.Firm;
+import model.sort.Sort;
 import view.OutputMassageHandler;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -92,6 +94,27 @@ public class UsersFx {
             goToPage();
     }
 
+
+    public void sortUser(MouseEvent mouseEvent) throws FileNotFoundException {
+        UserId.setCellValueFactory(new PropertyValueFactory<Account, String>("username"));
+        userName.setCellValueFactory(new PropertyValueFactory<Account, String>("name"));
+        userLast.setCellValueFactory(new PropertyValueFactory<Account, String>("lastname"));
+        userBirth.setCellValueFactory(new PropertyValueFactory<Account, Date>("birthdayDate"));
+        userPhoneNo.setCellValueFactory(new PropertyValueFactory<Account, Double>("phoneNo"));
+        userEmail.setCellValueFactory(new PropertyValueFactory<Account, String>("email"));
+
+        list.clear();
+        Sort.setNewArrayOfAccountSort(Account.getAllAccounts());
+        list.addAll(Sort.accountSortUserName());
+
+        usersList.setEditable(true);
+        usersList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        usersList.getSelectionModel().setCellSelectionEnabled(true);
+
+        usersList.setItems(list);
+
+    }
+
     private static void goToPage(){
         Scene pageTwoScene = new Scene(root);
         //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
@@ -130,4 +153,5 @@ public class UsersFx {
 
     public void exit(ActionEvent actionEvent) {
     }
+
 }

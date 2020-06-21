@@ -35,10 +35,11 @@ public class SaleRequest extends Request {
     }
 
     @Override
-    public  void declineRequest() {
+    public  void declineRequest() throws IOException {
         getAllRequests().remove(this);
         allSaleRequests.remove(this);
         getAllRequests().remove(this);
+        writeInJ();
     }
 
     @Override
@@ -50,6 +51,7 @@ public class SaleRequest extends Request {
         Product.getProductById(product).setInSale(true);
         getAllRequests().remove(this);
         allSaleRequests.remove(this);
+        writeInJ();
     }
 
 

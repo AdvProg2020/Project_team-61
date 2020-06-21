@@ -74,7 +74,7 @@
                     </stops>
                 </LinearGradient>
             </textFill></Label>
-        <Button layoutX="949.0" layoutY="745.0" mnemonicParsing="false" onMouseClicked="#addTrait" prefHeight="39.0" prefWidth="97.0" text="Add">
+        <Button layoutX="829.0" layoutY="283.0" mnemonicParsing="false" onMouseClicked="#addTrait" prefHeight="39.0" prefWidth="97.0" text="Add">
             <textFill>
                 <LinearGradient endX="1.0" endY="1.0">
                     <stops>
@@ -85,7 +85,7 @@
                     </stops>
                 </LinearGradient>
             </textFill></Button>
-        <Button layoutX="1263.0" layoutY="745.0" mnemonicParsing="false" onMouseClicked="#removeTrait" prefHeight="39.0" prefWidth="85.0" text="Remove">
+        <Button layoutX="829.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#removeTrait" prefHeight="39.0" prefWidth="97.0" text="Remove">
             <textFill>
                 <LinearGradient endX="1.0" endY="1.0">
                     <stops>
@@ -101,11 +101,6 @@
                 <Font size="27.0" />
             </font>
         </Text>
-        <TableView fx:id="categoryTraits" layoutX="905.0" layoutY="145.0" prefHeight="577.0" prefWidth="507.0">
-            <columns>
-                <TableColumn fx:id="categoryTrait" prefWidth="505.0" text="Traits" />
-            </columns>
-        </TableView>
         <Button layoutX="720.0" layoutY="422.0" mnemonicParsing="false" onMouseClicked="#editCategory" prefHeight="39.0" prefWidth="85.0" text="Edit">
             <textFill>
                 <LinearGradient endX="1.0" endY="1.0">
@@ -134,5 +129,11 @@
             <Font size="23.0" />
          </font>
       </Label>
+      <ListView fx:id="categoryTraits" layoutX="939.0" layoutY="202.0" prefHeight="500.0" prefWidth="409.0" />
+      <Text layoutX="1120.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Traits">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
     </children>
 </AnchorPane>

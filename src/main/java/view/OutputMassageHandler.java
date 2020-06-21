@@ -132,7 +132,11 @@ public class OutputMassageHandler {
             text =("category add");
         } else if (output == 46) {
             text =("there is no product with this id");
-        }
+        } else if (output == 47) {
+            text =("there is no trait with this id");
+        } else if (output == 48) {
+        text =("there is a trait with this id");
+    }
         return text;
     }
 

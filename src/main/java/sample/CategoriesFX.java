@@ -18,6 +18,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.accounts.Account;
 import model.productRelated.Category;
+import model.sort.Sort;
 import view.OutputMassageHandler;
 
 import java.io.IOException;
@@ -75,6 +76,22 @@ public class CategoriesFX {
         }
     }
 
+
+    public void sortCategories(MouseEvent mouseEvent) {
+        categoriesName.setCellValueFactory(new PropertyValueFactory<Category, String>("name"));
+
+        list.clear();
+        Sort.setNewArrayOfCategory(Category.getAllCategories());
+        list.addAll( Sort.categoryNameSort());
+
+        //  usersList.getColumns().addAll(UserId,userName,userLast,userBirth,userPhoneNo,userEmail);
+        categories.setEditable(true);
+        categories.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        categories.getSelectionModel().setCellSelectionEnabled(true);
+
+        categories.setItems(list);
+    }
+
     public void addCategories(MouseEvent mouseEvent) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(AddCategoryFx.class.getClassLoader().getResource("addCategoryFx.fxml")));
         goToPage();
@@ -110,4 +127,6 @@ public class CategoriesFX {
 
     public void exit(ActionEvent actionEvent) {
     }
+
+
 }

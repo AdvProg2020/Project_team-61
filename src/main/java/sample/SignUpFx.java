@@ -96,9 +96,10 @@ public class SignUpFx {
     }
 
     private void goToMenu() throws IOException {
-        if (role == "seller") {
-            root = FXMLLoader.load(Objects.requireNonNull(FirmFx.class.getClassLoader().getResource("firmFx.fxml")));
-        } else if (role.equalsIgnoreCase("manager") && !RegisterMenu.isHeadManager()) {
+     //   if (role == "seller") {
+         //   root = FXMLLoader.load(Objects.requireNonNull(FirmFx.class.getClassLoader().getResource("firmFx.fxml")));
+       // } else
+         if (role.equalsIgnoreCase("manager") && !RegisterMenu.isHeadManager()) {
             root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
         } else {
             root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));

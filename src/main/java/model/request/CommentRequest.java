@@ -30,21 +30,23 @@ public class CommentRequest extends Request {
     }
 
     @Override
-    public  void declineRequest() {
+    public  void declineRequest() throws IOException {
         Request.getAllRequests().remove(this);
         allCommentRequests.remove(this);
         Comment comment = Comment.getCommentFromId(id);
         comment.setCommentStatus(CommentStatus.NOTAPPROVEDBYTHEMANAGER);
+        writeInJ();
     }
 
     @Override
-    public  void acceptRequest() {
+    public  void acceptRequest() throws IOException {
         Comment comment =Comment.getCommentFromId(id);
         comment.setDetail(title,content,personToVote,product);
         comment.setCommentStatus(CommentStatus.CONFIRMED);
         product.setComment(comment);
         Request.getAllRequests().remove(this);
         allCommentRequests.remove(this);
+        writeInJ();
     }
 
     public void setId(String id) throws IOException {

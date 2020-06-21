@@ -7,82 +7,139 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import model.accounts.Account;
+import model.accounts.Customer;
 import view.OutputMassageHandler;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class AddDiscountFx {
 
-    @FXML private TextField maxAmountDiscount;
-    @FXML private TextField startAddDiscount;
-    @FXML private TextField endAddDiscount;
-    @FXML private TextField addDiscountId;
-    @FXML private TextField addDiscountTimesOfUse;
-    @FXML private  ListView<Account> allAccountsInfo;
-    @FXML private TextField addDiscountAmount;
-    @FXML private Label discountMs;
+    @FXML
+    private TextField maxAmountDiscount;
+    @FXML
+    private TextField startAddDiscount;
+    @FXML
+    private TextField endAddDiscount;
+    @FXML
+    private TextField addDiscountId;
+    @FXML
+    private TextField addDiscountTimesOfUse;
+    @FXML
+    private ListView<Account> allAccountsInfo;
+    @FXML
+    private TextField addDiscountAmount;
+    @FXML
+    private Label discountMs;
+    @FXML
+    private TableColumn<Account, String> discountUser;
+    @FXML
+    private TableView<Account> discountAccounts;
 
-    public ObservableList list = FXCollections.observableArrayList();
+    public static ObservableList list = FXCollections.observableArrayList();
     ArrayList<String> usernames = new ArrayList<>();
 
     @FXML
     public void initialize() throws IOException {
-        initializeObserverList();
+        makeTree();
     }
 
-    public  void initializeObserverList() {
-        allAccountsInfo.setEditable(true);
-        allAccountsInfo.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+    public static void makeList() {
         list.clear();
-        for (int i = 0; i <Account.getAllAccounts().size() ; i++) {
-            usernames.add(Account.getAllAccounts().get(i).getUsername());
-        }
-        list.addAll(usernames);
-        allAccountsInfo.getItems().addAll(list);
+        list.addAll(Customer.getAllCustomers());
+    }
+
+    private void makeTree() {
+        discountUser.setCellValueFactory(new PropertyValueFactory<Account, String>("username"));
+
+        makeList();
+        //  usersList.getColumns().addAll(UserId,userName,userLast,userBirth,userPhoneNo,userEmail);
+        discountAccounts.setEditable(true);
+        discountAccounts.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        discountAccounts.getSelectionModel().setCellSelectionEnabled(true);
+
+        discountAccounts.setItems(list);
     }
 
 
     public void addDiscount(MouseEvent mouseEvent) throws IOException, ParseException {
         String ms = null;
-        if (ManagerMenu.getCreate() == 0) {
-            addDiscountId.setText(OutputMassageHandler.showAccountOutput(ManagerMenu.createNewDiscountCode(addDiscountId.getText())));
-        }
-        if (ManagerMenu.getCreate() == 1) {
-            ms =OutputMassageHandler.showAccountOutput(ManagerMenu.setDetailToDiscountCode(startAddDiscount.getText(), 0));
-            if (ManagerMenu.getDetailMenu() == 1) {
-                ms =OutputMassageHandler.showAccountOutput(ManagerMenu.setDetailToDiscountCode(endAddDiscount.getText(), 1));
+        if (discountAccounts.getSelectionModel().getSelectedItem() != null) {
+            if (ManagerMenu.getCreate() == 0) {
+                addDiscountId.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.createNewDiscountCode(addDiscountId.getText())));
             }
-            if (ManagerMenu.getDetailMenu() == 2) {
-                ms =OutputMassageHandler.showAccountOutput(ManagerMenu.setDetailToDiscountCode(maxAmountDiscount.getText(), 2));
+            if (ManagerMenu.getCreate() == 1) {
+                ms = OutputMassageHandler.showManagerOutput(ManagerMenu.setDetailToDiscountCode(startAddDiscount.getText(), 0));
+                if (ManagerMenu.getDetailMenu() == 1) {
+                    ms = OutputMassageHandler.showManagerOutput(ManagerMenu.setDetailToDiscountCode(endAddDiscount.getText(), 1));
+                }
+                if (ManagerMenu.getDetailMenu() == 2) {
+                    ms = OutputMassageHandler.showManagerOutput(ManagerMenu.setDetailToDiscountCode(maxAmountDiscount.getText(), 2));
+                }
+                if (ManagerMenu.getDetailMenu() == 3) {
+                    ms = OutputMassageHandler.showManagerOutput(ManagerMenu.setDetailToDiscountCode(addDiscountTimesOfUse.getText(), 3));
+                }
+                if (ManagerMenu.getDetailMenu() == 4) {
+                    ms = OutputMassageHandler.showManagerOutput(ManagerMenu.setDetailToDiscountCode(addDiscountAmount.getText(), 4));
+                }
+                if (ManagerMenu.getDetailMenu() == 5) {
+                        Account account = discountAccounts.getSelectionModel().getSelectedItem();
+                        ms = OutputMassageHandler.showManagerOutput(ManagerMenu.setDetailToDiscountCode(account.getUsername(), 4));
+
+                }
             }
-            if (ManagerMenu.getDetailMenu() == 3) {
-                ms =OutputMassageHandler.showAccountOutput(ManagerMenu.setDetailToDiscountCode(addDiscountTimesOfUse.getText(), 3));
-            }
-            if (ManagerMenu.getDetailMenu() == 4) {
-                ms =OutputMassageHandler.showAccountOutput(ManagerMenu.setDetailToDiscountCode(addDiscountAmount.getText(), 4));
-            }
-            if (ManagerMenu.getDetailMenu() == 5) {
-                Account account = allAccountsInfo.getSelectionModel().getSelectedItem();
-                ms =OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(account.getUsername(), 5));
-            }
-        } discountMs.setText(ms);
+        }else ms = "you have to select account first";
+        discountMs.setText(ms);
 
     }
 
+    public void editDiscount(MouseEvent mouseEvent) throws IOException, ParseException {
+        String ms = null;
+        ms=(OutputMassageHandler.showManagerOutput(ManagerMenu.editDiscountCode(addDiscountId.getText())));
+        //if (ManagerMenu.getCreate() == 1) {
+            ms = OutputMassageHandler.showAccountOutput(ManagerMenu.editDiscountCodeField(startAddDiscount.getText(), "start of discount"));
+          //  if (ManagerMenu.getDetailMenu() == 1) {
+                ms = OutputMassageHandler.showAccountOutput(ManagerMenu.editDiscountCodeField(endAddDiscount.getText(), "end of discount"));
+           // }
+          //  if (ManagerMenu.getDetailMenu() == 2) {
+                ms = OutputMassageHandler.showAccountOutput(ManagerMenu.editDiscountCodeField(maxAmountDiscount.getText(), "max"));
+           // }
+           // if (ManagerMenu.getDetailMenu() == 3) {
+                ms = OutputMassageHandler.showAccountOutput(ManagerMenu.editDiscountCodeField(addDiscountTimesOfUse.getText(), "time of use"));
+           // }
+           // if (ManagerMenu.getDetailMenu() == 4) {
+                ms = OutputMassageHandler.showAccountOutput(ManagerMenu.editDiscountCodeField(addDiscountAmount.getText(), "amount"));
+           // }
 
-    public void addAccount(MouseEvent mouseEvent) {
+       // }
+        discountMs.setText(ms);
     }
 
-    public void removeAccount(MouseEvent mouseEvent) {
+    public void addAccount(MouseEvent mouseEvent) throws IOException, ParseException {
+        if (ManagerMenu.getEditableDiscountCode() != null) {
+            if (discountAccounts.getSelectionModel().getSelectedItem() != null) {
+                Account a = discountAccounts.getSelectionModel().getSelectedItem();
+                discountMs.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.editDiscountCodeField(a.getUsername(),"add account")));
+                makeTree();
+            } else discountMs.setText("you have to select first");
+        } else discountMs.setText("you have to put name and edit first");
+    }
+
+    public void removeAccount(MouseEvent mouseEvent) throws IOException, ParseException {
+        if (ManagerMenu.getEditableDiscountCode() != null) {
+            if (discountAccounts.getSelectionModel().getSelectedItem() != null) {
+                Account a = discountAccounts.getSelectionModel().getSelectedItem();
+                discountMs.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.editDiscountCodeField(a.getUsername(),"remove account")));
+                makeTree();
+            } else discountMs.setText("you have to select first");
+        } else discountMs.setText("you have to put name and edit first");
     }
 
 
@@ -100,6 +157,8 @@ public class AddDiscountFx {
     public void logout(ActionEvent actionEvent) {
 
     }
+
+
   /*  private DiscountCode newDiscountCode;
     @FXML
     public ImageView Exit;
@@ -201,6 +260,19 @@ public class AddDiscountFx {
     @FXML
     @FXML*/
 
+
+  /*  public  void initializeObserverList() {
+        allAccountsInfo.setEditable(true);
+        allAccountsInfo.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        list.clear();
+        for (int i = 0; i <Account.getAllAccounts().size() ; i++) {
+            usernames.add(Account.getAllAccounts().get(i).getUsername());
+        }
+        list.addAll(usernames);
+        allAccountsInfo.getItems().addAll(list);
+    }
+
+   */
 
 
 }

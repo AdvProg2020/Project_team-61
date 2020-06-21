@@ -21,11 +21,27 @@ public class ManagerMenu {
     private static int outputNo;
     private static DiscountCode editableDiscountCode;
     private static Category editableCategory;
-    private static String field;
+   // private static String field;
     private static int detailMenu = 0;
     private static DiscountCode newDiscountCode;
     private static Category newCategory;
     private static int create = 0;
+
+    public static Category getEditableCategory() {
+        return editableCategory;
+    }
+
+    public static void setEditableCategory(Category editableCategory) {
+        ManagerMenu.editableCategory = editableCategory;
+    }
+
+    public static DiscountCode getEditableDiscountCode() {
+        return editableDiscountCode;
+    }
+
+    public static void setEditableDiscountCode(DiscountCode editableDiscountCode) {
+        ManagerMenu.editableDiscountCode = editableDiscountCode;
+    }
 
     public static int getCreate() {
         return create;
@@ -35,9 +51,6 @@ public class ManagerMenu {
         ManagerMenu.create = create;
     }
 
-    public static String getField() {
-        return field;
-    }
 
     public static int getDetailMenu() {
         return detailMenu;
@@ -81,10 +94,10 @@ public class ManagerMenu {
         if (checkProduct(productID)) {
             Product.deleteProduct(productID);
             outputNo = 1;
-          //  OutputMassageHandler.showOutputWithString(2);
+            //  OutputMassageHandler.showOutputWithString(2);
         }
         return outputNo;
-       // OutputMassageHandler.showManagerOutput(outputNo);
+        // OutputMassageHandler.showManagerOutput(outputNo);
     }
     //------------------------------------------------
 
@@ -102,15 +115,15 @@ public class ManagerMenu {
             newDiscountCode = new DiscountCode(discountCodeId);
             newDiscountCode.setManager(LoginMenu.getLoginAccount());
             create = 1;
-            if(LoginMenu.getLoginAccount() instanceof Manager) {
+            if (LoginMenu.getLoginAccount() instanceof Manager) {
                 ((Manager) LoginMenu.getLoginAccount()).addDiscount(newDiscountCode);
             }
-         //   CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
-          //  CommandProcessor.setSubMenuStatus(SubMenuStatus.DETAILDESCOUNTCODE);
+            //   CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
+            //  CommandProcessor.setSubMenuStatus(SubMenuStatus.DETAILDESCOUNTCODE);
             outputNo = 0;
         } else outputNo = 25;
         return outputNo;
-       // OutputMassageHandler.showManagerOutput(outputNo);
+        // OutputMassageHandler.showManagerOutput(outputNo);
     }
 
     public static int setDetailToDiscountCode(String detail, int detailMen) throws ParseException, IOException {
@@ -149,55 +162,37 @@ public class ManagerMenu {
         } else if (detailMen == 4) {
             if (detail.matches("\\d+")) {
                 newDiscountCode.setDiscountAmount(Integer.parseInt(detail));
-               outputNo = 0;
+                outputNo = 0;
                 detailMenu = 5;
             } else outputNo = 28;
         } else if (detailMen == 5) {
             if (detail.matches("\\s+")) {
-               // if (Account.isThereAccountWithUsername(detail)) {
-                    newDiscountCode.addAccount(Account.getAccountWithUsername(detail));
-                    outputNo = 37;
-                    detailMenu = 0;
-                   // CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-                   // CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
-              //  } else outputNo = 31;
+                // if (Account.isThereAccountWithUsername(detail)) {
+                newDiscountCode.addAccount(Account.getAccountWithUsername(detail));
+                outputNo = 37;
+               // detailMenu = 0;
+                // CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+                // CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                //  } else outputNo = 31;
             } else outputNo = 30;
         }
         return outputNo;
-       //OutputMassageHandler.showManagerOutput(outputNo);
-    }
-
-    public static void sortBy(String sort) throws FileNotFoundException {
-        if(sort.matches("(?i)(?:request\\s+date|account\\s+name|category\\s+name|discount\\s+amount)")){
-            if(sort.matches("request\\s+date")){
-                Sort.setNewArrayOfRequest(Request.getAllRequests());
-                Sort.sortRequest();
-            }else if(sort.matches("account\\s+name")){
-                Sort.setNewArrayOfAccountSort(Account.getAllAccounts());
-                Sort.accountSortUserName();
-            }else if(sort.matches("category\\s+name")){
-                Sort.setNewArrayOfCategory(Category.getAllCategories());
-                Sort.categoryNameSort();
-            }else if(sort.matches("discount\\s+amount")){
-                Sort.setNewArrayOfDiscountCodeSort(DiscountCode.getAllDiscountCodes());
-                Sort.sortDiscountCodes();
-            }
-        }
+        //OutputMassageHandler.showManagerOutput(outputNo);
     }
 
 
-    public static void editDiscountCode(String discountCodeID) {
+    public static int editDiscountCode(String discountCodeID) {
         if (checkDiscountCode(discountCodeID)) {
             editableDiscountCode = DiscountCode.getDiscountWithId(discountCodeID);
             //CommandProcessor.setSubMenuStatus(SubMenuStatus.DISCOUNTCODEFIELD);
-            outputNo = 15;
-        } else OutputMassageHandler.showManagerOutput(outputNo);
+            outputNo = 0;
+        }// else OutputMassageHandler.showManagerOutput(outputNo);
+        return outputNo;
     }
 
 
-
-    public static void editDiscountCodeField(String edit) throws ParseException, IOException {
-        if (field.matches("(?i)start\\s+Of\\s+Discount\\s+Period")) {
+    public static int editDiscountCodeField(String edit, String field) throws ParseException, IOException {
+        if (field.matches("(?i)start\\s+Of\\s+Discount")) {
             if (edit.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
                 Date currentDate = new Date();
                 Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(edit);
@@ -206,7 +201,7 @@ public class ManagerMenu {
                     outputNo = 16;
                 } else outputNo = 26;
             } else outputNo = 8;
-        } else if (field.matches("(?i)end\\s+Of\\s+Discount\\s+Period")) {
+        } else if (field.matches("(?i)end\\s+Of\\s+Discount")) {
             if (edit.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
                 Date currentDate = new Date();
                 Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(edit);
@@ -215,17 +210,17 @@ public class ManagerMenu {
                     outputNo = 17;
                 } else outputNo = 26;
             } else outputNo = 10;
-        } else if (field.matches("(?i)max\\s+Discount\\s+Amount")) {
+        } else if (field.matches("(?i)max\\s*Amount")) {
             if (edit.matches("\\d+\\.\\d*")) {
                 editableDiscountCode.setMaxDiscountAmount(Double.parseDouble(edit));
                 outputNo = 18;
             } else outputNo = 12;
-        } else if (field.matches("(?i)total\\s+Times\\s+Of\\s+Use")) {
+        } else if (field.matches("(?i)Times\\s+Of\\s+Use")) {
             if (edit.matches("\\d+")) {
                 editableDiscountCode.setTotalTimesOfUse(Integer.parseInt(edit));
                 outputNo = 19;
             } else outputNo = 14;
-        } else if (field.matches("(?i)discount\\s+amount")) {
+        } else if (field.matches("(?i)amount")) {
             if (edit.matches("\\d+")) {
                 editableDiscountCode.setDiscountAmount(Integer.parseInt(edit));
                 outputNo = 27;
@@ -245,17 +240,18 @@ public class ManagerMenu {
                 } else outputNo = 32;
             } else outputNo = 30;
         }
-        OutputMassageHandler.showManagerOutput(outputNo);
+        return outputNo;
+
     }
 
     public static int removeDiscountCode(String discountCodeID) throws IOException {
         if (checkDiscountCode(discountCodeID)) {
             DiscountCode.deleteDiscount(discountCodeID);
-            if(LoginMenu.getLoginAccount() instanceof Manager) {
+            if (LoginMenu.getLoginAccount() instanceof Manager) {
                 ((Manager) LoginMenu.getLoginAccount()).removeDiscount(newDiscountCode);
             }
-            outputNo =6;
-           // OutputMassageHandler.showOutputWithString(discountCodeID, 4);
+            outputNo = 6;
+            // OutputMassageHandler.showOutputWithString(discountCodeID, 4);
         } //else OutputMassageHandler.showManagerOutput(outputNo);
         return outputNo;
     }
@@ -273,17 +269,17 @@ public class ManagerMenu {
     public static int acceptRequest(String requestID) throws IOException {
         if (checkRequest(requestID)) {
             Request.getRequestFromID(requestID).acceptRequest();
-            outputNo=5;
-          //  OutputMassageHandler.showOutputWithString(requestID, 5);
+            outputNo = 5;
+            //  OutputMassageHandler.showOutputWithString(requestID, 5);
         } //else OutputMassageHandler.showManagerOutput(outputNo);
         return outputNo;
     }
 
-    public static int declineRequest(String requestID) {
+    public static int declineRequest(String requestID) throws IOException {
         if (checkRequest(requestID)) {
             Request.getRequestFromID(requestID).declineRequest();
-            outputNo =6;
-           // OutputMassageHandler.showOutputWithString(requestID, 6);
+            outputNo = 6;
+            // OutputMassageHandler.showOutputWithString(requestID, 6);
         } //else OutputMassageHandler.showManagerOutput(outputNo);
         return outputNo;
     }
@@ -299,90 +295,75 @@ public class ManagerMenu {
     }
 
 
-    public static void editCategory(String category) {
+    public static int editCategory(String category) {
         if (checkCategory(category)) {
             editableCategory = Category.getCategoryWithName(category);
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.CATEGORYFIELD);
-            outputNo = 33;
+            //  CommandProcessor.setSubMenuStatus(SubMenuStatus.CATEGORYFIELD);
+            outputNo = 0;
         }
-        OutputMassageHandler.showManagerOutput(outputNo);
+        return outputNo;
+        // OutputMassageHandler.showManagerOutput(outputNo);
     }
 
-    public static int categoryField(String field) {
-        if (field.matches("(?i)(?:add\\s*product|remove\\s*product|remove\\s*trait|add\\s*trait)")) {
-            ManagerMenu.field = field;
-            outputNo =0;
-           // CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITCATEGORY);
-            //OutputMassageHandler.showOutputWithString(field, 3);
-        } //else OutputMassageHandler.showManagerOutput(outputNo);
+    public static int addTraitToCatEdit(String edit) throws IOException {
+        if (edit.matches(".+")) {
+            if (!editableCategory.isThereTrait(edit)) {
+                editableCategory.addTrait(edit);
+                outputNo = 43;
+            } else outputNo = 48;
+        } else outputNo = 42;
         return outputNo;
     }
 
-    public static void editCategoryField(String edit) throws IOException {
-        if (field.matches("remove\\s*trait")) {
-            if (field.matches(".+")) {
+    public static int removeTraitToCatEdit(String edit) throws IOException {
+        if (edit.matches(".+")) {
+            if (editableCategory.isThereTrait(edit)) {
                 editableCategory.removeTrait(edit);
                 outputNo = 41;
-            } else outputNo = 42;
-        } else if (field.matches("add\\s*trait")) {
-            if (field.matches(".+")) {
-                editableCategory.addTrait(edit);
-                outputNo = 43;
-            } else outputNo = 42;
-        } else if (field.matches("(?i)remove\\s*product")) {
-            if (edit.matches(".+")) {
-                if (checkProduct(edit)) {
-                    editableCategory.removeProductToCategory(Product.getProductById(edit));
-                    outputNo = 40;
-                }
-            } else outputNo = 2;
-        } else if (field.matches("(?i)add\\s*product")) {
-            if (edit.matches(".+")) {
-                if (checkProduct(edit)) {
-                    editableCategory.addProductToCategory(Product.getProductById(edit));
-                    outputNo = 39;
-                }
-            } else outputNo = 2;
-        }
-        OutputMassageHandler.showManagerOutput(outputNo);
-
+            } else outputNo = 47;
+        } else outputNo = 42;
+        return outputNo;
     }
+
 
     public static int addCategory(String category) throws IOException {
         if (!(Category.isThereCategoryWithName(category))) {
             newCategory = new Category(category);
-          //  CommandProcessor.setSubMenuStatus(SubMenuStatus.DETAILCATEGORY);
-          //  CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
+            //  CommandProcessor.setSubMenuStatus(SubMenuStatus.DETAILCATEGORY);
+            //  CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
             create = 1;
             outputNo = 0;
         } else outputNo = 34;
         return outputNo;
-       // OutputMassageHandler.showManagerOutput(outputNo);
+        //OutputMassageHandler.showManagerOutput(outputNo);
     }
 
     public static int setDetailToCategory(String detail) throws IOException {
         if (detailMenu == 0) {
             if (detail.matches("\\D+")) {
-              //  if (!detail.equalsIgnoreCase("finish")) {
+                if (!newCategory.isThereTrait(detail)) {
+                    //  if (!detail.equalsIgnoreCase("finish")) {
                     newCategory.addTrait(detail);
-                 //   outputNo = 43;
-             //   } else {
-                //    CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
-                //    CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGECATEGORIES);
-                  //  Category.addKey();
-                 //   detailMenu = 0;
+                    //   outputNo = 43;
+                    //   } else {
+                    //    CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                    //    CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGECATEGORIES);
+                    //  Category.addKey();
+                    //   detailMenu = 0;
                     outputNo = 0;
-              //  }
+                    //  }
+                } else outputNo = 48;
             } else outputNo = 42;
-        }return outputNo;
-       // OutputMassageHandler.showManagerOutput(outputNo);
+        }
+        return outputNo;
+        //  OutputMassageHandler.showManagerOutput(outputNo);
 
     }
 
     public static int removeCategory(String category) {
         if (checkCategory(category)) {
             Category.deleteCategory(category);
-            outputNo =13;
+            outputNo = 13;
             //OutputMassageHandler.showOutputWithString(category, 7);
         }// else OutputMassageHandler.showManagerOutput(outputNo);
         return outputNo;
@@ -479,6 +460,117 @@ public class ManagerMenu {
         CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDDISCOUNTCODE);
         OutputMassageHandler.showManagerOutput(6);
     }
+
+     public static int categoryField(String field) {
+        if (field.matches("(?i)(?:add\\s*product|remove\\s*product|remove\\s*trait|add\\s*trait)")) {
+            ManagerMenu.field = field;
+            outputNo =0;
+           // CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITCATEGORY);
+            //OutputMassageHandler.showOutputWithString(field, 3);
+        } //else OutputMassageHandler.showManagerOutput(outputNo);
+        return outputNo;
+    }
+
+     public static void editCategoryField(String edit) throws IOException {
+        if (field.matches("remove\\s*trait")) {
+            if (field.matches(".+")) {
+                editableCategory.removeTrait(edit);
+                outputNo = 41;
+            } else outputNo = 42;
+        } else if (field.matches("add\\s*trait")) {
+            if (field.matches(".+")) {
+                editableCategory.addTrait(edit);
+                outputNo = 43;
+            } else outputNo = 42;
+//        } else if (field.matches("(?i)remove\\s*product")) {
+//            if (edit.matches(".+")) {
+//                if (checkProduct(edit)) {
+//                    editableCategory.removeProductToCategory(Product.getProductById(edit));
+//                    outputNo = 40;
+//                }
+//            } else outputNo = 2;
+//        } else if (field.matches("(?i)add\\s*product")) {
+//            if (edit.matches(".+")) {
+//                if (checkProduct(edit)) {
+//                    editableCategory.addProductToCategory(Product.getProductById(edit));
+//                    outputNo = 39;
+//                }
+//            } else outputNo = 2;
+        }
+        OutputMassageHandler.showManagerOutput(outputNo);
+
+    }
+    public static int editDiscountCodeField(String edit, String field) throws ParseException, IOException {
+        if (field.matches("(?i)start\\s+Of\\s+Discount\\s+Period")) {
+            if (edit.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
+                Date currentDate = new Date();
+                Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(edit);
+                if (inputDate.after(currentDate)) {
+                    editableDiscountCode.setStartOfDiscountPeriod(inputDate);
+                    outputNo = 16;
+                } else outputNo = 26;
+            } else outputNo = 8;
+        } else if (field.matches("(?i)end\\s+Of\\s+Discount\\s+Period")) {
+            if (edit.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
+                Date currentDate = new Date();
+                Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(edit);
+                if (inputDate.after(currentDate)) {
+                    editableDiscountCode.setEndOfDiscountPeriod(inputDate);
+                    outputNo = 17;
+                } else outputNo = 26;
+            } else outputNo = 10;
+        } else if (field.matches("(?i)max\\s+Discount\\s+Amount")) {
+            if (edit.matches("\\d+\\.\\d*")) {
+                editableDiscountCode.setMaxDiscountAmount(Double.parseDouble(edit));
+                outputNo = 18;
+            } else outputNo = 12;
+        } else if (field.matches("(?i)total\\s+Times\\s+Of\\s+Use")) {
+            if (edit.matches("\\d+")) {
+                editableDiscountCode.setTotalTimesOfUse(Integer.parseInt(edit));
+                outputNo = 19;
+            } else outputNo = 14;
+        } else if (field.matches("(?i)discount\\s+amount")) {
+            if (edit.matches("\\d+")) {
+                editableDiscountCode.setDiscountAmount(Integer.parseInt(edit));
+                outputNo = 27;
+            } else outputNo = 28;
+        } else if (field.matches("(?i)add\\s+account")) {
+            if (edit.matches("\\d+")) {
+                if (Account.isThereAccountWithUsername(edit)) {
+                    editableDiscountCode.addAccount(Account.getAccountWithUsername(edit));
+                    outputNo = 29;
+                } else outputNo = 31;
+            } else outputNo = 30;
+        } else if (field.matches("(?i)remove\\s+account")) {
+            if (edit.matches("\\d+")) {
+                if (Account.isThereAccountWithUsername(edit)) {
+                    editableDiscountCode.removeAccount(Account.getAccountWithUsername(edit));
+                    outputNo = 19;
+                } else outputNo = 32;
+            } else outputNo = 30;
+        }
+        return outputNo;
+
+    }
+
+    public static void sortBy(String sort) throws FileNotFoundException {
+        if (sort.matches("(?i)(?:request\\s+date|account\\s+name|category\\s+name|discount\\s+amount)")) {
+            if (sort.matches("request\\s+date")) {
+                Sort.setNewArrayOfRequest(Request.getAllRequests());
+                Sort.sortRequest();
+            } else if (sort.matches("account\\s+name")) {
+                Sort.setNewArrayOfAccountSort(Account.getAllAccounts());
+                Sort.accountSortUserName();
+            } else if (sort.matches("category\\s+name")) {
+                Sort.setNewArrayOfCategory(Category.getAllCategories());
+                Sort.categoryNameSort();
+            } else if (sort.matches("discount\\s+amount")) {
+                Sort.setNewArrayOfDiscountCodeSort(DiscountCode.getAllDiscountCodes());
+                Sort.sortDiscountCodes();
+            }
+        }
+    }
+
 
     //            if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
 //                LocalDateTime currentDate = LocalDateTime.now();

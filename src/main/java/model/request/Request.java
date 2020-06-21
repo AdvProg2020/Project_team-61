@@ -56,7 +56,7 @@ public abstract class Request {
         return requestText;
     }
 
-    public abstract void declineRequest() ;
+    public abstract void declineRequest() throws IOException;
 
     public abstract void acceptRequest() throws IOException;
 

@@ -82,13 +82,16 @@ public class ProductsFx {
 
     }
     public void productsRemove(MouseEvent mouseEvent) {
-        if(LoginMenu.getLoginAccount() instanceof Manager){
             if(products.getSelectionModel().getSelectedItem() != null) {
                 Product product = (Product) products.getSelectionModel().getSelectedItem();
-                productsMs.setText( OutputMassageHandler.showAccountOutput(SellerMenu.processRemoveProduct(product.getProductId())));
+                if(LoginMenu.getLoginAccount() instanceof Manager) {
+                    productsMs.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.removeProduct(product.getProductId())));
+                } else if(LoginMenu.getLoginAccount() instanceof Seller) {
+                    productsMs.setText(OutputMassageHandler.showAccountOutput(SellerMenu.processRemoveProduct(product.getProductId())));
+                }
                 makeTree();
             }else productsMs.setText("you have to select first");
-        }
+
     }
 
     public void productsEdit(MouseEvent mouseEvent) throws IOException {
@@ -124,6 +127,11 @@ public class ProductsFx {
         }
     }
 
+    public void productsSortScore(MouseEvent mouseEvent) {
+    }
+
+    public void productssortView(MouseEvent mouseEvent) {
+    }
     private static void goToPage(){
         Scene pageTwoScene = new Scene(root);
         //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();

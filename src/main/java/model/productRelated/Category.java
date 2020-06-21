@@ -26,6 +26,14 @@ public class Category{
        writeInJ();
     }
 
+    public boolean isThereTrait(String name){
+        for ( String tr : traits){
+            if (tr.equalsIgnoreCase(name))
+                return true;
+        }
+        return false;
+    }
+
     public  ArrayList<String> getTraits() {
         return traits;
     }

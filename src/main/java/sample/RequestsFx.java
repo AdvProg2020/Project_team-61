@@ -18,18 +18,19 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.accounts.Account;
 import model.request.*;
+import model.sort.Sort;
 import view.OutputMassageHandler;
 
 import java.io.IOException;
 import java.util.Objects;
 
 public class RequestsFx {
-    @FXML private TableView<Request> requests;
-    @FXML private TableColumn<Request, String> requestId;
-
+    @FXML
+    private TableView<Request> requests;
+    @FXML
+    private TableColumn<Request, String> requestId;
     @FXML
     private TableColumn<Request, String> requestDate;
-
     @FXML
     private TableColumn<Request, Account> requestSeller;
 
@@ -54,18 +55,16 @@ public class RequestsFx {
         requestDate.setCellValueFactory(new PropertyValueFactory<Request, String>("requestDate"));
 
         makeList();
-        //  usersList.getColumns().addAll(UserId,userName,userLast,userBirth,userPhoneNo,userEmail);
         requests.setEditable(true);
         requests.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         requests.getSelectionModel().setCellSelectionEnabled(true);
-        ;
 
         requests.setItems(list);
     }
 
 
     public void showRequest(MouseEvent mouseEvent) throws IOException {
-        if(requests.getSelectionModel().getSelectedItem() != null) {
+        if (requests.getSelectionModel().getSelectedItem() != null) {
             Request request = requests.getSelectionModel().getSelectedItem();
             if (request instanceof AccountRequest) {
                 ViewAccountFx.setRequest(request);
@@ -90,25 +89,25 @@ public class RequestsFx {
 
     public void declineRequest(MouseEvent mouseEvent) throws IOException {
         String text = null;
-        if(requests.getSelectionModel().getSelectedItem() != null) {
+        if (requests.getSelectionModel().getSelectedItem() != null) {
             Request request = requests.getSelectionModel().getSelectedItem();
-             text =OutputMassageHandler.showOutputWithString(ManagerMenu.declineRequest(request.getRequestText()));
-             makeTree();
+            text = OutputMassageHandler.showOutputWithString(ManagerMenu.declineRequest(request.getRequestText()));
+            makeTree();
         } else text = " you have to select request first";
         show(text);
     }
 
     public void acceptRequest(MouseEvent mouseEvent) throws IOException {
         String text = null;
-        if(requests.getSelectionModel().getSelectedItem() != null) {
+        if (requests.getSelectionModel().getSelectedItem() != null) {
             Request request = requests.getSelectionModel().getSelectedItem();
-           text = OutputMassageHandler.showOutputWithString(ManagerMenu.acceptRequest(request.getRequestText()));
-           makeTree();
-        }else text = " you have to select request first";
+            text = OutputMassageHandler.showOutputWithString(ManagerMenu.acceptRequest(request.getRequestText()));
+            makeTree();
+        } else text = " you have to select request first";
         show(text);
     }
 
-    private static void goToPage(){
+    private static void goToPage() {
         Scene pageTwoScene = new Scene(root);
         //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         Main.primStage.setScene(pageTwoScene);
@@ -136,5 +135,21 @@ public class RequestsFx {
     }
 
     public void exit(ActionEvent actionEvent) {
+    }
+
+    public void sortRequest(MouseEvent mouseEvent) {
+
+        requestId.setCellValueFactory(new PropertyValueFactory<Request, String>("requestText"));
+        requestSeller.setCellValueFactory(new PropertyValueFactory<Request, Account>("seller"));
+        requestDate.setCellValueFactory(new PropertyValueFactory<Request, String>("requestDate"));
+
+        list.clear();
+        Sort.setNewArrayOfRequest(Request.getAllRequests());
+        list.addAll(Sort.sortRequest());
+        requests.setEditable(true);
+        requests.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        requests.getSelectionModel().setCellSelectionEnabled(true);
+
+        requests.setItems(list);
     }
 }
