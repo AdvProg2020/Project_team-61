@@ -1,34 +1,63 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import model.log.DeliveryStatus;
+import model.log.SaleLog;
+import model.off.Sale;
+import model.productRelated.Product;
+
+import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class SaleLogsFx {
-    
-    @FXML
-    private TableColumn<?, ?> saleLogsDeliveryStatus;
 
     @FXML
-    private TableColumn<?, ?> saleLogsDate;
+    private TableColumn<SaleLog, DeliveryStatus> saleLogsDeliveryStatus;
 
     @FXML
-    private TableView<?> saleLogsTableView;
+    private TableColumn<SaleLog, LocalDateTime> saleLogsDate;
 
     @FXML
-    private TableColumn<?, ?> saleLogsRecievedAmount;
+    private TableView<SaleLog> saleLogsTableView;
 
     @FXML
-    private TableColumn<?, ?> saleLogsId;
+    private TableColumn<SaleLog,Double> saleLogsRecievedAmount;
 
     @FXML
-    private TableColumn<?, ?> saleLogsCustomer;
+    private TableColumn<SaleLog, String> saleLogsId;
 
     @FXML
-    private TableColumn<?, ?> saleLogsReducedAmount;
+    private TableColumn<SaleLog, String> saleLogsCustomerName;
+    public  static ObservableList<SaleLog> data = FXCollections.observableArrayList();
+    @FXML
+    private TableColumn<SaleLog, Double> saleLogsReducedAmount;
+    public  void initializeObserverList() {
+        data.addAll(SaleLog.getAllSellersLog());
+    }
 
+   /* TableColumn<String, Person> column2 = new TableColumn<>("Last Name");
+    column2.setCellValueFactory(new PropertyValueFactory<>("lastName"));*/
+
+
+    @FXML
+    public void initialize()throws IOException {
+        saleLogsDeliveryStatus.setCellValueFactory(new PropertyValueFactory<>("deliveryStatus"));
+        saleLogsDate.setCellValueFactory(new PropertyValueFactory<>("number"));
+        saleLogsReducedAmount.setCellValueFactory(new PropertyValueFactory<>("reducedAmount"));
+        saleLogsCustomerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        saleLogsId.setCellValueFactory(new  PropertyValueFactory<>("saleLogId"));
+        saleLogsRecievedAmount.setCellValueFactory(new PropertyValueFactory<>("receivedAmount"));
+        initializeObserverList();
+        saleLogsTableView.getColumns().addAll(saleLogsId,saleLogsDate,saleLogsDeliveryStatus,saleLogsCustomerName,saleLogsRecievedAmount,saleLogsReducedAmount);
+        saleLogsTableView.setItems(data);
+    }
     public void logout(ActionEvent actionEvent) {
     }
 
