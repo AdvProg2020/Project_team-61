@@ -215,8 +215,6 @@ public class CustomerMenu {
         return false;
     }
 
-
-
     //score.............................................................
     public static void rateProduct(String productID, int number) throws IOException {
         if (checkProduct(productID)) {

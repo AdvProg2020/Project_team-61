@@ -1,6 +1,8 @@
 package gui;
 
 import controller.menus.LoginMenu;
+import controller.menus.ManagerMenu;
+import controller.menus.SellerMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,6 +25,7 @@ import model.accounts.Account;
 import model.accounts.Seller;
 import model.productRelated.Category;
 import model.productRelated.Product;
+import view.OutputMassageHandler;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -72,6 +75,7 @@ public class AddProductMenuFX {
     public TextField idTextField;
     public TextField numberOfProductTextField;
     public TextArea additionaldetailTextField;
+    public boolean finish = false;
     @FXML
     public TableView<Category> categoryTableView = new TableView<>();
 
@@ -85,6 +89,7 @@ public class AddProductMenuFX {
     public static ObservableList<Category> data = FXCollections.observableArrayList();
     public AnchorPane pane;
     public ArrayList<TextField> traitsTextFields = new ArrayList<>();
+    public ArrayList<String> traits = new ArrayList<>();
     String imageId;
     List<File> files;
 
@@ -124,6 +129,134 @@ public class AddProductMenuFX {
 
     @FXML
     public void addProduct(MouseEvent actionEvent) throws IOException {
+        String ms = null;
+        if (SellerMenu.getCreate() == 0) {
+            ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(idTextField.getText(), 0));
+        }
+        if (SellerMenu.getCreate() == 1) {
+            if (SellerMenu.getDetailMenu() == 1) {
+                ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(productNameTextField.getText(), 1));
+            }
+            if (SellerMenu.getDetailMenu() == 2) {
+                ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(priceTextField.getText(), 2));
+            }
+            if (SellerMenu.getDetailMenu() == 3) {
+                ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(categoryNameTextField.getText(), 3));
+            }
+            if (SellerMenu.getDetailMenu() == 4) {
+                ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(additionaldetailTextField.getText(), 4));
+            }
+            if (SellerMenu.getDetailMenu() == 5) {
+                ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(numberOfProductTextField.getText(), 5));
+                addImageView();
+                addCategoryTrait();
+            }
+            if (SellerMenu.getDetailMenu() == 6) {
+                if (finish) {
+                    //  addCategoryTrait();
+                    //if(changeToString()) {
+                    changeToString();
+                    SellerMenu.getProductRequest().setSpecialValue(traits);
+                    finish = true;
+                    // }else ms ="fill all field";
+                } else ms = "process add finished you should edit";
+                finish = true;
+            }
+        }
+        error.setText(ms);
+    }
+
+    public void editProduct(MouseEvent actionEvent) throws IOException {
+        String ms = null;
+        error.setText("you have to put all traits value");
+        if (SellerMenu.getEdit() == 0) {
+            ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProduct(idTextField.getText()));
+        }
+        if (SellerMenu.getEdit() == 1) {
+            addImageView();
+            addCategoryTrait();
+            changeToString();
+            ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(productNameTextField.getText(), "name"));
+            ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(priceTextField.getText(), "price"));
+            ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(categoryNameTextField.getText(), "category"));
+            ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(additionaldetailTextField.getText(), "additional"));
+            ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(numberOfProductTextField.getText(), "number"));
+            Product.getProductById(idTextField.getText()).setProductCategorySpecifications(traits);
+            // }
+        } else ms = "put id first";
+        error.setText(ms);
+    }
+
+    private void changeToString() {
+        for (TextField traitsTextField : traitsTextFields) {
+            traits.add(traitsTextField.getText());
+        }
+
+    }
+
+    public void backToProducts(MouseEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/productsMenu.fxml"));
+//        thisStage = new Stage();
+        prevScene = new Scene(fxmlLoader.load());
+        thisStage.setScene(prevScene);
+        thisStage.show();
+    }
+
+    public static void initializeObserverList() {
+        data.addAll(Category.getAllCategories());
+    }
+
+
+    @FXML
+    public void initialize() throws IOException {
+        categoryForPro.setCellValueFactory(new PropertyValueFactory<Category, String>("id"));
+        details.setCellValueFactory(new PropertyValueFactory<Category, TextField>("detail"));
+        initializeObserverList();
+        categoryTableView.getColumns().addAll(categoryForPro, details);
+        categoryTableView.setItems(data);
+        addImageView();
+    }
+
+    private void addCategoryTrait() {
+        traitsTextFields.clear();
+        Category category1 = Category.getCategoryWithName(categoryNameTextField.getText());
+        for (String trait : category1.getTraits()) {
+            int n = 50;
+            Label label = new Label();
+            label.setText(trait);
+            label.setLayoutY(n * (category1.getTraits().indexOf(trait) + 1));
+            label.setLayoutX(900 + category1.getTraits().indexOf(trait));
+            TextField textField = new TextField();
+            textField.setMaxSize(100, 50);
+            textField.setLayoutY((n) * (category1.getTraits().indexOf(trait) + 1));
+            textField.setLayoutX(1000 + category1.getTraits().indexOf(trait));
+
+            traitsTextFields.add(textField);
+            pane.getChildren().addAll(label, textField);
+            n += 5;
+        }
+    }
+
+    private void addImageView() {
+        productImage.setVisible(true);
+        productImage = new ImageView();
+        productImage.setFitHeight(216.0);
+        productImage.setFitWidth(267.0);
+        productImage.setLayoutX(137.0);
+        productImage.setLayoutY(76.0);
+        productImage.setOnDragDropped(e -> {
+            try {
+                handleDrop(e);
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            }
+        });
+        productImage.setOnDragOver(this::handleDragOver);
+    }
+    /*
+
+     @FXML
+    public void addProduct(MouseEvent actionEvent) throws IOException {
         String id = idTextField.getText();
         String name = productNameTextField.getText();
         String price = priceTextField.getText();
@@ -132,6 +265,8 @@ public class AddProductMenuFX {
         String seller = LoginMenu.getLoginAccount().getUsername();
         String numberOfProduct = numberOfProductTextField.getText();
         String additionalDetail = additionaldetailTextField.getText();
+
+
 
         if (!name.equals("")) {
             if (!price.equals("")) {
@@ -185,28 +320,9 @@ public class AddProductMenuFX {
         }
     }
 
-    public void backToProducts(MouseEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/productsMenu.fxml"));
-//        thisStage = new Stage();
-        prevScene = new Scene(fxmlLoader.load());
-        thisStage.setScene(prevScene);
-        thisStage.show();
-    }
-
-    public static void initializeObserverList() {
-        data.addAll(Category.getAllCategories());
-    }
 
 
-    @FXML
-    public void initialize() throws IOException {
-        categoryForPro.setCellValueFactory(new PropertyValueFactory<Category, String>("id"));
-        details.setCellValueFactory(new PropertyValueFactory<Category, TextField>("detail"));
-        initializeObserverList();
-        categoryTableView.getColumns().addAll(categoryForPro, details);
-        categoryTableView.setItems(data);
-
-    }
+     */
 
 
 }

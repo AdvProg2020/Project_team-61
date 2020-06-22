@@ -60,15 +60,6 @@ public class SignUpFx {
         dragEvent.consume();
     }
 
-    /*  String username = userSign.getText();
-   String name = nameSign.getText();
-   String lastName = lastNameSign.getText();
-   String phone = phoneNoSign.getText();
-   String password = passSign.getText();
-   String email = emailSign.getText();
-   String birthday = birthdaySign.getText();
-
-  */
     public void signUp(MouseEvent mouseEvent) throws IOException, ParseException {
         if (role != null) {
             if (RegisterMenu.getSignUpNo() == 0) {
@@ -137,6 +128,7 @@ public class SignUpFx {
             //RegisterMenu.setHeadManager(false);
         }
     }
+
     public void userMenu(ActionEvent actionEvent) {
     }
 

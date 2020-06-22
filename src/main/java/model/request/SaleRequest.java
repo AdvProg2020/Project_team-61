@@ -14,15 +14,15 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class SaleRequest extends Request {
-    private static String offId = null;
-    private static Date startOfSalePeriod = null;
-    private static Date endOfSalePeriod = null;
-    private static int saleAmount = 0;
-    private static String product= null;
-    private static Account seller = null;
-    private static ArrayList<Product> allSaleProducts = new ArrayList<>();
+    private  String offId = null;
+    private  Date startOfSalePeriod = null;
+    private  Date endOfSalePeriod = null;
+    private  int saleAmount = 0;
+    private  String product= null;
+   // private  Account seller = null;
+    private  ArrayList<Product> allSaleProducts = new ArrayList<>();
     private SaleStatus saleStatus;
-    private static Sale sale;
+    private  Sale sale;
     private static ArrayList<SaleRequest> allSaleRequests = new ArrayList<>();
     public static Type saleRequestType = new TypeToken<ArrayList<SaleRequest>>() {
     }.getType();
@@ -45,7 +45,7 @@ public class SaleRequest extends Request {
     @Override
     public  void acceptRequest() throws IOException {
         sale= Sale.getSaleWithId(offId);
-        sale.setSaleDetails(SaleStatus.CONFIRMED, startOfSalePeriod, endOfSalePeriod, saleAmount, seller);
+        sale.setSaleDetails(SaleStatus.CONFIRMED, startOfSalePeriod, endOfSalePeriod, saleAmount, this.getSeller());
         sale.setAllSaleProducts(allSaleProducts);
         sale.setSaleStatus(SaleStatus.CONFIRMED);
         Product.getProductById(product).setInSale(true);
@@ -60,11 +60,7 @@ public class SaleRequest extends Request {
         allSaleProducts.remove(product);
     }
 
-    public void setSeller(Account seller) throws IOException {
-        this.seller = seller;
-        writeInJ();
 
-    }
 
     public void addProductToSale(Product product) throws IOException {
         allSaleProducts.add(product);

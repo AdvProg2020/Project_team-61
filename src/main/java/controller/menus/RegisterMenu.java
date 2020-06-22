@@ -36,10 +36,6 @@ public class RegisterMenu {
         return headManager;
     }
 
-    public static void setHeadManager(boolean headManager) {
-        RegisterMenu.headManager = headManager;
-    }
-
     public static int getDetailMenu() {
         return detailMenu;
     }
@@ -56,9 +52,6 @@ public class RegisterMenu {
         RegisterMenu.signUpNo = signUpNo;
     }
 
-    public static void setManagerWant(boolean managerWant) {
-        RegisterMenu.managerWant = managerWant;
-    }
 
     public static int processRegister(String role, String username) throws IOException {
         if (username.matches("^[a-z0-9_-]{3,15}$")) {
