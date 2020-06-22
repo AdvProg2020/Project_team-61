@@ -6,7 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import model.accounts.Manager;
 import model.off.DiscountCode;
+import model.productRelated.Product;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -39,14 +41,18 @@ public class ManagerMenuFx {
     }
 
     public void manageAllProducts(MouseEvent mouseEvent) throws IOException {
-         root = FXMLLoader.load(Objects.requireNonNull(ManageProductsFx.class.getClassLoader().getResource("manageProductsFx.fxml")));
+        ProductsFx.setAllProducts(Product.getProductList());
+         root = FXMLLoader.load(Objects.requireNonNull(ProductsFx.class.getClassLoader().getResource("productsFx.fxml")));
         goToPage();
     }
 
     public void viewDiscount(MouseEvent mouseEvent) throws IOException {
-        DiscountCodesFx.setDiscounts(DiscountCode.getAllDiscountCodes());
-         root = FXMLLoader.load(Objects.requireNonNull(ViewDiscountFx.class.getClassLoader().getResource("viewDiscountFx.fxml")));
-        goToPage();
+        if(LoginMenu.getLoginAccount() instanceof Manager) {
+            Manager manager = (Manager) LoginMenu.getLoginAccount();
+            DiscountCodesFx.setDiscounts(manager.getAllDiscountCodes());
+            root = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("discountCodesFx.fxml")));
+            goToPage();
+        }
     }
 
     public void createDiscount(MouseEvent mouseEvent) throws IOException {

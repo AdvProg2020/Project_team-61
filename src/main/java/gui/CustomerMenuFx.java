@@ -39,7 +39,7 @@ public class CustomerMenuFx {
 
     public void viewCart(MouseEvent mouseEvent) throws IOException {
         if(LoginMenu.getLoginAccount() instanceof Customer) {
-           // BuyLogFx.setCurBuyLog(LoginMenu.getLoginAccount().);
+            //BuyLogFx.setCurBuyLog(LoginMenu.getLoginAccount().);
         }
          root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("buyLogFx.fxml")));
         goToPage();

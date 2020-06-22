@@ -1,4 +1,4 @@
-package sample;
+package gui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -100,4 +100,12 @@ public class BuyLogsFx {
     }
 
 
+    public void showOrderFromBuyLog(MouseEvent mouseEvent) {
+    }
+
+    public void rateProduct(MouseEvent mouseEvent) {
+    }
+
+    public void showOrdersFromBuyLog(MouseEvent mouseEvent) {
+    }
 }

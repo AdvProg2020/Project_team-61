@@ -1,5 +1,6 @@
- package sample;
+package gui;
 
+import gui.Main;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +20,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.log.BuyLog;
 import model.productRelated.Product;
-import sample.Main;
+
 
 
 import java.io.IOException;
@@ -50,7 +51,7 @@ public class BuyLogFx {
     @FXML private Label totalPriceLabel;
     @FXML private static Parent root;
 
-    private    BuyLog curBuyLog;
+    private   BuyLog curBuyLog;
     public  static ObservableList<Product> data = FXCollections.observableArrayList();
     public  BuyLog getCurBuyLog() {
         return curBuyLog;
@@ -164,4 +165,15 @@ public class BuyLogFx {
     }
 
 
+    public void increaseAmount(MouseEvent mouseEvent) {
+    }
+
+    public void reduceAmount(MouseEvent mouseEvent) {
+    }
+
+    public void viewProduct(MouseEvent mouseEvent) {
+    }
+
+    public void showTotalPrice(MouseEvent mouseEvent) {
+    }
 }

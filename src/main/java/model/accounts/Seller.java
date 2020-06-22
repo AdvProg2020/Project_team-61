@@ -3,6 +3,7 @@ package model.accounts;
 import com.google.gson.reflect.TypeToken;
 import model.firms.Firm;
 import model.log.SaleLog;
+import model.off.Sale;
 import model.productRelated.Product;
 import view.FileHandling;
 
@@ -15,6 +16,7 @@ public class Seller extends Account {
     private  ArrayList<SaleLog> saleLogsHistory = new ArrayList<>();
     private static ArrayList<Seller> allSellers = new ArrayList<>();
     private  ArrayList<Product> allProduct = new ArrayList<>();
+    private  ArrayList<Sale> allSales = new ArrayList<>();
     public static Type SellerType = new TypeToken<ArrayList<Seller>>() {
     }.getType();
 
@@ -23,6 +25,18 @@ public class Seller extends Account {
         role = "seller";
         allSellers.add(this);
         writeInJ();
+    }
+
+    public ArrayList<Sale> getAllSales() {
+        return allSales;
+    }
+
+    public void setAllSales(ArrayList<Sale> allSales) {
+        this.allSales = allSales;
+    }
+
+    public void setSaleLogsHistory(ArrayList<SaleLog> saleLogsHistory) {
+        this.saleLogsHistory = saleLogsHistory;
     }
 
     public void addProduct(Product product){

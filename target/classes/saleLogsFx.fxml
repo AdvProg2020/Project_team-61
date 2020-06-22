@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="848.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SaleLogsFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="848.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SaleLogsFx">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="848.0" stroke="BLACK" strokeType="INSIDE" width="1600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <fill>
@@ -60,17 +59,16 @@
                 </LinearGradient>
             </fill>
         </Text>
-        <TableView fx:id="saleLogsTableView" layoutX="249.0" layoutY="142.0" prefHeight="555.0" prefWidth="1102.0">
+        <TableView fx:id="saleLogsTableView" layoutX="249.0" layoutY="143.0" prefHeight="554.0" prefWidth="958.0">
             <columns>
                 <TableColumn fx:id="saleLogsId" minWidth="159.0" prefWidth="159.0" text="ID" />
                 <TableColumn fx:id="saleLogsCustomer" minWidth="163.0" prefWidth="163.0" text="Customer" />
-                <TableColumn fx:id="saleLogsDeliveryStatus" minWidth="138.0" prefWidth="168.0" text="Delivery Status" />
                 <TableColumn fx:id="saleLogsDate" minWidth="155.0" prefWidth="155.0" text="Date" />
                 <TableColumn fx:id="saleLogsReducedAmount" minWidth="220.0" prefWidth="256.0" text="Reduced Amount " />
                 <TableColumn fx:id="saleLogsRecievedAmount" minWidth="220.0" prefWidth="226.0" text="Recieved Amount" />
             </columns>
         </TableView>
-      <Button layoutX="1241.0" layoutY="721.0" mnemonicParsing="false" onMouseClicked="#viewSaleLogs" prefHeight="40.0" prefWidth="110.0" text="View">
+      <Button layoutX="1241.0" layoutY="721.0" mnemonicParsing="false" onMouseClicked="#viewSaleLogFromAllSaleLogs" prefHeight="40.0" prefWidth="110.0" text="View">
          <textFill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>

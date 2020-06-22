@@ -15,7 +15,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.accounts.Customer;
 import view.OutputMassageHandler;
-import view.SubMenuStatus;
+
 
 import java.io.IOException;
 
@@ -31,7 +31,7 @@ public class PayLogFx {
     //int output;
 
 
-    SubMenuStatus subMenuStatus=SubMenuStatus.RECIVERINFORMATION;
+    //SubMenuStatus subMenuStatus=SubMenuStatus.RECIVERINFORMATION;
     //public RegisterMenu registerMenu;
     int detailMenu=0;
    // public CustomerMenu customerMenu;

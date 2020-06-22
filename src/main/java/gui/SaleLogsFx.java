@@ -16,6 +16,7 @@ import model.log.SaleLog;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class SaleLogsFx {
@@ -39,14 +40,26 @@ public class SaleLogsFx {
     @FXML
     private TableColumn<SaleLog, String> saleLogsCustomerName;
     public  static ObservableList<SaleLog> data = FXCollections.observableArrayList();
+    private static ArrayList<SaleLog> saleLogs = new ArrayList<>();
     @FXML
     private TableColumn<SaleLog, Double> saleLogsReducedAmount;
+
+
+    public static ArrayList<SaleLog> getSaleLogs() {
+        return saleLogs;
+    }
+
+    public static void setSaleLogs(ArrayList<SaleLog> saleLogs) {
+        SaleLogsFx.saleLogs = saleLogs;
+    }
+
     public  void initializeObserverList() {
-        data.addAll(SaleLog.getAllSellersLog());
+        data.addAll(saleLogs);
     }
 
    /* TableColumn<String, Person> column2 = new TableColumn<>("Last Name");
     column2.setCellValueFactory(new PropertyValueFactory<>("lastName"));*/
+
 
 
     @FXML

@@ -12,6 +12,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import model.accounts.Seller;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -38,33 +39,31 @@ public class SellerMenuFx {
     }
 
     public void viewSalesHistory(MouseEvent mouseEvent) throws IOException {
-         root = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
-        goToPage();
+        if(LoginMenu.getLoginAccount() instanceof Seller) {
+            Seller seller = (Seller) LoginMenu.getLoginAccount();
+            SaleLogsFx.setSaleLogs(seller.getSaleLogsHistory());
+            root = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
+            goToPage();
+        }
     }
 
     public void addProduct(MouseEvent mouseEvent) throws IOException {
-        //esmeshoon fargh dare
          root = FXMLLoader.load(Objects.requireNonNull(AddProductMenuFX.class.getClassLoader().getResource("addProduct.fxml")));
         goToPage();
     }
 
-
-    public void removeProduct(MouseEvent mouseEvent) throws IOException {
-        //?????????????????????????????????
-       // Parent root = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
-       // goToPage();
-    }
-
     public void viewBalance(MouseEvent mouseEvent) throws IOException {
-//        Parent root = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
-//        goToPage();
         String balance = String.valueOf(LoginMenu.getLoginAccount().getCredit());
         show("balance: "+balance);
     }
 
     public void viewOffs(MouseEvent mouseEvent) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(SalesFx.class.getClassLoader().getResource("salesFx.fxml")));
-        goToPage();
+        if(LoginMenu.getLoginAccount() instanceof Seller) {
+            Seller seller = (Seller) LoginMenu.getLoginAccount();
+            SalesFx.setAllSales(seller.getAllSales());
+            root = FXMLLoader.load(Objects.requireNonNull(SalesFx.class.getClassLoader().getResource("salesFx.fxml")));
+            goToPage();
+        }
     }
 
     public void showCategories(MouseEvent mouseEvent) throws IOException {
@@ -73,8 +72,12 @@ public class SellerMenuFx {
     }
 
     public void manageProducts(MouseEvent mouseEvent) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(ManageProductsFx.class.getClassLoader().getResource("manageProductsFx.fxml")));
-        goToPage();
+        if(LoginMenu.getLoginAccount() instanceof Seller) {
+            Seller seller = (Seller) LoginMenu.getLoginAccount();
+            ProductsFx.setAllProducts(seller.getAllProduct());
+            root = FXMLLoader.load(Objects.requireNonNull(ProductsFx.class.getClassLoader().getResource("productsFx.fxml")));
+            goToPage();
+        }
     }
 
     private static void goToPage(){
