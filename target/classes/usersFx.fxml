@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UsersFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.UsersFx">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="849.0" layoutX="1.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="1605.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
             <fill>
@@ -101,10 +101,20 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Label fx:id="usersMs" layoutX="121.0" layoutY="766.0" prefHeight="53.0" prefWidth="860.0" text="Label" textFill="WHITE">
+      <Label fx:id="usersMs" layoutX="121.0" layoutY="766.0" prefHeight="53.0" prefWidth="735.0" text="Label" textFill="WHITE">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
+      <Button layoutX="934.0" layoutY="773.0" mnemonicParsing="false" onMouseClicked="#sortUser" prefHeight="39.0" prefWidth="90.0" text="Sort">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#6a00ff" />
+                  <Stop color="RED" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
     </children>
 </AnchorPane>

@@ -2,6 +2,7 @@ package model.accounts;
 
 import com.google.gson.reflect.TypeToken;
 import model.log.BuyLog;
+import model.off.DiscountCode;
 import view.FileHandling;
 
 import java.io.IOException;
@@ -9,7 +10,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Customer extends Account {
-
+    ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
     private static ArrayList<Customer> allCustomers = new ArrayList<>();
     private ArrayList<BuyLog> BuyLogsHistory = new ArrayList<>();
     public static Type CustomerType = new TypeToken<ArrayList<Customer>>() {
@@ -23,6 +24,20 @@ public class Customer extends Account {
         writeInJ();
     }
 
+    public ArrayList<DiscountCode> getAllDiscountCodes() {
+        return allDiscountCodes;
+    }
+
+    public void addDiscountCode(DiscountCode discountCode) throws IOException {
+        allDiscountCodes.add(discountCode);
+        writeInJ();
+
+    }
+
+    public void removeDiscountCode(DiscountCode discountCode) throws IOException {
+        allDiscountCodes.remove(discountCode);
+        writeInJ();
+    }
 
     public static void setAllCustomers(ArrayList<Customer> allCustomers) {
         Customer.allCustomers = allCustomers;

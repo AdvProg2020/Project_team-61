@@ -8,7 +8,7 @@
     requires  javafx.archetype.simple;
     requires javafx.baseEmpty;
 
-    opens sample to javafx.fxml,javafx.controls,javafx.graphics,javafx.base;
+    opens gui to javafx.fxml,javafx.controls,javafx.graphics,javafx.base;
     opens model.accounts to javafx.base;
         opens model.off to javafx.base;
         opens model.request to javafx.base;

@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RequestsFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.RequestsFx">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="882.0" stroke="BLACK" strokeType="INSIDE" width="1605.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <fill>
@@ -96,6 +96,20 @@
          </textFill>
       </Button>
       <Button layoutX="1234.0" layoutY="788.0" mnemonicParsing="false" onMouseClicked="#declineRequest" text="Decline">
+         <font>
+            <Font size="19.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#2b00ff" />
+                  <Stop color="#ff00df" offset="0.5228758169934641" />
+                  <Stop color="RED" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="909.0" layoutY="788.0" mnemonicParsing="false" onMouseClicked="#sortRequest" text="Sort date">
          <font>
             <Font size="19.0" />
          </font>

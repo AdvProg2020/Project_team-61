@@ -6,7 +6,7 @@
 
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<AnchorPane prefHeight="900.0" prefWidth="1440.0" style="-fx-background-color: linear-gradient( #fff722, #ff26f9);" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.PayLogFx">
+<AnchorPane prefHeight="900.0" prefWidth="1440.0" style="-fx-background-color: linear-gradient( #fff722, #ff26f9);" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PayLogFx">
     <children>
         <Button layoutX="599.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#paymentProcess" text="Pay" />
         <TextField fx:id="PhoneNumberTextFieldPayLog" layoutX="390.0" layoutY="229.0" prefHeight="25.0" prefWidth="200.0" promptText="Phone Number" />

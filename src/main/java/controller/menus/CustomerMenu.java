@@ -58,7 +58,7 @@ public class CustomerMenu {
         if (isThereBuyLog()) {
             if (checkProduct(productID)) {
                 CustomerMenu.productID = productID;
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.INCREASEPRODUCTNUMBER);
+              //  CommandProcessor.setSubMenuStatus(SubMenuStatus.INCREASEPRODUCTNUMBER);
                 outputNo = 2;
             }
         }
@@ -98,7 +98,7 @@ public class CustomerMenu {
         if (isThereBuyLog()) {
             if (checkProduct(productID)) {
                 CustomerMenu.productID = productID;
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.DECREASEPRODUCTNUMBER);
+              // CommandProcessor.setSubMenuStatus(SubMenuStatus.DECREASEPRODUCTNUMBER);
                 outputNo = 3;
             }
         }
@@ -110,7 +110,7 @@ public class CustomerMenu {
         if (LoginMenu.isLogin()) {
             if (LoginMenu.getLoginAccount().getRole().equals("customer")) {
                 //CommandProcessor.setMenuStatus(MenuStatus.PURCHASE);
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
+               // CommandProcessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
                 //CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
                 outputNo = 7;
             } else outputNo = 8;
@@ -131,11 +131,11 @@ public class CustomerMenu {
         if (have.matches("(?i)(?:yes|no)")) {
             if (have.equalsIgnoreCase("yes")) {
                 hasDiscount = true;
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.CHECKDISCOUNTCODE);
+              //  CommandProcessor.setSubMenuStatus(SubMenuStatus.CHECKDISCOUNTCODE);
                 outputNo = 1;
             } else {
                 hasDiscount = false;
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
+              //  CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
                 outputNo = 3;
             }
         } else outputNo = 2;
@@ -150,7 +150,7 @@ public class CustomerMenu {
             if (discountCode.discountMatchAccount(loginAccount.getUsername())) {
                 if (discountCode.discountDateValid()) {
                     if (discountCode.getTotalTimesOfUse() > 0) {
-                        CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
+                       // CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
                         discountID = discountCodeId;
                         outputNo = 2;
                     } else outputNo = 5;
@@ -162,8 +162,8 @@ public class CustomerMenu {
 
     public static void payment() throws IOException {
         if (ProductMenu.getBuyLog().holePrice <= LoginMenu.getLoginAccount().getCredit()) {
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-            CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+           // CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+           // CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
             finishingPayment();
             outputNo = 0;
         } else outputNo = 0;

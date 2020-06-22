@@ -22,7 +22,7 @@ public abstract class Account {
     Date birthdayDate;
     public Firm firm;
     boolean fast;
-    ArrayList<DiscountCode> allDiscountCodes;
+
     private static ArrayList<Account> allAccounts;
     private static ArrayList<Date> birthdayDates = new ArrayList<>();
 //    public static Type AccountType = new TypeToken<ArrayList<Account>>() {
@@ -65,21 +65,6 @@ public abstract class Account {
 
     }
 
-    public ArrayList<DiscountCode> getAllDiscountCodes() {
-        return allDiscountCodes;
-    }
-
-    public void addDiscountCode(DiscountCode discountCode) throws IOException {
-        allDiscountCodes.add(discountCode);
-//        writeInJ();
-
-    }
-
-    public void removeDiscountCode(DiscountCode discountCode) throws IOException {
-        allDiscountCodes.remove(discountCode);
-//        writeInJ();
-
-    }
 
     public static boolean isThereAccountWithUsername(String username) {
         for (Account account : allAccounts) {
@@ -256,7 +241,7 @@ public abstract class Account {
                 ", currentPhoneNo=" + currentPhoneNo +
                 ", address='" + address + '\'' +
                 ", birthdayDate=" + birthdayDate +
-                ", allDiscountCodes=" + allDiscountCodes +
+               // ", allDiscountCodes=" + allDiscountCodes +
                 '}';
     }
 }

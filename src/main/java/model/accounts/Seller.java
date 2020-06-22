@@ -11,10 +11,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Seller extends Account {
-    //    private Firm firm;
-    private static ArrayList<SaleLog> saleLogsHistory = new ArrayList<>();
+    //private Firm firm;
+    private  ArrayList<SaleLog> saleLogsHistory = new ArrayList<>();
     private static ArrayList<Seller> allSellers = new ArrayList<>();
-    private static ArrayList<Product> allProduct = new ArrayList<>();
+    private  ArrayList<Product> allProduct = new ArrayList<>();
     public static Type SellerType = new TypeToken<ArrayList<Seller>>() {
     }.getType();
 
@@ -25,7 +25,11 @@ public class Seller extends Account {
         writeInJ();
     }
 
-    public static ArrayList<Product> getAllProduct() {
+    public void addProduct(Product product){
+        allProduct.add(product);
+    }
+
+    public ArrayList<Product> getAllProduct() {
         return allProduct;
     }
 
@@ -41,7 +45,7 @@ public class Seller extends Account {
         Seller.allSellers = allSellers;
     }
 
-    public static ArrayList<SaleLog> getSaleLogsHistory() {
+    public ArrayList<SaleLog> getSaleLogsHistory() {
         return saleLogsHistory;
     }
 
@@ -78,7 +82,7 @@ public class Seller extends Account {
                 ", currentPhoneNo=" + currentPhoneNo +
                 ", address='" + address + '\'' +
                 ", birthdayDate=" + birthdayDate +
-                ", allDiscountCodes=" + allDiscountCodes +
+             //   ", allDiscountCodes=" + allDiscountCodes +
                 '}';
     }
 }

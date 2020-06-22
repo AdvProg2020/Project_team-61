@@ -6,7 +6,7 @@
 
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<AnchorPane prefHeight="900.0" prefWidth="1440.0" style="-fx-background-color: linear-gradient( #fff722, #ff26f9);" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.PayLogFx">
+<AnchorPane prefHeight="900.0" prefWidth="1440.0" style="-fx-background-color: linear-gradient( #fff722, #ff26f9);" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PayLogFx">
     <children>
         <Button layoutX="599.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#paymentProcess" text="Pay" />
         <TextField fx:id="PhoneNumberTextFieldPayLog" layoutX="390.0" layoutY="229.0" prefHeight="25.0" prefWidth="200.0" promptText="Phone Number" />
@@ -22,21 +22,7 @@
         </Label>
         <Label layoutX="446.0" layoutY="254.0" text="Label" />
         <Label layoutX="460.0" layoutY="497.0" text="Label" />
-        <ImageView  fx:id="Back" fitHeight="86.0" fitWidth="61.0" layoutX="1362.0" layoutY="243.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="" />
-            </image>
-        </ImageView>
-        <ImageView fx:id="Exit" fitHeight="65.0" fitWidth="75.0" layoutX="1368.0" layoutY="318.0" onMouseClicked="#processExit" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="" />
-            </image>
-        </ImageView>
-        <ImageView fx:id="Account" fitHeight="81.0" fitWidth="61.0" layoutX="1362.0" layoutY="419.0" onMouseClicked="#gotoAccount" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="" />
-            </image>
-        </ImageView>
+
 
     </children>
 </AnchorPane>

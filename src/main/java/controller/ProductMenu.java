@@ -8,6 +8,7 @@ import model.productRelated.Comment;
 import model.productRelated.CommentStatus;
 import model.productRelated.Product;
 import view.*;
+import view.justConsole.OutputHandler;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,9 +28,9 @@ public class ProductMenu {
 
     //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     public static void processDigest() throws FileNotFoundException {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
+       // CommandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
         selectedProduct = Product.getProductById(ProductsMenu.getProductId());
-        OutputHandler.digest(selectedProduct.getId());
+       // OutputHandler.digest(selectedProduct.getId());
     }
 
     public static void addToCart() throws IOException {
@@ -43,19 +44,19 @@ public class ProductMenu {
 
     //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4
     public static void processAttributes() throws FileNotFoundException {
-        OutputHandler.attributes(selectedProduct.getId());
+       // OutputHandler.attributes(selectedProduct.getId());
     }
 
     public static void processCompare(String productID) throws FileNotFoundException {
         if (Product.isThereProductWithId(productID)) {
-            OutputHandler.compareProducts(selectedProduct.getId(), productID);
+         //   OutputHandler.compareProducts(selectedProduct.getId(), productID);
         } else OutputMassageHandler.showProductOutput(4);
     }
 
     //comment--------------------------------------------------------------------
     public static void processComments() throws FileNotFoundException {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
-        OutputHandler.showCommentOnOneProduct(selectedProduct.getId());
+       // CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
+       // OutputHandler.showCommentOnOneProduct(selectedProduct.getId());
     }
 
 
@@ -72,15 +73,15 @@ public class ProductMenu {
                 commentRequest.setId(commentId);
             }else commentRequest = (CommentRequest) Request.getRequestFromID(id);
             outputNo = 1;
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
-            CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
+          //  CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
+           // CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
         }else outputNo= 3;
         OutputMassageHandler.showProductsOutput(outputNo);
     }
 
 
     public static void titleOfComment(String title) throws IOException {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
+      //  CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
         commentRequest.setTitle(title);
         OutputMassageHandler.showProductsOutput(2);
 
@@ -88,8 +89,8 @@ public class ProductMenu {
 
 
     public static void contentOfComment(String content) throws IOException {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
-        CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+      //  CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
+      //  CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
         commentRequest.setContent(content);
     }
 

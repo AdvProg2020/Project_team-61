@@ -5,7 +5,7 @@ import model.accounts.Customer;
 import model.accounts.Manager;
 import model.request.AccountRequest;
 import model.request.Request;
-import view.SubMenuStatus;
+import view.justConsole.SubMenuStatus;
 
 import java.io.IOException;
 import java.text.ParseException;

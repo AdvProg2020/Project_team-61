@@ -70,7 +70,7 @@ public class SellerMenu {
         if (checkProduct(productID)) {
             if (product.getSeller() == LoginMenu.getLoginAccount()) {
                 productId = productID;
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTFIELD);
+               // CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTFIELD);
                 outputNo = 2;
             } else outputNo = 22;
         }
@@ -90,8 +90,8 @@ public class SellerMenu {
                 productRequest.setSellerName(seller);
                 productRequest.setProductId(productId);
             } else productRequest = (ProductRequest) Request.getRequestFromID(id);
-            SellerMenu.field = field;
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITPRODUCT);
+           // SellerMenu.field = field;
+           // CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITPRODUCT);
             outputNo = 3;
         } else outputNo = 23;
         OutputMassageHandler.showSellerOutput(outputNo);
@@ -127,7 +127,7 @@ public class SellerMenu {
             } else outputNo = 20;
         } else if (field.matches("(?i)category\\s*Specifications")) {
             if (Product.getCategorySpecifications().containsKey(edit)) {
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITSPECIFICATION);
+              //  CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITSPECIFICATION);
                 editValue = edit;
                 outputNo = 32;
             } else outputNo = 31;
@@ -141,8 +141,8 @@ public class SellerMenu {
     }
 
     public static void processAddProduct() {
-        CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDPRODUCT);
-        CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
+      //  CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDPRODUCT);
+      //  CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
         OutputMassageHandler.showSellerOutput(10);
     }
 
@@ -199,7 +199,7 @@ public class SellerMenu {
                 detailMenu = 0;
                 outputNo = 17;
                 OutputMassageHandler.show((String) productRequest.getSpecialValue().keySet().toArray()[0]);
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.TRAIT);
+                //CommandProcessor.setSubMenuStatus(SubMenuStatus.TRAIT);
             } else outputNo = 8;
         }
         OutputMassageHandler.showSellerOutput(outputNo);
@@ -270,7 +270,7 @@ public class SellerMenu {
             Sale sale = Sale.getSaleWithId(offID);
             if (sale.getSeller() == LoginMenu.getLoginAccount()) {
                 offId = offID;
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.SALEFIELD);
+               // CommandProcessor.setSubMenuStatus(SubMenuStatus.SALEFIELD);
                 outputNo = 2;
             } else outputNo = 5;
         }
@@ -292,7 +292,7 @@ public class SellerMenu {
                 outputNo = 26;
             } else outputNo = 4;
             SellerMenu.field = field;
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITSALE);
+           // CommandProcessor.setSubMenuStatus(SubMenuStatus.EDITSALE);
 
         }
         outputNo = 3;

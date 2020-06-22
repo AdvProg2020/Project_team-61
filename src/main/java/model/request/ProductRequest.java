@@ -58,12 +58,12 @@ public class ProductRequest extends Request {
         getAllRequests().remove(this);
         allProductRequests.remove(this);
         Product.getProductList().remove(this);
-        Seller.getAllProduct().remove(this);
+        sellerName.getAllProduct().remove(this);
         writeInJ();
     }
 
     @Override
-    public  void acceptRequest() throws IOException {
+    public void acceptRequest() throws IOException {
         Product newProduct = Product.getProductById(productId);
         newProduct.setDetailProduct(newProduct.getProductImage(),productName,price,categoryName,sellerName,companyName,numberOfProduct);
         newProduct.setAdditionalDetail(additionalDetail);
@@ -73,6 +73,7 @@ public class ProductRequest extends Request {
         }
         categoryName.addProductToCategory(newProduct);
         newProduct.setProductStatus(ProductStatus.CONFIRMED);
+        sellerName.addProduct(newProduct);
         getAllRequests().remove(this);
         allProductRequests.remove(this);
     }

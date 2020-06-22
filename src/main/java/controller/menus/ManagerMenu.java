@@ -26,6 +26,11 @@ public class ManagerMenu {
     private static DiscountCode newDiscountCode;
     private static Category newCategory;
     private static int create = 0;
+    private static int edit = 0;
+
+    public static int getEdit() {
+        return edit;
+    }
 
     public static Category getEditableCategory() {
         return editableCategory;
@@ -166,9 +171,13 @@ public class ManagerMenu {
                 detailMenu = 5;
             } else outputNo = 28;
         } else if (detailMen == 5) {
-            if (detail.matches("\\s+")) {
+            if (detail.matches(".+")) {
                 // if (Account.isThereAccountWithUsername(detail)) {
                 newDiscountCode.addAccount(Account.getAccountWithUsername(detail));
+                if(LoginMenu.getLoginAccount() instanceof Manager) {
+                  Manager man = (Manager) LoginMenu.getLoginAccount();
+                  man.addDiscount(newDiscountCode);
+                }
                 outputNo = 37;
                // detailMenu = 0;
                 // CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
@@ -185,6 +194,7 @@ public class ManagerMenu {
         if (checkDiscountCode(discountCodeID)) {
             editableDiscountCode = DiscountCode.getDiscountWithId(discountCodeID);
             //CommandProcessor.setSubMenuStatus(SubMenuStatus.DISCOUNTCODEFIELD);
+            edit =1;
             outputNo = 0;
         }// else OutputMassageHandler.showManagerOutput(outputNo);
         return outputNo;
@@ -226,18 +236,18 @@ public class ManagerMenu {
                 outputNo = 27;
             } else outputNo = 28;
         } else if (field.matches("(?i)add\\s+account")) {
-            if (edit.matches("\\d+")) {
-                if (Account.isThereAccountWithUsername(edit)) {
+            if (edit.matches(".+")) {
+                //if (Account.isThereAccountWithUsername(edit)) {
                     editableDiscountCode.addAccount(Account.getAccountWithUsername(edit));
                     outputNo = 29;
-                } else outputNo = 31;
+              //  } else outputNo = 31;
             } else outputNo = 30;
         } else if (field.matches("(?i)remove\\s+account")) {
-            if (edit.matches("\\d+")) {
-                if (Account.isThereAccountWithUsername(edit)) {
+            if (edit.matches(".+")) {
+                //if (Account.isThereAccountWithUsername(edit)) {
                     editableDiscountCode.removeAccount(Account.getAccountWithUsername(edit));
-                    outputNo = 19;
-                } else outputNo = 32;
+                    outputNo = 32;
+               // } else outputNo = 32;
             } else outputNo = 30;
         }
         return outputNo;

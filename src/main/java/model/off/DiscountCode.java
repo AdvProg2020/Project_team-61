@@ -1,6 +1,9 @@
 package model.off;
 
+import controller.menus.LoginMenu;
 import model.accounts.Account;
+import model.accounts.Customer;
+import model.accounts.Manager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +19,7 @@ public class DiscountCode {
     private double maxDiscountAmount;
     private int totalTimesOfUse;
     private Account manager;
-    private static ArrayList<Account> allCustomersWithDiscountCode = new ArrayList<Account>();
+    private  ArrayList<Account> allCustomersWithDiscountCode = new ArrayList<Account>();
     private static ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
 
     public DiscountCode(String discountId) throws IOException {
@@ -35,12 +38,22 @@ public class DiscountCode {
     }
 
     public void addAccount(Account customer) throws IOException {
-        allCustomersWithDiscountCode.add(customer);
-        customer.addDiscountCode(getDiscountWithId(discountId));
+        if(customer instanceof Customer) {
+            Customer cus = (Customer) customer;
+            allCustomersWithDiscountCode.add(customer);
+            cus.addDiscountCode(getDiscountWithId(discountId));
+        }
     }
-    public void removeAccount(Account account) throws IOException {
-        allCustomersWithDiscountCode.remove(account);
-        account.removeDiscountCode(getDiscountWithId(discountId));
+    public void removeAccount(Account customer) throws IOException {
+        if(customer instanceof Customer) {
+            Customer cus = (Customer) customer;
+            allCustomersWithDiscountCode.remove(customer);
+            cus.removeDiscountCode(getDiscountWithId(discountId));
+            Manager man = (Manager) LoginMenu.getLoginAccount();
+            if(allCustomersWithDiscountCode.size() == 0){
+                man.getAllDiscountCodes().remove(this);
+            }
+        }
     }
 
     public static void setStartOfDiscountPeriod(Date startOfDiscountPeriod) {
@@ -51,7 +64,7 @@ public class DiscountCode {
         this.manager = manager;
     }
 
-    public static boolean discountMatchAccount(String username){
+    public  boolean discountMatchAccount(String username){
 
         for (Account account : allCustomersWithDiscountCode) {
             if (account.getUsername().equalsIgnoreCase(username)) return true;

@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.DiscountCodesFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.DiscountCodesFx">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="882.0" layoutX="-200.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" width="1605.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <fill>
@@ -71,7 +71,7 @@
                 <TableColumn fx:id="discountTotalTime" prefWidth="219.0" text="Total times of use" />
             </columns>
         </TableView>
-        <Button layoutX="1046.0" layoutY="807.0" mnemonicParsing="false" onMouseClicked="#viewDiscount" prefHeight="25.0" prefWidth="81.0" text="View">
+        <Button layoutX="1119.0" layoutY="807.0" mnemonicParsing="false" onMouseClicked="#viewDiscount" prefHeight="25.0" prefWidth="81.0" text="View">
             <textFill>
                 <LinearGradient endX="1.0" endY="1.0">
                     <stops>
@@ -88,7 +88,7 @@
                     </stops>
                 </LinearGradient>
             </textFill></Button>
-        <Button layoutX="1176.0" layoutY="807.0" mnemonicParsing="false" onMouseClicked="#edit" prefHeight="25.0" prefWidth="81.0" text="Edit">
+        <Button layoutX="1216.0" layoutY="807.0" mnemonicParsing="false" onMouseClicked="#edit" prefHeight="25.0" prefWidth="81.0" text="Edit">
             <textFill>
                 <LinearGradient endX="1.0" endY="1.0">
                     <stops>
@@ -111,7 +111,7 @@
                 </LinearGradient>
             </textFill>
         </Button>
-        <Button layoutX="1294.0" layoutY="807.0" mnemonicParsing="false" onMouseClicked="#remove" prefHeight="25.0" prefWidth="81.0" text="Remove">
+        <Button layoutX="1308.0" layoutY="807.0" mnemonicParsing="false" onMouseClicked="#remove" prefHeight="25.0" prefWidth="81.0" text="Remove">
             <textFill>
                 <LinearGradient endX="1.0" endY="1.0">
                     <stops>
@@ -133,5 +133,23 @@
             <Font size="21.0" />
          </font>
       </Label>
+      <Button layoutX="988.0" layoutY="807.0" mnemonicParsing="false" onMouseClicked="#sortDiscount" prefHeight="31.0" prefWidth="115.0" text="Sort Amount">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color blue="0.6447368264198303" green="0.035818714648485184" red="0.5736963748931885" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color blue="0.4336931109428406" green="0.147599995136261" red="0.8199999928474426" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
     </children>
 </AnchorPane>

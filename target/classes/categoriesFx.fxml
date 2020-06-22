@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CategoriesFX">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CategoriesFX">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="882.0" stroke="BLACK" strokeType="INSIDE" width="1605.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <fill>
@@ -84,7 +84,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button layoutX="1337.0" layoutY="788.0" mnemonicParsing="false" onMouseClicked="#addCategories" prefHeight="32.0" prefWidth="75.0" text="Add">
+      <Button layoutX="1050.0" layoutY="788.0" mnemonicParsing="false" onMouseClicked="#addCategories" prefHeight="32.0" prefWidth="75.0" text="Add">
          <textFill>
             <LinearGradient endX="0.7815533980582524" endY="0.5097087378640777" startX="0.30097087378640774" startY="0.23786407766990292">
                <stops>
@@ -101,5 +101,17 @@
           <TableColumn fx:id="categoriesName" prefWidth="1058.0" text="Name" />
         </columns>
       </TableView>
+      <Button layoutX="963.0" layoutY="788.0" mnemonicParsing="false" onMouseClicked="#sortCategories" prefHeight="32.0" prefWidth="75.0" text="Sort">
+         <textFill>
+            <LinearGradient endX="0.7815533980582524" endY="0.5097087378640777" startX="0.30097087378640774" startY="0.23786407766990292">
+               <stops>
+                  <Stop color="#4a00ff" />
+                  <Stop color="#4a00ff" offset="0.007246376811594203" />
+                  <Stop color="#eb0000" offset="0.5543478260869565" />
+                  <Stop color="#3700ff" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
     </children>
 </AnchorPane>

@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewCategoryFx">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ViewCategoryFx">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" height="390.0" layoutX="1.0" layoutY="5.0" stroke="BLACK" strokeType="INSIDE" width="600.0">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="414.0" layoutY="-5.0" stroke="BLACK" strokeType="INSIDE" width="601.0">
             <fill>
                 <LinearGradient endX="1.0" endY="1.0">
                     <stops>
                         <Stop>
                             <color>
-                                <Color red="0.5663461685180664" green="1.0" blue="0.11999999731779099" />
+                                <Color blue="0.11999999731779099" green="1.0" red="0.5663461685180664" />
                             </color>
                         </Stop>
                         <Stop offset="1.0">
                             <color>
-                                <Color red="1.0" green="1.0" blue="1.0" />
+                                <Color blue="1.0" green="1.0" red="1.0" />
                             </color>
                         </Stop>
                     </stops>
@@ -32,8 +33,8 @@
             </font></Text>
         <TableView fx:id="viewCategoryTable" layoutX="201.0" layoutY="143.0" prefHeight="223.0" prefWidth="256.0">
             <columns>
-                <TableColumn fx:id="productCatColumn" prefWidth="117.33332824707031" text="Products" />
-                <TableColumn fx:id="traitCatColumn" minWidth="9.33331298828125" prefWidth="137.33334350585938" text="Traits" />
+                <TableColumn fx:id="productCatColumn" prefWidth="123.0" text="Products" />
+                <TableColumn fx:id="traitCatColumn" minWidth="9.33331298828125" prefWidth="133.0" text="Traits" />
             </columns>
         </TableView>
         <Text fx:id="nameTextField" layoutX="220.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" />
