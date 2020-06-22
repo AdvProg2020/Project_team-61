@@ -70,8 +70,6 @@ public class BuyLogFx {
         buyLogProductNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
         //buyLogDate.setCellValueFactory(curBuyLog,);
         buyLogPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-
-
         initializeObserverList();
         buyLog.getColumns().addAll(buyLogProductId,buyLogProduct,buyLogProductNumber,buyLogPrice);
         buyLog.setItems(data);

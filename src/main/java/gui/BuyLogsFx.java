@@ -104,6 +104,7 @@ public class BuyLogsFx {
     }
 
     public void rateProduct(MouseEvent mouseEvent) {
+
     }
 
     public void showOrdersFromBuyLog(MouseEvent mouseEvent) {

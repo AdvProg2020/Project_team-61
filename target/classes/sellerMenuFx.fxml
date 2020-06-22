@@ -90,7 +90,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button layoutX="625.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#manageProducts" prefHeight="54.0" prefWidth="328.0" text="manage products">
+      <Button layoutX="405.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#manageProducts" prefHeight="54.0" prefWidth="328.0" text="manage products">
          <font>
             <Font size="25.0" />
          </font>
@@ -105,22 +105,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button layoutX="1079.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#addProduct" prefHeight="54.0" prefWidth="328.0" text="add product">
-         <font>
-            <Font size="25.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0" startX="0.05339805825242718">
-               <stops>
-                  <Stop color="#ff8500" />
-                  <Stop color="#00afff" offset="0.28104575163398693" />
-                  <Stop color="#1850d9" offset="0.48366013071895425" />
-                  <Stop color="#c016da" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Button>
-      <Button layoutX="156.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#removeProduct" prefHeight="54.0" prefWidth="328.0" text="remove product">
+      <Button layoutX="913.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#addProduct" prefHeight="54.0" prefWidth="328.0" text="add product">
          <font>
             <Font size="25.0" />
          </font>

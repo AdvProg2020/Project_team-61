@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1649.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SignUpFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1649.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SignUpFx">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="890.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" width="1649.0">
          <fill>
@@ -20,7 +19,7 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <MenuBar layoutX="-21.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.leftAnchor="-21.0" AnchorPane.rightAnchor="21.0">
          <menus>
             <Menu mnemonicParsing="false" text="User menu">
                <items>
@@ -54,14 +53,14 @@
             <Image url="@view/icons/face.png" />
          </image>
       </ImageView>
-      <TextField fx:id="userSign" layoutX="705.0" layoutY="137.0" prefHeight="40.0" prefWidth="271.0" promptText="username" />
-      <PasswordField fx:id="passSign" layoutX="705.0" layoutY="220.0" prefHeight="40.0" prefWidth="271.0" promptText="password" />
-      <TextField fx:id="nameSign" layoutX="705.0" layoutY="297.0" prefHeight="40.0" prefWidth="271.0" promptText="name" />
-      <TextField fx:id="lastNameSign" layoutX="705.0" layoutY="389.0" prefHeight="40.0" prefWidth="271.0" promptText="last name" />
-      <TextField fx:id="phoneNoSign" layoutX="705.0" layoutY="564.0" prefHeight="40.0" prefWidth="271.0" promptText="phone number" />
-      <TextField fx:id="emailSign" layoutX="705.0" layoutY="476.0" prefHeight="40.0" prefWidth="271.0" promptText="Email" />
-      <TextField fx:id="birthdaySign" layoutX="705.0" layoutY="661.0" prefHeight="40.0" prefWidth="271.0" promptText="birthday date" />
-      <Text layoutX="766.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign up" wrappingWidth="150.0">
+      <TextField fx:id="userSign" layoutX="705.0" layoutY="97.0" prefHeight="40.0" prefWidth="271.0" promptText="username" />
+      <PasswordField fx:id="passSign" layoutX="705.0" layoutY="157.0" prefHeight="40.0" prefWidth="271.0" promptText="password" />
+      <TextField fx:id="nameSign" layoutX="705.0" layoutY="220.0" prefHeight="40.0" prefWidth="271.0" promptText="name" />
+      <TextField fx:id="lastNameSign" layoutX="705.0" layoutY="277.0" prefHeight="40.0" prefWidth="271.0" promptText="last name" />
+      <TextField fx:id="phoneNoSign" layoutX="705.0" layoutY="420.0" prefHeight="40.0" prefWidth="271.0" promptText="phone number" />
+      <TextField fx:id="emailSign" layoutX="705.0" layoutY="346.0" prefHeight="40.0" prefWidth="271.0" promptText="Email" />
+      <TextField fx:id="birthdaySign" layoutX="696.0" layoutY="496.0" prefHeight="40.0" prefWidth="271.0" promptText="birthday date" />
+      <Text layoutX="766.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign up" wrappingWidth="150.0">
          <font>
             <Font name="System Bold Italic" size="38.0" />
          </font>
@@ -130,7 +129,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button layoutX="789.0" layoutY="792.0" mnemonicParsing="false" onMouseClicked="#signUp" prefHeight="40.0" prefWidth="119.0" text="Create">
+      <Button layoutX="772.0" layoutY="579.0" mnemonicParsing="false" onMouseClicked="#signUp" prefHeight="40.0" prefWidth="119.0" text="Create">
          <textFill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>

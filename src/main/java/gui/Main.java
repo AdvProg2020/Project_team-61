@@ -26,8 +26,8 @@ import java.util.Objects;
 //import controller.request.*;
 
 public class Main extends Application {
-    private final int widthScene = 1700;
-    private final int heightScene = 850;
+    private final int widthScene = 1800;
+    private final int heightScene = 700;
     static Stage primStage;
 
 
