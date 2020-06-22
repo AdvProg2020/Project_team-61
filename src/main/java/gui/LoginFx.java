@@ -34,11 +34,15 @@ public class LoginFx {
     }
 
     public static void goToMenu(String role) throws IOException {
+        Parent curRoot  = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
         if(role.equalsIgnoreCase("manager")) {
+            ManagerMenuFx.setPriRoot(curRoot);
              root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
         }else  if(role.equalsIgnoreCase("seller")) {
+            SellerMenuFx.setPriRoot(curRoot);
              root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
         }else  if(role.equalsIgnoreCase("customer")) {
+            CustomerMenuFx.setPriRoot(curRoot);
              root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         }
 
@@ -56,6 +60,8 @@ public class LoginFx {
     }
 
     public void back(MouseEvent mouseEvent) {
+        root = priRoot;
+        goToPage();
 
     }
 

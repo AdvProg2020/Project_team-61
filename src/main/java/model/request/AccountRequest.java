@@ -61,10 +61,10 @@ public class AccountRequest extends Request {
     @Override
     public   void acceptRequest() throws IOException {
         Seller seller = new Seller(username);
-        createFirm();
-        firm = Firm.getFirmWithID(firmName);
+       // createFirm();
+      //  firm = Firm.getFirmWithID(firmName);
         seller.setDetailsToAccount(password, name, lastname, Email, phoneNo, birthdayDate, firm);
-        firm.setDetailToFirm(FirmPhoneNO, firmAddress, firmEmail);
+      //  firm.setDetailToFirm(FirmPhoneNO, firmAddress, firmEmail);
         Request.getAllRequests().remove(this);
         allAccountRequests.remove(this);
         writeInJ();

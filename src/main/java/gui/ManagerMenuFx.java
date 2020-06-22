@@ -20,6 +20,8 @@ public class ManagerMenuFx {
     }
 
     public void back(ActionEvent actionEvent) {
+        root = priRoot;
+        goToPage();
     }
 
     public void exit(ActionEvent actionEvent) {

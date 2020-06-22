@@ -22,6 +22,10 @@ public class CustomerMenuFx {
     private static Parent root;
     private static Parent priRoot;
 
+    public static void setPriRoot(Parent priRoot) {
+        CustomerMenuFx.priRoot = priRoot;
+    }
+
     public void viewPersonalInfo(MouseEvent mouseEvent) throws IOException {
         ViewAccountFx.setAccount(LoginMenu.getLoginAccount());
          root = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
@@ -89,6 +93,8 @@ public class CustomerMenuFx {
     }
 
     public void back(ActionEvent actionEvent) {
+        root = priRoot;
+        goToPage();
     }
 
 
