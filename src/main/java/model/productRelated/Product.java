@@ -71,6 +71,7 @@ public class Product {
     public static HashMap<String, String> getCategorySpecifications() {
         return categorySpecifications;
     }
+    public ArrayList<String> productCategorySpecifications = new ArrayList<>();
 
     public void setCategorySpecifications(HashMap<String, String> categorySpecifications) {
         this.categorySpecifications = categorySpecifications;
@@ -108,6 +109,10 @@ public class Product {
 
     //settersAndGetters----------------------------------------------------------------------------------
 
+
+    public ArrayList<String> getProductCategorySpecifications() {
+        return productCategorySpecifications;
+    }
 
     public String getProductImage() {
         return productImageId;
@@ -167,9 +172,13 @@ public class Product {
         proScores.add(score);
     }
 
-    public void setComment(Comment comment) {
-        this.comment = comment;
-        proComments.add(comment);
+//    public void setComment(Comment comment) {
+//        this.comment = comment;
+//        proComments.add(comment);
+//    }
+
+    public void setComment(String title , String content){
+        comment = new Comment(title,content,this.getId());
     }
 
     public String getId() {
@@ -201,12 +210,7 @@ public class Product {
     }
 
     public double getAverageScore() {
-        for (Product product : allProduct) {
-            if (product.getId().equals(productId)) {
-                return product.score.getAverageScore();
-            }
-        }
-        return 0;
+        return averageScore;
     }
 
     public void setAverageScore(double averageScore) {
@@ -297,23 +301,6 @@ public class Product {
         }
         return null;
     }
-
-
-//    public boolean ifProductHasSeller(String productId, String sellerUserName){
-//        if (isThereProductWithId(productId)) {
-//            for (Account seller : Product.getProductById(productId).getListOfSellers()) {
-//                if (seller.equals(Seller.getAccountWithUsername(sellerUserName))){
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
-//    }
-
-    //finish
-//    public ArrayList<Account> getListOfSellers () {
-//        return listOfSellers;
-//    }
 
     //finish
     public static void deleteProduct(String productId) {

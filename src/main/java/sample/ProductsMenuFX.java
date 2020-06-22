@@ -21,96 +21,86 @@ import model.productRelated.Product;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 
 public class ProductsMenuFX {
 
         @FXML
-        public  TableView<Product> tableView = new TableView<>();
+        public TableView<Product> tableView = new TableView<>();
         @FXML
         public TableColumn<Product, String> firstColumn = new TableColumn<>("id");
 
         @FXML
-        public TableColumn<Product,String> productImageViewTableColumn = new TableColumn<>("proImage");
+        public TableColumn<Product, String> productImageViewTableColumn = new TableColumn<>("proImage");
 
         @FXML
         public TableColumn<Product, String> secondColumn = new TableColumn<>("name");
         @FXML
-        public TableColumn<Product, Double> forthColumn = new TableColumn<>("price");
+        public TableColumn<Product, String> forthColumn = new TableColumn<>("price");
         @FXML
         public TableColumn<Product, String> fifthColumn = new TableColumn<>("seller");
-        @FXML
-        public TableColumn<Product, String> seventh = new TableColumn<>("factory");
 
         @FXML
-        public TableColumn<Product, Integer> eighth = new TableColumn<>("numberOfProducts");
-
-
+        public TableColumn<Product, String> sixthColumn = new TableColumn<>("Specifications");
         @FXML
-        public TableColumn<Product, String> sixthColumn = new TableColumn<>("additionalDetail");
-        @FXML
-        public static  ObservableList<Product> data = FXCollections.observableArrayList();
-        public static FilteredList<Product> filteredList = new FilteredList<>(data , b->true);
+        public static ObservableList<Product> data = FXCollections.observableArrayList();
+
+        public static ImageView productPic = new ImageView();
+
+        public static FilteredList<Product> filteredList = new FilteredList<>(data, b -> true);
 
 
-
-        public static Scene prevScene ;
+        public static Scene prevScene;
         public static Stage thisStage;
         public TextField searchField;
+        public AnchorPane topSplitPane;
         public ListView categoriesListView = new ListView();
+        public CheckBox filterAscending;
+        public CheckBox filterIsAvailable;
+        public AnchorPane FilterCategoryPane;
         public ObservableList<String> dataCat = FXCollections.observableArrayList();
+        public ArrayList<CheckBox> filterCatCheck = new ArrayList<>();
 
-        public static void showProPage(Stage stage, Scene scene) throws IOException {
-                AnchorPane root = FXMLLoader.load(Objects.requireNonNull(AddProductMenuFX.class.getClassLoader().getResource("sample/fxFile/sample.fxml")));
-                initializeObserverList();
-//        ImageView imageView = new ImageView();
-//        imageView.setImage(new Image("sample/images/alien2 (1) - Copy.jpeg"));
-//        imageView.setX(400);
-//        imageView.setY(200);
-//        root.getChildren().add(imageView);
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-        }
+
+
 
 
         public static void initializeObserverList() {
-                data.addAll(Product.getProductList());
+                for (Product product : Product.getProductList()) {
+                        if (!data.contains(product)){
+                                data.add(product);
+                        }
+                }
         }
-
         @FXML
         public void initialize() throws IOException {
-
+                dataInFilterCheck();
                 firstColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("id"));
                 secondColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
-                productImageViewTableColumn.setCellValueFactory(new PropertyValueFactory<Product,String>("productImageId"));
-                forthColumn.setCellValueFactory(new PropertyValueFactory<Product,Double>("price"));
-                fifthColumn.setCellValueFactory(new PropertyValueFactory<Product,String>("category"));
-                sixthColumn.setCellValueFactory(new PropertyValueFactory<Product,String>("seller"));
-                seventh.setCellValueFactory(new PropertyValueFactory<Product,String>("factory"));
-                eighth.setCellValueFactory(new PropertyValueFactory<Product,Integer>("numberOfProducts"));
+                productImageViewTableColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("productImage"));
+                forthColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("price"));
+                fifthColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("category"));
+                sixthColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("seller"));
 
 
                 initializeObserverList();
-                tableView.getColumns().addAll(firstColumn,secondColumn,productImageViewTableColumn,forthColumn,fifthColumn,sixthColumn,seventh,eighth);
+                tableView.getColumns().addAll(firstColumn, secondColumn, productImageViewTableColumn, forthColumn, fifthColumn, sixthColumn);
                 tableView.setItems(data);
 
 
-                searchField.textProperty().addListener((observable,oldValue,newValue) -> {
+                searchField.textProperty().addListener((observable, oldValue, newValue) -> {
                         filteredList.setPredicate(product -> {
-                                if (newValue == null || newValue.isEmpty()){
+                                if (newValue == null || newValue.isEmpty()) {
                                         return true;
                                 }
                                 String lowerCaseFilter = newValue.toLowerCase();
 
-                                if (product.getProductName().toLowerCase().contains(lowerCaseFilter)){
+                                if (product.getProductName().toLowerCase().contains(lowerCaseFilter)) {
                                         return true;
                                 }
-                                if (product.getSeller().getName().toLowerCase().contains(lowerCaseFilter)){
-                                        return true;
-                                }
-                                else if (product.getCategory().getName().toLowerCase().contains(lowerCaseFilter)){
+                                else if (product.getCategory().getName().toLowerCase().contains(lowerCaseFilter)) {
                                         return true;
                                 }
                                 else return false;
@@ -127,11 +117,11 @@ public class ProductsMenuFX {
                 tableView.setItems(sortedList);
         }
 
+
         public static void gotoProductPage(Product product) throws IOException {
-                FXMLLoader fxmlLoader = new FXMLLoader(ProductsMenuFX.class.getResource("/productMenu.fxml"));
+                AnchorPane root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("sample/fxFile/sample3.fxml")));
+                prevScene = new Scene(root);
                 thisStage = new Stage();
-                AnchorPane pane = fxmlLoader.load();
-                prevScene = new Scene(pane);
                 thisStage.setScene(prevScene);
                 ProductMenuFX.productInPage = product;
                 thisStage.show();
@@ -142,18 +132,35 @@ public class ProductsMenuFX {
                 int row = tablePosition.getRow();
                 Product item = tableView.getItems().get(row);
                 TableColumn tableColumn = tablePosition.getTableColumn();
-//        ImageView imageView = (ImageView) tableColumn.getCellObservableValue(item).getValue();
-                String im = (String) tableColumn.getCellObservableValue(item).getValue();
-//        imageView.setVisible(true);
-                gotoProductPage(Product.getProductWithImage(im));
-//        imageView.setVisible(true);
+
+                try {
+                        String im = (String) tableColumn.getCellObservableValue(item).getValue();
+                        ProductMenuFX.productInPage = Product.getProductWithImage(im);
+                        gotoProductPage(ProductMenuFX.productInPage);
+
+                } catch (NullPointerException e) {
+                        System.out.println("you cant press here");
+                }
         }
 
         public void dataInListView(){
                 for (Category category : Category.getAllCategories()) {
-                        dataCat.add(category.getName());
+                        if (!dataCat.contains(category)){
+                                dataCat.add(category.getName());
+                        }
                 }
                 categoriesListView.setItems(dataCat);
+        }
+
+        public void dataInFilterCheck(){
+                for (Category category : Category.getAllCategories()) {
+                        int n=30;
+                        CheckBox checkBox = new CheckBox(category.getName());
+                        checkBox.setLayoutY((n)*(Category.getAllCategories().indexOf(category)+1));
+                        checkBox.setLayoutX(10+Category.getAllCategories().indexOf(category));
+                        filterCatCheck.add(checkBox);
+                        FilterCategoryPane.getChildren().add(checkBox);
+                }
         }
 
 }

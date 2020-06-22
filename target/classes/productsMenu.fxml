@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ProductsMenuFX">
+<AnchorPane prefHeight="1035.0" prefWidth="1325.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ProductsMenuFX">
     <children>
-        <SplitPane dividerPositions="0.512987012987013" layoutX="55.0" layoutY="162.0" orientation="VERTICAL" prefHeight="1080.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <SplitPane dividerPositions="0.4578896418199419" layoutX="55.0" layoutY="162.0" orientation="VERTICAL" prefHeight="1035.0" prefWidth="1325.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <AnchorPane fx:id="topSplitPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                     <children>
@@ -55,12 +67,12 @@
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="495.0" prefWidth="1880.0">
                                             <children>
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" height="570.0" layoutY="-2.0"  opacity="0.8" stroke="BLACK" strokeType="INSIDE" width="1951.0" AnchorPane.bottomAnchor="-1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.599999999999909" AnchorPane.topAnchor="0.0">
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" height="1001.0" layoutX="-6.0" layoutY="-2.0" opacity="0.8" stroke="BLACK" strokeType="INSIDE" width="1957.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="-627.0" AnchorPane.topAnchor="0.0">
                                                     <fill>
                                                         <LinearGradient endX="1.0" endY="0.20229000444630632">
                                                             <stops>
-                                                                <Stop color="#fd5d00" />
-                                                                <Stop color="#ed4479" offset="1.0" />
+                                                                <Stop color="#c1d7f5" />
+                                                                <Stop color="#9fcfdf" offset="1.0" />
                                                             </stops>
                                                         </LinearGradient>
                                                     </fill>
@@ -83,42 +95,28 @@
                                                 </TableView>
                                                 <ScrollPane layoutY="83.0" prefHeight="200.0" prefWidth="246.0">
                                                     <content>
-                                                        <AnchorPane prefHeight="226.0" prefWidth="266.0">
+                                                        <AnchorPane fx:id="FilterCategoryPane" prefHeight="226.0" prefWidth="266.0">
                                                             <children>
                                                                 <Rectangle arcHeight="5.0" arcWidth="5.0" height="227.0" stroke="BLACK" strokeType="INSIDE" width="266.0">
                                                                     <fill>
                                                                         <LinearGradient endX="1.0" endY="0.20229000444630632">
                                                                             <stops>
-                                                                                <Stop color="#fac800" />
-                                                                                <Stop color="#ed4479" offset="1.0" />
+                                                                                <Stop color="#ffe785" />
+                                                                                <Stop color="#8ac0ed" offset="1.0" />
                                                                             </stops>
                                                                         </LinearGradient>
                                                                     </fill>
                                                                 </Rectangle>
-                                                                <CheckBox layoutX="14.0" layoutY="30.0" mnemonicParsing="false" text="ascending order" />
-                                                                <CheckBox layoutX="14.0" layoutY="56.0" mnemonicParsing="false" text="category" />
-                                                                <CheckBox layoutX="14.0" layoutY="84.0" mnemonicParsing="false" text="company" />
-                                                                <CheckBox layoutX="14.0" layoutY="108.0" mnemonicParsing="false" text="is available" />
-                                                                <Label layoutX="12.0" layoutY="5.0" prefHeight="18.0" prefWidth="78.0" text="Filters" />
+                                                                <Label layoutX="12.0" layoutY="5.0" prefHeight="18.0" prefWidth="78.0" text="Category" />
                                                             </children>
                                                         </AnchorPane>
                                                     </content>
                                                 </ScrollPane>
-                                                <ScrollPane layoutY="286.0" prefHeight="200.0" prefWidth="246.0">
+                                                <ScrollPane layoutY="594.0" prefHeight="200.0" prefWidth="246.0">
                                                     <content>
                                                         <AnchorPane prefHeight="226.0" prefWidth="266.0">
                                                             <children>
-                                                                <Rectangle arcHeight="5.0" arcWidth="5.0" height="254.0" stroke="BLACK" strokeType="INSIDE" width="272.0">
-                                                                    <fill>
-                                                                        <LinearGradient endX="1.0" endY="0.10305340781466654">
-                                                                            <stops>
-                                                                                <Stop color="#4bf500" />
-                                                                                <Stop color="#3f95ff" offset="1.0" />
-                                                                            </stops>
-                                                                        </LinearGradient>
-                                                                    </fill>
-                                                                </Rectangle>
-                                                                <CheckBox layoutX="14.0" layoutY="30.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="136.0" text="number of view" />
+                                                                <CheckBox layoutX="14.0" layoutY="31.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="136.0" text="number of view" />
                                                                 <CheckBox layoutX="14.0" layoutY="56.0" mnemonicParsing="false" text="score" />
                                                                 <CheckBox layoutX="14.0" layoutY="84.0" mnemonicParsing="false" text="CheckBox" />
                                                                 <CheckBox layoutX="14.0" layoutY="108.0" mnemonicParsing="false" text="CheckBox" />
@@ -128,11 +126,32 @@
                                                         </AnchorPane>
                                                     </content>
                                                 </ScrollPane>
+                                                <ScrollPane layoutY="283.0" prefHeight="200.0" prefWidth="246.0">
+                                                    <content>
+                                                        <AnchorPane prefHeight="226.0" prefWidth="266.0">
+                                                            <children>
+                                                                <Rectangle arcHeight="5.0" arcWidth="5.0" height="227.0" stroke="BLACK" strokeType="INSIDE" width="266.0">
+                                                                    <fill>
+                                                                        <LinearGradient endX="1.0" endY="0.20229000444630632">
+                                                                            <stops>
+                                                                                <Stop color="#fff2aa" />
+                                                                                <Stop color="#83c0f2" offset="1.0" />
+                                                                            </stops>
+                                                                        </LinearGradient>
+                                                                    </fill>
+                                                                </Rectangle>
+                                                                <Label layoutX="12.0" layoutY="5.0" prefHeight="19.0" prefWidth="124.0" text="Company Name" />
+                                                            </children>
+                                                        </AnchorPane>
+                                                    </content>
+                                                </ScrollPane>
+                                                <CheckBox fx:id="filterIsAvailable" layoutX="14.0" layoutY="507.0" mnemonicParsing="false" text="Is Availabla" />
+                                                <CheckBox fx:id="filterAscending" layoutX="14.0" layoutY="538.0" mnemonicParsing="false" text="Ascending Order" />
                                             </children>
                                         </AnchorPane>
                                     </content>
                                 </Tab>
-                                <Tab text="All Categories">
+                                <Tab onSelectionChanged="#dataInListView" text="All Categories">
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>
@@ -146,11 +165,21 @@
                                                         </LinearGradient>
                                                     </fill>
                                                 </Rectangle>
-                                                <TableView layoutX="38.0" layoutY="89.0" prefHeight="402.0" prefWidth="271.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="89.60000000000002">
-                                                    <columns>
-                                                        <TableColumn prefWidth="270.4000045776367" text="Categories" />
-                                                    </columns>
-                                                </TableView>
+                                                <ListView fx:id="categoriesListView" layoutX="31.0" layoutY="71.0" prefHeight="200.0" prefWidth="572.0" />
+                                                <Label layoutX="31.0" layoutY="28.0" prefHeight="18.0" prefWidth="189.0" text="Categories">
+                                                    <font>
+                                                        <Font size="23.0" />
+                                                    </font>
+                                                    <textFill>
+                                                        <LinearGradient endX="1.0" endY="1.0">
+                                                            <stops>
+                                                                <Stop color="#ffbd00" />
+                                                                <Stop color="#72ff00" offset="0.993835616438356" />
+                                                                <Stop color="WHITE" offset="1.0" />
+                                                            </stops>
+                                                        </LinearGradient>
+                                                    </textFill>
+                                                </Label>
                                             </children></AnchorPane>
                                     </content>
                                 </Tab>
@@ -160,7 +189,7 @@
                 </AnchorPane>
             </items>
         </SplitPane>
-        <MenuBar layoutY="2.0" style="-fx-background-color: #5f76ff;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <MenuBar layoutY="2.0" prefWidth="935.0" style="-fx-background-color: #5f76ff;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>

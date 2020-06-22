@@ -42,7 +42,7 @@ public class Main extends Application {
             */
 
      //   Parent root = FXMLLoader.load(getClass().getResource("mainMenuFx.fxml"));
-        Parent root = FXMLLoader.load(Objects.requireNonNull(UsersFx.class.getClassLoader().getResource("comment.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(UsersFx.class.getClassLoader().getResource("productsMenu.fxml")));
           //  Parent root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
         // Parent root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
         primaryStage.setTitle("market");

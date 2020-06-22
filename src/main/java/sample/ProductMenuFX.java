@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
@@ -26,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class ProductMenuFX {
+
     @FXML
     public AnchorPane productPagePane;
     @FXML
@@ -33,7 +36,7 @@ public class ProductMenuFX {
     public static Scene prevScene;
     public static Stage thisStage = new Stage();
     public static Product productInPage;
-    public AnchorPane scrollPane;
+
     public TextArea commentTextField;
     public TextField titleTextField;
     public Button backButtonAddComment;
@@ -50,88 +53,117 @@ public class ProductMenuFX {
     @FXML
     private Button commentButton;
     @FXML
-    private Button scoreButton;
-    @FXML
     private Label didntBuyToScoreOrProductIsFinish;
-
     @FXML
-    public TableColumn<Product, ArrayList<Comment>> titleColumn = new TableColumn<>("title");
-
+    public TableColumn<Comment, String  > titleColumn = new TableColumn<>("title");
     @FXML
-    public TableColumn<Product, ArrayList<Comment>> contentColumn = new TableColumn<>("content");
+    public TableColumn<Comment,String> contentColumn = new TableColumn<>("content");
     @FXML
     public static ObservableList<Comment> data = FXCollections.observableArrayList();
 
-
-    public static void showProPage(Stage stage, Scene scene, Product product) throws IOException {
-        productInPage = product;
-    }
-
-
-    public void makeUpPage() throws FileNotFoundException {
+    public void makeUpPage() throws IOException {
         productNameLabel.setText(productInPage.getProductName());
         File file = new File(productInPage.getProductImage());
         Image image = new Image(new FileInputStream(file));
         productPic.setImage(image);
-    }
+        productDetail.setText( "Id : " + productInPage.getId() + "\n" +
+                "Name : " + productInPage.getProductName() + "\n"+
+                "Price : " +  productInPage.getPrice() + "\n" +
+                "Seller : " +  productInPage.getSeller().getName() + "\n" +
+                "Category : " +  productInPage.getCategory().getName() + "\n" +
+                "Number : " + productInPage.getNumberOfProducts() + "\n" +
+                "Average Score : " + productInPage.getScore() + "\n"
+        );
+        productDetail.setEditable(false);
+        for (String productCategorySpecification : productInPage.productCategorySpecifications) {
+            System.out.println(productCategorySpecification);
+        }
+        for (String specification : productInPage.productCategorySpecifications) {
 
+            if (specification != null && !specification.equals("")){
+                for (String productCategorySpecification : productInPage.productCategorySpecifications) {
+                    if (!productCategorySpecification.equals(null)){
+                        if (!productCategoryDetail.getText().equals(handleProCatDetail())){
+                            productCategoryDetail.appendText(productCategorySpecification+"\n");
+                        }
+                    }
+                }
+            }
+            else {
+                System.out.println("trait is empty");
+            }
+        }
+        productCategoryDetail.setEditable(false);
+
+    }
 
     @FXML
     void popUpAddComment(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("sample/fxFile/comment.fxml")));
-        thisStage = new Stage();
         prevScene = new Scene(root);
+        thisStage = new Stage();
         thisStage.setScene(prevScene);
         thisStage.show();
     }
-
 
     public void handleAddProductToLog(ActionEvent actionEvent) {
 
     }
 
-    public void handleScore(ActionEvent actionEvent) {
-
-    }
-
     public void handleBackAddCommentButton(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("sample/fxFile/sample3.fxml")));
-        prevScene = new Scene(root);
-        thisStage.setScene(prevScene);
-        thisStage.show();
+        thisStage.close();
     }
 
     public void handleSendComment(ActionEvent actionEvent) {
         String title = titleTextField.getText();
         String content = commentTextField.getText();
-        if (title != null) {
-            if (content != null) {
-//                productInPage.com(title, content);
+        if (!title.equals("")) {
+            if (!content.equals("")) {
+                productInPage.setComment(title,content);
+                titleTextField.setText("");
+                contentColumn.setText("");
+                title = "";
+                content ="";
             } else {
-                nullAddCommentError.setText("content is empty");
                 nullAddCommentError.setVisible(true);
+                nullAddCommentError.setText("content is empty");
             }
         } else {
-            nullAddCommentError.setText("title is empty");
             nullAddCommentError.setVisible(true);
+            nullAddCommentError.setText("title is empty");
         }
+    }
+
+    public String handleProCatDetail(){
+        String out = "";
+        for (String specification : productInPage.productCategorySpecifications) {
+            out += specification+"\n";
+        }
+        return out;
     }
 
     @FXML
     public void initialize() throws IOException {
-        titleColumn.setCellValueFactory(new PropertyValueFactory<Product, ArrayList<Comment>>("title"));
-        contentColumn.setCellValueFactory(new PropertyValueFactory<Product, ArrayList<Comment>>("content"));
-        initializeObserverList();
-        commentTableView.getColumns().addAll(titleColumn, contentColumn);
+        titleColumn.setCellValueFactory(new PropertyValueFactory<Comment,String>("title"));
+        contentColumn.setCellValueFactory(new PropertyValueFactory<Comment, String >("content"));
+        for (Comment comment : Comment.getCommentsOfPro(productInPage.getId())) {
+            if (!data.contains(comment)){
+                data.add(comment);
+            }
+        }
+        commentTableView.getColumns().addAll(titleColumn,contentColumn);
         commentTableView.setItems(data);
-
+        for (Comment comment : Comment.getCommentsOfPro(productInPage.getId())) {
+            System.out.println(comment.getTitle());
+        }
+        data.removeAll();
     }
 
-    private void initializeObserverList() {
-//        if (productInPage.getAllCommentsOnProduct().size() != 0) {
-//            data.addAll(productInPage.getAllCommentsOnProduct());
-//        } else {
-//            System.out.println("no");
-//        }
+    public void backToProductsMenu(ActionEvent event) throws IOException {
+        AnchorPane root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("sample/fxFile/sample.fxml")));
+        Scene scene = new Scene(root);
+        thisStage.setScene(scene);
+        thisStage.show();
     }
+
 }

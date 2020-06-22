@@ -33,32 +33,8 @@ import java.util.Objects;
 
 public class AddProductMenuFX {
 
-    public Button addToCardButton;
-    public AnchorPane productMenuPane;
-    public AnchorPane topSplitPane;
-    public TextArea productImageRectangle;
-    public TextArea productProperties;
-    public Tab specificationsTab;
-    public Rectangle specificationPane;
-    public TextArea specificatonTextbox;
-    public AnchorPane commentsPane;
-    public Tab averageScoreTab;
-    public AnchorPane averageScorePane;
-    public Label productFinishedError;
-    public Tab commentTab;
-    public MenuItem account;
-    public MenuItem back;
-    public MenuItem logout;
-    public MenuItem exit;
-    public MenuItem deleteProduct;
-    public MenuItem editProduct;
-    public TextArea commentTitleField;
-    public TextArea commnetContentField;
-    public Button addCommentButton;
-    public Button addScoreButton;
-
     private static int outputNo = 0;
-    private static Product selectedProduct;
+    private Product product;
     public ImageView productImage;
     public TextField priceTextField;
     public TextField productNameTextField;
@@ -70,28 +46,19 @@ public class AddProductMenuFX {
     public TextField sellerNameTextField;
     public TextField idTextField;
     public TextField numberOfProductTextField;
-    public TextArea additionaldetailTextField;
-    @FXML
-    public TableView<Category> categoryTableView = new TableView<>();
-
-    @FXML
-    public TableColumn<Category, String> categoryForPro = new TableColumn<>("categoryName");
-
-    @FXML
-    public TableColumn<Category, TextField> details = new TableColumn<>("specifications");
-
-    @FXML
-    public static ObservableList<Category> data = FXCollections.observableArrayList();
     public AnchorPane pane;
-    public ArrayList<TextField> traitsTextFields = new ArrayList<>();
+    public static ArrayList<TextField> traitsTextFields = new ArrayList<>();
+    public TextArea additionaldetailTextField;
     String imageId;
     List<File> files;
+    Category productCategory;
+    ArrayList<String> traitText = new ArrayList<>();
 
 
     public static void showProPage(Stage stage, Scene scene) throws IOException {
         thisStage = stage;
         prevScene = scene;
-        Parent root = FXMLLoader.load(Objects.requireNonNull(AddProductMenuFX.class.getClassLoader().getResource("sample/fxFile/sample2.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("sample/fxFile/sample2.fxml")));
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -101,7 +68,6 @@ public class AddProductMenuFX {
     public void addProductToCard(ActionEvent actionEvent) {
         System.out.println("hah");
     }
-
 
     @FXML
     public void handleDragOver(DragEvent dragEvent) {
@@ -130,79 +96,100 @@ public class AddProductMenuFX {
         String seller = sellerNameTextField.getText();
         String numberOfProduct = numberOfProductTextField.getText();
         String additionalDetail = additionaldetailTextField.getText();
-
         if (!name.equals("")) {
             if (!price.equals("")) {
                 if (!category.equals("") && Category.isThereCategoryWithName(category)) {
-                    productImage.setVisible(true);
-                    Product product = new Product(id);
-                    product.setDetailProduct(imageId, name, Integer.parseInt(price), Category.getCategoryWithName(category), Account.getAccountWithUsername(seller), Seller.getAccountWithUsername(seller).getFirm(), Integer.parseInt(numberOfProduct));
-                    product.setAdditionalDetail(additionalDetail);
-                    productImage = new ImageView();
-                    productImage.setFitHeight(216.0);
-                    productImage.setFitWidth(267.0);
-                    productImage.setLayoutX(137.0);
-                    productImage.setLayoutY(76.0);
-                    productImage.setOnDragDropped(e -> {
-                        try {
-                            handleDrop(e);
-                        } catch (FileNotFoundException ex) {
-                            ex.printStackTrace();
-                        }
-                    });
-                    productImage.setOnDragOver(this::handleDragOver);
-                    System.out.println("haha");
-                    Category category1 = Category.getCategoryWithName(category);
-                    for (String trait : category1.getTraits()) {
-                        int n = 50;
-                        Label label = new Label();
-                        label.setText(trait);
-                        label.setLayoutY(n * (category1.getTraits().indexOf(trait) + 1));
-                        label.setLayoutX(900 + category1.getTraits().indexOf(trait));
-                        TextField textField = new TextField();
-                        textField.setMaxSize(100, 50);
-                        textField.setLayoutY((n) * (category1.getTraits().indexOf(trait) + 1));
-                        textField.setLayoutX(1000 + category1.getTraits().indexOf(trait));
-                        traitsTextFields.add(textField);
-                        pane.getChildren().addAll(label, textField);
-                        n += 5;
+                    if (Category.getCategoryWithName(category).getTraits() != null){
+                        productImage.setVisible(true);
+                        productImage.setVisible(true);
+                        Product product = new Product(id);
+                        product.setDetailProduct(imageId, name, Integer.parseInt(price), Category.getCategoryWithName(category), Account.getAccountWithUsername(seller), Seller.getAccountWithUsername(seller).getFirm(), Integer.parseInt(numberOfProduct));
+                        product.setAdditionalDetail(additionalDetail);
+                        productImage = new ImageView();
+                        productImage.setFitHeight(216.0);
+                        productImage.setFitWidth(267.0);
+                        productImage.setLayoutX(137.0);
+                        productImage.setLayoutY(76.0);
+                        handleTraits();
+                        product.productCategorySpecifications.addAll(traitText);
+                        productCategory = Category.getCategoryWithName(category);
+                        imageId = files.get(0).getPath();
+                        File file = new File(imageId);
+                        Image image = new Image(new FileInputStream(file));
+                        productImage = new ImageView();
+                        productImage.setImage(image);
+                        productImage.setFitHeight(216.0);
+                        productImage.setFitWidth(267.0);
+                        productImage.setLayoutX(137.0);
+                        productImage.setLayoutY(76.0);
+                        productImage.setOnDragDropped(e -> {
+                            try {
+                                handleDrop(e);
+                            } catch (FileNotFoundException ex) {
+                                ex.printStackTrace();
+                            }
+                        });
+                        productImage.setOnDragOver(this::handleDragOver);
                     }
-                } else {
+
+                }
+                else {
                     error.setVisible(true);
                     error.setText("please inter valid category");
                 }
             } else {
                 error.setVisible(true);
-                error.setText("please inter a valid price");
+                error.setText("please inter valid price");
+                System.out.println("heh");
+
             }
         } else {
             error.setVisible(true);
-            error.setText("please inter valid product name");
-            System.out.println("heh");
-
+            error.setText("please inter a valid product name");
         }
+
     }
 
     public void backToProducts(MouseEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/productsMenu.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxFile/sample.fxml"));
 //        thisStage = new Stage();
         prevScene = new Scene(fxmlLoader.load());
         thisStage.setScene(prevScene);
         thisStage.show();
     }
 
-    public static void initializeObserverList() {
-        data.addAll(Category.getAllCategories());
+    public void addTraitsButton(ActionEvent actionEvent) {
+        String category = categoryNameTextField.getText();
+        if (category != null && Category.isThereCategoryWithName(category)){
+            productCategory = Category.getCategoryWithName(category);
+            if (productCategory != null){
+                for (String trait : productCategory.getTraits()) {
+                    int n =50;
+                    Label label = new Label();
+                    label.setText(trait);
+                    label.setLayoutY(n*(productCategory.getTraits().indexOf(trait)+1));
+                    label.setLayoutX(900+productCategory.getTraits().indexOf(trait));
+                    TextField textField = new TextField();
+                    textField.setMaxSize(100,50);
+                    textField.setLayoutY((n)*(productCategory.getTraits().indexOf(trait)+1));
+                    textField.setLayoutX(1000+productCategory.getTraits().indexOf(trait));
+                    traitsTextFields.add(textField);
+                    pane.getChildren().addAll(label,textField);
+                    n+=5;
+                }
+            }
+        }
+        else {
+            error.setVisible(true);
+            error.setText("please enter category name first");
+        }
     }
 
+    private void handleTraits() {
 
-    @FXML
-    public void initialize() throws IOException {
-        categoryForPro.setCellValueFactory(new PropertyValueFactory<Category, String>("id"));
-        details.setCellValueFactory(new PropertyValueFactory<Category, TextField>("detail"));
-        initializeObserverList();
-        categoryTableView.getColumns().addAll(categoryForPro, details);
-        categoryTableView.setItems(data);
+        for (TextField traitsTextField : traitsTextFields) {
+            traitText.add(traitsTextField.getText());
+        }
 
     }
 

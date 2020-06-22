@@ -42,7 +42,7 @@ public class CommentRequest extends Request {
         Comment comment =Comment.getCommentFromId(id);
         comment.setDetail(title,content,personToVote,product);
         comment.setCommentStatus(CommentStatus.CONFIRMED);
-        product.setComment(comment);
+        product.setComment(title,content);
         Request.getAllRequests().remove(this);
         allCommentRequests.remove(this);
     }
