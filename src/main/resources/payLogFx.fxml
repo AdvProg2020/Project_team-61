@@ -4,24 +4,23 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <AnchorPane prefHeight="900.0" prefWidth="1440.0" style="-fx-background-color: linear-gradient( #fff722, #ff26f9);" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.PayLogFx">
     <children>
-        <Button layoutX="599.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#paymentProcess" text="Pay" />
+        <Button layoutX="597.0" layoutY="622.0" mnemonicParsing="false" onMouseClicked="#paymentProcess" text="Pay" />
         <TextField fx:id="PhoneNumberTextFieldPayLog" layoutX="390.0" layoutY="229.0" prefHeight="25.0" prefWidth="200.0" promptText="Phone Number" />
         <TextArea fx:id="AddressTextPayLog" layoutX="390.0" layoutY="288.0" prefHeight="200.0" prefWidth="200.0" promptText="Address" />
         <Label fx:id="PhoneNumberPayLogLabel" layoutX="298.0" layoutY="233.0" text="Phone Number:" />
         <Label fx:id="AddressPayLogLabel" layoutX="312.0" layoutY="288.0" text="Address:" />
-        <Label fx:id="DiscountPayLogLabel" layoutX="287.0" layoutY="536.0" text="Discount Code:" />
-        <TextField fx:id="discountPayLogTextField" layoutX="390.0" layoutY="532.0" prefHeight="25.0" prefWidth="207.0" promptText="enter discount code.." />
+        <Label fx:id="DiscountPayLogLabel" layoutX="294.0" layoutY="600.0" text="Discount Code:" />
+        <TextField fx:id="discountPayLogTextField" layoutX="386.0" layoutY="596.0" prefHeight="25.0" prefWidth="207.0" promptText="enter discount code.." />
         <Label layoutX="368.0" layoutY="30.0" prefHeight="105.0" prefWidth="270.0" text="Pay Log">
             <font>
                 <Font size="62.0" />
             </font>
         </Label>
-        <Label layoutX="446.0" layoutY="254.0" text="Label" />
-        <Label layoutX="460.0" layoutY="497.0" text="Label" />
+        <Label fx:id="alertMessage" layoutX="671.0" layoutY="314.0" prefHeight="84.0" prefWidth="109.0" text="Label" textFill="#e80303" />
+      <TextField fx:id="hasDiscount" layoutX="390.0" layoutY="525.0" promptText="yes or no" />
+      <Label layoutX="224.0" layoutY="529.0" text="Do you have discount code?" />
 
 
     </children>

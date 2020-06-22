@@ -191,33 +191,34 @@ public class OutputMassageHandler {
     }
 
 
-    public static void showCustomerOutput(int output) {
+    public static String showCustomerOutput(int output) {
         if (output == 0) {
             System.out.println("");
         } else if (output == 1) {
-            text =("there is no product with this productId ");
+            text = ("there is no product with this productId ");
         } else if (output == 4) {
-            text =("number format is invalid");
+            text = ("number format is invalid");
         } else if (output == 7) {
-            text =("there is no discount code with this id");
+            text = ("there is no discount code with this id");
         } else if (output == 8) {
-            text =("there is no log with this id");
+            text = ("there is no log with this id");
         } else if (output == 10) {
-            text =("product number increase");
+            text = ("product number increase");
         } else if (output == 11) {
-            text =("number must be between 1 to 5");
+            text = ("number must be between 1 to 5");
         } else if (output == 12) {
-            text =("there is no log yet");
+            text = ("there is no log yet");
         } else if (output == 13) {
-            text =("you didn't buy this product");
+            text = ("you didn't buy this product");
         } else if (output == 14) {
-            text =("score add to product");
+            text = ("score add to product");
         } else if (output == 15) {
-            text =("product number decrese");
+            text = ("product number decrese");
         }
+        return text;
     }
 
-    public static void showPurchaseOutput(int output){
+    public static String showPurchaseOutput(int output){
         if (output == 0) {
             text =("please enter discount id");
         } else if (output == 1) {
@@ -237,6 +238,13 @@ public class OutputMassageHandler {
         } else if (output == 8) {
             text =("you aren't a customer");
         }
+        else if (output==9){
+            text=("you don't have enough credit");
+        }
+        else if (output==10){
+            text=("payment successful!");
+        }
+        return text;
     }
 
     public static void showSellerOutput(int output) {

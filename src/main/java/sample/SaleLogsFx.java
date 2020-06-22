@@ -4,6 +4,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -15,11 +18,12 @@ import model.productRelated.Product;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class SaleLogsFx {
 
-    @FXML
-    private TableColumn<SaleLog, DeliveryStatus> saleLogsDeliveryStatus;
+    //@FXML
+  //  private TableColumn<SaleLog, DeliveryStatus> saleLogsDeliveryStatus;
 
     @FXML
     private TableColumn<SaleLog, LocalDateTime> saleLogsDate;
@@ -32,6 +36,7 @@ public class SaleLogsFx {
 
     @FXML
     private TableColumn<SaleLog, String> saleLogsId;
+    private static Parent root;
 
     @FXML
     private TableColumn<SaleLog, String> saleLogsCustomerName;
@@ -48,14 +53,14 @@ public class SaleLogsFx {
 
     @FXML
     public void initialize()throws IOException {
-        saleLogsDeliveryStatus.setCellValueFactory(new PropertyValueFactory<>("deliveryStatus"));
-        saleLogsDate.setCellValueFactory(new PropertyValueFactory<>("number"));
+      //  saleLogsDeliveryStatus.setCellValueFactory(new PropertyValueFactory<>("deliveryStatus"));
+        saleLogsId.setCellValueFactory(new  PropertyValueFactory<>("saleLogId"));
+        saleLogsDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         saleLogsReducedAmount.setCellValueFactory(new PropertyValueFactory<>("reducedAmount"));
         saleLogsCustomerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-        saleLogsId.setCellValueFactory(new  PropertyValueFactory<>("saleLogId"));
         saleLogsRecievedAmount.setCellValueFactory(new PropertyValueFactory<>("receivedAmount"));
         initializeObserverList();
-        saleLogsTableView.getColumns().addAll(saleLogsId,saleLogsDate,saleLogsDeliveryStatus,saleLogsCustomerName,saleLogsRecievedAmount,saleLogsReducedAmount);
+        saleLogsTableView.getColumns().addAll(saleLogsId,saleLogsDate,saleLogsCustomerName,saleLogsRecievedAmount,saleLogsReducedAmount);
         saleLogsTableView.setItems(data);
     }
     public void logout(ActionEvent actionEvent) {
@@ -70,6 +75,15 @@ public class SaleLogsFx {
     public void exit(ActionEvent actionEvent) {
     }
 
-    public void viewSaleLogs(MouseEvent mouseEvent) {
+    private static void goToPage(){
+        Scene pageTwoScene = new Scene(root);
+        //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        Main.primStage.setScene(pageTwoScene);
+        Main.primStage.show();
+    }
+    public void viewSaleLogFromAllSaleLogs(MouseEvent mouseEvent) throws IOException {
+        root= FXMLLoader.load(Objects.requireNonNull(SalesFx.class.getClassLoader().getResource("saleLogFx.fxml")));;
+        goToPage();
+
     }
 }

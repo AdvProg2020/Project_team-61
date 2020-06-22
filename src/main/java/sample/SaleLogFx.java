@@ -37,7 +37,7 @@ public class SaleLogFx {
     @FXML
     private TableColumn<Product, LocalDateTime> saleLogDate;
     public  void initializeObserverList() {
-        data.addAll(curSaleLog.getAllSoldProduct();
+        data.addAll(curSaleLog.getAllSoldProduct());
     }
     @FXML
     public void initialize()throws IOException {
