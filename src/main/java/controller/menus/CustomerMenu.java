@@ -52,7 +52,9 @@ public class CustomerMenu {
         return false;
     }
 
-
+    public static int getOutputNo() {
+        return outputNo;
+    }
 
     public static void increaseProductNumber(String productID) {
         if (isThereBuyLog()) {
@@ -118,7 +120,7 @@ public class CustomerMenu {
         OutputMassageHandler.showPurchaseOutput(outputNo);
     }
 
-    private static boolean checkDiscountCode(String discountCodeID) {
+    public static boolean checkDiscountCode(String discountCodeID) {
         //if (discountCodeID.matches("")) {
         if (DiscountCode.isThereDiscountWithId(discountCodeID)) {
             return true;
@@ -165,8 +167,8 @@ public class CustomerMenu {
            // CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
            // CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
             finishingPayment();
-            outputNo = 0;
-        } else outputNo = 0;
+            outputNo = 10;
+        } else outputNo = 9;
         OutputMassageHandler.showPurchaseOutput(outputNo);
     }
 

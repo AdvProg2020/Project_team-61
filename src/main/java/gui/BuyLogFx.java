@@ -1,5 +1,6 @@
-package gui;
+ package sample;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,117 +16,112 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import model.log.BuyLog;
 import model.productRelated.Product;
+import sample.Main;
 
 
 import java.io.IOException;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 public class BuyLogFx {
     @FXML
-    private TableView<Product> buyLog = new TableView<>();
+    private TableView<Product> buyLog=new TableView<>();
 
     @FXML
-    private TableColumn<BuyLog, Double> buyLogProductId = new TableColumn<>();
+    private TableColumn<Product,?>buyLogProductId=new TableColumn<>("id");
 
     @FXML
-    private TableColumn<BuyLog, Product> buyLogProduct = new TableColumn<>();
-    @FXML
-    private TableColumn<BuyLog, Double> buyLogTotalPrice = new TableColumn<>();
+    private TableColumn<Product, Product> buyLogProduct=new TableColumn<>("product");
+
+    //private TableColumn<Product, Double> buyLogTotalPrice=new TableColumn<>("totalPrice");
 
     @FXML
-    private TableColumn<BuyLog, Integer> buyLogProductNumber = new TableColumn<>();
+    private TableColumn<Product, Integer> buyLogProductNumber=new TableColumn<>("number");
 
     @FXML
-    private TableColumn<BuyLog, Double> buyLogPrice = new TableColumn<>();
+    private TableColumn<Product, Double> buyLogPrice=new TableColumn<>("price");
     @FXML
     private static Label buyLogDate;
-    @FXML
-    private Label totalPriceLabel;
-    @FXML
-    private Button addButton = new Button("+");
-    @FXML
-    private Button reduceButton = new Button("-");
-    @FXML
-    private static Parent root;
+    @FXML private Label totalPriceLabel;
+    @FXML private static Parent root;
 
-    private BuyLog curBuyLog;
-    public static ObservableList<Product> data = FXCollections.observableArrayList();
-
-    public BuyLog getCurBuyLog() {
+    private    BuyLog curBuyLog;
+    public  static ObservableList<Product> data = FXCollections.observableArrayList();
+    public  BuyLog getCurBuyLog() {
         return curBuyLog;
     }
 
-    public void setCurBuyLog(BuyLog curBuyLog) {
+    public    void setCurBuyLog(BuyLog curBuyLog) {
         this.curBuyLog = curBuyLog;
     }
-
-    public void initializeObserverList() {
+    public  void initializeObserverList() {
         data.addAll(curBuyLog.getChosenProduct().keySet());
     }
-
     @FXML
-    public void initialize() throws IOException {
+    public void initialize()throws IOException{
+        buyLogProductId.setCellValueFactory(new PropertyValueFactory<>("id"));
         buyLogProduct.setCellValueFactory(new PropertyValueFactory<>("product"));
         buyLogProductNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
         //buyLogDate.setCellValueFactory(curBuyLog,);
         buyLogPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-        buyLogTotalPrice.setCellValueFactory(new PropertyValueFactory<>("total Price"));
-        buyLogProductId.setCellValueFactory(new PropertyValueFactory<>("id"));
+
+
         initializeObserverList();
-        // buyLog.getColumns().addAll(buyLogTotalPrice,buyLogProduct,buyLogProductNumber,buyLogPrice,buyLogTotalPrice);
+        buyLog.getColumns().addAll(buyLogProductId,buyLogProduct,buyLogProductNumber,buyLogPrice);
         buyLog.setItems(data);
     }
-
-    public void increaseAmount(MouseEvent mouseEvent, Product product) {
-        ObservableList<Product> selectedProduct, allProducts;
-        selectedProduct = buyLog.getSelectionModel().getSelectedItems();
+    public  void increaseAmount(MouseEvent mouseEvent,Product product){
+        ObservableList<Product> selectedProduct,allProducts;
+        allProducts=buyLog.getItems();
+        selectedProduct=buyLog.getSelectionModel().getSelectedItems();
         for (Product product1 : selectedProduct) {
-            curBuyLog.increaseNumberOfProduct(product1.getProductId(), 1);
+            curBuyLog.increaseNumberOfProduct(product1.getProductId(),1);
         }
 
 
     }
-
-    public static void showPage(Stage stage, Scene scene) throws IOException {
-        AnchorPane root = FXMLLoader.load(Objects.requireNonNull(AddProductMenuFX.class.getClassLoader().getResource("gui/fxFile/sample.fxml")));
+    /*public static void showPage(Stage stage, Scene scene) throws IOException {
+        AnchorPane root = FXMLLoader.load(Objects.requireNonNull(AddProductMenuFX.class.getClassLoader().getResource("sample/fxFile/sample.fxml")));
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
-
-    public void reduceAmount(ActionEvent MouseEvent, Product product) {
-        ObservableList<Product> selectedProduct, allProducts;
-        selectedProduct = buyLog.getSelectionModel().getSelectedItems();
+    }*/
+    public void reduceAmount(ActionEvent MouseEvent, Product product){
+        ObservableList<Product> selectedProduct,allProducts;
+        selectedProduct=buyLog.getSelectionModel().getSelectedItems();
         for (Product product1 : selectedProduct) {
-            curBuyLog.reduceNumberOfProduct(product1.getProductId(), 1);
+            curBuyLog.reduceNumberOfProduct(product1.getProductId(),1);
         }
 
     }
-
-    public void showTotalPrice() {
+    public void showTotalPriceBuyLog(MouseEvent MouseClick){
         totalPriceLabel.setText(String.valueOf(curBuyLog.calculateHolePrice()));
     }
 
 
-    private static void goToPage() {
+    private static void goToPage(){
         Scene pageTwoScene = new Scene(root);
         //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         Main.primStage.setScene(pageTwoScene);
         Main.primStage.show();
     }
-
-    public static void showLogLocalDate() {
+    public  static void showLogLocalDate(){
         buyLogDate.setText(BuyLog.getLocalDateTimeForLog().toString());
     }
-
-    public void pay(MouseEvent mouseEvent) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("payLogFx.fxml")));
+    public void purchase(MouseEvent mouseEvent) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("payLogFx.fxml")));
         goToPage();
     }
 
+    public void viewProductFromBuyLog(MouseEvent mouseEvent) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("productMenuFx.fxml")));
+        goToPage();
+    }
         /*  public static void initializeObserverList() {
         data.clear();
         data.addAll(ProductMenu.getBuyLog());
