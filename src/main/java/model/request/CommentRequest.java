@@ -14,11 +14,11 @@ import java.util.ArrayList;
 
 public class CommentRequest extends Request {
 
-    private static String title;
-    private static String content;
-    private static Account personToVote;
-    private static Product product;
-    private static String id;
+    private  String title;
+    private  String content;
+    private  Account personToVote;
+    private  Product product;
+    private  String id;
     private static ArrayList<CommentRequest> allCommentRequests = new ArrayList<>();
     public static Type commentRequestType = new TypeToken<ArrayList<CommentRequest>>() {
     }.getType();

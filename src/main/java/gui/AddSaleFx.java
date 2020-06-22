@@ -51,83 +51,93 @@ public class AddSaleFx {
 
     @FXML
     public void initialize() throws IOException {
-        initializeObserverList();
+        makeTree();
     }
 
-    public void initializeObserverList() {
+    public void makeTree() {
         addSaleProduct.setCellValueFactory(new PropertyValueFactory<Product, String>("productId"));
         if (LoginMenu.getLoginAccount() instanceof Seller) {
             Seller seller = (Seller) LoginMenu.getLoginAccount();
             list.clear();
             list.addAll(seller.getAllProduct());
-//            Seller seller = (Seller) LoginMenu.getLoginAccount();
-//            for (int i = 0; i < seller.getAllProduct().size(); i++) {
-//                productsid.add(seller.getAllProduct().get(i).getId());
-//            }
-//            list.addAll(productsid);
-//            addSaleProducts.getItems().addAll(list);
+            addSaleProducts.setEditable(true);
+            addSaleProducts.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+            addSaleProducts.getSelectionModel().setCellSelectionEnabled(true);
+            addSaleProducts.setItems(list);
+
 
         }
-
-        //  usersList.getColumns().addAll(UserId,userName,userLast,userBirth,userPhoneNo,userEmail);
-        addSaleProducts.setEditable(true);
-        addSaleProducts.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        addSaleProducts.getSelectionModel().setCellSelectionEnabled(true);
-        addSaleProducts.setItems(list);
-
-
     }
 
-    public void createSale(MouseEvent mouseEvent) throws IOException, ParseException {
-        if (SellerMenu.getCreate() == 0) {
-            saleIdAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.setDetailsToSale(saleIdTextField.getText(), 0)));
-        }
-        if (SellerMenu.getCreate() == 1) {
-            startSaleAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.setDetailsToSale(startSaleDatePicker.getText(), 1)));
-            if (ManagerMenu.getDetailMenu() == 2) {
-                endSaleAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.setDetailsToSale(endSaleDatePicker.getText(), 2)));
+        public void createSale (MouseEvent mouseEvent) throws IOException, ParseException {
+            if (SellerMenu.getCreate() == 0) {
+                saleIdAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.setDetailsToSale(saleIdTextField.getText(), 0)));
             }
-            if (ManagerMenu.getDetailMenu() == 3) {
-                saleAmountAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.setDetailsToSale(saleAmount.getText(), 3)));
+            if (SellerMenu.getCreate() == 1) {
+                startSaleAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.setDetailsToSale(startSaleDatePicker.getText(), 1)));
+                if (ManagerMenu.getDetailMenu() == 2) {
+                    endSaleAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.setDetailsToSale(endSaleDatePicker.getText(), 2)));
+                }
+                if (ManagerMenu.getDetailMenu() == 3) {
+                    saleAmountAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.setDetailsToSale(saleAmount.getText(), 3)));
+                }
+                if (ManagerMenu.getDetailMenu() == 4) {
+                    Product product = addSaleProducts.getSelectionModel().getSelectedItem();
+                    saleAmountAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.setDetailsToSale(product.getId(), 4)));
+                }
             }
-            if (ManagerMenu.getDetailMenu() == 4) {
-                Product product = addSaleProducts.getSelectionModel().getSelectedItem();
-                saleAmountAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.setDetailsToSale(product.getId(), 4)));
-            }
+
+            // finish = false;
         }
 
-        // finish = false;
+        public void editSale (MouseEvent mouseEvent) throws IOException, ParseException {
+            if (SellerMenu.getEdit() == 0) {
+                saleIdAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.editOff(saleIdTextField.getText())));
+            }
+            if (SellerMenu.getEdit() == 1) {
+                startSaleAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.editOffField(startSaleDatePicker.getText(), "start")));
+                endSaleAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.editOffField(endSaleDatePicker.getText(), "end")));
+                saleAmountAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.editOffField(saleAmount.getText(), "amount")));
+
+            } else saleIdAlertLabel.setText("insert id first");
+        }
+
+        public void addProduct (MouseEvent mouseEvent) throws IOException, ParseException {
+            if (SellerMenu.getSaleRequest() != null) {
+                if (addSaleProducts.getSelectionModel().getSelectedItem() != null) {
+                    Product product = addSaleProducts.getSelectionModel().getSelectedItem();
+                    saleIdAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.editOffField(product.getId(), "add product")));
+                    makeTree();
+                } else saleIdAlertLabel.setText("you have to select first");
+            } else saleIdAlertLabel.setText("you have to insert name and edit first");
+        }
+        public void removeProduct (MouseEvent mouseEvent) throws IOException, ParseException {
+            if (SellerMenu.getSaleRequest() != null) {
+                if (addSaleProducts.getSelectionModel().getSelectedItem() != null) {
+                    Product product = addSaleProducts.getSelectionModel().getSelectedItem();
+                    saleIdAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.editOffField(product.getId(), "remove product")));
+                    makeTree();
+                } else saleIdAlertLabel.setText("you have to select first");
+            } else saleIdAlertLabel.setText("you have to insert name and edit first");
+
+        }
+        public void exit (ActionEvent actionEvent){
+        }
+
+        public void back (ActionEvent actionEvent){
+        }
+
+        public void logout (ActionEvent actionEvent){
+        }
+
+        public void userMenu (ActionEvent actionEvent){
+        }
 
 
-    }
-
-    public void addProduct(MouseEvent mouseEvent) throws IOException, ParseException {
-        //  if (!finish) {
-        // TreeItem<Product> a = saleProducts.getSelectionModel().getSelectedItem();
-        //  SellerMenu.setDetailsToSale(saleAmount.getText());
-        // }
-    }
-
-    public void exit(ActionEvent actionEvent) {
-    }
-
-    public void back(ActionEvent actionEvent) {
-    }
-
-    public void logout(ActionEvent actionEvent) {
-    }
-
-    public void userMenu(ActionEvent actionEvent) {
-    }
+        public void finish (MouseEvent mouseEvent){
+            finish = true;
+        }
 
 
-    public void finish(MouseEvent mouseEvent) {
-        finish = true;
-    }
 
-    public void removeProduct(MouseEvent mouseEvent) {
-    }
-
-    public void editSale(MouseEvent mouseEvent) {
-    }
 }

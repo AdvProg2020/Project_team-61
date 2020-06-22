@@ -101,7 +101,7 @@ public class OutputMassageHandler {
         } else if (output == 26) {
             text =("date must be after current date");
         } else if (output == 27) {
-            text =("discount amount changed");
+            text =("changed");
         } else if (output == 28) {
             text =("discount amount format is invalid");
         } else if (output == 29) {
@@ -251,7 +251,7 @@ public class OutputMassageHandler {
         return text;
     }
 
-    public static void showSellerOutput(int output) {
+    public static String showSellerOutput(int output) {
         if (output == 0) {
             System.out.println("number");
         } else if (output == 1) {
@@ -299,6 +299,7 @@ public class OutputMassageHandler {
         }else if (output == 33) {
             text =("new value request sent");
         }
+        return text;
     }
 
     public static String showSaleOutput(int output) {

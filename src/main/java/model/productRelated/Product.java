@@ -47,7 +47,7 @@ public class Product {
     private ArrayList<Comment> proComments = new ArrayList<Comment>();
     private ArrayList<Score> proScores = new ArrayList<>();
     private static HashMap<String, String> categorySpecifications = new HashMap<>();
-
+    public ArrayList<String> productCategorySpecifications = new ArrayList<>();
 
     //objectsAdded
     private Comment comment;
@@ -108,6 +108,14 @@ public class Product {
 
     //settersAndGetters----------------------------------------------------------------------------------
 
+
+    public ArrayList<String> getProductCategorySpecifications() {
+        return productCategorySpecifications;
+    }
+
+    public void setProductCategorySpecifications(ArrayList<String> productCategorySpecifications) {
+        this.productCategorySpecifications = productCategorySpecifications;
+    }
 
     public String getProductImage() {
         return productImageId;

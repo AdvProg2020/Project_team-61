@@ -36,16 +36,8 @@ public class ManagerMenu {
         return editableCategory;
     }
 
-    public static void setEditableCategory(Category editableCategory) {
-        ManagerMenu.editableCategory = editableCategory;
-    }
-
     public static DiscountCode getEditableDiscountCode() {
         return editableDiscountCode;
-    }
-
-    public static void setEditableDiscountCode(DiscountCode editableDiscountCode) {
-        ManagerMenu.editableDiscountCode = editableDiscountCode;
     }
 
     public static int getCreate() {
@@ -56,13 +48,8 @@ public class ManagerMenu {
         ManagerMenu.create = create;
     }
 
-
     public static int getDetailMenu() {
         return detailMenu;
-    }
-
-    public static void setDetailMenu(int detailMenu) {
-        ManagerMenu.detailMenu = detailMenu;
     }
 
     private static boolean checkUsername(String username) {
@@ -118,7 +105,7 @@ public class ManagerMenu {
     public static int createNewDiscountCode(String discountCodeId) throws IOException {
         if (!DiscountCode.isThereDiscountWithId(discountCodeId)) {
             newDiscountCode = new DiscountCode(discountCodeId);
-            newDiscountCode.setManager(LoginMenu.getLoginAccount());
+          //  newDiscountCode.setManager(LoginMenu.getLoginAccount());
             create = 1;
             if (LoginMenu.getLoginAccount() instanceof Manager) {
                 ((Manager) LoginMenu.getLoginAccount()).addDiscount(newDiscountCode);

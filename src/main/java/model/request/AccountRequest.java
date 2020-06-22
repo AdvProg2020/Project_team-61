@@ -64,7 +64,7 @@ public class AccountRequest extends Request {
        // createFirm();
       //  firm = Firm.getFirmWithID(firmName);
         seller.setDetailsToAccount(password, name, lastname, Email, phoneNo, birthdayDate, firm);
-      //  firm.setDetailToFirm(FirmPhoneNO, firmAddress, firmEmail);
+       // firm.setDetailToFirm(FirmPhoneNO, firmAddress, firmEmail);
         Request.getAllRequests().remove(this);
         allAccountRequests.remove(this);
         writeInJ();

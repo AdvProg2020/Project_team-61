@@ -17,20 +17,30 @@ import java.util.HashMap;
 
 public class ProductRequest extends Request {
 
-    private static String productId = null;
-    private static String productName = null;
-    private static double price = 0;
-    private static Seller sellerName = null;
-    private static Firm companyName = null;
-    private static Category categoryName = null;
-    private static Category lastCategory = null;
-    private static String additionalDetail = null;
-    private static int numberOfProduct = 0;
+    private  String productId = null;
+    private  String productName = null;
+    private  double price = 0;
+    private  Seller sellerName = null;
+    private  Firm companyName = null;
+    private  Category categoryName = null;
+    private  Category lastCategory = null;
+    private  String additionalDetail = null;
+    private  int numberOfProduct = 0;
     private static ArrayList<ProductRequest> allProductRequests = new ArrayList<>();
-    private static HashMap<String,String> specialValue = new HashMap<>();
+   // private  HashMap<String,String> specialValue = new HashMap<>();
+   private  ArrayList<String> specialValue = new ArrayList<>();
     public static Type productRequestType = new TypeToken<ArrayList<ProductRequest>>() {
     }.getType();
 
+
+    public ArrayList<String> getSpecialValue() {
+        return specialValue;
+    }
+
+    public void setSpecialValue(ArrayList<String> specialValue) throws IOException {
+        this.specialValue = specialValue;
+        writeInJ();
+    }
 
     public ProductRequest(String requestID) throws IOException {
         super(requestID);
@@ -43,15 +53,15 @@ public class ProductRequest extends Request {
 
 
 
-    public void addKey(){
-        for (String tr : categoryName.getTraits()) {
-            specialValue.put(tr, null);
-        }
-    }
-
-    public HashMap<String, String> getSpecialValue() {
-        return specialValue;
-    }
+//    public void addKey(){
+//        for (String tr : categoryName.getTraits()) {
+//            specialValue.put(tr, null);
+//        }
+//    }
+//
+//    public HashMap<String, String> getSpecialValue() {
+//        return specialValue;
+//    }
 
     @Override
     public void declineRequest() throws IOException {
@@ -67,7 +77,8 @@ public class ProductRequest extends Request {
         Product newProduct = Product.getProductById(productId);
         newProduct.setDetailProduct(newProduct.getProductImage(),productName,price,categoryName,sellerName,companyName,numberOfProduct);
         newProduct.setAdditionalDetail(additionalDetail);
-        newProduct.getCategorySpecifications().putAll(specialValue);
+        newProduct.setProductCategorySpecifications(specialValue);
+       // newProduct.getCategorySpecifications().putAll(specialValue);
         if(lastCategory != null) {
             lastCategory.removeProductToCategory(newProduct);
         }
@@ -78,10 +89,10 @@ public class ProductRequest extends Request {
         allProductRequests.remove(this);
     }
 
-    public void addHashmapValue(String key, String value) throws IOException {
-        specialValue.put(key,value);
-        writeInJ();
-    }
+//    public void addHashmapValue(String key, String value) throws IOException {
+//        specialValue.put(key,value);
+//        writeInJ();
+//    }
 
     public void setProductId(String productId) throws IOException {
         this.productId = productId;
