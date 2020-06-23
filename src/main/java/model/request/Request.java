@@ -12,7 +12,7 @@ import java.util.Comparator;
 public abstract class Request {
     private String requestText;
     private String requestDate;
-    private Account seller;
+    private String seller;
     private static ArrayList<Request> allRequests;
     LocalDateTime now;
 //    public static Type RequestType = new TypeToken<ArrayList<Request>>() {
@@ -26,9 +26,9 @@ public abstract class Request {
         now = LocalDateTime.now();
         requestDate = dtf.format(now);
         if(LoginMenu.getLoginAccount() instanceof Seller) {
-            seller = (Seller) LoginMenu.getLoginAccount();
+            seller =  LoginMenu.getLoginAccount().getUsername();
             Seller sel = (Seller) LoginMenu.getLoginAccount();
-            sel.addRequest(this);
+           sel.addRequest(this);
         }
         allRequests.add(this);
 
@@ -39,7 +39,7 @@ public abstract class Request {
         return requestDate;
     }
 
-    public Account getSeller() {
+    public String getSeller() {
         return seller;
     }
 

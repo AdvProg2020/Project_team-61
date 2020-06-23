@@ -45,7 +45,7 @@ public class SaleRequest extends Request {
     @Override
     public  void acceptRequest() throws IOException {
         sale= Sale.getSaleWithId(offId);
-        sale.setSaleDetails(SaleStatus.CONFIRMED, startOfSalePeriod, endOfSalePeriod, saleAmount, this.getSeller());
+        sale.setSaleDetails(SaleStatus.CONFIRMED, startOfSalePeriod, endOfSalePeriod, saleAmount, Account.getAccountWithUsername(this.getSeller()));
         sale.setAllSaleProducts(allSaleProducts);
         sale.setSaleStatus(SaleStatus.CONFIRMED);
         Product.getProductById(product).setInSale(true);

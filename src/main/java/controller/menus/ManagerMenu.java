@@ -103,17 +103,19 @@ public class ManagerMenu {
     }
 
     public static int createNewDiscountCode(String discountCodeId) throws IOException {
-        if (!DiscountCode.isThereDiscountWithId(discountCodeId)) {
-            newDiscountCode = new DiscountCode(discountCodeId);
-          //  newDiscountCode.setManager(LoginMenu.getLoginAccount());
-            create = 1;
-            if (LoginMenu.getLoginAccount() instanceof Manager) {
-                ((Manager) LoginMenu.getLoginAccount()).addDiscount(newDiscountCode);
-            }
-            //   CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
-            //  CommandProcessor.setSubMenuStatus(SubMenuStatus.DETAILDESCOUNTCODE);
-            outputNo = 0;
-        } else outputNo = 25;
+        if(discountCodeId.matches("(\\s*\\S+\\s*)+")) {
+            if (!DiscountCode.isThereDiscountWithId(discountCodeId)) {
+                newDiscountCode = new DiscountCode(discountCodeId);
+                //  newDiscountCode.setManager(LoginMenu.getLoginAccount());
+                create = 1;
+//            if (LoginMenu.getLoginAccount() instanceof Manager) {
+//                ((Manager) LoginMenu.getLoginAccount()).addDiscount(newDiscountCode);
+//            }
+                //   CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
+                //  CommandProcessor.setSubMenuStatus(SubMenuStatus.DETAILDESCOUNTCODE);
+                outputNo = 0;
+            } else outputNo = 25;
+        }
         return outputNo;
         // OutputMassageHandler.showManagerOutput(outputNo);
     }

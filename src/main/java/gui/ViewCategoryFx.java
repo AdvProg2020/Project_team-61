@@ -38,6 +38,7 @@ public class ViewCategoryFx {
     }
 
     public void initializeObserverList() {
+        data.clear();
         data.addAll(curCat);
     }
 
@@ -47,7 +48,9 @@ public class ViewCategoryFx {
         productCatColumn.setCellValueFactory(new PropertyValueFactory<>("product"));
         traitCatColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
         initializeObserverList();
-        viewCategoryTable.getColumns().addAll(productCatColumn, traitCatColumn);
+        viewCategoryTable.setEditable(true);
+
+        //  viewCategoryTable.getColumns().addAll(productCatColumn, traitCatColumn);
         viewCategoryTable.setItems(data);
     }
 }
