@@ -49,7 +49,10 @@
          </menus>
       </MenuBar>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6a8ab263" height="550.0" layoutX="350.0" layoutY="140.0" stroke="BLACK" strokeType="INSIDE" width="382.0" AnchorPane.bottomAnchor="390.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="1188.0" AnchorPane.topAnchor="140.0" />
-      <ImageView fitHeight="251.0" fitWidth="359.0" layoutX="1506.0" layoutY="785.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="1506.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="785.0" />
+      <ImageView fitHeight="251.0" fitWidth="359.0" layoutX="1506.0" layoutY="785.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="1506.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="785.0">
+         <image>
+            <Image url="@icons/face.png" />
+         </image></ImageView>
       <Text layoutX="500.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" wrappingWidth="81.6708984375" AnchorPane.bottomAnchor="870.7216796875" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="1338.3291015625" AnchorPane.topAnchor="177.7060546875">
          <font>
             <Font name="System Bold Italic" size="29.0" />
@@ -75,7 +78,10 @@
          </font>
       </Label>
       <PasswordField fx:id="passLogin" layoutX="407.0" layoutY="343.0" prefHeight="39.0" prefWidth="239.0" promptText="password" />
-      <ImageView fitHeight="57.0" fitWidth="70.0" layoutX="662.0" layoutY="619.0" onMouseClicked="#signUpMenu" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="57.0" fitWidth="70.0" layoutX="662.0" layoutY="619.0" onMouseClicked="#signUpMenu" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icons/signUp.png" />
+         </image></ImageView>
       <Button layoutX="489.0" layoutY="486.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="39.0" prefWidth="104.0" text="Login" textFill="#03abff" />
       <Button layoutX="364.0" layoutY="644.0" mnemonicParsing="false" onMouseClicked="#signUpMenu" prefHeight="32.0" prefWidth="82.0" text="Sign up" textFill="#03abff" />
    </children>

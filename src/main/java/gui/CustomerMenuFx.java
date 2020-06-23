@@ -13,6 +13,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.accounts.Customer;
+import model.accounts.Manager;
+import model.accounts.Seller;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -89,16 +91,22 @@ public class CustomerMenuFx {
         massage.show();
     }
 
-    public void logout(ActionEvent actionEvent) {
-    }
+
+
 
     public void back(ActionEvent actionEvent) {
         root = priRoot;
         goToPage();
     }
 
-
     public void exit(ActionEvent actionEvent) {
+        System.exit(0);
+    }
+
+    public void logout(ActionEvent actionEvent) throws IOException {
+        LoginMenu.processLogout();
+        root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        goToPage();
     }
 
 

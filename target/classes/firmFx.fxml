@@ -46,7 +46,7 @@
         </MenuBar>
         <ImageView fitHeight="276.0" fitWidth="303.0" layoutX="161.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@view/icons/face.png" />
+                <Image url="@icons/face.png" />
             </image>
         </ImageView>
         <Text layoutX="826.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Firm" wrappingWidth="268.6708984375">

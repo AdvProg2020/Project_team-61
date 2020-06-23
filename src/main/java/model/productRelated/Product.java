@@ -26,7 +26,7 @@ public class Product {
     private String productName;
     private Company companiesName;
     private double price;
-    private Account seller;
+    private Seller seller;
     private ProductStatus productStatus;
     private Category category;
     private double averageScore;
@@ -280,12 +280,12 @@ public class Product {
         return totalNumberOfBuyers;
     }
 
-    public Account getSeller() {
+    public Seller getSeller() {
         return (Seller) seller;
     }
 
 
-    public void setSeller(Account seller) {
+    public void setSeller(Seller seller) {
         this.seller = seller;
     }
 

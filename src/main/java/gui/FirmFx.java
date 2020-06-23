@@ -1,5 +1,6 @@
 package gui;
 
+import controller.menus.LoginMenu;
 import controller.menus.RegisterMenu;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import model.accounts.Customer;
+import model.accounts.Manager;
+import model.accounts.Seller;
 import view.OutputMassageHandler;
 
 import java.io.IOException;
@@ -59,16 +63,30 @@ public class FirmFx {
         }else firmNameCrMs.setText("please enter type first");
     }
 
-    public void userMenu(ActionEvent actionEvent) throws IOException {
-    }
 
-    public void logout(ActionEvent actionEvent) {
+    public void userMenu(ActionEvent actionEvent) throws IOException {
+        if(LoginMenu.getLoginAccount() instanceof Seller){
+            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+        } else if(LoginMenu.getLoginAccount() instanceof Manager){
+            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        }else if(LoginMenu.getLoginAccount() instanceof Customer){
+            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
+        }
     }
 
     public void back(ActionEvent actionEvent) {
+        root = priRoot;
+        goToPage();
     }
 
     public void exit(ActionEvent actionEvent) {
+        System.exit(0);
+    }
+
+    public void logout(ActionEvent actionEvent) throws IOException {
+        LoginMenu.processLogout();
+        root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        goToPage();
     }
 
     private static void goToPage() {

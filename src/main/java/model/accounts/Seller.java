@@ -5,6 +5,7 @@ import model.firms.Firm;
 import model.log.SaleLog;
 import model.off.Sale;
 import model.productRelated.Product;
+import model.request.Request;
 import view.FileHandling;
 
 import java.io.IOException;
@@ -17,6 +18,7 @@ public class Seller extends Account {
     private static ArrayList<Seller> allSellers = new ArrayList<>();
     private  ArrayList<Product> allProduct = new ArrayList<>();
     private  ArrayList<Sale> allSales = new ArrayList<>();
+    private  ArrayList<Request> allRequests = new ArrayList<>();
     public static Type SellerType = new TypeToken<ArrayList<Seller>>() {
     }.getType();
 
@@ -25,6 +27,22 @@ public class Seller extends Account {
         role = "seller";
         allSellers.add(this);
         writeInJ();
+    }
+
+    public void setAllProduct(ArrayList<Product> allProduct) {
+        this.allProduct = allProduct;
+    }
+
+    public ArrayList<Request> getAllRequests() {
+        return allRequests;
+    }
+
+    public void setAllRequests(ArrayList<Request> allRequests) {
+        this.allRequests = allRequests;
+    }
+
+    public void addRequest(Request request){
+        allRequests.add(request);
     }
 
     public ArrayList<Sale> getAllSales() {
@@ -39,8 +57,9 @@ public class Seller extends Account {
         this.saleLogsHistory = saleLogsHistory;
     }
 
-    public void addProduct(Product product){
+    public void addProduct(Product product) throws IOException {
         allProduct.add(product);
+        writeInJ();
     }
 
     public ArrayList<Product> getAllProduct() {

@@ -37,7 +37,7 @@
       </Text>
       <ImageView fitHeight="130.0" fitWidth="142.0" layoutX="644.0" layoutY="211.0" onMouseClicked="#score2" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/2.png" />
+            <Image url="@icons/2.png" />
          </image></ImageView>
       <Button layoutX="490.0" layoutY="474.0" mnemonicParsing="false" onMouseClicked="#score" prefHeight="43.0" prefWidth="110.0" text="Done">
          <textFill>
@@ -51,22 +51,22 @@
       </Button>
       <ImageView fitHeight="130.0" fitWidth="142.0" layoutX="831.0" layoutY="211.0" onMouseClicked="#score1" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/1.png" />
+            <Image url="@icons/1.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="130.0" fitWidth="142.0" layoutX="475.0" layoutY="211.0" onMouseClicked="#score3" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/3.png" />
+            <Image url="@icons/3.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="130.0" fitWidth="142.0" layoutX="283.0" layoutY="211.0" onMouseClicked="#score4" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/4.png" />
+            <Image url="@icons/4.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="130.0" fitWidth="142.0" layoutX="116.0" layoutY="211.0" onMouseClicked="#score5" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/5.png" />
+            <Image url="@icons/5.png" />
          </image>
       </ImageView>
       <Label fx:id="scoreMs" layoutX="512.0" layoutY="398.0" prefHeight="21.0" prefWidth="55.0" text="Label" textFill="WHITE" />

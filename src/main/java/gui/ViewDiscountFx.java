@@ -1,15 +1,24 @@
 package gui;
 
+import controller.menus.LoginMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import model.accounts.Account;
+import model.accounts.Customer;
+import model.accounts.Manager;
+import model.accounts.Seller;
 import model.off.DiscountCode;
+
+import java.io.IOException;
+import java.util.Objects;
 
 
 public class ViewDiscountFx {
@@ -63,19 +72,36 @@ public class ViewDiscountFx {
 
     }
 
-    public void back(MouseEvent mouseEvent) {
-        remove();
+
+    public void userMenu(ActionEvent actionEvent) throws IOException {
+        if(LoginMenu.getLoginAccount() instanceof Seller){
+            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+        } else if(LoginMenu.getLoginAccount() instanceof Manager){
+            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        }else if(LoginMenu.getLoginAccount() instanceof Customer){
+            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
+        }
     }
 
-    public void exit(MouseEvent mouseEvent) {
-        remove();
+    public void back(ActionEvent actionEvent) {
+        root = priRoot;
+        goToPage();
     }
 
-    public void userMenu(ActionEvent actionEvent) {
+    public void exit(ActionEvent actionEvent) {
+        System.exit(0);
     }
 
-    public void logout(ActionEvent actionEvent) {
-        remove();
+    public void logout(ActionEvent actionEvent) throws IOException {
+        LoginMenu.processLogout();
+        root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        goToPage();
+    }
+    private static void goToPage() {
+        Scene pageTwoScene = new Scene(root);
+        //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        Main.primStage.setScene(pageTwoScene);
+        Main.primStage.show();
     }
 
 }

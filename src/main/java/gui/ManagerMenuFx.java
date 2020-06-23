@@ -21,18 +21,7 @@ public class ManagerMenuFx {
         ManagerMenuFx.priRoot = priRoot;
     }
 
-    public void back(ActionEvent actionEvent) {
-        root = priRoot;
-        goToPage();
-    }
 
-    public void exit(ActionEvent actionEvent) {
-        System.exit(0);
-    }
-
-    public void logout(ActionEvent actionEvent) {
-        LoginMenu.processLogout();
-    }
 
     public void viewPersonalInfo(MouseEvent mouseEvent) throws IOException {
         ViewAccountFx.setAccount(LoginMenu.getLoginAccount());
@@ -80,6 +69,21 @@ public class ManagerMenuFx {
         //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         Main.primStage.setScene(pageTwoScene);
         Main.primStage.show();
+    }
+
+    public void back(ActionEvent actionEvent) {
+        root = priRoot;
+        goToPage();
+    }
+
+    public void exit(ActionEvent actionEvent) {
+        System.exit(0);
+    }
+
+    public void logout(ActionEvent actionEvent) throws IOException {
+        LoginMenu.processLogout();
+        root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        goToPage();
     }
 
 }

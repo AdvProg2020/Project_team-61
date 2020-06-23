@@ -87,9 +87,9 @@ public class SellerMenu {
                 if (!productRequest.isThereRequestFromID(id)) {
                     product.setProductStatus(ProductStatus.UNDERREVIEWFOREDITING);
                     productRequest = new ProductRequest(id);
-                    productRequest.setLastCategory(product.getCategory());
+                    productRequest.setLastCategory(product.getCategory().getName());
                     Seller seller = (Seller) LoginMenu.getLoginAccount();
-                    productRequest.setSellerName(seller);
+                   // productRequest.setSellerName(seller.getUsername());
                     productRequest.setProductId(productID);
                 } else productRequest = (ProductRequest) Request.getRequestFromID(id);
                // CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTFIELD);
@@ -126,7 +126,7 @@ public class SellerMenu {
         } else if (field.equalsIgnoreCase("category")) {
             if (edit.matches("^(?!\\s*$).+")) {
                 if (Category.isThereCategoryWithName(edit)) {
-                    productRequest.setCategoryName(Category.getCategoryWithName(edit));
+                    productRequest.setCategoryName(edit);
                     outputNo = 5;
                 } else outputNo = 21;
             } else outputNo = 20;
@@ -179,7 +179,7 @@ public class SellerMenu {
         } else if (detailMen == 3) {
             if (detail.matches("^(?!\\s*$).+")) {
                 if (Category.isThereCategoryWithName(detail)) {
-                    productRequest.setCategoryName(Category.getCategoryWithName(detail));
+                    productRequest.setCategoryName(detail);
               //      productRequest.addKey();
                     detailMenu = 4;
                     outputNo = 0;

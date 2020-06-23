@@ -7,10 +7,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import model.accounts.Customer;
+import model.accounts.Manager;
 import model.accounts.Seller;
 import model.productRelated.Product;
 import view.OutputMassageHandler;
@@ -18,6 +22,7 @@ import view.OutputMassageHandler;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class AddSaleFx {
 
@@ -49,6 +54,11 @@ public class AddSaleFx {
     private static Parent priRoot;
     private static Parent root;
 
+
+    public static void setPriRoot(Parent priRoot) {
+        AddSaleFx.priRoot = priRoot;
+    }
+
     @FXML
     public void initialize() throws IOException {
         makeTree();
@@ -70,22 +80,24 @@ public class AddSaleFx {
     }
 
         public void createSale (MouseEvent mouseEvent) throws IOException, ParseException {
+        if(addSaleProducts.getSelectionModel().getSelectedItem() != null) {
             if (SellerMenu.getCreate() == 0) {
                 saleIdAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.setDetailsToSale(saleIdTextField.getText(), 0)));
             }
             if (SellerMenu.getCreate() == 1) {
                 startSaleAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.setDetailsToSale(startSaleDatePicker.getText(), 1)));
-                if (ManagerMenu.getDetailMenu() == 2) {
+                if (SellerMenu.getDetailMenu() == 2) {
                     endSaleAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.setDetailsToSale(endSaleDatePicker.getText(), 2)));
                 }
-                if (ManagerMenu.getDetailMenu() == 3) {
+                if (SellerMenu.getDetailMenu() == 3) {
                     saleAmountAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.setDetailsToSale(saleAmount.getText(), 3)));
                 }
-                if (ManagerMenu.getDetailMenu() == 4) {
+                if (SellerMenu.getDetailMenu() == 4) {
                     Product product = addSaleProducts.getSelectionModel().getSelectedItem();
                     saleAmountAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.setDetailsToSale(product.getId(), 4)));
                 }
             }
+        } saleIdAlertLabel.setText("you have to select first");
 
             // finish = false;
         }
@@ -121,23 +133,49 @@ public class AddSaleFx {
             } else saleIdAlertLabel.setText("you have to insert name and edit first");
 
         }
-        public void exit (ActionEvent actionEvent){
-        }
 
-        public void back (ActionEvent actionEvent){
+    public void userMenu(ActionEvent actionEvent) throws IOException {
+        if(LoginMenu.getLoginAccount() instanceof Seller){
+            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+        } else if(LoginMenu.getLoginAccount() instanceof Manager){
+            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        }else if(LoginMenu.getLoginAccount() instanceof Customer){
+            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         }
+    }
 
-        public void logout (ActionEvent actionEvent){
-        }
+    private void backToFirst(){
+        SellerMenu.setCreate(0);
+        SellerMenu.setEdit(0);
+    }
 
-        public void userMenu (ActionEvent actionEvent){
-        }
+    public void back(ActionEvent actionEvent) {
+        backToFirst();
+        root = priRoot;
+        goToPage();
+    }
 
+    public void exit(ActionEvent actionEvent) {
+        backToFirst();
+        System.exit(0);
+    }
+
+    public void logout(ActionEvent actionEvent) throws IOException {
+        backToFirst();
+        LoginMenu.processLogout();
+        root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        goToPage();
+    }
 
         public void finish (MouseEvent mouseEvent){
             finish = true;
         }
 
-
+    private static void goToPage() {
+        Scene pageTwoScene = new Scene(root);
+        //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        Main.primStage.setScene(pageTwoScene);
+        Main.primStage.show();
+    }
 
 }

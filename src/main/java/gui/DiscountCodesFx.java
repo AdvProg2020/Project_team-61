@@ -1,5 +1,6 @@
 package gui;
 
+import controller.menus.LoginMenu;
 import controller.menus.ManagerMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +12,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import model.accounts.Customer;
+import model.accounts.Manager;
+import model.accounts.Seller;
 import model.off.DiscountCode;
 import model.sort.Sort;
 import view.OutputMassageHandler;
@@ -48,6 +52,11 @@ public class DiscountCodesFx {
     public static ObservableList<DiscountCode> data = FXCollections.observableArrayList();
     private static Parent root;
     private static Parent priRoot;
+
+    public static void setPriRoot(Parent priRoot) {
+        DiscountCodesFx.priRoot = priRoot;
+    }
+
     @FXML
     public void initialize() throws IOException {
         makeTree();
@@ -124,18 +133,31 @@ public class DiscountCodesFx {
         DiscountCodesFx.discounts = discounts;
     }
 
-    public void userMenu(ActionEvent actionEvent) {
-    }
 
-    public void logout(ActionEvent actionEvent) {
+    public void userMenu(ActionEvent actionEvent) throws IOException {
+        if(LoginMenu.getLoginAccount() instanceof Seller){
+            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+        } else if(LoginMenu.getLoginAccount() instanceof Manager){
+            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        }else if(LoginMenu.getLoginAccount() instanceof Customer){
+            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
+        }
     }
 
     public void back(ActionEvent actionEvent) {
+        root = priRoot;
+        goToPage();
     }
 
     public void exit(ActionEvent actionEvent) {
+        System.exit(0);
     }
 
+    public void logout(ActionEvent actionEvent) throws IOException {
+        LoginMenu.processLogout();
+        root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        goToPage();
+    }
 
 
 }

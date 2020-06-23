@@ -158,19 +158,30 @@ public class ViewAccountFx {
         goToPage();
     }
 
-    public void back(MouseEvent mouseEvent) {
 
+    public void userMenu(ActionEvent actionEvent) throws IOException {
+        if(LoginMenu.getLoginAccount() instanceof Seller){
+            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+        } else if(LoginMenu.getLoginAccount() instanceof Manager){
+            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        }else if(LoginMenu.getLoginAccount() instanceof Customer){
+            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
+        }
     }
 
-    public void exit(MouseEvent mouseEvent) {
-
+    public void back(ActionEvent actionEvent) {
+        root = priRoot;
+        goToPage();
     }
 
-    public void userMenu(ActionEvent actionEvent) {
+    public void exit(ActionEvent actionEvent) {
+        System.exit(0);
     }
 
-    public void logout(ActionEvent actionEvent) {
-
+    public void logout(ActionEvent actionEvent) throws IOException {
+        LoginMenu.processLogout();
+        root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        goToPage();
     }
 
 }

@@ -253,6 +253,22 @@ public class AddProductMenuFX {
         });
         productImage.setOnDragOver(this::handleDragOver);
     }
+
+    private void backToFirst(){
+        SellerMenu.setCreate(0);
+        SellerMenu.setEdit(0);
+    }
+
+    public void logout(ActionEvent actionEvent) throws IOException {
+        backToFirst();
+        LoginMenu.processLogout();
+        Parent root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        Scene pageTwoScene = new Scene(root);
+        //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        Main.primStage.setScene(pageTwoScene);
+        Main.primStage.show();
+
+    }
     /*
 
      @FXML

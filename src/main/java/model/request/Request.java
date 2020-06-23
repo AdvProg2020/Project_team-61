@@ -27,8 +27,11 @@ public abstract class Request {
         requestDate = dtf.format(now);
         if(LoginMenu.getLoginAccount() instanceof Seller) {
             seller = (Seller) LoginMenu.getLoginAccount();
+            Seller sel = (Seller) LoginMenu.getLoginAccount();
+            sel.addRequest(this);
         }
         allRequests.add(this);
+
 //        writeInJ();
     }
 
@@ -95,4 +98,5 @@ public abstract class Request {
                 ", seller=" + seller +
                 '}';
     }
+
 }

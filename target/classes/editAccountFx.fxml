@@ -95,7 +95,7 @@
         </Text>
         <ImageView fitHeight="259.0" fitWidth="224.0" layoutX="276.0" layoutY="236.0" onDragDropped="#picDropEdit" onDragOver="#picOverEdit" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@view/icons/face.png" />
+                <Image url="@icons/face.png" />
             </image>
         </ImageView>
         <Button layoutX="782.0" layoutY="670.0" mnemonicParsing="false" onMouseClicked="#editAccount" prefHeight="40.0" prefWidth="118.0" text="Edit">

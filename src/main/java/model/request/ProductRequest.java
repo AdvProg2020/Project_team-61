@@ -20,10 +20,10 @@ public class ProductRequest extends Request {
     private  String productId = null;
     private  String productName = null;
     private  double price = 0;
-    private  Seller sellerName = null;
+   // private  Seller sellerName = null;
     private  Firm companyName = null;
-    private  Category categoryName = null;
-    private  Category lastCategory = null;
+    private  String categoryName = null;
+    private  String lastCategory = null;
     private  String additionalDetail = null;
     private  int numberOfProduct = 0;
     private static ArrayList<ProductRequest> allProductRequests = new ArrayList<>();
@@ -45,9 +45,7 @@ public class ProductRequest extends Request {
     public ProductRequest(String requestID) throws IOException {
         super(requestID);
         allProductRequests.add(this);
-        if(LoginMenu.getLoginAccount() instanceof Seller) {
-            sellerName = (Seller) LoginMenu.getLoginAccount();
-        }
+
         writeInJ();
     }
 
@@ -68,23 +66,31 @@ public class ProductRequest extends Request {
         getAllRequests().remove(this);
         allProductRequests.remove(this);
         Product.getProductList().remove(this);
-        sellerName.getAllProduct().remove(this);
+        if(this.getSeller() instanceof Seller) {
+            Seller seller = (Seller) this.getSeller();
+            seller.getAllProduct().remove(this);
+        }
         writeInJ();
     }
 
     @Override
     public void acceptRequest() throws IOException {
+        Seller seller = null;
+        if(this.getSeller() instanceof Seller) {
+             seller = (Seller) this.getSeller();
+        }
         Product newProduct = Product.getProductById(productId);
-        newProduct.setDetailProduct(newProduct.getProductImage(),productName,price,categoryName,sellerName,companyName,numberOfProduct);
+        newProduct.setDetailProduct(newProduct.getProductImage(),productName,price,Category.getCategoryWithName(categoryName),seller,companyName,numberOfProduct);
         newProduct.setAdditionalDetail(additionalDetail);
         newProduct.setProductCategorySpecifications(specialValue);
        // newProduct.getCategorySpecifications().putAll(specialValue);
         if(lastCategory != null) {
-            lastCategory.removeProductToCategory(newProduct);
+            Category.getCategoryWithName(lastCategory).removeProductToCategory(newProduct);
         }
-        categoryName.addProductToCategory(newProduct);
+        Category.getCategoryWithName(categoryName).addProductToCategory(newProduct);
+
         newProduct.setProductStatus(ProductStatus.CONFIRMED);
-        sellerName.addProduct(newProduct);
+        seller.addProduct(newProduct);
         getAllRequests().remove(this);
         allProductRequests.remove(this);
     }
@@ -109,11 +115,7 @@ public class ProductRequest extends Request {
         writeInJ();
 
     }
-    public void setSellerName(Seller sellerName) throws IOException {
-        this.sellerName = sellerName;
-        writeInJ();
 
-    }
     public void setPrice(double price) throws IOException {
         this.price = price;
         writeInJ();
@@ -124,21 +126,20 @@ public class ProductRequest extends Request {
         writeInJ();
 
     }
-    public void setCategoryName(Category categoryName) throws IOException {
-        this.categoryName = categoryName;
-        writeInJ();
 
-    }
+
     public void setNumberOfProduct(int numberOfProduct) throws IOException {
         this.numberOfProduct = numberOfProduct;
         writeInJ();
 
     }
 
-    public void setLastCategory(Category lastCategory) throws IOException {
-        this.lastCategory = lastCategory;
-        writeInJ();
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
+    public void setLastCategory(String lastCategory) {
+        this.lastCategory = lastCategory;
     }
 
     public static void setAllProductRequests(ArrayList<ProductRequest> allProductRequests) {

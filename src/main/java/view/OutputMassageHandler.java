@@ -1,8 +1,25 @@
 package view;
 
 
+import javafx.scene.Parent;
+
+import java.util.ArrayList;
+
 public class OutputMassageHandler {
     private static String text;
+    private static ArrayList<Parent> allRoots = new ArrayList<>();
+
+    public static void addRoot(Parent root){
+        allRoots.add(root);
+    }
+
+    public static ArrayList<Parent> getAllRoots() {
+        return allRoots;
+    }
+
+    public static void setAllRoots(ArrayList<Parent> allRoots) {
+        OutputMassageHandler.allRoots = allRoots;
+    }
 
     public static String showProductsOutput(int output) {
         if (output == 0) {
