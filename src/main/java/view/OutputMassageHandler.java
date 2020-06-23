@@ -4,52 +4,54 @@ package view;
 public class OutputMassageHandler {
     private static String text;
 
-    public static void showProductsOutput(int output) {
+    public static String showProductsOutput(int output) {
         if (output == 0) {
             System.out.println("");
         } else if (output == 1) {
-            System.out.println("there is no filter with this id");
+            text =("there is no filter with this id");
         } else if (output == 2) {
-            System.out.println("filter disabled");
+            text =("filter disabled");
         } else if (output == 3) {
-            System.out.println("there is no sort with this id");
+            text =("there is no sort with this id");
         } else if (output == 4) {
-            System.out.println("sort disabled");
+            text =("sort disabled");
         } else if (output == 5) {
-            System.out.println("there is no product with this id");
+            text =("there is no product with this id");
         } else if (output == 6) {
-            System.out.println("this filter isn't available");
+            text =("this filter isn't available");
         } else if (output == 7) {
-            System.out.println("this sort isn't available");
+            text =("this sort isn't available");
         } else if (output == 8) {
-            System.out.println("please enter 2 number");
+            text =("please enter 2 number");
         } else if (output == 9) {
-            System.out.println("sort format is in valid");
+            text =("sort format is in valid");
         } else if (output == 10) {
-            System.out.println("please enter category name to filter");
+            text =("please enter category name to filter");
         } else if (output == 11) {
-            System.out.println("please enter firm name to filter");
+            text =("please enter firm name to filter");
         } else if (output == 12) {
-            System.out.println("please enter product name to filter");
+            text =("please enter product name to filter");
         } else if (output == 13) {
-            System.out.println("there is no category with this id");
+            text =("there is no category with this id");
         } else if (output == 14) {
-            System.out.println("there is no firm with this id");
+            text =("there is no firm with this id");
         } else if (output == 15) {
-            System.out.println("there is no product with this id");
+            text =("there is no product with this id");
         }
+        return text;
     }
 
-    public static void showProductOutput(int output) {
+    public static String showProductOutput(int output) {
         if (output == 0) {
-            System.out.println("");
+            text =("");
         } else if (output == 1) {
-            System.out.println("please enter comment title");
+            text =("comment content format is invalid");
         } else if (output == 2) {
-            System.out.println("please enter comment content");
+            text =("comment title format is invalid");
         } else if (output == 3) {
-            System.out.println("you already commented on this product");
+            text =("you already commented on this product");
         }
+        return text;
     }
 
 

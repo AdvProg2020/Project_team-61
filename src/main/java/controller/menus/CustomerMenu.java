@@ -216,18 +216,20 @@ public class CustomerMenu {
     }
 
     //score.............................................................
-    public static void rateProduct(String productID, int number) throws IOException {
+    public static int rateProduct(String productID, int number) throws IOException {
         if (checkProduct(productID)) {
             if (number >= 1 && number <= 5) {
-                if (checkCustomer()) {
+                //if (checkCustomer()) {
                     if (isBought()) {
                         Score newScore = new Score(LoginMenu.getLoginAccount(), Product.getProductById(productID), number);
                         // OutputMassageHandler.showOutputWith2String(productID, String.valueOf(number), 1);
                         outputNo = 14;
                     }else outputNo = 13;
-                }else outputNo = 9;
+               // }else outputNo = 9;
             } else outputNo = 11;
-        }OutputMassageHandler.showCustomerOutput(outputNo);
+
+        }//OutputMassageHandler.showCustomerOutput(outputNo);
+        return  outputNo;
     }
 
     private static boolean isBought() {

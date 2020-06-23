@@ -48,7 +48,7 @@
         </MenuBar>
         <ImageView fitHeight="276.0" fitWidth="303.0" layoutX="161.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="564.0" AnchorPane.leftAnchor="161.0" AnchorPane.rightAnchor="1534.2164916992188" AnchorPane.topAnchor="240.0">
             <image>
-                <Image url="@view/icons/face.png" />
+                <Image url="@icons/face.png" />
             </image>
         </ImageView>
         <Text layoutX="859.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Firm" wrappingWidth="201.6708984375" AnchorPane.bottomAnchor="951.2119140625" AnchorPane.leftAnchor="859.0" AnchorPane.rightAnchor="859.3291015625" AnchorPane.topAnchor="76.9150390625">
@@ -108,12 +108,12 @@
         </Label>
         <ImageView fitHeight="88.0" fitWidth="103.0" layoutX="1435.0" layoutY="780.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@view/icons/back.png" />
+                <Image url="@icons/back.png" />
             </image>
         </ImageView>
         <ImageView fitHeight="95.0" fitWidth="115.0" layoutX="1541.0" layoutY="777.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@view/icons/exit.png" />
+                <Image url="@icons/exit.png" />
             </image>
         </ImageView>
     </children>

@@ -48,7 +48,7 @@
         </MenuBar>
         <ImageView fitHeight="276.0" fitWidth="303.0" layoutX="161.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@view/icons/face.png" />
+                <Image url="@icons/face.png" />
             </image>
         </ImageView>
         <Text layoutX="826.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Firm" wrappingWidth="268.6708984375">
@@ -106,12 +106,12 @@
         </Label>
         <ImageView fitHeight="74.0" fitWidth="69.0" layoutX="1440.0" layoutY="783.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@view/icons/back.png" />
+                <Image url="@icons/back.png" />
             </image>
         </ImageView>
         <ImageView fitHeight="74.0" fitWidth="72.0" layoutX="1513.0" layoutY="783.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@view/icons/exit.png" />
+                <Image url="@icons/exit.png" />
             </image>
         </ImageView>
         <Text layoutX="151.0" layoutY="587.0" strokeType="OUTSIDE" strokeWidth="0.0" text="please drag your logo here">
