@@ -10,7 +10,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Customer extends Account {
-    private ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
+//    ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
     private static ArrayList<Customer> allCustomers = new ArrayList<>();
     private ArrayList<BuyLog> BuyLogsHistory = new ArrayList<>();
     public static Type CustomerType = new TypeToken<ArrayList<Customer>>() {
@@ -24,20 +24,20 @@ public class Customer extends Account {
         writeInJ();
     }
 
-    public ArrayList<DiscountCode> getAllDiscountCodes() {
-        return allDiscountCodes;
-    }
-
-    public void addDiscountCode(DiscountCode discountCode) throws IOException {
-        allDiscountCodes.add(discountCode);
-        writeInJ();
-
-    }
-
-    public void removeDiscountCode(DiscountCode discountCode) throws IOException {
-        allDiscountCodes.remove(discountCode);
-        writeInJ();
-    }
+//    public ArrayList<DiscountCode> getAllDiscountCodes() {
+//        return allDiscountCodes;
+//    }
+//
+//    public void addDiscountCode(DiscountCode discountCode) throws IOException {
+//        allDiscountCodes.add(discountCode);
+//        writeInJ();
+//
+//    }
+//
+//    public void removeDiscountCode(DiscountCode discountCode) throws IOException {
+//        allDiscountCodes.remove(discountCode);
+//        writeInJ();
+//    }
 
     public static void setAllCustomers(ArrayList<Customer> allCustomers) {
         Customer.allCustomers = allCustomers;
@@ -80,7 +80,6 @@ public class Customer extends Account {
                 ", currentPhoneNo=" + currentPhoneNo +
                 ", address='" + address + '\'' +
                 ", birthdayDate=" + birthdayDate +
-                ", allDiscountCodes=" + allDiscountCodes +
                 '}';
     }
 }

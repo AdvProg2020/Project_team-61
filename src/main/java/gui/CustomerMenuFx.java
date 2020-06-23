@@ -59,7 +59,7 @@ public class CustomerMenuFx {
         data.clear();
         if(LoginMenu.getLoginAccount() instanceof Customer){
             Customer customer = (Customer) LoginMenu.getLoginAccount();
-            data.addAll(customer.getAllDiscountCodes());
+//            data.addAll(customer.getAllDiscountCodes());
         }
         showList();
     }

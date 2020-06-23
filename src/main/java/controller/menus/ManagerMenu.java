@@ -163,9 +163,11 @@ public class ManagerMenu {
             if (detail.matches(".+")) {
                 // if (Account.isThereAccountWithUsername(detail)) {
                 newDiscountCode.addAccount(Account.getAccountWithUsername(detail));
+                Manager.writeInJ();
                 if(LoginMenu.getLoginAccount() instanceof Manager) {
                   Manager man = (Manager) LoginMenu.getLoginAccount();
                   man.addDiscount(newDiscountCode);
+                  Manager.writeInJ();
                 }
                 outputNo = 37;
                // detailMenu = 0;

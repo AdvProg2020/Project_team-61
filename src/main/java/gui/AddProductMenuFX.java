@@ -132,24 +132,30 @@ public class AddProductMenuFX {
         String ms = null;
         if (SellerMenu.getCreate() == 0) {
             ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(idTextField.getText(), 0));
+            Seller.writeInJ();
         }
         if (SellerMenu.getCreate() == 1) {
             if (SellerMenu.getDetailMenu() == 1) {
                 ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(productNameTextField.getText(), 1));
+                Seller.writeInJ();
             }
             if (SellerMenu.getDetailMenu() == 2) {
                 ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(priceTextField.getText(), 2));
+                Seller.writeInJ();
             }
             if (SellerMenu.getDetailMenu() == 3) {
                 ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(categoryNameTextField.getText(), 3));
+                Seller.writeInJ();
             }
             if (SellerMenu.getDetailMenu() == 4) {
                 ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(additionaldetailTextField.getText(), 4));
+                Seller.writeInJ();
             }
             if (SellerMenu.getDetailMenu() == 5) {
                 ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(numberOfProductTextField.getText(), 5));
                 addImageView();
                 addCategoryTrait();
+                Seller.writeInJ();
             }
             if (SellerMenu.getDetailMenu() == 6) {
                 if (finish) {
@@ -217,7 +223,7 @@ public class AddProductMenuFX {
         addImageView();
     }
 
-    private void addCategoryTrait() {
+    private void addCategoryTrait() throws IOException {
         traitsTextFields.clear();
         Category category1 = Category.getCategoryWithName(categoryNameTextField.getText());
         for (String trait : category1.getTraits()) {
@@ -235,9 +241,10 @@ public class AddProductMenuFX {
             pane.getChildren().addAll(label, textField);
             n += 5;
         }
+        Seller.writeInJ();
     }
 
-    private void addImageView() {
+    private void addImageView() throws IOException {
         productImage.setVisible(true);
         productImage = new ImageView();
         productImage.setFitHeight(216.0);
@@ -252,6 +259,7 @@ public class AddProductMenuFX {
             }
         });
         productImage.setOnDragOver(this::handleDragOver);
+        Seller.writeInJ();
     }
 
     private void backToFirst(){

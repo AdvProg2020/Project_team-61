@@ -99,7 +99,7 @@ public class ViewAccountFx {
     public void viewCustomerDiscount(MouseEvent mouseEvent) throws IOException {
         if(LoginMenu.getLoginAccount() instanceof Customer) {
             Customer customer = (Customer) LoginMenu.getLoginAccount();
-            DiscountCodesFx.setDiscounts(customer.getAllDiscountCodes());
+//            DiscountCodesFx.setDiscounts(customer.getAllDiscountCodes());
         } else if(LoginMenu.getLoginAccount() instanceof Manager) {
             Manager customer = (Manager) LoginMenu.getLoginAccount();
             DiscountCodesFx.setDiscounts(customer.getAllDiscountCodes());

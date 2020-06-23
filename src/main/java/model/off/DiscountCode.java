@@ -41,14 +41,14 @@ public class DiscountCode {
         if(customer instanceof Customer) {
             Customer cus = (Customer) customer;
             allCustomersWithDiscountCode.add(customer);
-            cus.addDiscountCode(getDiscountWithId(discountId));
+//            cus.addDiscountCode(getDiscountWithId(discountId));
         }
     }
     public void removeAccount(Account customer) throws IOException {
         if(customer instanceof Customer) {
             Customer cus = (Customer) customer;
             allCustomersWithDiscountCode.remove(customer);
-            cus.removeDiscountCode(getDiscountWithId(discountId));
+//            cus.removeDiscountCode(getDiscountWithId(discountId));
             Manager man = (Manager) LoginMenu.getLoginAccount();
             if(allCustomersWithDiscountCode.size() == 0){
                 man.getAllDiscountCodes().remove(this);
