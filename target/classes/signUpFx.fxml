@@ -53,14 +53,14 @@
             <Image url="@icons/face.png" />
          </image>
       </ImageView>
-      <TextField fx:id="userSign" layoutX="705.0" layoutY="97.0" prefHeight="40.0" prefWidth="271.0" promptText="username" />
-      <PasswordField fx:id="passSign" layoutX="705.0" layoutY="157.0" prefHeight="40.0" prefWidth="271.0" promptText="password" />
-      <TextField fx:id="nameSign" layoutX="705.0" layoutY="220.0" prefHeight="40.0" prefWidth="271.0" promptText="name" />
-      <TextField fx:id="lastNameSign" layoutX="705.0" layoutY="277.0" prefHeight="40.0" prefWidth="271.0" promptText="last name" />
-      <TextField fx:id="phoneNoSign" layoutX="705.0" layoutY="420.0" prefHeight="40.0" prefWidth="271.0" promptText="phone number" />
-      <TextField fx:id="emailSign" layoutX="705.0" layoutY="346.0" prefHeight="40.0" prefWidth="271.0" promptText="Email" />
-      <TextField fx:id="birthdaySign" layoutX="696.0" layoutY="496.0" prefHeight="40.0" prefWidth="271.0" promptText="birthday date" />
-      <Text layoutX="766.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign up" wrappingWidth="150.0">
+      <TextField fx:id="userSign" layoutX="705.0" layoutY="137.0" prefHeight="40.0" prefWidth="271.0" promptText="username" />
+      <PasswordField fx:id="passSign" layoutX="705.0" layoutY="220.0" prefHeight="40.0" prefWidth="271.0" promptText="password" />
+      <TextField fx:id="nameSign" layoutX="705.0" layoutY="297.0" prefHeight="40.0" prefWidth="271.0" promptText="name" />
+      <TextField fx:id="lastNameSign" layoutX="705.0" layoutY="389.0" prefHeight="40.0" prefWidth="271.0" promptText="last name" />
+      <TextField fx:id="phoneNoSign" layoutX="705.0" layoutY="564.0" prefHeight="40.0" prefWidth="271.0" promptText="phone number" />
+      <TextField fx:id="emailSign" layoutX="705.0" layoutY="476.0" prefHeight="40.0" prefWidth="271.0" promptText="Email" />
+      <TextField fx:id="birthdaySign" layoutX="705.0" layoutY="661.0" prefHeight="40.0" prefWidth="271.0" promptText="birthday date" />
+      <Text layoutX="766.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign up" wrappingWidth="150.0">
          <font>
             <Font name="System Bold Italic" size="38.0" />
          </font>
@@ -129,7 +129,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button layoutX="772.0" layoutY="579.0" mnemonicParsing="false" onMouseClicked="#signUp" prefHeight="40.0" prefWidth="119.0" text="Create">
+      <Button layoutX="781.0" layoutY="741.0" mnemonicParsing="false" onMouseClicked="#signUp" prefHeight="40.0" prefWidth="119.0" text="Create">
          <textFill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>

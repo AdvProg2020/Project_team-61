@@ -148,4 +148,12 @@ public class CategoriesFX {
         goToPage();
     }
 
+    public void viewCategories(MouseEvent mouseEvent) throws IOException {
+        if(categories.getSelectionModel().getSelectedItem() != null) {
+            Category curCat = categories.getSelectionModel().getSelectedItem();
+            ViewCategoryFx.setCurCat(curCat);
+            root = FXMLLoader.load(Objects.requireNonNull(ViewCategoryFx.class.getClassLoader().getResource("ViewCategoryFx.fxml")));
+
+        }
+    }
 }

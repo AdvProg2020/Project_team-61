@@ -3,6 +3,7 @@ package model.request;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import controller.menus.LoginMenu;
+import model.accounts.Account;
 import model.accounts.Seller;
 import model.firms.Firm;
 import model.productRelated.Category;
@@ -66,8 +67,8 @@ public class ProductRequest extends Request {
         getAllRequests().remove(this);
         allProductRequests.remove(this);
         Product.getProductList().remove(this);
-        if(this.getSeller() instanceof Seller) {
-            Seller seller = (Seller) this.getSeller();
+        if(Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
+            Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
             seller.getAllProduct().remove(this);
         }
         writeInJ();
@@ -76,8 +77,8 @@ public class ProductRequest extends Request {
     @Override
     public void acceptRequest() throws IOException {
         Seller seller = null;
-        if(this.getSeller() instanceof Seller) {
-             seller = (Seller) this.getSeller();
+        if(Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
+             seller = (Seller) Account.getAccountWithUsername(this.getSeller());
         }
         Product newProduct = Product.getProductById(productId);
         newProduct.setDetailProduct(newProduct.getProductImage(),productName,price,Category.getCategoryWithName(categoryName),seller,companyName,numberOfProduct);

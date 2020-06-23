@@ -10,7 +10,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Customer extends Account {
-    ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
+    private ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
     private static ArrayList<Customer> allCustomers = new ArrayList<>();
     private ArrayList<BuyLog> BuyLogsHistory = new ArrayList<>();
     public static Type CustomerType = new TypeToken<ArrayList<Customer>>() {

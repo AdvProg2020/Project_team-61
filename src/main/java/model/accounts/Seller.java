@@ -41,8 +41,9 @@ public class Seller extends Account {
         this.allRequests = allRequests;
     }
 
-    public void addRequest(Request request){
+    public void addRequest(Request request) throws IOException {
         allRequests.add(request);
+        writeInJ();
     }
 
     public ArrayList<Sale> getAllSales() {

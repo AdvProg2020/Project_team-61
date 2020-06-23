@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Manager extends Account {
 
     private static ArrayList<Manager> allManagers = new ArrayList<>();
-    ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
+    private ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
     public static Type ManagerType = new TypeToken<ArrayList<Manager>>() {
     }.getType();
 

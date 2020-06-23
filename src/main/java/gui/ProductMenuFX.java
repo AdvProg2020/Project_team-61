@@ -67,6 +67,15 @@ public class ProductMenuFX {
     private int score =0;
     ///////////////////////
     private Product product;
+    private static Product curProduct;
+
+    public Product getCurProduct() {
+        return curProduct;
+    }
+
+    public static void setCurProduct(Product curProduct) {
+        ProductMenuFX.curProduct = curProduct;
+    }
 
     public static void showProPage(Stage stage, Scene scene, Product product) throws IOException {
         productInPage = product;
