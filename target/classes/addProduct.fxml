@@ -21,7 +21,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AddProductMenuFX">
+<AnchorPane fx:id="pane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AddProductMenuFX">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="800.0" layoutX="-1.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="1280.0">
             <fill>
@@ -44,7 +44,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Logout">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
+                        <MenuItem mnemonicParsing="false" text="logout" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
@@ -75,7 +75,7 @@
         <Label layoutX="376.0" layoutY="473.0" text="additional detail" />
         <TextField fx:id="categoryNameTextField" layoutX="470.0" layoutY="332.0" prefHeight="35.0" prefWidth="287.0" />
         <Label layoutX="409.0" layoutY="350.0" text="category" />
-      <Label fx:id="error" layoutX="812.0" layoutY="212.0" prefHeight="21.0" prefWidth="365.0" text="Label" textFill="#c764e2" />
-      <Button fx:id="addProductButton1" layoutX="772.0" layoutY="711.0" mnemonicParsing="false" onMouseClicked="#editProduct" prefHeight="43.0" prefWidth="156.0" text="Edit Product" />
+        <Label fx:id="error" layoutX="812.0" layoutY="212.0" prefHeight="21.0" prefWidth="365.0" text="Label" textFill="#c764e2" />
+        <Button fx:id="addProductButton1" layoutX="772.0" layoutY="711.0" mnemonicParsing="false" onMouseClicked="#editProduct" prefHeight="43.0" prefWidth="156.0" text="Edit Product" />
     </children>
 </AnchorPane>

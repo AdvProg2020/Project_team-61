@@ -13,6 +13,7 @@ import model.accounts.Manager;
 import model.accounts.Seller;
 import model.off.Sale;
 import model.productRelated.Category;
+import model.productRelated.Product;
 import model.request.*;
 import view.FileHandling;
 
@@ -132,7 +133,7 @@ public class Main extends Application {
 //
 
 
-
+/*
         Type saleType = new TypeToken<ArrayList<Sale>>(){}.getType();
         try {
             JsonReader reader4 =new JsonReader(new FileReader("sale.json"));
@@ -146,7 +147,7 @@ public class Main extends Application {
             Sale.setAllSales(new ArrayList<>());
         }
 
-
+*/
 
         Type sellerType = new TypeToken<ArrayList<Seller>>(){}.getType();
         try {
@@ -241,7 +242,7 @@ public class Main extends Application {
        */
 
 
-        Type SaleReType = new TypeToken<ArrayList<SaleRequest>>(){}.getType();
+ /*       Type SaleReType = new TypeToken<ArrayList<SaleRequest>>(){}.getType();
         try {
             JsonReader reader11 =new JsonReader(new FileReader("saleRequest.json"));
             ArrayList<SaleRequest> saleRequestsArrayList = FileHandling.getGson().fromJson(reader11,SaleReType);
@@ -254,10 +255,16 @@ public class Main extends Application {
             SaleRequest.setAllSaleRequests(new ArrayList<>());
         }
 
+   */
         Request.setAllRequests(new ArrayList<>());
         Request.getAllRequests().addAll(AccountRequest.getAllAccountRequests());
         Request.getAllRequests().addAll(CommentRequest.getAllCommentRequests());
         Request.getAllRequests().addAll(ProductRequest.getAllProductRequests());
+        for (Seller seller : Seller.getAllSellers()) {
+            Request.getAllRequests().addAll(seller.getAllRequests());
+            Product.getProductList().addAll(seller.getAllProduct());
+            Sale.getAllSales().addAll(seller.getAllSales());
+        }
         Request.getAllRequests().addAll(SaleRequest.getAllSaleRequests());
 
         Application.launch(args);

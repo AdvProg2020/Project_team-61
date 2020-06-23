@@ -16,6 +16,7 @@ import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
+import model.off.DiscountCode;
 import view.OutputMassageHandler;
 
 import java.io.IOException;
@@ -84,30 +85,37 @@ public class AddDiscountFx {
         if (discountAccounts.getSelectionModel().getSelectedItem() != null) {
             if (ManagerMenu.getCreate() == 0) {
                 addDiscountId.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.createNewDiscountCode(addDiscountId.getText())));
+                Manager.writeInJ();
             }
             if (ManagerMenu.getCreate() == 1) {
                 ms = OutputMassageHandler.showManagerOutput(ManagerMenu.setDetailToDiscountCode(startAddDiscount.getText(), 0));
+                Manager.writeInJ();
                 if (ManagerMenu.getDetailMenu() == 1) {
                     ms = OutputMassageHandler.showManagerOutput(ManagerMenu.setDetailToDiscountCode(endAddDiscount.getText(), 1));
+                    Manager.writeInJ();
                 }
                 if (ManagerMenu.getDetailMenu() == 2) {
                     ms = OutputMassageHandler.showManagerOutput(ManagerMenu.setDetailToDiscountCode(maxAmountDiscount.getText(), 2));
+                    Manager.writeInJ();
                 }
                 if (ManagerMenu.getDetailMenu() == 3) {
                     ms = OutputMassageHandler.showManagerOutput(ManagerMenu.setDetailToDiscountCode(addDiscountTimesOfUse.getText(), 3));
+                    Manager.writeInJ();
                 }
                 if (ManagerMenu.getDetailMenu() == 4) {
                     ms = OutputMassageHandler.showManagerOutput(ManagerMenu.setDetailToDiscountCode(addDiscountAmount.getText(), 4));
+                    Manager.writeInJ();
                 }
                 if (ManagerMenu.getDetailMenu() == 5) {
                     Account account = discountAccounts.getSelectionModel().getSelectedItem();
                     ms = OutputMassageHandler.showManagerOutput(ManagerMenu.setDetailToDiscountCode(account.getUsername(), 5));
-
+                    Manager.writeInJ();
                 }
             }
+            Manager.writeInJ();
         } else ms = "you have to select account first";
         discountMs.setText(ms);
-
+        Manager.writeInJ();
     }
 
     public void editDiscount(MouseEvent mouseEvent) throws IOException, ParseException {
@@ -142,6 +150,7 @@ public class AddDiscountFx {
                 Account a = discountAccounts.getSelectionModel().getSelectedItem();
                 discountMs.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.editDiscountCodeField(a.getUsername(), "add account")));
                 makeTree();
+                Manager.writeInJ();
             } else discountMs.setText("you have to select first");
         } else discountMs.setText("you have to put name and edit first");
     }
@@ -151,6 +160,7 @@ public class AddDiscountFx {
             if (discountAccounts.getSelectionModel().getSelectedItem() != null) {
                 Account a = discountAccounts.getSelectionModel().getSelectedItem();
                 discountMs.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.editDiscountCodeField(a.getUsername(), "remove account")));
+                Manager.writeInJ();
                 makeTree();
             } else discountMs.setText("you have to select first");
         } else discountMs.setText("you have to put name and edit first");

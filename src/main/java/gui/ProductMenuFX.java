@@ -1,7 +1,5 @@
 package gui;
 
-import controller.ProductMenu;
-import controller.menus.CustomerMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,12 +11,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.productRelated.Comment;
 import model.productRelated.Product;
-import view.OutputMassageHandler;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -55,8 +51,12 @@ public class ProductMenuFX {
     private Button scoreButton;
     @FXML
     private Label didntBuyToScoreOrProductIsFinish;
-    @FXML
-    private Label scoreMs;
+    private static Product curProduct;
+
+    public static void setCurProduct(Product curProduct) {
+        ProductMenuFX.curProduct = curProduct;
+    }
+
     @FXML
     public TableColumn<Product, ArrayList<Comment>> titleColumn = new TableColumn<>("title");
 
@@ -64,9 +64,7 @@ public class ProductMenuFX {
     public TableColumn<Product, ArrayList<Comment>> contentColumn = new TableColumn<>("content");
     @FXML
     public static ObservableList<Comment> data = FXCollections.observableArrayList();
-    private int score =0;
-    ///////////////////////
-    private Product product;
+
 
     public static void showProPage(Stage stage, Scene scene, Product product) throws IOException {
         productInPage = product;
@@ -83,7 +81,7 @@ public class ProductMenuFX {
 
     @FXML
     void popUpAddComment(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("comment.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("gui/fxFile/comment.fxml")));
         thisStage = new Stage();
         prevScene = new Scene(root);
         thisStage.setScene(prevScene);
@@ -106,10 +104,20 @@ public class ProductMenuFX {
         thisStage.show();
     }
 
-    public void handleSendComment(ActionEvent actionEvent) throws IOException {
-        nullAddCommentError.setText(OutputMassageHandler.showProductOutput(ProductMenu.addComments()));
-        nullAddCommentError.setText(OutputMassageHandler.showProductOutput(ProductMenu.contentOfComment(commentTextField.getText())));
-        nullAddCommentError.setText(OutputMassageHandler.showProductOutput(ProductMenu.titleOfComment(titleTextField.getText())));
+    public void handleSendComment(ActionEvent actionEvent) {
+        String title = titleTextField.getText();
+        String content = commentTextField.getText();
+        if (title != null) {
+            if (content != null) {
+//                productInPage.com(title, content);
+            } else {
+                nullAddCommentError.setText("content is empty");
+                nullAddCommentError.setVisible(true);
+            }
+        } else {
+            nullAddCommentError.setText("title is empty");
+            nullAddCommentError.setVisible(true);
+        }
     }
 
     @FXML
@@ -129,48 +137,4 @@ public class ProductMenuFX {
 //            System.out.println("no");
 //        }
     }
-
-    public void score5(MouseEvent mouseEvent) {
-        score = 4;
-    }
-
-    public void score4(MouseEvent mouseEvent) {
-        score = 4;
-    }
-
-    public void score3(MouseEvent mouseEvent) {
-        score = 3;
-    }
-
-    public void score1(MouseEvent mouseEvent) {
-        score = 1;
-    }
-
-    public void score(MouseEvent mouseEvent) throws IOException {
-        if(score != 0){
-         scoreMs.setText(OutputMassageHandler.showCustomerOutput( CustomerMenu.rateProduct( product.getProductId(), score)));
-        }else scoreMs.setText("you have to select first");
-    }
-
-    public void score2(MouseEvent mouseEvent) {
-        score = 2;
-    }
-    /*
-        public void handleSendComment(ActionEvent actionEvent) throws IOException {
-        String title = titleTextField.getText();
-        String content = commentTextField.getText();
-
-        if (title != null) {
-            if (content != null) {
-//                productInPage.com(title, content);
-            } else {
-                nullAddCommentError.setText("content is empty");
-                nullAddCommentError.setVisible(true);
-            }
-        } else {
-            nullAddCommentError.setText("title is empty");
-            nullAddCommentError.setVisible(true);
-        }
-    }
-     */
 }
