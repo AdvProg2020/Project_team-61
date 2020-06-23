@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.accounts.Customer;
+import model.log.BuyLog;
 import view.OutputMassageHandler;
 
 
@@ -29,7 +30,11 @@ public class PayLogFx {
     @FXML
     TextField discountPayLogTextField;
     //int output;
+    private static BuyLog preBuyLog;
 
+    public static void setPreBuyLog(BuyLog preBuyLog) {
+        PayLogFx.preBuyLog = preBuyLog;
+    }
 
     //SubMenuStatus subMenuStatus=SubMenuStatus.RECIVERINFORMATION;
     //public RegisterMenu registerMenu;
@@ -54,20 +59,20 @@ public class PayLogFx {
         alertMessage.setText(OutputMassageHandler.showCustomerOutput(CustomerMenu.getOutputNo()));
 
     }
-   /* public void alertMessage(){
+    public void alertMessage(){
         Stage window=new Stage();
         Scene scene ;
         window.initModality(Modality.APPLICATION_MODAL);
         VBox layout=new VBox();
         TextArea textArea=new TextArea("Payment successfully");
-        Button button =new Button("ok");
+        Button button =new Button("go to account");
         layout.getChildren().addAll(button,textArea);
         layout.setAlignment(Pos.CENTER);
         button.setOnAction(e->window.close());
         scene=new Scene(layout);
         window.setScene(scene);
         window.showAndWait();
-    }*/
+    }
 
     public void gotoAccount(MouseEvent mouseEvent) {
     }
