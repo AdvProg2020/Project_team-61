@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AddCategoryFx">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="882.0" layoutX="-1.0" stroke="BLACK" strokeType="INSIDE" width="1611.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="0.0">
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#e4ff00" />
+                        <Stop color="#e4ff00" offset="0.007246376811594203" />
+                        <Stop color="#007aff" offset="0.4746376811594203" />
+                        <Stop color="#000bff" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="User menu">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#userMenu" text="your menu" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Logout">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Back">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <TextField fx:id="categoryId" layoutX="563.0" layoutY="229.0" prefHeight="39.0" prefWidth="253.0" promptText="Category name" />
+        <Label fx:id="categoryIdMs" layoutX="563.0" layoutY="268.0" prefHeight="32.0" prefWidth="253.0" text="Label" textFill="#f00505">
+         <font>
+            <Font size="23.0" />
+         </font></Label>
+        <Button layoutX="588.0" layoutY="422.0" mnemonicParsing="false" onMouseClicked="#createCategory" prefHeight="39.0" prefWidth="85.0" text="Create">
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#e4ff00" />
+                        <Stop color="#e4ff00" offset="0.007246376811594203" />
+                        <Stop color="#eb0202" offset="0.4746376811594203" />
+                        <Stop color="#000bff" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </textFill></Button>
+        <Label layoutX="737.0" layoutY="39.0" text="Category">
+            <font>
+                <Font name="System Bold Italic" size="40.0" />
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#ff9500" />
+                        <Stop color="#e1256d" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </textFill></Label>
+        <Button layoutX="829.0" layoutY="283.0" mnemonicParsing="false" onMouseClicked="#addTrait" prefHeight="39.0" prefWidth="97.0" text="Add">
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#e4ff00" />
+                        <Stop color="#e4ff00" offset="0.007246376811594203" />
+                        <Stop color="#eb0202" offset="0.4746376811594203" />
+                        <Stop color="#000bff" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </textFill></Button>
+        <Button layoutX="829.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#removeTrait" prefHeight="39.0" prefWidth="97.0" text="Remove">
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#e4ff00" />
+                        <Stop color="#e4ff00" offset="0.007246376811594203" />
+                        <Stop color="#eb0202" offset="0.4746376811594203" />
+                        <Stop color="#000bff" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </textFill></Button>
+        <Text layoutX="298.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category name:">
+            <font>
+                <Font size="27.0" />
+            </font>
+        </Text>
+        <Button layoutX="720.0" layoutY="422.0" mnemonicParsing="false" onMouseClicked="#editCategory" prefHeight="39.0" prefWidth="85.0" text="Edit">
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#e4ff00" />
+                        <Stop color="#e4ff00" offset="0.007246376811594203" />
+                        <Stop color="#eb0202" offset="0.4746376811594203" />
+                        <Stop color="#000bff" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </textFill>
+        </Button>
+      <Label fx:id="categoryTraitMs" layoutX="524.0" layoutY="489.0" prefHeight="34.0" prefWidth="332.0" text="Label" textFill="#f00505">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Text layoutX="298.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trait:">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Text>
+      <TextField fx:id="categoryAddTrait" layoutX="563.0" layoutY="308.0" prefHeight="39.0" prefWidth="253.0" promptText="Trait" />
+      <Label fx:id="categoryAddTraitMs" layoutX="564.0" layoutY="353.0" prefHeight="32.0" prefWidth="253.0" text="Label" textFill="#f00505">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <ListView fx:id="categoryTraits" layoutX="939.0" layoutY="202.0" prefHeight="500.0" prefWidth="409.0" />
+      <Text layoutX="1120.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Traits">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+    </children>
+</AnchorPane>
