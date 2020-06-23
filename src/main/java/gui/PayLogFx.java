@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.accounts.Customer;
+import model.log.BuyLog;
 import view.OutputMassageHandler;
 
 
@@ -29,7 +30,11 @@ public class PayLogFx {
     @FXML
     TextField discountPayLogTextField;
     //int output;
+    private static BuyLog preBuyLog;
 
+    public static void setPreBuyLog(BuyLog preBuyLog) {
+        PayLogFx.preBuyLog = preBuyLog;
+    }
 
     //SubMenuStatus subMenuStatus=SubMenuStatus.RECIVERINFORMATION;
     //public RegisterMenu registerMenu;

@@ -15,7 +15,7 @@ import model.productRelated.Product;
 import java.io.IOException;
 
 public class ViewCategoryFx {
-    Category curCat;
+    private static Category curCat;
     @FXML
     private TableView<Category> viewCategoryTable;
     @FXML
@@ -29,6 +29,9 @@ public class ViewCategoryFx {
     private static Parent priRoot;
     public static ObservableList<Category> data = FXCollections.observableArrayList();
 
+    public static void setCurCat(Category curCat) {
+        ViewCategoryFx.curCat = curCat;
+    }
 
     public static void setPriRoot(Parent priRoot) {
         ViewCategoryFx.priRoot = priRoot;
@@ -40,6 +43,7 @@ public class ViewCategoryFx {
 
     @FXML
     public void initialize() throws IOException {
+        catNameLabel.setText(curCat.getName());
         productCatColumn.setCellValueFactory(new PropertyValueFactory<>("product"));
         traitCatColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
         initializeObserverList();

@@ -51,6 +51,11 @@ public class ProductMenuFX {
     private Button scoreButton;
     @FXML
     private Label didntBuyToScoreOrProductIsFinish;
+    private static Product curProduct;
+
+    public static void setCurProduct(Product curProduct) {
+        ProductMenuFX.curProduct = curProduct;
+    }
 
     @FXML
     public TableColumn<Product, ArrayList<Comment>> titleColumn = new TableColumn<>("title");

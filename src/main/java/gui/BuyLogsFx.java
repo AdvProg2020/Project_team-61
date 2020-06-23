@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -15,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import model.accounts.Seller;
 import model.log.BuyLog;
 import model.log.DeliveryStatus;
+import model.off.DiscountCode;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -44,6 +46,27 @@ public class BuyLogsFx {
     public static void setAllBuyLogs(ArrayList<BuyLog> allBuyLogs) {
         BuyLogsFx.allBuyLogs = allBuyLogs;
     }
+   /* public void makeTree() throws IOException {
+        discountId.setCellValueFactory(new PropertyValueFactory<DiscountCode, String>("discountId"));
+        discountAmount.setCellValueFactory(new PropertyValueFactory<DiscountCode, Number>("discountAmount"));
+        discountStart.setCellValueFactory(new PropertyValueFactory<DiscountCode, String>("startOfDiscountPeriod"));
+        discountEnd.setCellValueFactory(new PropertyValueFactory<DiscountCode,String>("endOfDiscountPeriod"));
+        maxDiscountAmount.setCellValueFactory(new PropertyValueFactory<DiscountCode,Number>("maxDiscountAmount"));
+        discountTotalTime.setCellValueFactory(new PropertyValueFactory<DiscountCode,Number>("totalTimesOfUse"));
+
+
+        data.clear();
+        data.addAll(discounts);
+        discountCodes.setEditable(true);
+        discountCodes.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        discountCodes.getSelectionModel().setCellSelectionEnabled(true);
+        discountCodes.setItems(data);
+    }
+    public void edit(MouseEvent mouseEvent) {
+        if(discountCodes.getSelectionModel().getSelectedItem() != null) {
+            DiscountCode discountCode = discountCodes.getSelectionModel().getSelectedItem();
+        }
+    }*/
 
     public static void initializeObserverList() {
         data.clear();
@@ -57,18 +80,15 @@ public class BuyLogsFx {
       //  buyLogsSeller.setCellValueFactory(new PropertyValueFactory<>("buyLogSeller"));
      //   buyLogsDeliveryStatus.setCellValueFactory(new PropertyValueFactory<>("buyLogDeliveryStatus"));
         buyLogsDate.setCellValueFactory(new PropertyValueFactory<>("buyLogDate"));
-        buyLogsTotalPaidAmount.setCellValueFactory(new PropertyValueFactory<>(""));
-        //  buyLogsReduceAmount.setCellValueFactory(new PropertyValueFactory<>("maxDiscountAmount"));
-        // buyLogsRecievedAmount.setCellValueFactory(new PropertyValueFactory<>("totalTimesOfUse"));
-
-
+        buyLogsTotalPaidAmount.setCellValueFactory(new PropertyValueFactory<>("totalPaidAmount"));
         initializeObserverList();
         buyLogs.getColumns().addAll(buyLogsId,buyLogsDate);
         buyLogs.setEditable(true);
-        //  buyLogs.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        //  buyLogs.getSelectionModel().setCellSelectionEnabled(true);
+        buyLogs.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        buyLogs.getSelectionModel().setCellSelectionEnabled(true);
         buyLogs.setItems(data);
     }
+
 
     private static void goToPage(){
         Scene pageTwoScene = new Scene(root);
@@ -76,9 +96,14 @@ public class BuyLogsFx {
         Main.primStage.setScene(pageTwoScene);
         Main.primStage.show();
     }
-    public void showOrdersFromBuyLogs(MouseEvent mouseEvent) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("buyLogFx.fxml")));;
-        goToPage();
+    public void showOrderFromBuyLog(MouseEvent mouseEvent) throws IOException {
+        if (buyLogs.getSelectionModel().getSelectedItem()!=null){
+            BuyLog buyLog=buyLogs.getSelectionModel().getSelectedItem();
+            BuyLogFx.setCurBuyLog(buyLog);
+            root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("buyLogFx.fxml")));;
+            goToPage();
+        }
+
 
     }
     public void rateProductFromBuyLogs(MouseEvent mouseEvent){
@@ -88,6 +113,7 @@ public class BuyLogsFx {
 
 
     public void exit(ActionEvent actionEvent) {
+        System.exit(0);
     }
 
     public void back(ActionEvent actionEvent) {
@@ -99,14 +125,8 @@ public class BuyLogsFx {
     public void userMenu(ActionEvent actionEvent) {
     }
 
-
-    public void showOrderFromBuyLog(MouseEvent mouseEvent) {
-    }
-
     public void rateProduct(MouseEvent mouseEvent) {
 
     }
 
-    public void showOrdersFromBuyLog(MouseEvent mouseEvent) {
-    }
 }
