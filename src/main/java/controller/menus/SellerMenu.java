@@ -151,6 +151,8 @@ public class SellerMenu {
                         String id = LoginMenu.getLoginAccount().getUsername() + " wants add product " + detail;
                         if (!productRequest.isThereRequestFromID(id)) {
                             Product product = new Product(detail);
+                            Seller seller = (Seller) Seller.getAccountWithUsername(LoginMenu.getLoginAccount().getUsername());
+                            seller.getAllProduct().add(product);
                             product.setProductStatus(ProductStatus.UNDERREVIEWFORCONSTRUCTION);
                             productRequest = new ProductRequest(id);
                             productRequest.setProductId(detail);
