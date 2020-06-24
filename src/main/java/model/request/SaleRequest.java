@@ -3,6 +3,7 @@ package model.request;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
+import model.accounts.Seller;
 import model.off.Sale;
 import model.off.SaleStatus;
 import model.productRelated.Product;
@@ -14,15 +15,13 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class SaleRequest extends Request {
-    private static String offId = null;
-    private static Date startOfSalePeriod = null;
-    private static Date endOfSalePeriod = null;
-    private static int saleAmount = 0;
-    private static String product= null;
-    private static Account seller = null;
-    private static ArrayList<Product> allSaleProducts = new ArrayList<>();
-    private SaleStatus saleStatus;
-    private static Sale sale;
+    private String offId = null;
+    private Date startOfSalePeriod = null;
+    private Date endOfSalePeriod = null;
+    private int saleAmount = 0;
+    private String product = null;
+    private ArrayList<Product> allSaleProducts = new ArrayList<>();
+    private Sale sale;
     private static ArrayList<SaleRequest> allSaleRequests = new ArrayList<>();
     public static Type saleRequestType = new TypeToken<ArrayList<SaleRequest>>() {
     }.getType();
@@ -31,38 +30,47 @@ public class SaleRequest extends Request {
     public SaleRequest(String requestID) throws IOException {
         super(requestID);
         allSaleRequests.add(this);
+        if (Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
+            Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
+            seller.addSaleRequest(this);
+        }
         writeInJ();
     }
 
     @Override
-    public  void declineRequest() {
+    public void declineRequest() throws IOException {
         getAllRequests().remove(this);
         allSaleRequests.remove(this);
         getAllRequests().remove(this);
+        if (Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
+            Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
+            seller.getAllProductRequests().remove(this);
+            seller.removeSaleRequest(this);
+        }
+        writeInJ();
     }
 
     @Override
-    public  void acceptRequest() throws IOException {
-        sale= Sale.getSaleWithId(offId);
-        sale.setSaleDetails(SaleStatus.CONFIRMED, startOfSalePeriod, endOfSalePeriod, saleAmount, seller);
+    public void acceptRequest() throws IOException {
+        sale = Sale.getSaleWithId(offId);
+        sale.setSaleDetails(SaleStatus.CONFIRMED, startOfSalePeriod, endOfSalePeriod, saleAmount, Account.getAccountWithUsername(this.getSeller()));
         sale.setAllSaleProducts(allSaleProducts);
         sale.setSaleStatus(SaleStatus.CONFIRMED);
         Product.getProductById(product).setInSale(true);
         getAllRequests().remove(this);
         allSaleRequests.remove(this);
+        if (Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
+            Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
+            seller.removeSaleRequest(this);
+        }
+        writeInJ();
     }
-
 
 
     public void removeProduct(Product product) {
         allSaleProducts.remove(product);
     }
 
-    public void setSeller(Account seller) throws IOException {
-        this.seller = seller;
-        writeInJ();
-
-    }
 
     public void addProductToSale(Product product) throws IOException {
         allSaleProducts.add(product);
@@ -111,5 +119,33 @@ public class SaleRequest extends Request {
         FileHandling.setGson(new Gson());
         String json = FileHandling.getGson().toJson(SaleRequest.allSaleRequests, saleRequestType);
         FileHandling.writeInFile(json, "saleRequest.json");
+    }
+
+    public String getOffId() {
+        return offId;
+    }
+
+    public Date getStartOfSalePeriod() {
+        return startOfSalePeriod;
+    }
+
+    public Date getEndOfSalePeriod() {
+        return endOfSalePeriod;
+    }
+
+    public int getSaleAmount() {
+        return saleAmount;
+    }
+
+    public String getProduct() {
+        return product;
+    }
+
+    public ArrayList<Product> getAllSaleProducts() {
+        return allSaleProducts;
+    }
+
+    public Sale getSale() {
+        return sale;
     }
 }

@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="productPagePane" prefHeight="618.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ProductMenuFX">
+<AnchorPane fx:id="productPagePane" prefHeight="618.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ProductMenuFX">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="189.0" layoutX="75.0" layoutY="49.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
         <ImageView fx:id="productPic" fitHeight="172.0" fitWidth="200.0" layoutX="75.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" />
@@ -21,8 +21,10 @@
                 <Font size="23.0" />
             </font>
         </Label>
-        <Button fx:id="addToCardButton" layoutX="254.0" layoutY="262.0" mnemonicParsing="false" onAction="#handleAddProductToLog" text="Add To Card" />
-        <Label fx:id="didntBuyToScoreOrProductIsFinish" prefHeight="18.0" prefWidth="225.0" text="didntBuyToScore\\ProductIsFinish" visible="false">
+        <Button fx:id="addToCardButton" layoutX="73.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleAddProductToLog" text="Add To Card" />
+        <Button fx:id="commentButton" layoutX="166.0" layoutY="254.0" mnemonicParsing="false" onAction="#popUpAddComment" prefHeight="26.0" prefWidth="89.0" text="Comment" />
+        <Button fx:id="scoreButton" layoutX="269.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleScore" prefHeight="26.0" prefWidth="64.0" text="Score" />
+        <Label fx:id="didntBuyToScoreOrProductIsFinish" layoutX="100.0" layoutY="288.0" prefHeight="18.0" prefWidth="225.0" text="didntBuyToScore\\ProductIsFinish" visible="false">
             <font>
                 <Font size="15.0" />
             </font>
@@ -32,7 +34,7 @@
         <TableView fx:id="commentTableView" layoutX="62.0" layoutY="340.0" prefHeight="244.0" prefWidth="710.0">
 
         </TableView>
-        <Button fx:id="commentButton" layoutX="154.0" layoutY="262.0" mnemonicParsing="false" onAction="#popUpAddComment" prefHeight="26.0" prefWidth="89.0" text="Comment" />
+
         <MenuBar layoutX="9.0" layoutY="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
                 <Menu mnemonicParsing="false" text="File">

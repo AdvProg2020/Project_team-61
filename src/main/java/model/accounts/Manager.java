@@ -1,6 +1,7 @@
 package model.accounts;
 
 import com.google.gson.reflect.TypeToken;
+import model.off.DiscountCode;
 import view.FileHandling;
 
 import java.io.IOException;
@@ -10,14 +11,28 @@ import java.util.ArrayList;
 public class Manager extends Account {
 
     private static ArrayList<Manager> allManagers = new ArrayList<>();
+    public ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
     public static Type ManagerType = new TypeToken<ArrayList<Manager>>() {
     }.getType();
 
+    public ArrayList<DiscountCode> getAllDiscountCodes() {
+        return allDiscountCodes;
+    }
 
     public Manager(String username) throws IOException {
         super(username);
         role = "manager";
         allManagers.add(this);
+        writeInJ();
+    }
+
+    public void addDiscount(DiscountCode discountCode) throws IOException {
+        allDiscountCodes.add(discountCode);
+        writeInJ();
+    }
+
+    public void removeDiscount(DiscountCode discountCode) throws IOException {
+        allDiscountCodes.remove(discountCode);
         writeInJ();
     }
 

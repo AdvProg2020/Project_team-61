@@ -5,7 +5,7 @@ import model.accounts.Customer;
 import model.accounts.Manager;
 import model.request.AccountRequest;
 import model.request.Request;
-import view.SubMenuStatus;
+import view.justConsole.SubMenuStatus;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -15,6 +15,7 @@ import java.util.Date;
 
 public class RegisterMenu {
     private static int outputNo;
+    private static int signUpNo =0;
     private static Manager manager;
     private static Customer customer;
     private static AccountRequest accountRequest;
@@ -31,10 +32,26 @@ public class RegisterMenu {
     private static Date birthdayDate;
     private static SubMenuStatus subMenuStatus;
 
-
-    public static void setManagerWant(boolean managerWant) {
-        RegisterMenu.managerWant = managerWant;
+    public static boolean isHeadManager() {
+        return headManager;
     }
+
+    public static int getDetailMenu() {
+        return detailMenu;
+    }
+
+    public static void setDetailMenu(int detailMenu) {
+        RegisterMenu.detailMenu = detailMenu;
+    }
+
+    public static int getSignUpNo() {
+        return signUpNo;
+    }
+
+    public static void setSignUpNo(int signUpNo) {
+        RegisterMenu.signUpNo = signUpNo;
+    }
+
 
     public static int processRegister(String role, String username) throws IOException {
         if (username.matches("^[a-z0-9_-]{3,15}$")) {
@@ -43,6 +60,8 @@ public class RegisterMenu {
                     RegisterMenu.role = role;
                     RegisterMenu.username = username;
                     registerByRole(role, username);
+                    signUpNo =1;
+                    outputNo=0;
              //       subMenuStatus = CommandProcessor.getSubMenuStatus();
             //        CommandProcessor.setSubMenuStatus(SubMenuStatus.REGISTERATIONDETAILS);
             //        CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
@@ -87,38 +106,38 @@ public class RegisterMenu {
         }
     }
 
-    public static int completeRegisterProcess(String detail) throws IOException, ParseException {
-        if (detailMenu == 0) {
-            if (detail.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{8,10}$")) {
+    public static int completeRegisterProcess(String detail , int detailMen) throws IOException, ParseException {
+        if (detailMen == 0) {
+            if (detail.matches(".+")) {
                 password = detail;
-                detailMenu++;
+                detailMenu=1;
                 outputNo = 0;
             } else outputNo = 3;
-        } else if (detailMenu == 1) {
+        } else if (detailMen == 1) {
             if (detail.matches("(\\s*\\S+\\s*)+")) {
                 name = detail;
-                detailMenu++;
+                detailMenu=2;
                 outputNo = 0;
             } else outputNo = 5;
-        } else if (detailMenu == 2) {
+        } else if (detailMen == 2) {
             if (detail.matches("(\\s*\\S+\\s*)+")) {
                 lastName = detail;
-                detailMenu++;
+                detailMenu=3;
                 outputNo = 0;
             } else outputNo = 7;
-        } else if (detailMenu == 3) {
-            if (detail.matches("^(.+)@(.+)$")) {
+        } else if (detailMen == 3) {
+            if (detail.matches(".+")) {
                 Email = detail;
-                detailMenu++;
+                detailMenu=4;
                 outputNo = 0;
             } else outputNo = 9;
-        } else if (detailMenu == 4) {
-            if (detail.matches("09[0-9]{9}")) {
+        } else if (detailMen == 4) {
+            if (detail.matches(".+")) {
                 phoneNo = Double.parseDouble(detail);
-                detailMenu = 5;
+                detailMenu=5;
                 outputNo = 0;
             } else outputNo = 11;
-        } else if (detailMenu == 5) {
+        } else if (detailMen == 5) {
             if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
                 Date currentDate = new Date();
                 Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
@@ -127,7 +146,8 @@ public class RegisterMenu {
 //                DateFormat format = new SimpleDateFormat("dd/mm/yyyy");
  //                   birthdayDate = format.parse(detail);
                     birthdayDate = inputDate;
-                    detailMenu = 0;
+                    detailMenu=0;
+                    setSignUpNo(6);
                     createAccountWithDetails();
                 }else outputNo = 30;
             } else outputNo = 30;
@@ -154,32 +174,32 @@ public class RegisterMenu {
         }
     }
 
-    public static int createFirm(String detail) throws IOException {
-        if (detailMenu == 0) {
+    public static int createFirm(String detail , int detailMen) throws IOException {
+        if (detailMen == 0) {
             if (detail.matches("(\\s*\\S+\\s*)+")) {
                 accountRequest.setFirmName(detail);
                 detailMenu++;
                 outputNo = 0;
             } else outputNo = 3;
-        } else if (detailMenu == 1) {
+        } else if (detailMen == 1) {
             if (detail.matches("09[0-9]{9}")) {
                 accountRequest.setPhoneNo(Double.parseDouble(detail));
                 detailMenu++;
                 outputNo = 0;
             } else outputNo = 6;
-        } else if (detailMenu == 2) {
+        } else if (detailMen == 2) {
             if (detail.matches("(\\s*\\S+\\s*)+")) {
                 accountRequest.setFirmAddress(detail);
                 detailMenu = 3;
                 outputNo = 0;
             } else outputNo = 8;
-        }else if (detailMenu == 3) {
+        }else if (detailMen == 3) {
             if (detail.matches("(?i)(?:company|factory|work\\s*shop)")) {
                 accountRequest.setFirmType(detail);
                 detailMenu = 4;
                 outputNo = 0;
             } else outputNo = 18;
-        } else if (detailMenu == 4) {
+        } else if (detailMen == 4) {
             if (detail.matches("^(.+)@(.+)$")) {
                 accountRequest.setFirmEmail(detail);
                 detailMenu = 0;

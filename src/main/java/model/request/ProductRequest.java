@@ -3,6 +3,7 @@ package model.request;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import controller.menus.LoginMenu;
+import model.accounts.Account;
 import model.accounts.Seller;
 import model.firms.Firm;
 import model.productRelated.Category;
@@ -17,115 +18,122 @@ import java.util.HashMap;
 
 public class ProductRequest extends Request {
 
-    private static String productId = null;
-    private static String productName = null;
-    private static double price = 0;
-    private static Seller sellerName = null;
-    private static Firm companyName = null;
-    private static Category categoryName = null;
-    private static Category lastCategory = null;
-    private static String additionalDetail = null;
-    private static int numberOfProduct = 0;
+    private String productId = null;
+    private String productName = null;
+    private double price = 0;
+    private String companyName = null;
+    private String categoryName = null;
+    private String lastCategory = null;
+    private String additionalDetail = null;
+    private int numberOfProduct = 0;
     private static ArrayList<ProductRequest> allProductRequests = new ArrayList<>();
-    private static HashMap<String,String> specialValue = new HashMap<>();
+    // private  HashMap<String,String> specialValue = new HashMap<>();
+    private ArrayList<String> specialValue = new ArrayList<>();
     public static Type productRequestType = new TypeToken<ArrayList<ProductRequest>>() {
     }.getType();
 
 
-    public ProductRequest(String requestID) throws IOException {
-        super(requestID);
-        allProductRequests.add(this);
-        if(LoginMenu.getLoginAccount() instanceof Seller) {
-            sellerName = (Seller) LoginMenu.getLoginAccount();
-        }
-        writeInJ();
-    }
-
-
-
-    public void addKey(){
-        for (String tr : categoryName.getTraits()) {
-            specialValue.put(tr, null);
-        }
-    }
-
-    public HashMap<String, String> getSpecialValue() {
+    public ArrayList<String> getSpecialValue() {
         return specialValue;
     }
 
+    public void setSpecialValue(ArrayList<String> specialValue) throws IOException {
+        this.specialValue = specialValue;
+        writeInJ();
+    }
+
+    public ProductRequest(String requestID) throws IOException {
+        super(requestID);
+        allProductRequests.add(this);
+        if (Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
+            Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
+            seller.addProductRequest(this);
+        }
+        writeInJ();
+    }
+
+
     @Override
-    public void declineRequest() {
+    public void declineRequest() throws IOException {
         getAllRequests().remove(this);
         allProductRequests.remove(this);
         Product.getProductList().remove(this);
-        Seller.getAllProduct().remove(this);
+        if (Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
+            Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
+            seller.removeProductRequest(this);
+        }
+        writeInJ();
     }
 
     @Override
-    public  void acceptRequest() throws IOException {
-        Product newProduct = Product.getProductById(productId);
-        newProduct.setDetailProduct(newProduct.getProductImage(),productName,price,categoryName,sellerName,companyName,numberOfProduct);
-        newProduct.setAdditionalDetail(additionalDetail);
-        newProduct.getCategorySpecifications().putAll(specialValue);
-        if(lastCategory != null) {
-            lastCategory.removeProductToCategory(newProduct);
+    public void acceptRequest() throws IOException {
+        Seller seller = null;
+        if (Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
+            seller = (Seller) Account.getAccountWithUsername(this.getSeller());
         }
-        categoryName.addProductToCategory(newProduct);
+        Product newProduct = Product.getProductById(productId);
+        newProduct.setDetailProduct(newProduct.getProductImage(), productName, price, Category.getCategoryWithName(categoryName), seller, seller.getFirm(), numberOfProduct);
+        newProduct.setAdditionalDetail(additionalDetail);
+        newProduct.setProductCategorySpecifications(specialValue);
+        // newProduct.getCategorySpecifications().putAll(specialValue);
+        if (lastCategory != null) {
+            Category.getCategoryWithName(lastCategory).removeProductToCategory(newProduct);
+        }
+        Category.getCategoryWithName(categoryName).addProductToCategory(newProduct);
+
         newProduct.setProductStatus(ProductStatus.CONFIRMED);
         getAllRequests().remove(this);
         allProductRequests.remove(this);
+        seller.removeProductRequest(this);
+
     }
 
-    public void addHashmapValue(String key, String value) throws IOException {
-        specialValue.put(key,value);
-        writeInJ();
-    }
+//    public void addHashmapValue(String key, String value) throws IOException {
+//        specialValue.put(key,value);
+//        writeInJ();
+//    }
 
     public void setProductId(String productId) throws IOException {
         this.productId = productId;
         writeInJ();
 
     }
+
     public void setProductName(String productName) throws IOException {
         this.productName = productName;
         writeInJ();
 
     }
+
     public void setAdditionalDetail(String additionalDetail) throws IOException {
         this.additionalDetail = additionalDetail;
         writeInJ();
 
     }
-    public void setSellerName(Seller sellerName) throws IOException {
-        this.sellerName = sellerName;
-        writeInJ();
 
-    }
     public void setPrice(double price) throws IOException {
         this.price = price;
         writeInJ();
 
     }
-    public void setCompanyName(Firm companyName) throws IOException {
+
+    public void setCompanyName(String companyName) throws IOException {
         this.companyName = companyName;
         writeInJ();
-
     }
-    public void setCategoryName(Category categoryName) throws IOException {
-        this.categoryName = categoryName;
-        writeInJ();
 
-    }
     public void setNumberOfProduct(int numberOfProduct) throws IOException {
         this.numberOfProduct = numberOfProduct;
         writeInJ();
 
     }
 
-    public void setLastCategory(Category lastCategory) throws IOException {
-        this.lastCategory = lastCategory;
-        writeInJ();
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
+    public void setLastCategory(String lastCategory) {
+        this.lastCategory = lastCategory;
     }
 
     public static void setAllProductRequests(ArrayList<ProductRequest> allProductRequests) {
@@ -141,4 +149,14 @@ public class ProductRequest extends Request {
         String json = FileHandling.getGson().toJson(ProductRequest.allProductRequests, productRequestType);
         FileHandling.writeInFile(json, "productRequest.json");
     }
+
+    //    public void addKey(){
+//        for (String tr : categoryName.getTraits()) {
+//            specialValue.put(tr, null);
+//        }
+//    }
+//
+//    public HashMap<String, String> getSpecialValue() {
+//        return specialValue;
+//    }
 }

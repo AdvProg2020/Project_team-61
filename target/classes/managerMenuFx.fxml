@@ -9,10 +9,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ManagerMenuFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="848.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ManagerMenuFx">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" layoutX="-4.0" strokeType="INSIDE" width="1926.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="856.0" layoutX="-4.0" strokeType="INSIDE" width="1607.0">
          <stroke>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -30,16 +29,11 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <MenuBar layoutX="-4.0" layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0">
+      <MenuBar layoutX="-4.0" layoutY="-2.0" prefHeight="32.0" prefWidth="1607.0">
         <menus>
           <Menu mnemonicParsing="false" text="Back">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#exit" text="help" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Logout">
@@ -49,12 +43,12 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Exit">
               <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
               </items>
             </Menu>
         </menus>
       </MenuBar>
-      <Button layoutX="835.0" layoutY="149.0" mnemonicParsing="false" onMouseClicked="#viewPersonalInfo" prefHeight="43.0" prefWidth="249.0" text="view personal info">
+      <Button layoutX="676.0" layoutY="126.0" mnemonicParsing="false" onMouseClicked="#viewPersonalInfo" prefHeight="43.0" prefWidth="249.0" text="view personal info">
          <textFill>
             <LinearGradient endX="1.0" endY="0.8203883495145631" startX="0.3106796116504854">
                <stops>
@@ -67,7 +61,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button layoutX="518.0" layoutY="258.0" mnemonicParsing="false" onMouseClicked="#manageAllProducts" prefHeight="43.0" prefWidth="249.0" text="manage all products">
+      <Button layoutX="354.0" layoutY="237.0" mnemonicParsing="false" onMouseClicked="#manageAllProducts" prefHeight="43.0" prefWidth="249.0" text="manage all products">
          <textFill>
             <LinearGradient endX="1.0" endY="0.8203883495145631" startX="0.3106796116504854">
                <stops>
@@ -80,7 +74,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button layoutX="394.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#manageUsers" prefHeight="43.0" prefWidth="249.0" text="manage users">
+      <Button layoutX="236.0" layoutY="351.0" mnemonicParsing="false" onMouseClicked="#manageUsers" prefHeight="43.0" prefWidth="249.0" text="manage users">
          <textFill>
             <LinearGradient endX="1.0" endY="0.8203883495145631" startX="0.3106796116504854">
                <stops>
@@ -93,7 +87,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button layoutX="836.0" layoutY="258.0" mnemonicParsing="false" onMouseClicked="#createDiscount" prefHeight="43.0" prefWidth="249.0" text="create discount code">
+      <Button layoutX="675.0" layoutY="237.0" mnemonicParsing="false" onMouseClicked="#createDiscount" prefHeight="43.0" prefWidth="249.0" text="create discount code">
          <textFill>
             <LinearGradient endX="1.0" endY="0.8203883495145631" startX="0.3106796116504854">
                <stops>
@@ -106,7 +100,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button layoutX="836.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#viewDiscount" prefHeight="43.0" prefWidth="249.0" text="view discount codes">
+      <Button layoutX="675.0" layoutY="351.0" mnemonicParsing="false" onMouseClicked="#viewDiscount" prefHeight="43.0" prefWidth="249.0" text="view discount codes">
          <textFill>
             <LinearGradient endX="1.0" endY="0.8203883495145631" startX="0.3106796116504854">
                <stops>
@@ -119,7 +113,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button layoutX="1161.0" layoutY="258.0" mnemonicParsing="false" onMouseClicked="#manageRequests" prefHeight="43.0" prefWidth="249.0" text="manage requests">
+      <Button layoutX="1011.0" layoutY="237.0" mnemonicParsing="false" onMouseClicked="#manageRequests" prefHeight="43.0" prefWidth="249.0" text="manage requests">
          <textFill>
             <LinearGradient endX="1.0" endY="0.8203883495145631" startX="0.3106796116504854">
                <stops>
@@ -132,7 +126,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button layoutX="1293.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#manageCategories" prefHeight="43.0" prefWidth="249.0" text="manage categories">
+      <Button layoutX="1101.0" layoutY="351.0" mnemonicParsing="false" onMouseClicked="#manageCategories" prefHeight="43.0" prefWidth="249.0" text="manage categories">
          <textFill>
             <LinearGradient endX="1.0" endY="0.8203883495145631" startX="0.3106796116504854">
                <stops>

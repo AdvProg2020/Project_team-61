@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="addCommentSectionPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="view.gui.ViewComment">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="400.0" stroke="BLACK" strokeType="INSIDE" width="600.0">
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#eadeca" />
+                        <Stop color="#fad2f0" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <TextArea fx:id="commentTextField" layoutX="169.0" layoutY="108.0" prefHeight="200.0" prefWidth="280.0" promptText="enter the comment" />
+        <TextField fx:id="titleTextField" layoutX="169.0" layoutY="66.0" prefHeight="26.0" prefWidth="280.0" promptText="title" />
+        <Label layoutX="122.0" layoutY="70.0" text="title :">
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#001eff" />
+                        <Stop color="#ff009a" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </textFill>
+        </Label>
+        <Label layoutX="94.0" layoutY="108.0" text="comment :">
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#001eff" />
+                        <Stop color="#ff009a" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </textFill>
+        </Label>
+        <Button fx:id="backButtonAddComment" layoutX="169.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleBackAddCommentButton" text="back">
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#001eff" />
+                        <Stop color="#ff009a" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </textFill>
+        </Button>
+        <Button fx:id="sendCommentButton" layoutX="226.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleSendComment" text="send">
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#001eff" />
+                        <Stop color="#ff009a" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </textFill>
+        </Button>
+        <Label fx:id="nullAddCommentError" visible="false" layoutX="297.0" layoutY="338.0" prefHeight="18.0" prefWidth="158.0">
+            <font>
+                <Font name="Bookman Old Style Bold Italic" size="14.0" />
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#fd0808" />
+                        <Stop color="#ff1818" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </textFill>
+        </Label>
+    </children>
+</AnchorPane>

@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.shape.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1077.0" prefWidth="1918.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UsersFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.UsersFx">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="849.0" layoutX="1.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="1605.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
             <fill>
                 <LinearGradient endX="1.0" endY="1.0" startX="0.15533980582524273" startY="0.0970873786407767">
                     <stops>
@@ -24,7 +21,7 @@
                 </LinearGradient>
             </fill>
         </Rectangle>
-        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.bottomAnchor="1050.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+        <MenuBar layoutX="-1.0" layoutY="1.0" prefHeight="36.0" prefWidth="1605.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <menus>
                 <Menu mnemonicParsing="false" text="User menu">
                     <items>
@@ -48,7 +45,7 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <Text layoutX="907.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Users" AnchorPane.bottomAnchor="952.458984375" AnchorPane.leftAnchor="907.0" AnchorPane.rightAnchor="905.1181640625" AnchorPane.topAnchor="68.677734375">
+        <Text layoutX="749.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Users" AnchorPane.bottomAnchor="770.458984375" AnchorPane.leftAnchor="749.0" AnchorPane.rightAnchor="750.1181640625" AnchorPane.topAnchor="55.677734375">
             <font>
                 <Font name="System Bold Italic" size="42.0" />
             </font>
@@ -61,46 +58,60 @@
                 </LinearGradient>
             </fill>
         </Text>
-        <TableView fx:id="usersList" layoutX="243.0" layoutY="147.0" prefHeight="783.0" prefWidth="1477.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="243.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="147.0">
+        <TableView fx:id="usersList" layoutX="121.0" layoutY="139.0" prefHeight="612.0" prefWidth="1244.0">
             <columns>
-                <TableColumn fx:id="UserNumber" prefWidth="96.0" text="Number" />
-                <TableColumn fx:id="UserId" prefWidth="216.0" text="Username" />
-                <TableColumn fx:id="userName" prefWidth="190.0" text="Name" />
-                <TableColumn fx:id="userLast" prefWidth="235.0" text="Last name" />
-                <TableColumn fx:id="userBirth" prefWidth="218.0" text="Birthday date" />
-                <TableColumn fx:id="userPhoneNo" prefWidth="267.0" text="Phone number" />
-                <TableColumn fx:id="userEmail" prefWidth="254.0" text="Email" />
+                <TableColumn fx:id="UserId" prefWidth="155.0" text="Username" />
+                <TableColumn fx:id="userName" prefWidth="196.0" text="Name" />
+                <TableColumn fx:id="userLast" prefWidth="203.0" text="Last name" />
+                <TableColumn fx:id="userBirth" prefWidth="189.0" text="Birthday date" />
+                <TableColumn fx:id="userPhoneNo" prefWidth="251.0" text="Phone number" />
+                <TableColumn fx:id="userEmail" prefWidth="249.0" text="Email" />
             </columns>
         </TableView>
-        <Button layoutX="1625.0" layoutY="961.0" mnemonicParsing="false" onMouseClicked="#deleteUser" prefHeight="39.0" prefWidth="90.0" text="Delete" AnchorPane.bottomAnchor="77.0" AnchorPane.leftAnchor="1385.0" AnchorPane.rightAnchor="443.0" AnchorPane.topAnchor="961.0">
-            <textFill>
-                <LinearGradient endX="1.0" endY="1.0">
-                    <stops>
-                        <Stop color="#6a00ff" />
-                        <Stop color="RED" offset="1.0" />
-                    </stops>
-                </LinearGradient>
-            </textFill>
-        </Button>
-        <Button layoutX="1628.0" layoutY="961.0" mnemonicParsing="false" onMouseClicked="#viewUser" prefHeight="39.0" prefWidth="90.0" text="View" AnchorPane.bottomAnchor="77.0" AnchorPane.leftAnchor="1628.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="961.0">
-            <textFill>
-                <LinearGradient endX="1.0" endY="1.0">
-                    <stops>
-                        <Stop color="#6a00ff" />
-                        <Stop color="RED" offset="1.0" />
-                    </stops>
-                </LinearGradient>
-            </textFill>
-        </Button>
-        <Button layoutX="1494.0" layoutY="961.0" mnemonicParsing="false" onMouseClicked="#AddManager" prefHeight="39.0" prefWidth="115.0" text="Add manager" AnchorPane.bottomAnchor="77.0" AnchorPane.leftAnchor="1494.0" AnchorPane.rightAnchor="309.0" AnchorPane.topAnchor="961.0">
-            <textFill>
-                <LinearGradient endX="1.0" endY="1.0">
-                    <stops>
-                        <Stop color="#6a00ff" />
-                        <Stop color="RED" offset="1.0" />
-                    </stops>
-                </LinearGradient>
-            </textFill>
-        </Button>
+      <Button layoutX="1275.0" layoutY="773.0" mnemonicParsing="false" onMouseClicked="#viewUser" prefHeight="39.0" prefWidth="90.0" text="View">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#6a00ff" />
+                  <Stop color="RED" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="1168.0" layoutY="773.0" mnemonicParsing="false" onMouseClicked="#deleteUser" prefHeight="39.0" prefWidth="90.0" text="Delete">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#6a00ff" />
+                  <Stop color="RED" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="1037.0" layoutY="773.0" mnemonicParsing="false" onMouseClicked="#AddManager" prefHeight="39.0" prefWidth="115.0" text="Add manager">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#6a00ff" />
+                  <Stop color="RED" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Label fx:id="usersMs" layoutX="121.0" layoutY="766.0" prefHeight="53.0" prefWidth="735.0" text="Label" textFill="WHITE">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Button layoutX="934.0" layoutY="773.0" mnemonicParsing="false" onMouseClicked="#sortUser" prefHeight="39.0" prefWidth="90.0" text="Sort">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#6a00ff" />
+                  <Stop color="RED" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
     </children>
 </AnchorPane>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="592.0" prefWidth="1037.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ProductMenuFX">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="592.0" stroke="BLACK" strokeType="INSIDE" width="1059.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="RED" />
+                  <Stop color="BLACK" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Text layoutX="491.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score" wrappingWidth="96.6708984375">
+         <font>
+            <Font name="System Bold Italic" size="38.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#f4ff91" />
+                  <Stop color="#ffb700" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <ImageView fitHeight="130.0" fitWidth="142.0" layoutX="644.0" layoutY="211.0" onMouseClicked="#score2" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icons/2.png" />
+         </image></ImageView>
+      <Button layoutX="490.0" layoutY="474.0" mnemonicParsing="false" onMouseClicked="#score" prefHeight="43.0" prefWidth="110.0" text="Done">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#ffaa00" />
+                  <Stop color="RED" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <ImageView fitHeight="130.0" fitWidth="142.0" layoutX="831.0" layoutY="211.0" onMouseClicked="#score1" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icons/1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="130.0" fitWidth="142.0" layoutX="475.0" layoutY="211.0" onMouseClicked="#score3" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icons/3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="130.0" fitWidth="142.0" layoutX="283.0" layoutY="211.0" onMouseClicked="#score4" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icons/4.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="130.0" fitWidth="142.0" layoutX="116.0" layoutY="211.0" onMouseClicked="#score5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icons/5.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="scoreMs" layoutX="512.0" layoutY="398.0" prefHeight="21.0" prefWidth="55.0" text="Label" textFill="WHITE" />
+   </children>
+</AnchorPane>

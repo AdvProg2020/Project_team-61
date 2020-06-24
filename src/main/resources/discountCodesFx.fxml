@@ -10,9 +10,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.DiscountCodesFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.DiscountCodesFx">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" layoutX="-200.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="882.0" layoutX="-200.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" width="1605.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <fill>
                 <LinearGradient endX="1.0" endY="1.0" startX="0.15533980582524273" startY="0.0970873786407767">
                     <stops>
@@ -24,7 +24,7 @@
                 </LinearGradient>
             </fill>
         </Rectangle>
-        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.bottomAnchor="1050.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <menus>
                 <Menu mnemonicParsing="false" text="User menu">
                     <items>
@@ -48,7 +48,7 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <Text layoutX="807.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discount codes">
+        <Text layoutX="646.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discount codes">
             <font>
                 <Font name="System Bold Italic" size="42.0" />
             </font>
@@ -61,17 +61,17 @@
                 </LinearGradient>
             </fill>
         </Text>
-        <TableView fx:id="discountCodes" layoutX="274.0" layoutY="139.0" prefHeight="851.0" prefWidth="1322.0">
+        <TableView fx:id="discountCodes" layoutX="196.0" layoutY="134.0" prefHeight="661.0" prefWidth="1193.0">
             <columns>
-                <TableColumn fx:id="discountId" prefWidth="220.0" text="ID" />
-                <TableColumn fx:id="discountAmount" prefWidth="220.0" text="Discount amount" />
-                <TableColumn fx:id="discountStart" prefWidth="220.0" text="Start date" />
-                <TableColumn fx:id="discountEnd" prefWidth="220.0" text="End date" />
-                <TableColumn fx:id="maxDiscountAmount" prefWidth="220.0" text="Max amount" />
-                <TableColumn fx:id="discountTotalTime" prefWidth="220.0" text="Total times of use" />
+                <TableColumn fx:id="discountId" prefWidth="157.0" text="ID" />
+                <TableColumn fx:id="discountAmount" prefWidth="178.0" text="Discount amount" />
+                <TableColumn fx:id="discountStart" prefWidth="162.0" text="Start date" />
+                <TableColumn fx:id="discountEnd" prefWidth="239.0" text="End date" />
+                <TableColumn fx:id="maxDiscountAmount" prefWidth="237.0" text="Max amount" />
+                <TableColumn fx:id="discountTotalTime" prefWidth="219.0" text="Total times of use" />
             </columns>
         </TableView>
-        <Button  layoutX="1332.0" layoutY="1009.0" mnemonicParsing="false" onMouseClicked="#add" prefHeight="25.0" prefWidth="81.0" text="Add">
+        <Button layoutX="1119.0" layoutY="807.0" mnemonicParsing="false" onMouseClicked="#viewDiscount" prefHeight="25.0" prefWidth="81.0" text="View">
             <textFill>
                 <LinearGradient endX="1.0" endY="1.0">
                     <stops>
@@ -88,7 +88,7 @@
                     </stops>
                 </LinearGradient>
             </textFill></Button>
-        <Button  layoutX="1525.0" layoutY="1009.0" mnemonicParsing="false" onMouseClicked="#edit" prefHeight="25.0" prefWidth="81.0" text="Edit">
+        <Button layoutX="1216.0" layoutY="807.0" mnemonicParsing="false" onMouseClicked="#edit" prefHeight="25.0" prefWidth="81.0" text="Edit">
             <textFill>
                 <LinearGradient endX="1.0" endY="1.0">
                     <stops>
@@ -111,7 +111,7 @@
                 </LinearGradient>
             </textFill>
         </Button>
-        <Button  layoutX="1424.0" layoutY="1009.0" mnemonicParsing="false" onMouseClicked="#remove" prefHeight="25.0" prefWidth="81.0" text="Remove">
+        <Button layoutX="1308.0" layoutY="807.0" mnemonicParsing="false" onMouseClicked="#remove" prefHeight="25.0" prefWidth="81.0" text="Remove">
             <textFill>
                 <LinearGradient endX="1.0" endY="1.0">
                     <stops>
@@ -128,5 +128,28 @@
                     </stops>
                 </LinearGradient>
             </textFill></Button>
+      <Label fx:id="discountCodesMs" layoutX="198.0" layoutY="812.0" prefHeight="21.0" prefWidth="679.0" text="Label" textFill="WHITE">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Button layoutX="988.0" layoutY="807.0" mnemonicParsing="false" onMouseClicked="#sortDiscount" prefHeight="31.0" prefWidth="115.0" text="Sort Amount">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color blue="0.6447368264198303" green="0.035818714648485184" red="0.5736963748931885" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color blue="0.4336931109428406" green="0.147599995136261" red="0.8199999928474426" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
     </children>
 </AnchorPane>
