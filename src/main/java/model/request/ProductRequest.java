@@ -157,8 +157,9 @@ public class ProductRequest extends Request {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(String img) throws IOException {
         this.img = img;
+        writeInJ();
     }
 
     //    public void addKey(){
