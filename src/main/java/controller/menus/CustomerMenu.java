@@ -19,7 +19,7 @@ import java.util.UUID;
 
 
 public class CustomerMenu {
-    private static int outputNo;
+    private static int outputNo =0;
     private static String productID;
     private static boolean hasDiscount;
     private static String discountID;

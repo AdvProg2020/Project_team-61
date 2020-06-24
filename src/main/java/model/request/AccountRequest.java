@@ -30,8 +30,7 @@ public class AccountRequest extends Request {
     private static String firmAddress = null;
     private static String firmEmail = null;
     private static String FirmType = null;
-    // private static String firm;
-    private Account selectedAccount;
+
     private static ArrayList<AccountRequest> allAccountRequests = new ArrayList<>();
     public static Type accountRequestType = new TypeToken<ArrayList<AccountRequest>>() {
     }.getType();
@@ -71,7 +70,6 @@ public class AccountRequest extends Request {
         Seller seller = new Seller(username);
           createFirm();
           Firm firm = Firm.getFirmWithID(firmName);
-       //  firm = null;
         seller.setDetailsToAccount(password, name, lastname, Email, phoneNo, birthdayDate, firm);
          firm.setDetailToFirm(FirmPhoneNO, firmAddress, firmEmail);
         Request.getAllRequests().remove(this);
@@ -111,7 +109,7 @@ public class AccountRequest extends Request {
     }
 
     public void setEmail(String email) throws IOException {
-        Email = email;
+        this.Email = email;
         writeInJ();
 
     }
@@ -136,7 +134,7 @@ public class AccountRequest extends Request {
     }
 
     public void setFirmPhoneNO(double firmPhoneNO) throws IOException {
-        FirmPhoneNO = firmPhoneNO;
+        this.FirmPhoneNO = firmPhoneNO;
         writeInJ();
 
     }
@@ -154,7 +152,7 @@ public class AccountRequest extends Request {
     }
 
     public void setFirmType(String firmType) throws IOException {
-        FirmType = firmType;
+        this.FirmType = firmType;
         writeInJ();
 
     }
@@ -216,7 +214,4 @@ public class AccountRequest extends Request {
         return firmEmail;
     }
 
-    public static String getFirmType() {
-        return FirmType;
-    }
 }

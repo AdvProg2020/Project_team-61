@@ -20,24 +20,16 @@ public abstract class Request {
 
     public Request(String requestID) throws IOException {
         this.requestText = requestID;
-
-        //?
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         now = LocalDateTime.now();
         requestDate = dtf.format(now);
         if(LoginMenu.getLoginAccount() instanceof Seller) {
             seller =  LoginMenu.getLoginAccount().getUsername();
-            Seller sel = (Seller) LoginMenu.getLoginAccount();
-           //sel.addRequest(this);
         }
         allRequests.add(this);
 
-//        writeInJ();
     }
 
-    public String getRequestDate() {
-        return requestDate;
-    }
 
     public String getSeller() {
         return seller;
@@ -63,24 +55,19 @@ public abstract class Request {
 
     public abstract void acceptRequest() throws IOException;
 
-
-    public static void deleteRequest(String id){
-        allRequests.remove(getRequestFromID(id));
-    }
     public static Request getRequestFromID(String requestID){
         for(Request request : allRequests){
             if (request.requestText.equalsIgnoreCase(requestID)) return request;
         }
         return null;
     }
+
     public static boolean isThereRequestFromID(String requestID){
         for(Request request : allRequests){
             if (request.requestText.equalsIgnoreCase(requestID)) return true;
         }
         return false;
     }
-
-
 
     public static Comparator<Request> productComparatorForScore = new Comparator<Request>() {
 

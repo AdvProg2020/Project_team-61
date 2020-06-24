@@ -25,7 +25,7 @@ public class MainMenuFx {
         }
 
         public void sales(MouseEvent mouseEvent) throws IOException {
-//               Parent root = FXMLLoader.load(Objects.requireNonNull(className.class.getClassLoader().getResource(name)));
+               Parent root = FXMLLoader.load(Objects.requireNonNull(SaleMenuFx.class.getClassLoader().getResource("saleMenuFx.fxml")));
                 goToPage();
 
         }

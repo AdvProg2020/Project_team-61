@@ -20,9 +20,7 @@ public class SaleRequest extends Request {
     private  Date endOfSalePeriod = null;
     private  int saleAmount = 0;
     private  String product= null;
-   // private  Account seller = null;
     private  ArrayList<Product> allSaleProducts = new ArrayList<>();
-    private SaleStatus saleStatus;
     private  Sale sale;
     private static ArrayList<SaleRequest> allSaleRequests = new ArrayList<>();
     public static Type saleRequestType = new TypeToken<ArrayList<SaleRequest>>() {

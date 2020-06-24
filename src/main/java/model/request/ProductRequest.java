@@ -21,7 +21,6 @@ public class ProductRequest extends Request {
     private String productId = null;
     private String productName = null;
     private double price = 0;
-    // private  Seller sellerName = null;
     private String companyName = null;
     private String categoryName = null;
     private String lastCategory = null;
@@ -54,15 +53,7 @@ public class ProductRequest extends Request {
     }
 
 
-//    public void addKey(){
-//        for (String tr : categoryName.getTraits()) {
-//            specialValue.put(tr, null);
-//        }
-//    }
-//
-//    public HashMap<String, String> getSpecialValue() {
-//        return specialValue;
-//    }
+
 
     @Override
     public void declineRequest() throws IOException {
@@ -83,7 +74,7 @@ public class ProductRequest extends Request {
             seller = (Seller) Account.getAccountWithUsername(this.getSeller());
         }
         Product newProduct = Product.getProductById(productId);
-        newProduct.setDetailProduct(newProduct.getProductImage(), productName, price, Category.getCategoryWithName(categoryName), seller, Firm.getFirmWithID(companyName), numberOfProduct);
+        newProduct.setDetailProduct(newProduct.getProductImage(), productName, price, Category.getCategoryWithName(categoryName), seller, seller.getFirm(), numberOfProduct);
         newProduct.setAdditionalDetail(additionalDetail);
         newProduct.setProductCategorySpecifications(specialValue);
         // newProduct.getCategorySpecifications().putAll(specialValue);
@@ -93,7 +84,6 @@ public class ProductRequest extends Request {
         Category.getCategoryWithName(categoryName).addProductToCategory(newProduct);
 
         newProduct.setProductStatus(ProductStatus.CONFIRMED);
-      //  seller.addProduct(newProduct);
         getAllRequests().remove(this);
         allProductRequests.remove(this);
         seller.removeProductRequest(this);
@@ -161,4 +151,14 @@ public class ProductRequest extends Request {
         String json = FileHandling.getGson().toJson(ProductRequest.allProductRequests, productRequestType);
         FileHandling.writeInFile(json, "productRequest.json");
     }
+
+    //    public void addKey(){
+//        for (String tr : categoryName.getTraits()) {
+//            specialValue.put(tr, null);
+//        }
+//    }
+//
+//    public HashMap<String, String> getSpecialValue() {
+//        return specialValue;
+//    }
 }

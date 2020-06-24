@@ -18,15 +18,13 @@ public class LoginFx {
     private static Parent root;
     @FXML
     private TextField userLogin;
-
     @FXML
     private PasswordField passLogin;
-
     @FXML
     private Label passLoginMs;
-
     @FXML
     private Label userLoginMs;
+
     private static Parent priRoot;
 
     public static void setPriRoot(Parent priRoot) {
@@ -78,10 +76,12 @@ public class LoginFx {
     }
 
     private static void goToPage(){
-        Scene pageTwoScene = new Scene(root);
-        //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        Main.primStage.setScene(pageTwoScene);
-        Main.primStage.show();
+        if(root != null) {
+            Scene pageTwoScene = new Scene(root);
+            //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+            Main.primStage.setScene(pageTwoScene);
+            Main.primStage.show();
+        }
     }
 
 
