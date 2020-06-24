@@ -26,6 +26,7 @@ public class Sale{
     public Sale(String offId) throws IOException {
         this.offId = offId;
         allSales.add(this);
+        getAllSales().add(this);
         writeInJ();
     }
     public void setSaleDetails(SaleStatus saleStatus, Date startOfSalePeriod, Date endOfSalePeriod, int saleAmount, Account seller) throws IOException {
@@ -34,6 +35,7 @@ public class Sale{
         this.endOfSalePeriod = endOfSalePeriod;
         this.saleAmount = saleAmount;
         this.seller = seller;
+
         writeInJ();
     }
 

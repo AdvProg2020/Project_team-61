@@ -37,6 +37,8 @@ public class Product {
     private int totalNumberOfBuyers;
     private boolean isBought;
     String productImageId;
+    private String categoryName;
+    private String sellerName;
 
     //sample.lists
 //    private  ArrayList<Account> listOfSellers = new ArrayList<Account>();
@@ -90,12 +92,14 @@ public class Product {
         }
         if (seller != null) {
             this.seller = seller;
+            sellerName = seller.getName();
         }
         if (numberOfProducts != 0) {
             this.numberOfProducts = numberOfProducts;
         }
         if (category != null) {
             this.category = category;
+            categoryName = category.getName();
         }
         if (productImageId != null) {
             this.productImageId = productImageId;
@@ -293,6 +297,21 @@ public class Product {
         return comment;
     }
 
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public String getSellerName() {
+        return sellerName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
+    }
     //othersTobeHandel-------------------------------------------------------------------------------
 
 
