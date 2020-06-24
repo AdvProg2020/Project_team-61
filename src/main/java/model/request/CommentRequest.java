@@ -28,7 +28,7 @@ public class CommentRequest extends Request {
     public CommentRequest(String requestID) throws IOException {
         super(requestID);
         allCommentRequests.remove(this);
-        if(Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
+        if(Account.getAccountWithUsername(this.getSeller()) instanceof Customer) {
             Customer customer = (Customer) Account.getAccountWithUsername(this.getSeller());
             customer.addCommentRequest(this);
         }
