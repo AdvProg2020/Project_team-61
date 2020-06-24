@@ -22,9 +22,9 @@ public class Seller extends Account {
     private  ArrayList<Product> allProduct = new ArrayList<>();
     private  ArrayList<Sale> allSales = new ArrayList<>();
    // private  ArrayList<Request> allRequests = new ArrayList<>();
-     private  ArrayList<Request> allProductRequests = new ArrayList<>();
-    private  ArrayList<Request> allSaleRequests = new ArrayList<>();
-    private  ArrayList<Request> allAccountRequests = new ArrayList<>();
+     private  ArrayList<ProductRequest> allProductRequests = new ArrayList<>();
+    private  ArrayList<SaleRequest> allSaleRequests = new ArrayList<>();
+    private  ArrayList<AccountRequest> allAccountRequests = new ArrayList<>();
     public static Type SellerType = new TypeToken<ArrayList<Seller>>() {
     }.getType();
 
@@ -51,27 +51,27 @@ public class Seller extends Account {
         allProductRequests.add(productRequest);
     }
 
-    public ArrayList<Request> getAllProductRequests() {
+    public ArrayList<ProductRequest> getAllProductRequests() {
         return allProductRequests;
     }
 
-    public void setAllProductRequests(ArrayList<Request> allProductRequests) {
+    public void setAllProductRequests(ArrayList<ProductRequest> allProductRequests) {
         this.allProductRequests = allProductRequests;
     }
 
-    public ArrayList<Request> getAllSaleRequests() {
+    public ArrayList<SaleRequest> getAllSaleRequests() {
         return allSaleRequests;
     }
 
-    public void setAllSaleRequests(ArrayList<Request> allSaleRequests) {
+    public void setAllSaleRequests(ArrayList<SaleRequest> allSaleRequests) {
         this.allSaleRequests = allSaleRequests;
     }
 
-    public ArrayList<Request> getAllAccountRequests() {
+    public ArrayList<AccountRequest> getAllAccountRequests() {
         return allAccountRequests;
     }
 
-    public void setAllAccountRequests(ArrayList<Request> allAccountRequests) {
+    public void setAllAccountRequests(ArrayList<AccountRequest> allAccountRequests) {
         this.allAccountRequests = allAccountRequests;
     }
 

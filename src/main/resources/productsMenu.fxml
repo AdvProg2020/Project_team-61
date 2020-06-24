@@ -151,7 +151,7 @@
                                         </AnchorPane>
                                     </content>
                                 </Tab>
-                                <Tab onSelectionChanged="#dataInListView" text="All Categories">
+                                <Tab  text="All Categories">
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>

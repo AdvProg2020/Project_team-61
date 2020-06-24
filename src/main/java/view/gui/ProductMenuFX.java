@@ -1,20 +1,29 @@
 package view.gui;
 
+import controller.ProductMenu;
+import controller.menus.CustomerMenu;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.CacheHint;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.productRelated.Comment;
 import model.productRelated.Product;
+import view.OutputMassageHandler;
+
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class ProductMenuFX {
+
     @FXML
     public AnchorPane productPagePane;
     @FXML
@@ -31,7 +41,7 @@ public class ProductMenuFX {
     public static Scene prevScene;
     public static Stage thisStage = new Stage();
     public static Product productInPage;
-    public AnchorPane scrollPane;
+
     public TextArea commentTextField;
     public TextField titleTextField;
     public Button backButtonAddComment;
@@ -48,93 +58,135 @@ public class ProductMenuFX {
     @FXML
     private Button commentButton;
     @FXML
-    private Button scoreButton;
-    @FXML
     private Label didntBuyToScoreOrProductIsFinish;
-    private static Product curProduct;
-
-    public static void setCurProduct(Product curProduct) {
-        ProductMenuFX.curProduct = curProduct;
-    }
-
     @FXML
-    public TableColumn<Product, ArrayList<Comment>> titleColumn = new TableColumn<>("title");
-
+    public TableColumn<Comment, String> titleColumn = new TableColumn<>("title");
     @FXML
-    public TableColumn<Product, ArrayList<Comment>> contentColumn = new TableColumn<>("content");
+    public TableColumn<Comment, String> contentColumn = new TableColumn<>("content");
     @FXML
     public static ObservableList<Comment> data = FXCollections.observableArrayList();
+    @FXML
+    private Label scoreMs;
+    private int score =0;
 
-
-    public static void showProPage(Stage stage, Scene scene, Product product) throws IOException {
-        productInPage = product;
-    }
-
-
-    public void makeUpPage() throws FileNotFoundException {
+    public void makeUpPage() throws IOException {
         productNameLabel.setText(productInPage.getProductName());
         File file = new File(productInPage.getProductImage());
         Image image = new Image(new FileInputStream(file));
         productPic.setImage(image);
-    }
+        productDetail.setText("Id : " + productInPage.getId() + "\n" +
+                "Name : " + productInPage.getProductName() + "\n" +
+                "Price : " + productInPage.getPrice() + "\n" +
+                "Seller : " + productInPage.getSeller().getName() + "\n" +
+                "Category : " + productInPage.getCategory().getName() + "\n" +
+                "Number : " + productInPage.getNumberOfProducts() + "\n" +
+                "Average Score : " + productInPage.getScore() + "\n"
+        );
+        productDetail.setEditable(false);
+        for (String productCategorySpecification : productInPage.productCategorySpecifications) {
+            System.out.println(productCategorySpecification);
+        }
+        for (String specification : productInPage.productCategorySpecifications) {
 
+            if (specification != null && !specification.equals("")) {
+                for (String productCategorySpecification : productInPage.productCategorySpecifications) {
+                    if (!productCategorySpecification.equals(null)) {
+                        if (!productCategoryDetail.getText().equals(handleProCatDetail())) {
+                            productCategoryDetail.appendText(productCategorySpecification + "\n");
+                        }
+                    }
+                }
+            } else {
+                System.out.println("trait is empty");
+            }
+        }
+        productCategoryDetail.setEditable(false);
+
+    }
 
     @FXML
     void popUpAddComment(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("view/gui/fxFile/comment.fxml")));
-        thisStage = new Stage();
+        Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("sample/fxFile/comment.fxml")));
         prevScene = new Scene(root);
+        thisStage = new Stage();
         thisStage.setScene(prevScene);
         thisStage.show();
     }
-
 
     public void handleAddProductToLog(ActionEvent actionEvent) {
 
     }
 
-    public void handleScore(ActionEvent actionEvent) {
-
-    }
-
     public void handleBackAddCommentButton(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("view/gui/fxFile/sample3.fxml")));
-        prevScene = new Scene(root);
-        thisStage.setScene(prevScene);
-        thisStage.show();
+        thisStage.close();
     }
 
-    public void handleSendComment(ActionEvent actionEvent) {
-        String title = titleTextField.getText();
-        String content = commentTextField.getText();
-        if (title != null) {
-            if (content != null) {
-//                productInPage.com(title, content);
-            } else {
-                nullAddCommentError.setText("content is empty");
-                nullAddCommentError.setVisible(true);
-            }
-        } else {
-            nullAddCommentError.setText("title is empty");
-            nullAddCommentError.setVisible(true);
+    public void handleSendComment(ActionEvent actionEvent) throws IOException {
+        nullAddCommentError.setText(OutputMassageHandler.showProductOutput(ProductMenu.addComments()));
+        nullAddCommentError.setText(OutputMassageHandler.showProductOutput(ProductMenu.contentOfComment(commentTextField.getText())));
+        nullAddCommentError.setText(OutputMassageHandler.showProductOutput(ProductMenu.titleOfComment(titleTextField.getText())));
+    }
+
+    public String handleProCatDetail() {
+        String out = "";
+        for (String specification : productInPage.productCategorySpecifications) {
+            out += specification + "\n";
         }
+        return out;
     }
 
     @FXML
     public void initialize() throws IOException {
-        titleColumn.setCellValueFactory(new PropertyValueFactory<Product, ArrayList<Comment>>("title"));
-        contentColumn.setCellValueFactory(new PropertyValueFactory<Product, ArrayList<Comment>>("content"));
-        initializeObserverList();
+        titleColumn.setCellValueFactory(new PropertyValueFactory<Comment, String>("title"));
+        contentColumn.setCellValueFactory(new PropertyValueFactory<Comment, String>("content"));
+        for (Comment comment : Comment.getCommentsOfPro(productInPage.getId())) {
+            if (!data.contains(comment)) {
+                data.add(comment);
+            }
+        }
         commentTableView.getColumns().addAll(titleColumn, contentColumn);
         commentTableView.setItems(data);
+        for (Comment comment : Comment.getCommentsOfPro(productInPage.getId())) {
+            System.out.println(comment.getTitle());
+        }
+        data.removeAll();
+    }
+
+    public void backToProductsMenu(ActionEvent event) throws IOException {
+        AnchorPane root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("sample/fxFile/sample.fxml")));
+        Scene scene = new Scene(root);
+        thisStage.setScene(scene);
+        thisStage.show();
+    }
+
+
+
+    public void score5(MouseEvent mouseEvent) {
+        score = 4;
+    }
+
+    public void score4(MouseEvent mouseEvent) {
+        score = 4;
+    }
+
+    public void score3(MouseEvent mouseEvent) {
+        score = 3;
+    }
+
+    public void score1(MouseEvent mouseEvent) {
+        score = 1;
+    }
+
+
+    public void score(MouseEvent mouseEvent) throws IOException {
+        if(score != 0){
+            scoreMs.setText(OutputMassageHandler.showCustomerOutput( CustomerMenu.rateProduct( productInPage.getProductId(), score)));
+        }else scoreMs.setText("you have to select first");
+    }
+
+    public void score2(MouseEvent mouseEvent) {
 
     }
 
-    private void initializeObserverList() {
-//        if (productInPage.getAllCommentsOnProduct().size() != 0) {
-//            data.addAll(productInPage.getAllCommentsOnProduct());
-//        } else {
-//            System.out.println("no");
-//        }
-    }
+
 }

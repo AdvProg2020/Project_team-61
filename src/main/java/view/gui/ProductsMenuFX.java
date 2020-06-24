@@ -101,9 +101,13 @@ public class ProductsMenuFX {
                         });
 
                 });
+
+
+
                 tableView.setEditable(true);
 
-
+                dataInListView();
+                categoriesListView.setItems(dataCat);
                 SortedList<Product> sortedList = new SortedList<>(filteredList);
                 sortedList.comparatorProperty().bind(tableView.comparatorProperty());
                 tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);

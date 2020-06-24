@@ -117,7 +117,8 @@ public class BuyLogFx {
     public void viewProductFromBuyLog(MouseEvent mouseEvent) throws IOException {
         if (buyLog.getSelectionModel().getSelectedItem()!=null){
             Product selectedItem=buyLog.getSelectionModel().getSelectedItem();
-            ProductMenuFX.setCurProduct(selectedItem);
+//            ProductMenuFX.setCurProduct(selectedItem);
+            ProductMenuFX.productInPage = selectedItem;
             root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenuFx.fxml")));;
             goToPage();
         }

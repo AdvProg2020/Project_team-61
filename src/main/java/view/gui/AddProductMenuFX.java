@@ -199,9 +199,9 @@ public class AddProductMenuFX {
     }
 
     public void backToProducts(MouseEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/productsMenu.fxml"));
-//        thisStage = new Stage();
-        prevScene = new Scene(fxmlLoader.load());
+        Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productsMenu.fxml")));
+        thisStage = new Stage();
+        prevScene = new Scene(root);
         thisStage.setScene(prevScene);
         thisStage.show();
     }
