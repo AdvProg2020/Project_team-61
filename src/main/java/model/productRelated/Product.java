@@ -80,7 +80,7 @@ public class Product {
 
     //finish
     //id,productImage,name,price,category,seller
-    public void setDetailProduct(String productImageId, String name, double price, Category categoryr, Account selle, Firm firm, int numberOfProducts) throws IOException {
+    public void setDetailProduct(String productImageId, String name, double price, Category category, Account selle, Firm firm, int numberOfProducts) throws IOException {
         if (name != null) {
             this.productName = name;
         }
@@ -90,9 +90,11 @@ public class Product {
         if (price != 0) {
             this.price = price;
         }
-        if (seller != null) {
-            this.seller = seller;
-            sellerName = seller.getName();
+        if (selle != null) {
+            if(selle instanceof  Seller) {
+                this.seller = (Seller) selle;
+                sellerName = seller.getName();
+            }
         }
         if (numberOfProducts != 0) {
             this.numberOfProducts = numberOfProducts;

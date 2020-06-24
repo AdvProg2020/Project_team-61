@@ -75,6 +75,7 @@ public class ProductRequest extends Request {
         newProduct.setDetailProduct(newProduct.getProductImage(), productName, price, Category.getCategoryWithName(categoryName), seller, seller.getFirm(), numberOfProduct);
         newProduct.setAdditionalDetail(additionalDetail);
         newProduct.setProductCategorySpecifications(specialValue);
+        seller.getAllProduct().add(newProduct);
         // newProduct.getCategorySpecifications().putAll(specialValue);
         if (lastCategory != null) {
             Category.getCategoryWithName(lastCategory).removeProductToCategory(newProduct);

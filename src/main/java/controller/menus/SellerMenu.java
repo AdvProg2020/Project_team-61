@@ -157,6 +157,7 @@ public class SellerMenu {
                             product.setProductStatus(ProductStatus.UNDERREVIEWFORCONSTRUCTION);
                             productRequest = new ProductRequest(id);
                             productRequest.setProductId(detail);
+                            seller.getAllProductRequests().add(productRequest);
 //                            productRequest.setCompanyName(LoginMenu.getFirm().getName());
                         } else if (Request.getRequestFromID(id) instanceof ProductRequest) {
                             productRequest = (ProductRequest) Request.getRequestFromID(id);
