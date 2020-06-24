@@ -12,14 +12,14 @@ import java.util.Date;
 
 
 public class DiscountCode {
-    private String discountId;
-    private static Date startOfDiscountPeriod;
-    private static Date endOfDiscountPeriod;
-    private int discountAmount;
-    private double maxDiscountAmount;
-    private int totalTimesOfUse;
+    private String discountId= null;
+    private static Date startOfDiscountPeriod= null;
+    private static Date endOfDiscountPeriod = null;
+    private int discountAmount =0;
+    private double maxDiscountAmount=0;
+    private int totalTimesOfUse=0;
    // private Account manager;
-    private  ArrayList<Account> allCustomersWithDiscountCode = new ArrayList<Account>();
+    private  ArrayList<Customer> allCustomersWithDiscountCode = new ArrayList<Customer>();
     private static ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
 
     public DiscountCode(String discountId) throws IOException {
@@ -40,7 +40,7 @@ public class DiscountCode {
     public void addAccount(Account customer) throws IOException {
         if(customer instanceof Customer) {
             Customer cus = (Customer) customer;
-            allCustomersWithDiscountCode.add(customer);
+            allCustomersWithDiscountCode.add(cus);
 //            cus.addDiscountCode(getDiscountWithId(discountId));
         }
     }
@@ -114,9 +114,12 @@ public class DiscountCode {
         return totalTimesOfUse;
     }
 
-
-    public ArrayList<Account> getAllCustomersWithDiscountCode() {
+    public ArrayList<Customer> getAllCustomersWithDiscountCode() {
         return allCustomersWithDiscountCode;
+    }
+
+    public void setAllCustomersWithDiscountCode(ArrayList<Customer> allCustomersWithDiscountCode) {
+        this.allCustomersWithDiscountCode = allCustomersWithDiscountCode;
     }
 
     public static boolean isThereDiscountWithId(String id) {

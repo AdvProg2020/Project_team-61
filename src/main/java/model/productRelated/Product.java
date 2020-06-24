@@ -22,21 +22,21 @@ public class Product {
 
     //productDetail
 
-    private String productId;
-    private String productName;
-    private Company companiesName;
-    private double price;
-    private Seller seller;
-    private ProductStatus productStatus;
-    private Category category;
-    private double averageScore;
-    private int numberOfProducts;
-    private boolean isInSale;
-    private String additionalDetail;
-    private int numberOfViews;
-    private int totalNumberOfBuyers;
-    private boolean isBought;
-    String productImageId;
+    private String productId=null;
+    private String productName=null;
+    private Firm companiesName=null;
+    private double price=0;
+    private Seller seller=null;
+    private ProductStatus productStatus=null;
+    private Category category=null;
+    private double averageScore=0;
+    private int numberOfProducts=0;
+    private boolean isInSale = false;
+    private String additionalDetail =null;
+    private int numberOfViews =0;
+    private int totalNumberOfBuyers=0;
+    private boolean isBought = false;
+    String productImageId=null;
 
     //sample.lists
 //    private  ArrayList<Account> listOfSellers = new ArrayList<Account>();
@@ -78,7 +78,7 @@ public class Product {
 
     //finish
     //id,productImage,name,price,category,seller
-    public void setDetailProduct(String productImageId, String name, double price, Category categoryr, Account selle, Firm firm, int numberOfProducts) throws IOException {
+    public void setDetailProduct(String productImageId, String name, double price, Category category, Account selle, Firm firm, int numberOfProducts) throws IOException {
         if (name != null) {
             this.productName = name;
         }
@@ -89,7 +89,9 @@ public class Product {
             this.price = price;
         }
         if (seller != null) {
-            this.seller = seller;
+            if(selle instanceof Seller) {
+                this.seller = (Seller) selle;
+            }
         }
         if (numberOfProducts != 0) {
             this.numberOfProducts = numberOfProducts;
@@ -250,7 +252,7 @@ public class Product {
         return category;
     }
 
-    public Company getCompaniesName() {
+    public Firm getCompaniesName() {
         return companiesName;
     }
 

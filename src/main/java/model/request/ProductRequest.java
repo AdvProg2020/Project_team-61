@@ -93,7 +93,7 @@ public class ProductRequest extends Request {
         Category.getCategoryWithName(categoryName).addProductToCategory(newProduct);
 
         newProduct.setProductStatus(ProductStatus.CONFIRMED);
-        seller.addProduct(newProduct);
+      //  seller.addProduct(newProduct);
         getAllRequests().remove(this);
         allProductRequests.remove(this);
         seller.removeProductRequest(this);
