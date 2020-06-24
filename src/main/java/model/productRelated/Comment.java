@@ -17,6 +17,7 @@ public class Comment {
     //objectAdded
     Product productToComment;
     private Account personToVote;
+    String proId;
 
 
     //list
@@ -24,6 +25,10 @@ public class Comment {
 
     public Comment(String id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public static boolean isThereCommentWithId(String id) {
@@ -107,6 +112,16 @@ public class Comment {
                 }
             }
         }
+    }
+
+    public static ArrayList<Comment> getCommentsOfPro(String proId){
+        ArrayList<Comment> help = new ArrayList<>();
+        for (Comment comment : allComments) {
+            if (comment.proId.equals(proId)){
+                help.add(comment);
+            }
+        }
+        return help;
     }
 
 //    public  void writeInJ() throws IOException {

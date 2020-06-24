@@ -5,7 +5,10 @@ import model.firms.Firm;
 import model.log.SaleLog;
 import model.off.Sale;
 import model.productRelated.Product;
+import model.request.AccountRequest;
+import model.request.ProductRequest;
 import model.request.Request;
+import model.request.SaleRequest;
 import view.FileHandling;
 
 import java.io.IOException;
@@ -35,10 +38,6 @@ public class Seller extends Account {
 
     public ArrayList<Request> getAllRequests() {
         return allRequests;
-    }
-
-    public void setAllRequests(ArrayList<Request> allRequests) {
-        this.allRequests = allRequests;
     }
 
     public void addRequest(Request request) throws IOException {
