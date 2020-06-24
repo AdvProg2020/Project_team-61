@@ -1,19 +1,15 @@
 package view.gui;
 
-import controller.ProductMenu;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -23,15 +19,10 @@ import model.productRelated.Category;
 import model.productRelated.Product;
 
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.logging.Level;
+
 
 
 public class ProductsMenuFX {
@@ -85,8 +76,8 @@ public class ProductsMenuFX {
         public static void initializeObserverList() {
                 for (Product product : Product.getProductList()) {
                         if (!data.contains(product)){
-                                System.out.println(product.getSeller().getName());
-                                System.out.println(product.getCategory().getName());
+                                System.out.println(product.getSeller());
+                                System.out.println(product.getCategory());
                                 data.add(product);
                         }
                 }

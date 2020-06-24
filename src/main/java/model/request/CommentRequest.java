@@ -18,7 +18,7 @@ public class CommentRequest extends Request {
 
     private String title = null;
     private String content = null;
-    private Customer personToVote = null;
+    private String personToVote = null;
     private String product = null;
     private String id = null;
     private static ArrayList<CommentRequest> allCommentRequests = new ArrayList<>();
@@ -51,7 +51,7 @@ public class CommentRequest extends Request {
     @Override
     public void acceptRequest() throws IOException {
         Comment comment = Comment.getCommentFromId(id);
-        comment.setDetail(title, content, personToVote, Product.getProductById(product));
+        comment.setDetail(title, content, Account.getAccountWithUsername(personToVote), Product.getProductById(product));
         comment.setCommentStatus(CommentStatus.CONFIRMED);
         Product.getProductById(product).setComment(comment);
         Request.getAllRequests().remove(this);
@@ -81,7 +81,7 @@ public class CommentRequest extends Request {
 
     }
 
-    public void setPersonToVote(Customer personToVote) throws IOException {
+    public void setPersonToVote(String personToVote) throws IOException {
         this.personToVote = personToVote;
         writeInJ();
     }
@@ -105,4 +105,23 @@ public class CommentRequest extends Request {
         FileHandling.writeInFile(json, "commentRequest.json");
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public String getPersonToVote() {
+        return personToVote;
+    }
+
+    public String getProduct() {
+        return product;
+    }
+
+    public String getId() {
+        return id;
+    }
 }
