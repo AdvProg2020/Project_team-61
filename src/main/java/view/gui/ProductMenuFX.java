@@ -1,4 +1,4 @@
-package gui;
+package view.gui;
 
 import controller.ProductMenu;
 import controller.menus.CustomerMenu;
@@ -176,6 +176,7 @@ public class ProductMenuFX {
     public void score1(MouseEvent mouseEvent) {
         score = 1;
     }
+
 
     public void score(MouseEvent mouseEvent) throws IOException {
         if(score != 0){

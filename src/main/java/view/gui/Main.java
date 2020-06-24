@@ -261,7 +261,7 @@ public class Main extends Application {
         Request.getAllRequests().addAll(CommentRequest.getAllCommentRequests());
         Request.getAllRequests().addAll(ProductRequest.getAllProductRequests());
         for (Seller seller : Seller.getAllSellers()) {
-            Request.getAllRequests().addAll(seller.getAllRequests());
+//            Request.getAllRequests().addAll(seller.getAllRequests());
             Product.getProductList().addAll(seller.getAllProduct());
             Sale.getAllSales().addAll(seller.getAllSales());
         }
