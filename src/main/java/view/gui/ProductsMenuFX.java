@@ -1,14 +1,19 @@
 package view.gui;
 
+import controller.ProductMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -16,9 +21,16 @@ import javafx.stage.Stage;
 import model.productRelated.Category;
 import model.productRelated.Product;
 
+import javax.management.AttributeList;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.logging.Level;
 
 
 public class ProductsMenuFX {
@@ -47,19 +59,23 @@ public class ProductsMenuFX {
 
         public static FilteredList<Product> filteredList = new FilteredList<>(data, b -> true);
 
+        @FXML
+        public TableColumn<Category, String> catName = new TableColumn<>("name");
+
+        @FXML
+        public TableColumn<Category, ArrayList<String>> traits = new TableColumn<>("traits");
+
 
         public static Scene prevScene;
         public static Stage thisStage;
         public TextField searchField;
         public AnchorPane topSplitPane;
-        public ListView categoriesListView = new ListView();
+        public TableView categoriesListView = new TableView();
         public CheckBox filterAscending;
         public CheckBox filterIsAvailable;
         public AnchorPane FilterCategoryPane;
-        public ObservableList<String> dataCat = FXCollections.observableArrayList();
+        public ObservableList<Category> dataCat = FXCollections.observableArrayList();
         public ArrayList<CheckBox> filterCatCheck = new ArrayList<>();
-
-
 
         public static void initializeObserverList() {
                 for (Product product : Product.getProductList()) {
@@ -103,21 +119,25 @@ public class ProductsMenuFX {
                 });
 
 
-
                 tableView.setEditable(true);
 
+                catName.setCellValueFactory(new PropertyValueFactory<Category, String>("name"));
+                traits.setCellValueFactory(new PropertyValueFactory<Category, ArrayList<String>>("traits"));
                 dataInListView();
+                categoriesListView.getColumns().addAll(catName,traits);
                 categoriesListView.setItems(dataCat);
+
+
                 SortedList<Product> sortedList = new SortedList<>(filteredList);
                 sortedList.comparatorProperty().bind(tableView.comparatorProperty());
                 tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
                 tableView.getSelectionModel().setCellSelectionEnabled(true);
                 tableView.setItems(sortedList);
+
         }
 
-
         public static void gotoProductPage(Product product) throws IOException {
-                AnchorPane root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
+                AnchorPane root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("sample/fxFile/sample3.fxml")));
                 prevScene = new Scene(root);
                 thisStage = new Stage();
                 thisStage.setScene(prevScene);
@@ -144,11 +164,11 @@ public class ProductsMenuFX {
         public void dataInListView(){
                 for (Category category : Category.getAllCategories()) {
                         if (!dataCat.contains(category)){
-                                dataCat.add(category.getName());
+                                dataCat.add(category);
                         }
                 }
-                categoriesListView.setItems(dataCat);
         }
+
 
         public void dataInFilterCheck(){
                 for (Category category : Category.getAllCategories()) {
@@ -160,5 +180,4 @@ public class ProductsMenuFX {
                         FilterCategoryPane.getChildren().add(checkBox);
                 }
         }
-
 }

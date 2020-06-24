@@ -51,6 +51,7 @@ public class ProductMenuFX {
     public TextArea productCategoryDetail;
     public TextArea productDetail;
     public TableView commentTableView = new TableView();
+    public Button scoreButton;
     @FXML
     private Label productNameLabel;
     @FXML
@@ -185,6 +186,10 @@ public class ProductMenuFX {
     }
 
     public void score2(MouseEvent mouseEvent) {
+
+    }
+
+    public void handleScore(ActionEvent actionEvent) {
 
     }
 

@@ -90,6 +90,8 @@ public class AddProductMenuFX {
     public ArrayList<String> traits = new ArrayList<>();
     String imageId;
     List<File> files;
+    Category productCategory;
+    ArrayList<String> traitText = new ArrayList<>();
 
 
     public static void showProPage(Stage stage, Scene scene) throws IOException {
@@ -346,5 +348,39 @@ public class AddProductMenuFX {
 
      */
 
+    public void addTraitsButton(ActionEvent actionEvent) {
+        String category = categoryNameTextField.getText();
+        if (category != null && Category.isThereCategoryWithName(category)){
+            productCategory = Category.getCategoryWithName(category);
+            if (productCategory != null){
+                for (String trait : productCategory.getTraits()) {
+                    int n =50;
+                    Label label = new Label();
+                    label.setText(trait);
+                    label.setLayoutY(n*(productCategory.getTraits().indexOf(trait)+1));
+                    label.setLayoutX(900+productCategory.getTraits().indexOf(trait));
+                    TextField textField = new TextField();
+                    textField.setMaxSize(100,50);
+                    textField.setLayoutY((n)*(productCategory.getTraits().indexOf(trait)+1));
+                    textField.setLayoutX(1000+productCategory.getTraits().indexOf(trait));
+                    traitsTextFields.add(textField);
+                    pane.getChildren().addAll(label,textField);
+                    n+=5;
+                }
+            }
+        }
+        else {
+            error.setVisible(true);
+            error.setText("please enter category name first");
+        }
+    }
+
+    private void handleTraits() {
+
+        for (TextField traitsTextField : traitsTextFields) {
+            traitText.add(traitsTextField.getText());
+        }
+
+    }
 
 }
