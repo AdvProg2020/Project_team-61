@@ -161,8 +161,11 @@ public class ProductsMenuFX {
                 TableColumn tableColumn = tablePosition.getTableColumn();
 
                 try {
+                        System.out.println(tableColumn.getCellObservableValue(item).getValue() + "1***");
                         String im = (String) tableColumn.getCellObservableValue(item).getValue();
+                        System.out.println(im+"heh");
                         ProductMenuFX.productInPage = Product.getProductWithImage(im);
+                        System.out.println(ProductMenuFX.productInPage.getProductImage()+"fksflksdfsdlf");
                         gotoProductPage(ProductMenuFX.productInPage);
 
                 } catch (NullPointerException e) {

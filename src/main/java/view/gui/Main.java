@@ -2,6 +2,7 @@ package view.gui;
 
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import controller.ProductMenu;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -150,17 +151,8 @@ public class Main extends Application {
             Sale.getAllSales().addAll(seller.getAllSales());
         }
 
-        for (Manager manager : Manager.getAllManagers()) {
-            DiscountCode.getAllDiscountCodes().addAll(manager.getAllDiscountCodes());
-        }
 
-        for (DiscountCode discountCode : DiscountCode.getAllDiscountCodes()) {
-            System.out.println(discountCode.getDiscountId());
-        }
 
-        for (Sale sale : Sale.getAllSales()) {
-            System.out.println(sale.getOffId()+"#");
-        }
         Application.launch(args);
 
     }

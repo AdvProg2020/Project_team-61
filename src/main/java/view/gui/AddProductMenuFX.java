@@ -97,7 +97,7 @@ public class AddProductMenuFX {
     public static void showProPage(Stage stage, Scene scene) throws IOException {
         thisStage = stage;
         prevScene = scene;
-        Parent root = FXMLLoader.load(Objects.requireNonNull(AddProductMenuFX.class.getClassLoader().getResource("view/gui/fxFile/sample2.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(AddProductMenuFX.class.getClassLoader().getResource("productsMenu.fxml")));
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

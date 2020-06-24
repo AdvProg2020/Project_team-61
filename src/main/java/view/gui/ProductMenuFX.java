@@ -163,7 +163,7 @@ public class ProductMenuFX {
 
     @FXML
     void popUpAddComment(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("sample/fxFile/comment.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("comment.fxml")));
         prevScene = new Scene(root);
         thisStage = new Stage();
         thisStage.setScene(prevScene);
