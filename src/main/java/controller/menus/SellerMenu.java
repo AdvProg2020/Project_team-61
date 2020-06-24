@@ -144,7 +144,7 @@ public class SellerMenu {
 
 
 
-    public static int addProduct(String detail , int detailMen) throws IOException {
+    public static int addProduct(String detail , int detailMen , String img) throws IOException {
         if (detailMen == 0) {
             if (detail.matches("^(?!\\s*$).+")) {
                // if (!detail.equalsIgnoreCase("finish")) {
@@ -157,6 +157,7 @@ public class SellerMenu {
                             product.setProductStatus(ProductStatus.UNDERREVIEWFORCONSTRUCTION);
                             productRequest = new ProductRequest(id);
                             productRequest.setProductId(detail);
+                            productRequest.setImg(img);
 //                            productRequest.setCompanyName(LoginMenu.getFirm().getName());
                         } else if (Request.getRequestFromID(id) instanceof ProductRequest) {
                             productRequest = (ProductRequest) Request.getRequestFromID(id);
@@ -232,7 +233,7 @@ public class SellerMenu {
 
     }
 
-    public static int editOff(String offID) throws IOException {
+    public static int editOff(String offID ) throws IOException {
         if (checkSale(offID)) {
             Sale sale = Sale.getSaleWithId(offID);
             if (sale.getSeller() == LoginMenu.getLoginAccount()) {
@@ -306,12 +307,14 @@ public class SellerMenu {
             String id = "add sale: " + detail;
             if (!saleRequest.isThereRequestFromID(id)) {
                 Sale sale = new Sale(detail);
-                Seller seller = (Seller) Seller.getAccountWithUsername(LoginMenu.getLoginAccount().getUsername());
-                seller.getAllSales().add(sale);
-                sale.setSaleStatus(SaleStatus.UNDERREVIEWFORCONSTRUCTION);
-                saleRequest = new SaleRequest(id);
-                seller.getAllSaleRequests().add(saleRequest);
-                saleRequest.setOffId(detail);
+                if(LoginMenu.getLoginAccount() instanceof Seller) {
+                    Seller seller = (Seller) LoginMenu.getLoginAccount();
+                    seller.getAllSales().add(sale);
+                    sale.setSaleStatus(SaleStatus.UNDERREVIEWFORCONSTRUCTION);
+                    saleRequest = new SaleRequest(id);
+                    seller.getAllSaleRequests().add(saleRequest);
+                    saleRequest.setOffId(detail);
+                }
                // saleRequest.setSeller(LoginMenu.getLoginAccount());
             } else {
                 saleRequest = (SaleRequest) Request.getRequestFromID(id);
@@ -360,8 +363,9 @@ public class SellerMenu {
             if (detail.matches("((?!^ +$)^.+$)")) {
                 // if (!detail.equalsIgnoreCase("finish")) {
                 if (checkProductSale(detail)) {
-                    saleRequest.setProduct(detail);
-                    saleRequest.addProductToSale(Product.getProductById(detail));
+                    Product product =Product.getProductById(detail);
+                    saleRequest.addProduct(product);
+                    saleRequest.addProductToSale(product);
                     //   outputNo = 18;
                     // }
                     // } else {

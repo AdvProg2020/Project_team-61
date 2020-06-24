@@ -125,8 +125,8 @@ public class ProductsFx {
         if(LoginMenu.getLoginAccount() instanceof Seller){
             if(products.getSelectionModel().getSelectedItem() != null) {
                 Product product = products.getSelectionModel().getSelectedItem();
-                //??????????????????????????????
-                root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("signUpFx.fxml")));
+                ProductMenuFX.setProductInPage(product);
+                root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
                 goToPage();
             }else productsMs.setText("you have to select first");
         }

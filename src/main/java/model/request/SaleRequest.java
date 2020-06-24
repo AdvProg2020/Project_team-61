@@ -19,7 +19,7 @@ public class SaleRequest extends Request {
     private Date startOfSalePeriod = null;
     private Date endOfSalePeriod = null;
     private int saleAmount = 0;
-    private String product = null;
+    //private String product = null;
     private ArrayList<Product> allSaleProducts = new ArrayList<>();
     private Sale sale;
     private static ArrayList<SaleRequest> allSaleRequests = new ArrayList<>();
@@ -56,7 +56,10 @@ public class SaleRequest extends Request {
         sale.setSaleDetails(SaleStatus.CONFIRMED, startOfSalePeriod, endOfSalePeriod, saleAmount, Account.getAccountWithUsername(this.getSeller()));
         sale.setAllSaleProducts(allSaleProducts);
         sale.setSaleStatus(SaleStatus.CONFIRMED);
-        Product.getProductById(product).setInSale(true);
+        for (Product allSaleProduct : allSaleProducts) {
+            allSaleProduct.setInSale(true);
+
+        }
         getAllRequests().remove(this);
         allSaleRequests.remove(this);
         if (Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
@@ -66,6 +69,11 @@ public class SaleRequest extends Request {
         writeInJ();
     }
 
+
+    public void addProduct(Product product) throws IOException {
+        allSaleProducts.add(product);
+        writeInJ();
+    }
 
     public void removeProduct(Product product) throws IOException {
         allSaleProducts.remove(product);
@@ -103,10 +111,7 @@ public class SaleRequest extends Request {
 
     }
 
-    public void setProduct(String product) throws IOException {
-        this.product = product;
-        writeInJ();
-    }
+
 
     public static void setAllSaleRequests(ArrayList<SaleRequest> allSaleRequests) {
         SaleRequest.allSaleRequests = allSaleRequests;
@@ -138,9 +143,6 @@ public class SaleRequest extends Request {
         return saleAmount;
     }
 
-    public String getProduct() {
-        return product;
-    }
 
     public ArrayList<Product> getAllSaleProducts() {
         return allSaleProducts;

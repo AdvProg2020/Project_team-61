@@ -165,6 +165,7 @@ public class AddDiscountFx {
 //        }else if(LoginMenu.getLoginAccount() instanceof Customer){
 //            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
 //        }
+        goToPage();
     }
 
     public void back(ActionEvent actionEvent) {

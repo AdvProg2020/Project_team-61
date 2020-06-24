@@ -130,45 +130,47 @@ public class AddProductMenuFX {
     @FXML
     public void addProduct(MouseEvent actionEvent) throws IOException {
         String ms = null;
-        if (SellerMenu.getCreate() == 0) {
-            ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(idTextField.getText(), 0));
-            Seller.writeInJ();
-        }
-        if (SellerMenu.getCreate() == 1) {
-            if (SellerMenu.getDetailMenu() == 1) {
-                ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(productNameTextField.getText(), 1));
+        if(imageId != null) {
+            if (SellerMenu.getCreate() == 0) {
+                ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(idTextField.getText(), 0, imageId));
                 Seller.writeInJ();
             }
-            if (SellerMenu.getDetailMenu() == 2) {
-                ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(priceTextField.getText(), 2));
-                Seller.writeInJ();
-            }
-            if (SellerMenu.getDetailMenu() == 3) {
-                ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(categoryNameTextField.getText(), 3));
-                Seller.writeInJ();
-            }
-            if (SellerMenu.getDetailMenu() == 4) {
-                ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(additionaldetailTextField.getText(), 4));
-                Seller.writeInJ();
-            }
-            if (SellerMenu.getDetailMenu() == 5) {
-                ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(numberOfProductTextField.getText(), 5));
-                addImageView();
-                addCategoryTrait();
-                Seller.writeInJ();
-            }
-            if (SellerMenu.getDetailMenu() == 6) {
-                if (finish) {
-                    //  addCategoryTrait();
-                    //if(changeToString()) {
-                    changeToString();
-                    SellerMenu.getProductRequest().setSpecialValue(traits);
+            if (SellerMenu.getCreate() == 1) {
+                if (SellerMenu.getDetailMenu() == 1) {
+                    ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(productNameTextField.getText(), 1, null));
+                    Seller.writeInJ();
+                }
+                if (SellerMenu.getDetailMenu() == 2) {
+                    ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(priceTextField.getText(), 2, null));
+                    Seller.writeInJ();
+                }
+                if (SellerMenu.getDetailMenu() == 3) {
+                    ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(categoryNameTextField.getText(), 3, null));
+                    Seller.writeInJ();
+                }
+                if (SellerMenu.getDetailMenu() == 4) {
+                    ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(additionaldetailTextField.getText(), 4, null));
+                    Seller.writeInJ();
+                }
+                if (SellerMenu.getDetailMenu() == 5) {
+                    ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(numberOfProductTextField.getText(), 5, null));
+                    addImageView();
+                    addCategoryTrait();
+                    Seller.writeInJ();
+                }
+                if (SellerMenu.getDetailMenu() == 6) {
+                    if (finish) {
+                        //  addCategoryTrait();
+                        //if(changeToString()) {
+                        changeToString();
+                        SellerMenu.getProductRequest().setSpecialValue(traits);
+                        finish = true;
+                        // }else ms ="fill all field";
+                    } else ms = "process add finished you should edit";
                     finish = true;
-                    // }else ms ="fill all field";
-                } else ms = "process add finished you should edit";
-                finish = true;
+                }
             }
-        }
+        }else ms= "inset image firs";
         error.setText(ms);
     }
 

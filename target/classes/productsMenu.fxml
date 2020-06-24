@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -18,7 +25,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ProductsMenuFX">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ProductsMenuFX">
     <children>
         <SplitPane dividerPositions="0.4578896418199419" layoutX="55.0" layoutY="162.0" orientation="VERTICAL" prefHeight="1035.0" prefWidth="1325.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -196,21 +203,21 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="ACCOUNT" />
-                        <MenuItem mnemonicParsing="false" text="EXIT" />
-                        <MenuItem mnemonicParsing="false" text="BACK" />
+                        <MenuItem mnemonicParsing="false" onAction="#userMenu" text="ACCOUNT" />
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="EXIT" />
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="BACK" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Logout">
+                <Menu mnemonicParsing="false" onAction="#login" text="login">
                     <items>
                         <MenuItem mnemonicParsing="false" text="logout" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
-                    </items>
-                </Menu>
+            <Menu mnemonicParsing="false" text="logout">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
+              </items>
+            </Menu>
             </menus>
         </MenuBar>
     </children>

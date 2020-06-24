@@ -25,6 +25,7 @@ public class ProductRequest extends Request {
     private String categoryName = null;
     private String lastCategory = null;
     private String additionalDetail = null;
+    private String img = null;
     private int numberOfProduct = 0;
     private static ArrayList<ProductRequest> allProductRequests = new ArrayList<>();
     // private  HashMap<String,String> specialValue = new HashMap<>();
@@ -72,7 +73,7 @@ public class ProductRequest extends Request {
             seller = (Seller) Account.getAccountWithUsername(this.getSeller());
         }
         Product newProduct = Product.getProductById(productId);
-        newProduct.setDetailProduct(newProduct.getProductImage(), productName, price, Category.getCategoryWithName(categoryName), seller, seller.getFirm(), numberOfProduct);
+        newProduct.setDetailProduct(img, productName, price, Category.getCategoryWithName(categoryName), seller, seller.getFirm(), numberOfProduct);
         newProduct.setAdditionalDetail(additionalDetail);
         newProduct.setProductCategorySpecifications(specialValue);
         // newProduct.getCategorySpecifications().putAll(specialValue);
@@ -150,6 +151,14 @@ public class ProductRequest extends Request {
         FileHandling.setGson(new Gson());
         String json = FileHandling.getGson().toJson(ProductRequest.allProductRequests, productRequestType);
         FileHandling.writeInFile(json, "productRequest.json");
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     //    public void addKey(){
