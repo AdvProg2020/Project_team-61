@@ -3,6 +3,8 @@ package model.request;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
+import model.accounts.Customer;
+import model.accounts.Seller;
 import model.productRelated.Comment;
 import model.productRelated.CommentStatus;
 import model.productRelated.Product;
@@ -26,6 +28,10 @@ public class CommentRequest extends Request {
     public CommentRequest(String requestID) throws IOException {
         super(requestID);
         allCommentRequests.remove(this);
+        if(Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
+            Customer customer = (Customer) Account.getAccountWithUsername(this.getSeller());
+            customer.addCommentRequest(this);
+        }
         writeInJ();
     }
 

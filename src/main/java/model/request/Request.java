@@ -28,7 +28,7 @@ public abstract class Request {
         if(LoginMenu.getLoginAccount() instanceof Seller) {
             seller =  LoginMenu.getLoginAccount().getUsername();
             Seller sel = (Seller) LoginMenu.getLoginAccount();
-           sel.addRequest(this);
+           //sel.addRequest(this);
         }
         allRequests.add(this);
 
