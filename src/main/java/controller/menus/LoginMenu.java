@@ -5,7 +5,7 @@ import model.accounts.Seller;
 import model.firms.Firm;
 import model.request.AccountRequest;
 import model.request.Request;
-import gui.LoginFx;
+import view.gui.LoginFx;
 
 import java.io.IOException;
 

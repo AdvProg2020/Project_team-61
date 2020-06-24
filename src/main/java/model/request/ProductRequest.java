@@ -22,7 +22,7 @@ public class ProductRequest extends Request {
     private  String productName = null;
     private  double price = 0;
    // private  Seller sellerName = null;
-    private  Firm companyName = null;
+    private  String companyName = null;
     private  String categoryName = null;
     private  String lastCategory = null;
     private  String additionalDetail = null;
@@ -46,7 +46,10 @@ public class ProductRequest extends Request {
     public ProductRequest(String requestID) throws IOException {
         super(requestID);
         allProductRequests.add(this);
-
+        if(Account.getAccountWithUsername(this.getSeller()) instanceof  Seller) {
+            Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
+                    seller.addProductRequest(this);
+        }
         writeInJ();
     }
 
@@ -69,7 +72,7 @@ public class ProductRequest extends Request {
         Product.getProductList().remove(this);
         if(Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
             Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
-            seller.getAllProduct().remove(this);
+            seller.addProductRequest(this);
         }
         writeInJ();
     }
@@ -81,7 +84,7 @@ public class ProductRequest extends Request {
              seller = (Seller) Account.getAccountWithUsername(this.getSeller());
         }
         Product newProduct = Product.getProductById(productId);
-        newProduct.setDetailProduct(newProduct.getProductImage(),productName,price,Category.getCategoryWithName(categoryName),seller,companyName,numberOfProduct);
+        newProduct.setDetailProduct(newProduct.getProductImage(),productName,price,Category.getCategoryWithName(categoryName),seller,Firm.getFirmWithID(companyName),numberOfProduct);
         newProduct.setAdditionalDetail(additionalDetail);
         newProduct.setProductCategorySpecifications(specialValue);
        // newProduct.getCategorySpecifications().putAll(specialValue);
@@ -122,12 +125,11 @@ public class ProductRequest extends Request {
         writeInJ();
 
     }
-    public void setCompanyName(Firm companyName) throws IOException {
+
+    public void setCompanyName(String companyName) throws IOException {
         this.companyName = companyName;
         writeInJ();
-
     }
-
 
     public void setNumberOfProduct(int numberOfProduct) throws IOException {
         this.numberOfProduct = numberOfProduct;

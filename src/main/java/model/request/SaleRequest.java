@@ -3,6 +3,7 @@ package model.request;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
+import model.accounts.Seller;
 import model.off.Sale;
 import model.off.SaleStatus;
 import model.productRelated.Product;
@@ -39,6 +40,10 @@ public class SaleRequest extends Request {
         getAllRequests().remove(this);
         allSaleRequests.remove(this);
         getAllRequests().remove(this);
+        if(Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
+            Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
+            seller.addSaleRequest(this);
+        }
         writeInJ();
     }
 

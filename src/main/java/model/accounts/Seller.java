@@ -21,7 +21,10 @@ public class Seller extends Account {
     private static ArrayList<Seller> allSellers = new ArrayList<>();
     private  ArrayList<Product> allProduct = new ArrayList<>();
     private  ArrayList<Sale> allSales = new ArrayList<>();
-    private  ArrayList<Request> allRequests = new ArrayList<>();
+   // private  ArrayList<Request> allRequests = new ArrayList<>();
+     private  ArrayList<Request> allProductRequests = new ArrayList<>();
+    private  ArrayList<Request> allSaleRequests = new ArrayList<>();
+    private  ArrayList<Request> allAccountRequests = new ArrayList<>();
     public static Type SellerType = new TypeToken<ArrayList<Seller>>() {
     }.getType();
 
@@ -36,13 +39,40 @@ public class Seller extends Account {
         this.allProduct = allProduct;
     }
 
-    public ArrayList<Request> getAllRequests() {
-        return allRequests;
+    public void addSaleRequest(SaleRequest saleRequest){
+        allSaleRequests.add(saleRequest);
     }
 
-    public void addRequest(Request request) throws IOException {
-        allRequests.add(request);
-        writeInJ();
+    public void addAccountRequest(AccountRequest accountRequest){
+        allAccountRequests.add(accountRequest);
+    }
+
+    public void addProductRequest(ProductRequest productRequest){
+        allProductRequests.add(productRequest);
+    }
+
+    public ArrayList<Request> getAllProductRequests() {
+        return allProductRequests;
+    }
+
+    public void setAllProductRequests(ArrayList<Request> allProductRequests) {
+        this.allProductRequests = allProductRequests;
+    }
+
+    public ArrayList<Request> getAllSaleRequests() {
+        return allSaleRequests;
+    }
+
+    public void setAllSaleRequests(ArrayList<Request> allSaleRequests) {
+        this.allSaleRequests = allSaleRequests;
+    }
+
+    public ArrayList<Request> getAllAccountRequests() {
+        return allAccountRequests;
+    }
+
+    public void setAllAccountRequests(ArrayList<Request> allAccountRequests) {
+        this.allAccountRequests = allAccountRequests;
     }
 
     public ArrayList<Sale> getAllSales() {

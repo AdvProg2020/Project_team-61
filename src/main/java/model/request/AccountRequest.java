@@ -30,7 +30,7 @@ public class AccountRequest extends Request {
     private static String firmAddress = null;
     private static String firmEmail = null;
     private static String FirmType = null;
-    private static Firm firm;
+   // private static String firm;
     private Account selectedAccount;
     private static ArrayList<AccountRequest> allAccountRequests = new ArrayList<>();
     public static Type accountRequestType = new TypeToken<ArrayList<AccountRequest>>() {
@@ -48,6 +48,10 @@ public class AccountRequest extends Request {
     public AccountRequest(String requestID) throws IOException {
         super(requestID);
         allAccountRequests.add(this);
+        if(Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
+            Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
+            seller.addAccountRequest(this);
+        }
         writeInJ();
     }
 
@@ -61,8 +65,9 @@ public class AccountRequest extends Request {
     @Override
     public   void acceptRequest() throws IOException {
         Seller seller = new Seller(username);
-       // createFirm();
-      //  firm = Firm.getFirmWithID(firmName);
+      //  createFirm();
+      //  Firm firm = Firm.getFirmWithID(firmName);
+        Firm firm = null;
         seller.setDetailsToAccount(password, name, lastname, Email, phoneNo, birthdayDate, firm);
        // firm.setDetailToFirm(FirmPhoneNO, firmAddress, firmEmail);
         Request.getAllRequests().remove(this);
