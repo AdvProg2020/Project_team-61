@@ -18,18 +18,18 @@ import java.util.HashMap;
 
 public class ProductRequest extends Request {
 
-    private  String productId = null;
-    private  String productName = null;
-    private  double price = 0;
-   // private  Seller sellerName = null;
-    private  String companyName = null;
-    private  String categoryName = null;
-    private  String lastCategory = null;
-    private  String additionalDetail = null;
-    private  int numberOfProduct = 0;
+    private String productId = null;
+    private String productName = null;
+    private double price = 0;
+    // private  Seller sellerName = null;
+    private String companyName = null;
+    private String categoryName = null;
+    private String lastCategory = null;
+    private String additionalDetail = null;
+    private int numberOfProduct = 0;
     private static ArrayList<ProductRequest> allProductRequests = new ArrayList<>();
-   // private  HashMap<String,String> specialValue = new HashMap<>();
-   private  ArrayList<String> specialValue = new ArrayList<>();
+    // private  HashMap<String,String> specialValue = new HashMap<>();
+    private ArrayList<String> specialValue = new ArrayList<>();
     public static Type productRequestType = new TypeToken<ArrayList<ProductRequest>>() {
     }.getType();
 
@@ -46,13 +46,12 @@ public class ProductRequest extends Request {
     public ProductRequest(String requestID) throws IOException {
         super(requestID);
         allProductRequests.add(this);
-        if(Account.getAccountWithUsername(this.getSeller()) instanceof  Seller) {
+        if (Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
             Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
-                    seller.addProductRequest(this);
+            seller.addProductRequest(this);
         }
         writeInJ();
     }
-
 
 
 //    public void addKey(){
@@ -70,9 +69,9 @@ public class ProductRequest extends Request {
         getAllRequests().remove(this);
         allProductRequests.remove(this);
         Product.getProductList().remove(this);
-        if(Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
+        if (Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
             Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
-            seller.addProductRequest(this);
+            seller.removeProductRequest(this);
         }
         writeInJ();
     }
@@ -80,23 +79,25 @@ public class ProductRequest extends Request {
     @Override
     public void acceptRequest() throws IOException {
         Seller seller = null;
-        if(Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
-             seller = (Seller) Account.getAccountWithUsername(this.getSeller());
+        if (Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
+            seller = (Seller) Account.getAccountWithUsername(this.getSeller());
         }
         Product newProduct = Product.getProductById(productId);
-        newProduct.setDetailProduct(newProduct.getProductImage(),productName,price,Category.getCategoryWithName(categoryName),seller,Firm.getFirmWithID(companyName),numberOfProduct);
+        newProduct.setDetailProduct(newProduct.getProductImage(), productName, price, Category.getCategoryWithName(categoryName), seller, Firm.getFirmWithID(companyName), numberOfProduct);
         newProduct.setAdditionalDetail(additionalDetail);
         newProduct.setProductCategorySpecifications(specialValue);
-       // newProduct.getCategorySpecifications().putAll(specialValue);
-        if(lastCategory != null) {
+        // newProduct.getCategorySpecifications().putAll(specialValue);
+        if (lastCategory != null) {
             Category.getCategoryWithName(lastCategory).removeProductToCategory(newProduct);
         }
         Category.getCategoryWithName(categoryName).addProductToCategory(newProduct);
 
         newProduct.setProductStatus(ProductStatus.CONFIRMED);
-        seller.addProduct(newProduct);
+      //  seller.addProduct(newProduct);
         getAllRequests().remove(this);
         allProductRequests.remove(this);
+        seller.removeProductRequest(this);
+
     }
 
 //    public void addHashmapValue(String key, String value) throws IOException {
@@ -109,11 +110,13 @@ public class ProductRequest extends Request {
         writeInJ();
 
     }
+
     public void setProductName(String productName) throws IOException {
         this.productName = productName;
         writeInJ();
 
     }
+
     public void setAdditionalDetail(String additionalDetail) throws IOException {
         this.additionalDetail = additionalDetail;
         writeInJ();

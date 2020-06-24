@@ -41,6 +41,10 @@ public class CommentRequest extends Request {
         allCommentRequests.remove(this);
         Comment comment = Comment.getCommentFromId(id);
         comment.setCommentStatus(CommentStatus.NOTAPPROVEDBYTHEMANAGER);
+        if(Account.getAccountWithUsername(this.getSeller()) instanceof Customer) {
+            Customer customer = (Customer) Account.getAccountWithUsername(this.getSeller());
+            customer.removeCommentRequest(this);
+        }
         writeInJ();
     }
 
@@ -52,6 +56,10 @@ public class CommentRequest extends Request {
         product.setComment(comment);
         Request.getAllRequests().remove(this);
         allCommentRequests.remove(this);
+        if(Account.getAccountWithUsername(this.getSeller()) instanceof Customer) {
+            Customer customer = (Customer) Account.getAccountWithUsername(this.getSeller());
+            customer.removeCommentRequest(this);
+        }
         writeInJ();
     }
 

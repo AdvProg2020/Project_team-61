@@ -9,19 +9,19 @@ import java.io.IOException;
 import java.util.*;
 
 public abstract class Account {
-    String username;
-    String name;
-    String lastname;
-    String password;
-    String email;
-    double phoneNo;
+    String username = null;
+    String name = null;
+    String lastname = null;
+    String password = null;
+    String email = null;
+    double phoneNo = 0;
     double credit = 500000000;
-    String role;
-    double currentPhoneNo;
-    String address;
-    Date birthdayDate;
-    public Firm firm;
-    boolean fast;
+    String role = null;
+    double currentPhoneNo = 0;
+    String address = null;
+    Date birthdayDate = null;
+    public Firm firm = null;
+    boolean fast = false;
 
     private static ArrayList<Account> allAccounts;
     private static ArrayList<Date> birthdayDates = new ArrayList<>();
@@ -29,7 +29,7 @@ public abstract class Account {
 //    }.getType();
 
 
-    public void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate, Firm firm) throws IOException {
+    public void setDetailsToAccount(String password, String name, String lastname, String Emai, double phoneNo, Date birthdayDat, Firm firm) throws IOException {
         if (password != null) {
             this.password = password;
         }
@@ -40,14 +40,16 @@ public abstract class Account {
             this.lastname = lastname;
         }
         if (email != null) {
-            this.email = Email;
+            this.email = Emai;
         }
         if (phoneNo != 0) {
             this.phoneNo = phoneNo;
         }
         if (birthdayDate != null) {
-            this.birthdayDate = (Date) birthdayDate;
-            birthdayDates.add(birthdayDate);
+            if (birthdayDat instanceof Date) {
+                this.birthdayDate = (Date) birthdayDat;
+                birthdayDates.add(birthdayDate);
+            }
         }
         if (firm != null) {
             this.firm = firm;
@@ -241,7 +243,7 @@ public abstract class Account {
                 ", currentPhoneNo=" + currentPhoneNo +
                 ", address='" + address + '\'' +
                 ", birthdayDate=" + birthdayDate +
-               // ", allDiscountCodes=" + allDiscountCodes +
+                // ", allDiscountCodes=" + allDiscountCodes +
                 '}';
     }
 }

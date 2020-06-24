@@ -56,7 +56,7 @@ public class FirmFx {
             if (RegisterMenu.getDetailMenu() == 4) {
                 firmEmailCrMs.setText(OutputMassageHandler.showFirmOutput(RegisterMenu.createFirm(firmEmailCr.getText(), 4)));
                 RegisterMenu.setDetailMenu(0);
-                root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
+                root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
                 goToPage();
             }
             //type = null;

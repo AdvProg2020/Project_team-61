@@ -98,9 +98,9 @@ public class SignUpFx {
     private void goToMenu() throws IOException {
        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("signUpFx.fxml")));
         if (role == "seller") {
-       //     FirmFx.setPriRoot(curRoot);
-       //     root = FXMLLoader.load(Objects.requireNonNull(FirmFx.class.getClassLoader().getResource("firmFx.fxml")));
-            root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+            FirmFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(FirmFx.class.getClassLoader().getResource("firmFx.fxml")));
+           // root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
 
         } else
          if (role.equalsIgnoreCase("manager") && !RegisterMenu.isHeadManager()) {

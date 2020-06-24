@@ -167,7 +167,7 @@ public class ManagerMenu {
                 if(LoginMenu.getLoginAccount() instanceof Manager) {
                   Manager man = (Manager) LoginMenu.getLoginAccount();
                   man.addDiscount(newDiscountCode);
-                  Manager.writeInJ();
+                  //Manager.writeInJ();
                 }
                 outputNo = 37;
                // detailMenu = 0;

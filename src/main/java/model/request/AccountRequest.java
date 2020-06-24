@@ -21,7 +21,7 @@ public class AccountRequest extends Request {
     private static String password = null;
     private static String name = null;
     private static String lastname = null;
-    private static  String Email = null;
+    private static String Email = null;
     private static double phoneNo = 0;
     private static Date birthdayDate = null;
 
@@ -30,7 +30,7 @@ public class AccountRequest extends Request {
     private static String firmAddress = null;
     private static String firmEmail = null;
     private static String FirmType = null;
-   // private static String firm;
+    // private static String firm;
     private Account selectedAccount;
     private static ArrayList<AccountRequest> allAccountRequests = new ArrayList<>();
     public static Type accountRequestType = new TypeToken<ArrayList<AccountRequest>>() {
@@ -48,30 +48,36 @@ public class AccountRequest extends Request {
     public AccountRequest(String requestID) throws IOException {
         super(requestID);
         allAccountRequests.add(this);
-        if(Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
+        if (Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
             Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
             seller.addAccountRequest(this);
         }
         writeInJ();
     }
 
-@Override
-    public  void declineRequest() throws IOException {
+    @Override
+    public void declineRequest() throws IOException {
         Request.getAllRequests().remove(this);
         allAccountRequests.remove(this);
+        if (Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
+            Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
+            seller.removeAccountRequest(this);
+        }
         writeInJ();
     }
 
     @Override
-    public   void acceptRequest() throws IOException {
+    public void acceptRequest() throws IOException {
         Seller seller = new Seller(username);
-      //  createFirm();
-      //  Firm firm = Firm.getFirmWithID(firmName);
-        Firm firm = null;
+          createFirm();
+          Firm firm = Firm.getFirmWithID(firmName);
+       //  firm = null;
         seller.setDetailsToAccount(password, name, lastname, Email, phoneNo, birthdayDate, firm);
-       // firm.setDetailToFirm(FirmPhoneNO, firmAddress, firmEmail);
+         firm.setDetailToFirm(FirmPhoneNO, firmAddress, firmEmail);
         Request.getAllRequests().remove(this);
         allAccountRequests.remove(this);
+        seller.removeAccountRequest(this);
+
         writeInJ();
 
     }
