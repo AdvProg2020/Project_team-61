@@ -1,6 +1,7 @@
 package controller.menus;
 
 import model.accounts.Manager;
+import model.accounts.Seller;
 import model.request.Request;
 import model.accounts.Account;
 import model.off.DiscountCode;
@@ -86,7 +87,10 @@ public class ManagerMenu {
         if (checkProduct(productID)) {
             Product product = Product.getProductById(productID);
             Product.deleteProduct(productID);
-            product.getSeller().removeProduct(product);
+            if(Account.getAccountWithUsername(product.getSeller()) instanceof Seller) {
+                Seller seller = (Seller) Account.getAccountWithUsername(product.getSeller());
+                seller.removeProduct(product);
+            }
             outputNo = 1;
             //  OutputMassageHandler.showOutputWithString(2);
         }

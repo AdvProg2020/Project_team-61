@@ -82,7 +82,7 @@ public class SellerMenu {
     public static int editProduct(String productID) throws IOException {
         Product product = Product.getProductById(productID);
         if (checkProduct(productID)) {
-            if (product.getSeller() == LoginMenu.getLoginAccount()) {
+          //  if (product.getSeller() == LoginMenu.getLoginAccount()) {
                // productId = productID;
                 String id = LoginMenu.getLoginAccount().getUsername() + " wants edit product " + productID ;
                 if (!productRequest.isThereRequestFromID(id)) {
@@ -96,7 +96,7 @@ public class SellerMenu {
                // CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTFIELD);
                 outputNo = 0;
                 edit = 1;
-            } else outputNo = 22;
+          //  } else outputNo = 22;
         }
         return outputNo;
        // OutputMassageHandler.showSellerOutput(outputNo);
@@ -210,7 +210,7 @@ public class SellerMenu {
 
     public static int processRemoveProduct(String productID) {
         if (checkProduct(productID)) {
-            if (Product.getProductById(productID).getSeller() == LoginMenu.getLoginAccount()) {
+            if (Product.getProductById(productID).getSeller() == LoginMenu.getLoginAccount().getUsername()) {
                 Product.deleteProduct(productID);
                 outputNo = 18;
             }
@@ -397,7 +397,7 @@ public class SellerMenu {
     ///////////////////////////////////////
     private static boolean checkProductSale(String detail) {
         if (Product.isThereProductWithId(detail)) {
-            if (Product.getProductById(detail).getSeller() == LoginMenu.getLoginAccount()) {
+            if (Product.getProductById(detail).getSeller() == LoginMenu.getLoginAccount().getUsername()) {
                 if (Product.getProductById(detail).getInSale()) {
                     return true;
                 } else outputNo = 0;

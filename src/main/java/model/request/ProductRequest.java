@@ -85,7 +85,7 @@ public class ProductRequest extends Request {
         getAllRequests().remove(this);
         allProductRequests.remove(this);
         seller.removeProductRequest(this);
-
+        writeInJ();
     }
 
 //    public void addHashmapValue(String key, String value) throws IOException {
@@ -128,12 +128,14 @@ public class ProductRequest extends Request {
 
     }
 
-    public void setCategoryName(String categoryName) {
+    public void setCategoryName(String categoryName) throws IOException {
         this.categoryName = categoryName;
+        writeInJ();
     }
 
-    public void setLastCategory(String lastCategory) {
+    public void setLastCategory(String lastCategory) throws IOException {
         this.lastCategory = lastCategory;
+        writeInJ();
     }
 
     public static void setAllProductRequests(ArrayList<ProductRequest> allProductRequests) {

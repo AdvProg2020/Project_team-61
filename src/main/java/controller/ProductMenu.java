@@ -71,7 +71,7 @@ public class ProductMenu {
                 commentRequest = new CommentRequest(id);
                 if(LoginMenu.getLoginAccount() instanceof Customer) {
                     Customer customer = (Customer) LoginMenu.getLoginAccount();
-                    commentRequest.setPersonToVote(customer);
+                    commentRequest.setPersonToVote(customer.getUsername());
                     commentRequest.setProduct(selectedProduct.getId());
                 }
                 commentRequest.setId(commentId);

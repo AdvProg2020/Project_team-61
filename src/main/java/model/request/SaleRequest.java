@@ -67,8 +67,9 @@ public class SaleRequest extends Request {
     }
 
 
-    public void removeProduct(Product product) {
+    public void removeProduct(Product product) throws IOException {
         allSaleProducts.remove(product);
+        writeInJ();
     }
 
 

@@ -69,6 +69,12 @@ public class ProductMenuFX {
     @FXML
     private Label scoreMs;
     private int score =0;
+    private static Parent priRoot;
+    private static Parent root;
+
+    public static void setPriRoot(Parent priRoot) {
+        ProductMenuFX.priRoot = priRoot;
+    }
 
     public void makeUpPage() throws IOException {
         productNameLabel.setText(productInPage.getProductName());
@@ -78,7 +84,7 @@ public class ProductMenuFX {
         productDetail.setText("Id : " + productInPage.getId() + "\n" +
                 "Name : " + productInPage.getProductName() + "\n" +
                 "Price : " + productInPage.getPrice() + "\n" +
-                "Seller : " + productInPage.getSeller().getName() + "\n" +
+                "Seller : " + productInPage.getSeller() + "\n" +
                 "Category : " + productInPage.getCategory().getName() + "\n" +
                 "Number : " + productInPage.getNumberOfProducts() + "\n" +
                 "Average Score : " + productInPage.getScore() + "\n"
@@ -193,5 +199,15 @@ public class ProductMenuFX {
 
     }
 
+    public void back(){
+       root= priRoot;
+        goToPage();
+    }
+    private static void goToPage(){
+        Scene pageTwoScene = new Scene(root);
+        //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        Main.primStage.setScene(pageTwoScene);
+        Main.primStage.show();
+    }
 
 }
