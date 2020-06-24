@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.accounts.Seller;
 import model.productRelated.Category;
 import model.productRelated.Product;
 
@@ -48,10 +49,13 @@ public class ProductsMenuFX {
         @FXML
         public TableColumn<Product, String> forthColumn = new TableColumn<>("price");
         @FXML
-        public TableColumn<Product, String> fifthColumn = new TableColumn<>("seller");
+        public TableColumn<Product, Seller> fifthColumn = new TableColumn<>("seller");
 
         @FXML
         public TableColumn<Product, String> sixthColumn = new TableColumn<>("Specifications");
+
+        public TableColumn<Product ,Category> seventh = new TableColumn<>("category");
+
         @FXML
         public static ObservableList<Product> data = FXCollections.observableArrayList();
 
@@ -64,6 +68,7 @@ public class ProductsMenuFX {
 
         @FXML
         public TableColumn<Category, ArrayList<String>> traits = new TableColumn<>("traits");
+
 
 
         public static Scene prevScene;
@@ -80,6 +85,8 @@ public class ProductsMenuFX {
         public static void initializeObserverList() {
                 for (Product product : Product.getProductList()) {
                         if (!data.contains(product)){
+                                System.out.println(product.getSeller().getName());
+                                System.out.println(product.getCategory().getName());
                                 data.add(product);
                         }
                 }
@@ -87,16 +94,16 @@ public class ProductsMenuFX {
         @FXML
         public void initialize() throws IOException {
                 dataInFilterCheck();
-                firstColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("id"));
-                secondColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
+                firstColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("productId"));
+                secondColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("productName"));
                 productImageViewTableColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("productImage"));
                 forthColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("price"));
-                fifthColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("category"));
-                sixthColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("seller"));
-
+                fifthColumn.setCellValueFactory(new PropertyValueFactory<Product, Seller>("seller"));
+                sixthColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("additionalDetail"));
+                seventh.setCellValueFactory(new PropertyValueFactory<Product,Category>("category"));
 
                 initializeObserverList();
-                tableView.getColumns().addAll(firstColumn, secondColumn, productImageViewTableColumn, forthColumn, fifthColumn, sixthColumn);
+                tableView.getColumns().addAll(firstColumn, secondColumn, productImageViewTableColumn, forthColumn, fifthColumn, sixthColumn,seventh);
                 tableView.setItems(data);
 
 
@@ -137,7 +144,7 @@ public class ProductsMenuFX {
         }
 
         public static void gotoProductPage(Product product) throws IOException {
-                AnchorPane root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("sample/fxFile/sample3.fxml")));
+                AnchorPane root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
                 prevScene = new Scene(root);
                 thisStage = new Stage();
                 thisStage.setScene(prevScene);

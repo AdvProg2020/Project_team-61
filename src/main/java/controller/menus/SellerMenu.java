@@ -239,6 +239,8 @@ public class SellerMenu {
                 if (!Request.isThereRequestFromID(id)) {
                     Sale.getSaleWithId(offID).setSaleStatus(SaleStatus.UNDERREVIEWFOREDITING);
                     saleRequest = new SaleRequest(id);
+                    Seller seller = (Seller) Seller.getAccountWithUsername(LoginMenu.getLoginAccount().getUsername());
+                    seller.getAllSaleRequests().add(saleRequest);
                     saleRequest.setOffId(offID);
                     // saleRequest.setSeller(LoginMenu.getLoginAccount());
                 } else {
@@ -303,8 +305,11 @@ public class SellerMenu {
             String id = "add sale: " + detail;
             if (!saleRequest.isThereRequestFromID(id)) {
                 Sale sale = new Sale(detail);
+                Seller seller = (Seller) Seller.getAccountWithUsername(LoginMenu.getLoginAccount().getUsername());
+                seller.getAllSales().add(sale);
                 sale.setSaleStatus(SaleStatus.UNDERREVIEWFORCONSTRUCTION);
                 saleRequest = new SaleRequest(id);
+                seller.getAllSaleRequests().add(saleRequest);
                 saleRequest.setOffId(detail);
                // saleRequest.setSeller(LoginMenu.getLoginAccount());
             } else {
