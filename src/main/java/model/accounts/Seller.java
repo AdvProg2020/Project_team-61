@@ -24,7 +24,7 @@ public class Seller extends Account {
    // private  ArrayList<Request> allRequests = new ArrayList<>();
      private  ArrayList<ProductRequest> allProductRequests = new ArrayList<>();
     private  ArrayList<SaleRequest> allSaleRequests = new ArrayList<>();
-    private  ArrayList<AccountRequest> allAccountRequests = new ArrayList<>();
+    private static ArrayList<AccountRequest> allAccountRequests = new ArrayList<>();
     public static Type SellerType = new TypeToken<ArrayList<Seller>>() {
     }.getType();
 

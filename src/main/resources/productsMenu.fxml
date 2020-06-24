@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -19,23 +18,27 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1035.0" prefWidth="1325.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ProductsMenuFX">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ProductsMenuFX">
     <children>
         <SplitPane dividerPositions="0.4578896418199419" layoutX="55.0" layoutY="162.0" orientation="VERTICAL" prefHeight="1035.0" prefWidth="1325.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <AnchorPane fx:id="topSplitPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="1055.0" opacity="0.65" stroke="BLACK" strokeType="INSIDE" width="1920.0">
-                            <fill>
-                                <LinearGradient endX="1.0" endY="0.6183206015870771">
-                                    <stops>
-                                        <Stop color="#e3d9ff" />
-                                        <Stop color="#a47cd5" offset="0.4842465753424658" />
-                                        <Stop color="#309fe5" offset="1.0" />
-                                    </stops>
-                                </LinearGradient>
-                            </fill>
-                        </Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="1112.0" layoutY="-38.0" stroke="BLACK" strokeType="INSIDE" width="1973.0" AnchorPane.bottomAnchor="-583.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-55.0" AnchorPane.topAnchor="-38.0">
+                     <fill>
+                        <LinearGradient endX="1.0" endY="0.5725190912494222">
+                           <stops>
+                              <Stop color="#dcccfd" />
+                              <Stop color="#a2a2ea" offset="0.2623287671232876" />
+                              <Stop color="#dca4ff" offset="0.42123287671232873" />
+                              <Stop color="#ffe1c6" offset="0.7171232876712328" />
+                              <Stop color="#c7e8ff" offset="0.7582191780821916" />
+                              <Stop color="#9a9bf2" offset="0.993835616438356" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </Rectangle>
                         <ImageView fitHeight="352.0" fitWidth="533.0" layoutX="569.0" layoutY="25.0" opacity="0.56" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="25.0">
                             <image>
 
@@ -151,7 +154,7 @@
                                         </AnchorPane>
                                     </content>
                                 </Tab>
-                                <Tab  text="All Categories">
+                                <Tab text="All Categories">
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>
@@ -165,7 +168,6 @@
                                                         </LinearGradient>
                                                     </fill>
                                                 </Rectangle>
-                                                <ListView fx:id="categoriesListView" layoutX="31.0" layoutY="71.0" prefHeight="200.0" prefWidth="572.0" />
                                                 <Label layoutX="31.0" layoutY="28.0" prefHeight="18.0" prefWidth="189.0" text="Categories">
                                                     <font>
                                                         <Font size="23.0" />
@@ -180,6 +182,7 @@
                                                         </LinearGradient>
                                                     </textFill>
                                                 </Label>
+                                                <TableView fx:id="categoriesListView" layoutX="56.0" layoutY="82.0" prefHeight="376.0" prefWidth="845.0" />
                                             </children></AnchorPane>
                                     </content>
                                 </Tab>
