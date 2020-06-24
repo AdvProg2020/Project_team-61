@@ -13,8 +13,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.accounts.Customer;
+import model.off.DiscountCode;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class CustomerMenuFx {
@@ -55,9 +57,17 @@ public class CustomerMenuFx {
 
     public void viewCustomerDiscount(MouseEvent mouseEvent) throws IOException {
         data.clear();
+        ArrayList<DiscountCode> discounts = new ArrayList<>();
         if(LoginMenu.getLoginAccount() instanceof Customer){
             Customer customer = (Customer) LoginMenu.getLoginAccount();
-//            data.addAll(customer.getAllDiscountCodes());
+            for (DiscountCode allDiscountCode : DiscountCode.getAllDiscountCodes()) {
+                for (Customer customer1 : allDiscountCode.getAllCustomersWithDiscountCode()) {
+                    if (customer1.equals(customer)){
+                       discounts.add(allDiscountCode);
+                    }
+                }
+            }
+            data.addAll(discounts);
         }
         showList();
     }

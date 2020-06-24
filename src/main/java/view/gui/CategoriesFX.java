@@ -56,7 +56,6 @@ public class CategoriesFX {
 
 
         makeList();
-        //  usersList.getColumns().addAll(UserId,userName,userLast,userBirth,userPhoneNo,userEmail);
         categories.setEditable(true);
         categories.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         categories.getSelectionModel().setCellSelectionEnabled(true);
@@ -66,12 +65,8 @@ public class CategoriesFX {
 
 
     public void editCategories(MouseEvent mouseEvent) throws IOException {
-       // if(categories.getSelectionModel().getSelectedItem() != null) {
-           // Category curCat = categories.getSelectionModel().getSelectedItem();
-
         root = FXMLLoader.load(Objects.requireNonNull(AddCategoryFx.class.getClassLoader().getResource("addCategoryFx.fxml")));
             goToPage();
-       // }else usersMs.setText("you have to select first");
     }
 
     public void removeCategories(MouseEvent mouseEvent) {
@@ -90,7 +85,6 @@ public class CategoriesFX {
         Sort.setNewArrayOfCategory(Category.getAllCategories());
         list.addAll( Sort.categoryNameSort());
 
-        //  usersList.getColumns().addAll(UserId,userName,userLast,userBirth,userPhoneNo,userEmail);
         categories.setEditable(true);
         categories.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         categories.getSelectionModel().setCellSelectionEnabled(true);

@@ -11,18 +11,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import model.accounts.Customer;
 import model.accounts.Manager;
-import model.accounts.Seller;
 import model.productRelated.Category;
 import view.OutputMassageHandler;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class AddCategoryFx {
-
 
     @FXML
     private Label categoryIdMs;
@@ -39,7 +35,6 @@ public class AddCategoryFx {
 
     private String catName;
     public static ObservableList list = FXCollections.observableArrayList();
-    ArrayList<String> usernames = new ArrayList<>();
     private static Parent priRoot;
     private static Parent root;
 
@@ -63,33 +58,33 @@ public class AddCategoryFx {
     public void makeTree() {
         categoryTraits.setEditable(true);
         categoryTraits.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-       makeList();
-       list.addAll(Category.getCategoryWithName(catName).getTraits());
-       categoryTraits.getItems().addAll(list);
+        makeList();
+        list.addAll(Category.getCategoryWithName(catName).getTraits());
+        categoryTraits.getItems().addAll(list);
     }
 
 
     public void createCategory(MouseEvent mouseEvent) throws IOException {
-        if(LoginMenu.getLoginAccount() instanceof Manager) {
-        if (ManagerMenu.getCreate() == 0) {
-            categoryIdMs.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.addCategory(categoryId.getText())));
-            catName = categoryId.getText();
-        }
-        if (ManagerMenu.getCreate() == 1) {
-            categoryAddTraitMs.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.setDetailToCategory(categoryAddTrait.getText())));
-            makeTree();
-        }
-    }else categoryTraitMs.setText("only manager have access");
+        if (LoginMenu.getLoginAccount() instanceof Manager) {
+            if (ManagerMenu.getCreate() == 0) {
+                categoryIdMs.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.addCategory(categoryId.getText())));
+                catName = categoryId.getText();
+            }
+            if (ManagerMenu.getCreate() == 1) {
+                categoryAddTraitMs.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.setDetailToCategory(categoryAddTrait.getText())));
+                makeTree();
+            }
+        } else categoryTraitMs.setText("only manager have access");
     }
 
 
     public void removeTrait(MouseEvent mouseEvent) throws IOException {
-        if(LoginMenu.getLoginAccount() instanceof Manager) {
-        if (ManagerMenu.getEditableCategory()!= null) {
-            categoryAddTraitMs.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.removeTraitToCatEdit(categoryAddTrait.getText())));
-            makeTree();
-        }else categoryTraitMs.setText("you have to put name and edit first");
-        }else categoryTraitMs.setText("only manager have access");
+        if (LoginMenu.getLoginAccount() instanceof Manager) {
+            if (ManagerMenu.getEditableCategory() != null) {
+                categoryAddTraitMs.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.removeTraitToCatEdit(categoryAddTrait.getText())));
+                makeTree();
+            } else categoryTraitMs.setText("you have to put name and edit first");
+        } else categoryTraitMs.setText("only manager have access");
     }
 
     public void editCategory(MouseEvent mouseEvent) {
@@ -98,46 +93,28 @@ public class AddCategoryFx {
     }
 
     public void addTrait(MouseEvent mouseEvent) throws IOException {
-        if(LoginMenu.getLoginAccount() instanceof Manager) {
+        if (LoginMenu.getLoginAccount() instanceof Manager) {
             if (ManagerMenu.getEditableCategory() != null) {
                 categoryAddTraitMs.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.addTraitToCatEdit(categoryAddTrait.getText())));
                 makeTree();
             } else categoryTraitMs.setText("you have to put name and edit first");
-        }else categoryTraitMs.setText("only manager have access");
+        } else categoryTraitMs.setText("only manager have access");
     }
 
-     /*  public void makeTree() {
-        categoryTrait.setCellValueFactory(new PropertyValueFactory<Category, String>("traits"));
-        categoryTraits.setEditable(true);
-        categoryTraits.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        list.clear();
-     //   for (int i = 0; i < Category.getTraits().size() ; i++) {
-       //     usernames.add(Category.getTraits().get(i).);
-       // }
-        list.addAll(Category.getCategoryWithName(catName).getTraits());
-        categoryTraits.setItems(list);
-       // categoryTraits.getItems().addAll(list);
-    }
-     public void removeTrait(MouseEvent mouseEvent) throws IOException {
-        if(categoryTraits.getSelectionModel().getSelectedItem() != null) {
-            String str = categoryTraits.getSelectionModel().getSelectedItem();
-            categoryTraitMs.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.removeTraitToCatEdit(str)));
-            makeTree();
-        }else categoryTraitMs.setText("you have to select first");
-
-    }
-
-   */
 
 
     public void userMenu(ActionEvent actionEvent) throws IOException {
-        if(LoginMenu.getLoginAccount() instanceof Seller){
-            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
-        } else if(LoginMenu.getLoginAccount() instanceof Manager){
-            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
-        }else if(LoginMenu.getLoginAccount() instanceof Customer){
-            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
-        }
+       Parent curRoot = FXMLLoader.load(Objects.requireNonNull(AddCategoryFx.class.getClassLoader().getResource("addCategoryFx.fxml")));
+        ManagerMenuFx.setPriRoot(curRoot);
+        root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+//        if (LoginMenu.getLoginAccount() instanceof Seller) {
+//            SellerMenuFx.setPriRoot();
+//            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+//        } else if (LoginMenu.getLoginAccount() instanceof Manager) {
+//            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+//        } else if (LoginMenu.getLoginAccount() instanceof Customer) {
+//            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
+//        }
     }
 
     public void back(ActionEvent actionEvent) {
@@ -161,6 +138,30 @@ public class AddCategoryFx {
         Main.primStage.setScene(pageTwoScene);
         Main.primStage.show();
     }
+
+         /*  public void makeTree() {
+        categoryTrait.setCellValueFactory(new PropertyValueFactory<Category, String>("traits"));
+        categoryTraits.setEditable(true);
+        categoryTraits.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        list.clear();
+     //   for (int i = 0; i < Category.getTraits().size() ; i++) {
+       //     usernames.add(Category.getTraits().get(i).);
+       // }
+        list.addAll(Category.getCategoryWithName(catName).getTraits());
+        categoryTraits.setItems(list);
+       // categoryTraits.getItems().addAll(list);
+    }
+     public void removeTrait(MouseEvent mouseEvent) throws IOException {
+        if(categoryTraits.getSelectionModel().getSelectedItem() != null) {
+            String str = categoryTraits.getSelectionModel().getSelectedItem();
+            categoryTraitMs.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.removeTraitToCatEdit(str)));
+            makeTree();
+        }else categoryTraitMs.setText("you have to select first");
+
+    }
+
+   */
+
 }
 
 

@@ -86,7 +86,7 @@ public class ProductsFx {
 
 
     }
-    public void productsRemove(MouseEvent mouseEvent) {
+    public void productsRemove(MouseEvent mouseEvent) throws IOException {
             if(products.getSelectionModel().getSelectedItem() != null) {
                 Product product = (Product) products.getSelectionModel().getSelectedItem();
                 if(LoginMenu.getLoginAccount() instanceof Manager) {

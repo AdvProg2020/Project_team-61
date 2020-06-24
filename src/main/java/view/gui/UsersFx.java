@@ -87,7 +87,7 @@ public class UsersFx {
         }else usersMs.setText("you have to select first");
     }
 
-    public void deleteUser(MouseEvent mouseEvent) {
+    public void deleteUser(MouseEvent mouseEvent) throws IOException {
         if(usersList.getSelectionModel().getSelectedItem() != null) {
             Account a = usersList.getSelectionModel().getSelectedItem();
             usersMs.setText( OutputMassageHandler.showAccountOutput( ManagerMenu.deleteUser(a.getUsername())));
@@ -96,8 +96,9 @@ public class UsersFx {
     }
 
     public void AddManager(MouseEvent mouseEvent) throws IOException {
-            SignUpFx.setRole("manager");
+
             root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("signUpFx.fxml")));
+        SignUpFx.setRole("manager");
             goToPage();
     }
 

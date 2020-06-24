@@ -23,7 +23,7 @@ public abstract class Account {
     public Firm firm = null;
     boolean fast = false;
 
-    private static ArrayList<Account> allAccounts;
+    private static ArrayList<Account> allAccounts = new ArrayList<>();
     private static ArrayList<Date> birthdayDates = new ArrayList<>();
 //    public static Type AccountType = new TypeToken<ArrayList<Account>>() {
 //    }.getType();
@@ -83,8 +83,19 @@ public abstract class Account {
         return null;
     }
 
-    public static void deleteAccount(String username) {
+    public static void deleteAccount(String username) throws IOException {
+        Account account = Account.getAccountWithUsername(username);
         allAccounts.remove(getAccountWithUsername(username));
+        if(account instanceof Seller){
+            Seller.getAllSellers().remove(account);
+            Seller.writeInJ();
+        }else if(account instanceof Customer){
+            Customer.getAllCustomers().remove(account);
+            Customer.writeInJ();
+        } else if(account instanceof Manager){
+            Manager.getAllManagers().remove(account);
+            Manager.writeInJ();
+        }
 
     }
 

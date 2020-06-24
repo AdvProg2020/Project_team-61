@@ -27,7 +27,6 @@ public abstract class Request {
             seller =  LoginMenu.getLoginAccount().getUsername();
         }
         allRequests.add(this);
-
     }
 
 

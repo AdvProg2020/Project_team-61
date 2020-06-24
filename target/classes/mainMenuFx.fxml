@@ -23,28 +23,28 @@
                 </LinearGradient>
             </fill>
         </Rectangle>
-        <ImageView fitHeight="883.0" fitWidth="1258.0" layoutX="185.0" onMouseClicked="#users" pickOnBounds="true" preserveRatio="true" style="ba: #F5E5A4;" AnchorPane.topAnchor="0.0">
+        <ImageView fitHeight="883.0" fitWidth="1258.0" layoutX="185.0" pickOnBounds="true" preserveRatio="true" style="ba: #F5E5A4;" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@images/main.jpg" />
          </image></ImageView>
-        <Button layoutX="633.0" layoutY="435.0" mnemonicParsing="false" onMouseClicked="#users" prefHeight="34.0" prefWidth="282.0" style="-fx-background-color: #F5E5A4; -fx-border-radius: 25;" text="Users" textFill="#ff8c00">
+        <Button layoutX="633.0" layoutY="435.0" mnemonicParsing="false" onMouseClicked="#users" prefHeight="56.0" prefWidth="282.0" style="-fx-background-color: #F5E5A4; -fx-border-radius: 25;" text="Users" textFill="#ff8c00">
             <font>
-                <Font name="System Bold Italic" size="27.0" />
+                <Font name="Yas Bold Italic" size="27.0" />
             </font>
         </Button>
         <Button layoutX="636.0" layoutY="524.0" mnemonicParsing="false" onMouseClicked="#products" prefHeight="37.0" prefWidth="282.0" style="-fx-background-color: #F5E5A4; -fx-border-radius: 25;" text="Products" textFill="#ff8c00">
             <font>
-                <Font name="System Bold Italic" size="24.0" />
+                <Font name="Yas Bold Italic" size="24.0" />
             </font>
         </Button>
         <Button layoutX="633.0" layoutY="602.0" mnemonicParsing="false" onMouseClicked="#sales" prefHeight="44.0" prefWidth="282.0" style="-fx-background-color: #F5E5A4; -fx-border-radius: 25;" text="Sales" textFill="#ff8c00">
             <font>
-                <Font name="System Bold Italic" size="26.0" />
+                <Font name="Yas Bold Italic" size="26.0" />
             </font>
         </Button>
         <Button layoutX="633.0" layoutY="684.0" mnemonicParsing="false" onMouseClicked="#exit" prefHeight="51.0" prefWidth="288.0" style="-fx-background-color: #F5E5A4; -fx-border-radius: 25;" text="Exit" textFill="#ff8c00">
             <font>
-                <Font name="System Bold Italic" size="23.0" />
+                <Font name="Yas Bold Italic" size="23.0" />
             </font>
         </Button>
         <ImageView fitHeight="166.0" fitWidth="263.0" layoutX="642.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true" />

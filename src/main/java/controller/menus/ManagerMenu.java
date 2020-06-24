@@ -21,7 +21,7 @@ public class ManagerMenu {
     private static int outputNo;
     private static DiscountCode editableDiscountCode;
     private static Category editableCategory;
-   // private static String field;
+    // private static String field;
     private static int detailMenu = 0;
     private static DiscountCode newDiscountCode;
     private static Category newCategory;
@@ -62,7 +62,7 @@ public class ManagerMenu {
     }
 
 
-    public static int deleteUser(String username) {
+    public static int deleteUser(String username) throws IOException {
         if (checkUsername(username)) {
             Account.deleteAccount(username);
             outputNo = 37;
@@ -82,9 +82,11 @@ public class ManagerMenu {
         return false;
     }
 
-    public static int removeProduct(String productID) {
+    public static int removeProduct(String productID) throws IOException {
         if (checkProduct(productID)) {
+            Product product = Product.getProductById(productID);
             Product.deleteProduct(productID);
+            product.getSeller().removeProduct(product);
             outputNo = 1;
             //  OutputMassageHandler.showOutputWithString(2);
         }
@@ -103,7 +105,7 @@ public class ManagerMenu {
     }
 
     public static int createNewDiscountCode(String discountCodeId) throws IOException {
-        if(discountCodeId.matches("(\\s*\\S+\\s*)+")) {
+        if (discountCodeId.matches("(\\s*\\S+\\s*)+")) {
             if (!DiscountCode.isThereDiscountWithId(discountCodeId)) {
                 newDiscountCode = new DiscountCode(discountCodeId);
                 //  newDiscountCode.setManager(LoginMenu.getLoginAccount());
@@ -164,13 +166,13 @@ public class ManagerMenu {
                 // if (Account.isThereAccountWithUsername(detail)) {
                 newDiscountCode.addAccount(Account.getAccountWithUsername(detail));
                 Manager.writeInJ();
-                if(LoginMenu.getLoginAccount() instanceof Manager) {
-                  Manager man = (Manager) LoginMenu.getLoginAccount();
-                  man.addDiscount(newDiscountCode);
-                  //Manager.writeInJ();
+                if (LoginMenu.getLoginAccount() instanceof Manager) {
+                    Manager man = (Manager) LoginMenu.getLoginAccount();
+                    man.addDiscount(newDiscountCode);
+                    //Manager.writeInJ();
                 }
                 outputNo = 37;
-               // detailMenu = 0;
+                // detailMenu = 0;
                 // CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
                 // CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
                 //  } else outputNo = 31;
@@ -185,7 +187,7 @@ public class ManagerMenu {
         if (checkDiscountCode(discountCodeID)) {
             editableDiscountCode = DiscountCode.getDiscountWithId(discountCodeID);
             //CommandProcessor.setSubMenuStatus(SubMenuStatus.DISCOUNTCODEFIELD);
-            edit =1;
+            edit = 1;
             outputNo = 0;
         }// else OutputMassageHandler.showManagerOutput(outputNo);
         return outputNo;
@@ -229,16 +231,16 @@ public class ManagerMenu {
         } else if (field.matches("(?i)add\\s+account")) {
             if (edit.matches(".+")) {
                 //if (Account.isThereAccountWithUsername(edit)) {
-                    editableDiscountCode.addAccount(Account.getAccountWithUsername(edit));
-                    outputNo = 29;
-              //  } else outputNo = 31;
+                editableDiscountCode.addAccount(Account.getAccountWithUsername(edit));
+                outputNo = 29;
+                //  } else outputNo = 31;
             } else outputNo = 30;
         } else if (field.matches("(?i)remove\\s+account")) {
             if (edit.matches(".+")) {
                 //if (Account.isThereAccountWithUsername(edit)) {
-                    editableDiscountCode.removeAccount(Account.getAccountWithUsername(edit));
-                    outputNo = 32;
-               // } else outputNo = 32;
+                editableDiscountCode.removeAccount(Account.getAccountWithUsername(edit));
+                outputNo = 32;
+                // } else outputNo = 32;
             } else outputNo = 30;
         }
         return outputNo;

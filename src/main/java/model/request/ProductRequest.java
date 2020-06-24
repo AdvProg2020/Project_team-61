@@ -53,8 +53,6 @@ public class ProductRequest extends Request {
     }
 
 
-
-
     @Override
     public void declineRequest() throws IOException {
         getAllRequests().remove(this);

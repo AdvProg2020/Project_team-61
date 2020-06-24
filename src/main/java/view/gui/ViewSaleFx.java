@@ -18,12 +18,14 @@ import model.accounts.Manager;
 import model.accounts.Seller;
 import model.off.Sale;
 import model.productRelated.Product;
+import model.request.Request;
+import model.request.SaleRequest;
 
 import java.io.IOException;
 import java.util.Objects;
 
 public class ViewSaleFx {
-    @FXML private Label startSaleLabel;
+    @FXML private Label startSaleLabel ;
     @FXML private TableColumn<Product, String> saleProduct;
     @FXML private Label endSaleLabel;
     @FXML private Label saleAmountLabel;
@@ -34,6 +36,7 @@ public class ViewSaleFx {
     public static ObservableList list = FXCollections.observableArrayList();
     private static Parent root;
     private static Parent priRoot;
+    private static Request request;
 
     public static void setPriRoot(Parent priRoot) {
         ViewSaleFx.priRoot = priRoot;
@@ -47,8 +50,13 @@ public class ViewSaleFx {
         ViewSaleFx.curSale = curSale;
     }
 
+    public static Request getRequest() {
+        return request;
+    }
 
-
+    public static void setRequest(Request request) {
+        ViewSaleFx.request = request;
+    }
 
     private void makeTree() {
         saleProduct.setCellValueFactory(new PropertyValueFactory<Product, String>("productId"));
@@ -66,17 +74,41 @@ public class ViewSaleFx {
     }
     @FXML
     public void initialize()  {
-        makeTree();
-        saleIdLabel.setText(String.valueOf(curSale.getOffId()));
-        startSaleLabel.setText(String.valueOf(curSale.getStartOfSalePeriod()));
-        endSaleLabel.setText(String.valueOf(curSale.getEndOfSalePeriod()));
-        saleAmountLabel.setText(String.valueOf(curSale.getSaleAmount()));
-
+        if(request != null) {
+            makeTree();
+            saleIdLabel.setText(String.valueOf(curSale.getOffId()));
+            startSaleLabel.setText(String.valueOf(curSale.getStartOfSalePeriod()));
+            endSaleLabel.setText(String.valueOf(curSale.getEndOfSalePeriod()));
+            saleAmountLabel.setText(String.valueOf(curSale.getSaleAmount()));
+        }else showRequest();
 
     }
 
+    private void showRequest() {
+        if(request instanceof SaleRequest) {
+            SaleRequest saleRequest = (SaleRequest) request;
+            makeRequestTree();
+            saleIdLabel.setText(String.valueOf(saleRequest.getOffId()));
+            startSaleLabel.setText(String.valueOf(saleRequest.getStartOfSalePeriod()));
+            endSaleLabel.setText(String.valueOf(saleRequest.getEndOfSalePeriod()));
+            saleAmountLabel.setText(String.valueOf(saleRequest.getSaleAmount()));
+        }
+    }
 
+    private void makeRequestTree() {
+        if(request instanceof SaleRequest) {
+            SaleRequest saleRequest = (SaleRequest) request;
+            saleProduct.setCellValueFactory(new PropertyValueFactory<Product, String>("productId"));
+            list.clear();
+            list.addAll(saleRequest.getAllSaleProducts());
+            //  usersList.getColumns().addAll(UserId,userName,userLast,userBirth,userPhoneNo,userEmail);
+            saleProducts.setEditable(true);
+            saleProducts.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+            saleProducts.getSelectionModel().setCellSelectionEnabled(true);
 
+            saleProducts.setItems(list);
+        }
+    }
 
 
     public void userMenu(ActionEvent actionEvent) throws IOException {

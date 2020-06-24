@@ -20,10 +20,10 @@ import java.util.UUID;
 
 public class CustomerMenu {
     private static int outputNo =0;
-    private static String productID;
-    private static boolean hasDiscount;
-    private static String discountID;
-    private static Customer customer;
+    private static String productID = null;
+    private static boolean hasDiscount = false;
+    private static String discountID = null;
+    private static Customer customer= null;
 
     public static String getDiscountID() {
         return discountID;

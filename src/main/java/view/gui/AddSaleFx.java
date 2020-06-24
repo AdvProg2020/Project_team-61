@@ -97,9 +97,7 @@ public class AddSaleFx {
                 }
             }
         } saleIdAlertLabel.setText("you have to select first");
-
-            // finish = false;
-        }
+     }
 
         public void editSale (MouseEvent mouseEvent) throws IOException, ParseException {
             if (SellerMenu.getEdit() == 0) {

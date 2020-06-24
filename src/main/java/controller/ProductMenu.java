@@ -1,6 +1,7 @@
 package controller;
 
 import controller.menus.LoginMenu;
+import model.accounts.Customer;
 import model.request.CommentRequest;
 import model.request.Request;
 import model.log.BuyLog;
@@ -68,8 +69,11 @@ public class ProductMenu {
                 Comment comment = new Comment(id);
                 comment.setCommentStatus(CommentStatus.WAITINGFORAPPROVAL);
                 commentRequest = new CommentRequest(id);
-                commentRequest.setPersonToVote(LoginMenu.getLoginAccount());
-                commentRequest.setProduct(selectedProduct);
+                if(LoginMenu.getLoginAccount() instanceof Customer) {
+                    Customer customer = (Customer) LoginMenu.getLoginAccount();
+                    commentRequest.setPersonToVote(customer);
+                    commentRequest.setProduct(selectedProduct.getId());
+                }
                 commentRequest.setId(commentId);
             } else commentRequest = (CommentRequest) Request.getRequestFromID(id);
             outputNo = 0;

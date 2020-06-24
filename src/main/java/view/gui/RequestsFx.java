@@ -87,8 +87,8 @@ public class RequestsFx {
                 root = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
                 goToPage();
             } else if (request instanceof SaleRequest) {
-
-                root = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
+                ViewSaleFx.setRequest(request);
+                root = FXMLLoader.load(Objects.requireNonNull(ViewSaleFx.class.getClassLoader().getResource("viewSaleFx.fxml")));
                 goToPage();
             }
 

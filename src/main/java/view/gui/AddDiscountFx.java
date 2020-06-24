@@ -15,12 +15,10 @@ import javafx.scene.input.MouseEvent;
 import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Manager;
-import model.accounts.Seller;
 import view.OutputMassageHandler;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Objects;
 
 
@@ -48,7 +46,6 @@ public class AddDiscountFx {
     private TableView<Account> discountAccounts;
 
     public static ObservableList list = FXCollections.observableArrayList();
-    ArrayList<String> usernames = new ArrayList<>();
     private static Parent priRoot;
     private static Parent root;
 
@@ -70,7 +67,6 @@ public class AddDiscountFx {
         discountUser.setCellValueFactory(new PropertyValueFactory<Account, String>("username"));
 
         makeList();
-        //  usersList.getColumns().addAll(UserId,userName,userLast,userBirth,userPhoneNo,userEmail);
         discountAccounts.setEditable(true);
         discountAccounts.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         discountAccounts.getSelectionModel().setCellSelectionEnabled(true);
@@ -122,24 +118,15 @@ public class AddDiscountFx {
         if (ManagerMenu.getEdit() == 0) {
             ms = (OutputMassageHandler.showManagerOutput(ManagerMenu.editDiscountCode(addDiscountId.getText())));
         }
-        //if (ManagerMenu.getCreate() == 1) {
         if (ManagerMenu.getEdit() == 1) {
             ms = OutputMassageHandler.showManagerOutput(ManagerMenu.editDiscountCodeField(startAddDiscount.getText(), "start of discount"));
-            //  if (ManagerMenu.getDetailMenu() == 1) {
             ms = OutputMassageHandler.showManagerOutput(ManagerMenu.editDiscountCodeField(endAddDiscount.getText(), "end of discount"));
-            // }
-            //  if (ManagerMenu.getDetailMenu() == 2) {
             ms = OutputMassageHandler.showManagerOutput(ManagerMenu.editDiscountCodeField(maxAmountDiscount.getText(), "max"));
-            // }
-            // if (ManagerMenu.getDetailMenu() == 3) {
             ms = OutputMassageHandler.showManagerOutput(ManagerMenu.editDiscountCodeField(addDiscountTimesOfUse.getText(), "time of use"));
-            // }
-            // if (ManagerMenu.getDetailMenu() == 4) {
             ms = OutputMassageHandler.showManagerOutput(ManagerMenu.editDiscountCodeField(addDiscountAmount.getText(), "amount"));
-            // }
+
         }else ms = "you have to put id first";
 
-        // }
         discountMs.setText(ms);
     }
 
@@ -168,13 +155,16 @@ public class AddDiscountFx {
 
 
     public void userMenu(ActionEvent actionEvent) throws IOException {
-        if(LoginMenu.getLoginAccount() instanceof Seller){
-            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
-        } else if(LoginMenu.getLoginAccount() instanceof Manager){
-            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
-        }else if(LoginMenu.getLoginAccount() instanceof Customer){
-            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
-        }
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(AddCategoryFx.class.getClassLoader().getResource("addCategoryFx.fxml")));
+        ManagerMenuFx.setPriRoot(curRoot);
+        root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+//        if(LoginMenu.getLoginAccount() instanceof Seller){
+//            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+//        } else if(LoginMenu.getLoginAccount() instanceof Manager){
+//            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+//        }else if(LoginMenu.getLoginAccount() instanceof Customer){
+//            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
+//        }
     }
 
     public void back(ActionEvent actionEvent) {

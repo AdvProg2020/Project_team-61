@@ -81,10 +81,9 @@ public class DiscountCodesFx {
         discountCodes.getSelectionModel().setCellSelectionEnabled(true);
         discountCodes.setItems(data);
     }
-    public void edit(MouseEvent mouseEvent) {
-        if(discountCodes.getSelectionModel().getSelectedItem() != null) {
-            DiscountCode discountCode = discountCodes.getSelectionModel().getSelectedItem();
-        }
+    public void edit(MouseEvent mouseEvent) throws IOException {
+            root = FXMLLoader.load(Objects.requireNonNull(AddDiscountFx.class.getClassLoader().getResource("addDiscountFx.fxml")));
+            goToPage();
     }
 
     public void remove(MouseEvent mouseEvent) throws IOException {
