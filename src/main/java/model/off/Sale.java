@@ -39,6 +39,10 @@ public class Sale{
         writeInJ();
     }
 
+    public void setOffId(String offId) {
+        this.offId = offId;
+    }
+
     public static void setAllSales(ArrayList<Sale> allSales) {
         Sale.allSales = allSales;
     }

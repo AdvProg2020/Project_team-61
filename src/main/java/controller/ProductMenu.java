@@ -66,8 +66,8 @@ public class ProductMenu {
         if (!Comment.isThereCommentWithId(commentId)) {
             String id = LoginMenu.getLoginAccount() + "comment";
             if (!Request.isThereRequestFromID(id)) {
-                Comment comment = new Comment(id);
-                comment.setCommentStatus(CommentStatus.WAITINGFORAPPROVAL);
+//                Comment comment = new Comment(id);
+//                comment.setCommentStatus(CommentStatus.WAITINGFORAPPROVAL);
                 commentRequest = new CommentRequest(id);
                 if(LoginMenu.getLoginAccount() instanceof Customer) {
                     Customer customer = (Customer) LoginMenu.getLoginAccount();
