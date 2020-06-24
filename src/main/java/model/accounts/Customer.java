@@ -27,8 +27,14 @@ public class Customer extends Account {
         this.allCommentRequests = allCommentRequests;
     }
 
-    public void addCommentRequest(CommentRequest commentRequest){
+    public void addCommentRequest(CommentRequest commentRequest) throws IOException {
         allCommentRequests.add(commentRequest);
+        writeInJ();
+    }
+
+    public void removeCommentRequest(CommentRequest commentRequest) throws IOException {
+        allCommentRequests.remove(commentRequest);
+        writeInJ();
     }
 
     public Customer(String username) throws IOException {

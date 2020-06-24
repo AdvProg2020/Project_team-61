@@ -17,13 +17,13 @@ import java.util.ArrayList;
 
 public class Seller extends Account {
     //private Firm firm;
-    private  ArrayList<SaleLog> saleLogsHistory = new ArrayList<>();
+    private ArrayList<SaleLog> saleLogsHistory = new ArrayList<>();
     private static ArrayList<Seller> allSellers = new ArrayList<>();
-    private  ArrayList<Product> allProduct = new ArrayList<>();
-    private  ArrayList<Sale> allSales = new ArrayList<>();
-   // private  ArrayList<Request> allRequests = new ArrayList<>();
-     private  ArrayList<ProductRequest> allProductRequests = new ArrayList<>();
-    private  ArrayList<SaleRequest> allSaleRequests = new ArrayList<>();
+    private ArrayList<Product> allProduct = new ArrayList<>();
+    private ArrayList<Sale> allSales = new ArrayList<>();
+    // private  ArrayList<Request> allRequests = new ArrayList<>();
+    private ArrayList<ProductRequest> allProductRequests = new ArrayList<>();
+    private ArrayList<SaleRequest> allSaleRequests = new ArrayList<>();
     private static ArrayList<AccountRequest> allAccountRequests = new ArrayList<>();
     public static Type SellerType = new TypeToken<ArrayList<Seller>>() {
     }.getType();
@@ -35,20 +35,38 @@ public class Seller extends Account {
         writeInJ();
     }
 
+    public void removeProductRequest(ProductRequest productRequest) throws IOException {
+        allProductRequests.remove(productRequest);
+        writeInJ();
+    }
+
+    public void removeAccountRequest(AccountRequest productRequest) throws IOException {
+        allAccountRequests.remove(productRequest);
+        writeInJ();
+    }
+
+    public void removeSaleRequest(SaleRequest productRequest) throws IOException {
+        allSaleRequests.remove(productRequest);
+        writeInJ();
+    }
+
     public void setAllProduct(ArrayList<Product> allProduct) {
         this.allProduct = allProduct;
     }
 
-    public void addSaleRequest(SaleRequest saleRequest){
+    public void addSaleRequest(SaleRequest saleRequest) throws IOException {
         allSaleRequests.add(saleRequest);
+        writeInJ();
     }
 
-    public void addAccountRequest(AccountRequest accountRequest){
+    public void addAccountRequest(AccountRequest accountRequest) throws IOException {
         allAccountRequests.add(accountRequest);
+        writeInJ();
     }
 
-    public void addProductRequest(ProductRequest productRequest){
+    public void addProductRequest(ProductRequest productRequest) throws IOException {
         allProductRequests.add(productRequest);
+        writeInJ();
     }
 
     public ArrayList<ProductRequest> getAllProductRequests() {
@@ -103,7 +121,6 @@ public class Seller extends Account {
     }
 
 
-
     public static void setAllSellers(ArrayList<Seller> allSellers) {
         Seller.allSellers = allSellers;
     }
@@ -128,7 +145,6 @@ public class Seller extends Account {
     }
 
 
-
     @Override
     public String toString() {
         return "Seller{" +
@@ -145,7 +161,7 @@ public class Seller extends Account {
                 ", currentPhoneNo=" + currentPhoneNo +
                 ", address='" + address + '\'' +
                 ", birthdayDate=" + birthdayDate +
-             //   ", allDiscountCodes=" + allDiscountCodes +
+                //   ", allDiscountCodes=" + allDiscountCodes +
                 '}';
     }
 }

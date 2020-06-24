@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 import model.productRelated.Category;
 import model.productRelated.Product;
 
-import javax.management.AttributeList;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

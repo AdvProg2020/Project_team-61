@@ -32,6 +32,10 @@ public class SaleRequest extends Request {
     public SaleRequest(String requestID) throws IOException {
         super(requestID);
         allSaleRequests.add(this);
+        if(Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
+            Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
+            seller.addSaleRequest(this);
+        }
         writeInJ();
     }
 
@@ -42,7 +46,8 @@ public class SaleRequest extends Request {
         getAllRequests().remove(this);
         if(Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
             Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
-            seller.addSaleRequest(this);
+            seller.getAllProductRequests().remove(this);
+            seller.removeSaleRequest(this);
         }
         writeInJ();
     }
@@ -56,6 +61,10 @@ public class SaleRequest extends Request {
         Product.getProductById(product).setInSale(true);
         getAllRequests().remove(this);
         allSaleRequests.remove(this);
+        if(Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
+            Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
+            seller.removeSaleRequest(this);
+        }
         writeInJ();
     }
 
