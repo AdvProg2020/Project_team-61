@@ -307,12 +307,16 @@ public class SellerMenu {
             String id = "add sale: " + detail;
             if (!saleRequest.isThereRequestFromID(id)) {
                 Sale sale = new Sale(detail);
-                Seller seller = (Seller) Seller.getAccountWithUsername(LoginMenu.getLoginAccount().getUsername());
-                seller.getAllSales().add(sale);
-                sale.setSaleStatus(SaleStatus.UNDERREVIEWFORCONSTRUCTION);
-                saleRequest = new SaleRequest(id);
-                seller.getAllSaleRequests().add(saleRequest);
-                saleRequest.setOffId(detail);
+                sale.setOffId(detail);
+                if (LoginMenu.getLoginAccount() instanceof Seller){
+                    Seller seller = (Seller) LoginMenu.getLoginAccount();
+                    seller.getAllSales().add(sale);
+                    sale.setSaleStatus(SaleStatus.UNDERREVIEWFORCONSTRUCTION);
+                    saleRequest = new SaleRequest(id);
+                    saleRequest.setOffId(detail);
+                    seller.getAllSaleRequests().add(saleRequest);
+                }
+
                // saleRequest.setSeller(LoginMenu.getLoginAccount());
             } else {
                 saleRequest = (SaleRequest) Request.getRequestFromID(id);
@@ -361,8 +365,9 @@ public class SellerMenu {
             if (detail.matches("((?!^ +$)^.+$)")) {
                 // if (!detail.equalsIgnoreCase("finish")) {
                 if (checkProductSale(detail)) {
-                    saleRequest.setProduct(detail);
-                    saleRequest.addProductToSale(Product.getProductById(detail));
+                    Product product =Product.getProductById(detail);
+                    saleRequest.addProduct(product);
+                    saleRequest.addProductToSale(product);
                     //   outputNo = 18;
                     // }
                     // } else {
