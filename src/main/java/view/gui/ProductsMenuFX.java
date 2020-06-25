@@ -58,6 +58,11 @@ public class ProductsMenuFX {
     public TableColumn<ProductInMenusShow, String> sixthColumn = new TableColumn<>("Specifications");
 
     public TableColumn<ProductInMenusShow, Category> seventh = new TableColumn<>("category");
+
+    public TableColumn<ProductInMenusShow, String> eleventh = new TableColumn<>("firm");
+
+    public TableColumn<ProductInMenusShow, String> tenth = new TableColumn<>("numberOfProduct");
+
     @FXML
     public static ObservableList<ProductInMenusShow> data = FXCollections.observableArrayList();
 
@@ -88,6 +93,8 @@ public class ProductsMenuFX {
     public ArrayList<CheckBox> filterCatCheck = new ArrayList<>();
     public SortedList<ProductInMenusShow> sortedList = new SortedList<>(filteredList);
     public AnchorPane companyNamePaneFilter;
+    public TextField maxPriceTextField;
+    public TextField minPriceTextField;
 
     public static void setPriRoot(Parent priRoot) {
         ProductsMenuFX.priRoot = priRoot;
@@ -118,7 +125,8 @@ public class ProductsMenuFX {
             show.productImage.setFitWidth(100);
             show.productImage.setFitHeight(100);
             show.productImage.setImage(image);
-
+            show.firm = Seller.getAccountWithUsername(product.getSeller()).getFirm().getName();
+            show.numberOfProduct = product.getNumberOfProducts();
         }
     }
 
@@ -132,9 +140,13 @@ public class ProductsMenuFX {
         fifthColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("seller"));
         sixthColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("additionalDetail"));
         seventh.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, Category>("category"));
+        tenth.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow,String>("numberOfProduct"));
+
+        eleventh.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow,String>("firm"));
+
 
         initializeObserverList();
-        tableView.getColumns().addAll(firstColumn, secondColumn, productImageViewTableColumn, forthColumn, fifthColumn, sixthColumn, seventh);
+        tableView.getColumns().addAll(firstColumn, secondColumn, productImageViewTableColumn, forthColumn, fifthColumn, sixthColumn, seventh,eleventh,tenth);
         tableView.setItems(data);
 
 
@@ -149,10 +161,41 @@ public class ProductsMenuFX {
                     return true;
                 } else if (product.getCategory().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
-                } else return false;
+                }
+                else return false;
             });
 
         });
+
+        minPriceTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredList.setPredicate(product -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                if (product.getPrice() > Integer.parseInt(minPriceTextField.getText())) {
+                    return true;
+                }
+                else return false;
+            });
+
+        });
+
+        maxPriceTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredList.setPredicate(product -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                if (product.getPrice() < Integer.parseInt(minPriceTextField.getText())) {
+                    return true;
+                }
+                else return false;
+            });
+
+        });
+
+
 
         for (CheckBox checkBox : filterCatCheck) {
             checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
@@ -166,6 +209,9 @@ public class ProductsMenuFX {
                             return true;
                         }
                         if (checkBox.isSelected() && obj.getNumberOfProduct() != 0){
+                            return true;
+                        }
+                        if (checkBox.isSelected() && obj.getFirm().equals(checkBox.getText())){
                             return true;
                         }
                         else return false;
