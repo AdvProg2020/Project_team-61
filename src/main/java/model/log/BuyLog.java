@@ -2,6 +2,8 @@ package model.log;
 
 
 import controller.menus.CustomerMenu;
+import model.accounts.Account;
+import model.accounts.Customer;
 import model.accounts.Seller;
 import model.off.DiscountCode;
 import model.productRelated.Product;
@@ -40,8 +42,15 @@ public class BuyLog extends Log {
     private HashMap<Product, Integer> allBoughtProduct = new HashMap<>();
     private  HashMap<Product, Integer> chosenProduct = new HashMap<>();
     public static ArrayList<BuyLog> allCustomersLog = new ArrayList<BuyLog>();
+    private Account buyLogCustomer;
 
+    public Account getBuyLogCustomer() {
+        return buyLogCustomer;
+    }
 
+    public void setBuyLogCustomer(Account buyLogCustomer) {
+        this.buyLogCustomer = buyLogCustomer;
+    }
     //setterAndGetter----------------------------------------------------
 
     public String getId() {
@@ -122,7 +131,7 @@ public class BuyLog extends Log {
         ArrayList<Seller> sellers=null;
         for (Product p : allBoughtProduct.keySet()){
             if (!sellers.contains(p.getSeller())){
-                sellers.add((Seller) p.getSeller());
+                sellers.add((Seller) Account.getAccountWithUsername(p.getSeller()));
             }
         }
         return sellers;

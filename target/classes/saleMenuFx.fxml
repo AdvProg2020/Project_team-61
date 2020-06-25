@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.SaleMenuFx">
+   <children>
+      <Rectangle fx:id="productsInSaleTable" arcHeight="5.0" arcWidth="5.0" height="983.0" layoutX="-225.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="1855.0" AnchorPane.bottomAnchor="-183.0" AnchorPane.leftAnchor="-225.0" AnchorPane.rightAnchor="-350.0" AnchorPane.topAnchor="0.0">
+         <fill>
+            <LinearGradient endY="1.0" startX="0.7366411631343929">
+               <stops>
+                  <Stop color="#ff7600" />
+                  <Stop color="#00f5c8" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <TableView fx:id="ProductsInOffSearch" onMouseClicked="#clickedColumn" layoutX="95.0" layoutY="218.0" prefHeight="474.0" prefWidth="1037.0" />
+      <Label layoutX="487.0" layoutY="71.0" prefHeight="39.0" prefWidth="342.0" text="Products In Off">
+         <font>
+            <Font name="Britannic Bold" size="39.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#7f3900" />
+                  <Stop color="#05846b" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <TextField fx:id="searchProInSale" layoutX="174.0" layoutY="154.0" prefHeight="39.0" prefWidth="198.0" />
+      <Label layoutX="104.0" layoutY="161.0" prefHeight="26.0" prefWidth="62.0" text="search" textFill="#0022ff">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <MenuBar layoutY="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Back">
+            <items>
+              <MenuItem mnemonicParsing="false" text="back" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Exit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="exit" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Logout">
+            <items>
+              <MenuItem mnemonicParsing="false" text="logout" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="My Account">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="account" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>

@@ -1,55 +1,74 @@
 package view;
 
 
+import javafx.scene.Parent;
+
+import java.util.ArrayList;
+
 public class OutputMassageHandler {
     private static String text;
+    private static ArrayList<Parent> allRoots = new ArrayList<>();
 
-    public static void showProductsOutput(int output) {
-        if (output == 0) {
-            System.out.println("");
-        } else if (output == 1) {
-            System.out.println("there is no filter with this id");
-        } else if (output == 2) {
-            System.out.println("filter disabled");
-        } else if (output == 3) {
-            System.out.println("there is no sort with this id");
-        } else if (output == 4) {
-            System.out.println("sort disabled");
-        } else if (output == 5) {
-            System.out.println("there is no product with this id");
-        } else if (output == 6) {
-            System.out.println("this filter isn't available");
-        } else if (output == 7) {
-            System.out.println("this sort isn't available");
-        } else if (output == 8) {
-            System.out.println("please enter 2 number");
-        } else if (output == 9) {
-            System.out.println("sort format is in valid");
-        } else if (output == 10) {
-            System.out.println("please enter category name to filter");
-        } else if (output == 11) {
-            System.out.println("please enter firm name to filter");
-        } else if (output == 12) {
-            System.out.println("please enter product name to filter");
-        } else if (output == 13) {
-            System.out.println("there is no category with this id");
-        } else if (output == 14) {
-            System.out.println("there is no firm with this id");
-        } else if (output == 15) {
-            System.out.println("there is no product with this id");
-        }
+    public static void addRoot(Parent root){
+        allRoots.add(root);
     }
 
-    public static void showProductOutput(int output) {
+    public static ArrayList<Parent> getAllRoots() {
+        return allRoots;
+    }
+
+    public static void setAllRoots(ArrayList<Parent> allRoots) {
+        OutputMassageHandler.allRoots = allRoots;
+    }
+
+    public static String showProductsOutput(int output) {
         if (output == 0) {
             System.out.println("");
         } else if (output == 1) {
-            System.out.println("please enter comment title");
+            text =("there is no filter with this id");
         } else if (output == 2) {
-            System.out.println("please enter comment content");
+            text =("filter disabled");
         } else if (output == 3) {
-            System.out.println("you already commented on this product");
+            text =("there is no sort with this id");
+        } else if (output == 4) {
+            text =("sort disabled");
+        } else if (output == 5) {
+            text =("there is no product with this id");
+        } else if (output == 6) {
+            text =("this filter isn't available");
+        } else if (output == 7) {
+            text =("this sort isn't available");
+        } else if (output == 8) {
+            text =("please enter 2 number");
+        } else if (output == 9) {
+            text =("sort format is in valid");
+        } else if (output == 10) {
+            text =("please enter category name to filter");
+        } else if (output == 11) {
+            text =("please enter firm name to filter");
+        } else if (output == 12) {
+            text =("please enter product name to filter");
+        } else if (output == 13) {
+            text =("there is no category with this id");
+        } else if (output == 14) {
+            text =("there is no firm with this id");
+        } else if (output == 15) {
+            text =("there is no product with this id");
         }
+        return text;
+    }
+
+    public static String showProductOutput(int output) {
+        if (output == 0) {
+            text =("");
+        } else if (output == 1) {
+            text =("comment content format is invalid");
+        } else if (output == 2) {
+            text =("comment title format is invalid");
+        } else if (output == 3) {
+            text =("you already commented on this product");
+        }
+        return text;
     }
 
 
@@ -101,7 +120,7 @@ public class OutputMassageHandler {
         } else if (output == 26) {
             text =("date must be after current date");
         } else if (output == 27) {
-            text =("discount amount changed");
+            text =("changed");
         } else if (output == 28) {
             text =("discount amount format is invalid");
         } else if (output == 29) {
@@ -109,30 +128,34 @@ public class OutputMassageHandler {
         }else if (output == 30) {
             text =("username format is invalid");
         } else if (output == 31) {
-            System.out.println("there is no account with this username");
+            text =("there is no account with this username");
         } else if (output == 32) {
-            System.out.println("account removed from list");
+            text =("account removed from list");
         } else if (output == 34) {
-            System.out.println("there is a category with this name");
+            text =("there is a category with this name");
         } else if (output == 36) {
-            System.out.println("please enter username you want to add to discount code list (if you enter finish process end)");
+            text =("please enter username you want to add to discount code list (if you enter finish process end)");
         } else if (output == 37) {
-            System.out.println("discount code add");
+            text =("discount code add");
         } else if (output == 39) {
-            System.out.println("product add to category");
+            text =("product add to category");
         } else if (output == 40) {
-            System.out.println("product removed from category");
+            text =("product removed from category");
         } else if (output == 41) {
-            System.out.println("trait removed");
+            text =("trait removed");
         } else if (output == 42) {
-            System.out.println("trait format is invalid");
+            text =("trait format is invalid");
         } else if (output == 43) {
-            System.out.println("trait add");
+            text =("trait add");
         } else if (output == 45) {
-            System.out.println("category add");
+            text =("category add");
         } else if (output == 46) {
-            System.out.println("there is no product with this id");
-        }
+            text =("there is no product with this id");
+        } else if (output == 47) {
+            text =("there is no trait with this id");
+        } else if (output == 48) {
+        text =("there is a trait with this id");
+    }
         return text;
     }
 
@@ -191,33 +214,34 @@ public class OutputMassageHandler {
     }
 
 
-    public static void showCustomerOutput(int output) {
+    public static String showCustomerOutput(int output) {
         if (output == 0) {
             System.out.println("");
         } else if (output == 1) {
-            text =("there is no product with this productId ");
+            text = ("there is no product with this productId ");
         } else if (output == 4) {
-            text =("number format is invalid");
+            text = ("number format is invalid");
         } else if (output == 7) {
-            text =("there is no discount code with this id");
+            text = ("there is no discount code with this id");
         } else if (output == 8) {
-            text =("there is no log with this id");
+            text = ("there is no log with this id");
         } else if (output == 10) {
-            text =("product number increase");
+            text = ("product number increase");
         } else if (output == 11) {
-            text =("number must be between 1 to 5");
+            text = ("number must be between 1 to 5");
         } else if (output == 12) {
-            text =("there is no log yet");
+            text = ("there is no log yet");
         } else if (output == 13) {
-            text =("you didn't buy this product");
+            text = ("you didn't buy this product");
         } else if (output == 14) {
-            text =("score add to product");
+            text = ("score add to product");
         } else if (output == 15) {
-            text =("product number decrese");
+            text = ("product number decrese");
         }
+        return text;
     }
 
-    public static void showPurchaseOutput(int output){
+    public static String showPurchaseOutput(int output){
         if (output == 0) {
             text =("please enter discount id");
         } else if (output == 1) {
@@ -237,9 +261,16 @@ public class OutputMassageHandler {
         } else if (output == 8) {
             text =("you aren't a customer");
         }
+        else if (output==9){
+            text=("you don't have enough credit");
+        }
+        else if (output==10){
+            text=("payment successful!");
+        }
+        return text;
     }
 
-    public static void showSellerOutput(int output) {
+    public static String showSellerOutput(int output) {
         if (output == 0) {
             System.out.println("number");
         } else if (output == 1) {
@@ -287,6 +318,7 @@ public class OutputMassageHandler {
         }else if (output == 33) {
             text =("new value request sent");
         }
+        return text;
     }
 
     public static String showSaleOutput(int output) {
@@ -375,6 +407,8 @@ public class OutputMassageHandler {
             text =("username format is invalid");
         } else if (output == 37) {
             text =("account deleted");
+        }else if (output == 18) {
+            text =("product removed");
         }
         return text ;
     }

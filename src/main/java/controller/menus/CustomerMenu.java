@@ -19,11 +19,11 @@ import java.util.UUID;
 
 
 public class CustomerMenu {
-    private static int outputNo;
-    private static String productID;
-    private static boolean hasDiscount;
-    private static String discountID;
-    private static Customer customer;
+    private static int outputNo =0;
+    private static String productID = null;
+    private static boolean hasDiscount = false;
+    private static String discountID = null;
+    private static Customer customer= null;
 
     public static String getDiscountID() {
         return discountID;
@@ -52,13 +52,15 @@ public class CustomerMenu {
         return false;
     }
 
-
+    public static int getOutputNo() {
+        return outputNo;
+    }
 
     public static void increaseProductNumber(String productID) {
         if (isThereBuyLog()) {
             if (checkProduct(productID)) {
                 CustomerMenu.productID = productID;
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.INCREASEPRODUCTNUMBER);
+              //  CommandProcessor.setSubMenuStatus(SubMenuStatus.INCREASEPRODUCTNUMBER);
                 outputNo = 2;
             }
         }
@@ -98,7 +100,7 @@ public class CustomerMenu {
         if (isThereBuyLog()) {
             if (checkProduct(productID)) {
                 CustomerMenu.productID = productID;
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.DECREASEPRODUCTNUMBER);
+              // CommandProcessor.setSubMenuStatus(SubMenuStatus.DECREASEPRODUCTNUMBER);
                 outputNo = 3;
             }
         }
@@ -110,7 +112,7 @@ public class CustomerMenu {
         if (LoginMenu.isLogin()) {
             if (LoginMenu.getLoginAccount().getRole().equals("customer")) {
                 //CommandProcessor.setMenuStatus(MenuStatus.PURCHASE);
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
+               // CommandProcessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
                 //CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
                 outputNo = 7;
             } else outputNo = 8;
@@ -118,7 +120,7 @@ public class CustomerMenu {
         OutputMassageHandler.showPurchaseOutput(outputNo);
     }
 
-    private static boolean checkDiscountCode(String discountCodeID) {
+    public static boolean checkDiscountCode(String discountCodeID) {
         //if (discountCodeID.matches("")) {
         if (DiscountCode.isThereDiscountWithId(discountCodeID)) {
             return true;
@@ -131,11 +133,11 @@ public class CustomerMenu {
         if (have.matches("(?i)(?:yes|no)")) {
             if (have.equalsIgnoreCase("yes")) {
                 hasDiscount = true;
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.CHECKDISCOUNTCODE);
+              //  CommandProcessor.setSubMenuStatus(SubMenuStatus.CHECKDISCOUNTCODE);
                 outputNo = 1;
             } else {
                 hasDiscount = false;
-                CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
+              //  CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
                 outputNo = 3;
             }
         } else outputNo = 2;
@@ -150,7 +152,7 @@ public class CustomerMenu {
             if (discountCode.discountMatchAccount(loginAccount.getUsername())) {
                 if (discountCode.discountDateValid()) {
                     if (discountCode.getTotalTimesOfUse() > 0) {
-                        CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
+                       // CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
                         discountID = discountCodeId;
                         outputNo = 2;
                     } else outputNo = 5;
@@ -162,11 +164,11 @@ public class CustomerMenu {
 
     public static void payment() throws IOException {
         if (ProductMenu.getBuyLog().holePrice <= LoginMenu.getLoginAccount().getCredit()) {
-            CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-            CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
+           // CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
+           // CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
             finishingPayment();
-            outputNo = 0;
-        } else outputNo = 0;
+            outputNo = 10;
+        } else outputNo = 9;
         OutputMassageHandler.showPurchaseOutput(outputNo);
     }
 
@@ -181,7 +183,7 @@ public class CustomerMenu {
         }
         for (Product p : ProductMenu.getBuyLog().getChosenProduct().keySet()) {
             //faghat price bedoon discount be seller eafe
-            p.getSeller().setCredit(p.getSeller().getCredit() + p.getPrice());
+            Account.getAccountWithUsername(p.getSeller()).setCredit(Account.getAccountWithUsername(p.getSeller()).getCredit() + p.getPrice());
             p.getListOfBuyers().add((Customer) loginAccount);
         }
         ProductMenu.getBuyLog().setAllBoughtProduct(ProductMenu.getBuyLog().getChosenProduct());
@@ -213,21 +215,21 @@ public class CustomerMenu {
         return false;
     }
 
-
-
     //score.............................................................
-    public static void rateProduct(String productID, int number) throws IOException {
+    public static int rateProduct(String productID, int number) throws IOException {
         if (checkProduct(productID)) {
             if (number >= 1 && number <= 5) {
-                if (checkCustomer()) {
+                //if (checkCustomer()) {
                     if (isBought()) {
                         Score newScore = new Score(LoginMenu.getLoginAccount(), Product.getProductById(productID), number);
                         // OutputMassageHandler.showOutputWith2String(productID, String.valueOf(number), 1);
                         outputNo = 14;
                     }else outputNo = 13;
-                }else outputNo = 9;
+               // }else outputNo = 9;
             } else outputNo = 11;
-        }OutputMassageHandler.showCustomerOutput(outputNo);
+
+        }//OutputMassageHandler.showCustomerOutput(outputNo);
+        return  outputNo;
     }
 
     private static boolean isBought() {

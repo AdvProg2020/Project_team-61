@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewFirmFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1649.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ViewFirmFx">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="882.0" stroke="BLACK" strokeType="INSIDE" width="1649.0">
             <fill>
                 <LinearGradient endX="0.7233009708737864" endY="0.6116504854368933" startX="0.2524271844660194" startY="0.21844660194174756">
                     <stops>
@@ -22,7 +19,7 @@
                 </LinearGradient>
             </fill>
         </Rectangle>
-        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.bottomAnchor="1050.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <menus>
                 <Menu mnemonicParsing="false" text="User menu">
                     <items>
@@ -48,7 +45,7 @@
         </MenuBar>
         <ImageView fitHeight="276.0" fitWidth="303.0" layoutX="161.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="564.0" AnchorPane.leftAnchor="161.0" AnchorPane.rightAnchor="1534.2164916992188" AnchorPane.topAnchor="240.0">
             <image>
-                <Image url="@view/icons/face.png" />
+                <Image url="@icons/face.png" />
             </image>
         </ImageView>
         <Text layoutX="859.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Firm" wrappingWidth="201.6708984375" AnchorPane.bottomAnchor="951.2119140625" AnchorPane.leftAnchor="859.0" AnchorPane.rightAnchor="859.3291015625" AnchorPane.topAnchor="76.9150390625">
@@ -86,35 +83,46 @@
                 <Font name="System Bold Italic" size="35.0" />
             </font>
         </Text>
-        <Label fx:id="firmName" layoutX="959.0" layoutY="230.0" prefHeight="47.0" prefWidth="444.0" text="Label" textFill="#f2dddd" AnchorPane.bottomAnchor="803.0" AnchorPane.leftAnchor="959.0" AnchorPane.rightAnchor="517.0" AnchorPane.topAnchor="230.0">
-            <font>
-                <Font size="28.0" />
-            </font>
-        </Label>
-        <Label fx:id="firmPhoneNo" layoutX="959.0" layoutY="305.0" prefHeight="47.0" prefWidth="444.0" text="Label" textFill="#f2dddd" AnchorPane.bottomAnchor="728.0" AnchorPane.leftAnchor="959.0" AnchorPane.rightAnchor="517.0" AnchorPane.topAnchor="305.0">
-            <font>
-                <Font size="28.0" />
-            </font>
-        </Label>
-        <Label fx:id="firmEmail" layoutX="959.0" layoutY="399.0" prefHeight="47.0" prefWidth="444.0" text="Label" textFill="#f2dddd" AnchorPane.bottomAnchor="634.0" AnchorPane.leftAnchor="959.0" AnchorPane.rightAnchor="517.0" AnchorPane.topAnchor="399.0">
-            <font>
-                <Font size="28.0" />
-            </font>
-        </Label>
-        <Label fx:id="firmAddress" layoutX="959.0" layoutY="493.0" prefHeight="47.0" prefWidth="444.0" text="Label" textFill="#f2dddd" AnchorPane.bottomAnchor="540.0" AnchorPane.leftAnchor="959.0" AnchorPane.rightAnchor="517.0" AnchorPane.topAnchor="493.0">
-            <font>
-                <Font size="28.0" />
-            </font>
-        </Label>
-        <ImageView fitHeight="88.0" fitWidth="103.0" layoutX="1711.0" layoutY="972.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="88.0" fitWidth="103.0" layoutX="1435.0" layoutY="780.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@view/icons/back.png" />
+                <Image url="@icons/back.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="95.0" fitWidth="115.0" layoutX="1798.0" layoutY="969.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="95.0" fitWidth="115.0" layoutX="1541.0" layoutY="777.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@view/icons/exit.png" />
+                <Image url="@icons/exit.png" />
             </image>
         </ImageView>
+      <Label fx:id="firmAddress" layoutX="969.0" layoutY="503.0" prefHeight="47.0" prefWidth="444.0" textFill="#f2dddd">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Label fx:id="firmEmail" layoutX="969.0" layoutY="409.0" prefHeight="47.0" prefWidth="444.0" textFill="#f2dddd">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Label fx:id="firmPhoneNo" layoutX="969.0" layoutY="315.0" prefHeight="47.0" prefWidth="444.0" textFill="#f2dddd">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Label fx:id="firmName" layoutX="969.0" layoutY="240.0" prefHeight="47.0" prefWidth="444.0" textFill="#f2dddd">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Button layoutX="278.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#editFirm" prefHeight="47.0" prefWidth="82.0" text="Edit" />
+      <Text layoutX="616.0" layoutY="613.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:" wrappingWidth="142.6708984375">
+         <font>
+            <Font name="System Bold Italic" size="35.0" />
+         </font>
+      </Text>
+      <Label fx:id="firmType" layoutX="975.0" layoutY="577.0" prefHeight="47.0" prefWidth="444.0" textFill="#f2dddd">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

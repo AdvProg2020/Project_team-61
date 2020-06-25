@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="addCommentSectionPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="sample.ProductMenuFX">
+<AnchorPane fx:id="addCommentSectionPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="view.gui.ProductMenuFX">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="400.0" stroke="BLACK" strokeType="INSIDE" width="600.0">
             <fill>
@@ -64,7 +64,7 @@
                 </LinearGradient>
             </textFill>
         </Button>
-        <Label fx:id="nullAddCommentError" visible="false" layoutX="297.0" layoutY="338.0" prefHeight="18.0" prefWidth="158.0">
+        <Label fx:id="nullAddCommentError"  visible="false" layoutX="297.0" layoutY="338.0" prefHeight="18.0" prefWidth="158.0">
             <font>
                 <Font name="Bookman Old Style Bold Italic" size="14.0" />
             </font>

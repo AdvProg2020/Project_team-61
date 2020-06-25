@@ -24,9 +24,9 @@ public class Product {
 
     private String productId;
     private String productName;
-    private Company companiesName;
+    private String companiesName;
     private double price;
-    private Account seller;
+    private String seller;
     private ProductStatus productStatus;
     private Category category;
     private double averageScore;
@@ -37,6 +37,8 @@ public class Product {
     private int totalNumberOfBuyers;
     private boolean isBought;
     String productImageId;
+    private String categoryName;
+   // private String sellerName;
 
     //sample.lists
 //    private  ArrayList<Account> listOfSellers = new ArrayList<Account>();
@@ -47,7 +49,7 @@ public class Product {
     private ArrayList<Comment> proComments = new ArrayList<Comment>();
     private ArrayList<Score> proScores = new ArrayList<>();
     private static HashMap<String, String> categorySpecifications = new HashMap<>();
-
+    public ArrayList<String> productCategorySpecifications = new ArrayList<>();
 
     //objectsAdded
     private Comment comment;
@@ -71,7 +73,6 @@ public class Product {
     public static HashMap<String, String> getCategorySpecifications() {
         return categorySpecifications;
     }
-    public ArrayList<String> productCategorySpecifications = new ArrayList<>();
 
     public void setCategorySpecifications(HashMap<String, String> categorySpecifications) {
         this.categorySpecifications = categorySpecifications;
@@ -79,7 +80,7 @@ public class Product {
 
     //finish
     //id,productImage,name,price,category,seller
-    public void setDetailProduct(String productImageId, String name, double price, Category categoryr, Account selle, Firm firm, int numberOfProducts) throws IOException {
+    public void setDetailProduct(String productImageId, String name, double price, Category category, Account selle, Firm firm, int numberOfProducts) throws IOException {
         if (name != null) {
             this.productName = name;
         }
@@ -89,14 +90,15 @@ public class Product {
         if (price != 0) {
             this.price = price;
         }
-        if (seller != null) {
-            this.seller = seller;
+        if (selle != null) {
+            this.seller = selle.getUsername();
         }
         if (numberOfProducts != 0) {
             this.numberOfProducts = numberOfProducts;
         }
         if (category != null) {
             this.category = category;
+            categoryName = category.getName();
         }
         if (productImageId != null) {
             this.productImageId = productImageId;
@@ -112,6 +114,10 @@ public class Product {
 
     public ArrayList<String> getProductCategorySpecifications() {
         return productCategorySpecifications;
+    }
+
+    public void setProductCategorySpecifications(ArrayList<String> productCategorySpecifications) {
+        this.productCategorySpecifications = productCategorySpecifications;
     }
 
     public String getProductImage() {
@@ -172,13 +178,9 @@ public class Product {
         proScores.add(score);
     }
 
-//    public void setComment(Comment comment) {
-//        this.comment = comment;
-//        proComments.add(comment);
-//    }
-
-    public void setComment(String title , String content){
-        comment = new Comment(title,content,this.getId());
+    public void setComment(Comment comment) {
+        this.comment = comment;
+        proComments.add(comment);
     }
 
     public String getId() {
@@ -210,7 +212,12 @@ public class Product {
     }
 
     public double getAverageScore() {
-        return averageScore;
+        for (Product product : allProduct) {
+            if (product.getId().equals(productId)) {
+                return product.score.getAverageScore();
+            }
+        }
+        return 0;
     }
 
     public void setAverageScore(double averageScore) {
@@ -246,7 +253,7 @@ public class Product {
         return category;
     }
 
-    public Company getCompaniesName() {
+    public String getCompaniesName() {
         return companiesName;
     }
 
@@ -276,18 +283,28 @@ public class Product {
         return totalNumberOfBuyers;
     }
 
-    public Account getSeller() {
-        return (Seller) seller;
+    public String getSeller() {
+        return  seller;
     }
 
-
-    public void setSeller(Account seller) {
+    public void setSeller(String seller) {
         this.seller = seller;
     }
 
     public Comment getComment() {
         return comment;
     }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
 
     //othersTobeHandel-------------------------------------------------------------------------------
 
@@ -301,6 +318,23 @@ public class Product {
         }
         return null;
     }
+
+
+//    public boolean ifProductHasSeller(String productId, String sellerUserName){
+//        if (isThereProductWithId(productId)) {
+//            for (Account seller : Product.getProductById(productId).getListOfSellers()) {
+//                if (seller.equals(Seller.getAccountWithUsername(sellerUserName))){
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
+
+    //finish
+//    public ArrayList<Account> getListOfSellers () {
+//        return listOfSellers;
+//    }
 
     //finish
     public static void deleteProduct(String productId) {
@@ -345,6 +379,11 @@ public class Product {
         Category category = Category.getCategoryWithName(categoryId);
         category.getAllProducts().removeAll(category.getAllProducts());
     }
+
+    public static ArrayList<Product> getAllProduct() {
+        return allProduct;
+    }
+
 
     //checked
     public static Comparator<Product> productComparatorForView = new Comparator<Product>() {

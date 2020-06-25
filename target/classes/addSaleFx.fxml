@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0"  xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AddSaleFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.AddSaleFx">
     <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <fill>
@@ -47,10 +45,10 @@
             </menus>
         </MenuBar>
         <TextField fx:id="saleIdTextField" layoutX="563.0" layoutY="229.0" prefHeight="39.0" prefWidth="253.0" promptText="Sale Id" />
-        <Label fx:id="saleIdAlertLabel" layoutX="563.0" layoutY="268.0" prefHeight="21.0" prefWidth="253.0" text="Label" textFill="#f00505" />
-        <Label fx:id="startSaleAlertLabel" layoutX="561.0" layoutY="354.0" prefHeight="21.0" prefWidth="253.0" text="Label" textFill="#ee0707" />
-        <Label fx:id="endSaleAlertLabel" layoutX="562.0" layoutY="446.0" prefHeight="21.0" prefWidth="260.0" text="Label" textFill="#f70606" />
-        <Button layoutX="527.0" layoutY="610.0" mnemonicParsing="false" onMouseClicked="#createSale" text="Create">
+        <Label fx:id="saleIdAlertLabel" layoutX="563.0" layoutY="268.0" prefHeight="21.0" prefWidth="253.0" textFill="#f00505" />
+        <Label fx:id="startSaleAlertLabel" layoutX="561.0" layoutY="354.0" prefHeight="21.0" prefWidth="253.0" textFill="#ee0707" />
+        <Label fx:id="endSaleAlertLabel" layoutX="562.0" layoutY="446.0" prefHeight="21.0" prefWidth="260.0" textFill="#f70606" />
+        <Button layoutX="505.0" layoutY="602.0" mnemonicParsing="false" onMouseClicked="#createSale" prefHeight="39.0" prefWidth="85.0" text="Create">
          <textFill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -87,8 +85,8 @@
       <TextField fx:id="saleAmount" layoutX="558.0" layoutY="487.0" prefHeight="39.0" prefWidth="260.0" promptText="Sale amount" />
       <TextField fx:id="endSaleDatePicker" layoutX="562.0" layoutY="403.0" prefHeight="39.0" prefWidth="260.0" promptText="End of sale period" />
       <TextField fx:id="startSaleDatePicker" layoutX="563.0" layoutY="315.0" prefHeight="39.0" prefWidth="253.0" promptText="Start of sale period" />
-      <Label fx:id="saleAmountAlertLabel" layoutX="561.0" layoutY="530.0" prefHeight="21.0" prefWidth="253.0" text="Label" textFill="#f70606" />
-      <Button layoutX="1256.0" layoutY="858.0" mnemonicParsing="false" onMouseClicked="#finish" prefHeight="39.0" prefWidth="85.0" text="Finish">
+      <Label fx:id="saleAmountAlertLabel" layoutX="561.0" layoutY="530.0" prefHeight="21.0" prefWidth="253.0" textFill="#f70606" />
+      <Button layoutX="1256.0" layoutY="858.0" mnemonicParsing="false" onMouseClicked="#removeProduct" prefHeight="39.0" prefWidth="85.0" text="Remove">
          <textFill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -124,5 +122,17 @@
           <TableColumn fx:id="addSaleProduct" prefWidth="505.0" text="Products" />
         </columns>
       </TableView>
+      <Button layoutX="615.0" layoutY="602.0" mnemonicParsing="false" onMouseClicked="#editSale" prefHeight="39.0" prefWidth="85.0" text="Edit">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#e4ff00" />
+                  <Stop color="#e4ff00" offset="0.007246376811594203" />
+                  <Stop color="#eb0202" offset="0.4746376811594203" />
+                  <Stop color="#000bff" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
     </children>
 </AnchorPane>
