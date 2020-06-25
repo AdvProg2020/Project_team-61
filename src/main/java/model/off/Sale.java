@@ -151,7 +151,38 @@ public class Sale {
             }
         }
         return false;
+    }
 
+    public boolean checkSale() {
+        Date now = new Date();
+        if (startOfSalePeriod.after(now) && endOfSalePeriod.before(now)) {
+            return true;
+        }
+        return false;
+    }
+
+ /*   public static double withSale(Product product){
+        Sale s = null;
+        double price = product.getPrice();
+        for (Sale allSale : allSales) {
+            for (Product allSaleProduct : allSale.allSaleProducts) {
+                if (allSaleProduct.getId().equals(product.getId())) {
+                    s = allSale;
+                }
+            }
+        }if (s.checkSale()) {
+            price = price - ((price * s.saleAmount) / 100);
+        }
+        return price;
+    }
+
+  */
+
+    public double withSale(Product product) {
+        double price = product.getPrice();
+            price = (price * this.saleAmount) / 100;
+
+        return price;
     }
 
     public static void writeInJ() throws IOException {

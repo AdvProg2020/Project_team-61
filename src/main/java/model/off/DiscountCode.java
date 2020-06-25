@@ -64,8 +64,7 @@ public class DiscountCode {
 
 
     public boolean discountMatchAccount(String username) {
-
-        for (Account account : allCustomersWithDiscountCode) {
+        for (Customer account : allCustomersWithDiscountCode) {
             if (account.getUsername().equalsIgnoreCase(username)) return true;
         }
         return false;
