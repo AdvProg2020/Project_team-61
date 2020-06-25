@@ -9,6 +9,7 @@ public class Company extends Firm {
     public Company(String ID) throws IOException {
         super(ID);
         allCompanies.add(this);
+        type ="company";
   //      writeInJ();
     }
 //    public static void writeInJ() throws IOException {

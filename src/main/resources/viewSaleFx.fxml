@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewSaleFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ViewSaleFx">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <fill>
@@ -46,15 +44,15 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <Label fx:id="saleIdLabel" layoutX="566.0" layoutY="235.0" prefHeight="21.0" prefWidth="253.0" text="Label" textFill="#0a0a0a">
+        <Label fx:id="saleIdLabel" layoutX="566.0" layoutY="235.0" prefHeight="21.0" prefWidth="253.0" textFill="#0a0a0a">
          <font>
             <Font size="20.0" />
          </font></Label>
-        <Label fx:id="startSaleLabel" layoutX="566.0" layoutY="322.0" prefHeight="21.0" prefWidth="253.0" text="Label">
+        <Label fx:id="startSaleLabel" layoutX="566.0" layoutY="322.0" prefHeight="21.0" prefWidth="253.0">
          <font>
             <Font size="20.0" />
          </font></Label>
-        <Label fx:id="endSaleLabel" layoutX="563.0" layoutY="414.0" prefHeight="21.0" prefWidth="260.0" text="Label" textFill="#070707">
+        <Label fx:id="endSaleLabel" layoutX="563.0" layoutY="414.0" prefHeight="21.0" prefWidth="260.0" textFill="#070707">
          <font>
             <Font size="20.0" />
          </font></Label>
@@ -70,7 +68,7 @@
                     </stops>
                 </LinearGradient>
             </textFill></Label>
-        <Label fx:id="saleAmountLabel" layoutX="566.0" layoutY="496.0" prefHeight="21.0" prefWidth="253.0" text="Label">
+        <Label fx:id="saleAmountLabel" layoutX="566.0" layoutY="496.0" prefHeight="21.0" prefWidth="253.0">
          <font>
             <Font size="20.0" />
          </font></Label>

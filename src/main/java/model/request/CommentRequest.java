@@ -3,6 +3,8 @@ package model.request;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import model.accounts.Account;
+import model.accounts.Customer;
+import model.accounts.Seller;
 import model.productRelated.Comment;
 import model.productRelated.CommentStatus;
 import model.productRelated.Product;
@@ -14,37 +16,51 @@ import java.util.ArrayList;
 
 public class CommentRequest extends Request {
 
-    private static String title;
-    private static String content;
-    private static Account personToVote;
-    private static Product product;
-    private static String id;
+    private String title = null;
+    private String content = null;
+    private String personToVote = null;
+    private String product = null;
+    private String id = null;
     private static ArrayList<CommentRequest> allCommentRequests = new ArrayList<>();
     public static Type commentRequestType = new TypeToken<ArrayList<CommentRequest>>() {
     }.getType();
 
     public CommentRequest(String requestID) throws IOException {
         super(requestID);
-        allCommentRequests.remove(this);
+        allCommentRequests.add(this);
+        if (Account.getAccountWithUsername(this.getSeller()) instanceof Customer) {
+            Customer customer = (Customer) Account.getAccountWithUsername(this.getSeller());
+            customer.addCommentRequest(this);
+        }
         writeInJ();
     }
 
     @Override
-    public  void declineRequest() {
+    public void declineRequest() throws IOException {
         Request.getAllRequests().remove(this);
         allCommentRequests.remove(this);
         Comment comment = Comment.getCommentFromId(id);
         comment.setCommentStatus(CommentStatus.NOTAPPROVEDBYTHEMANAGER);
+        if (Account.getAccountWithUsername(this.getSeller()) instanceof Customer) {
+            Customer customer = (Customer) Account.getAccountWithUsername(this.getSeller());
+            customer.removeCommentRequest(this);
+        }
+        writeInJ();
     }
 
     @Override
-    public  void acceptRequest() {
-        Comment comment =Comment.getCommentFromId(id);
-        comment.setDetail(title,content,personToVote,product);
+    public void acceptRequest() throws IOException {
+        Comment comment = Comment.getCommentFromId(id);
+        comment.setDetail(title, content, Account.getAccountWithUsername(personToVote), Product.getProductById(product));
         comment.setCommentStatus(CommentStatus.CONFIRMED);
-        product.setComment(title,content);
+        Product.getProductById(product).setComment(comment);
         Request.getAllRequests().remove(this);
         allCommentRequests.remove(this);
+        if (Account.getAccountWithUsername(this.getSeller()) instanceof Customer) {
+            Customer customer = (Customer) Account.getAccountWithUsername(this.getSeller());
+            customer.removeCommentRequest(this);
+        }
+        writeInJ();
     }
 
     public void setId(String id) throws IOException {
@@ -65,16 +81,14 @@ public class CommentRequest extends Request {
 
     }
 
-    public void setProduct(Product product) throws IOException {
-        this.product = product;
-        writeInJ();
-
-    }
-
-    public void setPersonToVote(Account personToVote) throws IOException {
+    public void setPersonToVote(String personToVote) throws IOException {
         this.personToVote = personToVote;
         writeInJ();
+    }
 
+    public void setProduct(String product) throws IOException {
+        this.product = product;
+        writeInJ();
     }
 
     public static void setAllCommentRequests(ArrayList<CommentRequest> allCommentRequests) {
@@ -91,4 +105,23 @@ public class CommentRequest extends Request {
         FileHandling.writeInFile(json, "commentRequest.json");
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public String getPersonToVote() {
+        return personToVote;
+    }
+
+    public String getProduct() {
+        return product;
+    }
+
+    public String getId() {
+        return id;
+    }
 }

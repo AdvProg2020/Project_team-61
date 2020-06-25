@@ -13,22 +13,22 @@ public class Comment {
     String content;
     CommentStatus commentStatus;
     String id;
-    String proId;
 
     //objectAdded
     Product productToComment;
     private Account personToVote;
+    String proId;
 
 
     //list
     public static ArrayList<Comment> allComments = new ArrayList<Comment>();
-    public static ArrayList<Comment> allProductComments = new ArrayList<>();
 
-    public Comment(String title, String content, String proId) {
-        this.title = title;
-        this.content = content;
-        this.proId = proId;
-        allComments.add(this);
+    public Comment(String id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public static boolean isThereCommentWithId(String id) {
@@ -112,10 +112,6 @@ public class Comment {
                 }
             }
         }
-    }
-
-    public String getTitle() {
-        return title;
     }
 
     public static ArrayList<Comment> getCommentsOfPro(String proId){

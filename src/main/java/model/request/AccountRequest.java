@@ -21,8 +21,8 @@ public class AccountRequest extends Request {
     private static String password = null;
     private static String name = null;
     private static String lastname = null;
-    private static  String Email = null;
-    private static double phoneNo = 0;
+    private static String Email = null;
+    private static int phoneNo = 0;
     private static Date birthdayDate = null;
 
     private static String firmName = null;
@@ -30,8 +30,8 @@ public class AccountRequest extends Request {
     private static String firmAddress = null;
     private static String firmEmail = null;
     private static String FirmType = null;
-    private static Firm firm;
-    private Account selectedAccount;
+    private static String img;
+
     private static ArrayList<AccountRequest> allAccountRequests = new ArrayList<>();
     public static Type accountRequestType = new TypeToken<ArrayList<AccountRequest>>() {
     }.getType();
@@ -48,24 +48,36 @@ public class AccountRequest extends Request {
     public AccountRequest(String requestID) throws IOException {
         super(requestID);
         allAccountRequests.add(this);
+        if (Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
+            Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
+            seller.addAccountRequest(this);
+        }
         writeInJ();
     }
 
-@Override
-    public  void declineRequest() {
+    @Override
+    public void declineRequest() throws IOException {
         Request.getAllRequests().remove(this);
         allAccountRequests.remove(this);
+        if (Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
+            Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
+            seller.removeAccountRequest(this);
+        }
+        writeInJ();
     }
 
     @Override
-    public   void acceptRequest() throws IOException {
+    public void acceptRequest() throws IOException {
         Seller seller = new Seller(username);
         createFirm();
-        firm = Firm.getFirmWithID(firmName);
-        seller.setDetailsToAccount(password, name, lastname, Email, phoneNo, birthdayDate, firm);
+        Firm firm = Firm.getFirmWithID(firmName);
+        seller.setDetailsToAccount(password, name, lastname, Email, phoneNo, birthdayDate, firm , img);
         firm.setDetailToFirm(FirmPhoneNO, firmAddress, firmEmail);
         Request.getAllRequests().remove(this);
         allAccountRequests.remove(this);
+        seller.removeAccountRequest(this);
+
+        writeInJ();
 
     }
 
@@ -98,12 +110,12 @@ public class AccountRequest extends Request {
     }
 
     public void setEmail(String email) throws IOException {
-        Email = email;
+        this.Email = email;
         writeInJ();
 
     }
 
-    public void setPhoneNo(double phoneNo) throws IOException {
+    public void setPhoneNo(int phoneNo) throws IOException {
         this.phoneNo = phoneNo;
         writeInJ();
 
@@ -123,7 +135,7 @@ public class AccountRequest extends Request {
     }
 
     public void setFirmPhoneNO(double firmPhoneNO) throws IOException {
-        FirmPhoneNO = firmPhoneNO;
+        this.FirmPhoneNO = firmPhoneNO;
         writeInJ();
 
     }
@@ -141,7 +153,7 @@ public class AccountRequest extends Request {
     }
 
     public void setFirmType(String firmType) throws IOException {
-        FirmType = firmType;
+        this.FirmType = firmType;
         writeInJ();
 
     }
@@ -153,13 +165,15 @@ public class AccountRequest extends Request {
         FileHandling.writeInFile(json, "accountRequest.json");
     }
 
-    public void sellerAccountDetails(String username, String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate) {
+    public void sellerAccountDetails(String username, String password, String name, String lastname, String Email, int phoneNo, Date birthdayDate , String img) throws IOException {
         this.username = username;
         this.password = password;
         this.name = name;
         this.lastname = lastname;
         this.Email = Email;
         this.phoneNo = phoneNo;
+        this.img = img;
+        writeInJ();
     }
 
     public static String getUsername() {
@@ -178,7 +192,7 @@ public class AccountRequest extends Request {
         return Email;
     }
 
-    public static double getPhoneNo() {
+    public static int getPhoneNo() {
         return phoneNo;
     }
 

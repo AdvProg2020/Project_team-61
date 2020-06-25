@@ -2,6 +2,8 @@ package model.accounts;
 
 import com.google.gson.reflect.TypeToken;
 import model.log.BuyLog;
+import model.off.DiscountCode;
+import model.request.CommentRequest;
 import view.FileHandling;
 
 import java.io.IOException;
@@ -9,12 +11,31 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Customer extends Account {
-
+//    ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
     private static ArrayList<Customer> allCustomers = new ArrayList<>();
     private ArrayList<BuyLog> BuyLogsHistory = new ArrayList<>();
+    private ArrayList<CommentRequest> allCommentRequests = new ArrayList<>();
     public static Type CustomerType = new TypeToken<ArrayList<Customer>>() {
     }.getType();
 
+
+    public ArrayList<CommentRequest> getAllCommentRequests() {
+        return allCommentRequests;
+    }
+
+    public void setAllCommentRequests(ArrayList<CommentRequest> allCommentRequests) {
+        this.allCommentRequests = allCommentRequests;
+    }
+
+    public void addCommentRequest(CommentRequest commentRequest) throws IOException {
+        allCommentRequests.add(commentRequest);
+        writeInJ();
+    }
+
+    public void removeCommentRequest(CommentRequest commentRequest) throws IOException {
+        allCommentRequests.remove(commentRequest);
+        writeInJ();
+    }
 
     public Customer(String username) throws IOException {
         super(username);
@@ -23,6 +44,20 @@ public class Customer extends Account {
         writeInJ();
     }
 
+//    public ArrayList<DiscountCode> getAllDiscountCodes() {
+//        return allDiscountCodes;
+//    }
+//
+//    public void addDiscountCode(DiscountCode discountCode) throws IOException {
+//        allDiscountCodes.add(discountCode);
+//        writeInJ();
+//
+//    }
+//
+//    public void removeDiscountCode(DiscountCode discountCode) throws IOException {
+//        allDiscountCodes.remove(discountCode);
+//        writeInJ();
+//    }
 
     public static void setAllCustomers(ArrayList<Customer> allCustomers) {
         Customer.allCustomers = allCustomers;
@@ -65,7 +100,6 @@ public class Customer extends Account {
                 ", currentPhoneNo=" + currentPhoneNo +
                 ", address='" + address + '\'' +
                 ", birthdayDate=" + birthdayDate +
-                ", allDiscountCodes=" + allDiscountCodes +
                 '}';
     }
 }
