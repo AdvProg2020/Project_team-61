@@ -22,6 +22,7 @@ public abstract class Account {
     Date birthdayDate = null;
     public Firm firm = null;
     boolean fast = false;
+    String imageId;
 
     private static ArrayList<Account> allAccounts = new ArrayList<>();
     private static ArrayList<Date> birthdayDates = new ArrayList<>();
@@ -81,6 +82,14 @@ public abstract class Account {
             if (account.username.equalsIgnoreCase(username)) return account;
         }
         return null;
+    }
+
+    public String getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
     }
 
     public static void deleteAccount(String username) throws IOException {

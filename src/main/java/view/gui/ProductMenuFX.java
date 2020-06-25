@@ -15,11 +15,16 @@ import javafx.scene.CacheHint;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.accounts.Customer;
 import model.accounts.Manager;
@@ -30,6 +35,7 @@ import model.request.Request;
 import view.OutputMassageHandler;
 
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -52,10 +58,11 @@ public class ProductMenuFX {
     public Button backButtonAddComment;
     public Button sendCommentButton;
     public AnchorPane addCommentSectionPane;
-    public Label nullAddCommentError;
+    public Label nullAddCommentError = new Label();
     public TextArea productCategoryDetail;
     public TextArea productDetail;
     public TableView commentTableView = new TableView();
+
     public Button scoreButton;
     @FXML
     private Label productNameLabel;
@@ -163,11 +170,17 @@ public class ProductMenuFX {
 
     @FXML
     void popUpAddComment(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("comment.fxml")));
-        prevScene = new Scene(root);
-        thisStage = new Stage();
-        thisStage.setScene(prevScene);
-        thisStage.show();
+        if (LoginMenu.isLogin()){
+            Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("comment.fxml")));
+            prevScene = new Scene(root);
+            thisStage = new Stage();
+            thisStage.setScene(prevScene);
+            thisStage.show();
+        }else{
+            nullAddCommentError.setVisible(true);
+            nullAddCommentError.setText("sign In first");
+            nullAddCommentError.setVisible(true);
+        }
     }
 
     public void handleAddProductToLog(ActionEvent actionEvent) {
