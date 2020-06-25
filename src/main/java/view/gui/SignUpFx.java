@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
@@ -19,8 +20,12 @@ import model.accounts.Manager;
 import model.accounts.Seller;
 import view.OutputMassageHandler;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.List;
 import java.util.Objects;
 
 public class SignUpFx {
@@ -43,6 +48,8 @@ public class SignUpFx {
     private static String role;
     private static Parent root;
     private static Parent priRoot;
+    List<File> files;
+    String imageId;
 
     public static void setPriRoot(Parent priRoot) {
         SignUpFx.priRoot = priRoot;
@@ -115,6 +122,24 @@ public class SignUpFx {
         Main.primStage.setScene(pageTwoScene);
         Main.primStage.show();
 
+    }
+
+    @FXML
+    public void handleDragOver(DragEvent dragEvent) {
+        if (dragEvent.getDragboard().hasFiles()) {
+            dragEvent.acceptTransferModes(TransferMode.ANY);
+        }
+    }
+
+    @FXML
+    public void handleDrop(DragEvent dragEvent) throws FileNotFoundException {
+        files = dragEvent.getDragboard().getFiles();
+        System.out.println(files.get(0).getAbsolutePath());
+        System.out.println(files.get(0).getPath());
+        imageId = files.get(0).getPath();
+        File file = new File(imageId);
+        Image image = new Image(new FileInputStream(file));
+//        productImage.setImage(image);
     }
 
 
