@@ -37,7 +37,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("saleMenuFx.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
         primaryStage.setTitle("market");
         primaryStage.setScene(new Scene(root, widthScene, heightScene));
         primStage = primaryStage;
@@ -163,6 +163,15 @@ public class Main extends Application {
             }catch (NullPointerException e){
                 System.out.println("null");
             }
+        }
+
+        for (Seller seller : Seller.getAllSellers()) {
+            Firm.getAllFirms().add(seller.getFirm());
+
+        }
+
+        for (Manager manager : Manager.getAllManagers()) {
+            DiscountCode.getAllDiscountCodes().addAll(manager.getAllDiscountCodes());
         }
 
 
