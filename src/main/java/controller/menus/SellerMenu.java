@@ -89,7 +89,7 @@ public class SellerMenu {
                     product.setProductStatus(ProductStatus.UNDERREVIEWFOREDITING);
                     productRequest = new ProductRequest(id);
                     productRequest.setLastCategory(product.getCategory().getName());
-                    Seller seller = (Seller) LoginMenu.getLoginAccount();
+                   // Seller seller = (Seller) LoginMenu.getLoginAccount();
                    // productRequest.setSellerName(seller.getUsername());
                     productRequest.setProductId(productID);
                 } else productRequest = (ProductRequest) Request.getRequestFromID(id);

@@ -136,8 +136,8 @@ public class AddProductMenuFX {
     @FXML
     public void addProduct(MouseEvent actionEvent) throws IOException {
         String ms = null;
-        if(imageId != null) {
-            if(cat) {
+        if (imageId != null) {
+            if (cat) {
                 if (SellerMenu.getCreate() == 0) {
                     ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(idTextField.getText(), 0, imageId));
                     Seller.writeInJ();
@@ -177,8 +177,8 @@ public class AddProductMenuFX {
                         finish = true;
                     }
                 }
-            }else ms= "add trait button";
-        }else ms= "inset image first";
+            } else ms = "add trait button";
+        } else ms = "inset image first";
         error.setVisible(true);
         error.setText(ms);
     }
@@ -186,21 +186,24 @@ public class AddProductMenuFX {
     public void editProduct(MouseEvent actionEvent) throws IOException {
         String ms = null;
         error.setText("you have to put all traits value");
-        if (SellerMenu.getEdit() == 0) {
-            ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProduct(idTextField.getText()));
-        }
-        if (SellerMenu.getEdit() == 1) {
-            addImageView();
-            addCategoryTrait();
-            changeToString();
-            ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(productNameTextField.getText(), "name"));
-            ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(priceTextField.getText(), "price"));
-            ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(categoryNameTextField.getText(), "category"));
-            ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(additionaldetailTextField.getText(), "additional"));
-            ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(numberOfProductTextField.getText(), "number"));
-            Product.getProductById(idTextField.getText()).setProductCategorySpecifications(traits);
-            // }
-        } else ms = "put id first";
+        if (cat) {
+            if (SellerMenu.getEdit() == 0) {
+                ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProduct(idTextField.getText()));
+            }
+            if (SellerMenu.getEdit() == 1) {
+                // addImageView();
+                //  addCategoryTrait();
+                changeToString();
+                ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(productNameTextField.getText(), "name"));
+                ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(priceTextField.getText(), "price"));
+                ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(categoryNameTextField.getText(), "category"));
+                ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(additionaldetailTextField.getText(), "additional"));
+                ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(numberOfProductTextField.getText(), "number"));
+                //Product.getProductById(idTextField.getText()).setProductCategorySpecifications(traits);
+                SellerMenu.getProductRequest().setSpecialValue(traits);
+                // }
+            }
+        } else ms = "put all trait value first";
         error.setVisible(true);
         error.setText(ms);
     }
@@ -274,11 +277,10 @@ public class AddProductMenuFX {
         Seller.writeInJ();
     }
 
-    private static void backToFirst(){
+    private static void backToFirst() {
         SellerMenu.setCreate(0);
         SellerMenu.setEdit(0);
     }
-
 
 
     public void userMenu(ActionEvent actionEvent) throws IOException {
@@ -302,6 +304,7 @@ public class AddProductMenuFX {
         root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
         goToPage();
     }
+
     private static void goToPage() {
         backToFirst();
         Scene pageTwoScene = new Scene(root);
@@ -383,27 +386,26 @@ public class AddProductMenuFX {
 
     public void addTraitsButton(ActionEvent actionEvent) {
         String category = categoryNameTextField.getText();
-        if (category != null && Category.isThereCategoryWithName(category)){
+        if (category != null && Category.isThereCategoryWithName(category)) {
             productCategory = Category.getCategoryWithName(category);
-            if (productCategory != null){
+            if (productCategory != null) {
                 for (String trait : productCategory.getTraits()) {
-                    int n =50;
+                    int n = 50;
                     Label label = new Label();
                     label.setText(trait);
-                    label.setLayoutY(n*(productCategory.getTraits().indexOf(trait)+1));
-                    label.setLayoutX(900+productCategory.getTraits().indexOf(trait));
+                    label.setLayoutY(n * (productCategory.getTraits().indexOf(trait) + 1));
+                    label.setLayoutX(900 + productCategory.getTraits().indexOf(trait));
                     TextField textField = new TextField();
-                    textField.setMaxSize(100,50);
-                    textField.setLayoutY((n)*(productCategory.getTraits().indexOf(trait)+1));
-                    textField.setLayoutX(1000+productCategory.getTraits().indexOf(trait));
+                    textField.setMaxSize(100, 50);
+                    textField.setLayoutY((n) * (productCategory.getTraits().indexOf(trait) + 1));
+                    textField.setLayoutX(1000 + productCategory.getTraits().indexOf(trait));
                     traitsTextFields.add(textField);
-                    pane.getChildren().addAll(label,textField);
-                    n+=5;
+                    pane.getChildren().addAll(label, textField);
+                    n += 5;
                 }
                 cat = true;
             }
-        }
-        else {
+        } else {
             error.setVisible(true);
             error.setText("please enter category name first");
         }
