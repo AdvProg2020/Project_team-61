@@ -116,5 +116,6 @@
             <Font size="28.0" />
          </font>
       </Label>
+      <Button layoutX="1159.0" layoutY="472.0" mnemonicParsing="false" onMouseClicked="#editFirm" text="Edit" />
     </children>
 </AnchorPane>

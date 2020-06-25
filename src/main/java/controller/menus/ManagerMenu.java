@@ -29,6 +29,10 @@ public class ManagerMenu {
     private static int create = 0;
     private static int edit = 0;
 
+    public static void setEdit(int edit) {
+        ManagerMenu.edit = edit;
+    }
+
     public static int getEdit() {
         return edit;
     }

@@ -92,12 +92,16 @@ public class SalesFx {
 
 
     public void add(MouseEvent mouseEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SalesFx.class.getClassLoader().getResource("salesFx.fxml")));
+        AddSaleFx.setPriRoot(curRoot);
         root = FXMLLoader.load(Objects.requireNonNull(AddSaleFx.class.getClassLoader().getResource("addSaleFx.fxml")));
         goToPage();
 
     }
 
     public void edit(MouseEvent mouseEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SalesFx.class.getClassLoader().getResource("salesFx.fxml")));
+        AddSaleFx.setPriRoot(curRoot);
         root = FXMLLoader.load(Objects.requireNonNull(AddSaleFx.class.getClassLoader().getResource("addSaleFx.fxml")));
         goToPage();
 
@@ -106,6 +110,8 @@ public class SalesFx {
     public void viewSale(MouseEvent mouseEvent) throws IOException {
         if (sales.getSelectionModel().getSelectedItem() != null) {
             Sale sale = sales.getSelectionModel().getSelectedItem();
+            Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SalesFx.class.getClassLoader().getResource("salesFx.fxml")));
+            ViewSaleFx.setPriRoot(curRoot);
             ViewSaleFx.setCurSale(sale);
             root = FXMLLoader.load(Objects.requireNonNull(ViewSaleFx.class.getClassLoader().getResource("viewSaleFx.fxml")));
             goToPage();
@@ -122,7 +128,7 @@ public class SalesFx {
 
 
     public void userMenu(ActionEvent actionEvent) throws IOException {
-        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SalesFx.class.getClassLoader().getResource("salesFx.fxml")));
         if(LoginMenu.getLoginAccount() instanceof Seller){
             SellerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));

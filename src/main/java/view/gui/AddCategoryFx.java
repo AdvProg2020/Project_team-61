@@ -107,7 +107,7 @@ public class AddCategoryFx {
 
 
     public void userMenu(ActionEvent actionEvent) throws IOException {
-        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(AddCategoryFx.class.getClassLoader().getResource("addCategoryFx.fxml")));
         if(LoginMenu.getLoginAccount() instanceof Seller){
             SellerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
@@ -119,6 +119,11 @@ public class AddCategoryFx {
             root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         }
         goToPage();
+    }
+
+    private static void backToFirst(){
+        ManagerMenu.setCreate(0);
+        ManagerMenu.setEdit(0);
     }
 
     public void back(ActionEvent actionEvent) {
@@ -137,6 +142,7 @@ public class AddCategoryFx {
     }
 
     private static void goToPage() {
+        backToFirst();
         Scene pageTwoScene = new Scene(root);
         //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         Main.primStage.setScene(pageTwoScene);

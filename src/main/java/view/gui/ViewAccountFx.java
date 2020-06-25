@@ -140,22 +140,26 @@ public class ViewAccountFx {
     }
 
     public void viewFirm(MouseEvent mouseEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
         if(LoginMenu.getLoginAccount() instanceof Seller){
             ViewFirmFx.setAccount(LoginMenu.getLoginAccount());
         }else if(LoginMenu.getLoginAccount() instanceof Manager){
             ViewFirmFx.setRequest(request);
         }
+        ViewFirmFx.setPriRoot(curRoot);
         root = FXMLLoader.load(Objects.requireNonNull(ViewFirmFx.class.getClassLoader().getResource("viewFirmFx.fxml")));
         goToPage();
     }
 
     public void edit(MouseEvent mouseEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
+        EditAccountFx.setPriRoot(curRoot);
         root = FXMLLoader.load(Objects.requireNonNull(EditAccountFx.class.getClassLoader().getResource("editAccountFx.fxml")));
         goToPage();
     }
 
     public void userMenu(ActionEvent actionEvent) throws IOException {
-        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
         if(LoginMenu.getLoginAccount() instanceof Seller){
             SellerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));

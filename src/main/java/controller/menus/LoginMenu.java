@@ -150,17 +150,20 @@ public class LoginMenu {
 
     public static boolean checkFirm() {
         if (loginAccount instanceof Seller) {
-            if (((Seller) loginAccount).getFirm().getName().equalsIgnoreCase(firmName)) {
-                firm = ((Seller) loginAccount).getFirm();
-                return true;
+            if(loginAccount instanceof Seller) {
+                Seller seller = (Seller) loginAccount;
+                if (seller.getFirm().getName().equalsIgnoreCase(firmName)) {
+                    firm = seller.getFirm();
+                    return true;
+                }
             }
         }
         return false;
     }
 
     public static int firmName(String name) throws IOException {
-        if (name.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$")) {
-            if (checkFirm()) {
+        if (name.matches(".+")) {
+            if (Firm.isThereFirmWithID(name)) {
                 firmName = name;
                 accountRequest.setFirmName(firmName);
                 outputNo = 0;

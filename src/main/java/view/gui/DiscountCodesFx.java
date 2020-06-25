@@ -63,15 +63,13 @@ public class DiscountCodesFx {
     }
 
 
-
-
     public void makeTree() throws IOException {
         discountId.setCellValueFactory(new PropertyValueFactory<DiscountCode, String>("discountId"));
         discountAmount.setCellValueFactory(new PropertyValueFactory<DiscountCode, Number>("discountAmount"));
         discountStart.setCellValueFactory(new PropertyValueFactory<DiscountCode, String>("startOfDiscountPeriod"));
-        discountEnd.setCellValueFactory(new PropertyValueFactory<DiscountCode,String>("endOfDiscountPeriod"));
-        maxDiscountAmount.setCellValueFactory(new PropertyValueFactory<DiscountCode,Number>("maxDiscountAmount"));
-        discountTotalTime.setCellValueFactory(new PropertyValueFactory<DiscountCode,Number>("totalTimesOfUse"));
+        discountEnd.setCellValueFactory(new PropertyValueFactory<DiscountCode, String>("endOfDiscountPeriod"));
+        maxDiscountAmount.setCellValueFactory(new PropertyValueFactory<DiscountCode, Number>("maxDiscountAmount"));
+        discountTotalTime.setCellValueFactory(new PropertyValueFactory<DiscountCode, Number>("totalTimesOfUse"));
 
 
         data.clear();
@@ -81,13 +79,16 @@ public class DiscountCodesFx {
         discountCodes.getSelectionModel().setCellSelectionEnabled(true);
         discountCodes.setItems(data);
     }
+
     public void edit(MouseEvent mouseEvent) throws IOException {
-            root = FXMLLoader.load(Objects.requireNonNull(AddDiscountFx.class.getClassLoader().getResource("addDiscountFx.fxml")));
-            goToPage();
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("discountCodesFx.fxml")));
+        AddDiscountFx.setPriRoot(curRoot);
+        root = FXMLLoader.load(Objects.requireNonNull(AddDiscountFx.class.getClassLoader().getResource("addDiscountFx.fxml")));
+        goToPage();
     }
 
     public void remove(MouseEvent mouseEvent) throws IOException {
-        if(discountCodes.getSelectionModel().getSelectedItem() != null) {
+        if (discountCodes.getSelectionModel().getSelectedItem() != null) {
             DiscountCode discountCode = discountCodes.getSelectionModel().getSelectedItem();
             discountCodesMs.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.removeDiscountCode(discountCode.getDiscountId())));
             makeTree();
@@ -96,15 +97,17 @@ public class DiscountCodesFx {
     }
 
     public void viewDiscount(MouseEvent mouseEvent) throws IOException {
-        if(discountCodes.getSelectionModel().getSelectedItem() != null) {
+        if (discountCodes.getSelectionModel().getSelectedItem() != null) {
             DiscountCode discountCode = discountCodes.getSelectionModel().getSelectedItem();
+            Parent curRoot = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("discountCodesFx.fxml")));
+            ViewDiscountFx.setPriRoot(curRoot);
             ViewDiscountFx.setCurDiscountCode(discountCode);
             root = FXMLLoader.load(Objects.requireNonNull(ViewDiscountFx.class.getClassLoader().getResource("viewDiscountFx.fxml")));
             goToPage();
         }
     }
 
-    private static void goToPage(){
+    private static void goToPage() {
         Scene pageTwoScene = new Scene(root);
         //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         Main.primStage.setScene(pageTwoScene);
@@ -115,12 +118,12 @@ public class DiscountCodesFx {
         discountId.setCellValueFactory(new PropertyValueFactory<DiscountCode, String>("discountId"));
         discountAmount.setCellValueFactory(new PropertyValueFactory<DiscountCode, Number>("discountAmount"));
         discountStart.setCellValueFactory(new PropertyValueFactory<DiscountCode, String>("startOfDiscountPeriod"));
-        discountEnd.setCellValueFactory(new PropertyValueFactory<DiscountCode,String>("endOfDiscountPeriod"));
-        maxDiscountAmount.setCellValueFactory(new PropertyValueFactory<DiscountCode,Number>("maxDiscountAmount"));
-        discountTotalTime.setCellValueFactory(new PropertyValueFactory<DiscountCode,Number>("totalTimesOfUse"));
+        discountEnd.setCellValueFactory(new PropertyValueFactory<DiscountCode, String>("endOfDiscountPeriod"));
+        maxDiscountAmount.setCellValueFactory(new PropertyValueFactory<DiscountCode, Number>("maxDiscountAmount"));
+        discountTotalTime.setCellValueFactory(new PropertyValueFactory<DiscountCode, Number>("totalTimesOfUse"));
         data.clear();
         Sort.setNewArrayOfDiscountCodeSort(DiscountCode.getAllDiscountCodes());
-        data.addAll(   Sort.sortDiscountCodes());
+        data.addAll(Sort.sortDiscountCodes());
         discountCodes.setEditable(true);
         discountCodes.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         discountCodes.getSelectionModel().setCellSelectionEnabled(true);
@@ -133,17 +136,24 @@ public class DiscountCodesFx {
     }
 
 
+
     public void userMenu(ActionEvent actionEvent) throws IOException {
-        if(LoginMenu.getLoginAccount() instanceof Seller){
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("discountCodesFx.fxml")));
+        if (LoginMenu.getLoginAccount() instanceof Seller) {
+            SellerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
-        } else if(LoginMenu.getLoginAccount() instanceof Manager){
+        } else if (LoginMenu.getLoginAccount() instanceof Manager) {
+            ManagerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
-        }else if(LoginMenu.getLoginAccount() instanceof Customer){
+        } else if (LoginMenu.getLoginAccount() instanceof Customer) {
+            CustomerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         }
+        goToPage();
     }
 
-    public void back(ActionEvent actionEvent) {
+
+        public void back(ActionEvent actionEvent) {
         root = priRoot;
         goToPage();
     }
