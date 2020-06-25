@@ -53,13 +53,12 @@ public class SaleRequest extends Request {
     @Override
     public void acceptRequest() throws IOException {
         sale = Sale.getSaleWithId(offId);
-        sale.setSaleDetails(SaleStatus.CONFIRMED, startOfSalePeriod, endOfSalePeriod, saleAmount, Account.getAccountWithUsername(this.getSeller()));
+        sale.setSaleDetails(SaleStatus.CONFIRMED, startOfSalePeriod, endOfSalePeriod, saleAmount,this.getSeller());
         sale.setAllSaleProducts(allSaleProducts);
 //        Sale.allProInSale.addAll(sale.getAllSaleProducts());
         sale.setSaleStatus(SaleStatus.CONFIRMED);
         for (Product allSaleProduct : allSaleProducts) {
             allSaleProduct.setInSale(true);
-
         }
         getAllRequests().remove(this);
         allSaleRequests.remove(this);
@@ -70,11 +69,19 @@ public class SaleRequest extends Request {
         writeInJ();
     }
 
-
-    public void addProduct(Product product) throws IOException {
-        allSaleProducts.add(product);
-        writeInJ();
+    public boolean isThereProduct(Product p){
+        for (Product allSaleProduct : allSaleProducts) {
+            allSaleProduct.equals(p);
+            return true;
+        }
+        return false;
     }
+
+
+//    public void addProduct(Product product) throws IOException {
+//        allSaleProducts.add(product);
+//        writeInJ();
+//    }
 
     public void removeProduct(Product product) throws IOException {
         allSaleProducts.remove(product);

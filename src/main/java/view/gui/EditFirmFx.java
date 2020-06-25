@@ -23,17 +23,14 @@ public class EditFirmFx {
     @FXML
     private Label firmEmailCrMs;
     @FXML
-    private Label firmNameCrMs;
-    @FXML
     private TextField firmAddressCr;
     @FXML
     private Label firmAddressCrMs;
     @FXML
     private TextField firmEmailCr;
     @FXML
-    private TextField firmNameCr;
-    @FXML
     private TextField firmPhoneCr;
+
     private String type;
     private static Parent root;
     private static Parent priRoot;
@@ -43,14 +40,13 @@ public class EditFirmFx {
     }
 
     public void addFirm(MouseEvent mouseEvent) throws IOException {
-        String firmName = firmNameCr.getText();
-        String firmEmail = firmEmailCr.getText();
-        String firmNAddress = firmAddressCr.getText();
-        String firmPhone = firmPhoneCr.getText();
-        firmNameCrMs.setText(OutputMassageHandler.showFirmOutput(LoginMenu.firmName(firmName)));
-        firmEmailCrMs.setText(OutputMassageHandler.showFirmOutput(LoginMenu.editFirm(firmEmail,"email")));
-        firmAddressCrMs.setText(OutputMassageHandler.showFirmOutput(LoginMenu.editFirm(firmNAddress,"address")));
-        firmPhoneNoCrMs.setText(OutputMassageHandler.showFirmOutput(LoginMenu.editFirm(firmPhone,"phone number")));
+        if(LoginMenu.getLoginAccount() instanceof Seller) {
+            Seller seller = (Seller) LoginMenu.getLoginAccount();
+            LoginMenu.firmName(seller.getFirm().getName());
+            firmEmailCrMs.setText(OutputMassageHandler.showFirmOutput(LoginMenu.editFirm(firmEmailCr.getText(), "email")));
+            firmAddressCrMs.setText(OutputMassageHandler.showFirmOutput(LoginMenu.editFirm(firmAddressCr.getText(), "address")));
+            firmPhoneNoCrMs.setText(OutputMassageHandler.showFirmOutput(LoginMenu.editFirm(firmPhoneCr.getText(), "phone number")));
+        }
 
     }
 

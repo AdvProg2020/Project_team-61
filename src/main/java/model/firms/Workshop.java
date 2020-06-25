@@ -9,6 +9,7 @@ public class Workshop extends Firm {
     public Workshop(String ID) throws IOException {
         super(ID);
         allWorkshops.add(this);
+        type = "worK shop";
   //      writeInJ();
     }
 //    public static void writeInJ() throws IOException {

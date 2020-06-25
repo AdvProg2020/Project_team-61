@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -8,7 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.AddProductMenuFX">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.AddProductMenuFX">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="1920.0">
             <fill>
@@ -79,6 +78,9 @@
         <Label layoutX="409.0" layoutY="377.0" text="category" />
         <Button layoutX="776.0" layoutY="338.0" mnemonicParsing="false" onAction="#addTraitsButton" text="add Traits" />
       <Button fx:id="edit" layoutX="784.0" layoutY="711.0" mnemonicParsing="false" onMouseClicked="#editProduct" prefHeight="43.0" prefWidth="156.0" text="Edit" />
-      <Label fx:id="error" layoutX="508.0" layoutY="779.0" text="Label" textFill="#c764e2" />
+      <Label fx:id="error" layoutX="508.0" layoutY="779.0" prefHeight="31.0" prefWidth="430.0" textFill="#c764e2">
+         <font>
+            <Font size="21.0" />
+         </font></Label>
     </children>
 </AnchorPane>

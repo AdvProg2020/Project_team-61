@@ -9,6 +9,7 @@ public  class Firm {
     private double phoneNO;
     private String address;
     private String Email;
+    String type;
     private static ArrayList<Firm> allFirms = new ArrayList<>();
 
     public Firm(String name) throws IOException {
@@ -30,6 +31,12 @@ public  class Firm {
         }
 
     }
+
+    public String getType() {
+        return type;
+    }
+
+
 
     public static ArrayList<Firm> getAllFirms() {
         return allFirms;

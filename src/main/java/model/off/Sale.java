@@ -11,16 +11,15 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.*;
 
-public class Sale{
+public class Sale {
     private String offId;
     private SaleStatus saleStatus;
     private Date startOfSalePeriod;
     private Date endOfSalePeriod;
     private int saleAmount;
     private static String seller;
-    private ArrayList <Product> allSaleProducts = new ArrayList<>();
-    public static ArrayList<Product> allProInSale = new ArrayList<>();
-    private static ArrayList <Sale> allSales = new ArrayList<>();
+    private ArrayList<Product> allSaleProducts = new ArrayList<>();
+    private static ArrayList<Sale> allSales = new ArrayList<>();
     public static Type SaleType = new TypeToken<ArrayList<Sale>>() {
     }.getType();
 
@@ -30,20 +29,23 @@ public class Sale{
         getAllSales().add(this);
         writeInJ();
     }
-    public void setSaleDetails(SaleStatus saleStatus, Date startOfSalePeriod, Date endOfSalePeriod, int saleAmount, Account seller) throws IOException {
+
+    public void setSaleDetails(SaleStatus saleStatus, Date startOfSalePeriod, Date endOfSalePeriod, int saleAmount, String selle) throws IOException {
         this.saleStatus = saleStatus;
-        if(startOfSalePeriod != null) {
+        if (startOfSalePeriod != null) {
             this.startOfSalePeriod = startOfSalePeriod;
-        }   if(endOfSalePeriod != null) {
-        this.endOfSalePeriod = endOfSalePeriod;
-        }   if(saleAmount != 0) {
-        this.saleAmount = saleAmount;
-        }   if(seller != null) {
-            this.seller = seller.getUsername();
+        }
+        if (endOfSalePeriod != null) {
+            this.endOfSalePeriod = endOfSalePeriod;
+        }
+        if (saleAmount != 0) {
+            this.saleAmount = saleAmount;
+        }
+        if (selle != null) {
+            this.seller = selle;
         }
         writeInJ();
     }
-
 
     public void setOffId(String offId) {
         this.offId = offId;
@@ -60,15 +62,19 @@ public class Sale{
     public String getOffId() {
         return offId;
     }
+
     public SaleStatus getSaleStatus() {
         return saleStatus;
     }
+
     public Date getStartOfSalePeriod() {
         return startOfSalePeriod;
     }
+
     public Date getEndOfSalePeriod() {
         return endOfSalePeriod;
     }
+
     public int getSaleAmount() {
         return saleAmount;
     }
@@ -76,12 +82,13 @@ public class Sale{
     public ArrayList<Product> getAllSaleProducts() {
         return allSaleProducts;
     }
-    public ArrayList<Sale> listSales(){
+
+    public ArrayList<Sale> listSales() {
         return allSales;
     }
 
 
-    public static Sale getSaleWithId(String id){
+    public static Sale getSaleWithId(String id) {
         for (Sale sale : allSales) {
             if (sale.getOffId().equals(id)) {
                 return sale;
@@ -89,13 +96,14 @@ public class Sale{
         }
         return null;
     }
-    public static boolean isThereSaleWithId(String id){
+
+    public static boolean isThereSaleWithId(String id) {
         return allSales.contains(getSaleWithId(id));
     }
 
-    public Sale getSaleWithSeller(Seller seller){
-        for (Sale sale:allSales){
-            if ((Account.getAccountWithUsername(sale.getSeller()))==(seller)){
+    public Sale getSaleWithSeller(Seller seller) {
+        for (Sale sale : allSales) {
+            if ((Account.getAccountWithUsername(sale.getSeller())) == (seller)) {
                 return sale;
             }
 
@@ -111,10 +119,10 @@ public class Sale{
         Sale.seller = seller;
     }
 
-    public Sale getSaleWithProduct(Product product){
+    public Sale getSaleWithProduct(Product product) {
         for (Sale sale : allSales) {
             for (Product products : sale.getAllSaleProducts()) {
-                if (product.equals(products)){
+                if (product.equals(products)) {
                     return sale;
                 }
             }
@@ -122,23 +130,24 @@ public class Sale{
         return null;
     }
 
-    public void setAllSaleProducts(ArrayList<Product> allSaleProducts) {
+    public void setAllSaleProducts(ArrayList<Product> allSaleProducts) throws IOException {
         this.allSaleProducts = allSaleProducts;
-
+        Seller.writeInJ();
     }
 
     public void setSaleStatus(SaleStatus saleStatus) {
         this.saleStatus = saleStatus;
     }
 
-    public static void deleteSale(String id){
+    public static void deleteSale(String id) {
         allSales.remove(id);
     }
 
     public boolean isTheProductInAnotherSale(Product product) {
         for (Sale sale : allSales) {
             if (sale.getAllSaleProducts().contains(product)) {
-                return true;}
+                return true;
+            }
         }
         return false;
 

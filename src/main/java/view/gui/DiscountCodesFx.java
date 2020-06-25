@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class DiscountCodesFx {
-    private static ArrayList<DiscountCode> discounts;
+    private static ArrayList<DiscountCode> discounts = new ArrayList<>();
 
     @FXML
     private Label discountCodesMs;
@@ -81,17 +81,21 @@ public class DiscountCodesFx {
     }
 
     public void edit(MouseEvent mouseEvent) throws IOException {
-        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("discountCodesFx.fxml")));
-        AddDiscountFx.setPriRoot(curRoot);
-        root = FXMLLoader.load(Objects.requireNonNull(AddDiscountFx.class.getClassLoader().getResource("addDiscountFx.fxml")));
-        goToPage();
+        if (LoginMenu.getLoginAccount() instanceof Manager) {
+            Parent curRoot = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("discountCodesFx.fxml")));
+            AddDiscountFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(AddDiscountFx.class.getClassLoader().getResource("addDiscountFx.fxml")));
+            goToPage();
+        }
     }
 
     public void remove(MouseEvent mouseEvent) throws IOException {
-        if (discountCodes.getSelectionModel().getSelectedItem() != null) {
-            DiscountCode discountCode = discountCodes.getSelectionModel().getSelectedItem();
-            discountCodesMs.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.removeDiscountCode(discountCode.getDiscountId())));
-            makeTree();
+        if (LoginMenu.getLoginAccount() instanceof Manager) {
+            if (discountCodes.getSelectionModel().getSelectedItem() != null) {
+                DiscountCode discountCode = discountCodes.getSelectionModel().getSelectedItem();
+                discountCodesMs.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.removeDiscountCode(discountCode.getDiscountId())));
+                makeTree();
+            }
         }
 
     }
@@ -136,7 +140,6 @@ public class DiscountCodesFx {
     }
 
 
-
     public void userMenu(ActionEvent actionEvent) throws IOException {
         Parent curRoot = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("discountCodesFx.fxml")));
         if (LoginMenu.getLoginAccount() instanceof Seller) {
@@ -153,7 +156,7 @@ public class DiscountCodesFx {
     }
 
 
-        public void back(ActionEvent actionEvent) {
+    public void back(ActionEvent actionEvent) {
         root = priRoot;
         goToPage();
     }

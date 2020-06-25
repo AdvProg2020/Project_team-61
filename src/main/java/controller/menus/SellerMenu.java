@@ -244,6 +244,7 @@ public class SellerMenu {
                     Seller seller = (Seller) Seller.getAccountWithUsername(LoginMenu.getLoginAccount().getUsername());
                     seller.getAllSaleRequests().add(saleRequest);
                     saleRequest.setOffId(offID);
+                    edit = 1;
                     // saleRequest.setSeller(LoginMenu.getLoginAccount());
                 } else {
                     saleRequest = (SaleRequest) Request.getRequestFromID(id);
@@ -363,8 +364,9 @@ public class SellerMenu {
             if (detail.matches("((?!^ +$)^.+$)")) {
                 // if (!detail.equalsIgnoreCase("finish")) {
                // if (checkProductSale(detail)) {
-                    Product product =Product.getProductById(detail);
-                    saleRequest.addProduct(product);
+                Product product =Product.getProductById(detail);
+                if(!saleRequest.isThereProduct(product)) {
+                  //  saleRequest.addProduct(product);
                     saleRequest.addProductToSale(product);
                     //   outputNo = 18;
                     // }
@@ -373,7 +375,8 @@ public class SellerMenu {
                     //  CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
                     // detailMenu = 0;
                     outputNo = 0;
-              //  }
+                    //  }
+                }
             } else outputNo = 19;
         }
         return outputNo;

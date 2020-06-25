@@ -3,8 +3,6 @@ package model.accounts;
 
 import model.firms.Firm;
 
-import model.off.DiscountCode;
-
 import java.io.IOException;
 import java.util.*;
 
@@ -30,7 +28,7 @@ public abstract class Account {
 //    }.getType();
 
 
-    public void setDetailsToAccount(String password, String name, String lastname, String Emai, double phoneNo, Date birthdayDat, Firm firm , String img) throws IOException {
+    public void setDetailsToAccount(String password, String name, String lastname, String Emai, int phoneNo, Date birthdayDat, Firm firm , String img) throws IOException {
         if (password != null) {
             this.password = password;
         }
@@ -46,7 +44,7 @@ public abstract class Account {
         if (phoneNo != 0) {
             this.phoneNo = phoneNo;
         }
-        if (birthdayDate != null) {
+        if (birthdayDat != null) {
             if (birthdayDat instanceof Date) {
                 this.birthdayDate = (Date) birthdayDat;
                 birthdayDates.add(birthdayDate);
@@ -164,7 +162,7 @@ public abstract class Account {
 
     }
 
-    public void setPhoneNo(int phoneNo) throws IOException {
+    public void setPhoneNo(double phoneNo) throws IOException {
         this.phoneNo = phoneNo;
 //        writeInJ();
 
