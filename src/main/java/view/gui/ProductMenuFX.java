@@ -33,6 +33,7 @@ import model.accounts.Seller;
 import model.log.BuyLog;
 import model.productRelated.Comment;
 import model.productRelated.Product;
+import model.request.ProductRequest;
 import model.request.Request;
 import view.OutputMassageHandler;
 
@@ -136,38 +137,38 @@ public class ProductMenuFX {
     }
 
     private void makeRequest() throws FileNotFoundException {
+        if(request instanceof ProductRequest) {
+            ProductRequest productRequest = (ProductRequest) request;
+            productNameLabel.setText(productRequest.getProductName());
+            File file = new File(productRequest.getImg());
+            Image image = new Image(new FileInputStream(file));
+            productPic.setImage(image);
+            productDetail.setText("Id : " + productRequest.getProductId() + "\n" +
+                    "Name : " + productRequest.getProductName() + "\n" +
+                    "Price : " + productRequest.getPrice() + "\n" +
+                    "Seller : " + productRequest.getSeller() + "\n" +
+                    "Category : " + productRequest.getCategoryName() + "\n"
+            );
+            productDetail.setEditable(false);
+            for (String productCategorySpecification : productRequest.getSpecialValue()) {
+                System.out.println(productCategorySpecification);
+            }
+            for (String specification : productRequest.getSpecialValue()) {
 
-        productNameLabel.setText(productInPage.getProductName());
-        File file = new File(productInPage.getProductImage());
-        Image image = new Image(new FileInputStream(file));
-        productPic.setImage(image);
-        productDetail.setText("Id : " + productInPage.getId() + "\n" +
-                "Name : " + productInPage.getProductName() + "\n" +
-                "Price : " + productInPage.getPrice() + "\n" +
-                "Seller : " + productInPage.getSeller() + "\n" +
-                "Category : " + productInPage.getCategory().getName() + "\n" +
-                "Number : " + productInPage.getNumberOfProducts() + "\n" +
-                "Average Score : " + productInPage.getScore() + "\n"
-        );
-        productDetail.setEditable(false);
-        for (String productCategorySpecification : productInPage.productCategorySpecifications) {
-            System.out.println(productCategorySpecification);
-        }
-        for (String specification : productInPage.productCategorySpecifications) {
-
-            if (specification != null && !specification.equals("")) {
-                for (String productCategorySpecification : productInPage.productCategorySpecifications) {
-                    if (!productCategorySpecification.equals(null)) {
-                        if (!productCategoryDetail.getText().equals(handleProCatDetail())) {
-                            productCategoryDetail.appendText(productCategorySpecification + "\n");
+                if (specification != null && !specification.equals("")) {
+                    for (String productCategorySpecification : productRequest.getSpecialValue()) {
+                        if (!productCategorySpecification.equals(null)) {
+                            if (!productCategoryDetail.getText().equals(handleProCatDetail())) {
+                                productCategoryDetail.appendText(productCategorySpecification + "\n");
+                            }
                         }
                     }
+                } else {
+                    System.out.println("trait is empty");
                 }
-            } else {
-                System.out.println("trait is empty");
             }
+            productCategoryDetail.setEditable(false);
         }
-        productCategoryDetail.setEditable(false);
     }
 
     @FXML
@@ -222,28 +223,41 @@ public class ProductMenuFX {
     }
 
     public String handleProCatDetail() {
-        String out = "";
-        for (String specification : productInPage.productCategorySpecifications) {
-            out += specification + "\n";
+
+            String out = "";
+        if(request == null) {
+            for (String specification : productInPage.productCategorySpecifications) {
+                out += specification + "\n";
+            }
+        }else{
+            if(request instanceof  ProductRequest) {
+                ProductRequest productRequest = (ProductRequest) request;
+                for (String specification : productRequest.getSpecialValue()) {
+                    out += specification + "\n";
+                }
+            }
         }
-        return out;
+            return out;
+
     }
 
     @FXML
     public void initialize() throws IOException {
-        titleColumn.setCellValueFactory(new PropertyValueFactory<Comment, String>("title"));
-        contentColumn.setCellValueFactory(new PropertyValueFactory<Comment, String>("content"));
-        for (Comment comment : Comment.getCommentsOfPro(productInPage.getId())) {
-            if (!data.contains(comment)) {
-                data.add(comment);
+        if(request == null) {
+            titleColumn.setCellValueFactory(new PropertyValueFactory<Comment, String>("title"));
+            contentColumn.setCellValueFactory(new PropertyValueFactory<Comment, String>("content"));
+            for (Comment comment : Comment.getCommentsOfPro(productInPage.getId())) {
+                if (!data.contains(comment)) {
+                    data.add(comment);
+                }
             }
+            commentTableView.getColumns().addAll(titleColumn, contentColumn);
+            commentTableView.setItems(data);
+            for (Comment comment : Comment.getCommentsOfPro(productInPage.getId())) {
+                System.out.println(comment.getTitle());
+            }
+            data.removeAll();
         }
-        commentTableView.getColumns().addAll(titleColumn, contentColumn);
-        commentTableView.setItems(data);
-        for (Comment comment : Comment.getCommentsOfPro(productInPage.getId())) {
-            System.out.println(comment.getTitle());
-        }
-        data.removeAll();
     }
 
     public void backToProductsMenu(ActionEvent event) throws IOException {

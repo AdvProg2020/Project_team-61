@@ -99,13 +99,14 @@ public class RequestsFx {
                 goToPage();
             } else if (request instanceof ProductRequest) {
                 ProductMenuFX.setPriRoot(curRoot);
-                root = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
+                ProductMenuFX.setRequest(request);
+                root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
                 goToPage();
             } else if (request instanceof CommentRequest) {
                 CommentRequest commentRequest = (CommentRequest) request;
                 ViewComment.setPriRoot(curRoot);
                 ViewComment.setCommentRequest(commentRequest);
-                root = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
+                root = FXMLLoader.load(Objects.requireNonNull(ViewComment.class.getClassLoader().getResource("viewCommentFx.fxml")));
                 goToPage();
             } else if (request instanceof SaleRequest) {
                 ViewSaleFx.setRequest(request);
