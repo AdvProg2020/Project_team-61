@@ -12,6 +12,7 @@ import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
+import model.firms.Firm;
 import model.off.DiscountCode;
 import model.off.Sale;
 import model.productRelated.Category;
@@ -151,6 +152,9 @@ public class Main extends Application {
             Sale.getAllSales().addAll(seller.getAllSales());
         }
 
+        for (Seller seller : Seller.getAllSellers()) {
+            Firm.getAllFirms().add(seller.getFirm());
+        }
 
 
         Application.launch(args);
