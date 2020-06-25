@@ -55,6 +55,7 @@ public class SaleRequest extends Request {
         sale = Sale.getSaleWithId(offId);
         sale.setSaleDetails(SaleStatus.CONFIRMED, startOfSalePeriod, endOfSalePeriod, saleAmount,this.getSeller());
         sale.setAllSaleProducts(allSaleProducts);
+//        Sale.allProInSale.addAll(sale.getAllSaleProducts());
         sale.setSaleStatus(SaleStatus.CONFIRMED);
         for (Product allSaleProduct : allSaleProducts) {
             allSaleProduct.setInSale(true);

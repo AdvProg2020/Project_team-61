@@ -35,6 +35,8 @@ public class Seller extends Account {
         writeInJ();
     }
 
+
+
     public void removeProduct(Product product) throws IOException {
         allProduct.remove(product);
         if(product.getInSale()){

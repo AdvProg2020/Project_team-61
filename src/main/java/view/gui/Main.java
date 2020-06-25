@@ -150,12 +150,8 @@ public class Main extends Application {
             Product.getProductList().addAll(seller.getAllProduct());
 
             Sale.getAllSales().addAll(seller.getAllSales());
-        }
 
-        for (Seller seller : Seller.getAllSellers()) {
-            Firm.getAllFirms().add(seller.getFirm());
         }
-
 
         Application.launch(args);
 
