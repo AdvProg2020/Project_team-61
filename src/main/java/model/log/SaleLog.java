@@ -10,8 +10,6 @@ import java.util.Comparator;
 public class SaleLog extends Log{
 
 
-
-
     public SaleLog(String logId) throws IOException {
         super(logId);
         id=logId;
@@ -25,7 +23,7 @@ public class SaleLog extends Log{
     private double receivedAmount;
     private double reducedAmount;
     private String customerName;
-    private Product product;
+  //  private Product product;
     LocalDateTime localDateTimeForSaleLog;
 
 

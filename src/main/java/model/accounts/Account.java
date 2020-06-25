@@ -9,27 +9,28 @@ import java.io.IOException;
 import java.util.*;
 
 public abstract class Account {
-    String username;
-    String name;
-    String lastname;
-    String password;
-    String email;
-    double phoneNo;
+    String username = null;
+    String name = null;
+    String lastname = null;
+    String password = null;
+    String email = null;
+    double phoneNo = 0;
     double credit = 500000000;
-    String role;
-    double currentPhoneNo;
-    String address;
-    Date birthdayDate;
-    public Firm firm;
-    boolean fast;
-    ArrayList<DiscountCode> allDiscountCodes;
-    private static ArrayList<Account> allAccounts;
+    String role = null;
+    double currentPhoneNo = 0;
+    String address = null;
+    Date birthdayDate = null;
+    public Firm firm = null;
+    boolean fast = false;
+    String imageId;
+
+    private static ArrayList<Account> allAccounts = new ArrayList<>();
     private static ArrayList<Date> birthdayDates = new ArrayList<>();
 //    public static Type AccountType = new TypeToken<ArrayList<Account>>() {
 //    }.getType();
 
 
-    public void setDetailsToAccount(String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate, Firm firm) throws IOException {
+    public void setDetailsToAccount(String password, String name, String lastname, String Emai, double phoneNo, Date birthdayDat, Firm firm , String img) throws IOException {
         if (password != null) {
             this.password = password;
         }
@@ -40,17 +41,21 @@ public abstract class Account {
             this.lastname = lastname;
         }
         if (email != null) {
-            this.email = Email;
+            this.email = Emai;
         }
         if (phoneNo != 0) {
             this.phoneNo = phoneNo;
         }
         if (birthdayDate != null) {
-            this.birthdayDate = (Date) birthdayDate;
-            birthdayDates.add(birthdayDate);
+            if (birthdayDat instanceof Date) {
+                this.birthdayDate = (Date) birthdayDat;
+                birthdayDates.add(birthdayDate);
+            }
         }
         if (firm != null) {
             this.firm = firm;
+        }if (img != null) {
+            this.imageId = img;
         }
 //        writeInJ();
         Customer.writeInJ();
@@ -65,24 +70,8 @@ public abstract class Account {
 
     }
 
-    public ArrayList<DiscountCode> getAllDiscountCodes() {
-        return allDiscountCodes;
-    }
-
-    public void addDiscountCode(DiscountCode discountCode) throws IOException {
-        allDiscountCodes.add(discountCode);
-//        writeInJ();
-
-    }
-
-    public void removeDiscountCode(DiscountCode discountCode) throws IOException {
-        allDiscountCodes.remove(discountCode);
-//        writeInJ();
-
-    }
 
     public static boolean isThereAccountWithUsername(String username) {
-
         for (Account account : allAccounts) {
             if (account.username.equalsIgnoreCase(username)) return true;
         }
@@ -97,8 +86,28 @@ public abstract class Account {
         return null;
     }
 
-    public static void deleteAccount(String username) {
+    public String getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
+    }
+
+    public static void deleteAccount(String username) throws IOException {
+        Account account = Account.getAccountWithUsername(username);
         allAccounts.remove(getAccountWithUsername(username));
+        if(account instanceof Seller){
+            Seller.getAllSellers().remove(account);
+            Seller.writeInJ();
+        }else if(account instanceof Customer){
+            Customer.getAllCustomers().remove(account);
+            Customer.writeInJ();
+        } else if(account instanceof Manager){
+            Manager.getAllManagers().remove(account);
+            Manager.writeInJ();
+        }
+
     }
 
     public static boolean isThereAccountWithUsernameAndPassword(String username, String password) {
@@ -131,7 +140,9 @@ public abstract class Account {
     //----------------------------------------------------------------
     public void setName(String name) throws IOException {
         this.name = name;
-//        writeInJ();
+        Customer.writeInJ();
+        Manager.writeInJ();
+        Seller.writeInJ();
 
     }
 
@@ -254,7 +265,7 @@ public abstract class Account {
                 ", currentPhoneNo=" + currentPhoneNo +
                 ", address='" + address + '\'' +
                 ", birthdayDate=" + birthdayDate +
-                ", allDiscountCodes=" + allDiscountCodes +
+                // ", allDiscountCodes=" + allDiscountCodes +
                 '}';
     }
 }

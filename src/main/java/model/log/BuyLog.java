@@ -2,6 +2,7 @@ package model.log;
 
 
 import controller.menus.CustomerMenu;
+import model.accounts.Account;
 import model.accounts.Seller;
 import model.off.DiscountCode;
 import model.productRelated.Product;
@@ -122,7 +123,7 @@ public class BuyLog extends Log {
         ArrayList<Seller> sellers=null;
         for (Product p : allBoughtProduct.keySet()){
             if (!sellers.contains(p.getSeller())){
-                sellers.add((Seller) p.getSeller());
+                sellers.add((Seller) Account.getAccountWithUsername(p.getSeller()));
             }
         }
         return sellers;

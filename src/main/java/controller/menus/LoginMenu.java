@@ -5,8 +5,7 @@ import model.accounts.Seller;
 import model.firms.Firm;
 import model.request.AccountRequest;
 import model.request.Request;
-import sample.LoginFx;
-import view.SubMenuStatus;
+import view.gui.LoginFx;
 
 import java.io.IOException;
 
@@ -16,7 +15,7 @@ public class LoginMenu {
    // private static String field = null;
     private static String username = null;
     private static boolean login = false;
-    private static SubMenuStatus subMenuStatus;
+   // private static SubMenuStatus subMenuStatus;
     private static AccountRequest accountRequest;
     private static Firm firm;
     private static String firmName;
@@ -49,7 +48,7 @@ public class LoginMenu {
     }
 
     public static int checkPassword(String password) throws IOException {
-        if (password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{8,10}$")) {
+        if (password.matches(".+")) {
             if (Account.isThereAccountWithUsernameAndPassword(username, password)) {
                 loginAccount = Account.getAccountWithUsername(username);
                 login = true;
@@ -84,7 +83,7 @@ public class LoginMenu {
 
     public static int editAccount(String edit, String field) throws IOException {
         if (field.equalsIgnoreCase("password")) {
-            if (edit.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{8,10}$")) {
+            if (edit.matches(".+")) {
                 loginAccount.setPassword(edit);
                 outputNo = 0;
                // outputNo = 17;
@@ -151,17 +150,20 @@ public class LoginMenu {
 
     public static boolean checkFirm() {
         if (loginAccount instanceof Seller) {
-            if (((Seller) loginAccount).getFirm().getName().equalsIgnoreCase(firmName)) {
-                firm = ((Seller) loginAccount).getFirm();
-                return true;
+            if(loginAccount instanceof Seller) {
+                Seller seller = (Seller) loginAccount;
+                if (seller.getFirm().getName().equalsIgnoreCase(firmName)) {
+                    firm = seller.getFirm();
+                    return true;
+                }
             }
         }
         return false;
     }
 
     public static int firmName(String name) throws IOException {
-        if (name.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$")) {
-            if (checkFirm()) {
+        if (name.matches(".+")) {
+            if (Firm.isThereFirmWithID(name)) {
                 firmName = name;
                 accountRequest.setFirmName(firmName);
                 outputNo = 0;

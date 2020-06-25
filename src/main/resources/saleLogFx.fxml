@@ -7,9 +7,9 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SaleLogFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="848.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.SaleLogFx">
     <children>
-        <Rectangle  arcHeight="5.0" arcWidth="5.0" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="848.0" stroke="BLACK" strokeType="INSIDE" width="1600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <fill>
                 <LinearGradient endX="1.0" endY="1.0" startY="0.0970873786407767">
                     <stops>
@@ -23,7 +23,7 @@
                 </LinearGradient>
             </fill>
         </Rectangle>
-        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.bottomAnchor="1050.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1600.0">
             <menus>
                 <Menu mnemonicParsing="false" text="User menu">
                     <items>
@@ -47,7 +47,7 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <Text layoutX="868.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sale Log">
+        <Text layoutX="718.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sale Log">
             <font>
                 <Font name="System Bold Italic" size="42.0" />
             </font>
@@ -60,9 +60,8 @@
                 </LinearGradient>
             </fill>
         </Text>
-        <TableView fx:id="saleLogs" layoutX="290.0" layoutY="132.0" prefHeight="200.0" prefWidth="1320.0" AnchorPane.bottomAnchor="104.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="132.0">
+        <TableView fx:id="saleLogs" layoutX="250.0" layoutY="186.0" prefHeight="499.0" prefWidth="1101.0">
             <columns>
-                <TableColumn fx:id="saleLogNumber" minWidth="220.0" prefWidth="75.0" text="Number" />
                 <TableColumn fx:id="saleLogProduct" minWidth="220.0" prefWidth="75.0" text="Product" />
                 <TableColumn fx:id="saleLogProductNumber" minWidth="220.0" prefWidth="75.0" text="Product number" />
                 <TableColumn fx:id="saleLogDate" minWidth="220.0" prefWidth="75.0" text="Date" />

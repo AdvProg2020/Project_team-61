@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewDiscountFx">
+<AnchorPane prefHeight="900.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ViewDiscountFx">
     <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1545.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <fill>
@@ -43,7 +43,7 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <Label fx:id="discountInformationLabel" layoutX="628.0" layoutY="67.0" prefHeight="40.0" prefWidth="238.0" text="Discount code">
+        <Label layoutX="628.0" layoutY="67.0" prefHeight="40.0" prefWidth="238.0" text="Discount code">
             <font>
                 <Font name="System Bold Italic" size="34.0" />
             </font>

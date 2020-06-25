@@ -12,7 +12,7 @@ import java.util.Comparator;
 public abstract class Request {
     private String requestText;
     private String requestDate;
-    private Account seller;
+    private String seller;
     private static ArrayList<Request> allRequests;
     LocalDateTime now;
 //    public static Type RequestType = new TypeToken<ArrayList<Request>>() {
@@ -20,23 +20,17 @@ public abstract class Request {
 
     public Request(String requestID) throws IOException {
         this.requestText = requestID;
-
-        //?
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         now = LocalDateTime.now();
         requestDate = dtf.format(now);
         if(LoginMenu.getLoginAccount() instanceof Seller) {
-            seller = (Seller) LoginMenu.getLoginAccount();
+            seller =  LoginMenu.getLoginAccount().getUsername();
         }
         allRequests.add(this);
-//        writeInJ();
     }
 
-    public String getRequestDate() {
-        return requestDate;
-    }
 
-    public Account getSeller() {
+    public String getSeller() {
         return seller;
     }
 
@@ -56,28 +50,23 @@ public abstract class Request {
         return requestText;
     }
 
-    public abstract void declineRequest() ;
+    public abstract void declineRequest() throws IOException;
 
     public abstract void acceptRequest() throws IOException;
 
-
-    public static void deleteRequest(String id){
-        allRequests.remove(getRequestFromID(id));
-    }
     public static Request getRequestFromID(String requestID){
         for(Request request : allRequests){
             if (request.requestText.equalsIgnoreCase(requestID)) return request;
         }
         return null;
     }
+
     public static boolean isThereRequestFromID(String requestID){
         for(Request request : allRequests){
             if (request.requestText.equalsIgnoreCase(requestID)) return true;
         }
         return false;
     }
-
-
 
     public static Comparator<Request> productComparatorForScore = new Comparator<Request>() {
 
@@ -95,4 +84,5 @@ public abstract class Request {
                 ", seller=" + seller +
                 '}';
     }
+
 }
