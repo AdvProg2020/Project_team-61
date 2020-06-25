@@ -57,14 +57,14 @@
                 </LinearGradient>
             </fill>
         </Text>
-      <TableView fx:id="requests" onMouseClicked="#showRequest" layoutX="284.0" layoutY="108.0" prefHeight="647.0" prefWidth="1038.0">
+      <TableView fx:id="requests"  layoutX="284.0" layoutY="108.0" prefHeight="647.0" prefWidth="1038.0">
         <columns>
           <TableColumn fx:id="requestId" prefWidth="317.0" text="Text" />
           <TableColumn fx:id="requestSeller" minWidth="0.0" prefWidth="366.0" text="Account" />
             <TableColumn fx:id="requestDate" minWidth="0.0" prefWidth="354.0" text="Date" />
         </columns>
       </TableView>
-      <Button layoutX="1047.0" layoutY="788.0" mnemonicParsing="false"  text="Show">
+      <Button layoutX="1047.0" layoutY="788.0" mnemonicParsing="false" onMouseClicked="#showRequest" text="Show">
          <font>
             <Font size="19.0" />
          </font>
