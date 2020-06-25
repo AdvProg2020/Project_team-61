@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
@@ -30,6 +31,7 @@ import java.util.Objects;
 
 public class SignUpFx {
 
+    public ImageView userImage = new ImageView();
     @FXML private TextField phoneNoSign;
     @FXML private TextField userSign;
     @FXML private TextField lastNameSign;
@@ -131,7 +133,8 @@ public class SignUpFx {
         imageId = files.get(0).getPath();
         File file = new File(imageId);
         Image image = new Image(new FileInputStream(file));
-       // productImage.setImage(image);
+        userImage.setImage(image);
+
     }
 
 
