@@ -31,11 +31,15 @@ public class Sale{
     }
     public void setSaleDetails(SaleStatus saleStatus, Date startOfSalePeriod, Date endOfSalePeriod, int saleAmount, Account seller) throws IOException {
         this.saleStatus = saleStatus;
-        this.startOfSalePeriod = startOfSalePeriod;
+        if(startOfSalePeriod != null) {
+            this.startOfSalePeriod = startOfSalePeriod;
+        }   if(endOfSalePeriod != null) {
         this.endOfSalePeriod = endOfSalePeriod;
+        }   if(saleAmount != 0) {
         this.saleAmount = saleAmount;
-        this.seller = seller.getUsername();
-
+        }   if(seller != null) {
+            this.seller = seller.getUsername();
+        }
         writeInJ();
     }
 

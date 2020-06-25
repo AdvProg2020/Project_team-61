@@ -59,47 +59,39 @@ public class SignUpFx {
         SignUpFx.role = role;
     }
 
-    public void picDrop(DragEvent dragEvent) {
 
-    }
-
-
-    public void picOver(DragEvent dragEvent) {
-        if (dragEvent.getDragboard().hasContent(DataFormat.IMAGE)) {
-            dragEvent.acceptTransferModes(TransferMode.ANY);
-        }
-        dragEvent.consume();
-    }
 
     public void signUp(MouseEvent mouseEvent) throws IOException, ParseException {
-        if (role != null) {
-            if (RegisterMenu.getSignUpNo() == 0) {
-                userLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.processRegister(role, userSign.getText())));
-            }
-            if (RegisterMenu.getSignUpNo() == 1) {
-                passLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(passSign.getText(), 0)));
-                if (RegisterMenu.getDetailMenu() == 1) {
-                    nameLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(nameSign.getText(), 1)));
+        if(imageId != null) {
+            if (role != null) {
+                if (RegisterMenu.getSignUpNo() == 0) {
+                    userLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.processRegister(role, userSign.getText(), imageId)));
                 }
-                if (RegisterMenu.getDetailMenu() == 2) {
-                    lastNameLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(lastNameSign.getText(), 2)));
+                if (RegisterMenu.getSignUpNo() == 1) {
+                    passLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(passSign.getText(), 0)));
+                    if (RegisterMenu.getDetailMenu() == 1) {
+                        nameLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(nameSign.getText(), 1)));
+                    }
+                    if (RegisterMenu.getDetailMenu() == 2) {
+                        lastNameLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(lastNameSign.getText(), 2)));
+                    }
+                    if (RegisterMenu.getDetailMenu() == 3) {
+                        emailLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(emailSign.getText(), 3)));
+                    }
+                    if (RegisterMenu.getDetailMenu() == 4) {
+                        phoneLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(phoneNoSign.getText(), 4)));
+                    }
+                    if (RegisterMenu.getDetailMenu() == 5) {
+                        birthLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(birthdaySign.getText(), 5)));
+                    }
                 }
-                if (RegisterMenu.getDetailMenu() == 3) {
-                    emailLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(emailSign.getText(), 3)));
-                }
-                if (RegisterMenu.getDetailMenu() == 4) {
-                    phoneLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(phoneNoSign.getText(), 4)));
-                }
-                if (RegisterMenu.getDetailMenu() == 5) {
-                    birthLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(birthdaySign.getText(), 5)));
-                }
-            }
-            if (role != null && RegisterMenu.getSignUpNo() == 6) {
-                RegisterMenu.setSignUpNo(0);
-                RegisterMenu.setDetailMenu(0);
-                goToMenu();
-            } else RegisterMenu.setSignUpNo(1);
-        } else userLoginMs.setText("you have to select your role first");
+                if (role != null && RegisterMenu.getSignUpNo() == 6) {
+                    RegisterMenu.setSignUpNo(0);
+                    RegisterMenu.setDetailMenu(0);
+                    goToMenu();
+                } else RegisterMenu.setSignUpNo(1);
+            } else userLoginMs.setText("you have to select your role first");
+        }else userLoginMs.setText("drag image first");
     }
 
     private void goToMenu() throws IOException {
@@ -139,7 +131,7 @@ public class SignUpFx {
         imageId = files.get(0).getPath();
         File file = new File(imageId);
         Image image = new Image(new FileInputStream(file));
-//        productImage.setImage(image);
+       // productImage.setImage(image);
     }
 
 

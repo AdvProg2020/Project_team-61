@@ -30,6 +30,7 @@ public class AccountRequest extends Request {
     private static String firmAddress = null;
     private static String firmEmail = null;
     private static String FirmType = null;
+    private static String img;
 
     private static ArrayList<AccountRequest> allAccountRequests = new ArrayList<>();
     public static Type accountRequestType = new TypeToken<ArrayList<AccountRequest>>() {
@@ -70,7 +71,7 @@ public class AccountRequest extends Request {
         Seller seller = new Seller(username);
         createFirm();
         Firm firm = Firm.getFirmWithID(firmName);
-        seller.setDetailsToAccount(password, name, lastname, Email, phoneNo, birthdayDate, firm);
+        seller.setDetailsToAccount(password, name, lastname, Email, phoneNo, birthdayDate, firm , img);
         firm.setDetailToFirm(FirmPhoneNO, firmAddress, firmEmail);
         Request.getAllRequests().remove(this);
         allAccountRequests.remove(this);
@@ -164,13 +165,14 @@ public class AccountRequest extends Request {
         FileHandling.writeInFile(json, "accountRequest.json");
     }
 
-    public void sellerAccountDetails(String username, String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate) throws IOException {
+    public void sellerAccountDetails(String username, String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate , String img) throws IOException {
         this.username = username;
         this.password = password;
         this.name = name;
         this.lastname = lastname;
         this.Email = Email;
         this.phoneNo = phoneNo;
+        this.img = img;
         writeInJ();
     }
 

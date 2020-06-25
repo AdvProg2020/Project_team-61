@@ -237,7 +237,7 @@ public class SellerMenu {
         if (checkSale(offID)) {
             Sale sale = Sale.getSaleWithId(offID);
             if (sale.getSeller() == LoginMenu.getLoginAccount().getUsername()) {
-                String id = LoginMenu.getLoginAccount() + " wants edit off " + offID ;
+                String id = LoginMenu.getLoginAccount().getUsername() + " wants edit off " + offID ;
                 if (!Request.isThereRequestFromID(id)) {
                     Sale.getSaleWithId(offID).setSaleStatus(SaleStatus.UNDERREVIEWFOREDITING);
                     saleRequest = new SaleRequest(id);

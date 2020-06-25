@@ -35,12 +35,12 @@ import model.request.Request;
 import view.OutputMassageHandler;
 
 
-import java.awt.*;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.Objects;
 
 public class ProductMenuFX {

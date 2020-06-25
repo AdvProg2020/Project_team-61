@@ -98,7 +98,7 @@ public class SalesFx {
     }
 
     public void edit(MouseEvent mouseEvent) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(AddSaleFx.class.getClassLoader().getResource("addSale.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(AddSaleFx.class.getClassLoader().getResource("addSaleFx.fxml")));
         goToPage();
 
     }

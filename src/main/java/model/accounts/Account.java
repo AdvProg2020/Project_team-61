@@ -30,7 +30,7 @@ public abstract class Account {
 //    }.getType();
 
 
-    public void setDetailsToAccount(String password, String name, String lastname, String Emai, double phoneNo, Date birthdayDat, Firm firm) throws IOException {
+    public void setDetailsToAccount(String password, String name, String lastname, String Emai, double phoneNo, Date birthdayDat, Firm firm , String img) throws IOException {
         if (password != null) {
             this.password = password;
         }
@@ -54,6 +54,8 @@ public abstract class Account {
         }
         if (firm != null) {
             this.firm = firm;
+        }if (img != null) {
+            this.imageId = img;
         }
 //        writeInJ();
         Customer.writeInJ();
