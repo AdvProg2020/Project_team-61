@@ -120,7 +120,7 @@
                 </LinearGradient>
             </textFill>
         </Button>
-        <Label fx:id="productsMs" layoutX="249.0" layoutY="775.0" prefHeight="21.0" prefWidth="743.0" text="Label" textFill="#ff0396">
+        <Label fx:id="productsMs" layoutX="249.0" layoutY="775.0" prefHeight="43.0" prefWidth="657.0" textFill="#ff0396">
             <font>
                 <Font size="29.0" />
             </font>

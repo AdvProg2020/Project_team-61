@@ -18,6 +18,7 @@ import model.productRelated.Product;
 
 import java.io.IOException;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class BuyLogFx {
@@ -53,6 +54,7 @@ public class BuyLogFx {
 
     private static BuyLog curBuyLog;
     public static ObservableList<Product> data = FXCollections.observableArrayList();
+    private static ArrayList<Product> cart = new ArrayList<>();
 
     public BuyLog getCurBuyLog() {
         return curBuyLog;
@@ -76,7 +78,7 @@ public class BuyLogFx {
         //buyLogDate.setCellValueFactory(curBuyLog,);
         buyLogPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         initializeObserverList();
-        buyLog.getColumns().addAll(buyLogProductId, buyLogProduct, buyLogProductNumber, buyLogPrice);
+       // buyLog.getColumns().addAll(buyLogProductId, buyLogProduct, buyLogProductNumber, buyLogPrice);
         buyLog.setItems(data);
     }
 

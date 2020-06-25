@@ -22,7 +22,7 @@ public class AccountRequest extends Request {
     private static String name = null;
     private static String lastname = null;
     private static String Email = null;
-    private static int phoneNo = 0;
+    private static double phoneNo = 0;
     private static Date birthdayDate = null;
 
     private static String firmName = null;
@@ -115,7 +115,7 @@ public class AccountRequest extends Request {
 
     }
 
-    public void setPhoneNo(int phoneNo) throws IOException {
+    public void setPhoneNo(double phoneNo) throws IOException {
         this.phoneNo = phoneNo;
         writeInJ();
 
@@ -192,7 +192,7 @@ public class AccountRequest extends Request {
         return Email;
     }
 
-    public static int getPhoneNo() {
+    public static double getPhoneNo() {
         return phoneNo;
     }
 

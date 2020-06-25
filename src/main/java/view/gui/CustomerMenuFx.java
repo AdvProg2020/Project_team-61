@@ -23,6 +23,7 @@ public class CustomerMenuFx {
     public static ObservableList data = FXCollections.observableArrayList();
     private static Parent root;
     private static Parent priRoot;
+    ArrayList<DiscountCode> discounts = new ArrayList<>();
 
     public static void setPriRoot(Parent priRoot) {
         CustomerMenuFx.priRoot = priRoot;
@@ -66,8 +67,14 @@ public class CustomerMenuFx {
 
     ///////////////////////////
     public void viewCustomerDiscount(MouseEvent mouseEvent) throws IOException {
+        dis();
+        DiscountCodesFx.setDiscounts(discounts);
+        root = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("DiscountCodesFx.fxml")));
+        goToPage();
+    }
+
+    private void dis(){
         data.clear();
-        ArrayList<DiscountCode> discounts = new ArrayList<>();
         if (LoginMenu.getLoginAccount() instanceof Customer) {
             Customer customer = (Customer) LoginMenu.getLoginAccount();
             for (DiscountCode allDiscountCode : DiscountCode.getAllDiscountCodes()) {

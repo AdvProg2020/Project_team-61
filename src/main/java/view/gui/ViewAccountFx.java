@@ -17,10 +17,12 @@ import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
+import model.off.DiscountCode;
 import model.request.AccountRequest;
 import model.request.Request;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class ViewAccountFx {
@@ -35,10 +37,12 @@ public class ViewAccountFx {
     @FXML private Label username;
 
     public static final ObservableList data = FXCollections.observableArrayList();
+    private static ArrayList<DiscountCode> dis = new ArrayList();
     private static Parent root;
     private static Account account;
     private static Request request;
     private static Parent priRoot;
+    private Customer customer;
 
     public static void setPriRoot(Parent priRoot) {
         ViewAccountFx.priRoot = priRoot;
@@ -96,8 +100,9 @@ public class ViewAccountFx {
     ///////////////////////
     public void viewCustomerDiscount(MouseEvent mouseEvent) throws IOException {
         if(LoginMenu.getLoginAccount() instanceof Customer) {
-            Customer customer = (Customer) LoginMenu.getLoginAccount();
-//            DiscountCodesFx.setDiscounts(customer.getAllDiscountCodes());
+             customer = (Customer) LoginMenu.getLoginAccount();
+            findDis();
+            DiscountCodesFx.setDiscounts(dis);
         } else if(LoginMenu.getLoginAccount() instanceof Manager) {
             Manager customer = (Manager) LoginMenu.getLoginAccount();
             DiscountCodesFx.setDiscounts(customer.getAllDiscountCodes());
@@ -105,6 +110,14 @@ public class ViewAccountFx {
             root = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("DiscountCodesFx.fxml")));
             goToPage();
 
+    }
+
+    private void findDis() {
+        for (DiscountCode allDiscountCode : DiscountCode.getAllDiscountCodes()) {
+            if(allDiscountCode.getAllCustomersWithDiscountCode().contains(customer)){
+                dis.add(allDiscountCode);
+            }
+        }
     }
 
 

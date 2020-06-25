@@ -30,7 +30,7 @@ public class MainMenuFx {
     public void sales(MouseEvent mouseEvent) throws IOException {
         Parent curRoot = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
       //  SaleMenuFx.setPriRoot(curRoot);
-        Parent root = FXMLLoader.load(Objects.requireNonNull(SaleMenuFx.class.getClassLoader().getResource("saleMenuFx.fxml")));
+         root = FXMLLoader.load(Objects.requireNonNull(SaleMenuFx.class.getClassLoader().getResource("saleMenuFx.fxml")));
         goToPage();
 
     }

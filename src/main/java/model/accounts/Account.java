@@ -28,7 +28,7 @@ public abstract class Account {
 //    }.getType();
 
 
-    public void setDetailsToAccount(String password, String name, String lastname, String Emai, int phoneNo, Date birthdayDat, Firm firm , String img) throws IOException {
+    public void setDetailsToAccount(String password, String name, String lastname, String Emai, double phoneNo, Date birthdayDat, Firm firm , String img) throws IOException {
         if (password != null) {
             this.password = password;
         }

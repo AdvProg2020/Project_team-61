@@ -242,7 +242,8 @@ public class SellerMenu {
                     Sale.getSaleWithId(offID).setSaleStatus(SaleStatus.UNDERREVIEWFOREDITING);
                     saleRequest = new SaleRequest(id);
                     Seller seller = (Seller) Seller.getAccountWithUsername(LoginMenu.getLoginAccount().getUsername());
-                    seller.getAllSaleRequests().add(saleRequest);
+                    seller.addSale(sale);
+                   // seller.getAllSaleRequests().add(saleRequest);
                     saleRequest.setOffId(offID);
                     edit = 1;
                     // saleRequest.setSeller(LoginMenu.getLoginAccount());
@@ -310,10 +311,10 @@ public class SellerMenu {
                 Sale sale = new Sale(detail);
                 if(LoginMenu.getLoginAccount() instanceof Seller) {
                     Seller seller = (Seller) LoginMenu.getLoginAccount();
-                    seller.getAllSales().add(sale);
+                   // seller.getAllSales().add(sale);
                     sale.setSaleStatus(SaleStatus.UNDERREVIEWFORCONSTRUCTION);
                     saleRequest = new SaleRequest(id);
-                    seller.getAllSaleRequests().add(saleRequest);
+                    //seller.getAllSaleRequests().add(saleRequest);
                     saleRequest.setOffId(detail);
                 }
                // saleRequest.setSeller(LoginMenu.getLoginAccount());

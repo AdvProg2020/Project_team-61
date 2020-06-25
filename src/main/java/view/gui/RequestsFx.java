@@ -1,6 +1,5 @@
 package view.gui;
 
-import controller.ProductMenu;
 import controller.menus.LoginMenu;
 import controller.menus.ManagerMenu;
 import javafx.collections.FXCollections;
@@ -27,6 +26,7 @@ import model.sort.Sort;
 import view.OutputMassageHandler;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Objects;
 
 public class RequestsFx {
@@ -35,7 +35,7 @@ public class RequestsFx {
     @FXML
     private TableColumn<Request, String> requestId;
     @FXML
-    private TableColumn<Request, String> requestDate;
+    private TableColumn<Request, Date> requestDate;
     @FXML
     private TableColumn<Request, Account> requestSeller;
 
@@ -61,7 +61,7 @@ public class RequestsFx {
 
         requestId.setCellValueFactory(new PropertyValueFactory<Request, String>("requestText"));
         requestSeller.setCellValueFactory(new PropertyValueFactory<Request, Account>("seller"));
-        requestDate.setCellValueFactory(new PropertyValueFactory<Request, String>("requestDate"));
+        requestDate.setCellValueFactory(new PropertyValueFactory<Request, Date>("now"));
 
         makeList();
         requests.setEditable(true);
@@ -73,8 +73,8 @@ public class RequestsFx {
 
 
     public void showRequest(MouseEvent mouseEvent) throws IOException {
-        Parent curRoot   = FXMLLoader.load(Objects.requireNonNull(RequestsFx.class.getClassLoader().getResource("requestsFx.fxml")));
         if (requests.getSelectionModel().getSelectedItem() != null) {
+            Parent curRoot   = FXMLLoader.load(Objects.requireNonNull(RequestsFx.class.getClassLoader().getResource("requestsFx.fxml")));
             Request request = requests.getSelectionModel().getSelectedItem();
             if (request instanceof AccountRequest) {
                 ViewAccountFx.setRequest(request);
@@ -139,15 +139,19 @@ public class RequestsFx {
     }
 
 
-
     public void userMenu(ActionEvent actionEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(RequestsFx.class.getClassLoader().getResource("requestsFx.fxml")));
         if(LoginMenu.getLoginAccount() instanceof Seller){
+            SellerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
         } else if(LoginMenu.getLoginAccount() instanceof Manager){
+            ManagerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
         }else if(LoginMenu.getLoginAccount() instanceof Customer){
+            CustomerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         }
+        goToPage();
     }
 
     public void back(ActionEvent actionEvent) {
@@ -169,7 +173,7 @@ public class RequestsFx {
 
         requestId.setCellValueFactory(new PropertyValueFactory<Request, String>("requestText"));
         requestSeller.setCellValueFactory(new PropertyValueFactory<Request, Account>("seller"));
-        requestDate.setCellValueFactory(new PropertyValueFactory<Request, String>("requestDate"));
+        requestDate.setCellValueFactory(new PropertyValueFactory<Request, Date>("requestDate"));
 
         list.clear();
         Sort.setNewArrayOfRequest(Request.getAllRequests());

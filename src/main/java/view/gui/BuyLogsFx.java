@@ -67,7 +67,7 @@ public class BuyLogsFx {
 
     public static void initializeObserverList() {
         data.clear();
-        data.addAll(BuyLog.getAllCustomersLog());
+        data.addAll(allBuyLogs);
     }
 
     @FXML
