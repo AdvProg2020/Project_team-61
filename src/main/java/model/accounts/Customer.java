@@ -17,7 +17,7 @@ public class Customer extends Account {
     private ArrayList<CommentRequest> allCommentRequests = new ArrayList<>();
     public static Type CustomerType = new TypeToken<ArrayList<Customer>>() {
     }.getType();
-
+    private BuyLog customerCart;
 
     public ArrayList<CommentRequest> getAllCommentRequests() {
         return allCommentRequests;

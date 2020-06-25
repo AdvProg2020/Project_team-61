@@ -74,7 +74,7 @@ public class LoginFx {
         root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("signUpFx.fxml")));
         goToPage();
 
-    }
+    } 
 
     private static void goToPage() {
         if (root != null) {

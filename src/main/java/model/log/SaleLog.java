@@ -60,8 +60,21 @@ public class SaleLog extends Log{
 
     //other-------------------------------------------------------
 
+    public String getId() {
+        return id;
+    }
 
+    public double getReceivedAmount() {
+        return receivedAmount;
+    }
 
+    public double getReducedAmount() {
+        return reducedAmount;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
 
     //finish//doubt
     public void addProductToSaleLog(String productId){

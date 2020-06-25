@@ -51,6 +51,7 @@ public class SellerMenuFx {
             SaleLogsFx.setPriRoot(curRoot);
             SaleLogsFx.setSaleLogs(seller.getSaleLogsHistory());
             root = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
+            SaleLogsFx.setPriRoot(root);
             goToPage();
         }
     }

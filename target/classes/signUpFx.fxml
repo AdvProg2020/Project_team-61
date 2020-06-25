@@ -59,7 +59,7 @@
       <TextField fx:id="lastNameSign" layoutX="705.0" layoutY="389.0" prefHeight="40.0" prefWidth="271.0" promptText="last name" />
       <TextField fx:id="phoneNoSign" layoutX="705.0" layoutY="564.0" prefHeight="40.0" prefWidth="271.0" promptText="phone number" />
       <TextField fx:id="emailSign" layoutX="705.0" layoutY="476.0" prefHeight="40.0" prefWidth="271.0" promptText="Email" />
-      <TextField fx:id="birthdaySign" layoutX="705.0" layoutY="661.0" prefHeight="40.0" prefWidth="271.0" promptText="birthday date" />
+      <TextField fx:id="birthdaySign" layoutX="403.0" layoutY="644.0" prefHeight="40.0" prefWidth="271.0" promptText="birthday date" />
       <Text layoutX="766.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign up" wrappingWidth="150.0">
          <font>
             <Font name="System Bold Italic" size="38.0" />
@@ -129,7 +129,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button layoutX="781.0" layoutY="741.0" mnemonicParsing="false" onMouseClicked="#signUp" prefHeight="40.0" prefWidth="119.0" text="Create">
+      <Button layoutX="395.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#signUp" prefHeight="40.0" prefWidth="119.0" text="Create">
          <textFill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>

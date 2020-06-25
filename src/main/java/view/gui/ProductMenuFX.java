@@ -29,6 +29,7 @@ import javafx.stage.Stage;
 import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
+import model.log.BuyLog;
 import model.productRelated.Comment;
 import model.productRelated.Product;
 import model.request.Request;
@@ -183,8 +184,29 @@ public class ProductMenuFX {
         }
     }
 
-    public void handleAddProductToLog(ActionEvent actionEvent) {
+    public void handleAddProductToLog(ActionEvent actionEvent) throws IOException {
+        if (LoginMenu.isLogin()){
+            try {
+                ProductMenu.addToCart();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            BuyLogFx.setPriRoot(productPagePane);
+            BuyLogFx.setCurBuyLog(ProductMenu.getBuyLog());
 
+            BuyLogFx.getCurBuyLog().setBuyLogCustomer(LoginMenu.getLoginAccount());
+            AnchorPane root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("BuyLogFx.fxml")));
+            Scene scene = new Scene(root);
+            thisStage.setScene(scene);
+            thisStage.show();
+
+        }
+        else {
+            AnchorPane root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("LoginFx.fxml")));
+            Scene scene = new Scene(root);
+            thisStage.setScene(scene);
+            thisStage.show();
+        }
     }
 
     public void handleBackAddCommentButton(ActionEvent actionEvent) throws IOException {

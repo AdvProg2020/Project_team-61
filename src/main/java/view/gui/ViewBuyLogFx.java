@@ -24,15 +24,15 @@ import java.io.IOException;
 
 import java.util.Objects;
 
-public class BuyLogFx {
+public class ViewBuyLogFx {
     private static String buyLogId;
 
     public static void setBuyLogId(String buyLogId) {
-        BuyLogFx.buyLogId = buyLogId;
+        ViewBuyLogFx.buyLogId = buyLogId;
     }
 
     public static void setPriRoot(Parent priRoot) {
-        BuyLogFx.priRoot = priRoot;
+        ViewBuyLogFx.priRoot = priRoot;
     }
 
     @FXML
@@ -59,7 +59,7 @@ public class BuyLogFx {
     @FXML
     private static Parent root;
     private static Parent priRoot;
-   // public CustomerMenu ;
+    // public CustomerMenu ;
 
 
     private static BuyLog curBuyLog;
@@ -71,7 +71,7 @@ public class BuyLogFx {
 
 
     public static void setCurBuyLog(BuyLog curBuyLog) {
-        BuyLogFx.curBuyLog = curBuyLog;
+        ViewBuyLogFx.curBuyLog = curBuyLog;
     }
 
     public void initializeObserverList() {
@@ -95,20 +95,6 @@ public class BuyLogFx {
         buyLog.setItems(data);
     }
 
-    public void increaseAmount(MouseEvent mouseEvent) {
-        Product selectedProduct=buyLog.getSelectionModel().getSelectedItem();
-       curBuyLog.increaseNumberOfProduct(selectedProduct.getProductId(), 1);
-
-
-    }
-
-    public void reduceAmount(ActionEvent MouseEvent) {
-      //  ObservableList<Product> selectedProduct, allProducts;
-        Product selectedProduct;
-        selectedProduct = buyLog.getSelectionModel().getSelectedItem();
-        curBuyLog.reduceNumberOfProduct(selectedProduct.getProductId(), 1);
-
-    }
 
     public void showTotalPriceBuyLog(MouseEvent MouseClick) {
         totalPriceLabel.setText(String.valueOf(curBuyLog.calculateHolePrice()));
@@ -126,11 +112,6 @@ public class BuyLogFx {
         buyLogDate.setText(BuyLog.getLocalDateTimeForLog().toString());
     }
 
-    public void purchase(MouseEvent mouseEvent) throws IOException {
-        PayLogFx.setPreBuyLog(curBuyLog);
-        root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("payLogFx.fxml")));
-        goToPage();
-    }
 
     public void viewProductFromBuyLog(MouseEvent mouseEvent) throws IOException {
         if (buyLog.getSelectionModel().getSelectedItem() != null) {
@@ -187,8 +168,5 @@ public class BuyLogFx {
         System.exit(0);
     }
 
-
-    public void viewProduct(MouseEvent mouseEvent) {
-    }
 
 }
