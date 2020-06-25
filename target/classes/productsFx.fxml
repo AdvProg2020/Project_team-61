@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ProductsFx">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" layoutX="-200.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0" startX="0.15533980582524273" startY="0.0970873786407767">
+                    <stops>
+                        <Stop color="#ebda97" />
+                        <Stop color="#70e7eb" offset="0.26811594202898553" />
+                  <Stop color="#f26eb6" offset="0.6843563512361467" />
+                  <Stop color="#fcc5e5" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.bottomAnchor="1050.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="User menu">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#userMenu" text="your menu" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Logout">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Back">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Text layoutX="874.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Products">
+            <font>
+                <Font name="System Bold Italic" size="42.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#ff57bf" />
+                        <Stop color="WHITE" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <TableView fx:id="products" layoutX="274.0" layoutY="139.0" prefHeight="851.0" prefWidth="1322.0">
+            <columns>
+                <TableColumn fx:id="productId" prefWidth="171.0" text="ID" />
+                <TableColumn fx:id="productName" prefWidth="189.0" text="Name" />
+                <TableColumn fx:id="productPrice" prefWidth="180.0" text="Price" />
+                <TableColumn fx:id="productNumber" prefWidth="199.0" text="Number" />
+                <TableColumn fx:id="productNumberView" prefWidth="207.0" text="Number of view" />
+                <TableColumn fx:id="productStatus" prefWidth="190.0" text="Status" />
+            <TableColumn fx:id="productBuyerNo" prefWidth="185.0" text="Buyer number" />
+            </columns>
+        </TableView>
+        <Button layoutX="1515.0" layoutY="1009.0" mnemonicParsing="false" onMouseClicked="#remove" prefHeight="25.0" prefWidth="81.0" text="Remove">
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color blue="0.6447368264198303" green="0.035818714648485184" red="0.5736963748931885" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color blue="0.4336931109428406" green="0.147599995136261" red="0.8199999928474426" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill></Button>
+    </children>
+</AnchorPane>
