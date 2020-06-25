@@ -16,16 +16,6 @@ import java.util.HashMap;
 
 public class BuyLog extends Log {
 
-
-    public BuyLog(String logId) throws IOException {
-        super(logId);
-        id = logId;
-        localDateTimeForLog = LocalDateTime.now();
-        allCustomersLog.add(this);
-   //     writeInJ();
-    }
-
-
     //detail
     private String id;
     public static LocalDateTime localDateTimeForLog;
@@ -37,12 +27,19 @@ public class BuyLog extends Log {
     public double holePrice;
     public double price;
 
-
     //list
     private HashMap<Product, Integer> allBoughtProduct = new HashMap<>();
     private  HashMap<Product, Integer> chosenProduct = new HashMap<>();
     public static ArrayList<BuyLog> allCustomersLog = new ArrayList<BuyLog>();
     private Account buyLogCustomer;
+
+
+    public BuyLog(String logId) throws IOException {
+        super(logId);
+        id = logId;
+        localDateTimeForLog = LocalDateTime.now();
+        allCustomersLog.add(this);
+    }
 
     public Account getBuyLogCustomer() {
         return buyLogCustomer;

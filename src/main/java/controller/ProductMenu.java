@@ -22,6 +22,7 @@ public class ProductMenu {
     private static BuyLog buyLog;
     private static CommentRequest commentRequest;
 
+
     public static BuyLog getBuyLog() {
         return buyLog;
     }
@@ -29,14 +30,13 @@ public class ProductMenu {
 
 
     public static void addToCart() throws IOException {
-            String uniqueID = UUID.randomUUID().toString();
-            if (BuyLog.getFirstProduct()) {
-                buyLog = new BuyLog(uniqueID);
-            }
-            buyLog.addProductToBuyLog(ProductsMenu.getProductId(), 1);
-
-
+        String uniqueID = UUID.randomUUID().toString();
+        if (BuyLog.getFirstProduct()) {
+            buyLog = new BuyLog(uniqueID);
+        }
+        buyLog.addProductToBuyLog(ProductsMenu.getProductId(), 1);
     }
+
 
 
     public static int addComments() throws IOException {

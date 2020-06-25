@@ -1,5 +1,6 @@
 package view.gui;
 
+import controller.ProductMenu;
 import controller.menus.LoginMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -42,31 +43,33 @@ public class CustomerMenuFx {
         show("balance: " + balance);
     }
 
-    ///////////////////////////////////////////////////////
+
     public void viewCart(MouseEvent mouseEvent) throws IOException {
         if (LoginMenu.getLoginAccount() instanceof Customer) {
-          //  BuyLogFx.setCurBuyLog(LoginMenu.getLoginAccount());
-            BuyLogFx.getCurBuyLog().setBuyLogCustomer(LoginMenu.getLoginAccount());
-            Parent curRoot = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
-            BuyLogFx.setPriRoot(curRoot);
-            root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("buyLogFx.fxml")));
-            goToPage();
+            if(ProductMenu.getBuyLog() != null) {
+                BuyLogFx.setCurBuyLog(ProductMenu.getBuyLog());
+                BuyLogFx.getCurBuyLog().setBuyLogCustomer(LoginMenu.getLoginAccount());
+                Parent curRoot = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
+                BuyLogFx.setPriRoot(curRoot);
+                root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("buyLogFx.fxml")));
+                goToPage();
+            }else show("cart is empty");
         }
     }
 
-    ////////////////////////////////////////////
+
     public void viewOrders(MouseEvent mouseEvent) throws IOException {
         if (LoginMenu.getLoginAccount() instanceof Customer) {
             Parent curRoot = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
             ViewAccountFx.setPriRoot(curRoot);
-            BuyLogsFx.setAllBuyLogs(((Customer) LoginMenu.getLoginAccount()).getBuyLogsHistory());
-
+            Customer customer = (Customer) LoginMenu.getLoginAccount();
+            BuyLogsFx.setAllBuyLogs(customer.getBuyLogsHistory());
             root = FXMLLoader.load(Objects.requireNonNull(BuyLogsFx.class.getClassLoader().getResource("buyLogsFx.fxml")));
             goToPage();
         }
     }
 
-    ///////////////////////////
+
     public void viewCustomerDiscount(MouseEvent mouseEvent) throws IOException {
         dis();
         DiscountCodesFx.setDiscounts(discounts);

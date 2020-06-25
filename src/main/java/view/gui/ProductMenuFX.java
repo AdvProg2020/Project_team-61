@@ -1,6 +1,7 @@
 package view.gui;
 
 import controller.ProductMenu;
+import controller.ProductsMenu;
 import controller.menus.CustomerMenu;
 import controller.menus.LoginMenu;
 import javafx.beans.binding.Bindings;
@@ -185,8 +186,9 @@ public class ProductMenuFX {
     }
 
     public void handleAddProductToLog(ActionEvent actionEvent) throws IOException {
-        if (LoginMenu.isLogin()){
+       // if (LoginMenu.isLogin()){
             try {
+                ProductsMenu.setProductId(productInPage.getId());
                 ProductMenu.addToCart();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -197,16 +199,16 @@ public class ProductMenuFX {
             BuyLogFx.getCurBuyLog().setBuyLogCustomer(LoginMenu.getLoginAccount());
             AnchorPane root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("BuyLogFx.fxml")));
             Scene scene = new Scene(root);
-            thisStage.setScene(scene);
-            thisStage.show();
+            Main.primStage.setScene(scene);
+            Main.primStage.show();
 
-        }
-        else {
-            AnchorPane root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("LoginFx.fxml")));
-            Scene scene = new Scene(root);
-            thisStage.setScene(scene);
-            thisStage.show();
-        }
+       // }
+//        else {
+//            AnchorPane root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("LoginFx.fxml")));
+//            Scene scene = new Scene(root);
+//            Main.primStage.setScene(scene);
+//            Main.primStage.show();
+//        }
     }
 
     public void handleBackAddCommentButton(ActionEvent actionEvent) throws IOException {

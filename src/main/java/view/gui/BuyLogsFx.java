@@ -33,8 +33,17 @@ public class BuyLogsFx {
     //  @FXML private TableColumn<BuyLog, ?> buyLogsRecievedAmount;
     @FXML private Button showScoreButton;
     @FXML private static Parent root;
+    @FXML private static Parent priRoot;
     private static ArrayList<BuyLog> allBuyLogs = new ArrayList<>();
     public static ObservableList<BuyLog> data = FXCollections.observableArrayList();
+
+    public static Parent getPriRoot() {
+        return priRoot;
+    }
+
+    public static void setPriRoot(Parent priRoot) {
+        BuyLogsFx.priRoot = priRoot;
+    }
 
     public static ArrayList<BuyLog> getAllBuyLogs() {
         return allBuyLogs;
