@@ -2,6 +2,7 @@ package view.gui;
 
 import controller.ProductMenu;
 import controller.menus.CustomerMenu;
+import controller.menus.LoginMenu;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -20,6 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.log.BuyLog;
 import model.productRelated.Comment;
 import model.productRelated.Product;
 import view.OutputMassageHandler;
@@ -114,8 +116,28 @@ public class ProductMenuFX {
         thisStage.show();
     }
 
-    public void handleAddProductToLog(ActionEvent actionEvent) {
+    public void handleAddProductToLog(ActionEvent actionEvent) throws IOException {
+        if (LoginMenu.isLogin()){
+            try {
+                ProductMenu.addToCart();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            BuyLogFx.setPriRoot(productPagePane);
+            BuyLogFx.setCurBuyLog(ProductMenu.getBuyLog());
+            BuyLogFx.getCurBuyLog().setBuyLogCustomer(LoginMenu.getLoginAccount());
+            AnchorPane root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("BuyLogFx.fxml")));
+            Scene scene = new Scene(root);
+            thisStage.setScene(scene);
+            thisStage.show();
 
+        }
+        else {
+            AnchorPane root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("LoginFx.fxml")));
+            Scene scene = new Scene(root);
+            thisStage.setScene(scene);
+            thisStage.show();
+        }
     }
 
     public void handleBackAddCommentButton(ActionEvent actionEvent) throws IOException {

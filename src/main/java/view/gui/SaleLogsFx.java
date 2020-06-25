@@ -30,11 +30,12 @@ public class SaleLogsFx {
     private TableView<SaleLog> saleLogsTableView;
 
     @FXML
-    private TableColumn<SaleLog,Double> saleLogsRecievedAmount;
+    private TableColumn<SaleLog,Double> saleLogsReceivedAmount;
 
     @FXML
     private TableColumn<SaleLog, String> saleLogsId;
     private static Parent root;
+    private static Parent priRoot;
 
     @FXML
     private TableColumn<SaleLog, String> saleLogsCustomerName;
@@ -68,9 +69,9 @@ public class SaleLogsFx {
         saleLogsDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         saleLogsReducedAmount.setCellValueFactory(new PropertyValueFactory<>("reducedAmount"));
         saleLogsCustomerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-        saleLogsRecievedAmount.setCellValueFactory(new PropertyValueFactory<>("receivedAmount"));
+        saleLogsReceivedAmount.setCellValueFactory(new PropertyValueFactory<>("receivedAmount"));
         initializeObserverList();
-        saleLogsTableView.getColumns().addAll(saleLogsId,saleLogsDate,saleLogsCustomerName,saleLogsRecievedAmount,saleLogsReducedAmount);
+        saleLogsTableView.getColumns().addAll(saleLogsId,saleLogsDate,saleLogsCustomerName,saleLogsReceivedAmount,saleLogsReducedAmount);
         saleLogsTableView.setItems(data);
     }
     public void logout(ActionEvent actionEvent) {
@@ -79,10 +80,17 @@ public class SaleLogsFx {
     public void userMenu(ActionEvent actionEvent) {
     }
 
+    public static void setPriRoot(Parent priRoot) {
+        SaleLogsFx.priRoot = priRoot;
+    }
+
     public void back(ActionEvent actionEvent) {
+        root=priRoot;
+        goToPage();
     }
 
     public void exit(ActionEvent actionEvent) {
+        System.exit(0);
     }
 
     private static void goToPage(){
@@ -92,6 +100,7 @@ public class SaleLogsFx {
         Main.primStage.show();
     }
     public void viewSaleLogFromAllSaleLogs(MouseEvent mouseEvent) throws IOException {
+        SaleLogFx.setPriRoot(root);
         root= FXMLLoader.load(Objects.requireNonNull(SalesFx.class.getClassLoader().getResource("saleLogFx.fxml")));;
         goToPage();
 

@@ -27,6 +27,10 @@ public class BuyLogFx {
         BuyLogFx.buyLogId = buyLogId;
     }
 
+    public static void setPriRoot(Parent priRoot) {
+        BuyLogFx.priRoot = priRoot;
+    }
+
     @FXML
     private TableView<Product> buyLog = new TableView<>();
     @FXML
@@ -50,13 +54,15 @@ public class BuyLogFx {
     private Label totalPriceLabel;
     @FXML
     private static Parent root;
+    private static Parent priRoot;
 
     private static BuyLog curBuyLog;
     public static ObservableList<Product> data = FXCollections.observableArrayList();
 
-    public BuyLog getCurBuyLog() {
+    public static BuyLog getCurBuyLog() {
         return curBuyLog;
     }
+
 
     public static void setCurBuyLog(BuyLog curBuyLog) {
         BuyLogFx.curBuyLog = curBuyLog;
@@ -168,6 +174,9 @@ public class BuyLogFx {
     }
 
     public void back(ActionEvent actionEvent) {
+        root = priRoot;
+        goToPage();
+
     }
 
     public void exit(ActionEvent actionEvent) {

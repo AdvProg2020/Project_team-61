@@ -60,9 +60,6 @@ public class SaleLog extends Log{
 
     //other-------------------------------------------------------
 
-
-
-
     //finish//doubt
     public void addProductToSaleLog(String productId){
         Product product=Product.getProductById(productId);

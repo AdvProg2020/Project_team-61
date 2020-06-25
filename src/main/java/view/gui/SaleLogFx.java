@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -22,6 +23,8 @@ public class SaleLogFx {
 
     @FXML
     private TableColumn<Product, Integer> saleLogProductNumber;
+    @FXML
+    private TableColumn<Product, String> saleLogCustomer;
 
     @FXML
     private TableColumn<Product,Double> saleLogReducedAmount;
@@ -30,9 +33,17 @@ public class SaleLogFx {
     private TableColumn<Product, Double> saleLogRecievedAmount;
 
     @FXML
-    private TableColumn<Product, Product> saleLogProduct;
+    private TableColumn<Product, String> saleLogProduct;
     public  static ObservableList<Product> data = FXCollections.observableArrayList();
     SaleLog curSaleLog;
+
+    public static void setPriRoot(Parent priRoot) {
+        SaleLogFx.priRoot = priRoot;
+    }
+
+    private static Parent  priRoot;
+
+
 
     @FXML
     private TableColumn<Product, LocalDateTime> saleLogDate;
@@ -44,7 +55,8 @@ public class SaleLogFx {
         saleLogNumber.setCellValueFactory(new PropertyValueFactory<>("saleLogNumber"));
         saleLogDate.setCellValueFactory(new PropertyValueFactory<>("saleLogDate"));
         //buyLogDate.setCellValueFactory(curBuyLog,);
-        saleLogProduct.setCellValueFactory(new PropertyValueFactory<>("SaleLogProduct"));
+        saleLogCustomer.setCellValueFactory(new PropertyValueFactory<>("saleLogCustomer"));
+        saleLogProduct.setCellValueFactory(new PropertyValueFactory<>("saleLogProduct"));
         saleLogRecievedAmount.setCellValueFactory(new  PropertyValueFactory<>("saleLogReceivedAmount"));
         saleLogReducedAmount.setCellValueFactory(new PropertyValueFactory<>("saleLogReducedAmount"));
         saleLogProductNumber.setCellValueFactory(new PropertyValueFactory<>("saleLogProductNumber"));

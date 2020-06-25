@@ -68,7 +68,7 @@
                 <TableColumn fx:id="productScore" prefWidth="161.0" text="Score" />
             </columns>
         </TableView>
-        <Button layoutX="1158.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsView" text="view">
+        <Button layoutX="159.0" layoutY="402.0" mnemonicParsing="false" onMouseClicked="#productsView" text="view">
             <textFill>
                 <LinearGradient endX="1.0" endY="1.0">
                     <stops>
@@ -81,7 +81,7 @@
                 <Font size="17.0" />
             </font>
         </Button>
-        <Button layoutX="1225.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsViewBuyers" text="view buyers">
+        <Button layoutX="105.0" layoutY="458.0" mnemonicParsing="false" onMouseClicked="#productsViewBuyers" text="view buyers">
             <font>
                 <Font size="17.0" />
             </font>
@@ -94,7 +94,7 @@
                 </LinearGradient>
             </textFill>
         </Button>
-        <Button layoutX="1350.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsEdit" text="Edit">
+        <Button layoutX="162.0" layoutY="516.0" mnemonicParsing="false" onMouseClicked="#productsEdit" text="Edit">
             <font>
                 <Font size="17.0" />
             </font>
@@ -120,12 +120,12 @@
                 </LinearGradient>
             </textFill>
         </Button>
-        <Label fx:id="productsMs" layoutX="249.0" layoutY="775.0" prefHeight="21.0" prefWidth="743.0" text="Label" textFill="#ff0396">
+        <Label fx:id="productsMs" layoutX="12.0" layoutY="564.0" prefHeight="21.0" prefWidth="743.0" text="Label" textFill="#ff0396">
             <font>
                 <Font size="29.0" />
             </font>
         </Label>
-        <Button layoutX="1051.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsSortView" text="Sort view">
+        <Button layoutX="135.0" layoutY="348.0" mnemonicParsing="false" onMouseClicked="#productsSortView" text="Sort view">
             <font>
                 <Font size="17.0" />
             </font>
@@ -138,7 +138,7 @@
                 </LinearGradient>
             </textFill>
         </Button>
-        <Button layoutX="927.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsSortScore" text="Sort score">
+        <Button layoutX="132.0" layoutY="286.0" mnemonicParsing="false" onMouseClicked="#productsSortScore" text="Sort score">
             <font>
                 <Font size="17.0" />
             </font>

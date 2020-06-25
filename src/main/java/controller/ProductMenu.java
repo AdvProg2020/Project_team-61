@@ -35,11 +35,13 @@ public class ProductMenu {
     }
 
     public static void addToCart() throws IOException {
-        String uniqueID = UUID.randomUUID().toString();
-        if (BuyLog.getFirstProduct()) {
-            buyLog = new BuyLog(uniqueID);
-        }
-        buyLog.addProductToBuyLog(ProductsMenu.getProductId(), 1);
+            String uniqueID = UUID.randomUUID().toString();
+            if (BuyLog.getFirstProduct()) {
+                buyLog = new BuyLog(uniqueID);
+            }
+            buyLog.addProductToBuyLog(ProductsMenu.getProductId(), 1);
+
+
     }
 
 
