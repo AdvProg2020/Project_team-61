@@ -130,7 +130,7 @@ public class BuyLogFx {
     public void purchase(MouseEvent mouseEvent) throws IOException {
         if(LoginMenu.isLogin()) {
             PayLogFx.setPreBuyLog(curBuyLog);
-            root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("payLogFx.fxml")));
+            root = FXMLLoader.load(Objects.requireNonNull(PayLogFx.class.getClassLoader().getResource("payLogFx.fxml")));
             goToPage();
         }else{
             root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));

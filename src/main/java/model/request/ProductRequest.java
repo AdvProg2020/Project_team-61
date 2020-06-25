@@ -163,6 +163,42 @@ public class ProductRequest extends Request {
         writeInJ();
     }
 
+    public String getProductId() {
+        return productId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public String getLastCategory() {
+        return lastCategory;
+    }
+
+    public String getAdditionalDetail() {
+        return additionalDetail;
+    }
+
+    public int getNumberOfProduct() {
+        return numberOfProduct;
+    }
+
+    public static Type getProductRequestType() {
+        return productRequestType;
+    }
+
     //    public void addKey(){
 //        for (String tr : categoryName.getTraits()) {
 //            specialValue.put(tr, null);
