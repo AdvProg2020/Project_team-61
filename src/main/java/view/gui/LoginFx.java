@@ -1,6 +1,7 @@
 package view.gui;
 
 import controller.menus.LoginMenu;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -85,6 +86,8 @@ public class LoginFx {
     }
 
 
-
-
+    public void mainMenu(ActionEvent actionEvent) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        goToPage();
+    }
 }

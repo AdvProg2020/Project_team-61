@@ -70,10 +70,6 @@ public class ViewFirmFx {
         firmAddress.setText(accountRequest.getFirmAddress());
     }
 
-    private void remove(){
-        account = null;
-        request = null;
-    }
 
     public void userMenu(ActionEvent actionEvent) throws IOException {
         Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));

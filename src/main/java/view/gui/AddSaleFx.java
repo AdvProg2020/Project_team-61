@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
+import model.off.Sale;
 import model.productRelated.Product;
 import view.OutputMassageHandler;
 

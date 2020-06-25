@@ -170,7 +170,8 @@ public class AddProductMenuFX {
                     finish = true;
                 }
             }
-        }else ms= "inset image firs";
+        }else ms= "inset image first";
+        error.setVisible(true);
         error.setText(ms);
     }
 
@@ -192,6 +193,7 @@ public class AddProductMenuFX {
             Product.getProductById(idTextField.getText()).setProductCategorySpecifications(traits);
             // }
         } else ms = "put id first";
+        error.setVisible(true);
         error.setText(ms);
     }
 

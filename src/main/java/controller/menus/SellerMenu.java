@@ -236,7 +236,7 @@ public class SellerMenu {
     public static int editOff(String offID ) throws IOException {
         if (checkSale(offID)) {
             Sale sale = Sale.getSaleWithId(offID);
-            if (sale.getSeller() == LoginMenu.getLoginAccount()) {
+            if (sale.getSeller() == LoginMenu.getLoginAccount().getUsername()) {
                 String id = LoginMenu.getLoginAccount() + " wants edit off " + offID ;
                 if (!Request.isThereRequestFromID(id)) {
                     Sale.getSaleWithId(offID).setSaleStatus(SaleStatus.UNDERREVIEWFOREDITING);
@@ -284,17 +284,17 @@ public class SellerMenu {
             } else outputNo = 15;
         } else if (field.matches("(?i)remove\\s*product")) {
             if (edit.matches("((?!^ +$)^.+$)")) {
-                if (checkProductSale(edit)) {
+                //if (checkProductSale(edit)) {
                     saleRequest.removeProduct(Product.getProductById(edit));
                     outputNo = 17;
-                }
+               // }
             } else outputNo = 19;
         } else if (field.matches("(?i)add\\s*product")) {
             if (edit.matches("((?!^ +$)^.+$)")) {
-                if (checkProductSale(edit)) {
+                //if (checkProductSale(edit)) {
                     saleRequest.addProductToSale(Product.getProductById(edit));
                     outputNo = 18;
-                }
+                //}
             } else outputNo = 19;
         }
         return outputNo;
@@ -362,7 +362,7 @@ public class SellerMenu {
         } else if (detailMen == 4) {
             if (detail.matches("((?!^ +$)^.+$)")) {
                 // if (!detail.equalsIgnoreCase("finish")) {
-                if (checkProductSale(detail)) {
+               // if (checkProductSale(detail)) {
                     Product product =Product.getProductById(detail);
                     saleRequest.addProduct(product);
                     saleRequest.addProductToSale(product);
@@ -373,7 +373,7 @@ public class SellerMenu {
                     //  CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
                     // detailMenu = 0;
                     outputNo = 0;
-                }
+              //  }
             } else outputNo = 19;
         }
         return outputNo;
@@ -398,17 +398,17 @@ public class SellerMenu {
         }
     }
 
-    ///////////////////////////////////////
-    private static boolean checkProductSale(String detail) {
-        if (Product.isThereProductWithId(detail)) {
-            if (Product.getProductById(detail).getSeller() == LoginMenu.getLoginAccount().getUsername()) {
-                if (Product.getProductById(detail).getInSale()) {
-                    return true;
-                } else outputNo = 0;
-            } else outputNo = 5;
-        } else outputNo = 8;
-        return false;
-    }
+//    ///////////////////////////////////////
+//    private static boolean checkProductSale(String detail) {
+//        if (Product.isThereProductWithId(detail)) {
+//           // if (Product.getProductById(detail).getSeller() == LoginMenu.getLoginAccount().getUsername()) {
+//               // if (Product.getProductById(detail).getInSale()) {
+//                    return true;
+//               // } else outputNo = 0;
+//           // } else outputNo = 5;
+//        } else outputNo = 8;
+//        return false;
+//    }
 
     //-------------------------------------------------------------------------------
   /*  //gson

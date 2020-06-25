@@ -158,13 +158,6 @@ public class AddDiscountFx {
         Parent curRoot = FXMLLoader.load(Objects.requireNonNull(AddCategoryFx.class.getClassLoader().getResource("addCategoryFx.fxml")));
         ManagerMenuFx.setPriRoot(curRoot);
         root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
-//        if(LoginMenu.getLoginAccount() instanceof Seller){
-//            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
-//        } else if(LoginMenu.getLoginAccount() instanceof Manager){
-//            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
-//        }else if(LoginMenu.getLoginAccount() instanceof Customer){
-//            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
-//        }
         goToPage();
     }
 

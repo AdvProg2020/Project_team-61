@@ -58,6 +58,7 @@ public class AddCategoryFx {
     }
 
     public void makeTree() {
+
         categoryTraits.setEditable(true);
         categoryTraits.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         makeList();

@@ -67,10 +67,6 @@ public class ViewDiscountFx {
 
     }
 
-    private void remove() {
-
-    }
-
     public void userMenu(ActionEvent actionEvent) throws IOException {
         Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
         if(LoginMenu.getLoginAccount() instanceof Seller){

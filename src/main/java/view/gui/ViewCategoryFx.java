@@ -50,7 +50,7 @@ public class ViewCategoryFx {
         initializeObserverList();
         viewCategoryTable.setEditable(true);
 
-        //  viewCategoryTable.getColumns().addAll(productCatColumn, traitCatColumn);
+
         viewCategoryTable.setItems(data);
     }
 }
