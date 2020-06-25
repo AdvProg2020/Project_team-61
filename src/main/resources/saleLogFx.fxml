@@ -60,16 +60,36 @@
             </fill>
         </Text>
       <ListView fx:id="products" layoutX="731.0" layoutY="408.0" prefHeight="200.0" prefWidth="200.0" />
-      <Label fx:id="saleLogDate" layoutX="810.0" layoutY="263.0" text="Label" />
-      <Label fx:id="saleLogReceived" layoutX="810.0" layoutY="304.0" text="Label" />
-      <Label fx:id="saleLogCustomerName" layoutX="1021.0" layoutY="296.0" text="Label" />
-      <Label fx:id="saleLogId" layoutX="810.0" layoutY="212.0" text="Label" />
-      <Label layoutX="1021.0" layoutY="333.0" text="Label" />
-      <Label fx:id="SaleLogReduced" layoutX="810.0" layoutY="350.0" text="Label" />
+      <Label fx:id="saleLogDate" layoutX="764.0" layoutY="229.0" text="Label" />
+      <Label fx:id="saleLogReceived" layoutX="764.0" layoutY="273.0" text="Label" />
+      <Label fx:id="saleLogCustomerName" layoutX="764.0" layoutY="350.0" text="Label" />
+      <Label fx:id="saleLogId" layoutX="758.0" layoutY="187.0" text="Label" />
+      <Label fx:id="saleLogReduced" layoutX="764.0" layoutY="313.0" text="Label" />
       <Text layoutX="646.0" layoutY="428.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Products:">
          <font>
             <Font name="Bungee Inline" size="12.0" />
          </font>
       </Text>
+      <Text layoutX="579.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reduced Amount:">
+         <font>
+            <Font size="20.0" />
+         </font></Text>
+      <Text layoutX="577.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Received Amount:">
+         <font>
+            <Font size="20.0" />
+         </font></Text>
+      <Text layoutX="633.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:">
+         <font>
+            <Font size="22.0" />
+         </font></Text>
+      <Text layoutX="642.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id:" wrappingWidth="56.13671875">
+         <font>
+            <Font name="Cambria" size="21.0" />
+         </font>
+      </Text>
+      <Text layoutX="630.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer:">
+         <font>
+            <Font size="20.0" />
+         </font></Text>
     </children>
 </AnchorPane>

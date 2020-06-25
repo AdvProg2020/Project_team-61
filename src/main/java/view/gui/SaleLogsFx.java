@@ -1,5 +1,6 @@
 package view.gui;
 
+import controller.menus.LoginMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +12,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import model.accounts.Customer;
+import model.accounts.Manager;
+import model.accounts.Seller;
 import model.log.SaleLog;
 
 import java.io.IOException;
@@ -30,7 +34,7 @@ public class SaleLogsFx {
     private TableView<SaleLog> saleLogsTableView;
 
     @FXML
-    private TableColumn<SaleLog,Double> saleLogsReceivedAmount;
+    private TableColumn<SaleLog,Double> saleLogsRecievedAmount;
 
     @FXML
     private TableColumn<SaleLog, String> saleLogsId;
@@ -38,7 +42,7 @@ public class SaleLogsFx {
     private static Parent priRoot;
 
     @FXML
-    private TableColumn<SaleLog, String> saleLogsCustomerName;
+    private TableColumn<SaleLog, String> saleLogsCustomer;
     public  static ObservableList<SaleLog> data = FXCollections.observableArrayList();
     private static ArrayList<SaleLog> saleLogs = new ArrayList<>();
     @FXML
@@ -68,16 +72,27 @@ public class SaleLogsFx {
         saleLogsId.setCellValueFactory(new  PropertyValueFactory<>("saleLogId"));
         saleLogsDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         saleLogsReducedAmount.setCellValueFactory(new PropertyValueFactory<>("reducedAmount"));
-        saleLogsCustomerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-        saleLogsReceivedAmount.setCellValueFactory(new PropertyValueFactory<>("receivedAmount"));
+        saleLogsCustomer.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        saleLogsRecievedAmount.setCellValueFactory(new PropertyValueFactory<>("receivedAmount"));
         initializeObserverList();
-        saleLogsTableView.getColumns().addAll(saleLogsId,saleLogsDate,saleLogsCustomerName,saleLogsReceivedAmount,saleLogsReducedAmount);
+        saleLogsTableView.getColumns().addAll(saleLogsId,saleLogsDate,saleLogsCustomer,saleLogsRecievedAmount,saleLogsReducedAmount);
         saleLogsTableView.setItems(data);
     }
-    public void logout(ActionEvent actionEvent) {
+    public void logout(ActionEvent actionEvent) throws IOException {
+        LoginMenu.processLogout();
+        root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        goToPage();
     }
 
-    public void userMenu(ActionEvent actionEvent) {
+    public void userMenu(ActionEvent actionEvent) throws IOException {
+        if(LoginMenu.getLoginAccount() instanceof Seller){
+            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+        } else if(LoginMenu.getLoginAccount() instanceof Manager){
+            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        }else if(LoginMenu.getLoginAccount() instanceof Customer){
+            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
+        }
+        goToPage();
     }
 
     public static void setPriRoot(Parent priRoot) {
@@ -101,8 +116,10 @@ public class SaleLogsFx {
     }
     public void viewSaleLogFromAllSaleLogs(MouseEvent mouseEvent) throws IOException {
         SaleLogFx.setPriRoot(root);
+        SaleLogFx.setCurSaleLog(saleLogsTableView.getSelectionModel().getSelectedItem());
         root= FXMLLoader.load(Objects.requireNonNull(SalesFx.class.getClassLoader().getResource("saleLogFx.fxml")));;
         goToPage();
 
     }
+
 }
