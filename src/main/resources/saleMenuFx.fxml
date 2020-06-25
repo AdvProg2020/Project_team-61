@@ -24,7 +24,7 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <TableView fx:id="ProductsInOffSearch" layoutX="95.0" layoutY="218.0" prefHeight="474.0" prefWidth="1037.0" />
+      <TableView fx:id="ProductsInOffSearch" onMouseClicked="#clickedColumn" layoutX="95.0" layoutY="218.0" prefHeight="474.0" prefWidth="1037.0" />
       <Label layoutX="487.0" layoutY="71.0" prefHeight="39.0" prefWidth="342.0" text="Products In Off">
          <font>
             <Font name="Britannic Bold" size="39.0" />
