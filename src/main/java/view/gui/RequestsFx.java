@@ -9,11 +9,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -21,6 +19,8 @@ import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
+import model.productRelated.Product;
+import model.productRelated.ProductInMenusShow;
 import model.request.*;
 import model.sort.Sort;
 import view.OutputMassageHandler;
@@ -73,9 +73,25 @@ public class RequestsFx {
 
 
     public void showRequest(MouseEvent mouseEvent) throws IOException {
+        String im = "";
+        TablePosition tablePosition = requests.getSelectionModel().getSelectedCells().get(0);
+        int row = tablePosition.getRow();
+        Request item = requests.getItems().get(row);
+        TableColumn tableColumn = tablePosition.getTableColumn();
+
+        try {
+
+            im = (String) tableColumn.getCellObservableValue(item).getValue();
+
+
+
+        } catch (NullPointerException e) {
+            System.out.println("you cant press here");
+        }
+
         if (requests.getSelectionModel().getSelectedItem() != null) {
             Parent curRoot   = FXMLLoader.load(Objects.requireNonNull(RequestsFx.class.getClassLoader().getResource("requestsFx.fxml")));
-            Request request = requests.getSelectionModel().getSelectedItem();
+            Request request = Request.getRequestFromID(im);
             if (request instanceof AccountRequest) {
                 ViewAccountFx.setRequest(request);
                 ViewAccountFx.setPriRoot(curRoot);
