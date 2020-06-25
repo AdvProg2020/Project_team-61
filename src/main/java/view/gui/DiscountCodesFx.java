@@ -21,6 +21,7 @@ import view.OutputMassageHandler;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 public class DiscountCodesFx {
@@ -32,7 +33,7 @@ public class DiscountCodesFx {
     private TableView<DiscountCode> discountCodes;
 
     @FXML
-    private TableColumn<DiscountCode, String> discountStart;
+    private TableColumn<DiscountCode, Date> discountStart;
 
     @FXML
     private TableColumn<DiscountCode, Number> maxDiscountAmount;
@@ -47,7 +48,7 @@ public class DiscountCodesFx {
     private TableColumn<DiscountCode, String> discountId;
 
     @FXML
-    private TableColumn<DiscountCode, String> discountEnd;
+    private TableColumn<DiscountCode, Date> discountEnd;
 
     public static ObservableList<DiscountCode> data = FXCollections.observableArrayList();
     private static Parent root;
@@ -66,8 +67,8 @@ public class DiscountCodesFx {
     public void makeTree() throws IOException {
         discountId.setCellValueFactory(new PropertyValueFactory<DiscountCode, String>("discountId"));
         discountAmount.setCellValueFactory(new PropertyValueFactory<DiscountCode, Number>("discountAmount"));
-        discountStart.setCellValueFactory(new PropertyValueFactory<DiscountCode, String>("startOfDiscountPeriod"));
-        discountEnd.setCellValueFactory(new PropertyValueFactory<DiscountCode, String>("endOfDiscountPeriod"));
+        discountStart.setCellValueFactory(new PropertyValueFactory<DiscountCode, Date>("startOfDiscountPeriod"));
+        discountEnd.setCellValueFactory(new PropertyValueFactory<DiscountCode, Date>("endOfDiscountPeriod"));
         maxDiscountAmount.setCellValueFactory(new PropertyValueFactory<DiscountCode, Number>("maxDiscountAmount"));
         discountTotalTime.setCellValueFactory(new PropertyValueFactory<DiscountCode, Number>("totalTimesOfUse"));
 
@@ -121,8 +122,8 @@ public class DiscountCodesFx {
     public void sortDiscount(MouseEvent mouseEvent) {
         discountId.setCellValueFactory(new PropertyValueFactory<DiscountCode, String>("discountId"));
         discountAmount.setCellValueFactory(new PropertyValueFactory<DiscountCode, Number>("discountAmount"));
-        discountStart.setCellValueFactory(new PropertyValueFactory<DiscountCode, String>("startOfDiscountPeriod"));
-        discountEnd.setCellValueFactory(new PropertyValueFactory<DiscountCode, String>("endOfDiscountPeriod"));
+        discountStart.setCellValueFactory(new PropertyValueFactory<DiscountCode, Date>("startOfDiscountPeriod"));
+        discountEnd.setCellValueFactory(new PropertyValueFactory<DiscountCode, Date>("endOfDiscountPeriod"));
         maxDiscountAmount.setCellValueFactory(new PropertyValueFactory<DiscountCode, Number>("maxDiscountAmount"));
         discountTotalTime.setCellValueFactory(new PropertyValueFactory<DiscountCode, Number>("totalTimesOfUse"));
         data.clear();

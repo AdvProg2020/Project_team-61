@@ -99,6 +99,7 @@ public class ViewAccountFx {
 
     ///////////////////////
     public void viewCustomerDiscount(MouseEvent mouseEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
         if(LoginMenu.getLoginAccount() instanceof Customer) {
              customer = (Customer) LoginMenu.getLoginAccount();
             findDis();
@@ -107,21 +108,29 @@ public class ViewAccountFx {
             Manager customer = (Manager) LoginMenu.getLoginAccount();
             DiscountCodesFx.setDiscounts(customer.getAllDiscountCodes());
         }  else show("you can't see discounts");
+        DiscountCodesFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("DiscountCodesFx.fxml")));
             goToPage();
 
     }
 
     private void findDis() {
-        for (DiscountCode allDiscountCode : DiscountCode.getAllDiscountCodes()) {
-            if(allDiscountCode.getAllCustomersWithDiscountCode().contains(customer)){
-                dis.add(allDiscountCode);
+        if (LoginMenu.getLoginAccount() instanceof Customer) {
+            Customer customer = (Customer) LoginMenu.getLoginAccount();
+            for (DiscountCode allDiscountCode : DiscountCode.getAllDiscountCodes()) {
+                for (Customer customer1 : allDiscountCode.getAllCustomersWithDiscountCode()) {
+                    if (customer1.getUsername().equals(customer.getUsername())) {
+                        dis.add(allDiscountCode);
+                    }
+                }
             }
         }
     }
 
 
     public void viewLogs(MouseEvent mouseEvent) throws IOException {
+       Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
+
         if(LoginMenu.getLoginAccount() instanceof Customer) {
             root = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
             goToPage();

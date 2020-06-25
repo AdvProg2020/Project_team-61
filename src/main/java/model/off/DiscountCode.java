@@ -12,20 +12,20 @@ import java.util.Date;
 
 
 public class DiscountCode {
-    private String discountId= null;
-    private static Date startOfDiscountPeriod= null;
+    private String discountId = null;
+    private static Date startOfDiscountPeriod = null;
     private static Date endOfDiscountPeriod = null;
-    private int discountAmount =0;
-    private double maxDiscountAmount=0;
-    private int totalTimesOfUse=0;
-   // private Account manager;
-    private  ArrayList<Customer> allCustomersWithDiscountCode = new ArrayList<Customer>();
+    private int discountAmount = 0;
+    private double maxDiscountAmount = 0;
+    private int totalTimesOfUse = 0;
+    // private Account manager;
+    private ArrayList<Customer> allCustomersWithDiscountCode = new ArrayList<Customer>();
     private static ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
 
     public DiscountCode(String discountId) throws IOException {
         this.discountId = discountId;
         allDiscountCodes.add(this);
-       // writeInJ();
+        // writeInJ();
     }
 
 
@@ -38,31 +38,32 @@ public class DiscountCode {
     }
 
     public void addAccount(Account customer) throws IOException {
-        if(customer instanceof Customer) {
+        if (customer instanceof Customer) {
             Customer cus = (Customer) customer;
             allCustomersWithDiscountCode.add(cus);
 //            cus.addDiscountCode(getDiscountWithId(discountId));
         }
     }
+
     public void removeAccount(Account customer) throws IOException {
-        if(customer instanceof Customer) {
+        if (customer instanceof Customer) {
             Customer cus = (Customer) customer;
             allCustomersWithDiscountCode.remove(customer);
 //            cus.removeDiscountCode(getDiscountWithId(discountId));
             Manager man = (Manager) LoginMenu.getLoginAccount();
-            if(allCustomersWithDiscountCode.size() == 0){
+            if (allCustomersWithDiscountCode.size() == 0) {
                 man.getAllDiscountCodes().remove(this);
             }
         }
     }
 
-    public static void setStartOfDiscountPeriod(Date startOfDiscountPeriod) {
+    public static void setStartOfDiscountPeriod(Date startOfDiscountPeriod) throws IOException {
         DiscountCode.startOfDiscountPeriod = startOfDiscountPeriod;
+        Manager.writeInJ();
     }
 
 
-
-    public  boolean discountMatchAccount(String username){
+    public boolean discountMatchAccount(String username) {
 
         for (Account account : allCustomersWithDiscountCode) {
             if (account.getUsername().equalsIgnoreCase(username)) return true;
@@ -70,9 +71,9 @@ public class DiscountCode {
         return false;
     }
 
-    public static boolean discountDateValid(){
+    public static boolean discountDateValid() {
         Date now = new Date();
-        if (startOfDiscountPeriod.after(now) && endOfDiscountPeriod.before(now)){
+        if (startOfDiscountPeriod.after(now) && endOfDiscountPeriod.before(now)) {
             return true;
         }
         return false;
@@ -86,8 +87,9 @@ public class DiscountCode {
         this.totalTimesOfUse = totalTimesOfUse;
     }
 
-    public static void setEndOfDiscountPeriod(Date endOfDiscountPeriod) {
+    public static void setEndOfDiscountPeriod(Date endOfDiscountPeriod) throws IOException {
         DiscountCode.endOfDiscountPeriod = endOfDiscountPeriod;
+        Manager.writeInJ();
     }
 
     public void setMaxDiscountAmount(double maxDiscountAmount) {
@@ -140,21 +142,20 @@ public class DiscountCode {
         return null;
     }
 
-    public void giveDiscountToRandomCustomers(){
+    public void giveDiscountToRandomCustomers() {
 
     }
 
-    public void giveDiscountInBirthday(){
+    public void giveDiscountInBirthday() {
 
     }
 
-    public double calculate(double price){
-        if (price < maxDiscountAmount){
-            price = price-((price*discountAmount)/100);
-        }
-        else if (price > maxDiscountAmount){
-            double amountCant = price-maxDiscountAmount;
-            price = price - ((maxDiscountAmount*discountAmount)/100);
+    public double calculate(double price) {
+        if (price < maxDiscountAmount) {
+            price = price - ((price * discountAmount) / 100);
+        } else if (price > maxDiscountAmount) {
+            double amountCant = price - maxDiscountAmount;
+            price = price - ((maxDiscountAmount * discountAmount) / 100);
         }
         return price;
     }
@@ -176,7 +177,7 @@ public class DiscountCode {
 
             int productView1 = s1.getDiscountAmount();
             int productView2 = s2.getDiscountAmount();
-            return productView1- productView2;
+            return productView1 - productView2;
 
         }
     };

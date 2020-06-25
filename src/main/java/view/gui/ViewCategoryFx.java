@@ -54,7 +54,7 @@ public class ViewCategoryFx {
     public void initializeObserverList() {
         for (Product product : Product.getAllProduct()) {
             if (product.getCategory() != null) {
-                if (product.getCategory().equals(curCat)) {
+                if (product.getCategory().getName().equals(curCat.getName())) {
                     allProducts.add(product.getId());
                 }
             }

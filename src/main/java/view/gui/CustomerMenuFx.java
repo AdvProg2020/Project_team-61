@@ -74,19 +74,19 @@ public class CustomerMenuFx {
     }
 
     private void dis(){
-        data.clear();
+      //  data.clear();
         if (LoginMenu.getLoginAccount() instanceof Customer) {
             Customer customer = (Customer) LoginMenu.getLoginAccount();
             for (DiscountCode allDiscountCode : DiscountCode.getAllDiscountCodes()) {
                 for (Customer customer1 : allDiscountCode.getAllCustomersWithDiscountCode()) {
-                    if (customer1.equals(customer)) {
+                    if (customer1.getUsername().equals(customer.getUsername())) {
                         discounts.add(allDiscountCode);
                     }
                 }
             }
-            data.addAll(discounts);
+          //  data.addAll(discounts);
         }
-        showList();
+      //  showList();
     }
 
 
