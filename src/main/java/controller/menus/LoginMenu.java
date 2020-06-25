@@ -12,10 +12,10 @@ import java.io.IOException;
 public class LoginMenu {
     private static int outputNo;
     private static Account loginAccount;
-   // private static String field = null;
+    // private static String field = null;
     private static String username = null;
     private static boolean login = false;
-   // private static SubMenuStatus subMenuStatus;
+    // private static SubMenuStatus subMenuStatus;
     private static AccountRequest accountRequest;
     private static Firm firm;
     private static String firmName;
@@ -64,10 +64,9 @@ public class LoginMenu {
     }
 
 
-
     public static void edit() throws IOException {
         if (loginAccount.getRole() == "seller") {
-            String id = "seller " + LoginMenu.getLoginAccount().getUsername() + "wants edit account " ;
+            String id = "seller " + LoginMenu.getLoginAccount().getUsername() + "wants edit account ";
             if (accountRequest.isThereRequestFromID(id)) {
                 accountRequest = new AccountRequest(id);
                 accountRequest.setLastname(LoginMenu.getLoginAccount().getUsername());
@@ -86,35 +85,35 @@ public class LoginMenu {
             if (edit.matches(".+")) {
                 loginAccount.setPassword(edit);
                 outputNo = 0;
-               // outputNo = 17;
+                // outputNo = 17;
             } else outputNo = 3;
         } else if (field.equalsIgnoreCase("name")) {
             if (edit.matches("(\\s*\\S+\\s*)+")) {
                 loginAccount.setName(edit);
                 outputNo = 0;
-               // outputNo = 18;
+                // outputNo = 18;
             } else outputNo = 5;
         } else if (field.matches("last\\s*name")) {
             if (edit.matches("(\\s*\\S+\\s*)+")) {
                 loginAccount.setLastname(edit);
                 outputNo = 0;
-               // outputNo = 19;
+                // outputNo = 19;
             } else outputNo = 7;
         } else if (field.equalsIgnoreCase("Email")) {
             if (edit.matches("^(.+)@(.+)$")) {
                 loginAccount.setEmail(edit);
                 outputNo = 0;
-               // outputNo = 20;
+                // outputNo = 20;
             } else outputNo = 9;
         } else if (field.matches("Phone\\s*number")) {
             if (edit.matches("09[0-9]{9}")) {
                 loginAccount.setPhoneNo(Integer.parseInt(edit));
                 outputNo = 0;
-               // outputNo = 21;
+                // outputNo = 21;
             } else outputNo = 11;
         }
-        return  outputNo;
-       //  OutputMassageHandler.showAccountOutput(outputNo);
+        return outputNo;
+        //  OutputMassageHandler.showAccountOutput(outputNo);
     }
 
     public static int editSellerField(String edit, String field) throws IOException {
@@ -145,30 +144,36 @@ public class LoginMenu {
             } else outputNo = 11;
         }
         return outputNo;
-         //OutputMassageHandler.showAccountOutput(outputNo);
+        //OutputMassageHandler.showAccountOutput(outputNo);
     }
 
     public static boolean checkFirm() {
         if (loginAccount instanceof Seller) {
-            if (((Seller) loginAccount).getFirm().getName().equalsIgnoreCase(firmName)) {
-                firm = ((Seller) loginAccount).getFirm();
-                return true;
+            if (loginAccount instanceof Seller) {
+                Seller seller = (Seller) loginAccount;
+                if (seller.getFirm().getName().equalsIgnoreCase(firmName)) {
+                    firm = seller.getFirm();
+                    return true;
+                }
             }
         }
         return false;
     }
 
-    public static int firmName(String name) throws IOException {
-        if (name.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$")) {
-            if (checkFirm()) {
+    public static void firmName(String name) throws IOException {
+       // if (name.matches(".+")) {
+          //  if (Firm.isThereFirmWithID(name)) {
                 firmName = name;
+                String id = loginAccount.getUsername() + " wants edit firm";
+                accountRequest = new AccountRequest(id);
+                accountRequest.setFirmType(loginAccount.getFirm().getType());
                 accountRequest.setFirmName(firmName);
-                outputNo = 0;
+             //   outputNo = 0;
                 //   CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMFIELD);
                 //  outputNo = 5;
-            } else outputNo = 12;
-        } else outputNo = 3;
-        return outputNo;
+          //  } else outputNo = 12;
+      //  } else outputNo = 3;
+      //  return outputNo;
         // OutputMassageHandler.showFirmOutput(outputNo);
     }
 

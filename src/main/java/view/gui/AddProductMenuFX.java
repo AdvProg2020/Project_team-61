@@ -92,12 +92,18 @@ public class AddProductMenuFX {
     List<File> files;
     Category productCategory;
     ArrayList<String> traitText = new ArrayList<>();
+    private static Parent priRoot;
+    private static Parent root;
+    private static boolean cat = false;
 
+    public static void setPriRoot(Parent priRoot) {
+        AddProductMenuFX.priRoot = priRoot;
+    }
 
     public static void showProPage(Stage stage, Scene scene) throws IOException {
         thisStage = stage;
         prevScene = scene;
-        Parent root = FXMLLoader.load(Objects.requireNonNull(AddProductMenuFX.class.getClassLoader().getResource("view/gui/fxFile/sample2.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(AddProductMenuFX.class.getClassLoader().getResource("productsMenu.fxml")));
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -130,66 +136,75 @@ public class AddProductMenuFX {
     @FXML
     public void addProduct(MouseEvent actionEvent) throws IOException {
         String ms = null;
-        if (SellerMenu.getCreate() == 0) {
-            ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(idTextField.getText(), 0));
-            Seller.writeInJ();
-        }
-        if (SellerMenu.getCreate() == 1) {
-            if (SellerMenu.getDetailMenu() == 1) {
-                ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(productNameTextField.getText(), 1));
-                Seller.writeInJ();
-            }
-            if (SellerMenu.getDetailMenu() == 2) {
-                ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(priceTextField.getText(), 2));
-                Seller.writeInJ();
-            }
-            if (SellerMenu.getDetailMenu() == 3) {
-                ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(categoryNameTextField.getText(), 3));
-                Seller.writeInJ();
-            }
-            if (SellerMenu.getDetailMenu() == 4) {
-                ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(additionaldetailTextField.getText(), 4));
-                Seller.writeInJ();
-            }
-            if (SellerMenu.getDetailMenu() == 5) {
-                ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(numberOfProductTextField.getText(), 5));
-                addImageView();
-                addCategoryTrait();
-                Seller.writeInJ();
-            }
-            if (SellerMenu.getDetailMenu() == 6) {
-                if (finish) {
-                    //  addCategoryTrait();
-                    //if(changeToString()) {
-                    changeToString();
-                    SellerMenu.getProductRequest().setSpecialValue(traits);
-                    finish = true;
-                    // }else ms ="fill all field";
-                } else ms = "process add finished you should edit";
-                finish = true;
-            }
-        }
+        if (imageId != null) {
+            if (cat) {
+                if (SellerMenu.getCreate() == 0) {
+                    ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(idTextField.getText(), 0, imageId));
+                    Seller.writeInJ();
+                }
+                if (SellerMenu.getCreate() == 1) {
+                    if (SellerMenu.getDetailMenu() == 1) {
+                        ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(productNameTextField.getText(), 1, null));
+                        Seller.writeInJ();
+                    }
+                    if (SellerMenu.getDetailMenu() == 2) {
+                        ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(priceTextField.getText(), 2, null));
+                        Seller.writeInJ();
+                    }
+                    if (SellerMenu.getDetailMenu() == 3) {
+                        ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(categoryNameTextField.getText(), 3, null));
+                        Seller.writeInJ();
+                    }
+                    if (SellerMenu.getDetailMenu() == 4) {
+                        ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(additionaldetailTextField.getText(), 4, null));
+                        Seller.writeInJ();
+                    }
+                    if (SellerMenu.getDetailMenu() == 5) {
+                        ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(numberOfProductTextField.getText(), 5, null));
+                        // addImageView();
+                        //  addCategoryTrait();
+                        Seller.writeInJ();
+                    }
+                    if (SellerMenu.getDetailMenu() == 6) {
+                        //if (finish) {
+                        //  addCategoryTrait();
+                        //if(changeToString()) {
+                        changeToString();
+                        SellerMenu.getProductRequest().setSpecialValue(traits);
+                        finish = true;
+                        // }else ms ="fill all field";
+                        //} else ms = "process add finished you should edit";
+                        finish = true;
+                    }
+                }
+            } else ms = "add trait button";
+        } else ms = "inset image first";
+        error.setVisible(true);
         error.setText(ms);
     }
 
     public void editProduct(MouseEvent actionEvent) throws IOException {
         String ms = null;
         error.setText("you have to put all traits value");
-        if (SellerMenu.getEdit() == 0) {
-            ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProduct(idTextField.getText()));
-        }
-        if (SellerMenu.getEdit() == 1) {
-            addImageView();
-            addCategoryTrait();
-            changeToString();
-            ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(productNameTextField.getText(), "name"));
-            ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(priceTextField.getText(), "price"));
-            ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(categoryNameTextField.getText(), "category"));
-            ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(additionaldetailTextField.getText(), "additional"));
-            ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(numberOfProductTextField.getText(), "number"));
-            Product.getProductById(idTextField.getText()).setProductCategorySpecifications(traits);
-            // }
-        } else ms = "put id first";
+        if (cat) {
+            if (SellerMenu.getEdit() == 0) {
+                ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProduct(idTextField.getText()));
+            }
+            if (SellerMenu.getEdit() == 1) {
+                // addImageView();
+                //  addCategoryTrait();
+                changeToString();
+                ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(productNameTextField.getText(), "name"));
+                ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(priceTextField.getText(), "price"));
+                ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(categoryNameTextField.getText(), "category"));
+                ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(additionaldetailTextField.getText(), "additional"));
+                ms = OutputMassageHandler.showSellerOutput(SellerMenu.editProductField(numberOfProductTextField.getText(), "number"));
+                //Product.getProductById(idTextField.getText()).setProductCategorySpecifications(traits);
+                SellerMenu.getProductRequest().setSpecialValue(traits);
+                // }
+            }
+        } else ms = "put all trait value first";
+        error.setVisible(true);
         error.setText(ms);
     }
 
@@ -262,21 +277,42 @@ public class AddProductMenuFX {
         Seller.writeInJ();
     }
 
-    private void backToFirst(){
+    private static void backToFirst() {
         SellerMenu.setCreate(0);
         SellerMenu.setEdit(0);
     }
 
+
+    public void userMenu(ActionEvent actionEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(AddProductMenuFX.class.getClassLoader().getResource("addProduct.fxml")));
+        SellerMenuFx.setPriRoot(curRoot);
+        root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+        goToPage();
+    }
+
+    public void back(ActionEvent actionEvent) {
+        root = priRoot;
+        goToPage();
+    }
+
+    public void exit(ActionEvent actionEvent) {
+        System.exit(0);
+    }
+
     public void logout(ActionEvent actionEvent) throws IOException {
-        backToFirst();
         LoginMenu.processLogout();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        goToPage();
+    }
+
+    private static void goToPage() {
+        backToFirst();
         Scene pageTwoScene = new Scene(root);
         //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         Main.primStage.setScene(pageTwoScene);
         Main.primStage.show();
-
     }
+
     /*
 
      @FXML
@@ -350,26 +386,26 @@ public class AddProductMenuFX {
 
     public void addTraitsButton(ActionEvent actionEvent) {
         String category = categoryNameTextField.getText();
-        if (category != null && Category.isThereCategoryWithName(category)){
+        if (category != null && Category.isThereCategoryWithName(category)) {
             productCategory = Category.getCategoryWithName(category);
-            if (productCategory != null){
+            if (productCategory != null) {
                 for (String trait : productCategory.getTraits()) {
-                    int n =50;
+                    int n = 50;
                     Label label = new Label();
                     label.setText(trait);
-                    label.setLayoutY(n*(productCategory.getTraits().indexOf(trait)+1));
-                    label.setLayoutX(900+productCategory.getTraits().indexOf(trait));
+                    label.setLayoutY(n * (productCategory.getTraits().indexOf(trait) + 1));
+                    label.setLayoutX(900 + productCategory.getTraits().indexOf(trait));
                     TextField textField = new TextField();
-                    textField.setMaxSize(100,50);
-                    textField.setLayoutY((n)*(productCategory.getTraits().indexOf(trait)+1));
-                    textField.setLayoutX(1000+productCategory.getTraits().indexOf(trait));
+                    textField.setMaxSize(100, 50);
+                    textField.setLayoutY((n) * (productCategory.getTraits().indexOf(trait) + 1));
+                    textField.setLayoutX(1000 + productCategory.getTraits().indexOf(trait));
                     traitsTextFields.add(textField);
-                    pane.getChildren().addAll(label,textField);
-                    n+=5;
+                    pane.getChildren().addAll(label, textField);
+                    n += 5;
                 }
+                cat = true;
             }
-        }
-        else {
+        } else {
             error.setVisible(true);
             error.setText("please enter category name first");
         }

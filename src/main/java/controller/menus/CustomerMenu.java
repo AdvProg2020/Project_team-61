@@ -183,7 +183,7 @@ public class CustomerMenu {
         }
         for (Product p : ProductMenu.getBuyLog().getChosenProduct().keySet()) {
             //faghat price bedoon discount be seller eafe
-            p.getSeller().setCredit(p.getSeller().getCredit() + p.getPrice());
+            Account.getAccountWithUsername(p.getSeller()).setCredit(Account.getAccountWithUsername(p.getSeller()).getCredit() + p.getPrice());
             p.getListOfBuyers().add((Customer) loginAccount);
         }
         ProductMenu.getBuyLog().setAllBoughtProduct(ProductMenu.getBuyLog().getChosenProduct());

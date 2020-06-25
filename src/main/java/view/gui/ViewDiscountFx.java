@@ -67,19 +67,19 @@ public class ViewDiscountFx {
 
     }
 
-    private void remove() {
-
-    }
-
-
     public void userMenu(ActionEvent actionEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ViewDiscountFx.class.getClassLoader().getResource("viewDiscountFx.fxml")));
         if(LoginMenu.getLoginAccount() instanceof Seller){
+            SellerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
         } else if(LoginMenu.getLoginAccount() instanceof Manager){
+            ManagerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
         }else if(LoginMenu.getLoginAccount() instanceof Customer){
+            CustomerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         }
+        goToPage();
     }
 
     public void back(ActionEvent actionEvent) {

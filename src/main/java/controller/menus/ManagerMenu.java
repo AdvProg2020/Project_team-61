@@ -1,6 +1,7 @@
 package controller.menus;
 
 import model.accounts.Manager;
+import model.accounts.Seller;
 import model.request.Request;
 import model.accounts.Account;
 import model.off.DiscountCode;
@@ -27,6 +28,10 @@ public class ManagerMenu {
     private static Category newCategory;
     private static int create = 0;
     private static int edit = 0;
+
+    public static void setEdit(int edit) {
+        ManagerMenu.edit = edit;
+    }
 
     public static int getEdit() {
         return edit;
@@ -86,7 +91,10 @@ public class ManagerMenu {
         if (checkProduct(productID)) {
             Product product = Product.getProductById(productID);
             Product.deleteProduct(productID);
-            product.getSeller().removeProduct(product);
+            if(Account.getAccountWithUsername(product.getSeller()) instanceof Seller) {
+                Seller seller = (Seller) Account.getAccountWithUsername(product.getSeller());
+                seller.removeProduct(product);
+            }
             outputNo = 1;
             //  OutputMassageHandler.showOutputWithString(2);
         }
@@ -169,7 +177,7 @@ public class ManagerMenu {
                 if (LoginMenu.getLoginAccount() instanceof Manager) {
                     Manager man = (Manager) LoginMenu.getLoginAccount();
                     man.addDiscount(newDiscountCode);
-                    //Manager.writeInJ();
+                    Manager.writeInJ();
                 }
                 outputNo = 37;
                 // detailMenu = 0;

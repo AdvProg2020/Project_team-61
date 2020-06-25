@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
@@ -19,8 +20,12 @@ import model.accounts.Manager;
 import model.accounts.Seller;
 import view.OutputMassageHandler;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.List;
 import java.util.Objects;
 
 public class SignUpFx {
@@ -43,6 +48,8 @@ public class SignUpFx {
     private static String role;
     private static Parent root;
     private static Parent priRoot;
+    List<File> files;
+    String imageId;
 
     public static void setPriRoot(Parent priRoot) {
         SignUpFx.priRoot = priRoot;
@@ -52,47 +59,39 @@ public class SignUpFx {
         SignUpFx.role = role;
     }
 
-    public void picDrop(DragEvent dragEvent) {
 
-    }
-
-
-    public void picOver(DragEvent dragEvent) {
-        if (dragEvent.getDragboard().hasContent(DataFormat.IMAGE)) {
-            dragEvent.acceptTransferModes(TransferMode.ANY);
-        }
-        dragEvent.consume();
-    }
 
     public void signUp(MouseEvent mouseEvent) throws IOException, ParseException {
-        if (role != null) {
-            if (RegisterMenu.getSignUpNo() == 0) {
-                userLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.processRegister(role, userSign.getText())));
-            }
-            if (RegisterMenu.getSignUpNo() == 1) {
-                passLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(passSign.getText(), 0)));
-                if (RegisterMenu.getDetailMenu() == 1) {
-                    nameLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(nameSign.getText(), 1)));
+        if(imageId != null) {
+            if (role != null) {
+                if (RegisterMenu.getSignUpNo() == 0) {
+                    userLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.processRegister(role, userSign.getText(), imageId)));
                 }
-                if (RegisterMenu.getDetailMenu() == 2) {
-                    lastNameLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(lastNameSign.getText(), 2)));
+                if (RegisterMenu.getSignUpNo() == 1) {
+                    passLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(passSign.getText(), 0)));
+                    if (RegisterMenu.getDetailMenu() == 1) {
+                        nameLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(nameSign.getText(), 1)));
+                    }
+                    if (RegisterMenu.getDetailMenu() == 2) {
+                        lastNameLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(lastNameSign.getText(), 2)));
+                    }
+                    if (RegisterMenu.getDetailMenu() == 3) {
+                        emailLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(emailSign.getText(), 3)));
+                    }
+                    if (RegisterMenu.getDetailMenu() == 4) {
+                        phoneLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(phoneNoSign.getText(), 4)));
+                    }
+                    if (RegisterMenu.getDetailMenu() == 5) {
+                        birthLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(birthdaySign.getText(), 5)));
+                    }
                 }
-                if (RegisterMenu.getDetailMenu() == 3) {
-                    emailLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(emailSign.getText(), 3)));
-                }
-                if (RegisterMenu.getDetailMenu() == 4) {
-                    phoneLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(phoneNoSign.getText(), 4)));
-                }
-                if (RegisterMenu.getDetailMenu() == 5) {
-                    birthLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(birthdaySign.getText(), 5)));
-                }
-            }
-            if (role != null && RegisterMenu.getSignUpNo() == 6) {
-                RegisterMenu.setSignUpNo(0);
-                RegisterMenu.setDetailMenu(0);
-                goToMenu();
-            } else RegisterMenu.setSignUpNo(1);
-        } else userLoginMs.setText("you have to select your role first");
+                if (role != null && RegisterMenu.getSignUpNo() == 6) {
+                    RegisterMenu.setSignUpNo(0);
+                    RegisterMenu.setDetailMenu(0);
+                    goToMenu();
+                } else RegisterMenu.setSignUpNo(1);
+            } else userLoginMs.setText("you have to select your role first");
+        }else userLoginMs.setText("drag image first");
     }
 
     private void goToMenu() throws IOException {
@@ -117,6 +116,24 @@ public class SignUpFx {
 
     }
 
+    @FXML
+    public void handleDragOver(DragEvent dragEvent) {
+        if (dragEvent.getDragboard().hasFiles()) {
+            dragEvent.acceptTransferModes(TransferMode.ANY);
+        }
+    }
+
+    @FXML
+    public void handleDrop(DragEvent dragEvent) throws FileNotFoundException {
+        files = dragEvent.getDragboard().getFiles();
+        System.out.println(files.get(0).getAbsolutePath());
+        System.out.println(files.get(0).getPath());
+        imageId = files.get(0).getPath();
+        File file = new File(imageId);
+        Image image = new Image(new FileInputStream(file));
+       // productImage.setImage(image);
+    }
+
 
     public void sellerRole(MouseEvent mouseEvent) {
         role = "seller";
@@ -135,13 +152,18 @@ public class SignUpFx {
 
 
     public void userMenu(ActionEvent actionEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("signUpFx.fxml")));
         if(LoginMenu.getLoginAccount() instanceof Seller){
+            SellerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
         } else if(LoginMenu.getLoginAccount() instanceof Manager){
+            ManagerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
         }else if(LoginMenu.getLoginAccount() instanceof Customer){
+            CustomerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         }
+        goToPage();
     }
 
     public void back(ActionEvent actionEvent) {

@@ -9,22 +9,105 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="productPagePane" prefHeight="618.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ProductMenuFX">
+<AnchorPane fx:id="productPagePane" prefHeight="618.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ProductMenuFX">
     <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="651.0" stroke="BLACK" strokeType="INSIDE" width="1045.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#d7491e" />
+                  <Stop color="#c95d4d" offset="0.47602739726027393" />
+                  <Stop color="#ff69be" offset="0.834931506849315" />
+                  <Stop color="#ca4ca8" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="189.0" layoutX="75.0" layoutY="49.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+
+        <MenuBar layoutX="9.0" layoutY="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="BACK" />
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="EXIT" />
+                        <MenuItem mnemonicParsing="false" onAction="#userMenu" text="ACCOUNT" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Login">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#login" text="login" />
+                    </items>
+                </Menu>
+            <Menu mnemonicParsing="false" text="logout">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
+              </items>
+            </Menu>
+            </menus>
+        </MenuBar>
         <ImageView fx:id="productPic" fitHeight="172.0" fitWidth="200.0" layoutX="75.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" />
         <Label fx:id="productNameLabel" layoutX="629.0" layoutY="47.0" prefHeight="34.0" prefWidth="147.0" text="Product Name" textAlignment="JUSTIFY">
             <font>
                 <Font size="23.0" />
             </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#5900ff" />
+                  <Stop color="#2b00d7" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
         </Label>
-        <Button fx:id="addToCardButton" layoutX="73.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleAddProductToLog" text="Add To Card" />
-        <Button fx:id="commentButton" layoutX="166.0" layoutY="254.0" mnemonicParsing="false" onAction="#popUpAddComment" prefHeight="26.0" prefWidth="89.0" text="Comment" />
-        <Button fx:id="scoreButton" layoutX="269.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleScore" prefHeight="26.0" prefWidth="64.0" text="Score" />
-        <Label fx:id="didntBuyToScoreOrProductIsFinish" layoutX="100.0" layoutY="288.0" prefHeight="18.0" prefWidth="225.0" text="didntBuyToScore\\ProductIsFinish" visible="false">
+        <Button fx:id="addToCardButton" layoutX="80.0" layoutY="253.0" mnemonicParsing="false" onAction="#handleAddProductToLog" prefHeight="26.0" prefWidth="90.0" text="Add To Card">
+         <font>
+            <Font name="Bookshelf Symbol 7" size="12.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#d7491e" />
+                  <Stop color="#c95d4d" offset="0.47602739726027393" />
+                  <Stop color="#6710ff" offset="0.834931506849315" />
+                  <Stop color="#ca4ca8" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill></Button>
+        <Button fx:id="commentButton" layoutX="175.0" layoutY="253.0" mnemonicParsing="false" onAction="#popUpAddComment" prefHeight="26.0" prefWidth="89.0" text="Comment">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#d7491e" />
+                  <Stop color="#c95d4d" offset="0.47602739726027393" />
+                  <Stop color="#6710ff" offset="0.834931506849315" />
+                  <Stop color="#ca4ca8" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill></Button>
+        <Button fx:id="scoreButton" layoutX="275.0" layoutY="253.0" mnemonicParsing="false" onAction="#handleScore" prefHeight="26.0" prefWidth="64.0" text="Score">
+         <font>
+            <Font name="Californian FB" size="12.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#d7491e" />
+                  <Stop color="#c95d4d" offset="0.47602739726027393" />
+                  <Stop color="#6710ff" offset="0.834931506849315" />
+                  <Stop color="#ca4ca8" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill></Button>
+        <Label fx:id="didntBuyToScoreOrProductIsFinish" layoutX="32.0" layoutY="288.0" prefHeight="34.0" prefWidth="294.0" text="didntBuyToScore\\ProductIsFinish" textFill="#ff0101" visible="false">
             <font>
                 <Font size="15.0" />
             </font>
@@ -34,28 +117,16 @@
         <TableView fx:id="commentTableView" layoutX="62.0" layoutY="340.0" prefHeight="244.0" prefWidth="710.0">
 
         </TableView>
-
-        <MenuBar layoutX="9.0" layoutY="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <menus>
-                <Menu mnemonicParsing="false" text="File">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#backToProductsMenu" text="BACK" />
-                        <MenuItem mnemonicParsing="false" text="EXIT" />
-                        <MenuItem mnemonicParsing="false" text="ACCOUNT" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
-        <Button layoutX="87.0" layoutY="262.0" mnemonicParsing="false" onAction="#makeUpPage" text="refresh" />
+        <Button layoutX="11.0" layoutY="253.0" mnemonicParsing="false" onAction="#makeUpPage" prefHeight="26.0" prefWidth="64.0" text="refresh">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#d7491e" />
+                  <Stop color="#c95d4d" offset="0.47602739726027393" />
+                  <Stop color="#6710ff" offset="0.834931506849315" />
+                  <Stop color="#ca4ca8" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill></Button>
     </children>
 </AnchorPane>

@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
+import model.off.Sale;
 import model.productRelated.Product;
 import view.OutputMassageHandler;
 
@@ -78,8 +79,8 @@ public class AddSaleFx {
         }
     }
 
-        public void createSale (MouseEvent mouseEvent) throws IOException, ParseException {
-        if(addSaleProducts.getSelectionModel().getSelectedItem() != null) {
+    public void createSale(MouseEvent mouseEvent) throws IOException, ParseException {
+        if (addSaleProducts.getSelectionModel().getSelectedItem() != null) {
             if (SellerMenu.getCreate() == 0) {
                 saleIdAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.setDetailsToSale(saleIdTextField.getText(), 0)));
             }
@@ -96,52 +97,59 @@ public class AddSaleFx {
                     saleAmountAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.setDetailsToSale(product.getId(), 4)));
                 }
             }
-        } saleIdAlertLabel.setText("you have to select first");
-     }
-
-        public void editSale (MouseEvent mouseEvent) throws IOException, ParseException {
-            if (SellerMenu.getEdit() == 0) {
-                saleIdAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.editOff(saleIdTextField.getText())));
-            }
-            if (SellerMenu.getEdit() == 1) {
-                startSaleAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.editOffField(startSaleDatePicker.getText(), "start")));
-                endSaleAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.editOffField(endSaleDatePicker.getText(), "end")));
-                saleAmountAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.editOffField(saleAmount.getText(), "amount")));
-
-            } else saleIdAlertLabel.setText("insert id first");
-        }
-
-        public void addProduct (MouseEvent mouseEvent) throws IOException, ParseException {
-            if (SellerMenu.getSaleRequest() != null) {
-                if (addSaleProducts.getSelectionModel().getSelectedItem() != null) {
-                    Product product = addSaleProducts.getSelectionModel().getSelectedItem();
-                    saleIdAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.editOffField(product.getId(), "add product")));
-                    makeTree();
-                } else saleIdAlertLabel.setText("you have to select first");
-            } else saleIdAlertLabel.setText("you have to insert name and edit first");
-        }
-        public void removeProduct (MouseEvent mouseEvent) throws IOException, ParseException {
-            if (SellerMenu.getSaleRequest() != null) {
-                if (addSaleProducts.getSelectionModel().getSelectedItem() != null) {
-                    Product product = addSaleProducts.getSelectionModel().getSelectedItem();
-                    saleIdAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.editOffField(product.getId(), "remove product")));
-                    makeTree();
-                } else saleIdAlertLabel.setText("you have to select first");
-            } else saleIdAlertLabel.setText("you have to insert name and edit first");
-
-        }
-
-    public void userMenu(ActionEvent actionEvent) throws IOException {
-        if(LoginMenu.getLoginAccount() instanceof Seller){
-            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
-        } else if(LoginMenu.getLoginAccount() instanceof Manager){
-            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
-        }else if(LoginMenu.getLoginAccount() instanceof Customer){
-            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
-        }
+        } else saleIdAlertLabel.setText("you have to select first");
     }
 
-    private void backToFirst(){
+    public void editSale(MouseEvent mouseEvent) throws IOException, ParseException {
+        if (SellerMenu.getEdit() == 0) {
+            saleIdAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.editOff(saleIdTextField.getText())));
+        }
+        if (SellerMenu.getEdit() == 1) {
+            startSaleAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.editOffField(startSaleDatePicker.getText(), "start")));
+            endSaleAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.editOffField(endSaleDatePicker.getText(), "end")));
+            saleAmountAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.editOffField(saleAmount.getText(), "amount")));
+
+        }
+        //else saleIdAlertLabel.setText("insert id first");
+    }
+
+    public void addProduct(MouseEvent mouseEvent) throws IOException, ParseException {
+        if (SellerMenu.getSaleRequest() != null) {
+            if (addSaleProducts.getSelectionModel().getSelectedItem() != null) {
+                Product product = addSaleProducts.getSelectionModel().getSelectedItem();
+                saleIdAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.editOffField(product.getId(), "add product")));
+                makeTree();
+            } else saleIdAlertLabel.setText("you have to select first");
+        } else saleIdAlertLabel.setText("you have to insert name and edit first");
+    }
+
+    public void removeProduct(MouseEvent mouseEvent) throws IOException, ParseException {
+        if (SellerMenu.getSaleRequest() != null) {
+            if (addSaleProducts.getSelectionModel().getSelectedItem() != null) {
+                Product product = addSaleProducts.getSelectionModel().getSelectedItem();
+                saleIdAlertLabel.setText(OutputMassageHandler.showSaleOutput(SellerMenu.editOffField(product.getId(), "remove product")));
+                makeTree();
+            } else saleIdAlertLabel.setText("you have to select first");
+        } else saleIdAlertLabel.setText("you have to insert name and edit first");
+
+    }
+
+    public void userMenu(ActionEvent actionEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(AddSaleFx.class.getClassLoader().getResource("addSaleFx.fxml")));
+        if (LoginMenu.getLoginAccount() instanceof Seller) {
+            SellerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+        } else if (LoginMenu.getLoginAccount() instanceof Manager) {
+            ManagerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        } else if (LoginMenu.getLoginAccount() instanceof Customer) {
+            CustomerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
+        }
+        goToPage();
+    }
+
+    private static void backToFirst() {
         SellerMenu.setCreate(0);
         SellerMenu.setEdit(0);
     }
@@ -153,22 +161,21 @@ public class AddSaleFx {
     }
 
     public void exit(ActionEvent actionEvent) {
-        backToFirst();
         System.exit(0);
     }
 
     public void logout(ActionEvent actionEvent) throws IOException {
-        backToFirst();
         LoginMenu.processLogout();
         root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
         goToPage();
     }
 
-        public void finish (MouseEvent mouseEvent){
-            finish = true;
-        }
+    public void finish(MouseEvent mouseEvent) {
+        finish = true;
+    }
 
     private static void goToPage() {
+        backToFirst();
         Scene pageTwoScene = new Scene(root);
         //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         Main.primStage.setScene(pageTwoScene);

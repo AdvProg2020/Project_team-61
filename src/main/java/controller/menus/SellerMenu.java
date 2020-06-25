@@ -82,21 +82,21 @@ public class SellerMenu {
     public static int editProduct(String productID) throws IOException {
         Product product = Product.getProductById(productID);
         if (checkProduct(productID)) {
-            if (product.getSeller() == LoginMenu.getLoginAccount()) {
+          //  if (product.getSeller() == LoginMenu.getLoginAccount()) {
                // productId = productID;
                 String id = LoginMenu.getLoginAccount().getUsername() + " wants edit product " + productID ;
                 if (!productRequest.isThereRequestFromID(id)) {
                     product.setProductStatus(ProductStatus.UNDERREVIEWFOREDITING);
                     productRequest = new ProductRequest(id);
                     productRequest.setLastCategory(product.getCategory().getName());
-                    Seller seller = (Seller) LoginMenu.getLoginAccount();
+                   // Seller seller = (Seller) LoginMenu.getLoginAccount();
                    // productRequest.setSellerName(seller.getUsername());
                     productRequest.setProductId(productID);
                 } else productRequest = (ProductRequest) Request.getRequestFromID(id);
                // CommandProcessor.setSubMenuStatus(SubMenuStatus.PRODUCTFIELD);
                 outputNo = 0;
                 edit = 1;
-            } else outputNo = 22;
+          //  } else outputNo = 22;
         }
         return outputNo;
        // OutputMassageHandler.showSellerOutput(outputNo);
@@ -144,7 +144,7 @@ public class SellerMenu {
 
 
 
-    public static int addProduct(String detail , int detailMen) throws IOException {
+    public static int addProduct(String detail , int detailMen , String img) throws IOException {
         if (detailMen == 0) {
             if (detail.matches("^(?!\\s*$).+")) {
                // if (!detail.equalsIgnoreCase("finish")) {
@@ -157,6 +157,7 @@ public class SellerMenu {
                             product.setProductStatus(ProductStatus.UNDERREVIEWFORCONSTRUCTION);
                             productRequest = new ProductRequest(id);
                             productRequest.setProductId(detail);
+                            productRequest.setImg(img);
 //                            productRequest.setCompanyName(LoginMenu.getFirm().getName());
                         } else if (Request.getRequestFromID(id) instanceof ProductRequest) {
                             productRequest = (ProductRequest) Request.getRequestFromID(id);
@@ -210,7 +211,7 @@ public class SellerMenu {
 
     public static int processRemoveProduct(String productID) {
         if (checkProduct(productID)) {
-            if (Product.getProductById(productID).getSeller() == LoginMenu.getLoginAccount()) {
+            if (Product.getProductById(productID).getSeller() == LoginMenu.getLoginAccount().getUsername()) {
                 Product.deleteProduct(productID);
                 outputNo = 18;
             }
@@ -232,17 +233,18 @@ public class SellerMenu {
 
     }
 
-    public static int editOff(String offID) throws IOException {
+    public static int editOff(String offID ) throws IOException {
         if (checkSale(offID)) {
             Sale sale = Sale.getSaleWithId(offID);
-            if (sale.getSeller() == LoginMenu.getLoginAccount()) {
-                String id = LoginMenu.getLoginAccount() + " wants edit off " + offID ;
+            if (sale.getSeller() == LoginMenu.getLoginAccount().getUsername()) {
+                String id = LoginMenu.getLoginAccount().getUsername() + " wants edit off " + offID ;
                 if (!Request.isThereRequestFromID(id)) {
                     Sale.getSaleWithId(offID).setSaleStatus(SaleStatus.UNDERREVIEWFOREDITING);
                     saleRequest = new SaleRequest(id);
                     Seller seller = (Seller) Seller.getAccountWithUsername(LoginMenu.getLoginAccount().getUsername());
                     seller.getAllSaleRequests().add(saleRequest);
                     saleRequest.setOffId(offID);
+                    edit = 1;
                     // saleRequest.setSeller(LoginMenu.getLoginAccount());
                 } else {
                     saleRequest = (SaleRequest) Request.getRequestFromID(id);
@@ -283,17 +285,17 @@ public class SellerMenu {
             } else outputNo = 15;
         } else if (field.matches("(?i)remove\\s*product")) {
             if (edit.matches("((?!^ +$)^.+$)")) {
-                if (checkProductSale(edit)) {
+                //if (checkProductSale(edit)) {
                     saleRequest.removeProduct(Product.getProductById(edit));
                     outputNo = 17;
-                }
+               // }
             } else outputNo = 19;
         } else if (field.matches("(?i)add\\s*product")) {
             if (edit.matches("((?!^ +$)^.+$)")) {
-                if (checkProductSale(edit)) {
+                //if (checkProductSale(edit)) {
                     saleRequest.addProductToSale(Product.getProductById(edit));
                     outputNo = 18;
-                }
+                //}
             } else outputNo = 19;
         }
         return outputNo;
@@ -306,12 +308,14 @@ public class SellerMenu {
             String id = "add sale: " + detail;
             if (!saleRequest.isThereRequestFromID(id)) {
                 Sale sale = new Sale(detail);
-                Seller seller = (Seller) Seller.getAccountWithUsername(LoginMenu.getLoginAccount().getUsername());
-                seller.getAllSales().add(sale);
-                sale.setSaleStatus(SaleStatus.UNDERREVIEWFORCONSTRUCTION);
-                saleRequest = new SaleRequest(id);
-                seller.getAllSaleRequests().add(saleRequest);
-                saleRequest.setOffId(detail);
+                if(LoginMenu.getLoginAccount() instanceof Seller) {
+                    Seller seller = (Seller) LoginMenu.getLoginAccount();
+                    seller.getAllSales().add(sale);
+                    sale.setSaleStatus(SaleStatus.UNDERREVIEWFORCONSTRUCTION);
+                    saleRequest = new SaleRequest(id);
+                    seller.getAllSaleRequests().add(saleRequest);
+                    saleRequest.setOffId(detail);
+                }
                // saleRequest.setSeller(LoginMenu.getLoginAccount());
             } else {
                 saleRequest = (SaleRequest) Request.getRequestFromID(id);
@@ -359,9 +363,11 @@ public class SellerMenu {
         } else if (detailMen == 4) {
             if (detail.matches("((?!^ +$)^.+$)")) {
                 // if (!detail.equalsIgnoreCase("finish")) {
-                if (checkProductSale(detail)) {
-                    saleRequest.setProduct(detail);
-                    saleRequest.addProductToSale(Product.getProductById(detail));
+               // if (checkProductSale(detail)) {
+                Product product =Product.getProductById(detail);
+                if(!saleRequest.isThereProduct(product)) {
+                  //  saleRequest.addProduct(product);
+                    saleRequest.addProductToSale(product);
                     //   outputNo = 18;
                     // }
                     // } else {
@@ -369,6 +375,7 @@ public class SellerMenu {
                     //  CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
                     // detailMenu = 0;
                     outputNo = 0;
+                    //  }
                 }
             } else outputNo = 19;
         }
@@ -394,17 +401,17 @@ public class SellerMenu {
         }
     }
 
-    ///////////////////////////////////////
-    private static boolean checkProductSale(String detail) {
-        if (Product.isThereProductWithId(detail)) {
-            if (Product.getProductById(detail).getSeller() == LoginMenu.getLoginAccount()) {
-                if (Product.getProductById(detail).getInSale()) {
-                    return true;
-                } else outputNo = 0;
-            } else outputNo = 5;
-        } else outputNo = 8;
-        return false;
-    }
+//    ///////////////////////////////////////
+//    private static boolean checkProductSale(String detail) {
+//        if (Product.isThereProductWithId(detail)) {
+//           // if (Product.getProductById(detail).getSeller() == LoginMenu.getLoginAccount().getUsername()) {
+//               // if (Product.getProductById(detail).getInSale()) {
+//                    return true;
+//               // } else outputNo = 0;
+//           // } else outputNo = 5;
+//        } else outputNo = 8;
+//        return false;
+//    }
 
     //-------------------------------------------------------------------------------
   /*  //gson

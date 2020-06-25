@@ -26,20 +26,29 @@ import java.util.Objects;
 
 public class SalesFx {
 
-    @FXML private TableColumn<Sale, Number> saleAmount;
-    @FXML private TableColumn<Sale, Seller> saleSeller;
-    @FXML private TableColumn<Sale, String> saleId;
-    @FXML private TableColumn<Sale, Date> saleEnd;
-    @FXML private TableColumn<Sale, Date> saleStart;
-    @FXML private TableColumn<Sale, String> saleStatus;
-    @FXML private TableView<Sale> sales;
-    @FXML private Label salesMs;
+    @FXML
+    private TableColumn<Sale, Number> saleAmount;
+    @FXML
+    private TableColumn<Sale, String> saleSeller;
+    @FXML
+    private TableColumn<Sale, String> saleId;
+    @FXML
+    private TableColumn<Sale, Date> saleEnd;
+    @FXML
+    private TableColumn<Sale, Date> saleStart;
+    @FXML
+    private TableColumn<Sale, String> saleStatus;
+    @FXML
+    private TableView<Sale> sales;
+    @FXML
+    private Label salesMs;
 
 
     public static ObservableList list = FXCollections.observableArrayList();
     private static Parent root;
     private static ArrayList<Sale> allSales = new ArrayList<>();
     private static Parent priRoot;
+
     public static ArrayList<Sale> getAllSales() {
         return allSales;
     }
@@ -59,19 +68,21 @@ public class SalesFx {
 
     public static void makeList() {
         list.clear();
-        list.addAll(allSales);
+        if (LoginMenu.getLoginAccount() instanceof Seller) {
+            Seller seller = (Seller) LoginMenu.getLoginAccount();
+            list.addAll(seller.getAllSales());
+        }
     }
 
     private void makeTree() {
-        saleId.setCellValueFactory(new PropertyValueFactory<Sale, String>("username"));
-        saleStart.setCellValueFactory(new PropertyValueFactory<Sale, Date>("name"));
-        saleEnd.setCellValueFactory(new PropertyValueFactory<Sale, Date>("lastname"));
-        saleStatus.setCellValueFactory(new PropertyValueFactory<Sale, String>("birthdayDate"));
-        saleSeller.setCellValueFactory(new PropertyValueFactory<Sale, Seller>("phoneNo"));
-        saleAmount.setCellValueFactory(new PropertyValueFactory<Sale, Number>("email"));
+        saleId.setCellValueFactory(new PropertyValueFactory<Sale, String>("offId"));
+        saleStart.setCellValueFactory(new PropertyValueFactory<Sale, Date>("startOfSalePeriod"));
+        saleEnd.setCellValueFactory(new PropertyValueFactory<Sale, Date>("endOfSalePeriod"));
+        saleStatus.setCellValueFactory(new PropertyValueFactory<Sale, String>("saleStatus"));
+        saleSeller.setCellValueFactory(new PropertyValueFactory<Sale, String>("seller"));
+        saleAmount.setCellValueFactory(new PropertyValueFactory<Sale, Number>("saleAmount"));
 
         makeList();
-        //  usersList.getColumns().addAll(UserId,userName,userLast,userBirth,userPhoneNo,userEmail);
         sales.setEditable(true);
         sales.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         sales.getSelectionModel().setCellSelectionEnabled(true);
@@ -81,31 +92,34 @@ public class SalesFx {
 
 
     public void add(MouseEvent mouseEvent) throws IOException {
-      //  if(sales.getSelectionModel().getSelectedItem() != null) {
-          //  Sale sale = sales.getSelectionModel().getSelectedItem();
-            root = FXMLLoader.load(Objects.requireNonNull(AddSaleFx.class.getClassLoader().getResource("addSaleFx.fxml")));
-            goToPage();
-      //  }else salesMs.setText("you have to select first");
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SalesFx.class.getClassLoader().getResource("salesFx.fxml")));
+        AddSaleFx.setPriRoot(curRoot);
+        root = FXMLLoader.load(Objects.requireNonNull(AddSaleFx.class.getClassLoader().getResource("addSaleFx.fxml")));
+        goToPage();
+
     }
 
     public void edit(MouseEvent mouseEvent) throws IOException {
-        //if(sales.getSelectionModel().getSelectedItem() != null) {
-         //   Sale sale = sales.getSelectionModel().getSelectedItem();
-            root = FXMLLoader.load(Objects.requireNonNull(AddSaleFx.class.getClassLoader().getResource("addSale.fxml")));
-            goToPage();
-       // }else salesMs.setText("you have to select first");
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SalesFx.class.getClassLoader().getResource("salesFx.fxml")));
+        AddSaleFx.setPriRoot(curRoot);
+        root = FXMLLoader.load(Objects.requireNonNull(AddSaleFx.class.getClassLoader().getResource("addSaleFx.fxml")));
+        goToPage();
+
     }
 
     public void viewSale(MouseEvent mouseEvent) throws IOException {
-        if(sales.getSelectionModel().getSelectedItem() != null) {
-           Sale sale = sales.getSelectionModel().getSelectedItem();
-
-        root = FXMLLoader.load(Objects.requireNonNull(AddSaleFx.class.getClassLoader().getResource("addSale.fxml")));
-        goToPage();
-         }else salesMs.setText("you have to select first");
+        if (sales.getSelectionModel().getSelectedItem() != null) {
+            Sale sale = sales.getSelectionModel().getSelectedItem();
+            Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SalesFx.class.getClassLoader().getResource("salesFx.fxml")));
+            ViewSaleFx.setPriRoot(curRoot);
+            ViewSaleFx.setCurSale(sale);
+            root = FXMLLoader.load(Objects.requireNonNull(ViewSaleFx.class.getClassLoader().getResource("viewSaleFx.fxml")));
+            goToPage();
+        } else salesMs.setText("you have to select first");
 
     }
-    private static void goToPage(){
+
+    private static void goToPage() {
         Scene pageTwoScene = new Scene(root);
         //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         Main.primStage.setScene(pageTwoScene);
@@ -114,13 +128,18 @@ public class SalesFx {
 
 
     public void userMenu(ActionEvent actionEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SalesFx.class.getClassLoader().getResource("salesFx.fxml")));
         if(LoginMenu.getLoginAccount() instanceof Seller){
+            SellerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
         } else if(LoginMenu.getLoginAccount() instanceof Manager){
+            ManagerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
         }else if(LoginMenu.getLoginAccount() instanceof Customer){
+            CustomerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         }
+        goToPage();
     }
 
     public void back(ActionEvent actionEvent) {

@@ -65,15 +65,21 @@ public class CategoriesFX {
 
 
     public void editCategories(MouseEvent mouseEvent) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(AddCategoryFx.class.getClassLoader().getResource("addCategoryFx.fxml")));
+        if(LoginMenu.getLoginAccount() instanceof  Manager) {
+            Parent curRoot = FXMLLoader.load(Objects.requireNonNull(CategoriesFX.class.getClassLoader().getResource("categoriesFx.fxml")));
+            AddCategoryFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(AddCategoryFx.class.getClassLoader().getResource("addCategoryFx.fxml")));
             goToPage();
+        }
     }
 
     public void removeCategories(MouseEvent mouseEvent) {
-        if(categories.getSelectionModel().getSelectedItem() != null) {
-            Category curCat = categories.getSelectionModel().getSelectedItem();
-            OutputMassageHandler.showManagerOutput(ManagerMenu.removeCategory(curCat.getName()));
-            makeTree();
+        if(LoginMenu.getLoginAccount() instanceof  Manager) {
+            if (categories.getSelectionModel().getSelectedItem() != null) {
+                Category curCat = categories.getSelectionModel().getSelectedItem();
+                OutputMassageHandler.showManagerOutput(ManagerMenu.removeCategory(curCat.getName()));
+                makeTree();
+            }
         }
     }
 
@@ -93,11 +99,24 @@ public class CategoriesFX {
     }
 
     public void addCategories(MouseEvent mouseEvent) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(AddCategoryFx.class.getClassLoader().getResource("addCategoryFx.fxml")));
-        goToPage();
+        if(LoginMenu.getLoginAccount() instanceof  Manager) {
+            Parent curRoot = FXMLLoader.load(Objects.requireNonNull(CategoriesFX.class.getClassLoader().getResource("categoriesFx.fxml")));
+            AddCategoryFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(AddCategoryFx.class.getClassLoader().getResource("addCategoryFx.fxml")));
+            goToPage();
+        }
     }
 
+    public void viewCategories(MouseEvent mouseEvent) throws IOException {
+        if(categories.getSelectionModel().getSelectedItem() != null) {
+            Category curCat = categories.getSelectionModel().getSelectedItem();
+            Parent curRoot = FXMLLoader.load(Objects.requireNonNull(CategoriesFX.class.getClassLoader().getResource("categoriesFx.fxml")));
+            ViewCategoryFx.setPriRoot(curRoot);
+            ViewCategoryFx.setCurCat(curCat);
+            root = FXMLLoader.load(Objects.requireNonNull(ViewCategoryFx.class.getClassLoader().getResource("ViewCategoryFx.fxml")));
 
+        }
+    }
     private static void goToPage(){
         Scene pageTwoScene = new Scene(root);
         //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
@@ -105,26 +124,20 @@ public class CategoriesFX {
         Main.primStage.show();
     }
 
-    private void show(String text) {
-        Label label = new Label();
-        StackPane root = new StackPane();
-        root.getChildren().add(label);
-        label.setText(text);
-        Stage massage = new Stage();
-        massage.setScene(new Scene(root, 500, 500));
-        massage.show();
-    }
-
-
 
     public void userMenu(ActionEvent actionEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(CategoriesFX.class.getClassLoader().getResource("categoriesFx.fxml")));
         if(LoginMenu.getLoginAccount() instanceof Seller){
+            SellerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
         } else if(LoginMenu.getLoginAccount() instanceof Manager){
+            ManagerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
         }else if(LoginMenu.getLoginAccount() instanceof Customer){
+            CustomerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         }
+        goToPage();
     }
 
     public void back(ActionEvent actionEvent) {
@@ -142,12 +155,5 @@ public class CategoriesFX {
         goToPage();
     }
 
-    public void viewCategories(MouseEvent mouseEvent) throws IOException {
-        if(categories.getSelectionModel().getSelectedItem() != null) {
-            Category curCat = categories.getSelectionModel().getSelectedItem();
-            ViewCategoryFx.setCurCat(curCat);
-            root = FXMLLoader.load(Objects.requireNonNull(ViewCategoryFx.class.getClassLoader().getResource("ViewCategoryFx.fxml")));
 
-        }
-    }
 }

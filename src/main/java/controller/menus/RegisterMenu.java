@@ -28,9 +28,10 @@ public class RegisterMenu {
     private static String name;
     private static String lastName;
     private static String Email;
-    private static double phoneNo;
+    private static int phoneNo;
     private static Date birthdayDate;
     private static SubMenuStatus subMenuStatus;
+    private static  String img;
 
     public static boolean isHeadManager() {
         return headManager;
@@ -53,7 +54,7 @@ public class RegisterMenu {
     }
 
 
-    public static int processRegister(String role, String username) throws IOException {
+    public static int processRegister(String role, String username , String image) throws IOException {
         if (username.matches("^[a-z0-9_-]{3,15}$")) {
             if (!Account.isThereAccountWithUsername(username)) {
               //  if (role.matches("(?i)(?:customer|manager|seller)")) {
@@ -62,6 +63,7 @@ public class RegisterMenu {
                     registerByRole(role, username);
                     signUpNo =1;
                     outputNo=0;
+                    img = image;
              //       subMenuStatus = CommandProcessor.getSubMenuStatus();
             //        CommandProcessor.setSubMenuStatus(SubMenuStatus.REGISTERATIONDETAILS);
             //        CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
@@ -133,7 +135,7 @@ public class RegisterMenu {
             } else outputNo = 9;
         } else if (detailMen == 4) {
             if (detail.matches(".+")) {
-                phoneNo = Double.parseDouble(detail);
+                phoneNo = Integer.parseInt(detail);
                 detailMenu=5;
                 outputNo = 0;
             } else outputNo = 11;
@@ -158,16 +160,16 @@ public class RegisterMenu {
 
     public static void createAccountWithDetails() throws IOException {
         if (role.equalsIgnoreCase("seller")) {
-            accountRequest.sellerAccountDetails(username, password, name, lastName, Email, phoneNo, birthdayDate);
+            accountRequest.sellerAccountDetails(username, password, name, lastName, Email, phoneNo, birthdayDate, img);
          //   CommandProcessor.setSubMenuStatus(SubMenuStatus.ADDFIRM);
             outputNo=31;
         } else if(role.equalsIgnoreCase("customer")) {
-            customer.setDetailsToAccount(password, name, lastName, Email, phoneNo, birthdayDate , null);
+            customer.setDetailsToAccount(password, name, lastName, Email, phoneNo, birthdayDate , null , img);
           //  CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
           //  CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
             outputNo = 12;
         }else if(role.equalsIgnoreCase("manager")) {
-            manager.setDetailsToAccount(password, name, lastName, Email, phoneNo, birthdayDate , null);
+            manager.setDetailsToAccount(password, name, lastName, Email, phoneNo, birthdayDate , null , img);
           //  CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
           //  CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
             outputNo = 12;
@@ -183,7 +185,7 @@ public class RegisterMenu {
             } else outputNo = 3;
         } else if (detailMen == 1) {
             if (detail.matches("09[0-9]{9}")) {
-                accountRequest.setPhoneNo(Double.parseDouble(detail));
+                accountRequest.setPhoneNo(Integer.parseInt(detail));
                 detailMenu++;
                 outputNo = 0;
             } else outputNo = 6;

@@ -21,53 +21,65 @@ public class ManagerMenuFx {
     }
 
 
-
     public void viewPersonalInfo(MouseEvent mouseEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        ViewAccountFx.setPriRoot(curRoot);
         ViewAccountFx.setAccount(LoginMenu.getLoginAccount());
-         root = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
         goToPage();
     }
 
     public void manageAllProducts(MouseEvent mouseEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        ProductsFx.setPriRoot(curRoot);
         ProductsFx.setAllProducts(Product.getProductList());
-         root = FXMLLoader.load(Objects.requireNonNull(ProductsFx.class.getClassLoader().getResource("productsFx.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(ProductsFx.class.getClassLoader().getResource("productsFx.fxml")));
         goToPage();
     }
 
     public void viewDiscount(MouseEvent mouseEvent) throws IOException {
-        if(LoginMenu.getLoginAccount() instanceof Manager) {
-            Manager manager = (Manager) LoginMenu.getLoginAccount();
-            DiscountCodesFx.setDiscounts(manager.getAllDiscountCodes());
-            root = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("discountCodesFx.fxml")));
-            goToPage();
-        }
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        DiscountCodesFx.setPriRoot(curRoot);
+        Manager manager = (Manager) LoginMenu.getLoginAccount();
+        DiscountCodesFx.setDiscounts(manager.getAllDiscountCodes());
+        root = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("discountCodesFx.fxml")));
+        goToPage();
     }
 
     public void createDiscount(MouseEvent mouseEvent) throws IOException {
-         root = FXMLLoader.load(Objects.requireNonNull(AddDiscountFx.class.getClassLoader().getResource("addDiscountFx.fxml")));
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        AddDiscountFx.setPriRoot(curRoot);
+        root = FXMLLoader.load(Objects.requireNonNull(AddDiscountFx.class.getClassLoader().getResource("addDiscountFx.fxml")));
         goToPage();
     }
 
     public void manageCategories(MouseEvent mouseEvent) throws IOException {
-         root = FXMLLoader.load(Objects.requireNonNull(CategoriesFX.class.getClassLoader().getResource("categoriesFX.fxml")));
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        CategoriesFX.setPriRoot(curRoot);
+        root = FXMLLoader.load(Objects.requireNonNull(CategoriesFX.class.getClassLoader().getResource("categoriesFX.fxml")));
         goToPage();
     }
 
     public void manageRequests(MouseEvent mouseEvent) throws IOException {
-         root = FXMLLoader.load(Objects.requireNonNull(RequestsFx.class.getClassLoader().getResource("requestsFx.fxml")));
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        RequestsFx.setPriRoot(curRoot);
+        root = FXMLLoader.load(Objects.requireNonNull(RequestsFx.class.getClassLoader().getResource("requestsFx.fxml")));
         goToPage();
     }
 
     public void manageUsers(MouseEvent mouseEvent) throws IOException {
-         root = FXMLLoader.load(Objects.requireNonNull(UsersFx.class.getClassLoader().getResource("usersFx.fxml")));
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        UsersFx.setPriRoot(curRoot);
+        root = FXMLLoader.load(Objects.requireNonNull(UsersFx.class.getClassLoader().getResource("usersFx.fxml")));
         goToPage();
     }
 
-    private static void goToPage(){
+    private static void goToPage() {
         Scene pageTwoScene = new Scene(root);
         //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         Main.primStage.setScene(pageTwoScene);
         Main.primStage.show();
+
     }
 
     public void back(ActionEvent actionEvent) {

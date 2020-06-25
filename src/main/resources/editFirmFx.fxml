@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.EditFirmFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.EditFirmFx">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="882.0" stroke="BLACK" strokeType="INSIDE" width="1605.0">
             <fill>
@@ -34,7 +31,7 @@
                         <MenuItem mnemonicParsing="false" text="Close" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Exit">
+                <Menu mnemonicParsing="false" text="Back">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
                     </items>
@@ -64,11 +61,6 @@
                 </LinearGradient>
             </fill>
         </Text>
-        <Text layoutX="630.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="142.6708984375">
-            <font>
-                <Font name="System Bold Italic" size="35.0" />
-            </font>
-        </Text>
         <Text layoutX="630.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone number:" wrappingWidth="358.6708984375">
             <font>
                 <Font name="System Bold Italic" size="35.0" />
@@ -84,22 +76,17 @@
                 <Font name="System Bold Italic" size="35.0" />
             </font>
         </Text>
-        <Label fx:id="firmNameCrMs" layoutX="951.0" layoutY="260.0" prefHeight="27.0" prefWidth="403.0" text="Label" textFill="#f2dddd">
+        <Label fx:id="firmPhoneNoCrMs" layoutX="952.0" layoutY="350.0" prefHeight="40.0" prefWidth="451.0" textFill="#f2dddd">
             <font>
                 <Font size="20.0" />
             </font>
         </Label>
-        <Label fx:id="firmPhoneNoCrMs" layoutX="952.0" layoutY="350.0" prefHeight="40.0" prefWidth="451.0" text="Label" textFill="#f2dddd">
+        <Label fx:id="firmEmailCrMs" layoutX="952.0" layoutY="446.0" prefHeight="40.0" prefWidth="403.0" textFill="#f2dddd">
             <font>
                 <Font size="20.0" />
             </font>
         </Label>
-        <Label fx:id="firmEmailCrMs" layoutX="952.0" layoutY="446.0" prefHeight="40.0" prefWidth="403.0" text="Label" textFill="#f2dddd">
-            <font>
-                <Font size="20.0" />
-            </font>
-        </Label>
-        <Label fx:id="firmAddressCrMs" layoutX="951.0" layoutY="537.0" prefHeight="40.0" prefWidth="444.0" text="Label" textFill="#f2dddd">
+        <Label fx:id="firmAddressCrMs" layoutX="951.0" layoutY="537.0" prefHeight="40.0" prefWidth="444.0" textFill="#f2dddd">
             <font>
                 <Font size="20.0" />
             </font>
@@ -114,12 +101,6 @@
                 <Image url="@icons/exit.png" />
             </image>
         </ImageView>
-        <Text layoutX="151.0" layoutY="587.0" strokeType="OUTSIDE" strokeWidth="0.0" text="please drag your logo here">
-            <font>
-                <Font size="25.0" />
-            </font>
-        </Text>
-        <TextField fx:id="firmNameCr" layoutX="951.0" layoutY="220.0" prefHeight="40.0" prefWidth="403.0" promptText="name" />
         <TextField fx:id="firmPhoneCr" layoutX="951.0" layoutY="309.0" prefHeight="40.0" prefWidth="403.0" promptText="phone number" />
         <TextField fx:id="firmEmailCr" layoutX="951.0" layoutY="403.0" prefHeight="40.0" prefWidth="403.0" promptText="email" />
         <TextField fx:id="firmAddressCr" layoutX="951.0" layoutY="497.0" prefHeight="40.0" prefWidth="403.0" promptText="Address" />

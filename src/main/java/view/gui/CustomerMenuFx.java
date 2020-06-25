@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class CustomerMenuFx {
-    public static  ObservableList data = FXCollections.observableArrayList();
+    public static ObservableList data = FXCollections.observableArrayList();
     private static Parent root;
     private static Parent priRoot;
 
@@ -29,41 +29,51 @@ public class CustomerMenuFx {
     }
 
     public void viewPersonalInfo(MouseEvent mouseEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
+        ViewAccountFx.setPriRoot(curRoot);
         ViewAccountFx.setAccount(LoginMenu.getLoginAccount());
-         root = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
         goToPage();
     }
 
     public void viewBalance(MouseEvent mouseEvent) throws IOException {
-        String balance = "your credit is: "+ String.valueOf(LoginMenu.getLoginAccount().getCredit());
-        show("balance: "+balance);
+        String balance = "your credit is: " + String.valueOf(LoginMenu.getLoginAccount().getCredit());
+        show("balance: " + balance);
     }
 
+    ///////////////////////////////////////////////////////
     public void viewCart(MouseEvent mouseEvent) throws IOException {
-        if(LoginMenu.getLoginAccount() instanceof Customer) {
+        if (LoginMenu.getLoginAccount() instanceof Customer) {
             //BuyLogFx.setCurBuyLog(LoginMenu.getLoginAccount().);
+            Parent curRoot = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
+           // BuyLogFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("buyLogFx.fxml")));
+            goToPage();
         }
-         root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("buyLogFx.fxml")));
-        goToPage();
     }
 
+    ////////////////////////////////////////////
     public void viewOrders(MouseEvent mouseEvent) throws IOException {
-        if(LoginMenu.getLoginAccount() instanceof Customer) {
+        if (LoginMenu.getLoginAccount() instanceof Customer) {
+            Parent curRoot = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
+            ViewAccountFx.setPriRoot(curRoot);
             BuyLogsFx.setAllBuyLogs(((Customer) LoginMenu.getLoginAccount()).getBuyLogsHistory());
+
+            root = FXMLLoader.load(Objects.requireNonNull(BuyLogsFx.class.getClassLoader().getResource("buyLogsFx.fxml")));
+            goToPage();
         }
-         root = FXMLLoader.load(Objects.requireNonNull(BuyLogsFx.class.getClassLoader().getResource("buyLogsFx.fxml")));
-        goToPage();
     }
 
+    ///////////////////////////
     public void viewCustomerDiscount(MouseEvent mouseEvent) throws IOException {
         data.clear();
         ArrayList<DiscountCode> discounts = new ArrayList<>();
-        if(LoginMenu.getLoginAccount() instanceof Customer){
+        if (LoginMenu.getLoginAccount() instanceof Customer) {
             Customer customer = (Customer) LoginMenu.getLoginAccount();
             for (DiscountCode allDiscountCode : DiscountCode.getAllDiscountCodes()) {
                 for (Customer customer1 : allDiscountCode.getAllCustomersWithDiscountCode()) {
-                    if (customer1.equals(customer)){
-                       discounts.add(allDiscountCode);
+                    if (customer1.equals(customer)) {
+                        discounts.add(allDiscountCode);
                     }
                 }
             }
@@ -73,7 +83,7 @@ public class CustomerMenuFx {
     }
 
 
-    private static void goToPage(){
+    private static void goToPage() {
         Scene pageTwoScene = new Scene(root);
         //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         Main.primStage.setScene(pageTwoScene);
@@ -98,8 +108,6 @@ public class CustomerMenuFx {
         massage.setScene(new Scene(rot, 500, 500));
         massage.show();
     }
-
-
 
 
     public void back(ActionEvent actionEvent) {

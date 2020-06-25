@@ -55,10 +55,6 @@ public class ViewAccountFx {
     @FXML
     public void initialize()  {
         if (request == null) {
- //           Account curAccount = null;
-//            if (account != null) {
-//                curAccount = account;
-//            }
             Account curAccount = account;
             username.setText(curAccount.getUsername());
             name.setText(curAccount.getName());
@@ -90,6 +86,8 @@ public class ViewAccountFx {
 
     public void viewCart(MouseEvent mouseEvent) throws IOException {
         if(LoginMenu.getLoginAccount() instanceof Customer) {
+         Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SaleLogFx.class.getClassLoader().getResource("saleLogFx.fxml")));
+
             root = FXMLLoader.load(Objects.requireNonNull(SaleLogFx.class.getClassLoader().getResource("saleLogFx.fxml")));
             goToPage();
         }else show("you can't see cart");
@@ -144,31 +142,38 @@ public class ViewAccountFx {
     }
 
     public void viewFirm(MouseEvent mouseEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
         if(LoginMenu.getLoginAccount() instanceof Seller){
             ViewFirmFx.setAccount(LoginMenu.getLoginAccount());
         }else if(LoginMenu.getLoginAccount() instanceof Manager){
             ViewFirmFx.setRequest(request);
         }
+        ViewFirmFx.setPriRoot(curRoot);
         root = FXMLLoader.load(Objects.requireNonNull(ViewFirmFx.class.getClassLoader().getResource("viewFirmFx.fxml")));
         goToPage();
     }
 
     public void edit(MouseEvent mouseEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
+        EditAccountFx.setPriRoot(curRoot);
         root = FXMLLoader.load(Objects.requireNonNull(EditAccountFx.class.getClassLoader().getResource("editAccountFx.fxml")));
         goToPage();
     }
 
-
     public void userMenu(ActionEvent actionEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
         if(LoginMenu.getLoginAccount() instanceof Seller){
+            SellerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
         } else if(LoginMenu.getLoginAccount() instanceof Manager){
+            ManagerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
         }else if(LoginMenu.getLoginAccount() instanceof Customer){
+            CustomerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         }
+        goToPage();
     }
-
     public void back(ActionEvent actionEvent) {
         root = priRoot;
         goToPage();

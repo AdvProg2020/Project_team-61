@@ -65,30 +65,35 @@ public class EditAccountFx {
                 phoneLoginMs.setText(OutputMassageHandler.showAccountOutput(LoginMenu.editSellerField(phoneNoSign.getText(), "phone number")));
             if (nameSign.getText() != null)
                 nameLoginMs.setText(OutputMassageHandler.showAccountOutput(LoginMenu.editSellerField(nameSign.getText(), "name")));
-        }
-        if (passSign.getText().trim().isEmpty() )
-            passLoginMs.setText(OutputMassageHandler.showAccountOutput(LoginMenu.editAccount(passSign.getText(), "password")));
-        if (lastNameSign.getText() != null)
-            lastNameLoginMs.setText(OutputMassageHandler.showAccountOutput(LoginMenu.editAccount(lastNameSign.getText(), "last name")));
-        if (emailSign.getText() != null)
-            emailLoginMs.setText(OutputMassageHandler.showAccountOutput(LoginMenu.editAccount(emailSign.getText(), "email")));
-        if (phoneNoSign.getText() != null)
-            phoneLoginMs.setText(OutputMassageHandler.showAccountOutput(LoginMenu.editAccount(phoneNoSign.getText(), "phone number")));
-        if (nameSign.getText() != null) {
-            nameLoginMs.setText(OutputMassageHandler.showAccountOutput(LoginMenu.editAccount(nameSign.getText(), "name")));
+        }else {
+            if (passSign.getText().trim().isEmpty())
+                passLoginMs.setText(OutputMassageHandler.showAccountOutput(LoginMenu.editAccount(passSign.getText(), "password")));
+            if (lastNameSign.getText() != null)
+                lastNameLoginMs.setText(OutputMassageHandler.showAccountOutput(LoginMenu.editAccount(lastNameSign.getText(), "last name")));
+            if (emailSign.getText() != null)
+                emailLoginMs.setText(OutputMassageHandler.showAccountOutput(LoginMenu.editAccount(emailSign.getText(), "email")));
+            if (phoneNoSign.getText() != null)
+                phoneLoginMs.setText(OutputMassageHandler.showAccountOutput(LoginMenu.editAccount(phoneNoSign.getText(), "phone number")));
+            if (nameSign.getText() != null) {
+                nameLoginMs.setText(OutputMassageHandler.showAccountOutput(LoginMenu.editAccount(nameSign.getText(), "name")));
+            }
         }
 
     }
 
-
     public void userMenu(ActionEvent actionEvent) throws IOException {
-        if(LoginMenu.getLoginAccount() instanceof Seller){
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(EditAccountFx.class.getClassLoader().getResource("editAccountFx.fxml")));
+        if (LoginMenu.getLoginAccount() instanceof Seller) {
+            SellerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
-        } else if(LoginMenu.getLoginAccount() instanceof Manager){
+        } else if (LoginMenu.getLoginAccount() instanceof Manager) {
+            ManagerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
-        }else if(LoginMenu.getLoginAccount() instanceof Customer){
+        } else if (LoginMenu.getLoginAccount() instanceof Customer) {
+            CustomerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         }
+        goToPage();
     }
 
     public void back(ActionEvent actionEvent) {
@@ -106,11 +111,6 @@ public class EditAccountFx {
         goToPage();
     }
 
-    public void picDropEdit(DragEvent dragEvent) {
-    }
-
-    public void picOverEdit(DragEvent dragEvent) {
-    }
 
     private static void goToPage() {
         Scene pageTwoScene = new Scene(root);

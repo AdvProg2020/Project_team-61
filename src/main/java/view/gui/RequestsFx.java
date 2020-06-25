@@ -1,5 +1,6 @@
 package view.gui;
 
+import controller.ProductMenu;
 import controller.menus.LoginMenu;
 import controller.menus.ManagerMenu;
 import javafx.collections.FXCollections;
@@ -72,22 +73,27 @@ public class RequestsFx {
 
 
     public void showRequest(MouseEvent mouseEvent) throws IOException {
+        Parent curRoot   = FXMLLoader.load(Objects.requireNonNull(RequestsFx.class.getClassLoader().getResource("requestsFx.fxml")));
         if (requests.getSelectionModel().getSelectedItem() != null) {
             Request request = requests.getSelectionModel().getSelectedItem();
             if (request instanceof AccountRequest) {
                 ViewAccountFx.setRequest(request);
+                ViewAccountFx.setPriRoot(curRoot);
                 root = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
                 goToPage();
             } else if (request instanceof ProductRequest) {
-
+                ProductMenuFX.setPriRoot(curRoot);
                 root = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
                 goToPage();
             } else if (request instanceof CommentRequest) {
-
+                CommentRequest commentRequest = (CommentRequest) request;
+                ViewComment.setPriRoot(curRoot);
+                ViewComment.setCommentRequest(commentRequest);
                 root = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
                 goToPage();
             } else if (request instanceof SaleRequest) {
                 ViewSaleFx.setRequest(request);
+                ViewSaleFx.setPriRoot(curRoot);
                 root = FXMLLoader.load(Objects.requireNonNull(ViewSaleFx.class.getClassLoader().getResource("viewSaleFx.fxml")));
                 goToPage();
             }

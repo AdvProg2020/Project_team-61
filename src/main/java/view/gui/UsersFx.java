@@ -32,16 +32,24 @@ import java.util.Objects;
 
 public class UsersFx {
 
-    @FXML private TableView<Account> usersList;
-    @FXML private TableColumn<Account, String> UserId;
-    @FXML private TableColumn<Account, Double> userPhoneNo;
-    @FXML private TableColumn<Account, String> userEmail;
-    @FXML private TableColumn<Account, String> userLast;
-    @FXML private TableColumn<Account, Date> userBirth;
-    @FXML private TableColumn<Account, String> userName;
-    @FXML private Label usersMs;
+    @FXML
+    private TableView<Account> usersList;
+    @FXML
+    private TableColumn<Account, String> UserId;
+    @FXML
+    private TableColumn<Account, Double> userPhoneNo;
+    @FXML
+    private TableColumn<Account, String> userEmail;
+    @FXML
+    private TableColumn<Account, String> userLast;
+    @FXML
+    private TableColumn<Account, Date> userBirth;
+    @FXML
+    private TableColumn<Account, String> userName;
+    @FXML
+    private Label usersMs;
 
-    public static  ObservableList list = FXCollections.observableArrayList();
+    public static ObservableList list = FXCollections.observableArrayList();
     private static Parent root;
     private static ArrayList<Account> accounts = new ArrayList<>();
     private static Parent priRoot;
@@ -69,7 +77,6 @@ public class UsersFx {
         userEmail.setCellValueFactory(new PropertyValueFactory<Account, String>("email"));
 
         makeList();
-      //  usersList.getColumns().addAll(UserId,userName,userLast,userBirth,userPhoneNo,userEmail);
         usersList.setEditable(true);
         usersList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         usersList.getSelectionModel().setCellSelectionEnabled(true);
@@ -79,27 +86,26 @@ public class UsersFx {
 
 
     public void viewUser(MouseEvent mouseEvent) throws IOException {
-        if(usersList.getSelectionModel().getSelectedItem() != null) {
+        if (usersList.getSelectionModel().getSelectedItem() != null) {
             Account a = usersList.getSelectionModel().getSelectedItem();
             ViewAccountFx.setAccount(a);
             root = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
             goToPage();
-        }else usersMs.setText("you have to select first");
+        } else usersMs.setText("you have to select first");
     }
 
     public void deleteUser(MouseEvent mouseEvent) throws IOException {
-        if(usersList.getSelectionModel().getSelectedItem() != null) {
+        if (usersList.getSelectionModel().getSelectedItem() != null) {
             Account a = usersList.getSelectionModel().getSelectedItem();
-            usersMs.setText( OutputMassageHandler.showAccountOutput( ManagerMenu.deleteUser(a.getUsername())));
+            usersMs.setText(OutputMassageHandler.showAccountOutput(ManagerMenu.deleteUser(a.getUsername())));
             makeTree();
-        }else usersMs.setText("you have to select first");
+        } else usersMs.setText("you have to select first");
     }
 
     public void AddManager(MouseEvent mouseEvent) throws IOException {
-
-            root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("signUpFx.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("signUpFx.fxml")));
         SignUpFx.setRole("manager");
-            goToPage();
+        goToPage();
     }
 
 
@@ -123,42 +129,26 @@ public class UsersFx {
 
     }
 
-    private static void goToPage(){
+    private static void goToPage() {
         Scene pageTwoScene = new Scene(root);
         //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         Main.primStage.setScene(pageTwoScene);
         Main.primStage.show();
     }
 
-    private void show(String text) {
-        Label label = new Label();
-        StackPane root = new StackPane();
-        root.getChildren().add(label);
-        label.setText(text);
-        Stage massage = new Stage();
-        massage.setScene(new Scene(root, 500, 500));
-        massage.show();
-    }
-
-//    private void makeList() throws IOException {
-//        List<Account> allAccounts = new ArrayList<>();
-//        allAccounts.addAll(Account.getAllAccounts());
-//        list.clear();
-//        for (int i = 0; i < allAccounts.size() ; i++) {
-//            list.addAll(i, allAccounts.get(i).getUsername(),allAccounts.get(i).getName(),allAccounts.get(i).getLastname(),allAccounts.get(i).getBirthdayDate(),allAccounts.get(i).getPhoneNo(),allAccounts.get(i).getEmail());
-//        }
-//
-//    }
-
-
     public void userMenu(ActionEvent actionEvent) throws IOException {
-        if(LoginMenu.getLoginAccount() instanceof Seller){
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(UsersFx.class.getClassLoader().getResource("usersFx.fxml")));
+        if (LoginMenu.getLoginAccount() instanceof Seller) {
+            SellerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
-        } else if(LoginMenu.getLoginAccount() instanceof Manager){
+        } else if (LoginMenu.getLoginAccount() instanceof Manager) {
+            ManagerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
-        }else if(LoginMenu.getLoginAccount() instanceof Customer){
+        } else if (LoginMenu.getLoginAccount() instanceof Customer) {
+            CustomerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         }
+        goToPage();
     }
 
     public void back(ActionEvent actionEvent) {

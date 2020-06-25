@@ -28,19 +28,28 @@ import java.util.Objects;
 
 
 public class ProductsFx {
-    @FXML private TableColumn<Product, String> productAdditional;
-    @FXML private TableColumn<Product, String> productId;
-    @FXML private TableColumn<Product, String> productNumberView;
-    @FXML private TableColumn<Product, Double> productNumber;
-    @FXML private TableColumn<Product, Double> productScore;
-    @FXML private TableColumn<Product, String> productName;
-    @FXML private TableColumn<Product, Number> productPrice;
-    @FXML private TableView<Product> products;
+    @FXML
+    private TableColumn<Product, String> productAdditional;
+    @FXML
+    private TableColumn<Product, String> productId;
+    @FXML
+    private TableColumn<Product, String> productNumberView;
+    @FXML
+    private TableColumn<Product, Double> productNumber;
+    @FXML
+    private TableColumn<Product, Double> productScore;
+    @FXML
+    private TableColumn<Product, String> productName;
+    @FXML
+    private TableColumn<Product, Number> productPrice;
+    @FXML
+    private TableView<Product> products;
     @FXML
     private Label productsMs;
     private static Parent priRoot;
 
     public static ObservableList list = FXCollections.observableArrayList();
+    public static ObservableList data = FXCollections.observableArrayList();
     private static Parent root;
     private static ArrayList<Product> allProducts = new ArrayList<>();
 
@@ -86,60 +95,61 @@ public class ProductsFx {
 
 
     }
+
     public void productsRemove(MouseEvent mouseEvent) throws IOException {
-            if(products.getSelectionModel().getSelectedItem() != null) {
-                Product product = (Product) products.getSelectionModel().getSelectedItem();
-                if(LoginMenu.getLoginAccount() instanceof Manager) {
-                    productsMs.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.removeProduct(product.getProductId())));
-                } else if(LoginMenu.getLoginAccount() instanceof Seller) {
-                    productsMs.setText(OutputMassageHandler.showAccountOutput(SellerMenu.processRemoveProduct(product.getProductId())));
-                }
-                makeTree();
-            }else productsMs.setText("you have to select first");
+        if (products.getSelectionModel().getSelectedItem() != null) {
+            Product product = (Product) products.getSelectionModel().getSelectedItem();
+            if (LoginMenu.getLoginAccount() instanceof Manager) {
+                productsMs.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.removeProduct(product.getProductId())));
+            } else if (LoginMenu.getLoginAccount() instanceof Seller) {
+                productsMs.setText(OutputMassageHandler.showAccountOutput(SellerMenu.processRemoveProduct(product.getProductId())));
+            }
+            makeTree();
+        } else productsMs.setText("you have to select first");
 
     }
 
     public void productsEdit(MouseEvent mouseEvent) throws IOException {
-        if(LoginMenu.getLoginAccount() instanceof Seller){
-            if(products.getSelectionModel().getSelectedItem() != null) {
-                Product product= products.getSelectionModel().getSelectedItem();
-                //???????????????????
-            root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("signUpFx.fxml")));
-            goToPage();
-            }else productsMs.setText("you have to select first");
+        if (LoginMenu.getLoginAccount() instanceof Seller) {
+                root = FXMLLoader.load(Objects.requireNonNull(AddProductMenuFX.class.getClassLoader().getResource("addProduct.fxml")));
+                goToPage();
         }
     }
 
     public void productsViewBuyers(MouseEvent mouseEvent) {
-        if(LoginMenu.getLoginAccount() instanceof Seller){
-            if(products.getSelectionModel().getSelectedItem() != null) {
-                Product product= products.getSelectionModel().getSelectedItem();
-                list.clear();
-                list.addAll(product.getListOfBuyers());
+        if (LoginMenu.getLoginAccount() instanceof Seller) {
+            if (products.getSelectionModel().getSelectedItem() != null) {
+                ArrayList<String> arrayList = new ArrayList<>();
+                Product product = products.getSelectionModel().getSelectedItem();
+                data.clear();
+                for (Customer listOfBuyer : product.getListOfBuyers()) {
+                    arrayList.add(listOfBuyer.getUsername());
+                }
+                data.addAll(arrayList);
                 showList();
-            }else productsMs.setText("you have to select first");
+            } else productsMs.setText("you have to select first");
         }
     }
 
     public void productsView(MouseEvent mouseEvent) throws IOException {
-        if(LoginMenu.getLoginAccount() instanceof Seller){
-            if(products.getSelectionModel().getSelectedItem() != null) {
+        if (LoginMenu.getLoginAccount() instanceof Seller) {
+            if (products.getSelectionModel().getSelectedItem() != null) {
                 Product product = products.getSelectionModel().getSelectedItem();
-                //??????????????????????????????
-                root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("signUpFx.fxml")));
+                ProductMenuFX.setProductInPage(product);
+                root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
                 goToPage();
-            }else productsMs.setText("you have to select first");
+            } else productsMs.setText("you have to select first");
         }
     }
 
     public void productsSortScore(MouseEvent mouseEvent) {
-        if(LoginMenu.getLoginAccount() instanceof Seller) {
+        if (LoginMenu.getLoginAccount() instanceof Seller) {
             Seller seller = (Seller) LoginMenu.getLoginAccount();
             Sort.setNewArrayOfProductSort(seller.getAllProduct());
-        }else {
+        } else {
             Sort.setNewArrayOfProductSort(Product.getProductList());
         }
-        allProducts =Sort.scoreSort();
+        allProducts = Sort.scoreSort();
 
         makeTree();
 
@@ -147,23 +157,25 @@ public class ProductsFx {
     }
 
     public void productsSortView(MouseEvent mouseEvent) {
-        if(LoginMenu.getLoginAccount() instanceof Seller) {
+        if (LoginMenu.getLoginAccount() instanceof Seller) {
             Seller seller = (Seller) LoginMenu.getLoginAccount();
             Sort.setNewArrayOfProductSort(seller.getAllProduct());
-        }else  {
+        } else {
             Sort.setNewArrayOfProductSort(Product.getProductList());
         }
-        allProducts= Sort.numberOfViewsSort();
+        allProducts = Sort.numberOfViewsSort();
         makeTree();
 
 
     }
-    private static void goToPage(){
+
+    private static void goToPage() {
         Scene pageTwoScene = new Scene(root);
         //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         Main.primStage.setScene(pageTwoScene);
         Main.primStage.show();
     }
+
     private void showList() {
         ListView listView = new ListView(list);
         StackPane root = new StackPane();
@@ -174,11 +186,11 @@ public class ProductsFx {
     }
 
     public void userMenu(ActionEvent actionEvent) throws IOException {
-        if(LoginMenu.getLoginAccount() instanceof Seller){
+        if (LoginMenu.getLoginAccount() instanceof Seller) {
             root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
-        } else if(LoginMenu.getLoginAccount() instanceof Manager){
+        } else if (LoginMenu.getLoginAccount() instanceof Manager) {
             root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
-        }else if(LoginMenu.getLoginAccount() instanceof Customer){
+        } else if (LoginMenu.getLoginAccount() instanceof Customer) {
             root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         }
     }

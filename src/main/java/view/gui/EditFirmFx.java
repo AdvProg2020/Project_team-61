@@ -23,17 +23,14 @@ public class EditFirmFx {
     @FXML
     private Label firmEmailCrMs;
     @FXML
-    private Label firmNameCrMs;
-    @FXML
     private TextField firmAddressCr;
     @FXML
     private Label firmAddressCrMs;
     @FXML
     private TextField firmEmailCr;
     @FXML
-    private TextField firmNameCr;
-    @FXML
     private TextField firmPhoneCr;
+
     private String type;
     private static Parent root;
     private static Parent priRoot;
@@ -42,14 +39,30 @@ public class EditFirmFx {
         EditFirmFx.priRoot = priRoot;
     }
 
+    public void addFirm(MouseEvent mouseEvent) throws IOException {
+        if(LoginMenu.getLoginAccount() instanceof Seller) {
+            Seller seller = (Seller) LoginMenu.getLoginAccount();
+            LoginMenu.firmName(seller.getFirm().getName());
+            firmEmailCrMs.setText(OutputMassageHandler.showFirmOutput(LoginMenu.editFirm(firmEmailCr.getText(), "email")));
+            firmAddressCrMs.setText(OutputMassageHandler.showFirmOutput(LoginMenu.editFirm(firmAddressCr.getText(), "address")));
+            firmPhoneNoCrMs.setText(OutputMassageHandler.showFirmOutput(LoginMenu.editFirm(firmPhoneCr.getText(), "phone number")));
+        }
+
+    }
+
     public void userMenu(ActionEvent actionEvent) throws IOException {
-        if(LoginMenu.getLoginAccount() instanceof Seller){
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+        if (LoginMenu.getLoginAccount() instanceof Seller) {
+            SellerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
-        } else if(LoginMenu.getLoginAccount() instanceof Manager){
+        } else if (LoginMenu.getLoginAccount() instanceof Manager) {
+            ManagerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
-        }else if(LoginMenu.getLoginAccount() instanceof Customer){
+        } else if (LoginMenu.getLoginAccount() instanceof Customer) {
+            CustomerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         }
+        goToPage();
     }
 
     public void back(ActionEvent actionEvent) {
@@ -67,17 +80,7 @@ public class EditFirmFx {
         goToPage();
     }
 
-    public void addFirm(MouseEvent mouseEvent) throws IOException {
-        String firmName = firmNameCr.getText();
-        String firmEmail = firmEmailCr.getText();
-        String firmNAddress = firmAddressCr.getText();
-        String firmPhone = firmPhoneCr.getText();
-        firmNameCrMs.setText(OutputMassageHandler.showFirmOutput(LoginMenu.firmName(firmName)));
-        firmEmailCrMs.setText(OutputMassageHandler.showFirmOutput(LoginMenu.editFirm(firmEmail,"email")));
-        firmAddressCrMs.setText(OutputMassageHandler.showFirmOutput(LoginMenu.editFirm(firmNAddress,"address")));
-        firmPhoneNoCrMs.setText(OutputMassageHandler.showFirmOutput(LoginMenu.editFirm(firmPhone,"phone number")));
 
-    }
 
     private static void goToPage() {
         Scene pageTwoScene = new Scene(root);

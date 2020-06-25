@@ -15,23 +15,33 @@ import javafx.scene.CacheHint;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import model.accounts.Customer;
+import model.accounts.Manager;
+import model.accounts.Seller;
 import model.log.BuyLog;
 import model.productRelated.Comment;
 import model.productRelated.Product;
+import model.request.Request;
 import view.OutputMassageHandler;
+
 
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.Objects;
 
 public class ProductMenuFX {
@@ -49,10 +59,11 @@ public class ProductMenuFX {
     public Button backButtonAddComment;
     public Button sendCommentButton;
     public AnchorPane addCommentSectionPane;
-    public Label nullAddCommentError;
+    public Label nullAddCommentError = new Label();
     public TextArea productCategoryDetail;
     public TextArea productDetail;
     public TableView commentTableView = new TableView();
+
     public Button scoreButton;
     @FXML
     private Label productNameLabel;
@@ -71,8 +82,60 @@ public class ProductMenuFX {
     @FXML
     private Label scoreMs;
     private int score =0;
+    private static Parent priRoot;
+    private static Parent root;
+    private static Request request;
+
+    public static void setRequest(Request request) {
+        ProductMenuFX.request = request;
+    }
+
+    public static void setPriRoot(Parent priRoot) {
+        ProductMenuFX.priRoot = priRoot;
+    }
+
+    public static void setProductInPage(Product productInPage) {
+        ProductMenuFX.productInPage = productInPage;
+    }
 
     public void makeUpPage() throws IOException {
+        if(request == null) {
+            productNameLabel.setText(productInPage.getProductName());
+            File file = new File(productInPage.getProductImage());
+            Image image = new Image(new FileInputStream(file));
+            productPic.setImage(image);
+            productDetail.setText("Id : " + productInPage.getId() + "\n" +
+                    "Name : " + productInPage.getProductName() + "\n" +
+                    "Price : " + productInPage.getPrice() + "\n" +
+                    "Seller : " + productInPage.getSeller() + "\n" +
+                    "Category : " + productInPage.getCategory().getName() + "\n" +
+                    "Number : " + productInPage.getNumberOfProducts() + "\n" +
+                    "Average Score : " + productInPage.getScore() + "\n"
+            );
+            productDetail.setEditable(false);
+            for (String productCategorySpecification : productInPage.productCategorySpecifications) {
+                System.out.println(productCategorySpecification);
+            }
+            for (String specification : productInPage.productCategorySpecifications) {
+
+                if (specification != null && !specification.equals("")) {
+                    for (String productCategorySpecification : productInPage.productCategorySpecifications) {
+                        if (!productCategorySpecification.equals(null)) {
+                            if (!productCategoryDetail.getText().equals(handleProCatDetail())) {
+                                productCategoryDetail.appendText(productCategorySpecification + "\n");
+                            }
+                        }
+                    }
+                } else {
+                    System.out.println("trait is empty");
+                }
+            }
+            productCategoryDetail.setEditable(false);
+        }else makeRequest();
+    }
+
+    private void makeRequest() throws FileNotFoundException {
+
         productNameLabel.setText(productInPage.getProductName());
         File file = new File(productInPage.getProductImage());
         Image image = new Image(new FileInputStream(file));
@@ -80,7 +143,7 @@ public class ProductMenuFX {
         productDetail.setText("Id : " + productInPage.getId() + "\n" +
                 "Name : " + productInPage.getProductName() + "\n" +
                 "Price : " + productInPage.getPrice() + "\n" +
-                "Seller : " + productInPage.getSeller().getName() + "\n" +
+                "Seller : " + productInPage.getSeller() + "\n" +
                 "Category : " + productInPage.getCategory().getName() + "\n" +
                 "Number : " + productInPage.getNumberOfProducts() + "\n" +
                 "Average Score : " + productInPage.getScore() + "\n"
@@ -104,16 +167,21 @@ public class ProductMenuFX {
             }
         }
         productCategoryDetail.setEditable(false);
-
     }
 
     @FXML
     void popUpAddComment(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("sample/fxFile/comment.fxml")));
-        prevScene = new Scene(root);
-        thisStage = new Stage();
-        thisStage.setScene(prevScene);
-        thisStage.show();
+        if (LoginMenu.isLogin()){
+            Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("comment.fxml")));
+            prevScene = new Scene(root);
+            thisStage = new Stage();
+            thisStage.setScene(prevScene);
+            thisStage.show();
+        }else{
+            nullAddCommentError.setVisible(true);
+            nullAddCommentError.setText("sign In first");
+            nullAddCommentError.setVisible(true);
+        }
     }
 
     public void handleAddProductToLog(ActionEvent actionEvent) throws IOException {
@@ -216,4 +284,49 @@ public class ProductMenuFX {
     }
 
 
+
+    public void back(ActionEvent actionEvent) {
+        root = priRoot;
+        goToPage();
+    }
+
+    public void exit(ActionEvent actionEvent) {
+        System.exit(0);
+    }
+
+    public void logout(ActionEvent actionEvent) throws IOException {
+        LoginMenu.processLogout();
+        root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        goToPage();
+    }
+
+    private static void goToPage() {
+        Scene pageTwoScene = new Scene(root);
+        //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        Main.primStage.setScene(pageTwoScene);
+        Main.primStage.show();
+    }
+
+    public void login(ActionEvent actionEvent)throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
+        goToPage();
+    }
+
+
+    public void userMenu(ActionEvent actionEvent)throws IOException {
+        Parent curRoot  = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
+        if(LoginMenu.getLoginAccount() instanceof Manager) {
+            ManagerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        }else  if(LoginMenu.getLoginAccount() instanceof Seller) {
+            SellerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+        }else  if(LoginMenu.getLoginAccount() instanceof Customer) {
+            CustomerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
+        }
+
+        goToPage();
+
+    }
 }

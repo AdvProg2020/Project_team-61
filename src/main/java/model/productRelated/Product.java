@@ -24,9 +24,9 @@ public class Product {
 
     private String productId;
     private String productName;
-    private Company companiesName;
+    private String companiesName;
     private double price;
-    private Seller seller;
+    private String seller;
     private ProductStatus productStatus;
     private Category category;
     private double averageScore;
@@ -38,7 +38,7 @@ public class Product {
     private boolean isBought;
     String productImageId;
     private String categoryName;
-    private String sellerName;
+   // private String sellerName;
 
     //sample.lists
 //    private  ArrayList<Account> listOfSellers = new ArrayList<Account>();
@@ -80,7 +80,7 @@ public class Product {
 
     //finish
     //id,productImage,name,price,category,seller
-    public void setDetailProduct(String productImageId, String name, double price, Category categoryr, Account selle, Firm firm, int numberOfProducts) throws IOException {
+    public void setDetailProduct(String productImageId, String name, double price, Category category, Account selle, Firm firm, int numberOfProducts) throws IOException {
         if (name != null) {
             this.productName = name;
         }
@@ -90,9 +90,8 @@ public class Product {
         if (price != 0) {
             this.price = price;
         }
-        if (seller != null) {
-            this.seller = seller;
-            sellerName = seller.getName();
+        if (selle != null) {
+            this.seller = selle.getUsername();
         }
         if (numberOfProducts != 0) {
             this.numberOfProducts = numberOfProducts;
@@ -254,7 +253,7 @@ public class Product {
         return category;
     }
 
-    public Company getCompaniesName() {
+    public String getCompaniesName() {
         return companiesName;
     }
 
@@ -284,12 +283,11 @@ public class Product {
         return totalNumberOfBuyers;
     }
 
-    public Seller getSeller() {
-        return (Seller) seller;
+    public String getSeller() {
+        return  seller;
     }
 
-
-    public void setSeller(Seller seller) {
+    public void setSeller(String seller) {
         this.seller = seller;
     }
 
@@ -301,17 +299,13 @@ public class Product {
         return categoryName;
     }
 
-    public String getSellerName() {
-        return sellerName;
-    }
+
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
 
-    public void setSellerName(String sellerName) {
-        this.sellerName = sellerName;
-    }
+
     //othersTobeHandel-------------------------------------------------------------------------------
 
 
