@@ -57,8 +57,6 @@ public class SaleLogsFx {
         SaleLogsFx.saleLogs = saleLogs;
     }
 
-    public static void setPriRoot(Parent curRoot) {
-    }
 
     public  void initializeObserverList() {
         data.addAll(saleLogs);

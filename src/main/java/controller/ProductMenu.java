@@ -22,7 +22,6 @@ public class ProductMenu {
     private static BuyLog buyLog;
     private static CommentRequest commentRequest;
 
-
     public static BuyLog getBuyLog() {
         return buyLog;
     }

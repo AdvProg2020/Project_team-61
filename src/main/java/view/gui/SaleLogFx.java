@@ -32,7 +32,7 @@ public class SaleLogFx {
 
 
     @FXML
-    private ListView<Product> saleLogProduct;
+    private ListView<Product> products;
     public  static ObservableList<Product> data = FXCollections.observableArrayList();
     public static SaleLog curSaleLog;
 
@@ -60,7 +60,7 @@ public class SaleLogFx {
         saleLogReceived.setText(String.valueOf(curSaleLog.getReceivedAmount()));
         saleLogReduced.setText(String.valueOf(curSaleLog.getReducedAmount()));
         initializeObserverList();
-        saleLogProduct.setItems(data);
+        products.setItems(data);
 
         //buyLogDate.setCellValueFactory(curBuyLog,)
         //  saleLogReducedAmount.setCellValueFactory(new PropertyValueFactory<>("id"));
