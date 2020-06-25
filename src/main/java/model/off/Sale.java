@@ -19,6 +19,7 @@ public class Sale {
     private int saleAmount;
     private static String seller;
     private ArrayList<Product> allSaleProducts = new ArrayList<>();
+    public static ArrayList<Product> allProSale = new ArrayList<>();
     private static ArrayList<Sale> allSales = new ArrayList<>();
     public static Type SaleType = new TypeToken<ArrayList<Sale>>() {
     }.getType();
