@@ -22,7 +22,7 @@ public class AccountRequest extends Request {
     private static String name = null;
     private static String lastname = null;
     private static String Email = null;
-    private static double phoneNo = 0;
+    private static int phoneNo = 0;
     private static Date birthdayDate = null;
 
     private static String firmName = null;
@@ -115,7 +115,7 @@ public class AccountRequest extends Request {
 
     }
 
-    public void setPhoneNo(double phoneNo) throws IOException {
+    public void setPhoneNo(int phoneNo) throws IOException {
         this.phoneNo = phoneNo;
         writeInJ();
 
@@ -165,7 +165,7 @@ public class AccountRequest extends Request {
         FileHandling.writeInFile(json, "accountRequest.json");
     }
 
-    public void sellerAccountDetails(String username, String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate , String img) throws IOException {
+    public void sellerAccountDetails(String username, String password, String name, String lastname, String Email, int phoneNo, Date birthdayDate , String img) throws IOException {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -192,7 +192,7 @@ public class AccountRequest extends Request {
         return Email;
     }
 
-    public static double getPhoneNo() {
+    public static int getPhoneNo() {
         return phoneNo;
     }
 
@@ -216,4 +216,7 @@ public class AccountRequest extends Request {
         return firmEmail;
     }
 
+    public static String getFirmType() {
+        return FirmType;
+    }
 }

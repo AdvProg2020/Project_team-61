@@ -9,6 +9,7 @@ public class Factory extends Firm {
     public Factory(String ID) throws IOException {
         super(ID);
         allFactories.add(this);
+        type = "factory";
   //      writeInJ();
     }
 //    public static void writeInJ() throws IOException {

@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.shape.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane  prefHeight="1035.0" prefWidth="1325.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.RequestsFx">
+<AnchorPane prefHeight="879.0" prefWidth="1589.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.RequestsFx">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="882.0" stroke="BLACK" strokeType="INSIDE" width="1605.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <fill>
@@ -62,8 +59,8 @@
         </Text>
       <TableView fx:id="requests" layoutX="284.0" layoutY="108.0" prefHeight="647.0" prefWidth="1038.0">
         <columns>
-          <TableColumn fx:id="requestId" prefWidth="317.0" text="ID" />
-          <TableColumn fx:id="requestSeller" minWidth="0.0" prefWidth="366.0" text="Seller" />
+          <TableColumn fx:id="requestId" prefWidth="317.0" text="Text" />
+          <TableColumn fx:id="requestSeller" minWidth="0.0" prefWidth="366.0" text="Account" />
             <TableColumn fx:id="requestDate" minWidth="0.0" prefWidth="354.0" text="Date" />
         </columns>
       </TableView>

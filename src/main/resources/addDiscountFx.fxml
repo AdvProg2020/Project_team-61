@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.paint.*?>
-<?import java.lang.*?>
-<?import javafx.scene.shape.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="1045.0" prefWidth="1613.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.AddDiscountFx">
@@ -136,7 +135,7 @@
             </LinearGradient>
          </fill>
       </Text>
-      <Label fx:id="discountMs" layoutX="925.0" layoutY="596.0" prefHeight="32.0" prefWidth="339.0" text="Label" textFill="WHITE">
+      <Label fx:id="discountMs" layoutX="925.0" layoutY="596.0" prefHeight="32.0" prefWidth="339.0" textFill="WHITE">
          <font>
             <Font size="19.0" />
          </font>

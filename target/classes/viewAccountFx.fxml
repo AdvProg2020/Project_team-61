@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ViewAccountFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ViewAccountFx">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="882.0" stroke="BLACK" strokeType="INSIDE" width="1605.0">
             <fill>
@@ -53,17 +50,17 @@
                 <Image url="@icons/face.png" />
             </image>
         </ImageView>
-        <Label fx:id="username" layoutX="64.0" layoutY="516.0" prefHeight="49.0" prefWidth="319.0" text="Label" textFill="WHITE">
+        <Label fx:id="username" layoutX="64.0" layoutY="516.0" prefHeight="49.0" prefWidth="319.0" textFill="WHITE">
             <font>
                 <Font size="28.0" />
             </font>
         </Label>
-        <Label fx:id="name" layoutX="748.0" layoutY="193.0" prefHeight="49.0" prefWidth="328.0" text="Label" textFill="WHITE">
+        <Label fx:id="name" layoutX="748.0" layoutY="193.0" prefHeight="49.0" prefWidth="328.0" textFill="WHITE">
             <font>
                 <Font size="25.0" />
             </font>
         </Label>
-        <Label fx:id="phoneNo" layoutX="749.0" layoutY="582.0" prefHeight="49.0" prefWidth="328.0" text="Label" textFill="WHITE">
+        <Label fx:id="phoneNo" layoutX="749.0" layoutY="582.0" prefHeight="49.0" prefWidth="328.0" textFill="WHITE">
             <font>
                 <Font size="25.0" />
             </font>
@@ -73,7 +70,7 @@
                 <Font size="28.0" />
             </font>
         </Label>
-        <Label fx:id="role" layoutX="749.0" layoutY="413.0" prefHeight="49.0" prefWidth="328.0" text="Label" textFill="WHITE">
+        <Label fx:id="role" layoutX="749.0" layoutY="413.0" prefHeight="49.0" prefWidth="328.0" textFill="WHITE">
             <font>
                 <Font size="25.0" />
             </font>
@@ -128,12 +125,12 @@
                 </LinearGradient>
             </fill>
         </Text>
-        <Label fx:id="birthday" layoutX="749.0" layoutY="495.0" prefHeight="49.0" prefWidth="328.0" text="Label" textFill="WHITE">
+        <Label fx:id="birthday" layoutX="749.0" layoutY="495.0" prefHeight="49.0" prefWidth="328.0" textFill="WHITE">
             <font>
                 <Font size="25.0" />
             </font>
         </Label>
-        <Label fx:id="lastName" layoutX="749.0" layoutY="272.0" prefHeight="49.0" prefWidth="328.0" text="Label" textFill="WHITE">
+        <Label fx:id="lastName" layoutX="749.0" layoutY="272.0" prefHeight="49.0" prefWidth="328.0" textFill="WHITE">
             <font>
                 <Font size="25.0" />
             </font>
@@ -185,7 +182,7 @@
                 <Font name="System Bold Italic" size="28.0" />
             </font>
         </Text>
-        <Label fx:id="credit" layoutX="748.0" layoutY="343.0" prefHeight="49.0" prefWidth="328.0" text="Label" textFill="WHITE">
+        <Label fx:id="credit" layoutX="748.0" layoutY="343.0" prefHeight="49.0" prefWidth="328.0" textFill="WHITE">
             <font>
                 <Font size="25.0" />
             </font>

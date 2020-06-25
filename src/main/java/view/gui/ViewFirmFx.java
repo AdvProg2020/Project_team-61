@@ -22,15 +22,14 @@ public class ViewFirmFx {
 
     @FXML
     private Label firmPhoneNo;
-
     @FXML
     private Label firmAddress;
-
     @FXML
     private Label firmName;
-
     @FXML
     private Label firmEmail;
+    @FXML
+    private Label firmType;
 
     private static Parent priRoot;
     private static Account account;
@@ -57,6 +56,7 @@ public class ViewFirmFx {
             firmEmail.setText(seller.getFirm().getEmail());
             firmPhoneNo.setText(String.valueOf(seller.getFirm().getPhoneNO()));
             firmAddress.setText(seller.getFirm().getAddress());
+            firmType.setText(seller.getFirm().getType());
         } else firmRequest();
     }
 
@@ -69,6 +69,7 @@ public class ViewFirmFx {
         firmEmail.setText(accountRequest.getFirmEmail());
         firmPhoneNo.setText(String.valueOf(accountRequest.getFirmPhoneNO()));
         firmAddress.setText(accountRequest.getFirmAddress());
+        firmType.setText(accountRequest.getFirmType());
     }
 
 
