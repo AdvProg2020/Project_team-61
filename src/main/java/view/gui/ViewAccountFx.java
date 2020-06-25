@@ -86,6 +86,8 @@ public class ViewAccountFx {
 
     public void viewCart(MouseEvent mouseEvent) throws IOException {
         if(LoginMenu.getLoginAccount() instanceof Customer) {
+         Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SaleLogFx.class.getClassLoader().getResource("saleLogFx.fxml")));
+
             root = FXMLLoader.load(Objects.requireNonNull(SaleLogFx.class.getClassLoader().getResource("saleLogFx.fxml")));
             goToPage();
         }else show("you can't see cart");
