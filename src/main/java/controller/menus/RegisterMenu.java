@@ -185,7 +185,7 @@ public class RegisterMenu {
             } else outputNo = 3;
         } else if (detailMen == 1) {
             if (detail.matches("09[0-9]{9}")) {
-                accountRequest.setPhoneNo(Integer.parseInt(detail));
+                accountRequest.setPhoneNo(Double.parseDouble(detail));
                 detailMenu++;
                 outputNo = 0;
             } else outputNo = 6;

@@ -91,12 +91,14 @@ public class ViewSaleFx {
 
     private void showRequest() {
         if (request instanceof SaleRequest) {
-            SaleRequest saleRequest = (SaleRequest) request;
-            makeRequestTree();
-            saleIdLabel.setText(String.valueOf(saleRequest.getOffId()));
-            startSaleLabel.setText(String.valueOf(saleRequest.getStartOfSalePeriod()));
-            endSaleLabel.setText(String.valueOf(saleRequest.getEndOfSalePeriod()));
-            saleAmountLabel.setText(String.valueOf(saleRequest.getSaleAmount()));
+            if(request instanceof  SaleRequest) {
+                SaleRequest saleRequest = (SaleRequest) request;
+                makeRequestTree();
+                saleIdLabel.setText(String.valueOf(saleRequest.getOffId()));
+                startSaleLabel.setText(String.valueOf(saleRequest.getStartOfSalePeriod()));
+                endSaleLabel.setText(String.valueOf(saleRequest.getEndOfSalePeriod()));
+                saleAmountLabel.setText(String.valueOf(saleRequest.getSaleAmount()));
+            }
         }
     }
 

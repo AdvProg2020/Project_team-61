@@ -380,6 +380,11 @@ public class Product {
         category.getAllProducts().removeAll(category.getAllProducts());
     }
 
+    public static ArrayList<Product> getAllProduct() {
+        return allProduct;
+    }
+
+
     //checked
     public static Comparator<Product> productComparatorForView = new Comparator<Product>() {
 

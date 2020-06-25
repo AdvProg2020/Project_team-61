@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -21,7 +24,7 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <TableView fx:id="ProductsInOffSearch" layoutX="171.0" layoutY="214.0" prefHeight="488.0" prefWidth="817.0" />
+      <TableView fx:id="ProductsInOffSearch" onMouseClicked="#clickedColumn" layoutX="95.0" layoutY="218.0" prefHeight="474.0" prefWidth="1037.0" />
       <Label layoutX="487.0" layoutY="71.0" prefHeight="39.0" prefWidth="342.0" text="Products In Off">
          <font>
             <Font name="Britannic Bold" size="39.0" />
@@ -35,11 +38,35 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <TextField fx:id="searchProInSale" layoutX="264.0" layoutY="155.0" prefHeight="39.0" prefWidth="198.0" />
-      <Label layoutX="196.0" layoutY="162.0" prefHeight="26.0" prefWidth="62.0" text="search" textFill="#0022ff">
+      <TextField fx:id="searchProInSale" layoutX="174.0" layoutY="154.0" prefHeight="39.0" prefWidth="198.0" />
+      <Label layoutX="104.0" layoutY="161.0" prefHeight="26.0" prefWidth="62.0" text="search" textFill="#0022ff">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
+      <MenuBar layoutY="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Back">
+            <items>
+              <MenuItem mnemonicParsing="false" text="back" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Exit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="exit" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Logout">
+            <items>
+              <MenuItem mnemonicParsing="false" text="logout" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="My Account">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="account" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
    </children>
 </AnchorPane>

@@ -3,7 +3,6 @@ package model.request;
 import controller.menus.LoginMenu;
 import model.accounts.Account;
 import model.accounts.Seller;
-
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,7 +23,9 @@ public abstract class Request {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         now = LocalDateTime.now();
         requestDate = dtf.format(now);
-        seller = LoginMenu.getLoginAccount().getUsername();
+        if(LoginMenu.getLoginAccount() instanceof Seller) {
+            seller =  LoginMenu.getLoginAccount().getUsername();
+        }
         allRequests.add(this);
     }
 
@@ -53,15 +54,15 @@ public abstract class Request {
 
     public abstract void acceptRequest() throws IOException;
 
-    public static Request getRequestFromID(String requestID) {
-        for (Request request : allRequests) {
+    public static Request getRequestFromID(String requestID){
+        for(Request request : allRequests){
             if (request.requestText.equalsIgnoreCase(requestID)) return request;
         }
         return null;
     }
 
-    public static boolean isThereRequestFromID(String requestID) {
-        for (Request request : allRequests) {
+    public static boolean isThereRequestFromID(String requestID){
+        for(Request request : allRequests){
             if (request.requestText.equalsIgnoreCase(requestID)) return true;
         }
         return false;

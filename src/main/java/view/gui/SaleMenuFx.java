@@ -5,15 +5,19 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+import model.accounts.Seller;
+import model.off.Sale;
 import model.productRelated.Category;
 import model.productRelated.Product;
 import model.productRelated.ProductInMenusShow;
@@ -24,6 +28,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Objects;
 
 public class SaleMenuFx {
     public TextField searchProInSale;
@@ -46,12 +52,20 @@ public class SaleMenuFx {
     public TableColumn<ProductInSaleShow, String> sixthColumn = new TableColumn<>("Specifications");
 
     public TableColumn<ProductInSaleShow , Category> seventh = new TableColumn<>("category");
+
+    public TableColumn<ProductInSaleShow , String> eight = new TableColumn<>("saleAmount");
+
+    public TableColumn<ProductInSaleShow , Date> ninth = new TableColumn<>("startOfSalePeriod");
+
+    public TableColumn<ProductInSaleShow , Date> tenth = new TableColumn<>("endOfSalePeriod");
+
     @FXML
     public static ObservableList<ProductInSaleShow> data = FXCollections.observableArrayList();
 
     public static FilteredList<ProductInSaleShow> filteredList = new FilteredList<>(data, b -> true);
 
-
+    public static Scene prevScene;
+    public static Stage thisStage;
 //    public static void setPriRoot(Parent priRoot) {
 //        ProductsMenuFX.priRoot = priRoot;
 //    }
@@ -67,7 +81,8 @@ public class SaleMenuFx {
 
 
     public static void listIni() throws FileNotFoundException {
-        for (Product product : Product.getProductList()) {
+
+        for (Product product : Sale.allProSale) {
             ProductInSaleShow show = new ProductInSaleShow(product.getId());
             show.name = product.getProductName();
             show.additionalDetail = product.getAdditionalDetail();
@@ -82,8 +97,17 @@ public class SaleMenuFx {
             show.productImage.setFitWidth(100);
             show.productImage.setFitHeight(100);
             show.productImage.setImage(image);
-
+            for (Seller seller : Seller.getAllSellers()) {
+                for (Sale sale : seller.getAllSales()) {
+                    if (sale.getAllSaleProducts().contains(product)){
+                        show.saleAmount = sale.getSaleAmount();
+                        show.startOfSalePeriod=sale.getStartOfSalePeriod();
+                        show.endOfSalePeriod = sale.getEndOfSalePeriod();
+                    }
+                }
+            }
         }
+
     }
 
 
@@ -97,9 +121,12 @@ public class SaleMenuFx {
         fifthColumn.setCellValueFactory(new PropertyValueFactory<ProductInSaleShow, String>("seller"));
         sixthColumn.setCellValueFactory(new PropertyValueFactory<ProductInSaleShow, String>("additionalDetail"));
         seventh.setCellValueFactory(new PropertyValueFactory<ProductInSaleShow,Category>("category"));
+        eight.setCellValueFactory(new PropertyValueFactory<ProductInSaleShow,String >("saleAmount"));
+        ninth.setCellValueFactory(new PropertyValueFactory<ProductInSaleShow, Date>("startOfSalePeriod"));
+        tenth.setCellValueFactory(new PropertyValueFactory<ProductInSaleShow,Date>("endOfSalePeriod"));
 
         initializeObserverList();
-        ProductsInOffSearch.getColumns().addAll(firstColumn, secondColumn, productImageViewTableColumn, forthColumn, fifthColumn, sixthColumn,seventh);
+        ProductsInOffSearch.getColumns().addAll(firstColumn, secondColumn, productImageViewTableColumn, forthColumn, fifthColumn, sixthColumn,seventh,eight,ninth,tenth);
         ProductsInOffSearch.setItems(data);
 
 
@@ -132,6 +159,33 @@ public class SaleMenuFx {
         ProductsInOffSearch.getSelectionModel().setCellSelectionEnabled(true);
         ProductsInOffSearch.setItems(sortedList);
 
+    }
+
+    public void clickedColumn(MouseEvent mouseEvent) throws IOException {
+        TablePosition tablePosition = (TablePosition) ProductsInOffSearch.getSelectionModel().getSelectedCells().get(0);
+        int row = tablePosition.getRow();
+        ProductInSaleShow item = (ProductInSaleShow) ProductsInOffSearch.getItems().get(row);
+        TableColumn tableColumn = tablePosition.getTableColumn();
+
+        try {
+
+            ImageView im = (ImageView) tableColumn.getCellObservableValue(item).getValue();
+            String id = ProductInSaleShow.getIdWithImage(im);
+            ProductMenuFX.productInPage = Product.getProductById(id);
+            gotoProductPage(ProductMenuFX.productInPage);
+
+        } catch (NullPointerException e) {
+            System.out.println("you cant press here");
+        }
+    }
+
+    public static void gotoProductPage(Product product) throws IOException {
+        AnchorPane root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
+        prevScene = new Scene(root);
+        thisStage = new Stage();
+        thisStage.setScene(prevScene);
+        ProductMenuFX.productInPage = product;
+        thisStage.show();
     }
 
 

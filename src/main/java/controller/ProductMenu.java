@@ -22,44 +22,21 @@ public class ProductMenu {
     private static BuyLog buyLog;
     private static CommentRequest commentRequest;
 
+
     public static BuyLog getBuyLog() {
         return buyLog;
     }
 
-    //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-    public static void processDigest() throws FileNotFoundException {
-        // CommandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
-        selectedProduct = Product.getProductById(ProductsMenu.getProductId());
-        // OutputHandler.digest(selectedProduct.getId());
-    }
+
 
     public static void addToCart() throws IOException {
-            String uniqueID = UUID.randomUUID().toString();
-            if (BuyLog.getFirstProduct()) {
-                buyLog = new BuyLog(uniqueID);
-            }
-            buyLog.addProductToBuyLog(ProductsMenu.getProductId(), 1);
-
-
+        String uniqueID = UUID.randomUUID().toString();
+        if (BuyLog.getFirstProduct()) {
+            buyLog = new BuyLog(uniqueID);
+        }
+        buyLog.addProductToBuyLog(ProductsMenu.getProductId(), 1);
     }
 
-
-    //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4
-    public static void processAttributes() throws FileNotFoundException {
-        // OutputHandler.attributes(selectedProduct.getId());
-    }
-
-    public static void processCompare(String productID) throws FileNotFoundException {
-        if (Product.isThereProductWithId(productID)) {
-            //   OutputHandler.compareProducts(selectedProduct.getId(), productID);
-        } else OutputMassageHandler.showProductOutput(4);
-    }
-
-    //comment--------------------------------------------------------------------
-    public static void processComments() throws FileNotFoundException {
-        // CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
-        // OutputHandler.showCommentOnOneProduct(selectedProduct.getId());
-    }
 
 
     public static int addComments() throws IOException {
@@ -105,4 +82,29 @@ public class ProductMenu {
         return outputNo;
     }
 
+    /*
+
+
+    public static void processAttributes() throws FileNotFoundException {
+        // OutputHandler.attributes(selectedProduct.getId());
+    }
+
+    public static void processCompare(String productID) throws FileNotFoundException {
+        if (Product.isThereProductWithId(productID)) {
+            //   OutputHandler.compareProducts(selectedProduct.getId(), productID);
+        } else OutputMassageHandler.showProductOutput(4);
+    }
+
+    //comment--------------------------------------------------------------------
+    public static void processComments() throws FileNotFoundException {
+        // CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTS);
+        // OutputHandler.showCommentOnOneProduct(selectedProduct.getId());
+    }
+
+      public static void processDigest() throws FileNotFoundException {
+        // CommandProcessor.setSubMenuStatus(SubMenuStatus.DIGEST);
+        selectedProduct = Product.getProductById(ProductsMenu.getProductId());
+        // OutputHandler.digest(selectedProduct.getId());
+    }
+     */
 }

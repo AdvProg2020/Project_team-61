@@ -17,6 +17,10 @@ public class ProductsMenu {
     private static int outputNo;
     private static String productId;
 
+    public static void setProductId(String productId) {
+        ProductsMenu.productId = productId;
+    }
+
 
     //filter-------------------------------------------------------
 

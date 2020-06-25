@@ -1,6 +1,7 @@
 package view.gui;
 
 import controller.menus.CustomerMenu;
+import controller.menus.LoginMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -127,9 +128,14 @@ public class BuyLogFx {
     }
 
     public void purchase(MouseEvent mouseEvent) throws IOException {
-        PayLogFx.setPreBuyLog(curBuyLog);
-        root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("payLogFx.fxml")));
-        goToPage();
+        if(LoginMenu.isLogin()) {
+            PayLogFx.setPreBuyLog(curBuyLog);
+            root = FXMLLoader.load(Objects.requireNonNull(PayLogFx.class.getClassLoader().getResource("payLogFx.fxml")));
+            goToPage();
+        }else{
+            root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
+            goToPage();
+        }
     }
 
     public void viewProductFromBuyLog(MouseEvent mouseEvent) throws IOException {

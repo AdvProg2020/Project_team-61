@@ -19,11 +19,20 @@ import java.util.ArrayList;
         public String additionalDetail;
         public int numberOfProduct;
         public double score = 50;
+        public String firm;
         public static ArrayList<ProductInMenusShow> list = new ArrayList<>();
 
         public ProductInMenusShow(String id) {
             this.id = id;
             list.add(this);
+        }
+
+        public String getFirm() {
+            return firm;
+        }
+
+        public void setFirm(String firm) {
+            this.firm = firm;
         }
 
         public String getName() {

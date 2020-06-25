@@ -137,6 +137,7 @@ public class ManagerMenu {
                 Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
                 if (inputDate.after(currentDate)) {
                     newDiscountCode.setStartOfDiscountPeriod(inputDate);
+                    Manager.writeInJ();
                     outputNo = 0;
                     detailMenu = 1;
                 } else outputNo = 26;
@@ -147,6 +148,7 @@ public class ManagerMenu {
                 Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
                 if (inputDate.after(currentDate)) {
                     newDiscountCode.setEndOfDiscountPeriod(inputDate);
+                    Manager.writeInJ();
                     outputNo = 0;
                     detailMenu = 2;
                 } else outputNo = 26;

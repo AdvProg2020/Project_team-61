@@ -48,7 +48,7 @@
             <Font size="22.0" />
          </font>
       </Text>
-      <ImageView fitHeight="274.0" fitWidth="249.0" layoutX="224.0" layoutY="190.0" onDragDropped="#handleDrop" onDragOver="#handleDragOver" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="userImage" fitHeight="274.0" fitWidth="249.0" layoutX="224.0" layoutY="190.0" onDragDropped="#handleDrop" onDragOver="#handleDragOver" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@icons/face.png" />
          </image>

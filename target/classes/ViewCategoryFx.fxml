@@ -1,64 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ViewCategoryFx">
+<AnchorPane prefHeight="715.0" prefWidth="1159.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ViewCategoryFx">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" height="414.0" layoutY="-5.0" stroke="BLACK" strokeType="INSIDE" width="601.0">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="729.0" layoutY="-5.0" stroke="BLACK" strokeType="INSIDE" width="1185.0">
             <fill>
                 <LinearGradient endX="1.0" endY="1.0">
                     <stops>
                         <Stop>
                             <color>
-                                <Color red="0.5663461685180664" green="1.0" blue="0.11999999731779099" />
+                                <Color blue="0.11999999731779099" green="1.0" red="0.5663461685180664" />
                             </color>
                         </Stop>
                         <Stop offset="1.0">
                             <color>
-                                <Color red="1.0" green="1.0" blue="1.0" />
+                                <Color blue="1.0" green="1.0" red="1.0" />
                             </color>
                         </Stop>
                     </stops>
                 </LinearGradient>
             </fill>
         </Rectangle>
-        <Text layoutX="198.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Category" wrappingWidth="226.478515625">
+        <MenuBar layoutX="3.0" layoutY="-4.0" prefHeight="36.0" prefWidth="1185.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="User menu">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#userMenu" text="your menu" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Logout">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Back">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Text layoutX="479.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Category" wrappingWidth="226.478515625">
             <font>
                 <Font size="28.0" />
             </font></Text>
-        <Text fx:id="nameTextField" layoutX="231.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:">
+        <Text fx:id="nameTextField" layoutX="479.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" />
+        <Label fx:id="catNameLabel" layoutX="570.0" layoutY="183.0" prefHeight="29.0" prefWidth="94.0" text="Label" />
+      <ListView fx:id="products" layoutX="229.0" layoutY="281.0" prefHeight="290.0" prefWidth="294.0" />
+      <ListView fx:id="traits" layoutX="623.0" layoutY="275.0" prefHeight="301.0" prefWidth="283.0" />
+      <Text layoutX="298.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Products" wrappingWidth="185.478515625">
          <font>
-            <Font name="Droid Serif" size="23.0" />
-         </font></Text>
-        <Label fx:id="catNameLabel" layoutX="287.0" layoutY="142.0" prefHeight="29.0" prefWidth="94.0" text="Label" />
-      <ListView fx:id="products" layoutX="211.0" layoutY="183.0" prefHeight="200.0" prefWidth="200.0" />
-      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="601.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="Account">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#userMenu" onMouseClicked="#userMenu" text="UserMenu" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Back">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Logout">
-            <items>
-                  <MenuItem mnemonicParsing="false" onAction="#logout" text="Logout" />
-            </items>
-          </Menu>
-            <Menu mnemonicParsing="false" text="Exit">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
-              </items>
-            </Menu>
-        </menus>
-      </MenuBar>
+            <Font size="28.0" />
+         </font>
+      </Text>
+      <Text layoutX="700.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Traits" wrappingWidth="128.478515625">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Text>
     </children>
 </AnchorPane>

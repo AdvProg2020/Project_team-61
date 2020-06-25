@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="848.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.BuyLogFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="848.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.BuyLogFx">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="848.0" stroke="BLACK" strokeType="INSIDE" width="1600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <fill>
@@ -75,30 +76,30 @@
                <stops>
                   <Stop>
                      <color>
-                        <Color red="1.0" green="0.1944444477558136" blue="0.1944444477558136" />
+                        <Color blue="0.1944444477558136" green="0.1944444477558136" red="1.0" />
                      </color>
                   </Stop>
                   <Stop offset="1.0">
                      <color>
-                        <Color red="0.9166666865348816" green="0.12448559701442719" blue="0.6922153830528259" />
+                        <Color blue="0.6922153830528259" green="0.12448559701442719" red="0.9166666865348816" />
                      </color>
                   </Stop>
                </stops>
             </LinearGradient>
          </textFill>
       </Button>
-      <Button fx:id="showTotalPriceB" layoutX="1144.0" layoutY="638.0" mnemonicParsing="false" onMouseClicked="#showTotalPriceBuyLog" text="Show Total Price">
+      <Button fx:id="showTotalPriceB" layoutX="1154.0" layoutY="638.0" mnemonicParsing="false" onMouseClicked="#showTotalPriceBuyLog" text="Show Total Price">
          <textFill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
                   <Stop>
                      <color>
-                        <Color red="1.0" green="0.1944444477558136" blue="0.1944444477558136" />
+                        <Color blue="0.1944444477558136" green="0.1944444477558136" red="1.0" />
                      </color>
                   </Stop>
                   <Stop offset="1.0">
                      <color>
-                        <Color red="0.7938596606254578" green="0.46308478713035583" blue="0.05880441889166832" />
+                        <Color blue="0.05880441889166832" green="0.46308478713035583" red="0.7938596606254578" />
                      </color>
                   </Stop>
                </stops>

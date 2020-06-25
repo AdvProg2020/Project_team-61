@@ -36,6 +36,11 @@ public class Seller extends Account {
     }
 
 
+    public void addSale(Sale sale) throws IOException {
+        allSales.add(sale);
+        writeInJ();
+    }
+
 
     public void removeProduct(Product product) throws IOException {
         allProduct.remove(product);

@@ -19,11 +19,13 @@ import java.util.UUID;
 
 
 public class CustomerMenu {
-    private static int outputNo =0;
+    private static int outputNo = 0;
     private static String productID = null;
     private static boolean hasDiscount = false;
     private static String discountID = null;
-    private static Customer customer= null;
+   // private static Customer customer = null;
+    private static SaleLog saleLog;
+
 
     public static String getDiscountID() {
         return discountID;
@@ -56,22 +58,11 @@ public class CustomerMenu {
         return outputNo;
     }
 
-    public static void increaseProductNumber(String productID) {
-        if (isThereBuyLog()) {
-            if (checkProduct(productID)) {
-                CustomerMenu.productID = productID;
-              //  CommandProcessor.setSubMenuStatus(SubMenuStatus.INCREASEPRODUCTNUMBER);
-                outputNo = 2;
-            }
-        }
-        OutputMassageHandler.showCustomerOutput(outputNo);
-
-    }
 
     public static void sortBy(String sort) throws FileNotFoundException {
-        if(sort.matches("(?i)(?:log\\s+date)")){
-            if(sort.matches("log\\s+date")) {
-                Customer customer= (Customer) LoginMenu.getLoginAccount();
+        if (sort.matches("(?i)(?:log\\s+date)")) {
+            if (sort.matches("log\\s+date")) {
+                Customer customer = (Customer) LoginMenu.getLoginAccount();
                 Sort.setNewArrayOfBuyLog(customer.getBuyLogsHistory());
                 Sort.buyLogSortDate();
             }
@@ -81,44 +72,24 @@ public class CustomerMenu {
 
     public static void increaseLogProduct(String number) {
         if (number.matches("\\d+")) {
-            Product product = Product.getProductById(productID);
-            ProductMenu.getBuyLog().increaseNumberOfProduct(productID, Integer.parseInt(number));
-            outputNo=10;
-        }else outputNo=4;
+            //  Product product = Product.getProductById(productID);
+            ProductMenu.getBuyLog().addProductToBuyLog(productID, Integer.parseInt(number));
+            outputNo = 10;
+        } else outputNo = 4;
         OutputMassageHandler.showCustomerOutput(outputNo);
     }
 
     public static void decreaseLogProduct(String number) {
         if (number.matches("\\d+")) {
             ProductMenu.getBuyLog().reduceNumberOfProduct(productID, Integer.parseInt(number));
-            outputNo=15;
-        }else outputNo=4;
+            outputNo = 15;
+        } else outputNo = 4;
         OutputMassageHandler.showCustomerOutput(outputNo);
     }
 
-    public static void decreaseProductNumber(String productID) {
-        if (isThereBuyLog()) {
-            if (checkProduct(productID)) {
-                CustomerMenu.productID = productID;
-              // CommandProcessor.setSubMenuStatus(SubMenuStatus.DECREASEPRODUCTNUMBER);
-                outputNo = 3;
-            }
-        }
-        OutputMassageHandler.showCustomerOutput(outputNo);
-    }
 
     //purches............................................................................
-    public static void purchase() {
-        if (LoginMenu.isLogin()) {
-            if (LoginMenu.getLoginAccount().getRole().equals("customer")) {
-                //CommandProcessor.setMenuStatus(MenuStatus.PURCHASE);
-               // CommandProcessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
-                //CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
-                outputNo = 7;
-            } else outputNo = 8;
-        } else outputNo = 6;
-        OutputMassageHandler.showPurchaseOutput(outputNo);
-    }
+
 
     public static boolean checkDiscountCode(String discountCodeID) {
         //if (discountCodeID.matches("")) {
@@ -133,11 +104,11 @@ public class CustomerMenu {
         if (have.matches("(?i)(?:yes|no)")) {
             if (have.equalsIgnoreCase("yes")) {
                 hasDiscount = true;
-              //  CommandProcessor.setSubMenuStatus(SubMenuStatus.CHECKDISCOUNTCODE);
+                //  CommandProcessor.setSubMenuStatus(SubMenuStatus.CHECKDISCOUNTCODE);
                 outputNo = 1;
             } else {
                 hasDiscount = false;
-              //  CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
+                //  CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
                 outputNo = 3;
             }
         } else outputNo = 2;
@@ -148,24 +119,22 @@ public class CustomerMenu {
     public static void discountCodeValidation(String discountCodeId) {
         Account loginAccount = LoginMenu.getLoginAccount();
         DiscountCode discountCode = DiscountCode.getDiscountWithId(discountCodeId);
-        if (checkDiscountCode(discountCodeId)) {
+        if (DiscountCode.isThereDiscountWithId(discountCodeId)) {
             if (discountCode.discountMatchAccount(loginAccount.getUsername())) {
                 if (discountCode.discountDateValid()) {
                     if (discountCode.getTotalTimesOfUse() > 0) {
-                       // CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
+                        // CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
                         discountID = discountCodeId;
                         outputNo = 2;
                     } else outputNo = 5;
                 } else outputNo = 4;
             } else outputNo = 3;
-        }
+        } else outputNo = 7;
         OutputMassageHandler.showPurchaseOutput(outputNo);
     }
 
     public static void payment() throws IOException {
         if (ProductMenu.getBuyLog().holePrice <= LoginMenu.getLoginAccount().getCredit()) {
-           // CommandProcessor.setSubMenuStatus(SubMenuStatus.MAINMENU);
-           // CommandProcessor.setMenuStatus(MenuStatus.MAINMENU);
             finishingPayment();
             outputNo = 10;
         } else outputNo = 9;
@@ -174,81 +143,78 @@ public class CustomerMenu {
 
     private static void finishingPayment() throws IOException {
         double holePrice = ProductMenu.getBuyLog().calculateHolePrice();
-        Account loginAccount = LoginMenu.getLoginAccount();
+        Customer loginAccount = null;
+        if (LoginMenu.getLoginAccount() instanceof Customer) {
+            loginAccount = (Customer) LoginMenu.getLoginAccount();
+        }
         double money = loginAccount.getCredit() - holePrice;
         loginAccount.setCredit(money);
 
-        if (CustomerMenu.hasDiscount) {
-
-        }
         for (Product p : ProductMenu.getBuyLog().getChosenProduct().keySet()) {
-            //faghat price bedoon discount be seller eafe
             Account.getAccountWithUsername(p.getSeller()).setCredit(Account.getAccountWithUsername(p.getSeller()).getCredit() + p.getPrice());
-            p.getListOfBuyers().add((Customer) loginAccount);
+            int n = p.getNumberOfProducts() - ProductMenu.getBuyLog().getChosenProduct().get(p);
+            p.setNumberOfProducts(n);
+            if (n == 0) {
+                p.setIsBought(true);
+            }
+            p.getListOfBuyers().add(loginAccount);
         }
-        ProductMenu.getBuyLog().setAllBoughtProduct(ProductMenu.getBuyLog().getChosenProduct());
+
         ProductMenu.getBuyLog().setItsFinal(true);
 
         for (Seller seller : ProductMenu.getBuyLog().getSellers()) {
-            for (Product p : ProductMenu.getBuyLog().getAllBoughtProduct().keySet()) {
+            for (Product p : ProductMenu.getBuyLog().getChosenProduct().keySet()) {
                 if (p.getSeller().equals(seller)) {
-                    UUID id = UUID.randomUUID();
-                    SaleLog saleLog = new SaleLog(id.toString());
-                    saleLog.setSaleLogDetail(p.getPrice(), seller.getName());
-                    saleLog.addProductToSaleLog(p.getId());
+                    if (!SaleLog.idThereSeller(seller)) {
+                        UUID id = UUID.randomUUID();
+                        saleLog = new SaleLog(id.toString());
+                    } else {
+                        saleLog = SaleLog.getLogWithSeller(seller.getUsername());
+                    }
+                    saleLog.setSeller(seller.getUsername());
+                    saleLog.addPrice(p.getPrice());
+                    saleLog.addProductToSaleLog(p.getId(), ProductMenu.getBuyLog().getChosenProduct().get(p));
                     if (p.getInSale()) {
-                        saleLog.setReducedAmount(p.getSale().getSaleAmount());
+                        if(p.getSale().checkSale()) {
+                            saleLog.setReducedAmount(p.getSale().withSale(p));
+                        }
                     } else saleLog.setReducedAmount(0);
+                    saleLog.setReceivedAmount();
                 }
             }
         }
     }
 
-    //log.............................................................................
-
-    private static boolean checkLog(String orderID) {
-        // if (orderID.matches("(?!^ +$)^.+$")) {
-        if (Log.isThereLogWithID(orderID)) {
-            return true;
-        } else outputNo = 8;
-        //} else outputNo = 0;
-        return false;
-    }
 
     //score.............................................................
     public static int rateProduct(String productID, int number) throws IOException {
         if (checkProduct(productID)) {
             if (number >= 1 && number <= 5) {
                 //if (checkCustomer()) {
-                    if (isBought()) {
-                        Score newScore = new Score(LoginMenu.getLoginAccount(), Product.getProductById(productID), number);
-                        // OutputMassageHandler.showOutputWith2String(productID, String.valueOf(number), 1);
-                        outputNo = 14;
-                    }else outputNo = 13;
-               // }else outputNo = 9;
+                if (isBought()) {
+                    Score newScore = new Score(LoginMenu.getLoginAccount(), Product.getProductById(productID), number);
+                    // OutputMassageHandler.showOutputWith2String(productID, String.valueOf(number), 1);
+                    outputNo = 14;
+                } else outputNo = 13;
+                // }else outputNo = 9;
             } else outputNo = 11;
 
         }//OutputMassageHandler.showCustomerOutput(outputNo);
-        return  outputNo;
+        return outputNo;
     }
 
     private static boolean isBought() {
-        for (BuyLog buyLog : customer.getBuyLogsHistory()) {
-            if (buyLog.checkIfProductIsBought(productID)) {
-                return true;
+        if(LoginMenu.getLoginAccount() instanceof  Customer) {
+            Customer cus = (Customer) LoginMenu.getLoginAccount();
+            for (BuyLog buyLog : cus.getBuyLogsHistory()) {
+                if (buyLog.checkIfProductIsBought(productID)) {
+                    return true;
+                }
             }
         }
         return false;
     }
 
-    private static boolean checkCustomer() {
-        Account account = LoginMenu.getLoginAccount();
-        if (account instanceof Customer) {
-            customer = ((Customer) account);
-            return true;
-        }
-        return false;
-    }
 
 /*    //GSON
     public static void processViewBalance() throws FileNotFoundException {
@@ -306,8 +272,59 @@ public class CustomerMenu {
 
     }
 
- */
 
+    public static void decreaseProductNumber(String productID) {
+        if (isThereBuyLog()) {
+            if (checkProduct(productID)) {
+                CustomerMenu.productID = productID;
+              // CommandProcessor.setSubMenuStatus(SubMenuStatus.DECREASEPRODUCTNUMBER);
+                outputNo = 3;
+            }
+        }
+        OutputMassageHandler.showCustomerOutput(outputNo);
+    }
+
+        public static void increaseProductNumber(String productID) {
+        if (isThereBuyLog()) {
+            if (checkProduct(productID)) {
+                CustomerMenu.productID = productID;
+              //  CommandProcessor.setSubMenuStatus(SubMenuStatus.INCREASEPRODUCTNUMBER);
+                outputNo = 2;
+            }
+        }
+        OutputMassageHandler.showCustomerOutput(outputNo);
+
+    }
+        public static void purchase() {
+        if (LoginMenu.isLogin()) {
+            if (LoginMenu.getLoginAccount().getRole().equals("customer")) {
+                //CommandProcessor.setMenuStatus(MenuStatus.PURCHASE);
+               // CommandProcessor.setSubMenuStatus(SubMenuStatus.RECIVERINFORMATION);
+                //CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
+                outputNo = 7;
+            } else outputNo = 8;
+        } else outputNo = 6;
+        OutputMassageHandler.showPurchaseOutput(outputNo);
+    }
+
+    private static boolean checkCustomer() {
+        Account account = LoginMenu.getLoginAccount();
+        if (account instanceof Customer) {
+            customer = ((Customer) account);
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean checkLog(String orderID) {
+        // if (orderID.matches("(?!^ +$)^.+$")) {
+        if (Log.isThereLogWithID(orderID)) {
+            return true;
+        } else outputNo = 8;
+        //} else outputNo = 0;
+        return false;
+    }
+ */
 
 
 }

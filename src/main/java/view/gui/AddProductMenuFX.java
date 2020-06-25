@@ -131,6 +131,8 @@ public class AddProductMenuFX {
         File file = new File(imageId);
         Image image = new Image(new FileInputStream(file));
         productImage.setImage(image);
+        productImage.setVisible(true);
+        pane.getChildren().add(productImage);
     }
 
     @FXML

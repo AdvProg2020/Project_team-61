@@ -1,6 +1,5 @@
 package view.gui;
 
-import controller.ProductMenu;
 import controller.menus.LoginMenu;
 import controller.menus.ManagerMenu;
 import javafx.collections.FXCollections;
@@ -10,11 +9,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -22,11 +19,14 @@ import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
+import model.productRelated.Product;
+import model.productRelated.ProductInMenusShow;
 import model.request.*;
 import model.sort.Sort;
 import view.OutputMassageHandler;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Objects;
 
 public class RequestsFx {
@@ -35,7 +35,7 @@ public class RequestsFx {
     @FXML
     private TableColumn<Request, String> requestId;
     @FXML
-    private TableColumn<Request, String> requestDate;
+    private TableColumn<Request, Date> requestDate;
     @FXML
     private TableColumn<Request, Account> requestSeller;
 
@@ -61,7 +61,7 @@ public class RequestsFx {
 
         requestId.setCellValueFactory(new PropertyValueFactory<Request, String>("requestText"));
         requestSeller.setCellValueFactory(new PropertyValueFactory<Request, Account>("seller"));
-        requestDate.setCellValueFactory(new PropertyValueFactory<Request, String>("requestDate"));
+        requestDate.setCellValueFactory(new PropertyValueFactory<Request, Date>("now"));
 
         makeList();
         requests.setEditable(true);
@@ -73,9 +73,25 @@ public class RequestsFx {
 
 
     public void showRequest(MouseEvent mouseEvent) throws IOException {
-        Parent curRoot   = FXMLLoader.load(Objects.requireNonNull(RequestsFx.class.getClassLoader().getResource("requestsFx.fxml")));
+        String im = "";
+        TablePosition tablePosition = requests.getSelectionModel().getSelectedCells().get(0);
+        int row = tablePosition.getRow();
+        Request item = requests.getItems().get(row);
+        TableColumn tableColumn = tablePosition.getTableColumn();
+
+        try {
+
+            im = (String) tableColumn.getCellObservableValue(item).getValue();
+
+
+
+        } catch (NullPointerException e) {
+            System.out.println("you cant press here");
+        }
+
         if (requests.getSelectionModel().getSelectedItem() != null) {
-            Request request = requests.getSelectionModel().getSelectedItem();
+            Parent curRoot   = FXMLLoader.load(Objects.requireNonNull(RequestsFx.class.getClassLoader().getResource("requestsFx.fxml")));
+            Request request = Request.getRequestFromID(im);
             if (request instanceof AccountRequest) {
                 ViewAccountFx.setRequest(request);
                 ViewAccountFx.setPriRoot(curRoot);
@@ -83,13 +99,14 @@ public class RequestsFx {
                 goToPage();
             } else if (request instanceof ProductRequest) {
                 ProductMenuFX.setPriRoot(curRoot);
-                root = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
+                ProductMenuFX.setRequest(request);
+                root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
                 goToPage();
             } else if (request instanceof CommentRequest) {
                 CommentRequest commentRequest = (CommentRequest) request;
                 ViewComment.setPriRoot(curRoot);
                 ViewComment.setCommentRequest(commentRequest);
-                root = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
+                root = FXMLLoader.load(Objects.requireNonNull(ViewComment.class.getClassLoader().getResource("viewCommentFx.fxml")));
                 goToPage();
             } else if (request instanceof SaleRequest) {
                 ViewSaleFx.setRequest(request);
@@ -139,15 +156,19 @@ public class RequestsFx {
     }
 
 
-
     public void userMenu(ActionEvent actionEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(RequestsFx.class.getClassLoader().getResource("requestsFx.fxml")));
         if(LoginMenu.getLoginAccount() instanceof Seller){
+            SellerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
         } else if(LoginMenu.getLoginAccount() instanceof Manager){
+            ManagerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
         }else if(LoginMenu.getLoginAccount() instanceof Customer){
+            CustomerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         }
+        goToPage();
     }
 
     public void back(ActionEvent actionEvent) {
@@ -169,7 +190,7 @@ public class RequestsFx {
 
         requestId.setCellValueFactory(new PropertyValueFactory<Request, String>("requestText"));
         requestSeller.setCellValueFactory(new PropertyValueFactory<Request, Account>("seller"));
-        requestDate.setCellValueFactory(new PropertyValueFactory<Request, String>("requestDate"));
+        requestDate.setCellValueFactory(new PropertyValueFactory<Request, Date>("requestDate"));
 
         list.clear();
         Sort.setNewArrayOfRequest(Request.getAllRequests());

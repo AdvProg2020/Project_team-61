@@ -153,6 +153,28 @@ public class Main extends Application {
 
         }
 
+        for (Sale sale : Sale.getAllSales()) {
+            Sale.allProSale.addAll(sale.getAllSaleProducts());
+            try{
+                for (Product allSaleProduct : sale.getAllSaleProducts()) {
+                    System.out.println(allSaleProduct.getProductName());
+
+                }
+            }catch (NullPointerException e){
+                System.out.println("null");
+            }
+        }
+
+        for (Seller seller : Seller.getAllSellers()) {
+            Firm.getAllFirms().add(seller.getFirm());
+
+        }
+
+        for (Manager manager : Manager.getAllManagers()) {
+            DiscountCode.getAllDiscountCodes().addAll(manager.getAllDiscountCodes());
+        }
+
+
         Application.launch(args);
 
     }

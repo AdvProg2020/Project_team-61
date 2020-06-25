@@ -65,6 +65,7 @@ public class SaleRequest extends Request {
         if (Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
             Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
             seller.removeSaleRequest(this);
+          //  seller.addSale(sale);
         }
         writeInJ();
     }

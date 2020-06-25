@@ -114,7 +114,7 @@ public class CategoriesFX {
             ViewCategoryFx.setPriRoot(curRoot);
             ViewCategoryFx.setCurCat(curCat);
             root = FXMLLoader.load(Objects.requireNonNull(ViewCategoryFx.class.getClassLoader().getResource("ViewCategoryFx.fxml")));
-
+            goToPage();
         }
     }
     private static void goToPage(){
