@@ -195,8 +195,6 @@ public class ProductsMenuFX {
 
         });
 
-
-
         for (CheckBox checkBox : filterCatCheck) {
             checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
