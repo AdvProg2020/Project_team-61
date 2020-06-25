@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
@@ -21,6 +22,9 @@ import model.off.DiscountCode;
 import model.request.AccountRequest;
 import model.request.Request;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -30,7 +34,7 @@ public class ViewAccountFx {
     @FXML private Label lastName;
     @FXML private Label role;
     @FXML private Label name;
-    @FXML private ImageView accountImg;
+    @FXML private ImageView accountImg = new ImageView();
     @FXML private Label credit;
     @FXML private Label phoneNo;
     @FXML private Label email;
@@ -57,7 +61,7 @@ public class ViewAccountFx {
     }
 
     @FXML
-    public void initialize()  {
+    public void initialize() throws FileNotFoundException {
         if (request == null) {
             Account curAccount = account;
             username.setText(curAccount.getUsername());
@@ -68,6 +72,10 @@ public class ViewAccountFx {
             email.setText(curAccount.getEmail());
             credit.setText(String.valueOf(curAccount.getCredit()));
             birthday.setText(String.valueOf(curAccount.getBirthdayDate()));
+            File file = new File(curAccount.getImageId());
+            Image image = new Image(new FileInputStream(file));
+            accountImg.setImage(image);
+
         }else showRequest();
     }
 
