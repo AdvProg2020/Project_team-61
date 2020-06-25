@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -22,8 +23,12 @@ import model.accounts.Manager;
 import model.accounts.Seller;
 import model.productRelated.Category;
 import model.productRelated.Product;
+import model.productRelated.ProductInMenusShow;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -33,31 +38,31 @@ import java.util.Objects;
 public class ProductsMenuFX {
 
         @FXML
-        public TableView<Product> tableView = new TableView<>();
+        public TableView<ProductInMenusShow> tableView = new TableView<>();
         @FXML
-        public TableColumn<Product, String> firstColumn = new TableColumn<>("id");
+        public TableColumn<ProductInMenusShow, String> firstColumn = new TableColumn<>("id");
 
         @FXML
-        public TableColumn<Product, String> productImageViewTableColumn = new TableColumn<>("proImage");
+        public TableColumn<ProductInMenusShow, ImageView> productImageViewTableColumn = new TableColumn<>("productImage");
 
         @FXML
-        public TableColumn<Product, String> secondColumn = new TableColumn<>("name");
+        public TableColumn<ProductInMenusShow, String> secondColumn = new TableColumn<>("name");
         @FXML
-        public TableColumn<Product, String> forthColumn = new TableColumn<>("price");
+        public TableColumn<ProductInMenusShow, String> forthColumn = new TableColumn<>("price");
         @FXML
-        public TableColumn<Product, Seller> fifthColumn = new TableColumn<>("seller");
+        public TableColumn<ProductInMenusShow, String> fifthColumn = new TableColumn<>("seller");
 
         @FXML
-        public TableColumn<Product, String> sixthColumn = new TableColumn<>("Specifications");
+        public TableColumn<ProductInMenusShow, String> sixthColumn = new TableColumn<>("Specifications");
 
-        public TableColumn<Product ,Category> seventh = new TableColumn<>("category");
-
+        public TableColumn<ProductInMenusShow ,Category> seventh = new TableColumn<>("category");
         @FXML
-        public static ObservableList<Product> data = FXCollections.observableArrayList();
+        public static ObservableList<ProductInMenusShow> data = FXCollections.observableArrayList();
+
 
         public static ImageView productPic = new ImageView();
 
-        public static FilteredList<Product> filteredList = new FilteredList<>(data, b -> true);
+        public static FilteredList<ProductInMenusShow> filteredList = new FilteredList<>(data, b -> true);
 
         @FXML
         public TableColumn<Category, String> catName = new TableColumn<>("name");
@@ -84,25 +89,44 @@ public class ProductsMenuFX {
                 ProductsMenuFX.priRoot = priRoot;
         }
 
-        public static void initializeObserverList() {
-                for (Product product : Product.getProductList()) {
-                        if (!data.contains(product)){
-                                System.out.println(product.getSeller());
-                                System.out.println(product.getCategory());
-                                data.add(product);
+        public static void initializeObserverList() throws FileNotFoundException {
+                listIni();
+                for (ProductInMenusShow show : ProductInMenusShow.list) {
+                        if (!data.contains(show)){
+                                data.add(show);
                         }
+                }
+        }
+
+        public static void listIni() throws FileNotFoundException {
+                for (Product product : Product.getProductList()) {
+                        ProductInMenusShow show = new ProductInMenusShow(product.getId());
+                        show.name = product.getProductName();
+                        show.additionalDetail = product.getAdditionalDetail();
+                        show.category = product.getCategory().getName();
+                        show.id = product.getId();
+                        show.price = product.getPrice();
+                        show.comment = product.getComment();
+                        show.seller = product.getSeller();
+                        File file = new File(product.getProductImage());
+                        Image image = new Image(new FileInputStream(file));
+                        show.productImage = new ImageView();
+                        show.productImage.setFitWidth(100);
+                        show.productImage.setFitHeight(100);
+                        show.productImage.setImage(image);
+
                 }
         }
         @FXML
         public void initialize() throws IOException {
                 dataInFilterCheck();
-                firstColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("productId"));
-                secondColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("productName"));
-                productImageViewTableColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("productImage"));
-                forthColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("price"));
-                fifthColumn.setCellValueFactory(new PropertyValueFactory<Product, Seller>("seller"));
-                sixthColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("additionalDetail"));
-                seventh.setCellValueFactory(new PropertyValueFactory<Product,Category>("category"));
+                firstColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("id"));
+                secondColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("name"));
+                productImageViewTableColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, ImageView>("productImage"));
+                forthColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("price"));
+                fifthColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("seller"));
+                sixthColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("additionalDetail"));
+                seventh.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow,Category>("category"));
 
                 initializeObserverList();
                 tableView.getColumns().addAll(firstColumn, secondColumn, productImageViewTableColumn, forthColumn, fifthColumn, sixthColumn,seventh);
@@ -116,10 +140,10 @@ public class ProductsMenuFX {
                                 }
                                 String lowerCaseFilter = newValue.toLowerCase();
 
-                                if (product.getProductName().toLowerCase().contains(lowerCaseFilter)) {
+                                if (product.getName().toLowerCase().contains(lowerCaseFilter)) {
                                         return true;
                                 }
-                                else if (product.getCategory().getName().toLowerCase().contains(lowerCaseFilter)) {
+                                else if (product.getCategory().toLowerCase().contains(lowerCaseFilter)) {
                                         return true;
                                 }
                                 else return false;
@@ -137,7 +161,7 @@ public class ProductsMenuFX {
                 categoriesListView.setItems(dataCat);
 
 
-                SortedList<Product> sortedList = new SortedList<>(filteredList);
+                SortedList<ProductInMenusShow> sortedList = new SortedList<>(filteredList);
                 sortedList.comparatorProperty().bind(tableView.comparatorProperty());
                 tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
                 tableView.getSelectionModel().setCellSelectionEnabled(true);
@@ -157,15 +181,14 @@ public class ProductsMenuFX {
         public void clickedColumn(MouseEvent mouseEvent) throws IOException {
                 TablePosition tablePosition = tableView.getSelectionModel().getSelectedCells().get(0);
                 int row = tablePosition.getRow();
-                Product item = tableView.getItems().get(row);
+                ProductInMenusShow item = tableView.getItems().get(row);
                 TableColumn tableColumn = tablePosition.getTableColumn();
 
                 try {
-                        System.out.println(tableColumn.getCellObservableValue(item).getValue() + "1***");
-                        String im = (String) tableColumn.getCellObservableValue(item).getValue();
-                        System.out.println(im+"heh");
-                        ProductMenuFX.productInPage = Product.getProductWithImage(im);
-                        System.out.println(ProductMenuFX.productInPage.getProductImage()+"fksflksdfsdlf");
+
+                        ImageView im = (ImageView) tableColumn.getCellObservableValue(item).getValue();
+                        String id = ProductInMenusShow.getIdWithImage(im);
+                        ProductMenuFX.productInPage = Product.getProductById(id);
                         gotoProductPage(ProductMenuFX.productInPage);
 
                 } catch (NullPointerException e) {

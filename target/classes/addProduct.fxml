@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.AddProductMenuFX">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="2078.0">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="1920.0">
             <fill>
                 <LinearGradient endX="1.0" endY="1.0">
                     <stops>
@@ -24,6 +24,30 @@
                 </LinearGradient>
             </fill>
         </Rectangle>
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1658.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="User menu">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#userMenu" text="your menu" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Logout">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Back">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
         <Label layoutX="555.0" layoutY="14.0" prefHeight="151.0" prefWidth="343.0" text="       Add Product" textAlignment="RIGHT" AnchorPane.topAnchor="14.0">
             <font>
                 <Font size="35.0" />
