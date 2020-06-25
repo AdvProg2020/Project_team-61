@@ -3,6 +3,7 @@ package model.productRelated;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ProductInSaleShow {
     public String name;
@@ -16,6 +17,9 @@ public class ProductInSaleShow {
     public String additionalDetail;
     public int numberOfProduct;
     public double score = 50;
+    public double saleAmount;
+    public Date startOfSalePeriod;
+    public Date endOfSalePeriod;
     public static ArrayList<ProductInSaleShow> list = new ArrayList<>();
 
     public ProductInSaleShow(String id) {
@@ -23,6 +27,29 @@ public class ProductInSaleShow {
         list.add(this);
     }
 
+    public double getSaleAmount() {
+        return saleAmount;
+    }
+
+    public void setSaleAmount(double saleAmount) {
+        this.saleAmount = saleAmount;
+    }
+
+    public Date getEndOfSalePeriod() {
+        return endOfSalePeriod;
+    }
+
+    public Date getStartOfSalePeriod() {
+        return startOfSalePeriod;
+    }
+
+    public void setEndOfSalePeriod(Date endOfSalePeriod) {
+        this.endOfSalePeriod = endOfSalePeriod;
+    }
+
+    public void setStartOfSalePeriod(Date startOfSalePeriod) {
+        this.startOfSalePeriod = startOfSalePeriod;
+    }
 
     public String getName() {
         return name;
