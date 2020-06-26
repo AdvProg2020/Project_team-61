@@ -46,6 +46,10 @@ public class SaleLog extends Log {
 
     }
 
+    public static ArrayList<SaleLog> getAllSellersLog() {
+        return allSellersLog;
+    }
+
     public double getReceivedAmount() {
         return receivedAmount;
     }

@@ -65,7 +65,7 @@ public class BuyLogsFx {
             BuyLogShow buyLogShow = new BuyLogShow();
             buyLogShow.holePrice = buyLog.holePrice;
             buyLogShow.price = buyLog.price;
-            buyLogShow.buyLogId = buyLog.getId();
+            buyLogShow.buyLogId = buyLog.getLogId();
 
         }
 
@@ -130,11 +130,14 @@ public class BuyLogsFx {
 
         try {
             String im = (String) tableColumn.getCellObservableValue(item).getValue();
-            BuyLog buyLog = BuyLog.getBuyLogWithName(im);
-            HashMap<Product,Integer> boughtPro = buyLog.getChosenProduct();
-            BuyLogFx.setCurbuylog(buyLog);
-            root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("buyLogFx.fxml")));
-            goToPage();
+            if (BuyLog.getLogWithId(im) instanceof BuyLog){
+                BuyLog buyLog = (BuyLog) BuyLog.getLogWithId(im);
+                HashMap<Product, Integer> boughtPro = buyLog.getChosenProduct();
+                BuyLogFx.setCurBuylog(buyLog);
+                root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("buyLogFx.fxml")));
+                goToPage();
+
+            }
 
         } catch (NullPointerException e) {
             System.out.println("you cant press here");

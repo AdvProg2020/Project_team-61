@@ -195,7 +195,7 @@ public class ProductMenuFX {
                 e.printStackTrace();
             }
             BuyLogFx.setPriRoot(productPagePane);
-            BuyLogFx.setCurBuyLog(ProductMenu.getBuyLog());
+            BuyLogFx.setCurBuylog(ProductMenu.getBuyLog());
 
           //  BuyLogFx.getCurBuyLog().setBuyLogCustomer(LoginMenu.getLoginAccount());
             AnchorPane root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("BuyLogFx.fxml")));

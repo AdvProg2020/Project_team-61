@@ -33,10 +33,15 @@ public class BuyLog extends Log {
         allCustomersLog.add(this);
     }
 
+    public static ArrayList<BuyLog> getAllCustomersLog() {
+        return allCustomersLog;
+    }
 
     public static boolean getFirstProduct() {
         return firstProduct;
     }
+
+
 
     public HashMap<Product, Integer> getChosenProduct() {
         return chosenProduct;

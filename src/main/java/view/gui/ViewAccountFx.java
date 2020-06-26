@@ -109,7 +109,7 @@ public class ViewAccountFx {
         if (LoginMenu.getLoginAccount() instanceof Customer) {
             if(ProductMenu.getBuyLog() != null) {
                 Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SaleLogFx.class.getClassLoader().getResource("saleLogFx.fxml")));
-                BuyLogFx.setCurbuylog(ProductMenu.getBuyLog());
+                BuyLogFx.setCurBuylog(ProductMenu.getBuyLog());
                 BuyLogFx.setPriRoot(curRoot);
                 root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("buyLogFx.fxml")));
                 goToPage();

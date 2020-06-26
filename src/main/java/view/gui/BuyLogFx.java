@@ -73,7 +73,7 @@ public class BuyLogFx {
         return curbuylog;
     }
 
-    public static void setCurbuylog(BuyLog curbuylog) {
+    public static void setCurBuylog(BuyLog curbuylog) {
         BuyLogFx.curbuylog = curbuylog;
     }
 
@@ -89,7 +89,7 @@ public class BuyLogFx {
     public static void listIni() throws FileNotFoundException {
         for (Product product : curbuylog.getChosenProduct().keySet()) {
             BuyLogShoo buyLogShoo = new BuyLogShoo();
-            buyLogShoo.logId = curbuylog.getId();
+            buyLogShoo.logId = curbuylog.getLogId();
             buyLogShoo.productName = product.getProductName();
             buyLogShoo.numberOfProduct = curbuylog.getChosenProduct().get(product);
             buyLogShoo.price = product.getPrice();
