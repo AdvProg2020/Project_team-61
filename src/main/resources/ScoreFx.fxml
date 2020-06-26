@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="592.0" prefWidth="1037.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ProductMenuFX">
+<AnchorPane prefHeight="592.0" prefWidth="1037.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ProductMenuFX">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="592.0" stroke="BLACK" strokeType="INSIDE" width="1059.0">
          <fill>
@@ -69,6 +66,6 @@
             <Image url="@icons/5.png" />
          </image>
       </ImageView>
-      <Label fx:id="scoreMs" layoutX="512.0" layoutY="398.0" prefHeight="21.0" prefWidth="55.0" text="Label" textFill="WHITE" />
+      <Label fx:id="scoreMs" layoutX="365.0" layoutY="393.0" prefHeight="22.0" prefWidth="349.0" textFill="WHITE" />
    </children>
 </AnchorPane>

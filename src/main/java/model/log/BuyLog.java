@@ -33,6 +33,15 @@ public class BuyLog extends Log {
         allCustomersLog.add(this);
     }
 
+    public double getHolePrice() {
+        holePrice =totalPrice() - salePrice;
+        return holePrice;
+    }
+
+    public void setHolePrice(double holePrice) {
+        this.holePrice = holePrice;
+    }
+
     public static ArrayList<BuyLog> getAllCustomersLog() {
         return allCustomersLog;
     }
@@ -83,7 +92,7 @@ public class BuyLog extends Log {
         Product product = Product.getProductById(productId);
         for (Product product1 : chosenProduct.keySet()) {
             if (product1.equals(product)){
-                numberOfChosenPro = chosenProduct.get(productId);
+                numberOfChosenPro = chosenProduct.get(product);
             }else {
                 chosenProduct.put(product,1);
             }
