@@ -79,6 +79,8 @@ public class SaleLogsFx {
         saleLogsTableView.getColumns().addAll(saleLogsId,saleLogsDate,saleLogsCustomer,saleLogsRecievedAmount,saleLogsReducedAmount);
         saleLogsTableView.setItems(data);
     }
+
+
     public void logout(ActionEvent actionEvent) throws IOException {
         LoginMenu.processLogout();
         root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));

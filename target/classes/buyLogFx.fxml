@@ -68,7 +68,7 @@
                 </LinearGradient>
             </fill>
         </Text>
-        <TableView fx:id="buyLogTable" editable="true" layoutX="194.0" layoutY="171.0" prefHeight="428.0" prefWidth="1087.0" />
+        <TableView fx:id="buyLogTable" onMouseClicked="#clickedColumn" editable="true" layoutX="194.0" layoutY="171.0" prefHeight="428.0" prefWidth="1087.0" />
       <Button fx:id="increaseB" layoutX="990.0" layoutY="638.0" mnemonicParsing="false" onMouseClicked="#increaseAmount" text="+" textFill="#092002" />
       <Button fx:id="reduceB" layoutX="1015.0" layoutY="638.0" mnemonicParsing="false" onMouseClicked="#reduceAmount" text="-" textFill="#e30f0f" />
       <Button fx:id="viewProductB" layoutX="1046.0" layoutY="638.0" mnemonicParsing="false" onMouseClicked="#viewProductFromBuyLog" text="View Product">
