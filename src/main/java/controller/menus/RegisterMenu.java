@@ -33,6 +33,7 @@ public class RegisterMenu {
     private static Date birthdayDate;
     private static SubMenuStatus subMenuStatus;
     private static  String img;
+    public static boolean ok;
 
     public static boolean isHeadManager() {
         return headManager;
@@ -223,7 +224,7 @@ public class RegisterMenu {
                 outputNo = 0;
             } else outputNo = 1;
         } else if (detailMen == 1) {
-            if (detail.matches("\\d{1,5}\\s\\w.\\s(\\b\\w*\\b\\s){1,2}\\w*\\.")) {
+            if (detail.matches(".+")) {
                 LoginMenu.getLoginAccount().setAddress(detail);
                 detailMenu = 2;
                 outputNo = 0;
@@ -235,6 +236,7 @@ public class RegisterMenu {
                 }else{
                     LoginMenu.getLoginAccount().setFast(false);
                 }
+                ok = true;
                 detailMenu = 0;
                 //CommandProcessor.setSubMenuStatus(SubMenuStatus.HAVEDISCOUNT);
                 //CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);

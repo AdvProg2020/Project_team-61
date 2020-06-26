@@ -53,7 +53,7 @@ public class Score {
     public void calculateAverageScore(int score) {
         double total = 0;
         for (int i = 0; i < allScores.size(); i++) {
-            total = +total + allScores.get(i).getScore();
+            total = total + allScores.get(i).getScore();
         }
         productTOScore.setAverageScore(total);
     }

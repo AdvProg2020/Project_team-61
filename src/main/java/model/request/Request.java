@@ -2,6 +2,7 @@ package model.request;
 
 import controller.menus.LoginMenu;
 import model.accounts.Account;
+import model.accounts.Customer;
 import model.accounts.Seller;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -24,6 +25,8 @@ public abstract class Request {
         now = LocalDateTime.now();
         requestDate = dtf.format(now);
         if(LoginMenu.getLoginAccount() instanceof Seller) {
+            seller =  LoginMenu.getLoginAccount().getUsername();
+        }else if(LoginMenu.getLoginAccount() instanceof Customer) {
             seller =  LoginMenu.getLoginAccount().getUsername();
         }
         allRequests.add(this);
