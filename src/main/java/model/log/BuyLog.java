@@ -160,20 +160,23 @@ public class BuyLog extends Log {
         BuyLog.allCustomersLog = allCustomersLog;
     }
 
-
-
     @Override
     public String toString() {
         return "BuyLog{" +
-                ", numberOfChosenPro=" + numberOfChosenPro +
+                "numberOfChosenPro=" + numberOfChosenPro +
                 ", holePrice=" + holePrice +
                 ", price=" + price +
-                //  ", allBoughtProduct=" + allBoughtProduct +
+                ", salePrice=" + salePrice +
                 ", chosenProduct=" + chosenProduct +
+                ", logId='" + logId + '\'' +
+                ", localDateTimeForLog=" + localDateTimeForLog +
+                ", deliveryStatus=" + deliveryStatus +
                 '}';
     }
 
-    /*
+
+
+/*
         public void increaseNumberOfProduct(String productId, int amount) {
         Product product = Product.getProductById(productId);
         int numberOfPro = chosenProduct.get(product);

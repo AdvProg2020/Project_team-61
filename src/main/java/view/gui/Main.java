@@ -53,9 +53,9 @@ public class Main extends Application {
 
         if (Manager.getAllManagers().size() == 0) {
             SignUpFx.setRole("manager");
-            root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("buyLogsFx.fxml")));
+            root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("signUpFx.fxml")));
         }else {
-             root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("buyLogsFx.fxml")));
+             root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
         }
         primaryStage.setTitle("market");
         primaryStage.setScene(new Scene(root, widthScene, heightScene));
