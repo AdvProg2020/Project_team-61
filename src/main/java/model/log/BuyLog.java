@@ -137,7 +137,7 @@ public class BuyLog extends Log {
 
 
     public ArrayList<Seller> getSellers() {
-        ArrayList<Seller> sellers = null;
+        ArrayList<Seller> sellers = new ArrayList();
         for (Product p : chosenProduct.keySet()) {
             if(Account.getAccountWithUsername(p.getSeller()) instanceof  Seller) {
                 Seller seller = (Seller) Account.getAccountWithUsername(p.getSeller());

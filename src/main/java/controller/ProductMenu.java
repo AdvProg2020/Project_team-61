@@ -25,6 +25,10 @@ public class ProductMenu {
     private static String productId;
 
 
+    public static void setBuyLog(BuyLog buyLog) {
+        ProductMenu.buyLog = buyLog;
+    }
+
     public static Product getSelectedProduct() {
         return selectedProduct;
     }

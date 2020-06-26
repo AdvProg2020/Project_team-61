@@ -43,6 +43,33 @@ public class CustomerMenu {
         return false;
     }
 
+    public static void setOutputNo(int outputNo) {
+        CustomerMenu.outputNo = outputNo;
+    }
+
+    public static String getProductID() {
+        return productID;
+    }
+
+    public static void setProductID(String productID) {
+        CustomerMenu.productID = productID;
+    }
+
+    public static void setHasDiscount(boolean hasDiscount) {
+        CustomerMenu.hasDiscount = hasDiscount;
+    }
+
+    public static void setDiscountID(String discountID) {
+        CustomerMenu.discountID = discountID;
+    }
+
+    public static SaleLog getSaleLog() {
+        return saleLog;
+    }
+
+    public static void setSaleLog(SaleLog saleLog) {
+        CustomerMenu.saleLog = saleLog;
+    }
 
     //product.......................................................................................
     private static boolean checkProduct(String productID) {
@@ -132,7 +159,7 @@ public class CustomerMenu {
             outputNo = 10;
         } else outputNo = 9;
         return outputNo;
-       // OutputMassageHandler.showPurchaseOutput(outputNo);
+      //  OutputMassageHandler.showPurchaseOutput(outputNo);
     }
 
     private static void finishingPayment() throws IOException {
@@ -159,7 +186,7 @@ public class CustomerMenu {
 
         for (Seller seller : ProductMenu.getBuyLog().getSellers()) {
             for (Product p : ProductMenu.getBuyLog().getChosenProduct().keySet()) {
-                if (p.getSeller().equals(seller)) {
+                if (p.getSeller().equals(seller.getUsername())) {
                     if (!SaleLog.idThereSeller(seller)) {
                         UUID id = UUID.randomUUID();
                         saleLog = new SaleLog(id.toString());
