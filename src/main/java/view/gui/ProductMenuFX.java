@@ -60,7 +60,7 @@ public class ProductMenuFX {
     public TextField titleTextField;
     public Button backButtonAddComment;
     public Button sendCommentButton;
-    public AnchorPane addCommentSectionPane;
+    public AnchorPane addCommentSectionPane = new AnchorPane();
     public Label nullAddCommentError = new Label();
     public TextArea productCategoryDetail;
     public TextArea productDetail;
@@ -183,7 +183,7 @@ public class ProductMenuFX {
             nullAddCommentError.setVisible(true);
             nullAddCommentError.setText("sign In first");
             nullAddCommentError.setVisible(true);
-            addCommentSectionPane.getChildren().add(nullAddCommentError);
+
         }
     }
 

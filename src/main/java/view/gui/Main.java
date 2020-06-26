@@ -139,6 +139,8 @@ public class Main extends Application {
             CommentRequest.setAllCommentRequests(new ArrayList<>());
         }
 
+
+
         Request.setAllRequests(new ArrayList<>());
         Request.getAllRequests().addAll(CommentRequest.getAllCommentRequests());
 

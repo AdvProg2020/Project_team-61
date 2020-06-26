@@ -112,7 +112,7 @@ public class BuyLogFx {
     public void initialize() throws IOException {
 
         productName.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, String>("productName"));
-        numberOfPro.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, String>("price"));
+        numberOfPro.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, String>("numberOfProduct"));
         LogId.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, String>("logId"));
         buyLogPrice.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, Double>("price"));
         hole.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, Double>("hole"));
@@ -153,9 +153,10 @@ public class BuyLogFx {
             product = Product.getProductById(a.productName);
             if (product != null) {
                 ProductMenu.getBuyLog().addProductToBuyLog(product.getId(), 1);
+                initialize();
             }
         }
-          initialize();
+
     }
 
     public void reduceAmount(MouseEvent MouseEvent) throws IOException {
@@ -163,15 +164,17 @@ public class BuyLogFx {
             BuyLogShoo a = buyLogTable.getSelectionModel().getSelectedItem();
             product = Product.getProductById(a.productName);
             ProductMenu.getBuyLog().reduceNumberOfProduct(product.getId(), 1);
+            initialize();
         }
-         initialize();
+
     }
 
     public void showTotalPriceBuyLog(MouseEvent MouseClick) throws IOException {
         if (curbuylog instanceof BuyLog) {
             totalPriceLabel.setText(String.valueOf(curbuylog.getHolePrice()));
+            initialize();
         }
-         initialize();
+
     }
 
     public void showLogLocalDate() {
