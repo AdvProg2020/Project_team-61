@@ -152,6 +152,7 @@ public class CustomerMenu {
         //OutputMassageHandler.showPurchaseOutput(outputNo);
     }
 
+
     public static int payment() throws IOException {
         if (ProductMenu.getBuyLog().holePrice <= LoginMenu.getLoginAccount().getCredit()) {
             finishingPayment();
