@@ -59,32 +59,22 @@ public class CustomerMenu {
     }
 
 
-    public static void sortBy(String sort) throws FileNotFoundException {
-        if (sort.matches("(?i)(?:log\\s+date)")) {
-            if (sort.matches("log\\s+date")) {
-                Customer customer = (Customer) LoginMenu.getLoginAccount();
-                Sort.setNewArrayOfBuyLog(customer.getBuyLogsHistory());
-                Sort.buyLogSortDate();
-            }
-
-        }
-    }
 
     public static void increaseLogProduct(String number) {
-        if (number.matches("\\d+")) {
+       // if (number.matches("\\d+")) {
             //  Product product = Product.getProductById(productID);
             ProductMenu.getBuyLog().addProductToBuyLog(productID, Integer.parseInt(number));
-            outputNo = 10;
-        } else outputNo = 4;
-        OutputMassageHandler.showCustomerOutput(outputNo);
+         //   outputNo = 10;
+       // } else outputNo = 4;
+       // OutputMassageHandler.showCustomerOutput(outputNo);
     }
 
     public static void decreaseLogProduct(String number) {
-        if (number.matches("\\d+")) {
+      //  if (number.matches("\\d+")) {
             ProductMenu.getBuyLog().reduceNumberOfProduct(productID, Integer.parseInt(number));
-            outputNo = 15;
-        } else outputNo = 4;
-        OutputMassageHandler.showCustomerOutput(outputNo);
+       //     outputNo = 15;
+       // } else outputNo = 4;
+       // OutputMassageHandler.showCustomerOutput(outputNo);
     }
 
 
@@ -100,7 +90,7 @@ public class CustomerMenu {
         return false;
     }
 
-    public static void haveDiscount(String have) {
+    public static int haveDiscount(String have) {
         if (have.matches("(?i)(?:yes|no)")) {
             if (have.equalsIgnoreCase("yes")) {
                 hasDiscount = true;
@@ -112,11 +102,12 @@ public class CustomerMenu {
                 outputNo = 3;
             }
         } else outputNo = 2;
-        OutputMassageHandler.showPurchaseOutput(outputNo);
+        return outputNo;
+       // OutputMassageHandler.showPurchaseOutput(outputNo);
     }
 
 
-    public static void discountCodeValidation(String discountCodeId) {
+    public static int discountCodeValidation(String discountCodeId) {
         Account loginAccount = LoginMenu.getLoginAccount();
         DiscountCode discountCode = DiscountCode.getDiscountWithId(discountCodeId);
         if (DiscountCode.isThereDiscountWithId(discountCodeId)) {
@@ -130,15 +121,18 @@ public class CustomerMenu {
                 } else outputNo = 4;
             } else outputNo = 3;
         } else outputNo = 7;
-        OutputMassageHandler.showPurchaseOutput(outputNo);
+        return outputNo;
+
+        //OutputMassageHandler.showPurchaseOutput(outputNo);
     }
 
-    public static void payment() throws IOException {
+    public static int payment() throws IOException {
         if (ProductMenu.getBuyLog().holePrice <= LoginMenu.getLoginAccount().getCredit()) {
             finishingPayment();
             outputNo = 10;
         } else outputNo = 9;
-        OutputMassageHandler.showPurchaseOutput(outputNo);
+        return outputNo;
+       // OutputMassageHandler.showPurchaseOutput(outputNo);
     }
 
     private static void finishingPayment() throws IOException {
@@ -149,6 +143,7 @@ public class CustomerMenu {
         }
         double money = loginAccount.getCredit() - holePrice;
         loginAccount.setCredit(money);
+        loginAccount.addLog(ProductMenu.getBuyLog());
 
         for (Product p : ProductMenu.getBuyLog().getChosenProduct().keySet()) {
             Account.getAccountWithUsername(p.getSeller()).setCredit(Account.getAccountWithUsername(p.getSeller()).getCredit() + p.getPrice());
@@ -168,6 +163,7 @@ public class CustomerMenu {
                     if (!SaleLog.idThereSeller(seller)) {
                         UUID id = UUID.randomUUID();
                         saleLog = new SaleLog(id.toString());
+                        seller.addLog(saleLog);
                     } else {
                         saleLog = SaleLog.getLogWithSeller(seller.getUsername());
                     }
@@ -323,6 +319,18 @@ public class CustomerMenu {
         } else outputNo = 8;
         //} else outputNo = 0;
         return false;
+    }
+
+
+    public static void sortBy(String sort) throws FileNotFoundException {
+        if (sort.matches("(?i)(?:log\\s+date)")) {
+            if (sort.matches("log\\s+date")) {
+                Customer customer = (Customer) LoginMenu.getLoginAccount();
+                Sort.setNewArrayOfBuyLog(customer.getBuyLogsHistory());
+                Sort.buyLogSortDate();
+            }
+
+        }
     }
  */
 

@@ -83,8 +83,6 @@ public class RequestsFx {
 
             im = (String) tableColumn.getCellObservableValue(item).getValue();
 
-
-
         } catch (NullPointerException e) {
             System.out.println("you cant press here");
         }

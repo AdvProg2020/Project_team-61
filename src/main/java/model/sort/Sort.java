@@ -118,19 +118,19 @@ public abstract class Sort {
         return newArrayOfCategory;
     }
 
-    public static ArrayList<BuyLog> buyLogSortDate() throws FileNotFoundException {
-        Collections.sort(newArrayOfBuyLog,BuyLog.productComparatorForScore);
-//        availableSorts.remove(4);
-//        listOfBuyLogSort.add(newArrayOfBuyLog);
-        return newArrayOfBuyLog;
-    }
-
-    public static ArrayList<SaleLog> saleLogSortDate() throws FileNotFoundException {
-        Collections.sort(newArrayOfSalelog,SaleLog.productComparatorForScore);
-//        availableSorts.remove(5);
-//        listOfSaleLogtSort.add(newArrayOfSalelog);
-        return newArrayOfSalelog;
-    }
+//    public static ArrayList<BuyLog> buyLogSortDate() throws FileNotFoundException {
+//        Collections.sort(newArrayOfBuyLog,BuyLog.productComparatorForScore);
+////        availableSorts.remove(4);
+////        listOfBuyLogSort.add(newArrayOfBuyLog);
+//        return newArrayOfBuyLog;
+//    }
+//
+//    public static ArrayList<SaleLog> saleLogSortDate() throws FileNotFoundException {
+//        Collections.sort(newArrayOfSalelog,SaleLog.productComparatorForScore);
+////        availableSorts.remove(5);
+////        listOfSaleLogtSort.add(newArrayOfSalelog);
+//        return newArrayOfSalelog;
+//    }
 
     public static ArrayList<DiscountCode> sortDiscountCodes(){
         Collections.sort(newArrayOfDiscountCodeSort,DiscountCode.productComparatorForView);

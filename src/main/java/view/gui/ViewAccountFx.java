@@ -19,7 +19,6 @@ import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
-import model.log.BuyLog;
 import model.off.DiscountCode;
 import model.request.AccountRequest;
 import model.request.Request;
@@ -33,23 +32,23 @@ import java.util.Objects;
 
 public class ViewAccountFx {
     @FXML
-    private Label birthday;
+    private Label birthday = new Label();
     @FXML
-    private Label lastName;
+    private Label lastName = new Label();
     @FXML
-    private Label role;
+    private Label role = new Label();
     @FXML
-    private Label name;
+    private Label name = new Label();
     @FXML
     private ImageView accountImg = new ImageView();
     @FXML
-    private Label credit;
+    private Label credit = new Label();
     @FXML
-    private Label phoneNo;
+    private Label phoneNo = new Label();
     @FXML
-    private Label email;
+    private Label email = new Label();
     @FXML
-    private Label username;
+    private Label username = new Label();
 
     public static final ObservableList data = FXCollections.observableArrayList();
     private static ArrayList<DiscountCode> dis = new ArrayList();
@@ -110,7 +109,7 @@ public class ViewAccountFx {
         if (LoginMenu.getLoginAccount() instanceof Customer) {
             if(ProductMenu.getBuyLog() != null) {
                 Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SaleLogFx.class.getClassLoader().getResource("saleLogFx.fxml")));
-                BuyLogFx.setCurBuyLog(ProductMenu.getBuyLog());
+                BuyLogFx.setCurBuylog(ProductMenu.getBuyLog());
                 BuyLogFx.setPriRoot(curRoot);
                 root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("buyLogFx.fxml")));
                 goToPage();

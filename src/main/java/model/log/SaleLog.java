@@ -31,13 +31,23 @@ public class SaleLog extends Log {
         price += p;
     }
 
+    public static void setAllSellersLog(ArrayList<SaleLog> allSellersLog) {
+        SaleLog.allSellersLog = allSellersLog;
+    }
+
     public void setReducedAmount(double reducedAmount) {
         this.reducedAmount = reducedAmount;
     }
 
-    public void setReceivedAmount() {
-        receivedAmount =price-reducedAmount;
+    public void setReceivedAmount() throws IOException {
+        receivedAmount = price - reducedAmount;
+        Seller.writeInJ();
 
+
+    }
+
+    public static ArrayList<SaleLog> getAllSellersLog() {
+        return allSellersLog;
     }
 
     public double getReceivedAmount() {

@@ -384,23 +384,6 @@ public class SellerMenu {
         // OutputMassageHandler.showSaleOutput(outputNo);
     }
 
-    public static void sortBy(String sort) throws FileNotFoundException {
-        if (sort.matches("(?i)(?:product\\s+view|product\\s+score|log\\s+date)")) {
-            if (sort.matches("product\\s+view")) {
-                Seller seller = (Seller) LoginMenu.getLoginAccount();
-                Sort.setNewArrayOfProductSort(seller.getAllProduct());
-                Sort.numberOfViewsSort();
-            } else if (sort.matches("product\\s+score")) {
-                Seller seller = (Seller) LoginMenu.getLoginAccount();
-                Sort.setNewArrayOfProductSort(seller.getAllProduct());
-                Sort.scoreSort();
-            } else if (sort.matches("log\\s+date")) {
-                Seller seller = (Seller) LoginMenu.getLoginAccount();
-                Sort.setNewArrayOfSalelog(seller.getSaleLogsHistory());
-                Sort.saleLogSortDate();
-            }
-        }
-    }
 
 //    ///////////////////////////////////////
 //    private static boolean checkProductSale(String detail) {
@@ -561,6 +544,25 @@ public class SellerMenu {
         }
         outputNo = 3;
         OutputMassageHandler.showSaleOutput(outputNo);
+    }
+
+
+    public static void sortBy(String sort) throws FileNotFoundException {
+        if (sort.matches("(?i)(?:product\\s+view|product\\s+score|log\\s+date)")) {
+            if (sort.matches("product\\s+view")) {
+                Seller seller = (Seller) LoginMenu.getLoginAccount();
+                Sort.setNewArrayOfProductSort(seller.getAllProduct());
+                Sort.numberOfViewsSort();
+            } else if (sort.matches("product\\s+score")) {
+                Seller seller = (Seller) LoginMenu.getLoginAccount();
+                Sort.setNewArrayOfProductSort(seller.getAllProduct());
+                Sort.scoreSort();
+            } else if (sort.matches("log\\s+date")) {
+                Seller seller = (Seller) LoginMenu.getLoginAccount();
+                Sort.setNewArrayOfSalelog(seller.getSaleLogsHistory());
+                Sort.saleLogSortDate();
+            }
+        }
     }
    */
 

@@ -22,6 +22,39 @@ public abstract class Log {
 
     }
 
+
+    public String getLogId() {
+        return logId;
+    }
+
+    public void setLogId(String logId) {
+        this.logId = logId;
+    }
+
+    public static LocalDateTime getLocalDateTimeForLog() {
+        return localDateTimeForLog;
+    }
+
+    public static void setLocalDateTimeForLog(LocalDateTime localDateTimeForLog) {
+        Log.localDateTimeForLog = localDateTimeForLog;
+    }
+
+    public DeliveryStatus getDeliveryStatus() {
+        return deliveryStatus;
+    }
+
+    public boolean isItsFinal() {
+        return ItsFinal;
+    }
+
+    public static ArrayList<Log> getAllLogs() {
+        return allLogs;
+    }
+
+    public static void setAllLogs(ArrayList<Log> allLogs) {
+        Log.allLogs = allLogs;
+    }
+
     public void setDeliveryStatus(DeliveryStatus deliveryStatus) {
         this.deliveryStatus = deliveryStatus;
     }

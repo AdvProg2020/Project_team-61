@@ -13,6 +13,8 @@ import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
 import model.firms.Firm;
+import model.log.BuyLog;
+import model.log.SaleLog;
 import model.off.DiscountCode;
 import model.off.Sale;
 import model.productRelated.Category;
@@ -37,7 +39,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("buyLogsFx.fxml")));
         primaryStage.setTitle("market");
         primaryStage.setScene(new Scene(root, widthScene, heightScene));
         primStage = primaryStage;
@@ -174,7 +176,30 @@ public class Main extends Application {
             DiscountCode.getAllDiscountCodes().addAll(manager.getAllDiscountCodes());
         }
 
+        for (Seller seller : Seller.getAllSellers()) {
+            SaleLog.getAllSellersLog().addAll(seller.getSaleLogsHistory());
+        }
 
+        if (SaleLog.getAllSellersLog().size() == 0){
+            SaleLog.setAllSellersLog(new ArrayList<>());
+        }
+
+        for (Customer customer : Customer.getAllCustomers()) {
+            BuyLog.getAllCustomersLog().addAll(customer.getBuyLogsHistory());
+        }
+
+        if (BuyLog.getAllCustomersLog().size() == 0){
+            BuyLog.setAllCustomersLog(new ArrayList<>());
+        }
+
+        BuyLog buyLog = new BuyLog("firstBuyLog");
+        buyLog.holePrice = 10;
+        buyLog.price = 20;
+        buyLog.getChosenProduct().put(Product.getProductById("haha"),3);
+        BuyLog buyLog1 = new BuyLog("secondBuyLog");
+        buyLog1.holePrice=40;
+        buyLog1.price=30;
+        buyLog1.getChosenProduct().put(Product.getProductById("third"),8);
         Application.launch(args);
 
     }
