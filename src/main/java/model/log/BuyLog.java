@@ -81,7 +81,14 @@ public class BuyLog extends Log {
 
     public void addProductToBuyLog(String productId, int amount) {
         Product product = Product.getProductById(productId);
-        numberOfChosenPro = chosenProduct.get(productId);
+        for (Product product1 : chosenProduct.keySet()) {
+            if (product1.equals(product)){
+                numberOfChosenPro = chosenProduct.get(productId);
+            }else {
+                chosenProduct.put(product,1);
+            }
+        }
+
         if (product.getNumberOfProducts() > amount) {
             numberOfChosenPro = numberOfChosenPro + amount;
             //product.setNumberOfProducts(product.getNumberOfProducts() - amount);

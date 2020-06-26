@@ -112,23 +112,21 @@ public class ProductsMenuFX {
     public static void listIni() throws FileNotFoundException {
         for (Product product : Product.getProductList()) {
             ProductInMenusShow show = new ProductInMenusShow(product.getId());
-            if(product.getProductStatus().equals("CONFIRMED")) {
-                show.name = product.getProductName();
-                show.additionalDetail = product.getAdditionalDetail();
-                show.category = product.getCategory().getName();
-                show.id = product.getId();
-                show.price = product.getPrice();
-                show.comment = product.getComment();
-                show.seller = product.getSeller();
-                File file = new File(product.getProductImage());
-                Image image = new Image(new FileInputStream(file));
-                show.productImage = new ImageView();
-                show.productImage.setFitWidth(100);
-                show.productImage.setFitHeight(100);
-                show.productImage.setImage(image);
-                show.firm = Seller.getAccountWithUsername(product.getSeller()).getFirm().getName();
-                show.numberOfProduct = product.getNumberOfProducts();
-            }
+            show.name = product.getProductName();
+            show.additionalDetail = product.getAdditionalDetail();
+            show.category = product.getCategory().getName();
+            show.id = product.getId();
+            show.price = product.getPrice();
+            show.comment = product.getComment();
+            show.seller = product.getSeller();
+            File file = new File(product.getProductImage());
+            Image image = new Image(new FileInputStream(file));
+            show.productImage = new ImageView();
+            show.productImage.setFitWidth(100);
+            show.productImage.setFitHeight(100);
+            show.productImage.setImage(image);
+            show.firm = Seller.getAccountWithUsername(product.getSeller()).getFirm().getName();
+            show.numberOfProduct = product.getNumberOfProducts();
         }
     }
 
