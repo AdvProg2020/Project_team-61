@@ -16,6 +16,7 @@ public class BuyLogShoo {
     public double hole ;
     public ImageView imageView = new ImageView();
 
+
     public ImageView getImageView() {
         return imageView;
     }
@@ -75,4 +76,6 @@ public class BuyLogShoo {
     public void setLogId(String logId) {
         this.logId = logId;
     }
+
+
 }
