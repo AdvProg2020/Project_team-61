@@ -44,7 +44,7 @@ public class SaleLogFx {
     private static Parent root;
 
     public  void initializeObserverList() {
-        data.addAll(curSaleLog.getAllSoldProduct());
+      //  data.addAll(curSaleLog.getAllSoldProduct());
     }
 
     public static void setCurSaleLog(SaleLog curSaleLog) {
@@ -54,9 +54,9 @@ public class SaleLogFx {
     @FXML
     public void initialize()throws IOException {
 
-        saleLogId.setText(curSaleLog.getId());
-        saleLogCustomerName.setText(curSaleLog.getCustomerName());
-        saleLogDate.setText(curSaleLog.getLocalDateTimeForSaleLog().toString());
+        saleLogId.setText(curSaleLog.getLogId());
+       // saleLogCustomerName.setText(curSaleLog.getCustomerName());
+        saleLogDate.setText(curSaleLog.getLocalDateTimeForLog().toString());
         saleLogReceived.setText(String.valueOf(curSaleLog.getReceivedAmount()));
         saleLogReduced.setText(String.valueOf(curSaleLog.getReducedAmount()));
         initializeObserverList();

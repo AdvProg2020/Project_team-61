@@ -132,7 +132,6 @@ public class Seller extends Account {
     public void addLog(SaleLog saleLog) throws IOException {
         saleLogsHistory.add(saleLog);
         writeInJ();
-
     }
 
 

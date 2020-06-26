@@ -1,40 +1,35 @@
 package model.log;
 
+import model.accounts.Seller;
 import model.productRelated.Product;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 
-public class SaleLog extends Log{
-
+public class SaleLog extends Log {
+    private double receivedAmount = 0;
+    private double price = 0;
+    private double reducedAmount = 0;
+    private String seller;
 
     public SaleLog(String logId) throws IOException {
         super(logId);
-        id=logId;
         allSellersLog.add(this);
-        localDateTimeForSaleLog=LocalDateTime.now();
-     //   writeInJ();
     }
 
-    //detail
-    private String id;
-    private double receivedAmount;
-    private double reducedAmount;
-    private String customerName;
-  //  private Product product;
-    LocalDateTime localDateTimeForSaleLog;
-
-
-    //list
-
-    private ArrayList<Product> allSoldProduct = new ArrayList<Product>();
+    private HashMap<Product, Integer> chosenProduct = new HashMap<>();
+    //  private ArrayList<Product> allSoldProduct = new ArrayList<Product>();
     private static ArrayList<SaleLog> allSellersLog = new ArrayList<SaleLog>();
 
 
     //setterAndGetter--------------------------------------------
 
+    public void addPrice(double p) {
+        price += p;
+    }
 
     public static void setAllSellersLog(ArrayList<SaleLog> allSellersLog) {
         SaleLog.allSellersLog = allSellersLog;
@@ -44,28 +39,11 @@ public class SaleLog extends Log{
         this.reducedAmount = reducedAmount;
     }
 
-    public ArrayList<Product> getAllSoldProduct() {
-        return allSoldProduct;
-    }
+    public void setReceivedAmount() throws IOException {
+        receivedAmount = price - reducedAmount;
+        Seller.writeInJ();
 
-    public void setSaleLogDetail(double receivedAmount, String customerName){
-        this.receivedAmount =receivedAmount;
-        this.customerName=customerName;
-        allSellersLog.add(this);
-    }
 
-    public LocalDateTime getLocalDateTimeForSaleLog() {
-        return localDateTimeForSaleLog;
-    }
-
-    public static ArrayList<SaleLog> getAllSellersLog() {
-        return allSellersLog;
-    }
-
-    //other-------------------------------------------------------
-
-    public String getId() {
-        return id;
     }
 
     public double getReceivedAmount() {
@@ -76,39 +54,46 @@ public class SaleLog extends Log{
         return reducedAmount;
     }
 
-    public String getCustomerName() {
-        return customerName;
+
+    public void addProductToSaleLog(String productId, int number) {
+        Product product = Product.getProductById(productId);
+        chosenProduct.put(product, number);
     }
 
-    //finish//doubt
-    public void addProductToSaleLog(String productId){
-        Product product=Product.getProductById(productId);
-        allSoldProduct.add(product);
-    }
-
-
-    public static Comparator<SaleLog> productComparatorForScore = new Comparator<SaleLog>() {
-
-        public int compare(SaleLog o1, SaleLog o2) {
-            return o1.getLocalDateTimeForSaleLog().compareTo(o2.getLocalDateTimeForSaleLog());
+    public static boolean idThereSeller(Seller seller) {
+        for (SaleLog saleLog : allSellersLog) {
+            saleLog.seller.equals(seller.getUsername());
+            return true;
         }
-    };
+        return false;
+    }
 
-//    public static void writeInJ() throws IOException {
-//        Type collectionType = new TypeToken<ArrayList<SaleLog>>(){}.getType();
-//        String json= FileHandling.getGson().toJson(getAllSellersLog(),collectionType);
-//        FileHandling.turnToArray(json+" "+"saleLog.json");
-//    }
+    public static SaleLog getLogWithSeller(String seller) {
+        for (SaleLog allLog : allSellersLog) {
+            if (allLog.seller.equals(seller)) {
+                return allLog;
+            }
+        }
+        return null;
+    }
+
+    public String getSeller() {
+        return seller;
+    }
+
+    public void setSeller(String seller) {
+        this.seller = seller;
+    }
 
     @Override
     public String toString() {
         return "SaleLog{" +
                 "receivedAmount=" + receivedAmount +
                 ", reducedAmount=" + reducedAmount +
-                ", customerName='" + customerName + '\'' +
-                ", product=" + product +
-                ", localDateTimeForSaleLog=" + localDateTimeForSaleLog +
-                ", allSoldProduct=" + allSoldProduct +
+                //  ", customerName='" + customerName + '\'' +
+                //  ", product=" + product +
+                //", localDateTimeForSaleLog=" + localDateTimeForSaleLog +
+                // ", allSoldProduct=" + allSoldProduct +
                 '}';
     }
 }

@@ -4,11 +4,15 @@ import controller.ProductMenu;
 import controller.ProductsMenu;
 import controller.menus.CustomerMenu;
 import controller.menus.LoginMenu;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.CacheHint;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -21,10 +25,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
+import model.log.BuyLog;
 import model.productRelated.Comment;
 import model.productRelated.Product;
 import model.request.ProductRequest;
@@ -183,15 +189,15 @@ public class ProductMenuFX {
     public void handleAddProductToLog(ActionEvent actionEvent) throws IOException {
        // if (LoginMenu.isLogin()){
             try {
-                ProductsMenu.setProductId(productInPage.getId());
+                ProductMenu.setProductId(productInPage.getId());
                 ProductMenu.addToCart();
             } catch (IOException e) {
                 e.printStackTrace();
             }
             BuyLogFx.setPriRoot(productPagePane);
-            BuyLogFx.setCurbuylog(ProductMenu.getBuyLog());
+            BuyLogFx.setCurBuyLog(ProductMenu.getBuyLog());
 
-            BuyLogFx.getCurbuylog().setBuyLogCustomer(LoginMenu.getLoginAccount());
+          //  BuyLogFx.getCurBuyLog().setBuyLogCustomer(LoginMenu.getLoginAccount());
             AnchorPane root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("BuyLogFx.fxml")));
             Scene scene = new Scene(root);
             Main.primStage.setScene(scene);

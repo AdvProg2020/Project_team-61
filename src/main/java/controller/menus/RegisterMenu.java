@@ -5,6 +5,7 @@ import model.accounts.Customer;
 import model.accounts.Manager;
 import model.request.AccountRequest;
 import model.request.Request;
+import view.OutputMassageHandler;
 import view.justConsole.SubMenuStatus;
 
 import java.io.IOException;
@@ -214,20 +215,20 @@ public class RegisterMenu {
        // OutputMassageHandler.showFirmOutput(outputNo);
     }
 
-    public static int receiverInformation(String detail) throws IOException {
-        if (detailMenu == 0) {
+    public static int receiverInformation(String detail, int detailMen) throws IOException {
+        if (detailMen == 0) {
             if (detail.matches("\\d+")) {
                 LoginMenu.getLoginAccount().setCurrentPhoneNo(Double.parseDouble(detail));
                 detailMenu = 1;
                 outputNo = 0;
             } else outputNo = 1;
-        } else if (detailMenu == 1) {
+        } else if (detailMen == 1) {
             if (detail.matches("\\d{1,5}\\s\\w.\\s(\\b\\w*\\b\\s){1,2}\\w*\\.")) {
                 LoginMenu.getLoginAccount().setAddress(detail);
                 detailMenu = 2;
                 outputNo = 0;
             } else outputNo = 3;
-        } else if (detailMenu == 2) {
+        } else if (detailMen == 2) {
             if (detail.matches("(?i)(?:yes|no)")) {
                 if(detail.equalsIgnoreCase("yes")){
                     LoginMenu.getLoginAccount().setFast(true);
@@ -241,7 +242,7 @@ public class RegisterMenu {
             } else outputNo = 5;
         }
         return outputNo;
-       // OutputMassageHandler.showReceiverInfo(outputNo);
+      //  OutputMassageHandler.showReceiverInfo(outputNo);
 
     }
 

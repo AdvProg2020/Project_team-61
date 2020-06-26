@@ -41,10 +41,10 @@ public class PayLogFx {
    // public CustomerMenu customerMenu;
     public void paymentProcess(MouseEvent mouseEvent) throws IOException {
         //String ms;
-        RegisterMenu.receiverInformation(PhoneNumberTextFieldPayLog.getText());
-        RegisterMenu.receiverInformation(AddressTextPayLog.getText());
+        RegisterMenu.receiverInformation(PhoneNumberTextFieldPayLog.getText(),0);
+        RegisterMenu.receiverInformation(AddressTextPayLog.getText(),1);
         //ms=OutputMassageHandler.showCustomerOutput(output);
-        RegisterMenu.receiverInformation(hasDiscount.getText());
+       // RegisterMenu.receiverInformation(hasDiscount.getText());
         if (hasDiscount.getText().matches("no")){
             discountPayLogTextField.setDisable(true);
         }
