@@ -23,9 +23,9 @@ public class CustomerMenu {
     private static String productID = null;
     private static boolean hasDiscount = false;
     private static String discountID = null;
-   // private static Customer customer = null;
+    // private static Customer customer = null;
     private static SaleLog saleLog;
-
+    public static boolean ok = false;
 
     public static String getDiscountID() {
         return discountID;
@@ -86,22 +86,21 @@ public class CustomerMenu {
     }
 
 
-
     public static void increaseLogProduct(String number) {
-       // if (number.matches("\\d+")) {
-            //  Product product = Product.getProductById(productID);
-            ProductMenu.getBuyLog().addProductToBuyLog(productID, Integer.parseInt(number));
-         //   outputNo = 10;
-       // } else outputNo = 4;
-       // OutputMassageHandler.showCustomerOutput(outputNo);
+        // if (number.matches("\\d+")) {
+        //  Product product = Product.getProductById(productID);
+        ProductMenu.getBuyLog().addProductToBuyLog(productID, Integer.parseInt(number));
+        //   outputNo = 10;
+        // } else outputNo = 4;
+        // OutputMassageHandler.showCustomerOutput(outputNo);
     }
 
     public static void decreaseLogProduct(String number) {
-      //  if (number.matches("\\d+")) {
-            ProductMenu.getBuyLog().reduceNumberOfProduct(productID, Integer.parseInt(number));
-       //     outputNo = 15;
-       // } else outputNo = 4;
-       // OutputMassageHandler.showCustomerOutput(outputNo);
+        //  if (number.matches("\\d+")) {
+        ProductMenu.getBuyLog().reduceNumberOfProduct(productID, Integer.parseInt(number));
+        //     outputNo = 15;
+        // } else outputNo = 4;
+        // OutputMassageHandler.showCustomerOutput(outputNo);
     }
 
 
@@ -130,7 +129,7 @@ public class CustomerMenu {
             }
         } else outputNo = 2;
         return outputNo;
-       // OutputMassageHandler.showPurchaseOutput(outputNo);
+        // OutputMassageHandler.showPurchaseOutput(outputNo);
     }
 
 
@@ -156,10 +155,11 @@ public class CustomerMenu {
     public static int payment() throws IOException {
         if (ProductMenu.getBuyLog().holePrice <= LoginMenu.getLoginAccount().getCredit()) {
             finishingPayment();
+            ok = true;
             outputNo = 10;
         } else outputNo = 9;
         return outputNo;
-      //  OutputMassageHandler.showPurchaseOutput(outputNo);
+        //  OutputMassageHandler.showPurchaseOutput(outputNo);
     }
 
     private static void finishingPayment() throws IOException {
@@ -198,7 +198,7 @@ public class CustomerMenu {
                     saleLog.addPrice(p.getPrice());
                     saleLog.addProductToSaleLog(p.getId(), ProductMenu.getBuyLog().getChosenProduct().get(p));
                     if (p.getInSale()) {
-                        if(p.getSale().checkSale()) {
+                        if (p.getSale().checkSale()) {
                             saleLog.setReducedAmount(p.getSale().withSale(p));
                         }
                     } else saleLog.setReducedAmount(0);
@@ -227,7 +227,7 @@ public class CustomerMenu {
     }
 
     private static boolean isBought() {
-        if(LoginMenu.getLoginAccount() instanceof  Customer) {
+        if (LoginMenu.getLoginAccount() instanceof Customer) {
             Customer cus = (Customer) LoginMenu.getLoginAccount();
             for (BuyLog buyLog : cus.getBuyLogsHistory()) {
                 if (buyLog.checkIfProductIsBought(productID)) {

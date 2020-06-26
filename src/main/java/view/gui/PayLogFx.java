@@ -2,6 +2,7 @@ package view.gui;
 
 import controller.ProductMenu;
 import controller.menus.CustomerMenu;
+import controller.menus.LoginMenu;
 import controller.menus.RegisterMenu;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -71,6 +72,10 @@ public class PayLogFx {
             }
             if (RegisterMenu.ok) {
                 alertMessage.setText(OutputMassageHandler.showReceiverInfo(CustomerMenu.payment()));
+                if(CustomerMenu.ok) {
+                    alertMessage.setText(OutputMassageHandler.showReceiverInfo(CustomerMenu.payment()) + "\n" +
+                            "your credit: " + LoginMenu.getLoginAccount().getCredit());
+                }
                 finalP();
             }
             //  }

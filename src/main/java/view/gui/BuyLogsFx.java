@@ -152,7 +152,9 @@ public class BuyLogsFx {
                 BuyLog buyLog = (BuyLog) BuyLog.getLogWithId(im);
                 HashMap<Product, Integer> boughtPro = buyLog.getChosenProduct();
                 BuyLogFx.setCurBuylog(buyLog);
-                root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("buyLogFx.fxml")));
+                Parent curRoot = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("buyLogFx.fxml")));
+                BuyLogFx.setPriRoot(curRoot);
+                root = FXMLLoader.load(Objects.requireNonNull(ViewBuyLogFx.class.getClassLoader().getResource("viewBuyLog.fxml")));
                 goToPage();
 
             }
