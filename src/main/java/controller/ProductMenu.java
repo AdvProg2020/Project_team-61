@@ -57,7 +57,7 @@ public class ProductMenu {
     public static int addComments() throws IOException {
         String commentId = LoginMenu.getLoginAccount().getUsername() + " comment on " + selectedProduct.getId();
         if (!Comment.isThereCommentWithId(commentId)) {
-         //   String id = LoginMenu.getLoginAccount(). + "comment";
+            //   String id = LoginMenu.getLoginAccount(). + "comment";
             if (!Request.isThereRequestFromID(commentId)) {
                 Comment comment = new Comment(commentId);
                 comment.setCommentStatus(CommentStatus.WAITINGFORAPPROVAL);
@@ -74,7 +74,7 @@ public class ProductMenu {
             // CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
         } else outputNo = 3;
         return outputNo;
-       // OutputMassageHandler.showProductOutput(outputNo);
+        // OutputMassageHandler.showProductOutput(outputNo);
     }
 
 
