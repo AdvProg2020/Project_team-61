@@ -1,5 +1,7 @@
 package view.gui;
 
+import controller.ProductMenu;
+import controller.menus.CustomerMenu;
 import controller.menus.LoginMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,13 +15,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import model.log.BuyLog;
 import model.log.BuyLogShoo;
 import model.productRelated.Product;
 
 
-import javax.swing.text.html.ImageView;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -49,14 +51,14 @@ public class BuyLogFx {
     private TableColumn<BuyLogShoo, String> numberOfPro = new TableColumn<>("numberOfProduct");
 
     @FXML
-    private TableColumn<BuyLogShoo,String> LogId = new TableColumn<>("logId");
+    private TableColumn<BuyLogShoo, String> LogId = new TableColumn<>("logId");
 
     @FXML
-    private TableColumn<BuyLogShoo,Double> buyLogPrice = new TableColumn<>("price");
+    private TableColumn<BuyLogShoo, Double> buyLogPrice = new TableColumn<>("price");
 
     private TableColumn<BuyLogShoo, ImageView> proImage = new TableColumn<>("imageView");
 
-    private TableColumn<BuyLogShoo,Double> hole = new TableColumn<>("Hole Price");
+    private TableColumn<BuyLogShoo, Double> hole = new TableColumn<>("Hole Price");
 
     @FXML
     private Label buyLogDate;
@@ -65,9 +67,9 @@ public class BuyLogFx {
     @FXML
     private static Parent root;
     private static Parent priRoot;
-   // public CustomerMenu ;
+    // public CustomerMenu ;
     private static BuyLog curbuylog;
-    public  ObservableList<BuyLogShoo> data = FXCollections.observableArrayList();
+    public ObservableList<BuyLogShoo> data = FXCollections.observableArrayList();
 
     public static BuyLog getCurbuylog() {
         return curbuylog;
@@ -93,7 +95,7 @@ public class BuyLogFx {
             buyLogShoo.productName = product.getProductName();
             buyLogShoo.numberOfProduct = curbuylog.getChosenProduct().get(product);
             buyLogShoo.price = product.getPrice();
-            buyLogShoo.hole = buyLogShoo.price*buyLogShoo.numberOfProduct;
+            buyLogShoo.hole = buyLogShoo.price * buyLogShoo.numberOfProduct;
             File file = new File(product.getProductImage());
             Image image = new Image(new FileInputStream(file));
             buyLogShoo.imageView.setImage(image);
@@ -106,27 +108,24 @@ public class BuyLogFx {
     public void initialize() throws IOException {
         initializeObserverList();
         productName.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, String>("productName"));
-        numberOfPro.setCellValueFactory(new PropertyValueFactory<BuyLogShoo,String>("price"));
-        LogId.setCellValueFactory(new PropertyValueFactory<BuyLogShoo,String>("logId"));
-        buyLogPrice.setCellValueFactory(new PropertyValueFactory<BuyLogShoo,Double>("price"));
-        hole.setCellValueFactory(new PropertyValueFactory<BuyLogShoo,Double>("hole"));
-        proImage.setCellValueFactory(new PropertyValueFactory<BuyLogShoo,ImageView>("imageView"));
+        numberOfPro.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, String>("price"));
+        LogId.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, String>("logId"));
+        buyLogPrice.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, Double>("price"));
+        hole.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, Double>("hole"));
+        proImage.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, ImageView>("imageView"));
 
-        buyLogTable.getColumns().addAll(productName,numberOfPro,LogId,buyLogPrice,hole,proImage);
+        buyLogTable.getColumns().addAll(productName, numberOfPro, LogId, buyLogPrice, hole, proImage);
         buyLogTable.setItems(data);
     }
 
 
-
     public void increaseAmount(MouseEvent mouseEvent) {
-      /*  Product selectedProduct=buyLog.getSelectionModel().getSelectedItem();
-       curBuyLog.increaseNumberOfProduct(selectedProduct.getProductId(), 1);
-*/
-
+//        Product selectedProduct = buyLogTable.getSelectionModel().getSelectedItem();
+//        ProductMenu.getBuyLog().addProductToBuyLog(productID,1);
     }
 
     public void reduceAmount(ActionEvent MouseEvent) {
-      //  ObservableList<Product> selectedProduct, allProducts;
+        //  ObservableList<Product> selectedProduct, allProducts;
        /* Product selectedProduct;
         selectedProduct = buyLog.getSelectionModel().getSelectedItem();
         curBuyLog.reduceNumberOfProduct(selectedProduct.getProductId(), 1);
@@ -150,11 +149,11 @@ public class BuyLogFx {
     }
 
     public void purchase(MouseEvent mouseEvent) throws IOException {
-        if(LoginMenu.isLogin()) {
+        if (LoginMenu.isLogin()) {
             PayLogFx.setPreBuyLog(curbuylog);
             root = FXMLLoader.load(Objects.requireNonNull(PayLogFx.class.getClassLoader().getResource("payLogFx.fxml")));
             goToPage();
-        }else{
+        } else {
             root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
             goToPage();
         }

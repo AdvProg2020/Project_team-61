@@ -1,5 +1,6 @@
 package view.gui;
 
+import controller.menus.LoginMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,6 +11,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import model.accounts.Customer;
+import model.accounts.Manager;
+import model.accounts.Seller;
 import model.log.BuyLog;
 import model.log.BuyLogShow;
 import model.productRelated.Product;
@@ -90,33 +94,47 @@ public class BuyLogsFx {
         Main.primStage.show();
     }
 
-    public void rateProductFromBuyLogs(MouseEvent mouseEvent){
-
+    public void userMenu(ActionEvent actionEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(BuyLogsFx.class.getClassLoader().getResource("buyLogsFx.fxml")));
+        if (LoginMenu.getLoginAccount() instanceof Seller) {
+            SellerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+        } else if (LoginMenu.getLoginAccount() instanceof Manager) {
+            ManagerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        } else if (LoginMenu.getLoginAccount() instanceof Customer) {
+            CustomerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
+        }
+        goToPage();
     }
 
-
+    public void back(ActionEvent actionEvent) {
+        root = priRoot;
+        goToPage();
+    }
 
     public void exit(ActionEvent actionEvent) {
         System.exit(0);
     }
 
-    public void back(ActionEvent actionEvent) {
+    public void logout(ActionEvent actionEvent) throws IOException {
+        LoginMenu.processLogout();
+        root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        goToPage();
     }
 
-    public void logout(ActionEvent actionEvent) {
-    }
 
-    public void userMenu(ActionEvent actionEvent) {
-    }
-
-    public void rateProduct(MouseEvent mouseEvent) {
-
+    public void rateProduct(MouseEvent mouseEvent) throws IOException {
+//        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
+//        ProductMenuFX.setProductInPage(product);
+//        ProductMenuFX.setPriRoot(curRoot);
+//        root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
+//        goToPage();
     }
 
     public void showOrdersFromBuyLog(MouseEvent mouseEvent) throws IOException {
         if (buyLogs.getSelectionModel().getSelectedItem()!=null){
-//            BuyLog buyLog=buyLogs.getSelectionModel().getSelectedItem();
-
             root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("buyLogFx.fxml")));;
             goToPage();
         }
