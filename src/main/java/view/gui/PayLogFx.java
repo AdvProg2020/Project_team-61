@@ -4,6 +4,7 @@ import controller.menus.CustomerMenu;
 import controller.menus.RegisterMenu;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -30,6 +31,16 @@ public class PayLogFx {
     TextField discountPayLogTextField;
     //int output;
     private static BuyLog preBuyLog;
+
+    private static Parent priRoot;
+
+    public static Parent getPriRoot() {
+        return priRoot;
+    }
+
+    public static void setPriRoot(Parent priRoot) {
+        PayLogFx.priRoot = priRoot;
+    }
 
     public static void setPreBuyLog(BuyLog preBuyLog) {
         PayLogFx.preBuyLog = preBuyLog;
