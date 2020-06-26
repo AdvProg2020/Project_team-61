@@ -106,7 +106,7 @@ public class BuyLog extends Log {
             numberOfChosenPro = numberOfChosenPro + amount;
            // product.setNumberOfProducts(0);
           //  product.setIsBought(true);
-            chosenProduct.put(product, amount);
+            chosenProduct.put(product, numberOfChosenPro);
         } else if (product.getNumberOfProducts() < amount) {
             numberOfChosenPro = numberOfChosenPro + product.getNumberOfProducts();
            // product.setNumberOfProducts(0);
