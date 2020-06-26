@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -17,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import model.log.BuyLog;
 import model.log.BuyLogShoo;
 import model.productRelated.Product;
+import model.productRelated.ProductInMenusShow;
 
 
 import javax.swing.text.html.ImageView;
@@ -90,7 +92,7 @@ public class BuyLogFx {
         for (Product product : curbuylog.getChosenProduct().keySet()) {
             BuyLogShoo buyLogShoo = new BuyLogShoo();
             buyLogShoo.logId = curbuylog.getLogId();
-            buyLogShoo.productName = product.getProductName();
+            buyLogShoo.productName = product.getId();
             buyLogShoo.numberOfProduct = curbuylog.getChosenProduct().get(product);
             buyLogShoo.price = product.getPrice();
             buyLogShoo.hole = buyLogShoo.price*buyLogShoo.numberOfProduct;
@@ -117,6 +119,20 @@ public class BuyLogFx {
     }
 
 
+    public void clickedColumn(MouseEvent mouseEvent) throws IOException {
+        TablePosition tablePosition = buyLogTable.getSelectionModel().getSelectedCells().get(0);
+        int row = tablePosition.getRow();
+        BuyLogShoo item = buyLogTable.getItems().get(row);
+        TableColumn tableColumn = tablePosition.getTableColumn();
+
+        try {
+            String im = (String) tableColumn.getCellObservableValue(item).getValue();
+            Product product = Product.getProductById(im);
+
+        } catch (NullPointerException e) {
+            System.out.println("you cant press here");
+        }
+    }
 
     public void increaseAmount(MouseEvent mouseEvent) {
       /*  Product selectedProduct=buyLog.getSelectionModel().getSelectedItem();
