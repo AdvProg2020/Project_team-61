@@ -80,7 +80,7 @@ public class ViewBuyLogFx {
 
     @FXML
     public void initialize() throws IOException {
-        buyLogIdLabel.setText(curBuyLog.getId());
+        buyLogIdLabel.setText(curBuyLog.getLogId());
         buyLogDate.setText(BuyLog.getLocalDateTimeForLog().toString());
         buyLogProductId.setCellValueFactory(new PropertyValueFactory<>("id"));
         buyLogProduct.setCellValueFactory(new PropertyValueFactory<>("product"));

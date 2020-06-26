@@ -35,8 +35,10 @@ public class SaleLog extends Log {
         this.reducedAmount = reducedAmount;
     }
 
-    public void setReceivedAmount() {
-        receivedAmount =price-reducedAmount;
+    public void setReceivedAmount() throws IOException {
+        receivedAmount = price - reducedAmount;
+        Seller.writeInJ();
+
 
     }
 

@@ -1,20 +1,10 @@
 package controller;
 
-import model.firms.Firm;
-import model.productRelated.Category;
-import model.productRelated.Product;
-import model.filtar.Filter;
-import model.sort.Sort;
-import view.*;
-import view.justConsole.OutputHandler;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class ProductsMenu {
-
-    private static int outputNo;
+/*
+   // private static int outputNo;
     private static String productId;
 
     public static void setProductId(String productId) {

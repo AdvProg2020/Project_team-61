@@ -21,20 +21,27 @@ public class ProductMenu {
     private static Product selectedProduct;
     private static BuyLog buyLog;
     private static CommentRequest commentRequest;
+    private static String productId;
 
 
     public static BuyLog getBuyLog() {
         return buyLog;
     }
 
+    public static String getProductId() {
+        return productId;
+    }
 
+    public static void setProductId(String productId) {
+        ProductMenu.productId = productId;
+    }
 
     public static void addToCart() throws IOException {
         String uniqueID = UUID.randomUUID().toString();
         if (BuyLog.getFirstProduct()) {
             buyLog = new BuyLog(uniqueID);
         }
-        buyLog.addProductToBuyLog(ProductsMenu.getProductId(), 1);
+        buyLog.addProductToBuyLog(productId, 1);
     }
 
 

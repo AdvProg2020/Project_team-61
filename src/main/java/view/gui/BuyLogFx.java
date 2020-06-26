@@ -81,7 +81,7 @@ public class BuyLogFx {
 
     @FXML
     public void initialize() throws IOException {
-        buyLogIdLabel.setText(curBuyLog.getId());
+        buyLogIdLabel.setText(curBuyLog.getLogId());
         buyLogDate.setText(BuyLog.getLocalDateTimeForLog().toString());
         buyLogProductId.setCellValueFactory(new PropertyValueFactory<>("id"));
         buyLogProduct.setCellValueFactory(new PropertyValueFactory<>("product"));
@@ -98,7 +98,7 @@ public class BuyLogFx {
 
     public void increaseAmount(MouseEvent mouseEvent) {
         Product selectedProduct=buyLog.getSelectionModel().getSelectedItem();
-       curBuyLog.increaseNumberOfProduct(selectedProduct.getProductId(), 1);
+     //  curBuyLog.increaseNumberOfProduct(selectedProduct.getProductId(), 1);
 
 
     }

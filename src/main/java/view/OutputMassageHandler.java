@@ -9,7 +9,7 @@ public class OutputMassageHandler {
     private static String text;
     private static ArrayList<Parent> allRoots = new ArrayList<>();
 
-    public static void addRoot(Parent root){
+    public static void addRoot(Parent root) {
         allRoots.add(root);
     }
 
@@ -25,48 +25,48 @@ public class OutputMassageHandler {
         if (output == 0) {
             System.out.println("");
         } else if (output == 1) {
-            text =("there is no filter with this id");
+            text = ("there is no filter with this id");
         } else if (output == 2) {
-            text =("filter disabled");
+            text = ("filter disabled");
         } else if (output == 3) {
-            text =("there is no sort with this id");
+            text = ("there is no sort with this id");
         } else if (output == 4) {
-            text =("sort disabled");
+            text = ("sort disabled");
         } else if (output == 5) {
-            text =("there is no product with this id");
+            text = ("there is no product with this id");
         } else if (output == 6) {
-            text =("this filter isn't available");
+            text = ("this filter isn't available");
         } else if (output == 7) {
-            text =("this sort isn't available");
+            text = ("this sort isn't available");
         } else if (output == 8) {
-            text =("please enter 2 number");
+            text = ("please enter 2 number");
         } else if (output == 9) {
-            text =("sort format is in valid");
+            text = ("sort format is in valid");
         } else if (output == 10) {
-            text =("please enter category name to filter");
+            text = ("please enter category name to filter");
         } else if (output == 11) {
-            text =("please enter firm name to filter");
+            text = ("please enter firm name to filter");
         } else if (output == 12) {
-            text =("please enter product name to filter");
+            text = ("please enter product name to filter");
         } else if (output == 13) {
-            text =("there is no category with this id");
+            text = ("there is no category with this id");
         } else if (output == 14) {
-            text =("there is no firm with this id");
+            text = ("there is no firm with this id");
         } else if (output == 15) {
-            text =("there is no product with this id");
+            text = ("there is no product with this id");
         }
         return text;
     }
 
     public static String showProductOutput(int output) {
         if (output == 0) {
-            text =("");
+            text = ("");
         } else if (output == 1) {
-            text =("comment content format is invalid");
+            text = ("comment content format is invalid");
         } else if (output == 2) {
-            text =("comment title format is invalid");
+            text = ("comment title format is invalid");
         } else if (output == 3) {
-            text =("you already commented on this product");
+            text = ("you already commented on this product");
         }
         return text;
     }
@@ -74,88 +74,88 @@ public class OutputMassageHandler {
 
     public static String showManagerOutput(int output) {
         if (output == 0) {
-            text =("");
+            text = ("");
         } else if (output == 1) {
-            text =("product removed");
+            text = ("product removed");
         } else if (output == 2) {
-            text =("product Id format is invalid");
+            text = ("product Id format is invalid");
         } else if (output == 3) {
-            text =("no product exist with this Id");
+            text = ("no product exist with this Id");
         } else if (output == 4) {
-            text =("discount code Id format is inavlid");
+            text = ("discount code Id format is inavlid");
         } else if (output == 5) {
-            text =("there is no discount code with this Id");
+            text = ("there is no discount code with this Id");
         } else if (output == 6) {
-            text =("discount code removed");
+            text = ("discount code removed");
         } else if (output == 8) {
-            text =("start of discount period format is invalid");
+            text = ("start of discount period format is invalid");
         } else if (output == 10) {
-            text =("end of discount period format is invalid");
+            text = ("end of discount period format is invalid");
         } else if (output == 12) {
-            text =("maximum discount amount format is invalid");
+            text = ("maximum discount amount format is invalid");
         } else if (output == 13) {
-            text =("category removed");
+            text = ("category removed");
         } else if (output == 14) {
-            text =("total time of use format is invalid");
+            text = ("total time of use format is invalid");
         } else if (output == 16) {
-            text =("start of discount period changed");
+            text = ("start of discount period changed");
         } else if (output == 17) {
-            text =("end of discount period changed");
+            text = ("end of discount period changed");
         } else if (output == 18) {
-            text =("maximum discount amount changed");
+            text = ("maximum discount amount changed");
         } else if (output == 19) {
-            text =("total time of use changed");
+            text = ("total time of use changed");
         } else if (output == 20) {
-            text =("request format is invalid");
+            text = ("request format is invalid");
         } else if (output == 21) {
-            text =("no request exist with this ID");
+            text = ("no request exist with this ID");
         } else if (output == 22) {
-            text =("category format is invalid");
+            text = ("category format is invalid");
         } else if (output == 23) {
-            text =("no category exist with this name");
+            text = ("no category exist with this name");
         } else if (output == 24) {
-            text =("total time of use format is invalid");
-        }else if (output == 25) {
-            text =("there is discount code with this id");
+            text = ("total time of use format is invalid");
+        } else if (output == 25) {
+            text = ("there is discount code with this id");
         } else if (output == 26) {
-            text =("date must be after current date");
+            text = ("date must be after current date");
         } else if (output == 27) {
-            text =("changed");
+            text = ("changed");
         } else if (output == 28) {
-            text =("discount amount format is invalid");
+            text = ("discount amount format is invalid");
         } else if (output == 29) {
-            text =("account added to list");
-        }else if (output == 30) {
-            text =("username format is invalid");
+            text = ("account added to list");
+        } else if (output == 30) {
+            text = ("username format is invalid");
         } else if (output == 31) {
-            text =("there is no account with this username");
+            text = ("there is no account with this username");
         } else if (output == 32) {
-            text =("account removed from list");
+            text = ("account removed from list");
         } else if (output == 34) {
-            text =("there is a category with this name");
+            text = ("there is a category with this name");
         } else if (output == 36) {
-            text =("please enter username you want to add to discount code list (if you enter finish process end)");
+            text = ("please enter username you want to add to discount code list (if you enter finish process end)");
         } else if (output == 37) {
-            text =("discount code add");
+            text = ("discount code add");
         } else if (output == 39) {
-            text =("product add to category");
+            text = ("product add to category");
         } else if (output == 40) {
-            text =("product removed from category");
+            text = ("product removed from category");
         } else if (output == 41) {
-            text =("trait removed");
+            text = ("trait removed");
         } else if (output == 42) {
-            text =("trait format is invalid");
+            text = ("trait format is invalid");
         } else if (output == 43) {
-            text =("trait add");
+            text = ("trait add");
         } else if (output == 45) {
-            text =("category add");
+            text = ("category add");
         } else if (output == 46) {
-            text =("there is no product with this id");
+            text = ("there is no product with this id");
         } else if (output == 47) {
-            text =("there is no trait with this id");
+            text = ("there is no trait with this id");
         } else if (output == 48) {
-        text =("there is a trait with this id");
-    }
+            text = ("there is a trait with this id");
+        }
         return text;
     }
 
@@ -207,9 +207,9 @@ public class OutputMassageHandler {
         } else if (output == 27) {
             System.out.println("you have already requested for new account");
         } else if (output == 28) {
-            text =("you don't have permission for new account");
+            text = ("you don't have permission for new account");
         } else if (output == 29) {
-            text =("Your request has not been reviewed");
+            text = ("Your request has not been reviewed");
         }
     }
 
@@ -241,31 +241,29 @@ public class OutputMassageHandler {
         return text;
     }
 
-    public static String showPurchaseOutput(int output){
+    public static String showPurchaseOutput(int output) {
         if (output == 0) {
-            text =("please enter discount id");
+            text = ("please enter discount id");
         } else if (output == 1) {
-            text =("answer must be (yes|no)");
+            text = ("answer must be (yes|no)");
         } else if (output == 2) {
-            text =("enter payment to finish buying process");
+            text = ("enter payment to finish buying process");
         } else if (output == 3) {
-            text =("you dont have this discount id");
+            text = ("you dont have this discount id");
         } else if (output == 4) {
-            text =("date is invalid");
+            text = ("date is invalid");
         } else if (output == 5) {
-            text =("you can't use iy anymore");
+            text = ("you can't use iy anymore");
         } else if (output == 6) {
-            text =("you have to login first");
+            text = ("you have to login first");
         } else if (output == 7) {
-            text =("please enter your phone number");
+            text = ("please enter your phone number");
         } else if (output == 8) {
-            text =("you aren't a customer");
-        }
-        else if (output==9){
-            text=("you don't have enough credit");
-        }
-        else if (output==10){
-            text=("payment successful!");
+            text = ("you aren't a customer");
+        } else if (output == 9) {
+            text = ("you don't have enough credit");
+        } else if (output == 10) {
+            text = ("payment successful!");
         }
         return text;
     }
@@ -274,86 +272,86 @@ public class OutputMassageHandler {
         if (output == 0) {
             System.out.println("number");
         } else if (output == 1) {
-            text =("there is no product with this productId ");
+            text = ("there is no product with this productId ");
         } else if (output == 4) {
-            text =("product name change request sent");
+            text = ("product name change request sent");
         } else if (output == 5) {
-            text =("product price change request sent");
+            text = ("product price change request sent");
         } else if (output == 6) {
-            text =("product name format is invalid");
+            text = ("product name format is invalid");
         } else if (output == 7) {
-            text =("product price format is invalid");
+            text = ("product price format is invalid");
         } else if (output == 8) {
-            text =("number of product format is invalid");
+            text = ("number of product format is invalid");
         } else if (output == 9) {
-            text =("number Of Product change request sent");
+            text = ("number Of Product change request sent");
         } else if (output == 14) {
-            text =("additional detail change request sent");
+            text = ("additional detail change request sent");
         } else if (output == 15) {
-            text =("additional detail format is invalid");
+            text = ("additional detail format is invalid");
         } else if (output == 18) {
-            text =("product removed");
+            text = ("product removed");
         } else if (output == 19) {
-            text =("product id must not be finish");
+            text = ("product id must not be finish");
         } else if (output == 20) {
-            text =("category field format is invalid");
+            text = ("category field format is invalid");
         } else if (output == 21) {
-            text =("there is no category with this id");
+            text = ("there is no category with this id");
         } else if (output == 22) {
-            text =("you can't change this product");
+            text = ("you can't change this product");
         } else if (output == 23) {
-            text =("field format is invalid (Name|price|category|additional details|number Of Product)");
+            text = ("field format is invalid (Name|price|category|additional details|number Of Product)");
         } else if (output == 24) {
-            text =("there is no category with this name");
+            text = ("there is no category with this name");
         } else if (output == 25) {
-            text =("category format is invalid");
+            text = ("category format is invalid");
         } else if (output == 27) {
-            text =("there is no product with this id");
+            text = ("there is no product with this id");
         } else if (output == 28) {
-            text =("sale request sent");
+            text = ("sale request sent");
         } else if (output == 29) {
-            text =("value format is invalid");
+            text = ("value format is invalid");
         } else if (output == 31) {
-            text =("there is no trait in category");
-        }else if (output == 33) {
-            text =("new value request sent");
+            text = ("there is no trait in category");
+        } else if (output == 33) {
+            text = ("new value request sent");
         }
         return text;
     }
 
     public static String showSaleOutput(int output) {
         if (output == 0) {
-            text =("");
+            text = ("");
         } else if (output == 1) {
-            text =("there is no sale with this name");
+            text = ("there is no sale with this name");
         } else if (output == 3) {
-            text =("off field format is invalid");
+            text = ("off field format is invalid");
         } else if (output == 5) {
-            text =("you cant't edit this off");
+            text = ("you cant't edit this off");
         } else if (output == 7) {
-            text =("there is an off with this id");
+            text = ("there is an off with this id");
         } else if (output == 8) {
-            text =("there is no product with this id");
+            text = ("there is no product with this id");
         } else if (output == 9) {
-            text =("start of sale period format is invalid");
+            text = ("start of sale period format is invalid");
         } else if (output == 11) {
-            text =("start of sale period request sent");
+            text = ("start of sale period request sent");
         } else if (output == 12) {
-            text =("date is invalid");
+            text = ("date is invalid");
         } else if (output == 13) {
-            text =("end of sale period request sent");
+            text = ("end of sale period request sent");
         } else if (output == 14) {
-            text =("end of sale period format is invalid");
+            text = ("end of sale period format is invalid");
         } else if (output == 15) {
-            text =("sale amount format is invalid");
+            text = ("sale amount format is invalid");
         } else if (output == 16) {
-            text =("sale amount request sent");
+            text = ("sale amount request sent");
         } else if (output == 17) {
-            text =("product removed");
+            text = ("product removed");
         } else if (output == 18) {
-            text =("product add");
+            text = ("product add");
         } else if (output == 19) {
-            text =("product id format is invalid");
+            text = ("product id format is invalid");
         }
         return text;
 
@@ -364,115 +362,116 @@ public class OutputMassageHandler {
         if (output == 0) {
             return ("");
         } else if (output == 1) {
-            text =("a user exists with this username");
+            text = ("a user exists with this username");
         } else if (output == 3) {
-            text =("password format is invalid");
+            text = ("password format is invalid");
         } else if (output == 5) {
-            text =("name format is invalid");
+            text = ("name format is invalid");
         } else if (output == 7) {
-            text =("last name format is invalid");
+            text = ("last name format is invalid");
         } else if (output == 9) {
-            text =("email format is invalid");
+            text = ("email format is invalid");
         } else if (output == 11) {
-            text =("phone number format is invalid");
+            text = ("phone number format is invalid");
         } else if (output == 12) {
-            text =("register successful");
+            text = ("register successful");
         } else if (output == 13) {
-            text =("no user exist with this username");
+            text = ("no user exist with this username");
         } else if (output == 14) {
-            text =("your password is wrong");
+            text = ("your password is wrong");
         } else if (output == 16) {
-            text =("no account field matches with this (username|password|last name|email|phone number|firm)");
+            text = ("no account field matches with this (username|password|last name|email|phone number|firm)");
         } else if (output == 22) {
-            text =("logout");
+            text = ("logout");
         } else if (output == 23) {
-            text =("you cannot create manager profile");
+            text = ("you cannot create manager profile");
         } else if (output == 24) {
-            text =("You've logged in before");
+            text = ("You've logged in before");
         } else if (output == 25) {
-            text =("you have to login first");
+            text = ("you have to login first");
         } else if (output == 26) {
-            text =("no role matches with this");
+            text = ("no role matches with this");
         } else if (output == 27) {
-            text =("you can't change firm information");
+            text = ("you can't change firm information");
         } else if (output == 30) {
-            text =("birthday Date format is invalid");
+            text = ("birthday Date format is invalid");
         } else if (output == 32) {
-            text =("username format is invalid");
+            text = ("username format is invalid");
         } else if (output == 33) {
-            text =("you can't login");
+            text = ("you can't login");
         } else if (output == 35) {
-            text =("there is no account with this user name");
-        } else if (output == 36){
-            text =("username format is invalid");
+            text = ("there is no account with this user name");
+        } else if (output == 36) {
+            text = ("username format is invalid");
         } else if (output == 37) {
-            text =("account deleted");
-        }else if (output == 18) {
-            text =("product removed");
-        }
-        return text ;
-    }
-
-    public static String showFirmOutput(int output) {
-        if (output == 0) {
-            text =("");
-        } else if (output == 1) {
-            text =("no firm field matches with this (name|address|email|phone number)");
-        } else if (output == 3) {
-            text =("firm name format is invalid");
-        } else if (output == 6) {
-            text =("firm's phone number format is invalid");
-        } else if (output == 7) {
-            text =("phone number request for new value sent");
-        } else if (output == 8) {
-            text =("firm's address format is invalid");
-        } else if (output == 9) {
-            text =("address request for new value sent");
-        } else if (output == 10) {
-            text =("firm's Email format is invalid");
-        } else if (output == 11) {
-            text =("Email number request for new value sent");
-        } else if (output == 12) {
-            text =("you dont have firm with this name");
-        } else if (output == 17) {
-            text =("register account request sent to manager");
+            text = ("account deleted");
         } else if (output == 18) {
-            text =("firm's type format is invalid (company|factory|workshop)");
+            text = ("product removed");
         }
         return text;
     }
 
-    public static void showReceiverInfo(int output) {
+    public static String showFirmOutput(int output) {
         if (output == 0) {
-            System.out.println("");
+            text = ("");
         } else if (output == 1) {
-            text =("current phone number format is invalid");
+            text = ("no firm field matches with this (name|address|email|phone number)");
         } else if (output == 3) {
-            text =("address format is invalid");
-        } else if (output == 4) {
-            text =("do you want fast post? (yes|no)");
-        } else if (output == 5) {
-            text =("answer must be yes or no");
+            text = ("firm name format is invalid");
         } else if (output == 6) {
-            text =("do yo have discount code? (yes|no)");
+            text = ("firm's phone number format is invalid");
+        } else if (output == 7) {
+            text = ("phone number request for new value sent");
+        } else if (output == 8) {
+            text = ("firm's address format is invalid");
+        } else if (output == 9) {
+            text = ("address request for new value sent");
+        } else if (output == 10) {
+            text = ("firm's Email format is invalid");
+        } else if (output == 11) {
+            text = ("Email number request for new value sent");
+        } else if (output == 12) {
+            text = ("you dont have firm with this name");
+        } else if (output == 17) {
+            text = ("register account request sent to manager");
+        } else if (output == 18) {
+            text = ("firm's type format is invalid (company|factory|workshop)");
         }
+        return text;
     }
 
-    public static String showOutputWithString( int output) {
-        if (output == 1) {
-            text =("account deleted");
-        } else if (output == 2) {
-            text =("product  removed");
+    public static String showReceiverInfo(int output) {
+        if (output == 0) {
+            text = ("");
+        } else if (output == 1) {
+            text = ("current phone number format is invalid");
+        } else if (output == 3) {
+            text = ("address format is invalid");
         } else if (output == 4) {
-            text =("discount code removed");
+            text = ("do you want fast post? (yes|no)");
         } else if (output == 5) {
-            text =("request  accepted");
+            text = ("answer must be yes or no");
         } else if (output == 6) {
-            text =("request declined");
+            text = ("do yo have discount code? (yes|no)");
+        }
+        return text;
+    }
+
+    public static String showOutputWithString(int output) {
+        if (output == 1) {
+            text = ("account deleted");
+        } else if (output == 2) {
+            text = ("product  removed");
+        } else if (output == 4) {
+            text = ("discount code removed");
+        } else if (output == 5) {
+            text = ("request  accepted");
+        } else if (output == 6) {
+            text = ("request declined");
         } else if (output == 7) {
-            text =("category  removed");
+            text = ("category  removed");
         } else if (output == 8) {
-            text =("your credit ");
+            text = ("your credit ");
         }
         return text;
     }
@@ -501,12 +500,9 @@ public class OutputMassageHandler {
 
   */
 
-    public static void show(String show){
+    public static void show(String show) {
         System.out.println(show);
     }
-
-
-
 
 
 }
