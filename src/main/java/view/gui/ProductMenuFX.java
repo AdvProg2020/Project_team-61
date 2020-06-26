@@ -216,7 +216,7 @@ public class ProductMenuFX {
         thisStage.close();
     }
 
-    public void handleSendComment(ActionEvent actionEvent) throws IOException {
+    public void handleSendComment(MouseEvent mouseEvent) throws IOException {
         ProductMenu.setSelectedProduct(productInPage);
         nullAddCommentError.setText(OutputMassageHandler.showProductOutput(ProductMenu.addComments()));
         nullAddCommentError.setText(OutputMassageHandler.showProductOutput(ProductMenu.contentOfComment(commentTextField.getText())));
