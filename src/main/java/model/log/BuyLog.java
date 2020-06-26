@@ -101,7 +101,7 @@ public class BuyLog extends Log {
         if (product.getNumberOfProducts() > amount) {
             numberOfChosenPro = numberOfChosenPro + amount;
             //product.setNumberOfProducts(product.getNumberOfProducts() - amount);
-            chosenProduct.put(product, amount);
+            chosenProduct.put(product, numberOfChosenPro);
         } else if (product.getNumberOfProducts() == amount) {
             numberOfChosenPro = numberOfChosenPro + amount;
            // product.setNumberOfProducts(0);
@@ -118,7 +118,11 @@ public class BuyLog extends Log {
 
     public void reduceNumberOfProduct(String productId, int amount) {
         Product product = Product.getProductById(productId);
-        numberOfChosenPro = chosenProduct.get(product);
+        for (Product product1 : chosenProduct.keySet()) {
+            if (product1.equals(product)){
+                numberOfChosenPro = chosenProduct.get(product);
+            }
+        }
         if (amount < numberOfChosenPro) {
             chosenProduct.put(product, chosenProduct.get(product) - amount);
            // product.setNumberOfProducts(product.getNumberOfProducts() + amount);
