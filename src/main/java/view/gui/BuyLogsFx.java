@@ -70,7 +70,7 @@ public class BuyLogsFx {
             buyLogShow.holePrice = buyLog.holePrice;
             buyLogShow.price = buyLog.price;
             buyLogShow.buyLogId = buyLog.getLogId();
-
+            buyLogShow.localDateTime=buyLog.getLocalDateTimeForLog();
         }
 
     }
@@ -80,10 +80,10 @@ public class BuyLogsFx {
     public void initialize() throws IOException {
         buyLogsId.setCellValueFactory(new PropertyValueFactory<BuyLogShow, String>("buyLogId"));
         buyLogsTotalPaidAmount.setCellValueFactory(new PropertyValueFactory<BuyLogShow,Double>("price"));
-
+        buyLogsDate.setCellValueFactory(new PropertyValueFactory<BuyLogShow,LocalDateTime>("localDateTime"));
 
         initializeObserverList();
-        buyLogs.getColumns().addAll(buyLogsId,buyLogsTotalPaidAmount);
+        buyLogs.getColumns().addAll(buyLogsId,buyLogsTotalPaidAmount,buyLogsDate);
         buyLogs.setItems(data);
     }
 

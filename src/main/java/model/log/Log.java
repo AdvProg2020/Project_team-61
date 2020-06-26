@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public abstract class Log {
 
     String logId;
-    public static LocalDateTime localDateTimeForLog;
+    public  LocalDateTime localDateTimeForLog;
     DeliveryStatus deliveryStatus;
     private boolean ItsFinal;
 
@@ -31,12 +31,12 @@ public abstract class Log {
         this.logId = logId;
     }
 
-    public static LocalDateTime getLocalDateTimeForLog() {
+    public LocalDateTime getLocalDateTimeForLog() {
         return localDateTimeForLog;
     }
 
-    public static void setLocalDateTimeForLog(LocalDateTime localDateTimeForLog) {
-        Log.localDateTimeForLog = localDateTimeForLog;
+    public void setLocalDateTimeForLog(LocalDateTime localDateTimeForLog) {
+        this.localDateTimeForLog = localDateTimeForLog;
     }
 
     public DeliveryStatus getDeliveryStatus() {

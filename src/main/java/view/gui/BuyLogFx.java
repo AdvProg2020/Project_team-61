@@ -178,7 +178,7 @@ public class BuyLogFx {
     }
 
     public void showLogLocalDate() {
-        buyLogDate.setText(BuyLog.getLocalDateTimeForLog().toString());
+        buyLogDate.setText(curbuylog.getLocalDateTimeForLog().toString());
     }
 
     public void purchase(MouseEvent mouseEvent) throws IOException {
