@@ -81,7 +81,7 @@ public class ViewBuyLogFx {
     @FXML
     public void initialize() throws IOException {
         buyLogIdLabel.setText(curBuyLog.getLogId());
-        buyLogDate.setText(BuyLog.getLocalDateTimeForLog().toString());
+        buyLogDate.setText(curBuyLog.getLocalDateTimeForLog().toString());
         buyLogProductId.setCellValueFactory(new PropertyValueFactory<>("id"));
         buyLogProduct.setCellValueFactory(new PropertyValueFactory<>("product"));
         buyLogProductNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
@@ -109,7 +109,7 @@ public class ViewBuyLogFx {
     }
 
     public void showLogLocalDate() {
-        buyLogDate.setText(BuyLog.getLocalDateTimeForLog().toString());
+        buyLogDate.setText(curBuyLog.getLocalDateTimeForLog().toString());
     }
 
 

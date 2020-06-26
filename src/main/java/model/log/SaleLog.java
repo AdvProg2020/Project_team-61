@@ -101,11 +101,13 @@ public class SaleLog extends Log {
     public String toString() {
         return "SaleLog{" +
                 "receivedAmount=" + receivedAmount +
+                ", price=" + price +
                 ", reducedAmount=" + reducedAmount +
-                //  ", customerName='" + customerName + '\'' +
-                //  ", product=" + product +
-                //", localDateTimeForSaleLog=" + localDateTimeForSaleLog +
-                // ", allSoldProduct=" + allSoldProduct +
+                ", seller='" + seller + '\'' +
+                ", chosenProduct=" + chosenProduct +
+                ", logId='" + logId + '\'' +
+                ", localDateTimeForLog=" + localDateTimeForLog +
+                ", deliveryStatus=" + deliveryStatus +
                 '}';
     }
 }
