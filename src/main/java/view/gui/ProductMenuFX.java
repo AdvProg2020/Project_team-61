@@ -183,6 +183,7 @@ public class ProductMenuFX {
             nullAddCommentError.setVisible(true);
             nullAddCommentError.setText("sign In first");
             nullAddCommentError.setVisible(true);
+            addCommentSectionPane.getChildren().add(nullAddCommentError);
         }
     }
 
