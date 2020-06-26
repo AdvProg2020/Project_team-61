@@ -19,7 +19,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import model.accounts.Customer;
 import model.accounts.Manager;
@@ -140,13 +139,13 @@ public class ProductsMenuFX {
         fifthColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("seller"));
         sixthColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("additionalDetail"));
         seventh.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, Category>("category"));
-        tenth.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow,String>("numberOfProduct"));
+        tenth.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("numberOfProduct"));
 
-        eleventh.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow,String>("firm"));
+        eleventh.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("firm"));
 
 
         initializeObserverList();
-        tableView.getColumns().addAll(firstColumn, secondColumn, productImageViewTableColumn, forthColumn, fifthColumn, sixthColumn, seventh,eleventh,tenth);
+        tableView.getColumns().addAll(firstColumn, secondColumn, productImageViewTableColumn, forthColumn, fifthColumn, sixthColumn, seventh, eleventh, tenth);
         tableView.setItems(data);
 
 
@@ -161,8 +160,7 @@ public class ProductsMenuFX {
                     return true;
                 } else if (product.getCategory().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
-                }
-                else return false;
+                } else return false;
             });
 
         });
@@ -175,8 +173,7 @@ public class ProductsMenuFX {
 
                 if (product.getPrice() > Integer.parseInt(minPriceTextField.getText())) {
                     return true;
-                }
-                else return false;
+                } else return false;
             });
 
         });
@@ -189,30 +186,38 @@ public class ProductsMenuFX {
 
                 if (product.getPrice() < Integer.parseInt(minPriceTextField.getText())) {
                     return true;
-                }
-                else return false;
+                } else return false;
             });
 
         });
 
         for (CheckBox checkBox : filterCatCheck) {
             checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                     filteredList.setPredicate(obj -> {
                         if (!checkBox.isSelected()) {
                             return true;
                         }
-                        if (checkBox.isSelected() && obj.getCategory().equals(checkBox.getText())){
-                            return true;
+                        if (checkBox.isSelected() && checkBox.getText().contains("category")) {
+                            String[] s = checkBox.getText().split(" ");
+                            if (s[1].equals(obj.getCategory())) {
+                                return true;
+                            }
                         }
-                        if (checkBox.isSelected() && obj.getNumberOfProduct() != 0){
-                            return true;
+                        if (checkBox.isSelected() && checkBox.getText().equals("isAvailable") && obj.getNumberOfProduct() != 0){
+                            if (!filteredList.contains(obj)){
+                                return true;
+                            }
                         }
-                        if (checkBox.isSelected() && obj.getFirm().equals(checkBox.getText())){
-                            return true;
+                        if (checkBox.isSelected() && checkBox.getText().contains("firm")) {
+                            String[] s = checkBox.getText().split(" ");
+                            if (s[1].equals(obj.getFirm())) {
+                                return true;
+                            }
                         }
-                        else return false;
+                        return false;
                     });
                 }
             });
@@ -226,8 +231,6 @@ public class ProductsMenuFX {
         dataInListView();
         categoriesListView.getColumns().addAll(catName, traits);
         categoriesListView.setItems(dataCat);
-
-
         sortedList = new SortedList<>(filteredList);
         sortedList.comparatorProperty().bind(tableView.comparatorProperty());
         tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -275,7 +278,7 @@ public class ProductsMenuFX {
     public void dataInFilterCheck() {
         for (Category category : Category.getAllCategories()) {
             int n = 30;
-            CheckBox checkBox = new CheckBox(category.getName());
+            CheckBox checkBox = new CheckBox("category " + category.getName());
             checkBox.setLayoutY((n) * (Category.getAllCategories().indexOf(category) + 1));
             checkBox.setLayoutX(10 + Category.getAllCategories().indexOf(category));
             filterCatCheck.add(checkBox);
@@ -283,15 +286,15 @@ public class ProductsMenuFX {
         }
 
         for (Firm firm : Firm.getAllFirms()) {
-            int n=30;
-            CheckBox checkBox = new CheckBox(firm.getName());
+            int n = 30;
+            CheckBox checkBox = new CheckBox("firm " + firm.getName());
             checkBox.setLayoutY((n) * (Firm.getAllFirms().indexOf(firm) + 1));
             checkBox.setLayoutX(10 + Firm.getAllFirms().indexOf(firm));
             filterCatCheck.add(checkBox);
             companyNamePaneFilter.getChildren().add(checkBox);
         }
-        filterCatCheck.add(filterIsAvailable);
-        filterCatCheck.add(filterAscending);
+//        filterCatCheck.add(filterIsAvailable);
+//        filterCatCheck.add(filterAscending);
     }
 
     public void back(ActionEvent actionEvent) {
