@@ -218,6 +218,7 @@ public class CustomerMenu {
                 //if (checkCustomer()) {
                 if (isBought()) {
                     Score newScore = new Score(LoginMenu.getLoginAccount(), Product.getProductById(productID), number);
+                    Product.getProductById(productID).score = newScore;
                     // OutputMassageHandler.showOutputWith2String(productID, String.valueOf(number), 1);
                     outputNo = 14;
                 } else outputNo = 13;

@@ -193,21 +193,6 @@ public class Main extends Application {
             DiscountCode.getAllDiscountCodes().addAll(manager.getAllDiscountCodes());
         }
 
-        for (Seller seller : Seller.getAllSellers()) {
-            SaleLog.getAllSellersLog().addAll(seller.getSaleLogsHistory());
-        }
-
-        if (SaleLog.getAllSellersLog().size() == 0){
-            SaleLog.setAllSellersLog(new ArrayList<>());
-        }
-
-        for (Customer customer : Customer.getAllCustomers()) {
-            BuyLog.getAllCustomersLog().addAll(customer.getBuyLogsHistory());
-        }
-
-        if (BuyLog.getAllCustomersLog().size() == 0){
-            BuyLog.setAllCustomersLog(new ArrayList<>());
-        }
 
         BuyLog buyLog = new BuyLog("firstBuyLog");
         buyLog.holePrice = 10;

@@ -8,16 +8,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import model.accounts.Customer;
 import model.log.BuyLog;
 import model.off.Sale;
 import model.productRelated.Product;
+import model.request.Request;
+import view.OutputMassageHandler;
 
 
 import java.io.IOException;
@@ -26,6 +26,8 @@ import java.util.Objects;
 
 public class ViewBuyLogFx {
     private static String buyLogId;
+    public TableView buyLogTable;
+    public Button viewProductB;
 
     public static void setBuyLogId(String buyLogId) {
         ViewBuyLogFx.buyLogId = buyLogId;
@@ -34,6 +36,11 @@ public class ViewBuyLogFx {
     public static void setPriRoot(Parent priRoot) {
         ViewBuyLogFx.priRoot = priRoot;
     }
+
+    private int score =0;
+
+    @FXML
+    private Label scoreMs;
 
     @FXML
     private TableView<Product> buyLog = new TableView<>();
@@ -150,6 +157,7 @@ public class ViewBuyLogFx {
 
    */
 
+
     public void userMenu(ActionEvent actionEvent) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         goToPage();
@@ -166,6 +174,53 @@ public class ViewBuyLogFx {
 
     public void exit(ActionEvent actionEvent) {
         System.exit(0);
+    }
+
+
+    public void score5(MouseEvent mouseEvent) {
+        score = 4;
+    }
+
+    public void score4(MouseEvent mouseEvent) {
+        score = 4;
+    }
+
+    public void score3(MouseEvent mouseEvent) {
+        score = 3;
+    }
+
+    public void score1(MouseEvent mouseEvent) {
+        score = 1;
+    }
+
+
+    public void score(MouseEvent mouseEvent) throws IOException {
+        String im = "";
+        TablePosition tablePosition = buyLog.getSelectionModel().getSelectedCells().get(0);
+        int row = tablePosition.getRow();
+        Product item = buyLog.getItems().get(row);
+        TableColumn tableColumn = tablePosition.getTableColumn();
+        try{
+            im = (String) tableColumn.getCellObservableValue(item).getValue();
+        }catch (NullPointerException e){
+            System.out.println("you Cant Press Here");
+        }
+        if(score != 0){
+            scoreMs.setText(OutputMassageHandler.showCustomerOutput( CustomerMenu.rateProduct( im, score)));
+        }else scoreMs.setText("you have to select first");
+    }
+
+    public void score2(MouseEvent mouseEvent) {
+
+    }
+
+    public void handleScore(MouseEvent mouseEvent) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("ScoreFx.fxml")));
+        Scene pageTwoScene = new Scene(root);
+        Stage stage= new Stage();
+        //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        stage.setScene(pageTwoScene);
+        stage.show();
     }
 
 
