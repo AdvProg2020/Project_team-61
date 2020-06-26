@@ -9,14 +9,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TablePosition;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
@@ -111,7 +109,7 @@ public class BuyLogFx {
 
     @FXML
     public void initialize() throws IOException {
-        initializeObserverList();
+
         productName.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, String>("productName"));
         numberOfPro.setCellValueFactory(new PropertyValueFactory<BuyLogShoo,String>("price"));
         LogId.setCellValueFactory(new PropertyValueFactory<BuyLogShoo,String>("logId"));
@@ -119,13 +117,17 @@ public class BuyLogFx {
         hole.setCellValueFactory(new PropertyValueFactory<BuyLogShoo,Double>("hole"));
         proImage.setCellValueFactory(new PropertyValueFactory<BuyLogShoo,ImageView>("imageView"));
 
+        buyLogTable.setEditable(true);
+        buyLogTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        buyLogTable.getSelectionModel().setCellSelectionEnabled(true);
+        initializeObserverList();
         buyLogTable.getColumns().addAll(productName,numberOfPro,LogId,buyLogPrice,hole,proImage);
         buyLogTable.setItems(data);
     }
 
 
     public void clickedColumn(MouseEvent mouseEvent) throws IOException {
-        TablePosition tablePosition = buyLogTable.getSelectionModel().getSelectedCells().get(0);
+       /* TablePosition tablePosition = buyLogTable.getSelectionModel().getSelectedCells().get(0);
         int row = tablePosition.getRow();
         BuyLogShoo item = buyLogTable.getItems().get(row);
         TableColumn tableColumn = tablePosition.getTableColumn();
@@ -137,21 +139,29 @@ public class BuyLogFx {
         } catch (NullPointerException e) {
             System.out.println("you cant press here");
         }
+
+        */
     }
 
     public void increaseAmount(MouseEvent mouseEvent) throws IOException {
+        BuyLogShoo a = buyLogTable.getSelectionModel().getSelectedItem();
+        product = Product.getProductById(a.productName);
         ProductMenu.getBuyLog().addProductToBuyLog(product.getId(), 1);
-        initialize();
+      //  initialize();
     }
 
     public void reduceAmount(ActionEvent MouseEvent) throws IOException {
+        BuyLogShoo a = buyLogTable.getSelectionModel().getSelectedItem();
+        product = Product.getProductById(a.productName);
         ProductMenu.getBuyLog().reduceNumberOfProduct(product.getId(), 1);
-        initialize();
+       // initialize();
     }
 
     public void showTotalPriceBuyLog(MouseEvent MouseClick) throws IOException {
-        totalPriceLabel.setText(String.valueOf(curbuylog.calculateHolePrice()));
-        initialize();
+        if(curbuylog instanceof  BuyLog) {
+            totalPriceLabel.setText(String.valueOf(curbuylog.getHolePrice()));
+        }
+       // initialize();
     }
 
     public void showLogLocalDate() {
@@ -201,11 +211,15 @@ public class BuyLogFx {
     }
 
     public void viewProductFromBuyLog(MouseEvent mouseEvent) throws IOException {
-        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
-        ProductMenuFX.setProductInPage(product);
-        ProductMenuFX.setPriRoot(curRoot);
-        root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
-        goToPage();
+        BuyLogShoo a = buyLogTable.getSelectionModel().getSelectedItem();
+        product = Product.getProductById(a.productName);
+        if(product!= null) {
+            Parent curRoot = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("buyLogFx.fxml")));
+            ProductMenuFX.setProductInPage(product);
+            ProductMenuFX.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
+            goToPage();
+        }
     }
 
 

@@ -33,6 +33,15 @@ public class BuyLog extends Log {
         allCustomersLog.add(this);
     }
 
+    public double getHolePrice() {
+        holePrice =totalPrice() - salePrice;
+        return holePrice;
+    }
+
+    public void setHolePrice(double holePrice) {
+        this.holePrice = holePrice;
+    }
+
     public static ArrayList<BuyLog> getAllCustomersLog() {
         return allCustomersLog;
     }
@@ -40,6 +49,7 @@ public class BuyLog extends Log {
     public static boolean getFirstProduct() {
         return firstProduct;
     }
+
 
 
     public HashMap<Product, Integer> getChosenProduct() {
@@ -52,16 +62,18 @@ public class BuyLog extends Log {
             holePrice = discountCode.calculate(totalPrice() - withSale());
             discountCode.setTotalTimesOfUse(discountCode.getTotalTimesOfUse() - 1);
         } else {
-            holePrice = totalPrice() - withSale();
+            holePrice =totalPrice() - withSale();
         }
         return holePrice;
     }
 
 
-    public double withSale() {
+
+
+    public double withSale(){
         for (Product p : chosenProduct.keySet()) {
-            if (p.getInSale()) {
-                if (p.getSale().checkSale()) {
+            if(p.getInSale()){
+                if(p.getSale().checkSale()) {
                     salePrice += chosenProduct.get(p) * p.getSale().withSale(p);
                 }
             }
@@ -78,13 +90,13 @@ public class BuyLog extends Log {
 
     public void addProductToBuyLog(String productId, int amount) {
         Product product = Product.getProductById(productId);
-        if (chosenProduct.containsKey(product)) {
-            numberOfChosenPro = chosenProduct.get(product);
-        } else {
-            chosenProduct.put(product, amount);
-            numberOfChosenPro += amount;
+        for (Product product1 : chosenProduct.keySet()) {
+            if (product1.equals(product)){
+                numberOfChosenPro = chosenProduct.get(product);
+            }else {
+                chosenProduct.put(product,1);
+            }
         }
-
 
         if (product.getNumberOfProducts() > amount) {
             numberOfChosenPro = numberOfChosenPro + amount;
@@ -92,14 +104,14 @@ public class BuyLog extends Log {
             chosenProduct.put(product, amount);
         } else if (product.getNumberOfProducts() == amount) {
             numberOfChosenPro = numberOfChosenPro + amount;
-            // product.setNumberOfProducts(0);
-            //  product.setIsBought(true);
+           // product.setNumberOfProducts(0);
+          //  product.setIsBought(true);
             chosenProduct.put(product, amount);
         } else if (product.getNumberOfProducts() < amount) {
             numberOfChosenPro = numberOfChosenPro + product.getNumberOfProducts();
-            // product.setNumberOfProducts(0);
+           // product.setNumberOfProducts(0);
             chosenProduct.put(product, product.getNumberOfProducts());
-            // product.setIsBought(true);
+           // product.setIsBought(true);
         }
     }
 
@@ -109,12 +121,12 @@ public class BuyLog extends Log {
         numberOfChosenPro = chosenProduct.get(product);
         if (amount < numberOfChosenPro) {
             chosenProduct.put(product, chosenProduct.get(product) - amount);
-            // product.setNumberOfProducts(product.getNumberOfProducts() + amount);
+           // product.setNumberOfProducts(product.getNumberOfProducts() + amount);
         } else if (amount == numberOfChosenPro) {
             chosenProduct.remove(product);
-            // product.setNumberOfProducts(product.getNumberOfProducts() + amount);
+           // product.setNumberOfProducts(product.getNumberOfProducts() + amount);
         } else if (amount > chosenProduct.get(product)) {
-            // product.setNumberOfProducts(chosenProduct.get(product));
+           // product.setNumberOfProducts(chosenProduct.get(product));
             chosenProduct.remove(product);
         }
     }
@@ -123,7 +135,7 @@ public class BuyLog extends Log {
     public ArrayList<Seller> getSellers() {
         ArrayList<Seller> sellers = null;
         for (Product p : chosenProduct.keySet()) {
-            if (Account.getAccountWithUsername(p.getSeller()) instanceof Seller) {
+            if(Account.getAccountWithUsername(p.getSeller()) instanceof  Seller) {
                 Seller seller = (Seller) Account.getAccountWithUsername(p.getSeller());
                 sellers.add(seller);
             }
@@ -131,9 +143,9 @@ public class BuyLog extends Log {
         return sellers;
     }
 
-    public boolean checkIfProductIsBought(String productID) {
+    public  boolean checkIfProductIsBought(String productID){
         for (Product product : chosenProduct.keySet()) {
-            if (product.getId().equalsIgnoreCase(productID)) {
+            if(product.getId().equalsIgnoreCase(productID)){
                 return true;
             }
         }
@@ -143,6 +155,7 @@ public class BuyLog extends Log {
     public static void setAllCustomersLog(ArrayList<BuyLog> allCustomersLog) {
         BuyLog.allCustomersLog = allCustomersLog;
     }
+
 
 
     @Override
