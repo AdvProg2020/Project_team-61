@@ -122,7 +122,6 @@ public class CustomerMenu {
             } else outputNo = 3;
         } else outputNo = 7;
         return outputNo;
-
         //OutputMassageHandler.showPurchaseOutput(outputNo);
     }
 
@@ -154,9 +153,7 @@ public class CustomerMenu {
             }
             p.getListOfBuyers().add(loginAccount);
         }
-
         ProductMenu.getBuyLog().setItsFinal(true);
-
         for (Seller seller : ProductMenu.getBuyLog().getSellers()) {
             for (Product p : ProductMenu.getBuyLog().getChosenProduct().keySet()) {
                 if (p.getSeller().equals(seller)) {

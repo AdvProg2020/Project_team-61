@@ -4,10 +4,12 @@ package view;
 import javafx.scene.Parent;
 
 import java.util.ArrayList;
+import java.util.function.DoubleToIntFunction;
 
 public class OutputMassageHandler {
     private static String text;
     private static ArrayList<Parent> allRoots = new ArrayList<>();
+    //private static int output;
 
     public static void addRoot(Parent root) {
         allRoots.add(root);

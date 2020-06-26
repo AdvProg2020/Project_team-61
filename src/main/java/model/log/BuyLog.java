@@ -67,9 +67,6 @@ public class BuyLog extends Log {
         return holePrice;
     }
 
-
-
-
     public double withSale(){
         for (Product p : chosenProduct.keySet()) {
             if(p.getInSale()){
@@ -80,7 +77,6 @@ public class BuyLog extends Log {
         }
         return salePrice;
     }
-
     public double totalPrice() {
         for (Product p : chosenProduct.keySet()) {
             price = chosenProduct.get(p) * p.getPrice();
@@ -135,7 +131,6 @@ public class BuyLog extends Log {
         }
     }
 
-
     public ArrayList<Seller> getSellers() {
         ArrayList<Seller> sellers = null;
         for (Product p : chosenProduct.keySet()) {
@@ -159,8 +154,6 @@ public class BuyLog extends Log {
     public static void setAllCustomersLog(ArrayList<BuyLog> allCustomersLog) {
         BuyLog.allCustomersLog = allCustomersLog;
     }
-
-
 
     @Override
     public String toString() {

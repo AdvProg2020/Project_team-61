@@ -215,6 +215,10 @@ public class RegisterMenu {
        // OutputMassageHandler.showFirmOutput(outputNo);
     }
 
+    public static int getOutputNo() {
+        return outputNo;
+    }
+
     public static int receiverInformation(String detail, int detailMen) throws IOException {
         if (detailMen == 0) {
             if (detail.matches("\\d+")) {
