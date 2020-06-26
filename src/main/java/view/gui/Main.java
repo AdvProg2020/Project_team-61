@@ -205,8 +205,13 @@ public class Main extends Application {
         buyLog1.getChosenProduct().put(Product.getProductById("third"),8);
 
         for (Product product : Product.getAllProduct()) {
+            for (Comment proComment : product.proComments) {
+                System.out.println(proComment.getId());
+            }
+
             Comment.allComments.addAll(product.proComments);
         }
+
 
         Application.launch(args);
 

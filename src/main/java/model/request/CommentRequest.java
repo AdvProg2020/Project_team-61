@@ -51,16 +51,26 @@ public class CommentRequest extends Request {
     @Override
     public void acceptRequest() throws IOException {
         Comment comment = Comment.getCommentFromId(id);
-        comment.setDetail(title, content, Account.getAccountWithUsername(personToVote), Product.getProductById(product));
-        comment.setCommentStatus(CommentStatus.CONFIRMED);
-        Product.getProductById(product).setComment(comment);
-        Request.getAllRequests().remove(this);
-        allCommentRequests.remove(this);
+        if (Account.getAccountWithUsername(personToVote) instanceof Customer){
+            Customer customer = (Customer) Account.getAccountWithUsername(personToVote);
+            comment.setDetail(title, content, customer);
+            comment.setCommentStatus(CommentStatus.CONFIRMED);
+            Product.getProductById(product).setComment(comment);
+            for (Comment proComment : Product.getProductById(product).proComments) {
+                if (proComment.getId().equals(comment.getId())){
+                    proComment = comment;
+                }
+            }
+            Request.getAllRequests().remove(this);
+            allCommentRequests.remove(this);
+        }
+
         if (Account.getAccountWithUsername(this.getSeller()) instanceof Customer) {
             Customer customer = (Customer) Account.getAccountWithUsername(this.getSeller());
             customer.removeCommentRequest(this);
         }
         writeInJ();
+        Seller.writeInJ();
     }
 
     public void setId(String id) throws IOException {

@@ -2,6 +2,7 @@ package controller;
 
 import controller.menus.LoginMenu;
 import model.accounts.Customer;
+import model.accounts.Seller;
 import model.request.CommentRequest;
 import model.request.Request;
 import model.log.BuyLog;
@@ -60,15 +61,21 @@ public class ProductMenu {
             //   String id = LoginMenu.getLoginAccount(). + "comment";
             if (!Request.isThereRequestFromID(commentId)) {
                 Comment comment = new Comment(commentId);
+                selectedProduct.proComments.add(comment);
+                Seller.writeInJ();
                 comment.setCommentStatus(CommentStatus.WAITINGFORAPPROVAL);
                 commentRequest = new CommentRequest(commentId);
+                Seller.writeInJ();
                 if(LoginMenu.getLoginAccount() instanceof Customer) {
                     Customer customer = (Customer) LoginMenu.getLoginAccount();
                     commentRequest.setPersonToVote(customer.getUsername());
                     commentRequest.setProduct(selectedProduct.getId());
+                    Seller.writeInJ();
                 }
                 commentRequest.setId(commentId);
             } else commentRequest = (CommentRequest) Request.getRequestFromID(commentId);
+            Seller.writeInJ();
+
             outputNo = 0;
             //  CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
             // CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);

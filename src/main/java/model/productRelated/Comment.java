@@ -1,6 +1,7 @@
 package model.productRelated;
 
 import model.accounts.Account;
+import model.accounts.Customer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,10 +14,11 @@ public class Comment {
     String content;
     CommentStatus commentStatus;
     String id;
+    String personName;
 
     //objectAdded
-    Product productToComment;
-    private Account personToVote;
+
+    private Customer personToVote;
     String proId;
 
 
@@ -43,7 +45,7 @@ public class Comment {
 
 //setterAndGetter--------------------------------------------------------------------------------------------
 
-    public void setDetail(String title , String content , Account personToVote , Product productToComment){
+    public void setDetail(String title , String content , Customer personToVote){
         if (title != null){
             this.title = title;
         }
@@ -52,9 +54,7 @@ public class Comment {
         }
         if (personToVote != null){
             this.personToVote=personToVote;
-        }
-        if (productToComment != null){
-            this.productToComment=productToComment;
+            personName = personToVote.getName();
         }
         allComments.add(this);
     }
@@ -115,21 +115,47 @@ public class Comment {
         }
     }
 
-    public static ArrayList<Comment> getCommentsOfPro(String proId){
-        ArrayList<Comment> help = new ArrayList<>();
-        for (Comment comment : allComments) {
-            if (comment.proId.equals(proId)){
-                help.add(comment);
-            }
-        }
-        return help;
+    public String getContent() {
+        return content;
     }
 
-//    public  void writeInJ() throws IOException {
-//        Type collectionType = new TypeToken<ArrayList<Comment>>(){}.getType();
-//        String json= FileHandling.getGson().toJson(getAllComments(),collectionType);
-//        FileHandling.turnToArray(json+" "+"commend.json");
-//    }
+    public CommentStatus getCommentStatus() {
+        return commentStatus;
+    }
+
+    public String getPersonName() {
+        return personName;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public static void setAllComments(ArrayList<Comment> allComments) {
+        Comment.allComments = allComments;
+    }
+
+    public void setPersonName(String personName) {
+        this.personName = personName;
+    }
+
+    public void setPersonToVote(Customer personToVote) {
+        this.personToVote = personToVote;
+    }
+
+    public void setProId(String proId) {
+        this.proId = proId;
+    }
+
+    public void setSold(boolean sold) {
+        isSold = sold;
+    }
+
+    public static ArrayList<Comment> getCommentsOfPro(String proId){
+        Product product = Product.getProductById(proId);
+        return product.proComments;
+    }
+
 
     @Override
     public String toString() {
@@ -138,7 +164,6 @@ public class Comment {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", commentStatus=" + commentStatus +
-                ", productToComment=" + productToComment +
                 ", personToVote=" + personToVote +
                 '}';
     }
