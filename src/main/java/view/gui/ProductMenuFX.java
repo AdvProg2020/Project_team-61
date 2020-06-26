@@ -38,7 +38,6 @@ import model.request.Request;
 import view.OutputMassageHandler;
 
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -87,7 +86,7 @@ public class ProductMenuFX {
     public static ObservableList<Comment> data = FXCollections.observableArrayList();
     @FXML
     private Label scoreMs;
-    private int score =0;
+    private int score = 0;
     private static Parent priRoot;
     private static Parent root;
     private static Request request;
@@ -106,7 +105,7 @@ public class ProductMenuFX {
 
     public void makeUpPage() throws IOException {
 
-        if(request == null) {
+        if (request == null) {
             productNameLabel.setText(productInPage.getProductName());
             File file = new File(productInPage.getProductImage());
             Image image = new Image(new FileInputStream(file));
@@ -138,11 +137,11 @@ public class ProductMenuFX {
                 }
             }
             productCategoryDetail.setEditable(false);
-        }else makeRequest();
+        } else makeRequest();
     }
 
     private void makeRequest() throws FileNotFoundException {
-        if(request instanceof ProductRequest) {
+        if (request instanceof ProductRequest) {
             ProductRequest productRequest = (ProductRequest) request;
             productNameLabel.setText(productRequest.getProductName());
             File file = new File(productRequest.getImg());
@@ -178,13 +177,13 @@ public class ProductMenuFX {
 
     @FXML
     void popUpAddComment(MouseEvent mouseEvent) throws IOException {
-        if (LoginMenu.isLogin()){
+        if (LoginMenu.isLogin()) {
             Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("comment.fxml")));
             prevScene = new Scene(root);
             thisStage = new Stage();
             thisStage.setScene(prevScene);
             thisStage.show();
-        }else{
+        } else {
             nullAddCommentError.setVisible(true);
             nullAddCommentError.setText("sign In first");
             nullAddCommentError.setVisible(true);
@@ -193,23 +192,25 @@ public class ProductMenuFX {
     }
 
     public void handleAddProductToLog(ActionEvent actionEvent) throws IOException {
-       // if (LoginMenu.isLogin()){
-            try {
-                ProductMenu.setProductId(productInPage.getId());
-                ProductMenu.addToCart();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            BuyLogFx.setPriRoot(productPagePane);
-            BuyLogFx.setCurBuylog(ProductMenu.getBuyLog());
+        // if (LoginMenu.isLogin()){
+        try {
+            ProductMenu.setProductId(productInPage.getId());
+            ProductMenu.addToCart();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        BuyLogFx.setPriRoot(productPagePane);
+        BuyLogFx.setCurBuylog(ProductMenu.getBuyLog());
+        Parent cur = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
+        BuyLogFx.setPriRoot(cur);
 
-          //  BuyLogFx.getCurBuyLog().setBuyLogCustomer(LoginMenu.getLoginAccount());
-            AnchorPane root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("buyLogFx.fxml")));
-            Scene scene = new Scene(root);
-            Main.primStage.setScene(scene);
-            Main.primStage.show();
+        //  BuyLogFx.getCurBuyLog().setBuyLogCustomer(LoginMenu.getLoginAccount());
+        AnchorPane root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("buyLogFx.fxml")));
+        Scene scene = new Scene(root);
+        Main.primStage.setScene(scene);
+        Main.primStage.show();
 
-       // }
+        // }
 //        else {
 //            AnchorPane root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("LoginFx.fxml")));
 //            Scene scene = new Scene(root);
@@ -231,30 +232,30 @@ public class ProductMenuFX {
 
     public String handleProCatDetail() {
 
-            String out = "";
-        if(request == null) {
+        String out = "";
+        if (request == null) {
             for (String specification : productInPage.productCategorySpecifications) {
                 out += specification + "\n";
             }
-        }else{
-            if(request instanceof  ProductRequest) {
+        } else {
+            if (request instanceof ProductRequest) {
                 ProductRequest productRequest = (ProductRequest) request;
                 for (String specification : productRequest.getSpecialValue()) {
                     out += specification + "\n";
                 }
             }
         }
-            return out;
+        return out;
 
     }
 
     @FXML
     public void initialize() throws IOException {
 
-        if(request == null) {
+        if (request == null) {
             titleColumn.setCellValueFactory(new PropertyValueFactory<Comment, String>("title"));
             contentColumn.setCellValueFactory(new PropertyValueFactory<Comment, String>("content"));
-            personWhoCommented.setCellValueFactory(new PropertyValueFactory<Comment,String>("personName"));
+            personWhoCommented.setCellValueFactory(new PropertyValueFactory<Comment, String>("personName"));
 
             for (Comment comment : Comment.getCommentsOfPro(productInPage.getId())) {
                 if (!data.contains(comment)) {
@@ -278,8 +279,41 @@ public class ProductMenuFX {
     }
 
 
+    public void score5(MouseEvent mouseEvent) {
+        score = 4;
+    }
+
+    public void score4(MouseEvent mouseEvent) {
+        score = 4;
+    }
+
+    public void score3(MouseEvent mouseEvent) {
+        score = 3;
+    }
+
+    public void score1(MouseEvent mouseEvent) {
+        score = 1;
+    }
 
 
+    public void score(MouseEvent mouseEvent) throws IOException {
+        if(score != 0){
+            scoreMs.setText(OutputMassageHandler.showCustomerOutput( CustomerMenu.rateProduct( productInPage.getProductId(), score)));
+        }else scoreMs.setText("you have to select first");
+    }
+
+    public void score2(MouseEvent mouseEvent) {
+        score = 2;
+    }
+
+    public void handleScore(MouseEvent mouseEvent) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("ScoreFx.fxml")));
+        Scene pageTwoScene = new Scene(root);
+        Stage stage= new Stage();
+        //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        stage.setScene(pageTwoScene);
+        stage.show();
+    }
 
     public void back(ActionEvent actionEvent) {
         root = priRoot;
@@ -303,21 +337,21 @@ public class ProductMenuFX {
         Main.primStage.show();
     }
 
-    public void login(ActionEvent actionEvent)throws IOException {
+    public void login(ActionEvent actionEvent) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
         goToPage();
     }
 
 
-    public void userMenu(ActionEvent actionEvent)throws IOException {
-        Parent curRoot  = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
-        if(LoginMenu.getLoginAccount() instanceof Manager) {
+    public void userMenu(ActionEvent actionEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
+        if (LoginMenu.getLoginAccount() instanceof Manager) {
             ManagerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
-        }else  if(LoginMenu.getLoginAccount() instanceof Seller) {
+        } else if (LoginMenu.getLoginAccount() instanceof Seller) {
             SellerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
-        }else  if(LoginMenu.getLoginAccount() instanceof Customer) {
+        } else if (LoginMenu.getLoginAccount() instanceof Customer) {
             CustomerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         }

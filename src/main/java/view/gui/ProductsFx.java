@@ -78,10 +78,10 @@ public class ProductsFx {
     private void makeTree() {
         productId.setCellValueFactory(new PropertyValueFactory<Product, String>("productId"));
         productAdditional.setCellValueFactory(new PropertyValueFactory<Product, String>("additionalDetail"));
-        productScore.setCellValueFactory(new PropertyValueFactory<Product, Double>("averageScore"));
+//        productScore.setCellValueFactory(new PropertyValueFactory<Product, Double>("averageScore"));
         productName.setCellValueFactory(new PropertyValueFactory<Product, String>("productName"));
         productNumber.setCellValueFactory(new PropertyValueFactory<Product, Double>("numberOfProducts"));
-        productNumberView.setCellValueFactory(new PropertyValueFactory<Product, String>("numberOfViews"));
+      //  productNumberView.setCellValueFactory(new PropertyValueFactory<Product, String>("numberOfViews"));
         productPrice.setCellValueFactory(new PropertyValueFactory<Product, Number>("price"));
 
 
@@ -135,7 +135,7 @@ public class ProductsFx {
         if (LoginMenu.getLoginAccount() instanceof Seller) {
             if (products.getSelectionModel().getSelectedItem() != null) {
                 Product product = products.getSelectionModel().getSelectedItem();
-                Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
+                Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ProductsFx.class.getClassLoader().getResource("productsFx.fxml")));
                 ProductMenuFX.setProductInPage(product);
                 ProductMenuFX.setPriRoot(curRoot);
                 root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));

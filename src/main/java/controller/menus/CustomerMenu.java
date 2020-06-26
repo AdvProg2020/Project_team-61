@@ -212,12 +212,14 @@ public class CustomerMenu {
 
 
     //score.............................................................
-    public static int rateProduct(String productID, int number) throws IOException {
-        if (checkProduct(productID)) {
+    public static int rateProduct(String productI, int number) throws IOException {
+        if (checkProduct(productI)) {
             if (number >= 1 && number <= 5) {
                 //if (checkCustomer()) {
                 if (isBought()) {
+                    CustomerMenu.productID = productI;
                     Score newScore = new Score(LoginMenu.getLoginAccount(), Product.getProductById(productID), number);
+                    Product.getProductById(productID).score = newScore;
                     // OutputMassageHandler.showOutputWith2String(productID, String.valueOf(number), 1);
                     outputNo = 14;
                 } else outputNo = 13;

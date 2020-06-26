@@ -124,13 +124,17 @@ public class ViewAccountFx {
             customer = (Customer) LoginMenu.getLoginAccount();
             findDis();
             DiscountCodesFx.setDiscounts(dis);
+            DiscountCodesFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("DiscountCodesFx.fxml")));
+            goToPage();
         } else if (LoginMenu.getLoginAccount() instanceof Manager) {
             Manager customer = (Manager) LoginMenu.getLoginAccount();
             DiscountCodesFx.setDiscounts(customer.getAllDiscountCodes());
+            DiscountCodesFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("DiscountCodesFx.fxml")));
+            goToPage();
         } else show("you can't see discounts");
-        DiscountCodesFx.setPriRoot(curRoot);
-        root = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("DiscountCodesFx.fxml")));
-        goToPage();
+
 
     }
 

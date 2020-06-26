@@ -1,6 +1,7 @@
 package view.gui;
 
 
+import controller.ProductMenu;
 import controller.menus.LoginMenu;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -291,6 +292,8 @@ public class ProductsMenuFX {
     }
 
     public static void gotoProductPage(Product product) throws IOException {
+        Parent cur = FXMLLoader.load(Objects.requireNonNull(ProductsMenuFX.class.getClassLoader().getResource("productsMenu.fxml")));
+        ProductMenuFX.setPriRoot(cur);
         AnchorPane root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
         prevScene = new Scene(root);
         thisStage = new Stage();
@@ -406,7 +409,7 @@ public class ProductsMenuFX {
     }
 
     public void userMenu(ActionEvent actionEvent) throws IOException {
-        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
         if (LoginMenu.getLoginAccount() instanceof Manager) {
             ManagerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));

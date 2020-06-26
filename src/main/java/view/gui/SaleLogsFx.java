@@ -22,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 public class SaleLogsFx {
@@ -30,7 +31,7 @@ public class SaleLogsFx {
   //  private TableColumn<SaleLog, DeliveryStatus> saleLogsDeliveryStatus;
 
     @FXML
-    private TableColumn<SaleLogShow, LocalDateTime> saleLogsDate;
+    private TableColumn<SaleLogShow, Date> saleLogsDate;
 
     @FXML
     private TableView<SaleLogShow> saleLogsTableView = new TableView<>();
@@ -79,8 +80,8 @@ public class SaleLogsFx {
     @FXML
     public void initialize() throws IOException {
         saleLogsId.setCellValueFactory(new PropertyValueFactory<SaleLogShow, String>("saleLogId"));
-        saleLogsDate.setCellValueFactory(new PropertyValueFactory<SaleLogShow,LocalDateTime>("localDateTime"));
-        saleLogsDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+      //  saleLogsDate.setCellValueFactory(new PropertyValueFactory<SaleLogShow, Date>("localDateTime"));
+        saleLogsDate.setCellValueFactory(new PropertyValueFactory<SaleLogShow, Date>("date"));
         initializeObserverList();
         saleLogsTableView.getColumns().addAll(saleLogsId,saleLogsDate);
         saleLogsTableView.setItems(data);

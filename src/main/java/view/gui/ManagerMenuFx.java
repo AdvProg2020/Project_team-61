@@ -38,12 +38,14 @@ public class ManagerMenuFx {
     }
 
     public void viewDiscount(MouseEvent mouseEvent) throws IOException {
-        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
-        DiscountCodesFx.setPriRoot(curRoot);
-        Manager manager = (Manager) LoginMenu.getLoginAccount();
-        DiscountCodesFx.setDiscounts(manager.getAllDiscountCodes());
-        root = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("discountCodesFx.fxml")));
-        goToPage();
+        if(LoginMenu.getLoginAccount() instanceof Manager) {
+            Manager manager = (Manager) LoginMenu.getLoginAccount();
+            Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+            DiscountCodesFx.setPriRoot(curRoot);
+            DiscountCodesFx.setDiscounts(manager.getAllDiscountCodes());
+            root = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("discountCodesFx.fxml")));
+            goToPage();
+        }
     }
 
     public void createDiscount(MouseEvent mouseEvent) throws IOException {

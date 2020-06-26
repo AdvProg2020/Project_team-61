@@ -57,15 +57,13 @@
                 </LinearGradient>
             </fill>
         </Text>
-        <TableView fx:id="products" layoutX="243.0" layoutY="120.0" prefHeight="630.0" prefWidth="1252.0">
+        <TableView fx:id="products" layoutX="326.0" layoutY="131.0" prefHeight="616.0" prefWidth="898.0">
             <columns>
                 <TableColumn fx:id="productId" prefWidth="171.0" text="ID" />
                 <TableColumn fx:id="productName" prefWidth="189.0" text="Name" />
                 <TableColumn fx:id="productPrice" prefWidth="180.0" text="Price" />
                 <TableColumn fx:id="productNumber" prefWidth="179.0" text="Number" />
-                <TableColumn fx:id="productNumberView" prefWidth="197.0" text="Number of view" />
                 <TableColumn fx:id="productAdditional" prefWidth="175.0" text="Additional details" />
-                <TableColumn fx:id="productScore" prefWidth="161.0" text="Score" />
             </columns>
         </TableView>
         <Button layoutX="1158.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsView" text="view">

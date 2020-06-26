@@ -88,7 +88,9 @@ public class CustomerMenuFx {
 
     public void viewCustomerDiscount(MouseEvent mouseEvent) throws IOException {
         dis();
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         DiscountCodesFx.setDiscounts(discounts);
+        DiscountCodesFx.setPriRoot(curRoot);
         root = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("DiscountCodesFx.fxml")));
         goToPage();
     }

@@ -1,6 +1,7 @@
 package view.gui;
 
 import controller.menus.CustomerMenu;
+import controller.menus.LoginMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +16,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import model.accounts.Customer;
+import model.accounts.Manager;
+import model.accounts.Seller;
 import model.log.BuyLog;
 import model.off.Sale;
 import model.productRelated.Product;
@@ -119,7 +122,6 @@ public class ViewBuyLogFx {
 //            ProductMenuFX.setCurProduct(selectedItem);
             ProductMenuFX.productInPage = selectedItem;
             root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenuFx.fxml")));
-            ;
             goToPage();
         }
 
@@ -150,23 +152,34 @@ public class ViewBuyLogFx {
 
    */
 
-    public void userMenu(ActionEvent actionEvent) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
-        goToPage();
-    }
 
-    public void logout(ActionEvent actionEvent) {
+    public void userMenu(ActionEvent actionEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ViewBuyLogFx.class.getClassLoader().getResource("viewBuyLog.fxml")));
+        if (LoginMenu.getLoginAccount() instanceof Seller) {
+            SellerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+        } else if (LoginMenu.getLoginAccount() instanceof Manager) {
+            ManagerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        } else if (LoginMenu.getLoginAccount() instanceof Customer) {
+            CustomerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
+        }
+        goToPage();
     }
 
     public void back(ActionEvent actionEvent) {
         root = priRoot;
         goToPage();
-
     }
 
     public void exit(ActionEvent actionEvent) {
         System.exit(0);
     }
 
-
+    public void logout(ActionEvent actionEvent) throws IOException {
+        LoginMenu.processLogout();
+        root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        goToPage();
+    }
 }
