@@ -68,7 +68,7 @@
                 <TableColumn fx:id="saleLogsRecievedAmount" minWidth="220.0" prefWidth="226.0" text="Recieved Amount" />
             </columns>
         </TableView>
-      <Button layoutX="1241.0" layoutY="721.0" mnemonicParsing="false" onMouseClicked="#viewSaleLogFromAllSaleLogs" prefHeight="40.0" prefWidth="110.0" text="View">
+      <Button layoutX="1096.0" layoutY="715.0" mnemonicParsing="false" onMouseClicked="#viewSaleLogFromAllSaleLogs" prefHeight="40.0" prefWidth="110.0" text="View">
          <textFill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>

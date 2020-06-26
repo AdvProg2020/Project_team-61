@@ -29,7 +29,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-//import controller.request.*;
 
 public class Main extends Application {
     private final int widthScene = 1800;
@@ -39,7 +38,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("buyLogsFx.fxml")));
+
+        Parent root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
         primaryStage.setTitle("market");
         primaryStage.setScene(new Scene(root, widthScene, heightScene));
         primStage = primaryStage;
