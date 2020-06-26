@@ -75,6 +75,7 @@ public class SalesFx {
     }
 
     private void makeTree() {
+        checkIfTimeEnds();
         saleId.setCellValueFactory(new PropertyValueFactory<Sale, String>("offId"));
         saleStart.setCellValueFactory(new PropertyValueFactory<Sale, Date>("startOfSalePeriod"));
         saleEnd.setCellValueFactory(new PropertyValueFactory<Sale, Date>("endOfSalePeriod"));
@@ -88,6 +89,17 @@ public class SalesFx {
         sales.getSelectionModel().setCellSelectionEnabled(true);
 
         sales.setItems(list);
+    }
+
+    private void checkIfTimeEnds() {
+        Sale sale1 = null;
+        for (Sale sale : Sale.getAllSales()) {
+            if (sale.getStartOfSalePeriod().after(sale.getEndOfSalePeriod())){
+                sale1 = sale;
+            }
+        }
+        Sale.getAllSales().remove(sale1);
+        makeList();
     }
 
 

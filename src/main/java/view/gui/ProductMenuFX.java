@@ -105,6 +105,7 @@ public class ProductMenuFX {
     }
 
     public void makeUpPage() throws IOException {
+
         if(request == null) {
             productNameLabel.setText(productInPage.getProductName());
             File file = new File(productInPage.getProductImage());
@@ -249,6 +250,7 @@ public class ProductMenuFX {
 
     @FXML
     public void initialize() throws IOException {
+
         if(request == null) {
             titleColumn.setCellValueFactory(new PropertyValueFactory<Comment, String>("title"));
             contentColumn.setCellValueFactory(new PropertyValueFactory<Comment, String>("content"));
@@ -276,42 +278,6 @@ public class ProductMenuFX {
     }
 
 
-
-    public void score5(MouseEvent mouseEvent) {
-        score = 4;
-    }
-
-    public void score4(MouseEvent mouseEvent) {
-        score = 4;
-    }
-
-    public void score3(MouseEvent mouseEvent) {
-        score = 3;
-    }
-
-    public void score1(MouseEvent mouseEvent) {
-        score = 1;
-    }
-
-
-    public void score(MouseEvent mouseEvent) throws IOException {
-        if(score != 0){
-            scoreMs.setText(OutputMassageHandler.showCustomerOutput( CustomerMenu.rateProduct( productInPage.getProductId(), score)));
-        }else scoreMs.setText("you have to select first");
-    }
-
-    public void score2(MouseEvent mouseEvent) {
-
-    }
-
-    public void handleScore(MouseEvent mouseEvent) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("ScoreFx.fxml")));
-        Scene pageTwoScene = new Scene(root);
-        Stage stage= new Stage();
-        //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        stage.setScene(pageTwoScene);
-        stage.show();
-    }
 
 
 

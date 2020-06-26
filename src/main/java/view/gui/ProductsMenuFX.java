@@ -62,6 +62,8 @@ public class ProductsMenuFX {
 
     public TableColumn<ProductInMenusShow, String> tenth = new TableColumn<>("numberOfProduct");
 
+    public TableColumn<ProductInMenusShow, Double> ninth = new TableColumn<>("score");
+
     @FXML
     public static ObservableList<ProductInMenusShow> data = FXCollections.observableArrayList();
 
@@ -69,6 +71,7 @@ public class ProductsMenuFX {
     public static ImageView productPic = new ImageView();
 
     public static FilteredList<ProductInMenusShow> filteredList = new FilteredList<>(data, b -> true);
+
 
     @FXML
     public TableColumn<Category, String> catName = new TableColumn<>("name");
@@ -91,10 +94,16 @@ public class ProductsMenuFX {
     public ObservableList<Category> dataCat = FXCollections.observableArrayList();
     public ArrayList<CheckBox> filterCatCheck = new ArrayList<>();
     public SortedList<ProductInMenusShow> sortedList = new SortedList<>(filteredList);
+
     public AnchorPane companyNamePaneFilter;
     public TextField maxPriceTextField;
     public TextField minPriceTextField;
-
+    public AnchorPane SellerNameFilterPane;
+    public AnchorPane ProductNameFilterPane;
+    public AnchorPane TraitFilterPane;
+    public
+    FilteredList<Category> filteredListCat = new FilteredList<>(dataCat, b -> true);
+    public SortedList<Category> sortedList1 = new SortedList<>(filteredListCat);
     public static void setPriRoot(Parent priRoot) {
         ProductsMenuFX.priRoot = priRoot;
     }
@@ -144,12 +153,13 @@ public class ProductsMenuFX {
         sixthColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("additionalDetail"));
         seventh.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, Category>("category"));
         tenth.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("numberOfProduct"));
+        ninth.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, Double>("score"));
 
         eleventh.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("firm"));
 
 
         initializeObserverList();
-        tableView.getColumns().addAll(firstColumn, secondColumn, productImageViewTableColumn, forthColumn, fifthColumn, sixthColumn, seventh, eleventh, tenth);
+        tableView.getColumns().addAll(firstColumn, secondColumn, productImageViewTableColumn, forthColumn, fifthColumn, sixthColumn, seventh, eleventh, tenth,ninth);
         tableView.setItems(data);
 
 
@@ -221,6 +231,36 @@ public class ProductsMenuFX {
                                 return true;
                             }
                         }
+                        if (checkBox.isSelected() && checkBox.getText().contains("seller")){
+                            String[] s = checkBox.getText().split(" ");
+                            if (s[1].equals(obj.getSeller())){
+                                return true;
+                            }
+                        }
+                        if (checkBox.isSelected() && checkBox.getText().contains("product")){
+                            String[] s = checkBox.getText().split(" ");
+                            if (s[1].equals(obj.name)){
+                                return true;
+                            }
+                        }
+                        return false;
+                    });
+                }
+            });
+
+            checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                    filteredListCat.setPredicate(obj -> {
+                        String[] s = checkBox.getText().split(" ");
+                        if (!checkBox.isSelected()) {
+                            return true;
+                        }
+                        if (checkBox.isSelected()){
+                            if (obj.getTraits().contains(s[1])){
+                                return true;
+                            }
+                        }
                         return false;
                     });
                 }
@@ -240,6 +280,13 @@ public class ProductsMenuFX {
         tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         tableView.getSelectionModel().setCellSelectionEnabled(true);
         tableView.setItems(sortedList);
+
+
+        sortedList1 = new SortedList<>(filteredListCat);
+        sortedList1.comparatorProperty().bind(categoriesListView.comparatorProperty());
+        categoriesListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        categoriesListView.getSelectionModel().setCellSelectionEnabled(true);
+        categoriesListView.setItems(sortedList1);
 
     }
 
@@ -297,8 +344,38 @@ public class ProductsMenuFX {
             filterCatCheck.add(checkBox);
             companyNamePaneFilter.getChildren().add(checkBox);
         }
-//        filterCatCheck.add(filterIsAvailable);
-//        filterCatCheck.add(filterAscending);
+
+        for (Seller seller : Seller.getAllSellers()) {
+            int n = 30;
+            CheckBox checkBox = new CheckBox("seller " + seller.getUsername());
+            checkBox.setLayoutY((n) * (Seller.getAllSellers().indexOf(seller) + 1));
+            checkBox.setLayoutX(10 + Seller.getAllSellers().indexOf(seller));
+            filterCatCheck.add(checkBox);
+            SellerNameFilterPane.getChildren().add(checkBox);
+        }
+
+        for (Product product : Product.getAllProduct()) {
+            int n = 30;
+            CheckBox checkBox = new CheckBox("product " + product.getProductName());
+            checkBox.setLayoutY((n) * (Product.getAllProduct().indexOf(product) + 1));
+            checkBox.setLayoutX(10 + Product.getAllProduct().indexOf(product));
+            filterCatCheck.add(checkBox);
+            ProductNameFilterPane.getChildren().add(checkBox);
+        }
+
+        for (Category category : Category.getAllCategories()) {
+            for (String trait : category.getTraits()) {
+                int n = 30;
+                CheckBox checkBox = new CheckBox("trait " + trait);
+                checkBox.setLayoutY((n) * (category.getTraits().indexOf(trait) + 1));
+                checkBox.setLayoutX(10 + category.getTraits().indexOf(trait));
+                filterCatCheck.add(checkBox);
+                TraitFilterPane.getChildren().add(checkBox);
+            }
+        }
+
+        filterCatCheck.add(filterIsAvailable);
+        filterCatCheck.add(filterAscending);
     }
 
     public void back(ActionEvent actionEvent) {
