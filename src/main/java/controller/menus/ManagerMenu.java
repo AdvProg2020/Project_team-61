@@ -1,5 +1,6 @@
 package controller.menus;
 
+import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
 import model.request.Request;
@@ -15,6 +16,8 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
+import java.util.UUID;
 
 
 public class ManagerMenu {
@@ -116,6 +119,18 @@ public class ManagerMenu {
         ManagerMenu.detailMenu = detailMenu;
     }
 
+    public static void giveDiscountToRandomCustomers() throws IOException {
+        Random randomGenerator=new Random();
+        int index = randomGenerator.nextInt(Customer.getAllCustomers().size());
+        Customer customer = Customer.getAllCustomers().get(index);
+        String uniqueID = UUID.randomUUID().toString();
+        createNewDiscountCode(uniqueID);
+      //  newDiscountCode.setStartOfDiscountPeriod("");
+      //  newDiscountCode.setEndOfDiscountPeriod();
+        newDiscountCode.setTotalTimesOfUse(1);
+        newDiscountCode.setDiscountAmount(10);
+        newDiscountCode.setMaxDiscountAmount(1000);
+    }
     public static int createNewDiscountCode(String discountCodeId) throws IOException {
         if (discountCodeId.matches("(\\s*\\S+\\s*)+")) {
             if (!DiscountCode.isThereDiscountWithId(discountCodeId)) {
