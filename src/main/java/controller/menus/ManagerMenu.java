@@ -112,6 +112,10 @@ public class ManagerMenu {
         return false;
     }
 
+    public static void setDetailMenu(int detailMenu) {
+        ManagerMenu.detailMenu = detailMenu;
+    }
+
     public static int createNewDiscountCode(String discountCodeId) throws IOException {
         if (discountCodeId.matches("(\\s*\\S+\\s*)+")) {
             if (!DiscountCode.isThereDiscountWithId(discountCodeId)) {
