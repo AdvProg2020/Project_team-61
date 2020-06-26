@@ -197,7 +197,7 @@ public class ProductMenuFX {
             BuyLogFx.setPriRoot(productPagePane);
             BuyLogFx.setCurBuyLog(ProductMenu.getBuyLog());
 
-            BuyLogFx.getCurBuyLog().setBuyLogCustomer(LoginMenu.getLoginAccount());
+          //  BuyLogFx.getCurBuyLog().setBuyLogCustomer(LoginMenu.getLoginAccount());
             AnchorPane root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("BuyLogFx.fxml")));
             Scene scene = new Scene(root);
             Main.primStage.setScene(scene);
