@@ -1,6 +1,7 @@
 package model.productRelated;
 
 import model.accounts.Account;
+import model.accounts.Customer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,10 +14,11 @@ public class Comment {
     String content;
     CommentStatus commentStatus;
     String id;
+    String personName;
 
     //objectAdded
-    Product productToComment;
-    private String personToVote;
+
+    private Customer personToVote;
     String proId;
 
 
@@ -43,29 +45,27 @@ public class Comment {
 
 //setterAndGetter--------------------------------------------------------------------------------------------
 
-    public void setDetail(String title, String content, Account personToVote, Product productToComment) {
-        if (title != null) {
+    public void setDetail(String title , String content , Customer personToVote){
+        if (title != null){
             this.title = title;
         }
-        if (content != null) {
+        if (content != null){
             this.content = content;
         }
-        if (personToVote != null) {
-            this.personToVote = personToVote.getUsername();
+        if (personToVote != null){
+            this.personToVote=personToVote;
+            personName = personToVote.getName();
         }
-        if (productToComment != null) {
-            this.productToComment = productToComment;
-        }
-        // allComments.add(this);
+        allComments.add(this);
     }
 
     public String getId() {
         return id;
     }
 
-    public static Comment getCommentFromId(String id) {
+    public static Comment getCommentFromId(String id){
         for (Comment comment : allComments) {
-            if (comment.getId().equals(id)) {
+            if (comment.getId().equals(id)){
                 return comment;
             }
         }
@@ -85,12 +85,12 @@ public class Comment {
         allComments.add(this);
     }
 
-    public ArrayList<Comment> getAllComments() {
+    public  ArrayList<Comment> getAllComments() {
         return allComments;
     }
 
 
-    public String getPersonToVote() {
+    public Account getPersonToVote() {
         return personToVote;
     }
 
@@ -115,21 +115,47 @@ public class Comment {
         }
     }
 
-    public static ArrayList<Comment> getCommentsOfPro(String proId) {
-        ArrayList<Comment> help = new ArrayList<>();
-        for (Comment comment : allComments) {
-            if (comment.proId.equals(proId)) {
-                help.add(comment);
-            }
-        }
-        return help;
+    public String getContent() {
+        return content;
     }
 
-//    public  void writeInJ() throws IOException {
-//        Type collectionType = new TypeToken<ArrayList<Comment>>(){}.getType();
-//        String json= FileHandling.getGson().toJson(getAllComments(),collectionType);
-//        FileHandling.turnToArray(json+" "+"commend.json");
-//    }
+    public CommentStatus getCommentStatus() {
+        return commentStatus;
+    }
+
+    public String getPersonName() {
+        return personName;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public static void setAllComments(ArrayList<Comment> allComments) {
+        Comment.allComments = allComments;
+    }
+
+    public void setPersonName(String personName) {
+        this.personName = personName;
+    }
+
+    public void setPersonToVote(Customer personToVote) {
+        this.personToVote = personToVote;
+    }
+
+    public void setProId(String proId) {
+        this.proId = proId;
+    }
+
+    public void setSold(boolean sold) {
+        isSold = sold;
+    }
+
+    public static ArrayList<Comment> getCommentsOfPro(String proId){
+        Product product = Product.getProductById(proId);
+        return product.proComments;
+    }
+
 
     @Override
     public String toString() {
@@ -138,7 +164,6 @@ public class Comment {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", commentStatus=" + commentStatus +
-                ", productToComment=" + productToComment +
                 ", personToVote=" + personToVote +
                 '}';
     }

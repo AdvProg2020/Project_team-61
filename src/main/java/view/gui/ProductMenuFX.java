@@ -60,7 +60,7 @@ public class ProductMenuFX {
     public TextField titleTextField;
     public Button backButtonAddComment;
     public Button sendCommentButton;
-    public AnchorPane addCommentSectionPane;
+    public AnchorPane addCommentSectionPane = new AnchorPane();
     public Label nullAddCommentError = new Label();
     public TextArea productCategoryDetail;
     public TextArea productDetail;
@@ -79,6 +79,10 @@ public class ProductMenuFX {
     public TableColumn<Comment, String> titleColumn = new TableColumn<>("title");
     @FXML
     public TableColumn<Comment, String> contentColumn = new TableColumn<>("content");
+
+    @FXML
+    public TableColumn<Comment, String> personWhoCommented = new TableColumn<>("person commented on this");
+
     @FXML
     public static ObservableList<Comment> data = FXCollections.observableArrayList();
     @FXML
@@ -183,6 +187,7 @@ public class ProductMenuFX {
             nullAddCommentError.setVisible(true);
             nullAddCommentError.setText("sign In first");
             nullAddCommentError.setVisible(true);
+
         }
     }
 
@@ -247,6 +252,8 @@ public class ProductMenuFX {
         if(request == null) {
             titleColumn.setCellValueFactory(new PropertyValueFactory<Comment, String>("title"));
             contentColumn.setCellValueFactory(new PropertyValueFactory<Comment, String>("content"));
+            personWhoCommented.setCellValueFactory(new PropertyValueFactory<Comment,String>("personName"));
+
             for (Comment comment : Comment.getCommentsOfPro(productInPage.getId())) {
                 if (!data.contains(comment)) {
                     data.add(comment);
@@ -257,7 +264,7 @@ public class ProductMenuFX {
             for (Comment comment : Comment.getCommentsOfPro(productInPage.getId())) {
                 System.out.println(comment.getTitle());
             }
-            data.removeAll();
+            data.clear();
         }
     }
 

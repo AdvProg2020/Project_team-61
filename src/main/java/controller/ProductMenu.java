@@ -2,6 +2,7 @@ package controller;
 
 import controller.menus.LoginMenu;
 import model.accounts.Customer;
+import model.accounts.Seller;
 import model.request.CommentRequest;
 import model.request.Request;
 import model.log.BuyLog;
@@ -57,27 +58,30 @@ public class ProductMenu {
     public static int addComments() throws IOException {
         String commentId = LoginMenu.getLoginAccount().getUsername() + " comment on " + selectedProduct.getId();
         if (!Comment.isThereCommentWithId(commentId)) {
-         //   String id = LoginMenu.getLoginAccount(). + "comment";
+            //   String id = LoginMenu.getLoginAccount(). + "comment";
             if (!Request.isThereRequestFromID(commentId)) {
                 Comment comment = new Comment(commentId);
+                selectedProduct.proComments.add(comment);
+                Seller.writeInJ();
                 comment.setCommentStatus(CommentStatus.WAITINGFORAPPROVAL);
                 commentRequest = new CommentRequest(commentId);
+                Seller.writeInJ();
                 if(LoginMenu.getLoginAccount() instanceof Customer) {
                     Customer customer = (Customer) LoginMenu.getLoginAccount();
                     commentRequest.setPersonToVote(customer.getUsername());
                     commentRequest.setProduct(selectedProduct.getId());
+                    Seller.writeInJ();
                 }
                 commentRequest.setId(commentId);
-            } else{
-                if(Request.getRequestFromID(commentId) instanceof CommentRequest)
-                    commentRequest = (CommentRequest) Request.getRequestFromID(commentId);
-            }
+            } else commentRequest = (CommentRequest) Request.getRequestFromID(commentId);
+            Seller.writeInJ();
+
             outputNo = 0;
             //  CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
             // CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);
         } else outputNo = 3;
         return outputNo;
-       // OutputMassageHandler.showProductOutput(outputNo);
+        // OutputMassageHandler.showProductOutput(outputNo);
     }
 
 
