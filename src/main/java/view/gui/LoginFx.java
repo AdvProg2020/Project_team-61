@@ -33,6 +33,10 @@ public class LoginFx {
     }
 
     public static void goToMenu(String role) throws IOException {
+        //     String path = "src/main/java/view/music/shot.mp3";
+//            Media media = new Media(new File(path).toURI().toString());
+//            MediaPlayer mediaPlayer = new MediaPlayer(media);
+//            mediaPlayer.setAutoPlay(true);
         Parent curRoot = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
         if (role.equalsIgnoreCase("manager")) {
             ManagerMenuFx.setPriRoot(curRoot);
@@ -50,6 +54,10 @@ public class LoginFx {
 
 
     public void login(MouseEvent mouseEvent) throws IOException {
+        //     String path = "src/main/java/view/music/shot.mp3";
+//            Media media = new Media(new File(path).toURI().toString());
+//            MediaPlayer mediaPlayer = new MediaPlayer(media);
+//            mediaPlayer.setAutoPlay(true);
         String username = userLogin.getText();
         String password = passLogin.getText();
         int user = LoginMenu.processLogin(username);

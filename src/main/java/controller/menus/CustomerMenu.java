@@ -157,6 +157,8 @@ public class CustomerMenu {
             finishingPayment();
             ok = true;
             outputNo = 10;
+            Seller.writeInJ();
+            Customer.writeInJ();
         } else outputNo = 9;
         return outputNo;
         //  OutputMassageHandler.showPurchaseOutput(outputNo);

@@ -7,8 +7,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+//import javafx.scene.media.Media;
+//import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.accounts.Account;
 import model.accounts.Customer;
@@ -24,8 +24,6 @@ import model.productRelated.Comment;
 import model.productRelated.Product;
 import model.request.*;
 import view.FileHandling;
-//import javafx.scene.media.Media;
-//import javafx.scene.media.MediaPlayer;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -45,17 +43,17 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-            String path = "src/main/java/view/music/background.mp3";
-            Media media = new Media(new File(path).toURI().toString());
-            MediaPlayer mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.setAutoPlay(true);
+//            String path = "src/main/java/view/music/background.mp3";
+//            Media media = new Media(new File(path).toURI().toString());
+//            MediaPlayer mediaPlayer = new MediaPlayer(media);
+//            mediaPlayer.setAutoPlay(true);
 
 
         if (Manager.getAllManagers().size() == 0) {
             SignUpFx.setRole("manager");
-            root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("buyLogsFx.fxml")));
+            root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("signUpFx.fxml")));
         }else {
-             root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("buyLogsFx.fxml")));
+             root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
         }
         primaryStage.setTitle("market");
         primaryStage.setScene(new Scene(root, widthScene, heightScene));

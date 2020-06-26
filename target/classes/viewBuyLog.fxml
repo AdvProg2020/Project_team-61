@@ -1,14 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ViewBuyLog"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="848.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ViewBuyLogFx">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="848.0" stroke="BLACK" strokeType="INSIDE" width="1600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0" startY="0.0970873786407767">
+                    <stops>
+                        <Stop color="WHITE" />
+                        <Stop color="#f5f5ef" offset="0.007246376811594203" />
+                        <Stop color="#e3d96f" offset="0.08695652173913043" />
+                        <Stop color="#cfaa1f" offset="0.2536231884057971" />
+                        <Stop color="#ab437c" offset="0.5430520034100598" />
+                        <Stop color="#fcc5e5" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1600.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="User menu">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#userMenu" text="your menu" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Logout">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Back">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Text layoutX="702.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buy Log">
+            <font>
+                <Font name="System Bold Italic" size="42.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#ff57bf" />
+                        <Stop color="WHITE" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <TableView fx:id="buyLogTable" editable="true" layoutX="194.0" layoutY="171.0" onMouseClicked="#clickedColumn" prefHeight="428.0" prefWidth="1087.0" />
+        <Button fx:id="viewProductB" layoutX="1046.0" layoutY="638.0" mnemonicParsing="false" onMouseClicked="#viewProductFromBuyLog" text="View Product">
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="1.0" green="0.1944444477558136" blue="0.1944444477558136" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.9166666865348816" green="0.12448559701442719" blue="0.6922153830528259" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill>
+        </Button>
+        <Button fx:id="showTotalPriceB" layoutX="1154.0" layoutY="638.0" mnemonicParsing="false" onMouseClicked="#showTotalPriceBuyLog" text="Show Total Price">
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="1.0" green="0.1944444477558136" blue="0.1944444477558136" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7938596606254578" green="0.46308478713035583" blue="0.05880441889166832" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill>
+        </Button>
+        <Separator layoutX="194.0" layoutY="613.0" prefHeight="10.0" prefWidth="1087.0" />
+        <Text layoutX="194.0" layoutY="642.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Price:" wrappingWidth="73.90234375" />
+        <Label fx:id="totalPriceLabel" layoutX="287.0" layoutY="626.0" prefHeight="17.0" prefWidth="86.0" text="Label" />
+        <Label fx:id="buyLogIdLabel" layoutX="351.0" layoutY="58.0" prefHeight="56.0" prefWidth="219.0" />
+        <Label fx:id="buyLogDate" layoutX="1046.0" layoutY="95.0" text="Label" />
+    </children>
 </AnchorPane>

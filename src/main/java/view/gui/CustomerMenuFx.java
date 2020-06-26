@@ -31,7 +31,10 @@ public class CustomerMenuFx {
     }
 
     public void viewPersonalInfo(MouseEvent mouseEvent) throws IOException {
-
+        //     String path = "src/main/java/view/music/drop.mp3";
+//            Media media = new Media(new File(path).toURI().toString());
+//            MediaPlayer mediaPlayer = new MediaPlayer(media);
+//            mediaPlayer.setAutoPlay(true);
         Parent curRoot = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         ViewAccountFx.setPriRoot(curRoot);
         ViewAccountFx.setAccount(LoginMenu.getLoginAccount());
@@ -40,12 +43,20 @@ public class CustomerMenuFx {
     }
 
     public void viewBalance(MouseEvent mouseEvent) throws IOException {
+        //     String path = "src/main/java/view/music/drop.mp3";
+//            Media media = new Media(new File(path).toURI().toString());
+//            MediaPlayer mediaPlayer = new MediaPlayer(media);
+//            mediaPlayer.setAutoPlay(true);
         String balance = "your credit is: " + String.valueOf(LoginMenu.getLoginAccount().getCredit());
         show("balance: " + balance);
     }
 
 
     public void viewCart(MouseEvent mouseEvent) throws IOException {
+        //     String path = "src/main/java/view/music/drop.mp3";
+//            Media media = new Media(new File(path).toURI().toString());
+//            MediaPlayer mediaPlayer = new MediaPlayer(media);
+//            mediaPlayer.setAutoPlay(true);
         if (LoginMenu.getLoginAccount() instanceof Customer) {
             if(ProductMenu.getBuyLog() != null) {
                 BuyLogFx.setCurBuylog(ProductMenu.getBuyLog());
@@ -60,6 +71,10 @@ public class CustomerMenuFx {
 
 
     public void viewOrders(MouseEvent mouseEvent) throws IOException {
+        //     String path = "src/main/java/view/music/drop.mp3";
+//            Media media = new Media(new File(path).toURI().toString());
+//            MediaPlayer mediaPlayer = new MediaPlayer(media);
+//            mediaPlayer.setAutoPlay(true);
         if (LoginMenu.getLoginAccount() instanceof Customer) {
             Parent curRoot = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
             ViewAccountFx.setPriRoot(curRoot);
