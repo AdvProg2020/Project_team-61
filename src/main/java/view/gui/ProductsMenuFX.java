@@ -131,6 +131,10 @@ public class ProductsMenuFX {
 
     @FXML
     public void initialize() throws IOException {
+//        String path = "src/main/java/view/music/background.mp3";
+//        Media media = new Media(new File(path).toURI().toString());
+//        MediaPlayer mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.setAutoPlay(true);
         dataInFilterCheck();
         firstColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("id"));
         secondColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("name"));

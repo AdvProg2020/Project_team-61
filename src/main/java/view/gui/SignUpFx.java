@@ -139,11 +139,15 @@ public class SignUpFx {
 
 
     public void sellerRole(MouseEvent mouseEvent) {
-        role = "seller";
+        if(!LoginMenu.isLogin()) {
+            role = "seller";
+        }
     }
 
     public void customerRole(MouseEvent mouseEvent) {
-        role = "customer";
+        if(!LoginMenu.isLogin()) {
+            role = "customer";
+        }
     }
 
     public void managerRole(MouseEvent mouseEvent) {

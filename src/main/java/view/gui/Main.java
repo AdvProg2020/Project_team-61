@@ -22,7 +22,9 @@ import model.productRelated.Comment;
 import model.productRelated.Product;
 import model.request.*;
 import view.FileHandling;
-
+//import javafx.scene.media.Media;
+//import javafx.scene.media.MediaPlayer;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -35,12 +37,24 @@ public class Main extends Application {
     private final int widthScene = 1800;
     private final int heightScene = 700;
     static Stage primStage;
+    Parent root;
 
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+//            String path = "src/main/java/view/music/background.mp3";
+//            Media media = new Media(new File(path).toURI().toString());
+//            MediaPlayer mediaPlayer = new MediaPlayer(media);
+//            mediaPlayer.setAutoPlay(true);
+
+
+        if (Manager.getAllManagers().size() == 0) {
+            SignUpFx.setRole("manager");
+            root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("signUpFx.fxml")));
+        }else {
+             root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        }
         primaryStage.setTitle("market");
         primaryStage.setScene(new Scene(root, widthScene, heightScene));
         primStage = primaryStage;

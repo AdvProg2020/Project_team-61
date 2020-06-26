@@ -68,7 +68,10 @@ public class ProductMenu {
                     commentRequest.setProduct(selectedProduct.getId());
                 }
                 commentRequest.setId(commentId);
-            } else commentRequest = (CommentRequest) Request.getRequestFromID(commentId);
+            } else{
+                if(Request.getRequestFromID(commentId) instanceof CommentRequest)
+                    commentRequest = (CommentRequest) Request.getRequestFromID(commentId);
+            }
             outputNo = 0;
             //  CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
             // CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);

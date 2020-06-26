@@ -16,7 +16,7 @@ public class Comment {
 
     //objectAdded
     Product productToComment;
-    private Account personToVote;
+    private String personToVote;
     String proId;
 
 
@@ -43,29 +43,29 @@ public class Comment {
 
 //setterAndGetter--------------------------------------------------------------------------------------------
 
-    public void setDetail(String title , String content , Account personToVote , Product productToComment){
-        if (title != null){
+    public void setDetail(String title, String content, Account personToVote, Product productToComment) {
+        if (title != null) {
             this.title = title;
         }
-        if (content != null){
+        if (content != null) {
             this.content = content;
         }
-        if (personToVote != null){
-            this.personToVote=personToVote;
+        if (personToVote != null) {
+            this.personToVote = personToVote.getUsername();
         }
-        if (productToComment != null){
-            this.productToComment=productToComment;
+        if (productToComment != null) {
+            this.productToComment = productToComment;
         }
-        allComments.add(this);
+        // allComments.add(this);
     }
 
     public String getId() {
         return id;
     }
 
-    public static Comment getCommentFromId(String id){
+    public static Comment getCommentFromId(String id) {
         for (Comment comment : allComments) {
-            if (comment.getId().equals(id)){
+            if (comment.getId().equals(id)) {
                 return comment;
             }
         }
@@ -85,12 +85,12 @@ public class Comment {
         allComments.add(this);
     }
 
-    public  ArrayList<Comment> getAllComments() {
+    public ArrayList<Comment> getAllComments() {
         return allComments;
     }
 
 
-    public Account getPersonToVote() {
+    public String getPersonToVote() {
         return personToVote;
     }
 
@@ -115,10 +115,10 @@ public class Comment {
         }
     }
 
-    public static ArrayList<Comment> getCommentsOfPro(String proId){
+    public static ArrayList<Comment> getCommentsOfPro(String proId) {
         ArrayList<Comment> help = new ArrayList<>();
         for (Comment comment : allComments) {
-            if (comment.proId.equals(proId)){
+            if (comment.proId.equals(proId)) {
                 help.add(comment);
             }
         }
