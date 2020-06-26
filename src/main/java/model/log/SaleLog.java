@@ -36,6 +36,10 @@ public class SaleLog extends Log{
     //setterAndGetter--------------------------------------------
 
 
+    public static void setAllSellersLog(ArrayList<SaleLog> allSellersLog) {
+        SaleLog.allSellersLog = allSellersLog;
+    }
+
     public void setReducedAmount(double reducedAmount) {
         this.reducedAmount = reducedAmount;
     }

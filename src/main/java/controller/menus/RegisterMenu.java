@@ -28,7 +28,7 @@ public class RegisterMenu {
     private static String name;
     private static String lastName;
     private static String Email;
-    private static int phoneNo;
+    private static Double phoneNo;
     private static Date birthdayDate;
     private static SubMenuStatus subMenuStatus;
     private static  String img;
@@ -135,7 +135,7 @@ public class RegisterMenu {
             } else outputNo = 9;
         } else if (detailMen == 4) {
             if (detail.matches(".+")) {
-                phoneNo = Integer.parseInt(detail);
+                phoneNo = Double.parseDouble(detail);
                 detailMenu=5;
                 outputNo = 0;
             } else outputNo = 11;

@@ -165,7 +165,7 @@ public class AccountRequest extends Request {
         FileHandling.writeInFile(json, "accountRequest.json");
     }
 
-    public void sellerAccountDetails(String username, String password, String name, String lastname, String Email, int phoneNo, Date birthdayDate , String img) throws IOException {
+    public void sellerAccountDetails(String username, String password, String name, String lastname, String Email, double phoneNo, Date birthdayDate , String img) throws IOException {
         this.username = username;
         this.password = password;
         this.name = name;

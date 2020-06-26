@@ -47,8 +47,8 @@ public class CustomerMenuFx {
     public void viewCart(MouseEvent mouseEvent) throws IOException {
         if (LoginMenu.getLoginAccount() instanceof Customer) {
             if(ProductMenu.getBuyLog() != null) {
-                BuyLogFx.setCurBuyLog(ProductMenu.getBuyLog());
-                BuyLogFx.getCurBuyLog().setBuyLogCustomer(LoginMenu.getLoginAccount());
+                BuyLogFx.setCurbuylog(ProductMenu.getBuyLog());
+                BuyLogFx.getCurbuylog().setBuyLogCustomer(LoginMenu.getLoginAccount());
                 Parent curRoot = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
                 BuyLogFx.setPriRoot(curRoot);
                 root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("buyLogFx.fxml")));

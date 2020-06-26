@@ -152,6 +152,9 @@ public class BuyLog extends Log {
         return false;
     }
 
+    public static void setAllCustomersLog(ArrayList<BuyLog> allCustomersLog) {
+        BuyLog.allCustomersLog = allCustomersLog;
+    }
 
     public void increaseNumberOfProduct(String productId, int amount) {
         Product product = Product.getProductById(productId);
