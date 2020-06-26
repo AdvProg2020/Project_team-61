@@ -20,6 +20,7 @@ public class ProductInSaleShow {
     public double saleAmount;
     public Date startOfSalePeriod;
     public Date endOfSalePeriod;
+    public String firm;
     public static ArrayList<ProductInSaleShow> list = new ArrayList<>();
 
     public ProductInSaleShow(String id) {
@@ -49,6 +50,14 @@ public class ProductInSaleShow {
 
     public void setStartOfSalePeriod(Date startOfSalePeriod) {
         this.startOfSalePeriod = startOfSalePeriod;
+    }
+
+    public String getFirm() {
+        return firm;
+    }
+
+    public void setFirm(String firm) {
+        this.firm = firm;
     }
 
     public String getName() {

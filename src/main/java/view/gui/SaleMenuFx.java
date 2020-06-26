@@ -1,5 +1,7 @@
 package view.gui;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -17,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import model.accounts.Seller;
+import model.firms.Firm;
 import model.off.Sale;
 import model.productRelated.Category;
 import model.productRelated.Product;
@@ -59,6 +62,8 @@ public class SaleMenuFx {
 
     public TableColumn<ProductInSaleShow , Date> tenth = new TableColumn<>("endOfSalePeriod");
 
+    public ArrayList<CheckBox> filterCatCheck = new ArrayList<>();
+
     @FXML
     public static ObservableList<ProductInSaleShow> data = FXCollections.observableArrayList();
 
@@ -66,6 +71,11 @@ public class SaleMenuFx {
 
     public static Scene prevScene;
     public static Stage thisStage;
+    public AnchorPane CategoryFilterPane;
+    public AnchorPane CompnyNameFilterPane;
+    public AnchorPane SellerNameFilterPane;
+    public CheckBox IsAvailableChoiceBox;
+    public AnchorPane ProductNameFilterPane;
 //    public static void setPriRoot(Parent priRoot) {
 //        ProductsMenuFX.priRoot = priRoot;
 //    }
@@ -91,6 +101,7 @@ public class SaleMenuFx {
             show.price = product.getPrice();
             show.comment = product.getComment();
             show.seller = product.getSeller();
+            show.firm = product.getFirm().getName();
             File file = new File(product.getProductImage());
             Image image = new Image(new FileInputStream(file));
             show.productImage = new ImageView();
@@ -111,9 +122,51 @@ public class SaleMenuFx {
     }
 
 
+    public void dataInFilterCheck() {
+        for (Category category : Category.getAllCategories()) {
+            int n = 30;
+            CheckBox checkBox = new CheckBox("category " + category.getName());
+            checkBox.setLayoutY((n) * (Category.getAllCategories().indexOf(category) + 1));
+            checkBox.setLayoutX(10 + Category.getAllCategories().indexOf(category));
+            filterCatCheck.add(checkBox);
+            CategoryFilterPane.getChildren().add(checkBox);
+        }
+
+        for (Firm firm : Firm.getAllFirms()) {
+            int n = 30;
+            CheckBox checkBox = new CheckBox("firm " + firm.getName());
+            checkBox.setLayoutY((n) * (Firm.getAllFirms().indexOf(firm) + 1));
+            checkBox.setLayoutX(10 + Firm.getAllFirms().indexOf(firm));
+            filterCatCheck.add(checkBox);
+            CompnyNameFilterPane.getChildren().add(checkBox);
+        }
+
+        for (Seller seller : Seller.getAllSellers()) {
+            int n = 30;
+            CheckBox checkBox = new CheckBox("seller " + seller.getUsername());
+            checkBox.setLayoutY((n) * (Seller.getAllSellers().indexOf(seller) + 1));
+            checkBox.setLayoutX(10 + Seller.getAllSellers().indexOf(seller));
+            filterCatCheck.add(checkBox);
+            SellerNameFilterPane.getChildren().add(checkBox);
+        }
+
+        for (Product product : Product.getAllProduct()) {
+            int n = 30;
+            CheckBox checkBox = new CheckBox("product " + product.getProductName());
+            checkBox.setLayoutY((n) * (Product.getAllProduct().indexOf(product) + 1));
+            checkBox.setLayoutX(10 + Product.getAllProduct().indexOf(product));
+            filterCatCheck.add(checkBox);
+            ProductNameFilterPane.getChildren().add(checkBox);
+        }
+
+
+        filterCatCheck.add(IsAvailableChoiceBox);
+
+    }
 
     @FXML
     public void initialize() throws IOException {
+        dataInFilterCheck();
         firstColumn.setCellValueFactory(new PropertyValueFactory<ProductInSaleShow, String>("id"));
         secondColumn.setCellValueFactory(new PropertyValueFactory<ProductInSaleShow, String>("name"));
         productImageViewTableColumn.setCellValueFactory(new PropertyValueFactory<ProductInSaleShow, ImageView>("productImage"));
@@ -147,6 +200,50 @@ public class SaleMenuFx {
             });
 
         });
+
+        for (CheckBox checkBox : filterCatCheck) {
+            checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                    filteredList.setPredicate(obj -> {
+                        if (!checkBox.isSelected()) {
+                            return true;
+                        }
+                        if (checkBox.isSelected() && checkBox.getText().contains("category")) {
+                            String[] s = checkBox.getText().split(" ");
+                            if (s[1].equals(obj.getCategory())) {
+                                return true;
+                            }
+                        }
+                        if (checkBox.isSelected() && checkBox.getText().equals("isAvailable") && obj.getNumberOfProduct() != 0){
+                            if (!filteredList.contains(obj)){
+                                return true;
+                            }
+                        }
+                        if (checkBox.isSelected() && checkBox.getText().contains("firm")) {
+                            String[] s = checkBox.getText().split(" ");
+                            if (s[1].equals(obj.getFirm())) {
+                                return true;
+                            }
+                        }
+                        if (checkBox.isSelected() && checkBox.getText().contains("seller")){
+                            String[] s = checkBox.getText().split(" ");
+                            if (s[1].equals(obj.getSeller())){
+                                return true;
+                            }
+                        }
+                        if (checkBox.isSelected() && checkBox.getText().contains("product")){
+                            String[] s = checkBox.getText().split(" ");
+                            if (s[1].equals(obj.name)){
+                                return true;
+                            }
+                        }
+                        return false;
+                    });
+                }
+            });
+        }
 
 
         ProductsInOffSearch.setEditable(true);
