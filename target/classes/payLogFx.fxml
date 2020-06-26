@@ -2,16 +2,42 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="900.0" prefWidth="1440.0" style="-fx-background-color: linear-gradient( #fff722, #ff26f9);" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.PayLogFx">
     <children>
-        <Button layoutX="597.0" layoutY="622.0" mnemonicParsing="false" onMouseClicked="#paymentProcess" text="Pay" />
-        <TextField fx:id="PhoneNumberTextFieldPayLog" layoutX="390.0" layoutY="229.0" prefHeight="25.0" prefWidth="200.0" promptText="Phone Number" />
-        <TextArea fx:id="AddressTextPayLog" layoutX="390.0" layoutY="288.0" prefHeight="200.0" prefWidth="200.0" promptText="Address" />
-        <Label fx:id="PhoneNumberPayLogLabel" layoutX="298.0" layoutY="233.0" text="Phone Number:" />
-        <Label fx:id="AddressPayLogLabel" layoutX="312.0" layoutY="288.0" text="Address:" />
-        <Label fx:id="DiscountPayLogLabel" layoutX="294.0" layoutY="600.0" text="Discount Code:" />
+        <Button fx:id="payButton" layoutX="603.0" layoutY="636.0" mnemonicParsing="false" onMouseClicked="#paymentProcess" text="Pay">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.5600000023841858" green="0.05040000006556511" blue="0.05040000006556511" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9200000166893005" green="0.5599614977836609" blue="0.1103999987244606" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill></Button>
+        <TextField fx:id="phoneNumberTextFieldPayLog" layoutX="390.0" layoutY="229.0" onInputMethodTextChanged="#addressEnable" prefHeight="25.0" prefWidth="200.0" />
+        <TextArea fx:id="addressTextPayLog" layoutX="390.0" layoutY="288.0" prefHeight="200.0" prefWidth="200.0" />
+        <Label fx:id="PhoneNumberPayLogLabel" layoutX="257.0" layoutY="231.0" prefWidth="109.0" text="Phone Number:">
+         <font>
+            <Font name="Dosis SemiBold" size="16.0" />
+         </font></Label>
+        <Label fx:id="AddressPayLogLabel" layoutX="312.0" layoutY="288.0" text="Address:">
+         <font>
+            <Font name="Dosis SemiBold" size="17.0" />
+         </font></Label>
+        <Label fx:id="DiscountPayLogLabel" layoutX="262.0" layoutY="597.0" text="Discount Code:">
+         <font>
+            <Font name="Dosis SemiBold" size="17.0" />
+         </font></Label>
         <TextField fx:id="discountPayLogTextField" layoutX="386.0" layoutY="596.0" prefHeight="25.0" prefWidth="207.0" promptText="enter discount code.." />
         <Label layoutX="368.0" layoutY="30.0" prefHeight="105.0" prefWidth="270.0" text="Pay Log">
             <font>
@@ -19,8 +45,68 @@
             </font>
         </Label>
         <Label fx:id="alertMessage" layoutX="671.0" layoutY="314.0" prefHeight="84.0" prefWidth="109.0" text="Label" textFill="#e80303" />
-      <TextField fx:id="hasDiscount" layoutX="390.0" layoutY="525.0" promptText="yes or no" />
-      <Label layoutX="224.0" layoutY="529.0" text="Do you have discount code?" />
+      <Label layoutX="199.0" layoutY="527.0" text="Do you have discount code?">
+         <font>
+            <Font name="Dosis SemiBold" size="16.0" />
+         </font></Label>
+      <Button fx:id="yesButton" layoutX="390.0" layoutY="525.0" mnemonicParsing="false" onMouseClicked="#setYes" prefHeight="25.0" prefWidth="81.0" text="Yes">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3638888895511627" green="0.5745614171028137" blue="0.04788011685013771" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.1103999987244606" green="0.9200000166893005" blue="0.5755307674407959" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill></Button>
+      <Button fx:id="noButton" layoutX="486.0" layoutY="525.0" mnemonicParsing="false" onMouseClicked="#setNo" prefHeight="25.0" prefWidth="83.0" text="No">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3638888895511627" green="0.5745614171028137" blue="0.04788011685013771" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9254385828971863" green="0.10568280518054962" blue="0.10568280518054962" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill></Button>
+      <MenuBar prefHeight="25.0" prefWidth="1470.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Back">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Account">
+            <items>
+              <MenuItem mnemonicParsing="false" text="account" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Logout">
+            <items>
+              <MenuItem mnemonicParsing="false" text="logout" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Exit">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#processExit" text="exit" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
 
 
     </children>

@@ -14,6 +14,7 @@ import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import model.log.BuyLog;
 import model.log.BuyLogShoo;
@@ -21,7 +22,7 @@ import model.productRelated.Product;
 import model.productRelated.ProductInMenusShow;
 
 
-import javax.swing.text.html.ImageView;
+//import javax.swing.text.html.ImageView;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -169,6 +170,7 @@ public class BuyLogFx {
         if(LoginMenu.isLogin()) {
             PayLogFx.setPreBuyLog(curbuylog);
             root = FXMLLoader.load(Objects.requireNonNull(PayLogFx.class.getClassLoader().getResource("payLogFx.fxml")));
+
             goToPage();
         }else{
             root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
