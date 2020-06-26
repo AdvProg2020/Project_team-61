@@ -18,6 +18,7 @@ import model.log.SaleLog;
 import model.off.DiscountCode;
 import model.off.Sale;
 import model.productRelated.Category;
+import model.productRelated.Comment;
 import model.productRelated.Product;
 import model.request.*;
 import view.FileHandling;
@@ -200,6 +201,11 @@ public class Main extends Application {
         buyLog1.holePrice=40;
         buyLog1.price=30;
         buyLog1.getChosenProduct().put(Product.getProductById("third"),8);
+
+        for (Product product : Product.getAllProduct()) {
+            Comment.allComments.addAll(product.proComments);
+        }
+
         Application.launch(args);
 
     }

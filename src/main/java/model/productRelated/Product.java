@@ -46,7 +46,7 @@ public class Product {
     private static ArrayList<Product> allProduct = new ArrayList<Product>();
     private ArrayList<String> info = new ArrayList<>();
     public static ArrayList<String> listOfId = new ArrayList<String>();
-    private ArrayList<Comment> proComments = new ArrayList<Comment>();
+    public ArrayList<Comment> proComments = new ArrayList<Comment>();
     private ArrayList<Score> proScores = new ArrayList<>();
     private static HashMap<String, String> categorySpecifications = new HashMap<>();
     public ArrayList<String> productCategorySpecifications = new ArrayList<>();
