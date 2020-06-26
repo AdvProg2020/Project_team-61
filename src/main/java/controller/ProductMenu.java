@@ -24,6 +24,14 @@ public class ProductMenu {
     private static String productId;
 
 
+    public static Product getSelectedProduct() {
+        return selectedProduct;
+    }
+
+    public static void setSelectedProduct(Product selectedProduct) {
+        ProductMenu.selectedProduct = selectedProduct;
+    }
+
     public static BuyLog getBuyLog() {
         return buyLog;
     }
@@ -47,20 +55,20 @@ public class ProductMenu {
 
 
     public static int addComments() throws IOException {
-        String commentId = LoginMenu.getLoginAccount() + " comment on " + selectedProduct;
+        String commentId = LoginMenu.getLoginAccount().getUsername() + " comment on " + selectedProduct.getId();
         if (!Comment.isThereCommentWithId(commentId)) {
-            String id = LoginMenu.getLoginAccount() + "comment";
-            if (!Request.isThereRequestFromID(id)) {
-//                Comment comment = new Comment(id);
-//                comment.setCommentStatus(CommentStatus.WAITINGFORAPPROVAL);
-                commentRequest = new CommentRequest(id);
+         //   String id = LoginMenu.getLoginAccount(). + "comment";
+            if (!Request.isThereRequestFromID(commentId)) {
+                Comment comment = new Comment(commentId);
+                comment.setCommentStatus(CommentStatus.WAITINGFORAPPROVAL);
+                commentRequest = new CommentRequest(commentId);
                 if(LoginMenu.getLoginAccount() instanceof Customer) {
                     Customer customer = (Customer) LoginMenu.getLoginAccount();
                     commentRequest.setPersonToVote(customer.getUsername());
                     commentRequest.setProduct(selectedProduct.getId());
                 }
                 commentRequest.setId(commentId);
-            } else commentRequest = (CommentRequest) Request.getRequestFromID(id);
+            } else commentRequest = (CommentRequest) Request.getRequestFromID(commentId);
             outputNo = 0;
             //  CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSTITLE);
             // CommandProcessor.setInternalMenu(InternalMenu.CHANGEDETAILS);

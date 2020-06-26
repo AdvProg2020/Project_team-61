@@ -54,7 +54,7 @@ public class AddCategoryFx {
 
     public void makeList() {
         list.clear();
-        categoryTraits.getItems().addAll(list);
+       // categoryTraits.getItems().addAll(list);
     }
 
     public void makeTree() {

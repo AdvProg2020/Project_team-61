@@ -59,10 +59,9 @@
                 </LinearGradient>
             </fill>
         </Text>
-      <ListView fx:id="products" layoutX="731.0" layoutY="408.0" prefHeight="200.0" prefWidth="200.0" />
+      <ListView fx:id="products" layoutX="731.0" layoutY="372.0" prefHeight="236.0" prefWidth="246.0" />
       <Label fx:id="saleLogDate" layoutX="764.0" layoutY="229.0" text="Label" />
       <Label fx:id="saleLogReceived" layoutX="764.0" layoutY="273.0" text="Label" />
-      <Label fx:id="saleLogCustomerName" layoutX="764.0" layoutY="350.0" text="Label" />
       <Label fx:id="saleLogId" layoutX="758.0" layoutY="187.0" text="Label" />
       <Label fx:id="saleLogReduced" layoutX="764.0" layoutY="313.0" text="Label" />
       <Text layoutX="646.0" layoutY="428.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Products:">
@@ -87,9 +86,5 @@
             <Font name="Cambria" size="21.0" />
          </font>
       </Text>
-      <Text layoutX="630.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer:">
-         <font>
-            <Font size="20.0" />
-         </font></Text>
     </children>
 </AnchorPane>

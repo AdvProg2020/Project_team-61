@@ -33,6 +33,15 @@ public class BuyLog extends Log {
         allCustomersLog.add(this);
     }
 
+    public double getHolePrice() {
+        holePrice =totalPrice() - salePrice;
+        return holePrice;
+    }
+
+    public void setHolePrice(double holePrice) {
+        this.holePrice = holePrice;
+    }
+
     public static ArrayList<BuyLog> getAllCustomersLog() {
         return allCustomersLog;
     }
@@ -81,16 +90,23 @@ public class BuyLog extends Log {
 
     public void addProductToBuyLog(String productId, int amount) {
         Product product = Product.getProductById(productId);
-        numberOfChosenPro = chosenProduct.get(productId);
+        for (Product product1 : chosenProduct.keySet()) {
+            if (product1.equals(product)){
+                numberOfChosenPro = chosenProduct.get(product);
+            }else {
+                chosenProduct.put(product,1);
+            }
+        }
+
         if (product.getNumberOfProducts() > amount) {
             numberOfChosenPro = numberOfChosenPro + amount;
             //product.setNumberOfProducts(product.getNumberOfProducts() - amount);
-            chosenProduct.put(product, amount);
+            chosenProduct.put(product, numberOfChosenPro);
         } else if (product.getNumberOfProducts() == amount) {
             numberOfChosenPro = numberOfChosenPro + amount;
            // product.setNumberOfProducts(0);
           //  product.setIsBought(true);
-            chosenProduct.put(product, amount);
+            chosenProduct.put(product, numberOfChosenPro);
         } else if (product.getNumberOfProducts() < amount) {
             numberOfChosenPro = numberOfChosenPro + product.getNumberOfProducts();
            // product.setNumberOfProducts(0);
@@ -102,7 +118,11 @@ public class BuyLog extends Log {
 
     public void reduceNumberOfProduct(String productId, int amount) {
         Product product = Product.getProductById(productId);
-        numberOfChosenPro = chosenProduct.get(product);
+        for (Product product1 : chosenProduct.keySet()) {
+            if (product1.equals(product)){
+                numberOfChosenPro = chosenProduct.get(product);
+            }
+        }
         if (amount < numberOfChosenPro) {
             chosenProduct.put(product, chosenProduct.get(product) - amount);
            // product.setNumberOfProducts(product.getNumberOfProducts() + amount);

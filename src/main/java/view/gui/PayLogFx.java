@@ -40,6 +40,16 @@ public class PayLogFx {
     static Parent root;
     private static BuyLog preBuyLog;
 
+    private static Parent priRoot;
+
+    public static Parent getPriRoot() {
+        return priRoot;
+    }
+
+    public static void setPriRoot(Parent priRoot) {
+        PayLogFx.priRoot = priRoot;
+    }
+
     public static void setPreBuyLog(BuyLog preBuyLog) {
         PayLogFx.preBuyLog = preBuyLog;
     }

@@ -25,6 +25,7 @@ public class Comment {
 
     public Comment(String id) {
         this.id = id;
+        allComments.add(this);
     }
 
     public String getTitle() {

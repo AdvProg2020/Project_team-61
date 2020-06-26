@@ -46,6 +46,14 @@ public class SaleLog extends Log {
 
     }
 
+    public HashMap<Product, Integer> getChosenProduct() {
+        return chosenProduct;
+    }
+
+    public void setChosenProduct(HashMap<Product, Integer> chosenProduct) {
+        this.chosenProduct = chosenProduct;
+    }
+
     public static ArrayList<SaleLog> getAllSellersLog() {
         return allSellersLog;
     }

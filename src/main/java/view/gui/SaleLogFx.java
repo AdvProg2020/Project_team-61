@@ -44,7 +44,8 @@ public class SaleLogFx {
     private static Parent root;
 
     public  void initializeObserverList() {
-      //  data.addAll(curSaleLog.getAllSoldProduct());
+        data.clear();
+        data.addAll(curSaleLog.getChosenProduct().keySet());
     }
 
     public static void setCurSaleLog(SaleLog curSaleLog) {
@@ -55,31 +56,26 @@ public class SaleLogFx {
     public void initialize()throws IOException {
 
         saleLogId.setText(curSaleLog.getLogId());
-       // saleLogCustomerName.setText(curSaleLog.getCustomerName());
         saleLogDate.setText(curSaleLog.getLocalDateTimeForLog().toString());
         saleLogReceived.setText(String.valueOf(curSaleLog.getReceivedAmount()));
         saleLogReduced.setText(String.valueOf(curSaleLog.getReducedAmount()));
         initializeObserverList();
-        products.setItems(data);
-
-        //buyLogDate.setCellValueFactory(curBuyLog,)
-        //  saleLogReducedAmount.setCellValueFactory(new PropertyValueFactory<>("id"));
-
-        //saleLogs.getColumns().addAll(saleLogNumber,saleLogDate,saleLogProduct,saleLogRecievedAmount,saleLogReducedAmount,saleLogProductNumber);
-
+        products.getItems().addAll(data);
     }
 
     public void userMenu(ActionEvent actionEvent) throws IOException {
-
-            if(LoginMenu.getLoginAccount() instanceof Seller){
-                root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
-            } else if(LoginMenu.getLoginAccount() instanceof Manager){
-                root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
-            }else if(LoginMenu.getLoginAccount() instanceof Customer){
-                root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
-            }
-            goToPage();
-
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SaleLogFx.class.getClassLoader().getResource("saleLogFx.fxml")));
+        if (LoginMenu.getLoginAccount() instanceof Seller) {
+            SellerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+        } else if (LoginMenu.getLoginAccount() instanceof Manager) {
+            ManagerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        } else if (LoginMenu.getLoginAccount() instanceof Customer) {
+            CustomerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
+        }
+        goToPage();
     }
 
     public void logout(ActionEvent actionEvent) throws IOException {
@@ -89,8 +85,7 @@ public class SaleLogFx {
     }
 
     public void back(ActionEvent actionEvent) throws IOException {
-
-        root= FXMLLoader.load(Objects.requireNonNull(SalesFx.class.getClassLoader().getResource("saleLogFx.fxml")));;
+        root = priRoot;
         goToPage();
     }
     private static void goToPage(){

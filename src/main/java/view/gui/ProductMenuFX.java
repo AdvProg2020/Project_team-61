@@ -172,7 +172,7 @@ public class ProductMenuFX {
     }
 
     @FXML
-    void popUpAddComment(ActionEvent event) throws IOException {
+    void popUpAddComment(MouseEvent mouseEvent) throws IOException {
         if (LoginMenu.isLogin()){
             Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("comment.fxml")));
             prevScene = new Scene(root);
@@ -198,7 +198,7 @@ public class ProductMenuFX {
             BuyLogFx.setCurBuylog(ProductMenu.getBuyLog());
 
           //  BuyLogFx.getCurBuyLog().setBuyLogCustomer(LoginMenu.getLoginAccount());
-            AnchorPane root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("BuyLogFx.fxml")));
+            AnchorPane root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("buyLogFx.fxml")));
             Scene scene = new Scene(root);
             Main.primStage.setScene(scene);
             Main.primStage.show();
@@ -217,6 +217,7 @@ public class ProductMenuFX {
     }
 
     public void handleSendComment(ActionEvent actionEvent) throws IOException {
+        ProductMenu.setSelectedProduct(productInPage);
         nullAddCommentError.setText(OutputMassageHandler.showProductOutput(ProductMenu.addComments()));
         nullAddCommentError.setText(OutputMassageHandler.showProductOutput(ProductMenu.contentOfComment(commentTextField.getText())));
         nullAddCommentError.setText(OutputMassageHandler.showProductOutput(ProductMenu.titleOfComment(titleTextField.getText())));
@@ -296,8 +297,13 @@ public class ProductMenuFX {
 
     }
 
-    public void handleScore(ActionEvent actionEvent) {
-
+    public void handleScore(MouseEvent mouseEvent) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("ScoreFx.fxml")));
+        Scene pageTwoScene = new Scene(root);
+        Stage stage= new Stage();
+        //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        stage.setScene(pageTwoScene);
+        stage.show();
     }
 
 
