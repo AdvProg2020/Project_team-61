@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
@@ -21,9 +15,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="productPagePane" prefHeight="618.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ProductMenuFX">
+<AnchorPane fx:id="productPagePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="848.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ProductMenuFX">
     <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="651.0" stroke="BLACK" strokeType="INSIDE" width="1045.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="848.0" layoutX="-52.0" stroke="BLACK" strokeType="INSIDE" width="1652.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-52.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <fill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -35,7 +29,7 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="189.0" layoutX="75.0" layoutY="49.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="200.0" layoutX="503.0" layoutY="99.0" stroke="BLACK" strokeType="INSIDE" width="244.0" />
 
         <MenuBar layoutX="9.0" layoutY="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
@@ -58,10 +52,10 @@
             </Menu>
             </menus>
         </MenuBar>
-        <ImageView fx:id="productPic" fitHeight="172.0" fitWidth="200.0" layoutX="75.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" />
-        <Label fx:id="productNameLabel" layoutX="629.0" layoutY="47.0" prefHeight="34.0" prefWidth="147.0" text="Product Name" textAlignment="JUSTIFY">
+        <ImageView fx:id="productPic" fitHeight="181.0" fitWidth="244.0" layoutX="503.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true" />
+        <Label fx:id="productNameLabel" layoutX="525.0" layoutY="39.0" prefHeight="51.0" prefWidth="200.0" text="Product Name" textAlignment="JUSTIFY">
             <font>
-                <Font size="23.0" />
+                <Font name="Baskerville Old Face" size="28.0" />
             </font>
          <textFill>
             <LinearGradient endX="1.0" endY="1.0">
@@ -72,7 +66,7 @@
             </LinearGradient>
          </textFill>
         </Label>
-        <Button fx:id="addToCardButton" layoutX="80.0" layoutY="253.0" mnemonicParsing="false" onAction="#handleAddProductToLog" prefHeight="26.0" prefWidth="90.0" text="Add To Card">
+        <Button fx:id="addToCardButton" layoutX="567.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleAddProductToLog" prefHeight="26.0" prefWidth="90.0" text="Add To Card">
          <font>
             <Font name="Bookshelf Symbol 7" size="12.0" />
          </font>
@@ -86,7 +80,7 @@
                </stops>
             </LinearGradient>
          </textFill></Button>
-        <Button fx:id="commentButton" layoutX="175.0" layoutY="253.0" mnemonicParsing="false" onMouseClicked="#popUpAddComment" prefHeight="26.0" prefWidth="89.0" text="Comment">
+        <Button fx:id="commentButton" layoutX="667.0" layoutY="335.0" mnemonicParsing="false" onMouseClicked="#popUpAddComment" prefHeight="26.0" prefWidth="89.0" text="Comment">
          <font>
             <Font name="System Italic" size="12.0" />
          </font>
@@ -100,7 +94,7 @@
                </stops>
             </LinearGradient>
          </textFill></Button>
-        <Button fx:id="scoreButton" layoutX="275.0" layoutY="253.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="64.0" text="Score">
+        <Button fx:id="scoreButton"  onMouseClicked="#handleScore" layoutX="768.0" layoutY="335.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="64.0" text="Score">
          <font>
             <Font name="Californian FB" size="12.0" />
          </font>
@@ -119,12 +113,12 @@
                 <Font size="15.0" />
             </font>
         </Label>
-        <TextArea fx:id="productCategoryDetail" layoutX="597.0" layoutY="102.0" prefHeight="200.0" prefWidth="200.0" />
-        <TextArea fx:id="productDetail" layoutX="364.0" layoutY="102.0" prefHeight="200.0" prefWidth="200.0" />
-        <TableView fx:id="commentTableView" layoutX="62.0" layoutY="340.0" prefHeight="244.0" prefWidth="710.0">
+        <TextArea fx:id="productCategoryDetail" layoutX="1060.0" layoutY="113.0" prefHeight="200.0" prefWidth="200.0" />
+        <TextArea fx:id="productDetail" layoutX="810.0" layoutY="113.0" prefHeight="200.0" prefWidth="200.0" />
+        <TableView fx:id="commentTableView" layoutX="500.0" layoutY="387.0" prefHeight="250.0" prefWidth="759.0">
 
         </TableView>
-        <Button layoutX="11.0" layoutY="253.0" mnemonicParsing="false" onAction="#makeUpPage" prefHeight="26.0" prefWidth="64.0" text="refresh">
+        <Button layoutX="496.0" layoutY="335.0" mnemonicParsing="false" onAction="#makeUpPage" prefHeight="26.0" prefWidth="64.0" text="refresh">
          <textFill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -135,5 +129,20 @@
                </stops>
             </LinearGradient>
          </textFill></Button>
+      <Label layoutX="1016.0" layoutY="335.0" prefHeight="26.0" prefWidth="110.0" text="AVERAGE SCORE :">
+         <font>
+            <Font name="Berlin Sans FB" size="12.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#ffa600" />
+                  <Stop color="#00ffb2" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <ImageView fx:id="scoreImageView" fitHeight="51.0" fitWidth="55.0" layoutX="1126.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true" />
+      <ScrollPane fx:id="scrollPane" layoutX="487.0" layoutY="90.0" prefHeight="230.0" prefWidth="274.0" />
     </children>
 </AnchorPane>

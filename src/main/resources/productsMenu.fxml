@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="883.0" prefWidth="1628.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ProductsMenuFX">
+<AnchorPane fx:id="ProductsPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="883.0" prefWidth="1628.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ProductsMenuFX">
     <children>
         <SplitPane dividerPositions="0.4924812030075188" layoutX="55.0" layoutY="162.0" orientation="VERTICAL" prefHeight="1035.0" prefWidth="1325.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -76,7 +76,7 @@
                                 </LinearGradient>
                             </fill>
                         </Rectangle>
-                        <Label layoutX="641.0" layoutY="129.0" prefHeight="129.0" prefWidth="429.0" text="enjoy shopping with us">
+                        <Label layoutX="641.0" fx:id="move" layoutY="129.0" prefHeight="129.0" prefWidth="429.0" text="enjoy shopping with us">
                             <font>
                                 <Font name="Mongolian Baiti" size="42.0" />
                             </font>

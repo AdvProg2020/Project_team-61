@@ -352,6 +352,8 @@ public class OutputMassageHandler {
             text = ("product add");
         } else if (output == 19) {
             text = ("product id format is invalid");
+        }else if (output == 20) {
+            text = ("has sale");
         }
         return text;
 

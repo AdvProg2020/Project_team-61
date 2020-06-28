@@ -73,9 +73,9 @@ public class BuyLog extends Log {
     public double withSale(){
         for (Product p : chosenProduct.keySet()) {
             if(p.getInSale()){
-                if(p.getSale().checkSale()) {
-                    salePrice += chosenProduct.get(p) * p.getSale().withSale(p);
-                }
+                //  if(Sale.getSaleWithId(p.getSale()).checkSale()) {
+                salePrice =salePrice+( chosenProduct.get(p) * Sale.getSaleWithId(p.getSale()).withSale(p));
+                // }
             }
         }
         return salePrice;
@@ -104,14 +104,14 @@ public class BuyLog extends Log {
             chosenProduct.put(product, numberOfChosenPro);
         } else if (product.getNumberOfProducts() == amount) {
             numberOfChosenPro = numberOfChosenPro + amount;
-           // product.setNumberOfProducts(0);
-          //  product.setIsBought(true);
+            // product.setNumberOfProducts(0);
+            //  product.setIsBought(true);
             chosenProduct.put(product, numberOfChosenPro);
         } else if (product.getNumberOfProducts() < amount) {
             numberOfChosenPro = numberOfChosenPro + product.getNumberOfProducts();
-           // product.setNumberOfProducts(0);
+            // product.setNumberOfProducts(0);
             chosenProduct.put(product, product.getNumberOfProducts());
-           // product.setIsBought(true);
+            // product.setIsBought(true);
         }
     }
 
@@ -125,12 +125,12 @@ public class BuyLog extends Log {
         }
         if (amount < numberOfChosenPro) {
             chosenProduct.put(product, chosenProduct.get(product) - amount);
-           // product.setNumberOfProducts(product.getNumberOfProducts() + amount);
+            // product.setNumberOfProducts(product.getNumberOfProducts() + amount);
         } else if (amount == numberOfChosenPro) {
             chosenProduct.remove(product);
-           // product.setNumberOfProducts(product.getNumberOfProducts() + amount);
+            // product.setNumberOfProducts(product.getNumberOfProducts() + amount);
         } else if (amount > chosenProduct.get(product)) {
-           // product.setNumberOfProducts(chosenProduct.get(product));
+            // product.setNumberOfProducts(chosenProduct.get(product));
             chosenProduct.remove(product);
         }
     }

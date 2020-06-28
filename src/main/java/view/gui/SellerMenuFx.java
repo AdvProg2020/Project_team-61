@@ -49,7 +49,7 @@ public class SellerMenuFx {
             Seller seller = (Seller) LoginMenu.getLoginAccount();
             Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
             SaleLogsFx.setPriRoot(curRoot);
-            SaleLogsFx.setSaleLogs(seller.getSaleLogsHistory());
+            SaleLogsFx.setAllSaleLogs(seller.getSaleLogsHistory());
             root = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
             SaleLogsFx.setPriRoot(root);
             goToPage();

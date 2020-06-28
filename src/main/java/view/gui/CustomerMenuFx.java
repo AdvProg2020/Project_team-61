@@ -60,7 +60,7 @@ public class CustomerMenuFx {
         if (LoginMenu.getLoginAccount() instanceof Customer) {
             if(ProductMenu.getBuyLog() != null) {
                 BuyLogFx.setCurBuylog(ProductMenu.getBuyLog());
-              //  BuyLogFx.getCurBuyLog().setBuyLogCustomer(LoginMenu.getLoginAccount());
+                //  BuyLogFx.getCurBuyLog().setBuyLogCustomer(LoginMenu.getLoginAccount());
                 Parent curRoot = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
                 BuyLogFx.setPriRoot(curRoot);
                 root = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("buyLogFx.fxml")));
@@ -77,7 +77,7 @@ public class CustomerMenuFx {
 //            mediaPlayer.setAutoPlay(true);
         if (LoginMenu.getLoginAccount() instanceof Customer) {
             Parent curRoot = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
-            ViewAccountFx.setPriRoot(curRoot);
+            BuyLogsFx.setPriRoot(curRoot);
             Customer customer = (Customer) LoginMenu.getLoginAccount();
             BuyLogsFx.setAllBuyLogs(customer.getBuyLogsHistory());
             root = FXMLLoader.load(Objects.requireNonNull(BuyLogsFx.class.getClassLoader().getResource("buyLogsFx.fxml")));
@@ -88,13 +88,15 @@ public class CustomerMenuFx {
 
     public void viewCustomerDiscount(MouseEvent mouseEvent) throws IOException {
         dis();
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         DiscountCodesFx.setDiscounts(discounts);
+        DiscountCodesFx.setPriRoot(curRoot);
         root = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("DiscountCodesFx.fxml")));
         goToPage();
     }
 
     private void dis(){
-      //  data.clear();
+        //  data.clear();
         if (LoginMenu.getLoginAccount() instanceof Customer) {
             Customer customer = (Customer) LoginMenu.getLoginAccount();
             for (DiscountCode allDiscountCode : DiscountCode.getAllDiscountCodes()) {
@@ -104,9 +106,9 @@ public class CustomerMenuFx {
                     }
                 }
             }
-          //  data.addAll(discounts);
+            //  data.addAll(discounts);
         }
-      //  showList();
+        //  showList();
     }
 
 

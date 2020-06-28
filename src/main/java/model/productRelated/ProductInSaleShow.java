@@ -2,6 +2,8 @@ package model.productRelated;
 
 import javafx.scene.image.ImageView;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -18,8 +20,8 @@ public class ProductInSaleShow {
     public int numberOfProduct;
     public double score = 50;
     public double saleAmount;
-    public Date startOfSalePeriod;
-    public Date endOfSalePeriod;
+    public LocalDate startOfSalePeriod;
+    public LocalDate endOfSalePeriod;
     public String firm;
     public static ArrayList<ProductInSaleShow> list = new ArrayList<>();
 
@@ -36,19 +38,19 @@ public class ProductInSaleShow {
         this.saleAmount = saleAmount;
     }
 
-    public Date getEndOfSalePeriod() {
+    public LocalDate getEndOfSalePeriod() {
         return endOfSalePeriod;
     }
 
-    public Date getStartOfSalePeriod() {
+    public LocalDate getStartOfSalePeriod() {
         return startOfSalePeriod;
     }
 
-    public void setEndOfSalePeriod(Date endOfSalePeriod) {
+    public void setEndOfSalePeriod(LocalDate endOfSalePeriod) {
         this.endOfSalePeriod = endOfSalePeriod;
     }
 
-    public void setStartOfSalePeriod(Date startOfSalePeriod) {
+    public void setStartOfSalePeriod(LocalDate startOfSalePeriod) {
         this.startOfSalePeriod = startOfSalePeriod;
     }
 

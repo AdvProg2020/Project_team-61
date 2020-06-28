@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
+        <?import java.lang.*?>
+        <?import javafx.scene.control.*?>
+        <?import javafx.scene.layout.*?>
+        <?import javafx.scene.paint.*?>
+        <?import javafx.scene.shape.*?>
+        <?import javafx.scene.text.*?>
+        <?import javafx.scene.control.CheckBox?>
+        <?import javafx.scene.control.Label?>
+        <?import javafx.scene.control.Menu?>
+        <?import javafx.scene.control.MenuBar?>
+        <?import javafx.scene.control.MenuItem?>
+        <?import javafx.scene.control.ScrollPane?>
+        <?import javafx.scene.control.TableView?>
+        <?import javafx.scene.control.TextField?>
+        <?import javafx.scene.layout.AnchorPane?>
+        <?import javafx.scene.paint.LinearGradient?>
+        <?import javafx.scene.paint.Stop?>
+        <?import javafx.scene.shape.Rectangle?>
+        <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="793.0" prefWidth="1348.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.SaleMenuFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="793.0" prefWidth="1348.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.SaleMenuFx">
    <children>
-      <Rectangle fx:id="productsInSaleTable" arcHeight="5.0" arcWidth="5.0" height="983.0" layoutX="-225.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="1855.0" AnchorPane.bottomAnchor="-183.0" AnchorPane.leftAnchor="-225.0" AnchorPane.rightAnchor="-350.0" AnchorPane.topAnchor="0.0">
+      <Rectangle fx:id="productsInSaleTable" arcHeight="5.0" arcWidth="5.0" height="799.0" layoutX="-3.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="1354.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="-2.0">
          <fill>
             <LinearGradient endY="1.0" startX="0.7366411631343929">
                <stops>
@@ -26,6 +32,35 @@
             </LinearGradient>
          </fill>
       </Rectangle>
+      <MenuBar layoutY="14.0" prefWidth="1364.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Back">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="back" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Exit">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="exit" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Logout">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="logout" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="My Account">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="account" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Login">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#login" text="login" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
       <TableView fx:id="ProductsInOffSearch" layoutX="215.0" layoutY="164.0" onMouseClicked="#clickedColumn" prefHeight="524.0" prefWidth="918.0" />
       <Label layoutX="503.0" layoutY="48.0" prefHeight="39.0" prefWidth="342.0" text="Products In Off">
          <font>
@@ -46,33 +81,9 @@
             <Font size="22.0" />
          </font>
       </Label>
-      <MenuBar layoutY="14.0" prefWidth="1364.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="Back">
-            <items>
-              <MenuItem mnemonicParsing="false" text="back" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Exit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="exit" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Logout">
-            <items>
-              <MenuItem mnemonicParsing="false" text="logout" />
-            </items>
-          </Menu>
-            <Menu mnemonicParsing="false" text="My Account">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="account" />
-               </items>
-            </Menu>
-        </menus>
-      </MenuBar>
       <ScrollPane layoutX="14.0" layoutY="164.0" prefHeight="122.0" prefWidth="198.0">
-        <content>
-          <AnchorPane fx:id="CategoryFilterPane" minHeight="0.0" minWidth="0.0" prefHeight="147.0" prefWidth="199.0">
+         <content>
+            <AnchorPane fx:id="CategoryFilterPane" minHeight="0.0" minWidth="0.0" prefHeight="147.0" prefWidth="199.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" height="151.0" layoutX="-6.0" stroke="BLACK" strokeType="INSIDE" width="206.0" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <fill>
@@ -87,7 +98,7 @@
                   <Label layoutX="14.0" layoutY="5.0" text="Category" />
                </children>
             </AnchorPane>
-        </content>
+         </content>
       </ScrollPane>
       <ScrollPane layoutX="14.0" layoutY="320.0" prefHeight="122.0" prefWidth="198.0">
          <content>

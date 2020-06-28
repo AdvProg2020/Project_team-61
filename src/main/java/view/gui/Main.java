@@ -24,16 +24,18 @@ import model.productRelated.Comment;
 import model.productRelated.Product;
 import model.request.*;
 import view.FileHandling;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Objects;
+import java.time.LocalDate;
+import java.util.*;
 
 
 public class Main extends Application {
+
     private final int widthScene = 1800;
     private final int heightScene = 700;
     static Stage primStage;
@@ -52,8 +54,8 @@ public class Main extends Application {
         if (Manager.getAllManagers().size() == 0) {
             SignUpFx.setRole("manager");
             root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("signUpFx.fxml")));
-        }else {
-             root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        } else {
+            root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
         }
         primaryStage.setTitle("market");
         primaryStage.setScene(new Scene(root, widthScene, heightScene));
@@ -64,58 +66,65 @@ public class Main extends Application {
 
     public static void main(String[] args) throws IOException, ParseException {
 
-        Type categoryType = new TypeToken<ArrayList<Category>>(){}.getType();
+        for (DiscountCode allDiscountCode : DiscountCode.getAllDiscountCodes()) {
+            System.out.println(allDiscountCode.getDiscountId());
+        }
+        Type categoryType = new TypeToken<ArrayList<Category>>() {
+        }.getType();
         try {
-            JsonReader reader3 =new JsonReader(new FileReader("category.json"));
-            ArrayList<Category> categoryArrayList = FileHandling.getGson().fromJson(reader3,categoryType);
-            if (null==categoryArrayList){
-                categoryArrayList=new ArrayList<>();
+            JsonReader reader3 = new JsonReader(new FileReader("category.json"));
+            ArrayList<Category> categoryArrayList = FileHandling.getGson().fromJson(reader3, categoryType);
+            if (null == categoryArrayList) {
+                categoryArrayList = new ArrayList<>();
             }
             Category.setAllCategories(categoryArrayList);
-        }catch (IOException e){
-            FileHandling.writeInFile("","category.json");
+        } catch (IOException e) {
+            FileHandling.writeInFile("", "category.json");
             Category.setAllCategories(new ArrayList<>());
         }
 
 
-        Type sellerType = new TypeToken<ArrayList<Seller>>(){}.getType();
+        Type sellerType = new TypeToken<ArrayList<Seller>>() {
+        }.getType();
         try {
-            JsonReader reader5 =new JsonReader(new FileReader("seller.json"));
-            ArrayList<Seller> sellersArrayList = FileHandling.getGson().fromJson(reader5,sellerType);
-            if (null==sellersArrayList){
-                sellersArrayList=new ArrayList<>();
+            JsonReader reader5 = new JsonReader(new FileReader("seller.json"));
+            ArrayList<Seller> sellersArrayList = FileHandling.getGson().fromJson(reader5, sellerType);
+            if (null == sellersArrayList) {
+                sellersArrayList = new ArrayList<>();
             }
             Seller.setAllSellers(sellersArrayList);
-        }catch (IOException e){
-            FileHandling.writeInFile("","seller.json");
+        } catch (IOException e) {
+            FileHandling.writeInFile("", "seller.json");
             Seller.setAllSellers(new ArrayList<>());
         }
 
 
-        Type managerType = new TypeToken<ArrayList<Manager>>(){}.getType();
+        Type managerType = new TypeToken<ArrayList<Manager>>() {
+        }.getType();
         try {
-            JsonReader reader6 =new JsonReader(new FileReader("manager.json"));
-            ArrayList<Manager> managerArrayList = FileHandling.getGson().fromJson(reader6,managerType);
-            if (null==managerArrayList){
-                managerArrayList=new ArrayList<>();
+            JsonReader reader6 = new JsonReader(new FileReader("manager.json"));
+            ArrayList<Manager> managerArrayList = FileHandling.getGson().fromJson(reader6, managerType);
+            if (null == managerArrayList) {
+                managerArrayList = new ArrayList<>();
             }
             Manager.setAllManagers(managerArrayList);
-        }catch (IOException e){
-            FileHandling.writeInFile("","manager.json");
+        } catch (IOException e) {
+            FileHandling.writeInFile("", "manager.json");
             Manager.setAllManagers(new ArrayList<>());
         }
 
 
-        Type CustomerType = new TypeToken<ArrayList<Customer>>(){}.getType();
+        Type CustomerType = new TypeToken<ArrayList<Customer>>() {
+        }.getType();
         try {
-            JsonReader reader7 =new JsonReader(new FileReader("customer.json"));
-            ArrayList<Customer> customerArrayList = FileHandling.getGson().fromJson(reader7,CustomerType);
-            if (null==customerArrayList){
-                customerArrayList=new ArrayList<>();
+            JsonReader reader7 = new JsonReader(new FileReader("customer.json"));
+            ArrayList<Customer> customerArrayList = FileHandling.getGson().fromJson(reader7, CustomerType);
+            if (null == customerArrayList) {
+                customerArrayList = new ArrayList<>();
             }
             Customer.setAllCustomers(customerArrayList);
-        }catch (IOException e){
-            FileHandling.writeInFile("","customer.json");
+        } catch (IOException e) {
+            FileHandling.writeInFile("", "customer.json");
             Customer.setAllCustomers(new ArrayList<>());
         }
 
@@ -124,35 +133,34 @@ public class Main extends Application {
         Account.getAllAccounts().addAll(Manager.getAllManagers());
         Account.getAllAccounts().addAll(Seller.getAllSellers());
 
-        Type AccountReType = new TypeToken<ArrayList<AccountRequest>>(){}.getType();
+        Type AccountReType = new TypeToken<ArrayList<AccountRequest>>() {
+        }.getType();
         try {
-            JsonReader reader8 =new JsonReader(new FileReader("accountRequest.json"));
-            ArrayList<AccountRequest> accountRequestsArrayList = FileHandling.getGson().fromJson(reader8,AccountReType);
-            if (null==accountRequestsArrayList){
-                accountRequestsArrayList=new ArrayList<>();
+            JsonReader reader8 = new JsonReader(new FileReader("accountRequest.json"));
+            ArrayList<AccountRequest> accountRequestsArrayList = FileHandling.getGson().fromJson(reader8, AccountReType);
+            if (null == accountRequestsArrayList) {
+                accountRequestsArrayList = new ArrayList<>();
             }
             AccountRequest.setAllAccountRequests(accountRequestsArrayList);
-        }catch (IOException e){
-            FileHandling.writeInFile("","accountRequest.json");
+        } catch (IOException e) {
+            FileHandling.writeInFile("", "accountRequest.json");
             AccountRequest.setAllAccountRequests(new ArrayList<>());
         }
 
 
-
-
-        Type CommentReType = new TypeToken<ArrayList<CommentRequest>>(){}.getType();
+        Type CommentReType = new TypeToken<ArrayList<CommentRequest>>() {
+        }.getType();
         try {
-            JsonReader reader9 =new JsonReader(new FileReader("commentRequest.json"));
-            ArrayList<CommentRequest> commentRequests = FileHandling.getGson().fromJson(reader9,CommentReType);
-            if (null==commentRequests){
-                commentRequests=new ArrayList<>();
+            JsonReader reader9 = new JsonReader(new FileReader("commentRequest.json"));
+            ArrayList<CommentRequest> commentRequests = FileHandling.getGson().fromJson(reader9, CommentReType);
+            if (null == commentRequests) {
+                commentRequests = new ArrayList<>();
             }
             CommentRequest.setAllCommentRequests(commentRequests);
-        }catch (IOException e){
-            FileHandling.writeInFile("","commentRequest.json");
+        } catch (IOException e) {
+            FileHandling.writeInFile("", "commentRequest.json");
             CommentRequest.setAllCommentRequests(new ArrayList<>());
         }
-
 
 
         Request.setAllRequests(new ArrayList<>());
@@ -174,12 +182,12 @@ public class Main extends Application {
 
         for (Sale sale : Sale.getAllSales()) {
             Sale.allProSale.addAll(sale.getAllSaleProducts());
-            try{
+            try {
                 for (Product allSaleProduct : sale.getAllSaleProducts()) {
                     System.out.println(allSaleProduct.getProductName());
 
                 }
-            }catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 System.out.println("null");
             }
         }
@@ -197,11 +205,11 @@ public class Main extends Application {
         BuyLog buyLog = new BuyLog("firstBuyLog");
         buyLog.holePrice = 10;
         buyLog.price = 20;
-        buyLog.getChosenProduct().put(Product.getProductById("haha"),3);
+        buyLog.getChosenProduct().put(Product.getProductById("haha"), 3);
         BuyLog buyLog1 = new BuyLog("secondBuyLog");
-        buyLog1.holePrice=40;
-        buyLog1.price=30;
-        buyLog1.getChosenProduct().put(Product.getProductById("third"),8);
+        buyLog1.holePrice = 40;
+        buyLog1.price = 30;
+        buyLog1.getChosenProduct().put(Product.getProductById("third"), 8);
 
         for (Product product : Product.getAllProduct()) {
             for (Comment proComment : product.proComments) {
@@ -211,9 +219,41 @@ public class Main extends Application {
             Comment.allComments.addAll(product.proComments);
         }
 
-
+        if(Manager.getAllManagers().size() != 0){
+            if (Customer.getAllCustomers().size() != 0) {
+                randomDiscount();
+            }
+        }
         Application.launch(args);
 
     }
+
+    private static void randomDiscount() throws IOException {
+        ArrayList<Customer> randomElement = new ArrayList<>();
+        int size = Customer.getAllCustomers().size();
+        for (int i = 0; i < (size)/2; i++) {
+            Random rand = new Random();
+            int randomIndex = rand.nextInt(size);
+            randomElement.add(Customer.getAllCustomers().get(randomIndex));
+        }
+        LocalDate today = LocalDate.now();
+        UUID id = UUID.randomUUID();
+        DiscountCode prizeDiscountCode = new DiscountCode(id.toString());
+        prizeDiscountCode.setTotalTimesOfUse(1);
+        prizeDiscountCode.setDiscountAmount(10);
+        prizeDiscountCode.setMaxDiscountAmount(100000);
+        prizeDiscountCode.getAllCustomersWithDiscountCode().addAll(randomElement);
+        prizeDiscountCode.setStartOfDiscountPeriod(today);
+        DiscountCode.setEndOfDiscountPeriod(today.plusDays(10));
+        Random rand = new Random();
+
+        int randomIndex = rand.nextInt(Manager.getAllManagers().size());
+        Manager.getAllManagers().get(randomIndex).addDiscount(prizeDiscountCode);
+        Manager.writeInJ();
+
+
+    }
+
+
 
 }

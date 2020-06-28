@@ -20,9 +20,8 @@ public class Score {
     public  static ArrayList<Score> allScores = new ArrayList<>();
 
 
-    public Score(Account personToScore, Product productTOScore, int score) throws IOException {
+    public Score(Account personToScore, int score) throws IOException {
         this.personToScore = personToScore;
-        this.productTOScore = productTOScore;
         this.score = score;
         allScores.add(this);
 //        writeInJ();
@@ -69,7 +68,6 @@ public class Score {
         return "Score{" +
                 "score=" + score +
                 ", averageScore=" + averageScore +
-                ", productTOScore=" + productTOScore +
                 ", personToScore=" + personToScore +
                 '}';
     }

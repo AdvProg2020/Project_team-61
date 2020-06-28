@@ -4,12 +4,17 @@ import controller.ProductMenu;
 import controller.ProductsMenu;
 import controller.menus.CustomerMenu;
 import controller.menus.LoginMenu;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.CacheHint;
@@ -24,6 +29,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
+import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -31,8 +38,10 @@ import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
 import model.log.BuyLog;
+import model.off.Sale;
 import model.productRelated.Comment;
 import model.productRelated.Product;
+import model.productRelated.Score;
 import model.request.ProductRequest;
 import model.request.Request;
 import view.OutputMassageHandler;
@@ -56,6 +65,7 @@ public class ProductMenuFX {
     public static Stage thisStage = new Stage();
     public static Product productInPage;
 
+
     public TextArea commentTextField;
     public TextField titleTextField;
     public Button backButtonAddComment;
@@ -67,6 +77,7 @@ public class ProductMenuFX {
     public TableView commentTableView = new TableView();
 
     public Button scoreButton;
+    public ImageView scoreImageView = new ImageView();
     @FXML
     private Label productNameLabel;
     @FXML
@@ -91,6 +102,8 @@ public class ProductMenuFX {
     private static Parent priRoot;
     private static Parent root;
     private static Request request;
+    final DoubleProperty zoomProperty = new SimpleDoubleProperty(200);
+    public ScrollPane scrollPane = new ScrollPane();
 
     public static void setRequest(Request request) {
         ProductMenuFX.request = request;
@@ -105,6 +118,83 @@ public class ProductMenuFX {
     }
 
     public void makeUpPage() throws IOException {
+
+        zoomProperty.addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable arg0) {
+                productPic.setFitWidth(zoomProperty.get() * 4);
+                productPic.setFitHeight(zoomProperty.get() * 3);
+            }
+        });
+
+        scrollPane.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
+            @Override
+            public void handle(ScrollEvent event) {
+                if (event.getDeltaY() > 0) {
+                    zoomProperty.set(zoomProperty.get() * 1.1);
+                } else if (event.getDeltaY() < 0) {
+                    zoomProperty.set(zoomProperty.get() / 1.1);
+                }
+            }
+        });
+        productPic.preserveRatioProperty().set(true);
+        scrollPane.setContent(productPic);
+
+
+//        if (productInPage.getScore().getScore() == 5){
+//
+//        }
+//        else if (productInPage.getScore().getScore() == 4){
+//
+//        }
+//        else if (productInPage.getScore().getScore() == 3){
+//
+//        }
+//        else if (productInPage.getScore().getScore() == 2){
+//
+//        }
+//        else if (productInPage.getScore().getScore() == 1){
+//
+//        }
+
+        if ( productInPage.getScore() >=0 && productInPage.getScore()<2){
+            scoreImageView.setVisible(true);
+            scoreImageView.setImage(new Image("icons/1.png"));
+        }
+        else if (productInPage.getScore() >= 2 && productInPage.getScore()<3){
+            scoreImageView.setVisible(true);
+            scoreImageView.setImage(new Image("icons/2.png"));
+        }
+        else if (productInPage.getScore() >= 3 && productInPage.getScore()<4){
+            scoreImageView.setVisible(true);
+            scoreImageView.setImage(new Image("icons/3.png"));
+        }
+        else if (productInPage.getScore() >= 4 && productInPage.getScore()<5){
+            scoreImageView.setVisible(true);
+            scoreImageView.setImage(new Image("icons/4.png"));
+        }
+        else if (productInPage.getScore() == 5){
+            scoreImageView.setVisible(true);
+            scoreImageView.setImage(new Image("icons/5.png"));
+        }
+
+
+        if (productInPage.getInSale()){
+            for (Sale sale : Sale.getAllSales()) {
+                for (Product product : sale.getAllSaleProducts()) {
+                    if (product.equals(productInPage)){
+                        TextArea textArea = new TextArea();
+                        textArea.setText("Sale ID : " + productInPage.getSale()+ "\n" +
+                                "Sale Amount : " + sale.getSaleAmount());
+                        textArea.setEditable(false);
+                        textArea.setLayoutX(200);
+                        textArea.setLayoutY(200);
+                        textArea.setPrefSize(200,400);
+                        productPagePane.getChildren().add(textArea);
+                    }
+                }
+            }
+        }
 
         if(request == null) {
             productNameLabel.setText(productInPage.getProductName());
@@ -321,8 +411,43 @@ public class ProductMenuFX {
             CustomerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         }
-
         goToPage();
+    }
 
+
+    public void score5(MouseEvent mouseEvent) {
+        score = 4;
+    }
+
+    public void score4(MouseEvent mouseEvent) {
+        score = 4;
+    }
+
+    public void score3(MouseEvent mouseEvent) {
+        score = 3;
+    }
+
+    public void score1(MouseEvent mouseEvent) {
+        score = 1;
+    }
+
+
+    public void score(MouseEvent mouseEvent) throws IOException {
+        if(score != 0){
+            scoreMs.setText(OutputMassageHandler.showCustomerOutput( CustomerMenu.rateProduct( productInPage.getProductId(), score)));
+        }else scoreMs.setText("you have to select first");
+    }
+
+    public void score2(MouseEvent mouseEvent) {
+        score = 2;
+    }
+
+    public void handleScore(MouseEvent mouseEvent) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("ScoreFx.fxml")));
+        Scene pageTwoScene = new Scene(root);
+        Stage stage= new Stage();
+        //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        stage.setScene(pageTwoScene);
+        stage.show();
     }
 }

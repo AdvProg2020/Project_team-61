@@ -8,14 +8,15 @@ import view.FileHandling;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.*;
 
 public class Sale {
     private String offId;
     private SaleStatus saleStatus;
-    private Date startOfSalePeriod;
-    private Date endOfSalePeriod;
+    private LocalDate startOfSalePeriod;
+    private LocalDate endOfSalePeriod;
     private int saleAmount;
     private static String seller;
     private ArrayList<Product> allSaleProducts = new ArrayList<>();
@@ -31,7 +32,7 @@ public class Sale {
         writeInJ();
     }
 
-    public void setSaleDetails(SaleStatus saleStatus, Date startOfSalePeriod, Date endOfSalePeriod, int saleAmount, String selle) throws IOException {
+    public void setSaleDetails(SaleStatus saleStatus, LocalDate startOfSalePeriod, LocalDate endOfSalePeriod, int saleAmount, String selle) throws IOException {
         this.saleStatus = saleStatus;
         if (startOfSalePeriod != null) {
             this.startOfSalePeriod = startOfSalePeriod;
@@ -68,11 +69,11 @@ public class Sale {
         return saleStatus;
     }
 
-    public Date getStartOfSalePeriod() {
+    public LocalDate getStartOfSalePeriod() {
         return startOfSalePeriod;
     }
 
-    public Date getEndOfSalePeriod() {
+    public LocalDate getEndOfSalePeriod() {
         return endOfSalePeriod;
     }
 
@@ -154,9 +155,11 @@ public class Sale {
     }
 
     public boolean checkSale() {
-        Date now = new Date();
-        if (startOfSalePeriod.after(now) && endOfSalePeriod.before(now)) {
-            return true;
+        LocalDate localDate = LocalDate.now();
+        if (startOfSalePeriod.isAfter(localDate)|| startOfSalePeriod.isEqual(localDate) ) {
+            if(endOfSalePeriod.isBefore(localDate)||startOfSalePeriod.isEqual(localDate)) {
+                return true;
+            }
         }
         return false;
     }
@@ -180,7 +183,7 @@ public class Sale {
 
     public double withSale(Product product) {
         double price = product.getPrice();
-            price = (price * this.saleAmount) / 100;
+        price =(price * this.saleAmount) / 100;
 
         return price;
     }

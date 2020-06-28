@@ -19,7 +19,6 @@ public abstract class Log {
         this.logId = logId;
         allLogs.add(this);
         localDateTimeForLog = LocalDateTime.now();
-
     }
 
 
