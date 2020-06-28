@@ -1,6 +1,7 @@
 package view.gui;
 
-import controller.menus.CustomerMenu;
+import controller.ProductMenu;
+import controller.menus.LoginMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,55 +11,59 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import model.accounts.Customer;
+import model.accounts.Manager;
+import model.accounts.Seller;
 import model.log.BuyLog;
-import model.off.Sale;
+import model.log.BuyLogShoo;
 import model.productRelated.Product;
-import model.request.Request;
-import view.OutputMassageHandler;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.util.Objects;
 
 public class ViewBuyLogFx {
     private static String buyLogId;
-    public TableView buyLogTable;
-    public Button viewProductB;
 
-    public static void setBuyLogId(String buyLogId) {
-        ViewBuyLogFx.buyLogId = buyLogId;
+    public static Parent getPriRoot() {
+        return priRoot;
     }
 
     public static void setPriRoot(Parent priRoot) {
         ViewBuyLogFx.priRoot = priRoot;
     }
 
-    private int score =0;
+    public static void setCurBuyLog(BuyLog curBuyLog) {
+        ViewBuyLogFx.CurBuyLog = curBuyLog;
+    }
 
     @FXML
-    private Label scoreMs;
+    private TableView<BuyLogShoo> buyLogTable = new TableView<>();
+    @FXML
+    private Label buyLogIdLabel = new Label();
+    @FXML
+    private TableColumn<BuyLogShoo, String> productName = new TableColumn<>("productName");
 
     @FXML
-    private TableView<Product> buyLog = new TableView<>();
-    @FXML
-    private Label buyLogIdLabel;
-    @FXML
-    private TableColumn<Product, ?> buyLogProductId = new TableColumn<>("id");
+    private TableColumn<BuyLogShoo, String> numberOfPro = new TableColumn<>("numberOfProduct");
 
     @FXML
-    private TableColumn<Product, Product> buyLogProduct = new TableColumn<>("product");
-
-    //private TableColumn<Product, Double> buyLogTotalPrice=new TableColumn<>("totalPrice");
+    private TableColumn<BuyLogShoo, String> LogId = new TableColumn<>("logId");
 
     @FXML
-    private TableColumn<Product, Integer> buyLogProductNumber = new TableColumn<>("number");
+    private TableColumn<BuyLogShoo, Double> buyLogPrice = new TableColumn<>("price");
 
-    @FXML
-    private TableColumn<Product, Double> buyLogPrice = new TableColumn<>("price");
+    private TableColumn<BuyLogShoo, ImageView> proImage = new TableColumn<>("imageView");
+
+    private TableColumn<BuyLogShoo, Double> hole = new TableColumn<>("Hole Price");
+
     @FXML
     private Label buyLogDate;
     @FXML
@@ -67,44 +72,112 @@ public class ViewBuyLogFx {
     private static Parent root;
     private static Parent priRoot;
     // public CustomerMenu ;
-
-
-    private static BuyLog curBuyLog;
-    public static ObservableList<Product> data = FXCollections.observableArrayList();
+    private static BuyLog CurBuyLog;
+    private static Product product;
+    private static boolean first = true;
+    public ObservableList<BuyLogShoo> data = FXCollections.observableArrayList();
 
     public static BuyLog getCurBuyLog() {
-        return curBuyLog;
+        return CurBuyLog;
     }
 
 
-    public static void setCurBuyLog(BuyLog curBuyLog) {
-        ViewBuyLogFx.curBuyLog = curBuyLog;
+
+    public void initializeObserverList() throws FileNotFoundException {
+        listIni();
+        for (BuyLogShoo buyLogShow : BuyLogShoo.list) {
+            data.clear();
+            if (!data.contains(buyLogShow)) {
+                data.add(buyLogShow);
+            }
+        }
     }
 
-    public void initializeObserverList() {
-        data.addAll(curBuyLog.getChosenProduct().keySet());
+    public static void listIni() throws FileNotFoundException {
+        for (Product product : CurBuyLog.getChosenProduct().keySet()) {
+            BuyLogShoo buyLogShoo = new BuyLogShoo();
+            buyLogShoo.logId = CurBuyLog.getLogId();
+            buyLogShoo.productName = product.getId();
+            buyLogShoo.numberOfProduct = CurBuyLog.getChosenProduct().get(product);
+            buyLogShoo.price = product.getPrice();
+            buyLogShoo.hole = buyLogShoo.price * buyLogShoo.numberOfProduct;
+            File file = new File(product.getProductImage());
+            Image image = new Image(new FileInputStream(file));
+            buyLogShoo.imageView.setImage(image);
+            buyLogShoo.imageView.setFitWidth(200);
+            buyLogShoo.imageView.setFitHeight(200);
+        }
     }
 
     @FXML
     public void initialize() throws IOException {
-        buyLogIdLabel.setText(curBuyLog.getLogId());
-        buyLogDate.setText(curBuyLog.getLocalDateTimeForLog().toString());
-        buyLogProductId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        buyLogProduct.setCellValueFactory(new PropertyValueFactory<>("product"));
-        buyLogProductNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
-        //buyLogDate.setCellValueFactory(curBuyLog,);
-        buyLogPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        buyLogDate.setText(String.valueOf(CurBuyLog.getLocalDateTimeForLog()));
+        productName.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, String>("productName"));
+        numberOfPro.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, String>("numberOfProduct"));
+        LogId.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, String>("logId"));
+        buyLogPrice.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, Double>("price"));
+        hole.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, Double>("hole"));
+        proImage.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, ImageView>("imageView"));
+
+        buyLogTable.setEditable(true);
+        buyLogTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        buyLogTable.getSelectionModel().setCellSelectionEnabled(true);
         initializeObserverList();
-        buyLog.setEditable(true);
-        buyLog.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        buyLog.getSelectionModel().setCellSelectionEnabled(true);
-        buyLog.getColumns().addAll(buyLogProductId, buyLogProduct, buyLogProductNumber, buyLogPrice);
-        buyLog.setItems(data);
+        if(first) {
+            buyLogTable.getColumns().addAll(productName, numberOfPro, LogId, buyLogPrice, hole, proImage);
+        }
+        buyLogTable.setItems(data);
+        first = false;
     }
 
+    public void showTotalPriceBuyLog(MouseEvent MouseClick) throws IOException {
+        if (CurBuyLog instanceof BuyLog) {
+            totalPriceLabel.setText(String.valueOf(CurBuyLog.getHolePrice()));
+            initialize();
+        }
 
-    public void showTotalPriceBuyLog(MouseEvent MouseClick) {
-        totalPriceLabel.setText(String.valueOf(curBuyLog.calculateHolePrice()));
+    }
+
+    public void userMenu(ActionEvent actionEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ViewBuyLogFx.class.getClassLoader().getResource("viewBuyLog.fxml")));
+        if (LoginMenu.getLoginAccount() instanceof Seller) {
+            SellerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+        } else if (LoginMenu.getLoginAccount() instanceof Manager) {
+            ManagerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        } else if (LoginMenu.getLoginAccount() instanceof Customer) {
+            CustomerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
+        }
+        goToPage();
+    }
+
+    public void back(ActionEvent actionEvent) {
+        root = priRoot;
+        goToPage();
+    }
+
+    public void exit(ActionEvent actionEvent) {
+        System.exit(0);
+    }
+
+    public void logout(ActionEvent actionEvent) throws IOException {
+        LoginMenu.processLogout();
+        root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        goToPage();
+    }
+
+    public void viewProductFromBuyLog(MouseEvent mouseEvent) throws IOException {
+        BuyLogShoo a = buyLogTable.getSelectionModel().getSelectedItem();
+        product = Product.getProductById(a.productName);
+        if (product != null) {
+            Parent curRoot = FXMLLoader.load(Objects.requireNonNull(BuyLogFx.class.getClassLoader().getResource("buyLogFx.fxml")));
+            ProductMenuFX.setProductInPage(product);
+            ProductMenuFX.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
+            goToPage();
+        }
     }
 
 
@@ -115,22 +188,19 @@ public class ViewBuyLogFx {
         Main.primStage.show();
     }
 
-    public void showLogLocalDate() {
-        buyLogDate.setText(curBuyLog.getLocalDateTimeForLog().toString());
+    public void handleScore(ActionEvent actionEvent) {
     }
 
+//        if (buyLog.getSelectionModel().getSelectedItem() != null) {
+//            Product selectedItem = buyLog.getSelectionModel().getSelectedItem();
+////            ProductMenuFX.setCurProduct(selectedItem);
+//            ProductMenuFX.productInPage = selectedItem;
+//            root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenuFx.fxml")));
+//            ;
+//            goToPage();
+//        }
 
-    public void viewProductFromBuyLog(MouseEvent mouseEvent) throws IOException {
-        if (buyLog.getSelectionModel().getSelectedItem() != null) {
-            Product selectedItem = buyLog.getSelectionModel().getSelectedItem();
-//            ProductMenuFX.setCurProduct(selectedItem);
-            ProductMenuFX.productInPage = selectedItem;
-            root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenuFx.fxml")));
-            ;
-            goToPage();
-        }
 
-    }
         /*  public static void initializeObserverList() {
         data.clear();
         data.addAll(ProductMenu.getBuyLog());
@@ -156,72 +226,4 @@ public class ViewBuyLogFx {
 
 
    */
-
-
-    public void userMenu(ActionEvent actionEvent) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
-        goToPage();
-    }
-
-    public void logout(ActionEvent actionEvent) {
-    }
-
-    public void back(ActionEvent actionEvent) {
-        root = priRoot;
-        goToPage();
-
-    }
-
-    public void exit(ActionEvent actionEvent) {
-        System.exit(0);
-    }
-
-
-    public void score5(MouseEvent mouseEvent) {
-        score = 4;
-    }
-
-    public void score4(MouseEvent mouseEvent) {
-        score = 4;
-    }
-
-    public void score3(MouseEvent mouseEvent) {
-        score = 3;
-    }
-
-    public void score1(MouseEvent mouseEvent) {
-        score = 1;
-    }
-
-
-    public void score(MouseEvent mouseEvent) throws IOException {
-        String im = "";
-        TablePosition tablePosition = buyLog.getSelectionModel().getSelectedCells().get(0);
-        int row = tablePosition.getRow();
-        Product item = buyLog.getItems().get(row);
-        TableColumn tableColumn = tablePosition.getTableColumn();
-        try{
-            im = (String) tableColumn.getCellObservableValue(item).getValue();
-        }catch (NullPointerException e){
-            System.out.println("you Cant Press Here");
-        }
-        if(score != 0){
-            scoreMs.setText(OutputMassageHandler.showCustomerOutput( CustomerMenu.rateProduct( im, score)));
-        }else scoreMs.setText("you have to select first");
-    }
-
-    public void score2(MouseEvent mouseEvent) {
-
-    }
-
-    public void handleScore(MouseEvent mouseEvent) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("ScoreFx.fxml")));
-        Scene pageTwoScene = new Scene(root);
-        Stage stage= new Stage();
-        //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        stage.setScene(pageTwoScene);
-        stage.show();
-    }
-
-
 }

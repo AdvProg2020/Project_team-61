@@ -92,9 +92,12 @@ public class DiscountCodesFx {
 
     public void remove(MouseEvent mouseEvent) throws IOException {
         if (LoginMenu.getLoginAccount() instanceof Manager) {
+          //  Manager manager = (Manager) LoginMenu.getLoginAccount();
             if (discountCodes.getSelectionModel().getSelectedItem() != null) {
                 DiscountCode discountCode = discountCodes.getSelectionModel().getSelectedItem();
-                discountCodesMs.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.removeDiscountCode(discountCode.getDiscountId())));
+                discountCodesMs.setText(OutputMassageHandler.showManagerOutput(ManagerMenu.removeDiscountCode(discountCode)));
+              //  discounts.clear();
+            //    discounts.addAll(manager.getAllDiscountCodes());
                 makeTree();
             }
         }

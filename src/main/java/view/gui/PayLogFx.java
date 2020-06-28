@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -37,6 +38,7 @@ public class PayLogFx {
     Label alertMessage;
     @FXML
     TextField discountPayLogTextField;
+    boolean has = true;
     //int output;
     private static BuyLog preBuyLog;
 
@@ -58,29 +60,46 @@ public class PayLogFx {
 
 
     public void paymentProcess(MouseEvent mouseEvent) throws IOException {
-        if (fast != null) {
-            if (discountPayLogTextField.getText() != null) {
-                CustomerMenu.discountCodeValidation(discountPayLogTextField.getText());
-            }
-            ///  if(CustomerMenu.getDiscountID() != null) {
-            alertMessage.setText(OutputMassageHandler.showReceiverInfo(RegisterMenu.receiverInformation(PhoneNumberTextFieldPayLog.getText(), 0)));
-            if (RegisterMenu.getDetailMenu() == 1) {
-                alertMessage.setText(OutputMassageHandler.showReceiverInfo(RegisterMenu.receiverInformation(AddressTextPayLog.getText(), 1)));
-            }
-            if (RegisterMenu.getDetailMenu() == 2) {
-                alertMessage.setText(OutputMassageHandler.showReceiverInfo(RegisterMenu.receiverInformation(fast, 2)));
-            }
-            if (RegisterMenu.ok) {
-                alertMessage.setText(OutputMassageHandler.showReceiverInfo(CustomerMenu.payment()));
-                if(CustomerMenu.ok) {
+        if(has) {
+            if (fast != null) {
+                if (discountPayLogTextField.getText() != null) {
+                    CustomerMenu.discountCodeValidation(discountPayLogTextField.getText());
+                }
+                ///  if(CustomerMenu.getDiscountID() != null) {
+                alertMessage.setText(OutputMassageHandler.showReceiverInfo(RegisterMenu.receiverInformation(PhoneNumberTextFieldPayLog.getText(), 0)));
+                if (RegisterMenu.getDetailMenu() == 1) {
+                    alertMessage.setText(OutputMassageHandler.showReceiverInfo(RegisterMenu.receiverInformation(AddressTextPayLog.getText(), 1)));
+                }
+                if (RegisterMenu.getDetailMenu() == 2) {
+                    alertMessage.setText(OutputMassageHandler.showReceiverInfo(RegisterMenu.receiverInformation(fast, 2)));
+                }
+                if (RegisterMenu.ok) {
+                    // alertMessage.setText(OutputMassageHandler.showReceiverInfo(CustomerMenu.payment()));
+                    // if(CustomerMenu.ok) {
                     alertMessage.setText(OutputMassageHandler.showReceiverInfo(CustomerMenu.payment()) + "\n" +
                             "your credit: " + LoginMenu.getLoginAccount().getCredit());
-                }
-                finalP();
-            }
-            //  }
+                    //}
+                    if (CustomerMenu.getPrizeDiscountCode() != null){
+                        show("your discount prize: "+ CustomerMenu.getPrizeDiscountCode());
+                    }
+                    finalP();
+                    has = false;
 
+                }
+                //  }
+
+            }
         }
+    }
+
+    private void show(String text) {
+        Label label = new Label();
+        StackPane rot = new StackPane();
+        rot.getChildren().add(label);
+        label.setText(text);
+        Stage massage = new Stage();
+        massage.setScene(new Scene(rot, 500, 500));
+        massage.show();
     }
 
     private void finalP() {
@@ -88,6 +107,7 @@ public class PayLogFx {
         ProductMenu.setSelectedProduct(null);
         ProductMenu.setProductId(null);
         ProductMenu.setBuyLog(null);
+        CustomerMenu.setPrizeDiscountCode(null);
     }
 
     public void alertMessage() {

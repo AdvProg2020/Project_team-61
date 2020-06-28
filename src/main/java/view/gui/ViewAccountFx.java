@@ -125,13 +125,13 @@ public class ViewAccountFx {
             findDis();
             DiscountCodesFx.setDiscounts(dis);
             DiscountCodesFx.setPriRoot(curRoot);
-            root = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("DiscountCodesFx.fxml")));
+            root = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("discountCodesFx.fxml")));
             goToPage();
         } else if (LoginMenu.getLoginAccount() instanceof Manager) {
             Manager customer = (Manager) LoginMenu.getLoginAccount();
             DiscountCodesFx.setDiscounts(customer.getAllDiscountCodes());
             DiscountCodesFx.setPriRoot(curRoot);
-            root = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("DiscountCodesFx.fxml")));
+            root = FXMLLoader.load(Objects.requireNonNull(DiscountCodesFx.class.getClassLoader().getResource("discountCodesFx.fxml")));
             goToPage();
         } else show("you can't see discounts");
 
@@ -157,7 +157,7 @@ public class ViewAccountFx {
         if (LoginMenu.getLoginAccount() instanceof Seller) {
             Seller seller = (Seller) LoginMenu.getLoginAccount();
             SaleLogsFx.setPriRoot(curRoot);
-            SaleLogsFx.setSaleLogs(seller.getSaleLogsHistory());
+            SaleLogsFx.setAllSaleLogs(seller.getSaleLogsHistory());
             root = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
             goToPage();
         } else if (LoginMenu.getLoginAccount() instanceof Customer) {
@@ -197,12 +197,16 @@ public class ViewAccountFx {
         Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
         if (LoginMenu.getLoginAccount() instanceof Seller) {
             ViewFirmFx.setAccount(LoginMenu.getLoginAccount());
+            ViewFirmFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(ViewFirmFx.class.getClassLoader().getResource("viewFirmFx.fxml")));
+            goToPage();
         } else if (LoginMenu.getLoginAccount() instanceof Manager) {
             ViewFirmFx.setRequest(request);
+            ViewFirmFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(ViewFirmFx.class.getClassLoader().getResource("viewFirmFx.fxml")));
+            goToPage();
         }
-        ViewFirmFx.setPriRoot(curRoot);
-        root = FXMLLoader.load(Objects.requireNonNull(ViewFirmFx.class.getClassLoader().getResource("viewFirmFx.fxml")));
-        goToPage();
+
     }
 
     public void edit(MouseEvent mouseEvent) throws IOException {

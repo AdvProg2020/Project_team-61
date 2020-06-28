@@ -53,10 +53,11 @@ public class Product {
 
     //objectsAdded
     private Comment comment;
-    public Score score;
-    private Log log;
-    private Account account;
-    private Sale sale;
+    public int score =0;
+    public int scorePeople =0;
+  //  private Log log;
+ //   private Account account;
+    private String sale;
     private Firm firm;
 
 
@@ -173,9 +174,9 @@ public class Product {
         return firm;
     }
 
-    public void setScore(Score score) {
+    public void setScore(int score) {
         this.score = score;
-        proScores.add(score);
+       // proScores.add(score);
     }
 
     public void setComment(Comment comment) {
@@ -211,14 +212,14 @@ public class Product {
         this.numberOfViews = numberOfViews + 1;
     }
 
-    public double getAverageScore() {
-        for (Product product : allProduct) {
-            if (product.getId().equals(productId)) {
-                return product.score.getAverageScore();
-            }
-        }
-        return 0;
-    }
+//    public double getAverageScore() {
+//        for (Product product : allProduct) {
+//            if (product.getId().equals(productId)) {
+//                return product.score.getAverageScore();
+//            }
+//        }
+//        return 0;
+//    }
 
     public void setAverageScore(double averageScore) {
         this.averageScore = averageScore;
@@ -261,19 +262,18 @@ public class Product {
         return productName;
     }
 
-    public Score getScore() {
+    public int getScore() {
         return score;
     }
 
-    public void setSale(Sale sale) {
-        this.sale = sale;
-        setInSale(true);
-    }
-
-    public Sale getSale() {
+    public String getSale() {
         return sale;
     }
 
+    public void setSale(String sale) {
+        this.sale = sale;
+        setInSale(true);
+    }
 
     public void setTotalNumberOfBuyers(int totalNumberOfBuyers) {
         this.totalNumberOfBuyers = totalNumberOfBuyers;
@@ -398,16 +398,16 @@ public class Product {
     };
 
     //checked
-    public static Comparator<Product> productComparatorForScore = new Comparator<Product>() {
-
-        public int compare(Product s1, Product s2) {
-
-            double productScore1 = s1.getAverageScore();
-            double productScore2 = s2.getAverageScore();
-            return Double.compare(productScore1, productScore2);
-
-        }
-    };
+//    public static Comparator<Product> productComparatorForScore = new Comparator<Product>() {
+//
+//        public int compare(Product s1, Product s2) {
+//
+//            double productScore1 = s1.getAverageScore();
+//            double productScore2 = s2.getAverageScore();
+//            return Double.compare(productScore1, productScore2);
+//
+//        }
+//    };
 
     public static Product getProductWithImage(String imageView) {
         for (Product product : allProduct) {
@@ -447,8 +447,8 @@ public class Product {
                 ", info=" + info +
                 ", comment=" + comment +
                 ", score=" + score +
-                ", log=" + log +
-                ", account=" + account +
+              //  ", log=" + log +
+               // ", account=" + account +
                 ", sale=" + sale +
                 '}';
     }

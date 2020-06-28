@@ -16,6 +16,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -263,18 +265,20 @@ public class SellerMenu {
     public static int editOffField(String edit , String field ) throws ParseException, IOException {
         if (field.matches("(?i)start")) {
             if (edit.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
-                Date currentDate = new Date();
-                Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(edit);
-                if (inputDate.after(currentDate)) {
+                LocalDate localDate = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate inputDate = LocalDate.parse(edit, formatter);
+                if (inputDate.isAfter(localDate)|| inputDate.isEqual(localDate)) {
                     saleRequest.setStartOfSalePeriod(inputDate);
                     outputNo = 11;
                 } else outputNo = 12;
             } else outputNo = 9;
         } else if (field.matches("(?i)end")) {
             if (edit.matches("([0-2][0-9]|3[0-1])/([0-9]|1[0-2])/20[0-5][0-9]")) {
-                Date currentDate = new Date();
-                Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(edit);
-                if (inputDate.after(currentDate)) {
+                LocalDate localDate = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate inputDate = LocalDate.parse(edit, formatter);
+                if (inputDate.isAfter(localDate)|| inputDate.isEqual(localDate)) {
                     saleRequest.setEndOfSalePeriod(inputDate);
                     outputNo = 13;
                 } else outputNo = 12;
@@ -294,8 +298,10 @@ public class SellerMenu {
         } else if (field.matches("(?i)add\\s*product")) {
             if (edit.matches("((?!^ +$)^.+$)")) {
                 //if (checkProductSale(edit)) {
+                if(!Product.getProductById(edit).getInSale()) {
                     saleRequest.addProductToSale(Product.getProductById(edit));
                     outputNo = 18;
+                }else outputNo = 20;
                 //}
             } else outputNo = 19;
         }
@@ -311,6 +317,7 @@ public class SellerMenu {
                 Sale sale = new Sale(detail);
                 if(LoginMenu.getLoginAccount() instanceof Seller) {
                     Seller seller = (Seller) LoginMenu.getLoginAccount();
+                    seller.addSale(sale);
                    // seller.getAllSales().add(sale);
                     sale.setSaleStatus(SaleStatus.UNDERREVIEWFORCONSTRUCTION);
                     saleRequest = new SaleRequest(id);
@@ -337,9 +344,10 @@ public class SellerMenu {
             } else outputNo = 9;
         } else if (detailMen == 1) {
             if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
-                Date currentDate = new Date();
-                Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
-                if (inputDate.after(currentDate)) {
+                LocalDate localDate = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate inputDate = LocalDate.parse(detail, formatter);
+                if (inputDate.isAfter(localDate)|| inputDate.isEqual(localDate)) {
                     saleRequest.setStartOfSalePeriod(inputDate);
                     detailMenu = 2;
                     outputNo = 0;
@@ -347,9 +355,10 @@ public class SellerMenu {
             } else outputNo = 9;
         } else if (detailMen == 2) {
             if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
-                Date currentDate = new Date();
-                Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
-                if (inputDate.after(currentDate)) {
+                LocalDate localDate = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate inputDate = LocalDate.parse(detail, formatter);
+                if (inputDate.isAfter(localDate)|| inputDate.isEqual(localDate)) {
                     saleRequest.setEndOfSalePeriod(inputDate);
                     detailMenu = 3;
                     outputNo = 0;
@@ -368,15 +377,17 @@ public class SellerMenu {
                 Product product =Product.getProductById(detail);
                 if(!saleRequest.isThereProduct(product)) {
                   //  saleRequest.addProduct(product);
-                    saleRequest.addProductToSale(product);
-                    //   outputNo = 18;
-                    // }
-                    // } else {
-                    //  CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEPRODUCTS);
-                    //  CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
-                    // detailMenu = 0;
-                    outputNo = 0;
-                    //  }
+                    if(!product.getInSale()) {
+                        saleRequest.addProductToSale(product);
+                        //   outputNo = 18;
+                        // }
+                        // } else {
+                        //  CommandProcessor.setSubMenuStatus(SubMenuStatus.MANAGEPRODUCTS);
+                        //  CommandProcessor.setInternalMenu(InternalMenu.MAINMENU);
+                        // detailMenu = 0;
+                        outputNo = 0;
+                        //  }
+                    }else outputNo = 20;
                 }
             } else outputNo = 19;
         }

@@ -86,6 +86,7 @@ public class BuyLogFx {
     public void initializeObserverList() throws FileNotFoundException {
         listIni();
         for (BuyLogShoo buyLogShow : BuyLogShoo.list) {
+            data.clear();
             if (!data.contains(buyLogShow)) {
                 data.add(buyLogShow);
             }
@@ -110,7 +111,7 @@ public class BuyLogFx {
 
     @FXML
     public void initialize() throws IOException {
-
+        buyLogDate.setText(String.valueOf(curbuylog.getLocalDateTimeForLog()));
         productName.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, String>("productName"));
         numberOfPro.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, String>("numberOfProduct"));
         LogId.setCellValueFactory(new PropertyValueFactory<BuyLogShoo, String>("logId"));
@@ -193,6 +194,7 @@ public class BuyLogFx {
             root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
             goToPage();
         }
+
     }
 
 
@@ -240,6 +242,7 @@ public class BuyLogFx {
 
 
     private static void goToPage() {
+        first = true;
         Scene pageTwoScene = new Scene(root);
         //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         Main.primStage.setScene(pageTwoScene);

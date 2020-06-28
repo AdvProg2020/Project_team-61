@@ -77,7 +77,7 @@ public class CustomerMenuFx {
 //            mediaPlayer.setAutoPlay(true);
         if (LoginMenu.getLoginAccount() instanceof Customer) {
             Parent curRoot = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
-            ViewAccountFx.setPriRoot(curRoot);
+            BuyLogsFx.setPriRoot(curRoot);
             Customer customer = (Customer) LoginMenu.getLoginAccount();
             BuyLogsFx.setAllBuyLogs(customer.getBuyLogsHistory());
             root = FXMLLoader.load(Objects.requireNonNull(BuyLogsFx.class.getClassLoader().getResource("buyLogsFx.fxml")));

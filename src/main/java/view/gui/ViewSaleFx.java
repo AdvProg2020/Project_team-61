@@ -82,7 +82,7 @@ public class ViewSaleFx {
         if (request == null) {
             makeTree();
             saleIdLabel.setText(String.valueOf(curSale.getOffId()));
-            startSaleLabel.setText(String.valueOf(curSale.getStartOfSalePeriod()));
+            startSaleLabel.setText(String.valueOf(curSale.getSaleAmount()));
             endSaleLabel.setText(String.valueOf(curSale.getEndOfSalePeriod()));
             saleAmountLabel.setText(String.valueOf(curSale.getSaleAmount()));
         } else showRequest();

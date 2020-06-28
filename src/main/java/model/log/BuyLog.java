@@ -73,8 +73,8 @@ public class BuyLog extends Log {
     public double withSale(){
         for (Product p : chosenProduct.keySet()) {
             if(p.getInSale()){
-                if(p.getSale().checkSale()) {
-                    salePrice += chosenProduct.get(p) * p.getSale().withSale(p);
+                if(Sale.getSaleWithId(p.getSale()).checkSale()) {
+                    salePrice =salePrice+( chosenProduct.get(p) * Sale.getSaleWithId(p.getSale()).withSale(p));
                 }
             }
         }

@@ -19,6 +19,7 @@ import model.accounts.Seller;
 import model.off.Sale;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
@@ -92,13 +93,14 @@ public class SalesFx {
     }
 
     private void checkIfTimeEnds() {
-        Sale sale1 = null;
+        ArrayList<Sale> sale1 = new ArrayList<>();
+        LocalDate localDate = LocalDate.now();
         for (Sale sale : Sale.getAllSales()) {
-            if (sale.getStartOfSalePeriod().after(sale.getEndOfSalePeriod())){
-                sale1 = sale;
+            if (sale.getEndOfSalePeriod().isAfter(localDate)){
+                sale1.add(sale);
             }
         }
-        Sale.getAllSales().remove(sale1);
+        Sale.getAllSales().removeAll(sale1);
         makeList();
     }
 

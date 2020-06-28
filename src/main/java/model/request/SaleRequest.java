@@ -11,13 +11,14 @@ import view.FileHandling;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class SaleRequest extends Request {
     private String offId = null;
-    private Date startOfSalePeriod = null;
-    private Date endOfSalePeriod = null;
+    private LocalDate startOfSalePeriod = null;
+    private LocalDate endOfSalePeriod = null;
     private int saleAmount = 0;
     //private String product = null;
     private ArrayList<Product> allSaleProducts = new ArrayList<>();
@@ -58,7 +59,8 @@ public class SaleRequest extends Request {
 //        Sale.allProInSale.addAll(sale.getAllSaleProducts());
         sale.setSaleStatus(SaleStatus.CONFIRMED);
         for (Product allSaleProduct : allSaleProducts) {
-            allSaleProduct.setInSale(true);
+            allSaleProduct.setSale(sale.getOffId());
+          //  allSaleProduct.setInSale(true);
         }
         getAllRequests().remove(this);
         allSaleRequests.remove(this);
@@ -102,13 +104,13 @@ public class SaleRequest extends Request {
 
     }
 
-    public void setStartOfSalePeriod(Date startOfSalePeriod) throws IOException {
+    public void setStartOfSalePeriod(LocalDate startOfSalePeriod) throws IOException {
         this.startOfSalePeriod = startOfSalePeriod;
         writeInJ();
 
     }
 
-    public void setEndOfSalePeriod(Date endOfSalePeriod) throws IOException {
+    public void setEndOfSalePeriod(LocalDate endOfSalePeriod) throws IOException {
         this.endOfSalePeriod = endOfSalePeriod;
         writeInJ();
 
@@ -140,11 +142,11 @@ public class SaleRequest extends Request {
         return offId;
     }
 
-    public Date getStartOfSalePeriod() {
+    public LocalDate getStartOfSalePeriod() {
         return startOfSalePeriod;
     }
 
-    public Date getEndOfSalePeriod() {
+    public LocalDate getEndOfSalePeriod() {
         return endOfSalePeriod;
     }
 

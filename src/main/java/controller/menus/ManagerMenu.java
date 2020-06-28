@@ -14,6 +14,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 
@@ -94,6 +96,7 @@ public class ManagerMenu {
             if(Account.getAccountWithUsername(product.getSeller()) instanceof Seller) {
                 Seller seller = (Seller) Account.getAccountWithUsername(product.getSeller());
                 seller.removeProduct(product);
+                Seller.writeInJ();
             }
             outputNo = 1;
             //  OutputMassageHandler.showOutputWithString(2);
@@ -133,9 +136,10 @@ public class ManagerMenu {
     public static int setDetailToDiscountCode(String detail, int detailMen) throws ParseException, IOException {
         if (detailMen == 0) {
             if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
-                Date currentDate = new Date();
-                Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
-                if (inputDate.after(currentDate)) {
+                LocalDate localDate = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+                LocalDate inputDate = LocalDate.parse(detail, formatter);
+                if (inputDate.isAfter(localDate)|| inputDate.isEqual(localDate)) {
                     newDiscountCode.setStartOfDiscountPeriod(inputDate);
                     Manager.writeInJ();
                     outputNo = 0;
@@ -144,9 +148,10 @@ public class ManagerMenu {
             } else outputNo = 8;
         } else if (detailMen == 1) {
             if (detail.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
-                Date currentDate = new Date();
-                Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(detail);
-                if (inputDate.after(currentDate)) {
+                LocalDate localDate = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate inputDate = LocalDate.parse(detail, formatter);
+                if (inputDate.isAfter(localDate)|| inputDate.isEqual(localDate)) {
                     newDiscountCode.setEndOfDiscountPeriod(inputDate);
                     Manager.writeInJ();
                     outputNo = 0;
@@ -207,18 +212,20 @@ public class ManagerMenu {
     public static int editDiscountCodeField(String edit, String field) throws ParseException, IOException {
         if (field.matches("(?i)start\\s+Of\\s+Discount")) {
             if (edit.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
-                Date currentDate = new Date();
-                Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(edit);
-                if (inputDate.after(currentDate)) {
+                LocalDate localDate = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate inputDate = LocalDate.parse(edit, formatter);
+                if (inputDate.isAfter(localDate)|| inputDate.isEqual(localDate)) {
                     editableDiscountCode.setStartOfDiscountPeriod(inputDate);
                     outputNo = 16;
                 } else outputNo = 26;
             } else outputNo = 8;
         } else if (field.matches("(?i)end\\s+Of\\s+Discount")) {
             if (edit.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")) {
-                Date currentDate = new Date();
-                Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(edit);
-                if (inputDate.after(currentDate)) {
+                LocalDate localDate = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate inputDate = LocalDate.parse(edit, formatter);
+                if (inputDate.isAfter(localDate)|| inputDate.isEqual(localDate)) {
                     editableDiscountCode.setEndOfDiscountPeriod(inputDate);
                     outputNo = 17;
                 } else outputNo = 26;
@@ -257,11 +264,12 @@ public class ManagerMenu {
 
     }
 
-    public static int removeDiscountCode(String discountCodeID) throws IOException {
-        if (checkDiscountCode(discountCodeID)) {
-            DiscountCode.deleteDiscount(discountCodeID);
+    public static int removeDiscountCode(DiscountCode discountCodeID) throws IOException {
+        if (checkDiscountCode(discountCodeID.getDiscountId())) {
             if (LoginMenu.getLoginAccount() instanceof Manager) {
-                ((Manager) LoginMenu.getLoginAccount()).removeDiscount(newDiscountCode);
+                Manager manager = (Manager) LoginMenu.getLoginAccount();
+                manager.removeDiscount(discountCodeID);
+                DiscountCode.deleteDiscount(discountCodeID);
             }
             outputNo = 6;
             // OutputMassageHandler.showOutputWithString(discountCodeID, 4);

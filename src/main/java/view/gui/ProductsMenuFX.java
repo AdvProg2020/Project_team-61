@@ -3,6 +3,7 @@ package view.gui;
 
 import controller.ProductMenu;
 import controller.menus.LoginMenu;
+import javafx.animation.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -16,11 +17,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
@@ -33,11 +38,19 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.Objects;
 
 
 public class ProductsMenuFX {
+
+//    public static Timeline timeline = new Timeline();
+
+    public static int mtime;
+    public static boolean trueFalse = true;
+
+
 
     @FXML
     public TableView<ProductInMenusShow> tableView = new TableView<>();
@@ -61,6 +74,8 @@ public class ProductsMenuFX {
 
     public TableColumn<ProductInMenusShow, String> eleventh = new TableColumn<>("firm");
 
+    public TableColumn<ProductInMenusShow, Label> isSaleOrN = new TableColumn<>("status");
+
     public TableColumn<ProductInMenusShow, String> tenth = new TableColumn<>("numberOfProduct");
 
     public TableColumn<ProductInMenusShow, Double> ninth = new TableColumn<>("score");
@@ -79,6 +94,20 @@ public class ProductsMenuFX {
 
     @FXML
     public TableColumn<Category, ArrayList<String>> traits = new TableColumn<>("traits");
+
+    public Label move;
+     //public  Image isFinish = new Image("images/productIsFinish.png");
+    @FXML
+    private void move() {
+        TranslateTransition transition = new TranslateTransition();
+        transition.setNode(move);
+        transition.setDuration(Duration.seconds(1.5));
+        transition.setFromX(-1000);
+        transition.setToX(1000);
+        transition.setAutoReverse(true);
+        transition.setCycleCount(Timeline.INDEFINITE);
+        transition.play();
+    }
 
 
     private static Parent priRoot;
@@ -105,6 +134,7 @@ public class ProductsMenuFX {
     public
     FilteredList<Category> filteredListCat = new FilteredList<>(dataCat, b -> true);
     public SortedList<Category> sortedList1 = new SortedList<>(filteredListCat);
+
     public static void setPriRoot(Parent priRoot) {
         ProductsMenuFX.priRoot = priRoot;
     }
@@ -112,6 +142,7 @@ public class ProductsMenuFX {
     public static void initializeObserverList() throws FileNotFoundException {
         listIni();
         for (ProductInMenusShow show : ProductInMenusShow.list) {
+            data.clear();
             if (!data.contains(show)) {
                 data.add(show);
             }
@@ -119,6 +150,7 @@ public class ProductsMenuFX {
     }
 
     public static void listIni() throws FileNotFoundException {
+
         for (Product product : Product.getProductList()) {
             ProductInMenusShow show = new ProductInMenusShow(product.getId());
             show.name = product.getProductName();
@@ -134,10 +166,57 @@ public class ProductsMenuFX {
             show.productImage.setFitWidth(100);
             show.productImage.setFitHeight(100);
             show.productImage.setImage(image);
+            final SoftReference<Image> softRef = new SoftReference<Image>(show.productImage.getImage());
+
+
+
+//            if (product.getInSale()){
+//              //  image = new Image("images/PngItem_147577.png");
+//                show.productImage.setImage(new Image("src/main/resources/images/PngItem_147577.png"));
+//                show.inSaleOrFinishLabel.setVisible(true);
+//                show.inSaleOrFinishLabel.setTextFill(Color.FIREBRICK);
+//                show.inSaleOrFinishLabel.setText("IN SALE");         }
+
+            //dark ya light mikone
+//            ColorAdjust colorAdjust = new ColorAdjust();
+//            colorAdjust.setBrightness(-0.5);
+
+            //color filter
+            Lighting lighting = new Lighting();
+            lighting.setDiffuseConstant(1.0);
+            lighting.setSpecularConstant(0.0);
+            lighting.setSpecularExponent(0.0);
+            lighting.setSurfaceScale(0.0);
+            lighting.setLight(new Light.Distant(45, 45, Color.RED));
+            if (product.getNumberOfProducts() == 0) {
+//                image = new Image("images/productIsFinish.png");
+//                show.productImage.setImage(image);
+                show.productImage.setEffect(lighting);
+                show.inSaleOrFinishLabel.setVisible(true);
+                show.inSaleOrFinishLabel.setTextFill(Color.FIREBRICK);
+                show.inSaleOrFinishLabel.setText("FINISHED");
+            }
+//            if (product.getNumberOfProducts() == 0){
+            //change hole image
+//                ImageView finishImage = new ImageView(new Image("images/productIsFinish.png"));
+//                finishImage.setFitWidth(100);
+//                finishImage.setFitHeight(100);
+//                finishImage.setLayoutY(show.productImage.getLayoutY());
+//                finishImage.setLayoutX(show.productImage.getLayoutX());
+//                finishImage.setEffect();
+
+            //
+//                show.productImage.setEffect(lighting);
+            //           }
+//            if (product.getInSale()){
+//                show.inSaleOrFinishLabel.setText("IS IN SALE");
+//                show.inSaleOrFinishLabel.setVisible(true);
+//            }
             show.firm = Seller.getAccountWithUsername(product.getSeller()).getFirm().getName();
             show.numberOfProduct = product.getNumberOfProducts();
         }
     }
+
 
     @FXML
     public void initialize() throws IOException {
@@ -145,6 +224,7 @@ public class ProductsMenuFX {
 //        Media media = new Media(new File(path).toURI().toString());
 //        MediaPlayer mediaPlayer = new MediaPlayer(media);
 //        mediaPlayer.setAutoPlay(true);
+        move();
         dataInFilterCheck();
         firstColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("id"));
         secondColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("name"));
@@ -155,12 +235,12 @@ public class ProductsMenuFX {
         seventh.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, Category>("category"));
         tenth.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("numberOfProduct"));
         ninth.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, Double>("score"));
-
+        isSaleOrN.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, Label>("inSaleOrFinishLabel"));
         eleventh.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("firm"));
 
 
         initializeObserverList();
-        tableView.getColumns().addAll(firstColumn, secondColumn, productImageViewTableColumn, forthColumn, fifthColumn, sixthColumn, seventh, eleventh, tenth,ninth);
+        tableView.getColumns().addAll(firstColumn, secondColumn, productImageViewTableColumn, forthColumn, fifthColumn, sixthColumn, seventh, eleventh, tenth,ninth,isSaleOrN);
         tableView.setItems(data);
 
 
@@ -292,10 +372,9 @@ public class ProductsMenuFX {
     }
 
     public static void gotoProductPage(Product product) throws IOException {
-        Parent cur = FXMLLoader.load(Objects.requireNonNull(ProductsMenuFX.class.getClassLoader().getResource("productsMenu.fxml")));
-        ProductMenuFX.setPriRoot(cur);
         AnchorPane root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
         prevScene = new Scene(root);
+        ProductMenuFX.prevScene = prevScene;
         thisStage = new Stage();
         thisStage.setScene(prevScene);
         ProductMenuFX.productInPage = product;
@@ -409,7 +488,7 @@ public class ProductsMenuFX {
     }
 
     public void userMenu(ActionEvent actionEvent) throws IOException {
-        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
         if (LoginMenu.getLoginAccount() instanceof Manager) {
             ManagerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));

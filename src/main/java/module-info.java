@@ -16,4 +16,5 @@ module Project.team {
     opens model.request to javafx.base;
     opens model.productRelated to javafx.base;
     opens model.log to javafx.base;
+
 }

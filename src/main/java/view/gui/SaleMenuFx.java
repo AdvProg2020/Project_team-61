@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -286,5 +287,11 @@ public class SaleMenuFx {
     }
 
 
-
+    public void login(ActionEvent actionEvent) throws IOException {
+        AnchorPane root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
+        Scene pageTwoScene = new Scene(root);
+        //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        Main.primStage.setScene(pageTwoScene);
+        Main.primStage.show();
+    }
 }

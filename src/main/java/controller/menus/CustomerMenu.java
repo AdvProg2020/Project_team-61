@@ -3,11 +3,13 @@ package controller.menus;
 import controller.ProductMenu;
 import model.accounts.Account;
 import model.accounts.Customer;
+import model.accounts.Manager;
 import model.accounts.Seller;
 import model.log.BuyLog;
 import model.log.Log;
 import model.log.SaleLog;
 import model.off.DiscountCode;
+import model.off.Sale;
 import model.productRelated.Product;
 import model.productRelated.Score;
 import model.sort.Sort;
@@ -15,6 +17,8 @@ import view.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Random;
 import java.util.UUID;
 
 
@@ -26,6 +30,15 @@ public class CustomerMenu {
     // private static Customer customer = null;
     private static SaleLog saleLog;
     public static boolean ok = false;
+    private static DiscountCode prizeDiscountCode;
+
+    public static DiscountCode getPrizeDiscountCode() {
+        return prizeDiscountCode;
+    }
+
+    public static void setPrizeDiscountCode(DiscountCode prizeDiscountCode) {
+        CustomerMenu.prizeDiscountCode = prizeDiscountCode;
+    }
 
     public static String getDiscountID() {
         return discountID;
@@ -138,13 +151,14 @@ public class CustomerMenu {
         DiscountCode discountCode = DiscountCode.getDiscountWithId(discountCodeId);
         if (DiscountCode.isThereDiscountWithId(discountCodeId)) {
             if (discountCode.discountMatchAccount(loginAccount.getUsername())) {
-                if (discountCode.discountDateValid()) {
-                    if (discountCode.getTotalTimesOfUse() > 0) {
-                        // CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
-                        discountID = discountCodeId;
-                        outputNo = 2;
-                    } else outputNo = 5;
-                } else outputNo = 4;
+                   if (discountCode.discountDateValid()) {
+                if (discountCode.getTotalTimesOfUse() > 0) {
+                    // CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
+                    discountID = discountCodeId;
+                    hasDiscount = true;
+                    outputNo = 2;
+                } else outputNo = 5;
+                 } else outputNo = 4;
             } else outputNo = 3;
         } else outputNo = 7;
         return outputNo;
@@ -175,6 +189,23 @@ public class CustomerMenu {
         loginAccount.setCredit(money);
         loginAccount.addLog(ProductMenu.getBuyLog());
 
+        if (money > 1000000) {
+            LocalDate today = LocalDate.now();
+            UUID id = UUID.randomUUID();
+            prizeDiscountCode = new DiscountCode(id.toString());
+            prizeDiscountCode.setTotalTimesOfUse(1);
+            prizeDiscountCode.setDiscountAmount(10);
+            prizeDiscountCode.setMaxDiscountAmount(100000);
+            prizeDiscountCode.addAccount(loginAccount);
+            prizeDiscountCode.setStartOfDiscountPeriod(today);
+            DiscountCode.setEndOfDiscountPeriod(today.plusDays(10));
+            Random rand = new Random();
+            int randomIndex = rand.nextInt(Manager.getAllManagers().size());
+            Manager.getAllManagers().get(randomIndex).addDiscount(prizeDiscountCode);
+            Manager.writeInJ();
+
+        }
+
         for (Product p : ProductMenu.getBuyLog().getChosenProduct().keySet()) {
             Account.getAccountWithUsername(p.getSeller()).setCredit(Account.getAccountWithUsername(p.getSeller()).getCredit() + p.getPrice());
             int n = p.getNumberOfProducts() - ProductMenu.getBuyLog().getChosenProduct().get(p);
@@ -201,9 +232,9 @@ public class CustomerMenu {
                     saleLog.addPrice(p.getPrice());
                     saleLog.addProductToSaleLog(p.getId(), ProductMenu.getBuyLog().getChosenProduct().get(p));
                     if (p.getInSale()) {
-                        if (p.getSale().checkSale()) {
-                            saleLog.setReducedAmount(p.getSale().withSale(p));
-                        }
+                         if (Sale.getSaleWithId(p.getSale()).checkSale()) {
+                        saleLog.setReducedAmount(Sale.getSaleWithId(p.getSale()).withSale(p));
+                         }
                     } else saleLog.setReducedAmount(0);
                     saleLog.setReceivedAmount();
                 }
@@ -215,23 +246,26 @@ public class CustomerMenu {
     //score.............................................................
     public static int rateProduct(String productI, int number) throws IOException {
         if (checkProduct(productI)) {
-            if (number >= 1 && number <= 5) {
-                //if (checkCustomer()) {
-                if (isBought()) {
-                    CustomerMenu.productID = productI;
-                    Score newScore = new Score(LoginMenu.getLoginAccount(), Product.getProductById(productID), number);
-                    Product.getProductById(productID).score = newScore;
-                    // OutputMassageHandler.showOutputWith2String(productID, String.valueOf(number), 1);
-                    outputNo = 14;
-                } else outputNo = 13;
-                // }else outputNo = 9;
-            } else outputNo = 11;
+            // if (number >= 1 && number <= 5) {
+            //if (checkCustomer()) {
+            if (isBought(productI)) {
+                CustomerMenu.productID = productI;
+                Product p = Product.getProductById(productI);
+                int people = p.scorePeople + 1;
+                p.score = ((p.score * p.scorePeople) + number) / people;
+                //Score newScore = new Score(LoginMenu.getLoginAccount(), Product.getProductById(productID), number);
+                // Product.getProductById(productID).score = newScore;
+                // OutputMassageHandler.showOutputWith2String(productID, String.valueOf(number), 1);
+                outputNo = 14;
+            } else outputNo = 13;
+            // }else outputNo = 9;
+            // } else outputNo = 11;
 
         }//OutputMassageHandler.showCustomerOutput(outputNo);
         return outputNo;
     }
 
-    private static boolean isBought() {
+    private static boolean isBought(String productID) {
         if (LoginMenu.getLoginAccount() instanceof Customer) {
             Customer cus = (Customer) LoginMenu.getLoginAccount();
             for (BuyLog buyLog : cus.getBuyLogsHistory()) {
