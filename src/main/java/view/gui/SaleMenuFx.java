@@ -1,5 +1,6 @@
 package view.gui;
 
+import controller.menus.LoginMenu;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -19,6 +20,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import model.accounts.Customer;
+import model.accounts.Manager;
 import model.accounts.Seller;
 import model.firms.Firm;
 import model.off.Sale;
@@ -77,9 +80,16 @@ public class SaleMenuFx {
     public AnchorPane SellerNameFilterPane;
     public CheckBox IsAvailableChoiceBox;
     public AnchorPane ProductNameFilterPane;
-//    public static void setPriRoot(Parent priRoot) {
-//        ProductsMenuFX.priRoot = priRoot;
-//    }
+    private static  Parent priRoot;
+    private static  Parent root;
+
+    public static Parent getPriRoot() {
+        return priRoot;
+    }
+
+    public static void setPriRoot(Parent priRoot) {
+        SaleMenuFx.priRoot = priRoot;
+    }
 
     public static void initializeObserverList() throws FileNotFoundException {
         listIni();
@@ -288,10 +298,54 @@ public class SaleMenuFx {
 
 
     public void login(ActionEvent actionEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SaleMenuFx.class.getClassLoader().getResource("saleMenuFx.fxml")));
+        LoginFx.setPriRoot(curRoot);
         AnchorPane root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
         Scene pageTwoScene = new Scene(root);
         //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         Main.primStage.setScene(pageTwoScene);
         Main.primStage.show();
+    }
+
+    private static void goToPage() {
+        Scene pageTwoScene = new Scene(root);
+        //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        Main.primStage.setScene(pageTwoScene);
+        Main.primStage.show();
+    }
+
+
+    public void back(ActionEvent actionEvent) throws IOException {
+        if(priRoot == null){
+            root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        }else {
+            root = priRoot;
+        }
+        goToPage();
+    }
+
+    public void exit(ActionEvent actionEvent) {
+        System.exit(0);
+    }
+
+    public void logout(ActionEvent actionEvent) throws IOException {
+        LoginMenu.processLogout();
+        root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        goToPage();
+    }
+
+    public void UserMenu(ActionEvent actionEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SaleMenuFx.class.getClassLoader().getResource("saleMenuFx.fxml")));
+        if (LoginMenu.getLoginAccount() instanceof Seller) {
+            SellerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+        } else if (LoginMenu.getLoginAccount() instanceof Manager) {
+            ManagerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        } else if (LoginMenu.getLoginAccount() instanceof Customer) {
+            CustomerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
+        }
+        goToPage();
     }
 }

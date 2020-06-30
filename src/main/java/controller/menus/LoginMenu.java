@@ -19,6 +19,7 @@ public class LoginMenu {
     private static AccountRequest accountRequest;
     private static Firm firm;
     private static String firmName;
+    public static boolean yes = false;
 
     public static Firm getFirm() {
         return firm;
@@ -38,6 +39,7 @@ public class LoginMenu {
                 if (Account.isThereAccountWithUsername(username)) {
                     LoginMenu.username = username;
                     outputNo = 0;
+                    yes = true;
                     //subMenuStatus = CommandProcessor.getSubMenuStatus();
                     // CommandProcessor.setSubMenuStatus(SubMenuStatus.PASSWORD);
                 } else outputNo = 13;
@@ -54,6 +56,7 @@ public class LoginMenu {
                 login = true;
                 // findRole();
                 String role = loginAccount.getRole();
+                yes = false;
                 LoginFx.goToMenu(role);
                 outputNo = 0;
                 // CommandProcessor.setSubMenuStatus(subMenuStatus);
@@ -161,19 +164,19 @@ public class LoginMenu {
     }
 
     public static void firmName(String name) throws IOException {
-       // if (name.matches(".+")) {
-          //  if (Firm.isThereFirmWithID(name)) {
-                firmName = name;
-                String id = loginAccount.getUsername() + " wants edit firm";
-                accountRequest = new AccountRequest(id);
-                accountRequest.setFirmType(loginAccount.getFirm().getType());
-                accountRequest.setFirmName(firmName);
-             //   outputNo = 0;
-                //   CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMFIELD);
-                //  outputNo = 5;
-          //  } else outputNo = 12;
-      //  } else outputNo = 3;
-      //  return outputNo;
+        // if (name.matches(".+")) {
+        //  if (Firm.isThereFirmWithID(name)) {
+        firmName = name;
+        String id = loginAccount.getUsername() + " wants edit firm";
+        accountRequest = new AccountRequest(id);
+        accountRequest.setFirmType(loginAccount.getFirm().getType());
+        accountRequest.setFirmName(firmName);
+        //   outputNo = 0;
+        //   CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMFIELD);
+        //  outputNo = 5;
+        //  } else outputNo = 12;
+        //  } else outputNo = 3;
+        //  return outputNo;
         // OutputMassageHandler.showFirmOutput(outputNo);
     }
 

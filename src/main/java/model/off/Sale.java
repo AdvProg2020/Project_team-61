@@ -155,10 +155,12 @@ public class Sale {
     }
 
     public boolean checkSale() {
-        LocalDate localDate = LocalDate.now();
-        if (startOfSalePeriod.isAfter(localDate)|| startOfSalePeriod.isEqual(localDate) ) {
-            if(endOfSalePeriod.isBefore(localDate)||startOfSalePeriod.isEqual(localDate)) {
-                return true;
+        if(startOfSalePeriod != null && endOfSalePeriod != null) {
+            LocalDate localDate = LocalDate.now();
+            if (startOfSalePeriod.isAfter(localDate) || startOfSalePeriod.isEqual(localDate)) {
+                if (endOfSalePeriod.isBefore(localDate) || startOfSalePeriod.isEqual(localDate)) {
+                    return true;
+                }
             }
         }
         return false;

@@ -468,21 +468,6 @@ public class ProductMenuFX {
     }
 
 
-    public void userMenu(ActionEvent actionEvent)throws IOException {
-        Parent curRoot  = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
-        if(LoginMenu.getLoginAccount() instanceof Manager) {
-            ManagerMenuFx.setPriRoot(curRoot);
-            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
-        }else  if(LoginMenu.getLoginAccount() instanceof Seller) {
-            SellerMenuFx.setPriRoot(curRoot);
-            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
-        }else  if(LoginMenu.getLoginAccount() instanceof Customer) {
-            CustomerMenuFx.setPriRoot(curRoot);
-            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
-        }
-        goToPage();
-    }
-
 
     public void score5(MouseEvent mouseEvent) {
         score = 4;
@@ -518,5 +503,20 @@ public class ProductMenuFX {
         //Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         stage.setScene(pageTwoScene);
         stage.show();
+    }
+
+    public void userMenu(ActionEvent actionEvent)throws IOException {
+        Parent curRoot  = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
+        if(LoginMenu.getLoginAccount() instanceof Manager) {
+            ManagerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        }else  if(LoginMenu.getLoginAccount() instanceof Seller) {
+            SellerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+        }else  if(LoginMenu.getLoginAccount() instanceof Customer) {
+            CustomerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
+        }
+        goToPage();
     }
 }

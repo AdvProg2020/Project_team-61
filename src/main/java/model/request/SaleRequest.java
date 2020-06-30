@@ -42,11 +42,12 @@ public class SaleRequest extends Request {
     public void declineRequest() throws IOException {
         getAllRequests().remove(this);
         allSaleRequests.remove(this);
-        getAllRequests().remove(this);
+        //  getAllRequests().remove(this);
         if (Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
             Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
-            seller.getAllProductRequests().remove(this);
+            // seller.getAllProductRequests().remove(this);
             seller.removeSaleRequest(this);
+            seller.getAllSales().remove(Sale.getSaleWithId(offId));
         }
         writeInJ();
     }

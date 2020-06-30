@@ -72,10 +72,12 @@ public class DiscountCode {
     }
 
     public static boolean discountDateValid() {
-        LocalDate localDate = LocalDate.now();
-        if (startOfDiscountPeriod.isAfter(localDate) ||startOfDiscountPeriod.isEqual(localDate) ){
-            if(endOfDiscountPeriod.isBefore(localDate)||endOfDiscountPeriod.isEqual(localDate)) {
-                return true;
+        if(startOfDiscountPeriod != null && endOfDiscountPeriod != null) {
+            LocalDate localDate = LocalDate.now();
+            if (startOfDiscountPeriod.isAfter(localDate) || startOfDiscountPeriod.isEqual(localDate)) {
+                if (endOfDiscountPeriod.isBefore(localDate) || endOfDiscountPeriod.isEqual(localDate)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -91,7 +93,7 @@ public class DiscountCode {
 
     public static void setEndOfDiscountPeriod(LocalDate endOfDiscountPeriod) throws IOException {
         DiscountCode.endOfDiscountPeriod = endOfDiscountPeriod;
-        Manager.writeInJ();
+        // Manager.writeInJ();
     }
 
     public void setMaxDiscountAmount(double maxDiscountAmount) {

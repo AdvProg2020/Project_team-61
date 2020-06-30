@@ -23,10 +23,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
+
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -108,6 +105,7 @@ public class ProductsMenuFX {
     public TextField searchCategoryTraitsField;
     public Pagination pagination;
     public Label errorNumberFormat;
+    boolean first = true;
 
     // public  Image isFinish = new Image("images/productIsFinish.png");
     @FXML
@@ -209,8 +207,8 @@ public class ProductsMenuFX {
             lighting.setSurfaceScale(0.0);
             lighting.setLight(new Light.Distant(45, 45, Color.RED));
             if (product.getNumberOfProducts() == 0) {
-//                image = new Image("images/productIsFinish.png");
-//                show.productImage.setImage(image);
+                image = new Image("images/productIsFinish.png");
+                show.productImage.setImage(image);
                 show.productImage.setEffect(lighting);
                 show.inSaleOrFinishLabel.setVisible(true);
                 show.inSaleOrFinishLabel.setTextFill(Color.FIREBRICK);
@@ -228,10 +226,10 @@ public class ProductsMenuFX {
             //
 //                show.productImage.setEffect(lighting);
             //           }
-//            if (product.getInSale()){
-//                show.inSaleOrFinishLabel.setText("IS IN SALE");
-//                show.inSaleOrFinishLabel.setVisible(true);
-//            }
+            if (product.getInSale()){
+                show.inSaleOrFinishLabel.setText("IS IN SALE");
+                show.inSaleOrFinishLabel.setVisible(true);
+            }
             show.firm = Seller.getAccountWithUsername(product.getSeller()).getFirm().getName();
             show.numberOfProduct = product.getNumberOfProducts();
         }
@@ -264,7 +262,9 @@ public class ProductsMenuFX {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        tableView.getColumns().addAll(firstColumn, secondColumn, productImageViewTableColumn, forthColumn, fifthColumn, sixthColumn, seventh, eleventh, tenth,ninth,twelve,isSaleOrN);
+        if(first){
+            tableView.getColumns().addAll(firstColumn, secondColumn, productImageViewTableColumn, forthColumn, fifthColumn, sixthColumn, seventh, eleventh, tenth,ninth,twelve,isSaleOrN);
+        }first = false;
 //        tableView.setItems(data);
 
 
@@ -426,6 +426,8 @@ public class ProductsMenuFX {
 
 
     public static void gotoProductPage(Product product) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ProductsMenuFX.class.getClassLoader().getResource("productsMenu.fxml")));
+        ProductMenuFX.setPriRoot(curRoot);
         AnchorPane root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
         prevScene = new Scene(root);
         ProductMenuFX.prevScene = prevScene;
@@ -517,8 +519,12 @@ public class ProductsMenuFX {
         filterCatCheck.add(scoreSortCheck);
     }
 
-    public void back(ActionEvent actionEvent) {
-        root = priRoot;
+    public void back(ActionEvent actionEvent) throws IOException {
+        if(priRoot == null){
+            root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        }else {
+            root = priRoot;
+        }
         goToPage();
     }
 
@@ -545,7 +551,7 @@ public class ProductsMenuFX {
     }
 
     public void userMenu(ActionEvent actionEvent) throws IOException {
-        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ProductsMenuFX.class.getClassLoader().getResource("productsMenu.fxml")));
         if (LoginMenu.getLoginAccount() instanceof Manager) {
             ManagerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
