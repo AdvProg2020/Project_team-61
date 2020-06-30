@@ -19,8 +19,8 @@ public class Sale {
     private LocalDate endOfSalePeriod;
     private int saleAmount;
     private static String seller;
-    private ArrayList<Product> allSaleProducts = new ArrayList<>();
-    public static ArrayList<Product> allProSale = new ArrayList<>();
+    public ArrayList<Product> allSaleProducts = new ArrayList<>();
+   public static ArrayList<Product> allProSale = new ArrayList<>();
     private static ArrayList<Sale> allSales = new ArrayList<>();
     public static Type SaleType = new TypeToken<ArrayList<Sale>>() {
     }.getType();
@@ -100,7 +100,12 @@ public class Sale {
     }
 
     public static boolean isThereSaleWithId(String id) {
-        return allSales.contains(getSaleWithId(id));
+        for (Sale sale : allSales) {
+            if (sale.getOffId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Sale getSaleWithSeller(Seller seller) {
@@ -155,10 +160,12 @@ public class Sale {
     }
 
     public boolean checkSale() {
-        LocalDate localDate = LocalDate.now();
-        if (startOfSalePeriod.isAfter(localDate)|| startOfSalePeriod.isEqual(localDate) ) {
-            if(endOfSalePeriod.isBefore(localDate)||startOfSalePeriod.isEqual(localDate)) {
-                return true;
+        if(startOfSalePeriod != null && endOfSalePeriod != null) {
+            LocalDate localDate = LocalDate.now();
+            if (startOfSalePeriod.isAfter(localDate) || startOfSalePeriod.isEqual(localDate)) {
+                if (endOfSalePeriod.isBefore(localDate) || startOfSalePeriod.isEqual(localDate)) {
+                    return true;
+                }
             }
         }
         return false;

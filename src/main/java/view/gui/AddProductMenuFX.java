@@ -17,9 +17,14 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
+//import javafx.scene.media.Media;
+//import javafx.scene.media.MediaPlayer;
+//import javafx.scene.media.MediaView;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+import model.accounts.Customer;
+import model.accounts.Manager;
 import model.accounts.Seller;
 import model.productRelated.Category;
 import model.productRelated.Product;
@@ -88,7 +93,9 @@ public class AddProductMenuFX {
     public AnchorPane pane;
     public ArrayList<TextField> traitsTextFields = new ArrayList<>();
     public ArrayList<String> traits = new ArrayList<>();
+   // public javafx.scene.media.MediaView MediaView;
     String imageId;
+    String videoId;
     List<File> files;
     Category productCategory;
     ArrayList<String> traitText = new ArrayList<>();
@@ -125,8 +132,6 @@ public class AddProductMenuFX {
     @FXML
     public void handleDrop(DragEvent dragEvent) throws FileNotFoundException {
         files = dragEvent.getDragboard().getFiles();
-        System.out.println(files.get(0).getAbsolutePath());
-        System.out.println(files.get(0).getPath());
         imageId = files.get(0).getPath();
         File file = new File(imageId);
         Image image = new Image(new FileInputStream(file));
@@ -147,6 +152,7 @@ public class AddProductMenuFX {
                 if (SellerMenu.getCreate() == 1) {
                     if (SellerMenu.getDetailMenu() == 1) {
                         ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(productNameTextField.getText(), 1, null));
+                        //Product.getProductById(idTextField.getText()).setProductVideoId(videoId);
                         Seller.writeInJ();
                     }
                     if (SellerMenu.getDetailMenu() == 2) {
@@ -163,6 +169,7 @@ public class AddProductMenuFX {
                     }
                     if (SellerMenu.getDetailMenu() == 5) {
                         ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(numberOfProductTextField.getText(), 5, null));
+
                         // addImageView();
                         //  addCategoryTrait();
                         Seller.writeInJ();
@@ -284,13 +291,6 @@ public class AddProductMenuFX {
         SellerMenu.setEdit(0);
     }
 
-
-    public void userMenu(ActionEvent actionEvent) throws IOException {
-        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(AddProductMenuFX.class.getClassLoader().getResource("addProduct.fxml")));
-        SellerMenuFx.setPriRoot(curRoot);
-        root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
-        goToPage();
-    }
 
     public void back(ActionEvent actionEvent) {
         root = priRoot;
@@ -421,4 +421,42 @@ public class AddProductMenuFX {
 
     }
 
+/*    public void handleDropMedia(DragEvent dragEvent) throws FileNotFoundException {
+        files = dragEvent.getDragboard().getFiles();
+        videoId = files.get(0).getPath();
+        File file = new File(videoId);
+        Media media = new Media(file.toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        MediaView = new MediaView(mediaPlayer);
+        MediaView.setFitHeight(350);
+        MediaView.setFitWidth(360);
+        MediaView.setLayoutX(150);
+        MediaView.setLayoutY(450);
+        pane.getChildren().add(MediaView);
+    }
+
+ */
+
+    public void handleDragOverMedia(DragEvent dragEvent) {
+        if (dragEvent.getDragboard().hasFiles()) {
+            dragEvent.acceptTransferModes(TransferMode.ANY);
+        }
+    }
+
+    public void userMenu(ActionEvent actionEvent) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(AddProductMenuFX.class.getClassLoader().getResource("addProduct.fxml")));
+        if (LoginMenu.getLoginAccount() instanceof Seller) {
+            SellerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
+        } else if (LoginMenu.getLoginAccount() instanceof Manager) {
+            ManagerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
+        } else if (LoginMenu.getLoginAccount() instanceof Customer) {
+            CustomerMenuFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
+        }
+        goToPage();
+    }
 }

@@ -151,14 +151,14 @@ public class CustomerMenu {
         DiscountCode discountCode = DiscountCode.getDiscountWithId(discountCodeId);
         if (DiscountCode.isThereDiscountWithId(discountCodeId)) {
             if (discountCode.discountMatchAccount(loginAccount.getUsername())) {
-                   if (discountCode.discountDateValid()) {
-                if (discountCode.getTotalTimesOfUse() > 0) {
-                    // CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
-                    discountID = discountCodeId;
-                    hasDiscount = true;
-                    outputNo = 2;
-                } else outputNo = 5;
-                 } else outputNo = 4;
+                if (discountCode.discountDateValid()) {
+                    if (discountCode.getTotalTimesOfUse() > 0) {
+                        // CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
+                        discountID = discountCodeId;
+                        hasDiscount = true;
+                        outputNo = 2;
+                    } else outputNo = 5;
+                } else outputNo = 4;
             } else outputNo = 3;
         } else outputNo = 7;
         return outputNo;
@@ -232,9 +232,9 @@ public class CustomerMenu {
                     saleLog.addPrice(p.getPrice());
                     saleLog.addProductToSaleLog(p.getId(), ProductMenu.getBuyLog().getChosenProduct().get(p));
                     if (p.getInSale()) {
-                         if (Sale.getSaleWithId(p.getSale()).checkSale()) {
-                        saleLog.setReducedAmount(Sale.getSaleWithId(p.getSale()).withSale(p));
-                         }
+                        if (Sale.getSaleWithId(p.getSale()).checkSale()) {
+                            saleLog.setReducedAmount(Sale.getSaleWithId(p.getSale()).withSale(p));
+                        }
                     } else saleLog.setReducedAmount(0);
                     saleLog.setReceivedAmount();
                 }

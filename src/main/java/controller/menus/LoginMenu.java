@@ -19,6 +19,7 @@ public class LoginMenu {
     private static AccountRequest accountRequest;
     private static Firm firm;
     private static String firmName;
+    public static boolean yes = false;
 
     public static Firm getFirm() {
         return firm;
@@ -38,6 +39,7 @@ public class LoginMenu {
                 if (Account.isThereAccountWithUsername(username)) {
                     LoginMenu.username = username;
                     outputNo = 0;
+                    yes = true;
                     //subMenuStatus = CommandProcessor.getSubMenuStatus();
                     // CommandProcessor.setSubMenuStatus(SubMenuStatus.PASSWORD);
                 } else outputNo = 13;
@@ -54,6 +56,7 @@ public class LoginMenu {
                 login = true;
                 // findRole();
                 String role = loginAccount.getRole();
+                yes = false;
                 LoginFx.goToMenu(role);
                 outputNo = 0;
                 // CommandProcessor.setSubMenuStatus(subMenuStatus);

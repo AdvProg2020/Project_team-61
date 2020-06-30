@@ -77,7 +77,7 @@ public class ProductsFx {
 
     private void makeTree() {
         productId.setCellValueFactory(new PropertyValueFactory<Product, String>("productId"));
-        productAdditional.setCellValueFactory(new PropertyValueFactory<Product, String>("additionalDetail"));
+        productAdditional.setCellValueFactory(new PropertyValueFactory<Product, String>("productStatus"));
 //        productScore.setCellValueFactory(new PropertyValueFactory<Product, Double>("averageScore"));
         productName.setCellValueFactory(new PropertyValueFactory<Product, String>("productName"));
         productNumber.setCellValueFactory(new PropertyValueFactory<Product, Double>("numberOfProducts"));

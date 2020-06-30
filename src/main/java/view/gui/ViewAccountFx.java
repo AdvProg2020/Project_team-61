@@ -201,10 +201,12 @@ public class ViewAccountFx {
             root = FXMLLoader.load(Objects.requireNonNull(ViewFirmFx.class.getClassLoader().getResource("viewFirmFx.fxml")));
             goToPage();
         } else if (LoginMenu.getLoginAccount() instanceof Manager) {
-            ViewFirmFx.setRequest(request);
-            ViewFirmFx.setPriRoot(curRoot);
-            root = FXMLLoader.load(Objects.requireNonNull(ViewFirmFx.class.getClassLoader().getResource("viewFirmFx.fxml")));
-            goToPage();
+            if(request != null) {
+                ViewFirmFx.setRequest(request);
+                ViewFirmFx.setPriRoot(curRoot);
+                root = FXMLLoader.load(Objects.requireNonNull(ViewFirmFx.class.getClassLoader().getResource("viewFirmFx.fxml")));
+                goToPage();
+            }
         }
 
     }

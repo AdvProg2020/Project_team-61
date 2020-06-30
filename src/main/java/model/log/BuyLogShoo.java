@@ -77,5 +77,22 @@ public class BuyLogShoo {
         this.logId = logId;
     }
 
+    public static BuyLogShoo getProduct(String product){
+        for (BuyLogShoo allLog : list) {
+            if (allLog.productName.equals(product)) {
+                return allLog;
+            }
+        }
+        return null;
+    }
+
+    public static  boolean isThere(String product){
+        for (BuyLogShoo allLog : list) {
+            if (allLog.productName.equals(product)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

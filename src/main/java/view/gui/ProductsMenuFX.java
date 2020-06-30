@@ -13,6 +13,7 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -22,7 +23,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
+
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -40,6 +41,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
 
 
@@ -49,13 +52,13 @@ public class ProductsMenuFX {
 
     public static int mtime;
     public static boolean trueFalse = true;
-
-
-
     @FXML
     public TableView<ProductInMenusShow> tableView = new TableView<>();
     @FXML
     public TableColumn<ProductInMenusShow, String> firstColumn = new TableColumn<>("id");
+
+    @FXML
+    public TableColumn<ProductInMenusShow, Integer> twelve = new TableColumn<>("number of views");
 
     @FXML
     public TableColumn<ProductInMenusShow, ImageView> productImageViewTableColumn = new TableColumn<>("productImage");
@@ -63,7 +66,7 @@ public class ProductsMenuFX {
     @FXML
     public TableColumn<ProductInMenusShow, String> secondColumn = new TableColumn<>("name");
     @FXML
-    public TableColumn<ProductInMenusShow, String> forthColumn = new TableColumn<>("price");
+    public TableColumn<ProductInMenusShow, Double> forthColumn = new TableColumn<>("price");
     @FXML
     public TableColumn<ProductInMenusShow, String> fifthColumn = new TableColumn<>("seller");
 
@@ -96,7 +99,15 @@ public class ProductsMenuFX {
     public TableColumn<Category, ArrayList<String>> traits = new TableColumn<>("traits");
 
     public Label move;
-     //public  Image isFinish = new Image("images/productIsFinish.png");
+    public CheckBox numberOfViewSortCheck = new CheckBox();
+    public CheckBox scoreSortCheck = new CheckBox();
+    public CheckBox priceSort = new CheckBox();
+    public TextField searchCategoryTraitsField;
+    public Pagination pagination;
+    public Label errorNumberFormat;
+    boolean first = true;
+
+    // public  Image isFinish = new Image("images/productIsFinish.png");
     @FXML
     private void move() {
         TranslateTransition transition = new TranslateTransition();
@@ -139,10 +150,17 @@ public class ProductsMenuFX {
         ProductsMenuFX.priRoot = priRoot;
     }
 
-    public static void initializeObserverList() throws FileNotFoundException {
+    public void initializeObserverList() throws FileNotFoundException {
+        ProductInMenusShow.list.clear();
         listIni();
+        data.clear();
+        System.out.println(data.size());
+        sortedList1.clear();
+        sortedList.clear();
+        filteredList.clear();
+        filteredListCat.clear();
         for (ProductInMenusShow show : ProductInMenusShow.list) {
-            data.clear();
+//            data.clear();
             if (!data.contains(show)) {
                 data.add(show);
             }
@@ -166,16 +184,16 @@ public class ProductsMenuFX {
             show.productImage.setFitWidth(100);
             show.productImage.setFitHeight(100);
             show.productImage.setImage(image);
+            show.numberOfProduct = product.getNumberOfProducts();
             final SoftReference<Image> softRef = new SoftReference<Image>(show.productImage.getImage());
 
-
-
-//            if (product.getInSale()){
-//              //  image = new Image("images/PngItem_147577.png");
-//                show.productImage.setImage(new Image("src/main/resources/images/PngItem_147577.png"));
+            if (product.getInSale()){
+//                image = new Image("images/PngItem_147577.png");
+//                show.productImage.setImage(image);
 //                show.inSaleOrFinishLabel.setVisible(true);
 //                show.inSaleOrFinishLabel.setTextFill(Color.FIREBRICK);
-//                show.inSaleOrFinishLabel.setText("IN SALE");         }
+//                show.inSaleOrFinishLabel.setText("IN SALE");
+            }
 
             //dark ya light mikone
 //            ColorAdjust colorAdjust = new ColorAdjust();
@@ -219,7 +237,7 @@ public class ProductsMenuFX {
 
 
     @FXML
-    public void initialize() throws IOException {
+    public void initialize() {
 //        String path = "src/main/java/view/music/background.mp3";
 //        Media media = new Media(new File(path).toURI().toString());
 //        MediaPlayer mediaPlayer = new MediaPlayer(media);
@@ -229,7 +247,7 @@ public class ProductsMenuFX {
         firstColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("id"));
         secondColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("name"));
         productImageViewTableColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, ImageView>("productImage"));
-        forthColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("price"));
+        forthColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, Double>("price"));
         fifthColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("seller"));
         sixthColumn.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("additionalDetail"));
         seventh.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, Category>("category"));
@@ -237,11 +255,17 @@ public class ProductsMenuFX {
         ninth.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, Double>("score"));
         isSaleOrN.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, Label>("inSaleOrFinishLabel"));
         eleventh.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, String>("firm"));
+        twelve.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow, Integer>("numberOfViews"));
 
-
-        initializeObserverList();
-        tableView.getColumns().addAll(firstColumn, secondColumn, productImageViewTableColumn, forthColumn, fifthColumn, sixthColumn, seventh, eleventh, tenth,ninth,isSaleOrN);
-        tableView.setItems(data);
+        try {
+            initializeObserverList();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        if(first){
+        tableView.getColumns().addAll(firstColumn, secondColumn, productImageViewTableColumn, forthColumn, fifthColumn, sixthColumn, seventh, eleventh, tenth,ninth,twelve,isSaleOrN);
+       }first = false;
+//        tableView.setItems(data);
 
 
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -265,10 +289,15 @@ public class ProductsMenuFX {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-
-                if (product.getPrice() > Integer.parseInt(minPriceTextField.getText())) {
-                    return true;
-                } else return false;
+                try{
+                    int priceFilter = Integer.parseInt(newValue);
+                    if (product.getPrice() > priceFilter) {
+                        return true;
+                    }
+                }catch (NumberFormatException e){
+                    errorNumberFormat.setVisible(true);
+                }
+                return false;
             });
 
         });
@@ -278,10 +307,15 @@ public class ProductsMenuFX {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-
-                if (product.getPrice() < Integer.parseInt(minPriceTextField.getText())) {
-                    return true;
-                } else return false;
+                try{
+                    int priceFilter = Integer.parseInt(newValue);
+                    if (product.getPrice() < priceFilter) {
+                        return true;
+                    }
+                }catch (NumberFormatException e){
+                    errorNumberFormat.setVisible(true);
+                }
+                return false;
             });
 
         });
@@ -324,33 +358,48 @@ public class ProductsMenuFX {
                                 return true;
                             }
                         }
-                        return false;
-                    });
-                }
-            });
-
-            checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                    filteredListCat.setPredicate(obj -> {
-                        String[] s = checkBox.getText().split(" ");
-                        if (!checkBox.isSelected()) {
+                        if (checkBox.isSelected() && checkBox.getText().contains("number")){
+                            sortedList.comparatorProperty().bind(tableView.comparatorProperty());
+                            tableView.setItems(sortedList);
+                            tableView.getSortOrder().addAll(tenth);
                             return true;
                         }
-                        if (checkBox.isSelected()){
-                            if (obj.getTraits().contains(s[1])){
-                                return true;
-                            }
+                        if (checkBox.isSelected() && checkBox.getText().contains("score")){
+                            sortedList.comparatorProperty().bind(tableView.comparatorProperty());
+                            tableView.setItems(sortedList);
+                            tableView.getSortOrder().addAll(ninth);
+                            return true;
+                        }
+                        if (checkBox.isSelected() && checkBox.getText().contains("price")){
+                            sortedList.comparatorProperty().bind(tableView.comparatorProperty());
+                            tableView.setItems(sortedList);
+                            tableView.getSortOrder().addAll(forthColumn);
+                            return true;
                         }
                         return false;
                     });
                 }
             });
+
+//            checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+//                @Override
+//                public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+//                    filteredListCat.setPredicate(obj -> {
+//                        String[] s = checkBox.getText().split(" ");
+//                        if (!checkBox.isSelected()) {
+//                            return true;
+//                        }
+//                        if (checkBox.isSelected()){
+//                            if (obj.getTraits().contains(s[1])){
+//                                return true;
+//                            }
+//                        }
+//                        return false;
+//                    });
+//                }
+//            });
         }
-
-
         tableView.setEditable(true);
-
         catName.setCellValueFactory(new PropertyValueFactory<Category, String>("name"));
         traits.setCellValueFactory(new PropertyValueFactory<Category, ArrayList<String>>("traits"));
         dataInListView();
@@ -363,15 +412,22 @@ public class ProductsMenuFX {
         tableView.setItems(sortedList);
 
 
+
         sortedList1 = new SortedList<>(filteredListCat);
         sortedList1.comparatorProperty().bind(categoriesListView.comparatorProperty());
         categoriesListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         categoriesListView.getSelectionModel().setCellSelectionEnabled(true);
         categoriesListView.setItems(sortedList1);
 
+
     }
 
+
+
+
     public static void gotoProductPage(Product product) throws IOException {
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ProductsMenuFX.class.getClassLoader().getResource("productsMenu.fxml")));
+        ProductMenuFX.setPriRoot(curRoot);
         AnchorPane root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
         prevScene = new Scene(root);
         ProductMenuFX.prevScene = prevScene;
@@ -458,10 +514,17 @@ public class ProductsMenuFX {
 
         filterCatCheck.add(filterIsAvailable);
         filterCatCheck.add(filterAscending);
+        filterCatCheck.add(numberOfViewSortCheck);
+        filterCatCheck.add(priceSort);
+        filterCatCheck.add(scoreSortCheck);
     }
 
-    public void back(ActionEvent actionEvent) {
-        root = priRoot;
+    public void back(ActionEvent actionEvent) throws IOException {
+        if(priRoot == null){
+            root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        }else {
+            root = priRoot;
+        }
         goToPage();
     }
 
@@ -488,7 +551,7 @@ public class ProductsMenuFX {
     }
 
     public void userMenu(ActionEvent actionEvent) throws IOException {
-        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ProductsMenuFX.class.getClassLoader().getResource("productsMenu.fxml")));
         if (LoginMenu.getLoginAccount() instanceof Manager) {
             ManagerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));

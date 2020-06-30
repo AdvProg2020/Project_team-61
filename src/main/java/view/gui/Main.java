@@ -201,7 +201,11 @@ public class Main extends Application {
             DiscountCode.getAllDiscountCodes().addAll(manager.getAllDiscountCodes());
         }
 
-
+        for (Seller seller : Seller.getAllSellers()) {
+            if (seller.getAllSales().size() != 0){
+                Sale.getAllSales().addAll(seller.getAllSales());
+            }
+        }
         BuyLog buyLog = new BuyLog("firstBuyLog");
         buyLog.holePrice = 10;
         buyLog.price = 20;
@@ -220,8 +224,8 @@ public class Main extends Application {
         }
 
         if(Manager.getAllManagers().size() != 0){
-            if (Customer.getAllCustomers().size() != 0) {
-               randomDiscount();
+            if (Customer.getAllCustomers().size() >= 2) {
+                randomDiscount();
             }
         }
         Application.launch(args);
@@ -234,7 +238,7 @@ public class Main extends Application {
         for (int i = 0; i < (size)/2; i++) {
             Random rand = new Random();
             int randomIndex = rand.nextInt(size);
-           randomElement.add(Customer.getAllCustomers().get(randomIndex));
+            randomElement.add(Customer.getAllCustomers().get(randomIndex));
         }
         LocalDate today = LocalDate.now();
         UUID id = UUID.randomUUID();
@@ -245,11 +249,11 @@ public class Main extends Application {
         prizeDiscountCode.getAllCustomersWithDiscountCode().addAll(randomElement);
         prizeDiscountCode.setStartOfDiscountPeriod(today);
         DiscountCode.setEndOfDiscountPeriod(today.plusDays(10));
-            Random rand = new Random();
+        Random rand = new Random();
 
-                int randomIndex = rand.nextInt(Manager.getAllManagers().size());
-                Manager.getAllManagers().get(randomIndex).addDiscount(prizeDiscountCode);
-                Manager.writeInJ();
+        int randomIndex = rand.nextInt(Manager.getAllManagers().size());
+        Manager.getAllManagers().get(randomIndex).addDiscount(prizeDiscountCode);
+        Manager.writeInJ();
 
 
     }

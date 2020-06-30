@@ -44,7 +44,7 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <Text layoutX="756.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Products">
+        <Text layoutX="578.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Products">
             <font>
                 <Font name="System Bold Italic" size="42.0" />
             </font>
@@ -57,16 +57,16 @@
                 </LinearGradient>
             </fill>
         </Text>
-        <TableView fx:id="products" layoutX="326.0" layoutY="131.0" prefHeight="616.0" prefWidth="898.0">
+        <TableView fx:id="products" layoutX="326.0" layoutY="127.0" prefHeight="620.0" prefWidth="896.0">
             <columns>
                 <TableColumn fx:id="productId" prefWidth="171.0" text="ID" />
                 <TableColumn fx:id="productName" prefWidth="189.0" text="Name" />
                 <TableColumn fx:id="productPrice" prefWidth="180.0" text="Price" />
                 <TableColumn fx:id="productNumber" prefWidth="179.0" text="Number" />
-                <TableColumn fx:id="productAdditional" prefWidth="175.0" text="Additional details" />
+                <TableColumn fx:id="productAdditional" prefWidth="175.0" text="Staus" />
             </columns>
         </TableView>
-        <Button layoutX="1158.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsView" text="view">
+        <Button layoutX="1166.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsView" text="view">
             <textFill>
                 <LinearGradient endX="1.0" endY="1.0">
                     <stops>
@@ -79,7 +79,7 @@
                 <Font size="17.0" />
             </font>
         </Button>
-        <Button layoutX="1225.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsViewBuyers" text="view buyers">
+        <Button layoutX="861.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsViewBuyers" text="view buyers">
             <font>
                 <Font size="17.0" />
             </font>
@@ -92,7 +92,7 @@
                 </LinearGradient>
             </textFill>
         </Button>
-        <Button layoutX="1350.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsEdit" text="Edit">
+        <Button layoutX="1089.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsEdit" text="Edit">
             <font>
                 <Font size="17.0" />
             </font>
@@ -105,7 +105,7 @@
                 </LinearGradient>
             </textFill>
         </Button>
-        <Button layoutX="1410.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsRemove" text="Remove">
+        <Button layoutX="985.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsRemove" text="Remove">
             <font>
                 <Font size="17.0" />
             </font>
@@ -123,31 +123,5 @@
                 <Font size="29.0" />
             </font>
         </Label>
-        <Button layoutX="1051.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsSortView" text="Sort view">
-            <font>
-                <Font size="17.0" />
-            </font>
-            <textFill>
-                <LinearGradient endX="1.0" endY="1.0">
-                    <stops>
-                        <Stop color="#3000ff" />
-                        <Stop color="#ff006a" offset="1.0" />
-                    </stops>
-                </LinearGradient>
-            </textFill>
-        </Button>
-        <Button layoutX="927.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#productsSortScore" text="Sort score">
-            <font>
-                <Font size="17.0" />
-            </font>
-            <textFill>
-                <LinearGradient endX="1.0" endY="1.0">
-                    <stops>
-                        <Stop color="#3000ff" />
-                        <Stop color="#ff006a" offset="1.0" />
-                    </stops>
-                </LinearGradient>
-            </textFill>
-        </Button>
     </children>
 </AnchorPane>

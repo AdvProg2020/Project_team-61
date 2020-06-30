@@ -90,13 +90,14 @@ public class SaleLogsFx {
         saleLogsId.setCellValueFactory(new PropertyValueFactory<SaleLogShow, String>("saleLogId"));
         //  saleLogsDate.setCellValueFactory(new PropertyValueFactory<SaleLogShow, Date>("localDateTime"));
         saleLogsDate.setCellValueFactory(new PropertyValueFactory<SaleLogShow, Date>("localDateTime"));
-        saleLogsTableView.setEditable(true);
         saleLogsTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         saleLogsTableView.getSelectionModel().setCellSelectionEnabled(true);
         initializeObserverList();
         if(first ) {
             saleLogsTableView.getColumns().addAll(saleLogsId, saleLogsDate);
         }first = false;
+      //  saleLogsTableView.setEditable(true);
+
         saleLogsTableView.setItems(data);
 
     }

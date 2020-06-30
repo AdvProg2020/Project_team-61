@@ -62,6 +62,7 @@ public class ProductRequest extends Request {
         if (Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
             Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
             seller.removeProductRequest(this);
+            seller.removeProduct(Product.getProductById(productId));
         }
         writeInJ();
     }

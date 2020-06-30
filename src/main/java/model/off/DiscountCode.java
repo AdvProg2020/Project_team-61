@@ -72,10 +72,12 @@ public class DiscountCode {
     }
 
     public static boolean discountDateValid() {
-        LocalDate localDate = LocalDate.now();
-        if (startOfDiscountPeriod.isAfter(localDate) ||startOfDiscountPeriod.isEqual(localDate) ){
-            if(endOfDiscountPeriod.isBefore(localDate)||endOfDiscountPeriod.isEqual(localDate)) {
-                return true;
+        if(startOfDiscountPeriod != null && endOfDiscountPeriod != null) {
+            LocalDate localDate = LocalDate.now();
+            if (startOfDiscountPeriod.isAfter(localDate) || startOfDiscountPeriod.isEqual(localDate)) {
+                if (endOfDiscountPeriod.isBefore(localDate) || endOfDiscountPeriod.isEqual(localDate)) {
+                    return true;
+                }
             }
         }
         return false;

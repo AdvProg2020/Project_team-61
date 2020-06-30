@@ -87,7 +87,9 @@ public class UsersFx {
 
     public void viewUser(MouseEvent mouseEvent) throws IOException {
         if (usersList.getSelectionModel().getSelectedItem() != null) {
+            Parent curRoot = FXMLLoader.load(Objects.requireNonNull(UsersFx.class.getClassLoader().getResource("usersFx.fxml")));
             Account a = usersList.getSelectionModel().getSelectedItem();
+            ViewAccountFx.setPriRoot(curRoot);
             ViewAccountFx.setAccount(a);
             root = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
             goToPage();

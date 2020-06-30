@@ -22,6 +22,7 @@ import model.request.Request;
 import model.request.SaleRequest;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class ViewSaleFx {
@@ -43,6 +44,7 @@ public class ViewSaleFx {
     private static Parent root;
     private static Parent priRoot;
     private static Request request;
+    static ArrayList<Product> arrayList = new ArrayList<>();
 
     public static void setPriRoot(Parent priRoot) {
         ViewSaleFx.priRoot = priRoot;
@@ -77,12 +79,14 @@ public class ViewSaleFx {
         saleProducts.setItems(list);
     }
 
+
+
     @FXML
     public void initialize() {
         if (request == null) {
             makeTree();
             saleIdLabel.setText(String.valueOf(curSale.getOffId()));
-            startSaleLabel.setText(String.valueOf(curSale.getSaleAmount()));
+            startSaleLabel.setText(String.valueOf(curSale.getStartOfSalePeriod()));
             endSaleLabel.setText(String.valueOf(curSale.getEndOfSalePeriod()));
             saleAmountLabel.setText(String.valueOf(curSale.getSaleAmount()));
         } else showRequest();
