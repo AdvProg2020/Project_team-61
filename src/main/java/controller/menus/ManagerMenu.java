@@ -96,6 +96,7 @@ public class ManagerMenu {
             if(Account.getAccountWithUsername(product.getSeller()) instanceof Seller) {
                 Seller seller = (Seller) Account.getAccountWithUsername(product.getSeller());
                 seller.removeProduct(product);
+                Seller.writeInJ();
             }
             outputNo = 1;
             //  OutputMassageHandler.showOutputWithString(2);
@@ -263,11 +264,12 @@ public class ManagerMenu {
 
     }
 
-    public static int removeDiscountCode(String discountCodeID) throws IOException {
-        if (checkDiscountCode(discountCodeID)) {
-            DiscountCode.deleteDiscount(discountCodeID);
+    public static int removeDiscountCode(DiscountCode discountCodeID) throws IOException {
+        if (checkDiscountCode(discountCodeID.getDiscountId())) {
             if (LoginMenu.getLoginAccount() instanceof Manager) {
-                ((Manager) LoginMenu.getLoginAccount()).removeDiscount(newDiscountCode);
+                Manager manager = (Manager) LoginMenu.getLoginAccount();
+                manager.removeDiscount(discountCodeID);
+                DiscountCode.deleteDiscount(discountCodeID);
             }
             outputNo = 6;
             // OutputMassageHandler.showOutputWithString(discountCodeID, 4);

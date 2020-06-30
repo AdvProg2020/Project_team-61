@@ -33,10 +33,11 @@ public class Product {
     private int numberOfProducts;
     private boolean isInSale;
     private String additionalDetail;
-    private int numberOfViews;
+    private int  numberOfViews = 0;
     private int totalNumberOfBuyers;
     private boolean isBought;
     String productImageId;
+    String productVideoId;
     private String categoryName;
     // private String sellerName;
 
@@ -70,6 +71,13 @@ public class Product {
         //writeInJ();
     }
 
+    public String getProductVideoId() {
+        return productVideoId;
+    }
+
+    public void setProductVideoId(String productVideoId) {
+        this.productVideoId = productVideoId;
+    }
 
     public static HashMap<String, String> getCategorySpecifications() {
         return categorySpecifications;
@@ -208,11 +216,11 @@ public class Product {
         return numberOfViews;
     }
 
-    public void setNumberOfViews() {
-        this.numberOfViews = numberOfViews + 1;
+    public void setNumberOfViews(int numberOfViews) {
+        this.numberOfViews = numberOfViews;
     }
 
-//    public double getAverageScore() {
+    //    public double getAverageScore() {
 //        for (Product product : allProduct) {
 //            if (product.getId().equals(productId)) {
 //                return product.score.getAverageScore();

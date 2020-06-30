@@ -32,16 +32,18 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
 import model.log.BuyLog;
+import model.log.SaleLogShow;
 import model.off.Sale;
-import model.productRelated.Comment;
-import model.productRelated.Product;
-import model.productRelated.Score;
+import model.productRelated.*;
 import model.request.ProductRequest;
 import model.request.Request;
 import view.OutputMassageHandler;
@@ -53,6 +55,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class ProductMenuFX {
@@ -77,7 +80,10 @@ public class ProductMenuFX {
     public TableView commentTableView = new TableView();
 
     public Button scoreButton;
+
     public ImageView scoreImageView = new ImageView();
+
+    public TableView similarProductsTableView = new TableView();
     @FXML
     private Label productNameLabel;
     @FXML
@@ -92,10 +98,24 @@ public class ProductMenuFX {
     public TableColumn<Comment, String> contentColumn = new TableColumn<>("content");
 
     @FXML
+    public TableColumn<SimilarShow, String> proName = new TableColumn<>("name");
+
+    @FXML
+    public TableColumn<SimilarShow, Double> proPrice = new TableColumn<>("price");
+
+    @FXML
+    public TableColumn<SimilarShow, ImageView> proImage = new TableColumn<>("productImage");
+
+    @FXML
     public TableColumn<Comment, String> personWhoCommented = new TableColumn<>("person commented on this");
 
     @FXML
     public static ObservableList<Comment> data = FXCollections.observableArrayList();
+
+    @FXML
+    public static ObservableList<SimilarShow> similarShows = FXCollections.observableArrayList();
+
+
     @FXML
     private Label scoreMs;
     private int score =0;
@@ -118,6 +138,24 @@ public class ProductMenuFX {
     }
 
     public void makeUpPage() throws IOException {
+        productInPage.setNumberOfViews(productInPage.getNumberOfView() + 1);
+        for (ProductInMenusShow productInMenusShow : ProductInMenusShow.list) {
+            if (productInMenusShow.getId().equals(productInPage.getId())){
+                productInMenusShow.setNumberOfViews(productInPage.getNumberOfView());
+            }
+        }
+        if (productInPage.getProductVideoId() != null){
+            File fileVideo = new File(productInPage.getProductVideoId());
+            Media media = new Media(fileVideo.toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setAutoPlay(true);
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            MediaView mediaView = new MediaView(mediaPlayer);
+            mediaView.setLayoutY(200);
+            mediaView.setLayoutX(200);
+            productPagePane.getChildren().add(mediaView);
+        }
+
 
         zoomProperty.addListener(new InvalidationListener() {
             @Override
@@ -188,8 +226,8 @@ public class ProductMenuFX {
                                 "Sale Amount : " + sale.getSaleAmount());
                         textArea.setEditable(false);
                         textArea.setLayoutX(200);
-                        textArea.setLayoutY(200);
-                        textArea.setPrefSize(200,400);
+                        textArea.setLayoutY(100);
+                        textArea.setPrefSize(200,300);
                         productPagePane.getChildren().add(textArea);
                     }
                 }
@@ -338,8 +376,41 @@ public class ProductMenuFX {
 
     }
 
+    public void initializeSimilar() throws FileNotFoundException {
+        for (Product product : Product.getProductList()) {
+            if (product.getProductName().equals(productInPage.getProductName()) && !product.getId().equals(productInPage.getId())){
+                SimilarShow show = new SimilarShow();
+                show.name = product.getProductName();
+                show.price = product.getPrice();
+                File file = new File(product.getProductImage());
+                Image image = new Image(new FileInputStream(file));
+                show.productImage = new ImageView();
+                show.productImage.setFitWidth(100);
+                show.productImage.setFitHeight(100);
+                show.productImage.setImage(image);
+            }
+        }
+    }
+
+    public void ini() throws FileNotFoundException {
+        initializeSimilar();
+        for (SimilarShow show : SimilarShow.list) {
+            similarShows.add(show);
+        }
+    }
+
+
     @FXML
     public void initialize() throws IOException {
+
+        ini();
+
+        proName.setCellValueFactory(new PropertyValueFactory<SimilarShow,String>("name"));
+        proPrice.setCellValueFactory(new PropertyValueFactory<SimilarShow,Double>("price"));
+        proImage.setCellValueFactory(new PropertyValueFactory<SimilarShow,ImageView>("productImage"));
+
+        similarProductsTableView.getColumns().addAll(proName,proPrice,proImage);
+        similarProductsTableView.setItems(similarShows);
 
         if(request == null) {
             titleColumn.setCellValueFactory(new PropertyValueFactory<Comment, String>("title"));
@@ -366,8 +437,6 @@ public class ProductMenuFX {
         thisStage.setScene(scene);
         thisStage.show();
     }
-
-
 
 
 

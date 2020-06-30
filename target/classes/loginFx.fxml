@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -8,87 +7,82 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0d4b68;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.LoginFx">
-   <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" layoutY="-1.0" stroke="#0d4b68" strokeType="INSIDE" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <fill>
-            <LinearGradient endX="1.0" endY="0.6699029126213591" startX="0.47572815533980584" startY="0.1941747572815534">
-               <stops>
-                  <Stop color="#0d4b68" />
-                  <Stop color="#0d4b68" offset="0.007246376811594203" />
-                  <Stop color="#22388c" offset="0.13398692810457516" />
-                  <Stop color="#2289b5" offset="0.2020460358056266" />
-                  <Stop color="#2289b5" offset="0.3137254901960784" />
-                  <Stop color="#85d8ce" offset="0.42235009946007385" />
-                  <Stop color="#2488b2" offset="0.5321824381926684" />
-                  <Stop color="#2488b2" offset="0.5718954248366014" />
-                  <Stop color="#0d4b68" offset="0.6413043478260869" />
-                  <Stop color="#2289b5" offset="0.7330917874396137" />
-                  <Stop color="#2287b5" offset="0.847826086956522" />
-                  <Stop color="#07685b" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </fill>
-      </Rectangle>
-      <MenuBar layoutY="0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <menus>
-            <Menu mnemonicParsing="false" text="Sign up">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#signUpMenu" text="new account" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Back">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Exit">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Main menu">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#mainMenu" text="main menu" />
-              </items>
-            </Menu>
-         </menus>
-      </MenuBar>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6a8ab263" height="550.0" layoutX="350.0" layoutY="140.0" stroke="BLACK" strokeType="INSIDE" width="382.0" AnchorPane.bottomAnchor="390.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="1188.0" AnchorPane.topAnchor="140.0" />
-      <ImageView fitHeight="251.0" fitWidth="359.0" layoutX="1506.0" layoutY="785.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="1506.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="785.0">
-         <image>
-            <Image url="@icons/face.png" />
-         </image></ImageView>
-      <Text layoutX="500.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" wrappingWidth="81.6708984375" AnchorPane.bottomAnchor="870.7216796875" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="1338.3291015625" AnchorPane.topAnchor="177.7060546875">
-         <font>
-            <Font name="System Bold Italic" size="29.0" />
-         </font>
-         <fill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="#074cc3" />
-                  <Stop color="#c0e1f2" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </fill>
-      </Text>
-      <TextField fx:id="userLogin" layoutX="407.0" layoutY="262.0" prefHeight="39.0" prefWidth="239.0" promptText="username" />
-      <Label fx:id="userLoginMs" layoutX="407.0" layoutY="300.0" prefHeight="21.0" prefWidth="239.0" textAlignment="CENTER" textFill="RED">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Label>
-      <Label fx:id="passLoginMs" layoutX="407.0" layoutY="382.0" prefHeight="21.0" prefWidth="239.0" textAlignment="CENTER" textFill="RED">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Label>
-      <PasswordField fx:id="passLogin" layoutX="407.0" layoutY="343.0" prefHeight="39.0" prefWidth="239.0" promptText="password" />
-      <ImageView fitHeight="57.0" fitWidth="70.0" layoutX="662.0" layoutY="619.0" onMouseClicked="#signUpMenu" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@icons/signUp.png" />
-         </image></ImageView>
-      <Button layoutX="489.0" layoutY="486.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="39.0" prefWidth="104.0" text="Login" textFill="#03abff" />
-      <Button layoutX="364.0" layoutY="644.0" mnemonicParsing="false" onMouseClicked="#signUpMenu" prefHeight="32.0" prefWidth="82.0" text="Sign up" textFill="#03abff" />
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0d4b68;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.LoginFx">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="1080.0" layoutY="-1.0" stroke="#0d4b68" strokeType="INSIDE" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <fill>
+                <LinearGradient endX="1.0" endY="0.6699029126213591" startX="0.47572815533980584" startY="0.1941747572815534">
+                    <stops>
+                        <Stop color="#0d4b68" />
+                        <Stop color="#0d4b68" offset="0.007246376811594203" />
+                        <Stop color="#22388c" offset="0.13398692810457516" />
+                        <Stop color="#2289b5" offset="0.2020460358056266" />
+                        <Stop color="#2289b5" offset="0.3137254901960784" />
+                        <Stop color="#85d8ce" offset="0.42235009946007385" />
+                        <Stop color="#2488b2" offset="0.5321824381926684" />
+                        <Stop color="#2488b2" offset="0.5718954248366014" />
+                        <Stop color="#0d4b68" offset="0.6413043478260869" />
+                        <Stop color="#2289b5" offset="0.7330917874396137" />
+                        <Stop color="#2287b5" offset="0.847826086956522" />
+                        <Stop color="#07685b" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <MenuBar layoutY="0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="Sign up">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#signUpMenu" text="new account" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Main menu">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#mainMenu" text="main menu" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6a8ab263" height="550.0" layoutX="350.0" layoutY="140.0" stroke="BLACK" strokeType="INSIDE" width="382.0" AnchorPane.bottomAnchor="390.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="1188.0" AnchorPane.topAnchor="140.0" />
+        <ImageView fitHeight="251.0" fitWidth="359.0" layoutX="1506.0" layoutY="785.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="1506.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="785.0">
+            <image>
+                <Image url="@icons/face.png" />
+            </image></ImageView>
+        <Text layoutX="500.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" wrappingWidth="81.6708984375" AnchorPane.bottomAnchor="870.7216796875" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="1338.3291015625" AnchorPane.topAnchor="177.7060546875">
+            <font>
+                <Font name="System Bold Italic" size="29.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#074cc3" />
+                        <Stop color="#c0e1f2" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <TextField fx:id="userLogin" layoutX="407.0" layoutY="262.0" prefHeight="39.0" prefWidth="239.0" promptText="username" />
+        <Label fx:id="userLoginMs" layoutX="407.0" layoutY="300.0" prefHeight="21.0" prefWidth="239.0" textAlignment="CENTER" textFill="RED">
+            <font>
+                <Font size="21.0" />
+            </font>
+        </Label>
+        <Label fx:id="passLoginMs" layoutX="407.0" layoutY="382.0" prefHeight="21.0" prefWidth="239.0" textAlignment="CENTER" textFill="RED">
+            <font>
+                <Font size="21.0" />
+            </font>
+        </Label>
+        <PasswordField fx:id="passLogin" layoutX="407.0" layoutY="343.0" prefHeight="39.0" prefWidth="239.0" promptText="password" />
+        <ImageView fitHeight="57.0" fitWidth="70.0" layoutX="662.0" layoutY="619.0" onMouseClicked="#signUpMenu" pickOnBounds="true" preserveRatio="true">
+            <image>
+<!--                <Image url="@icons/signUp.png" />-->
+            </image></ImageView>
+        <Button layoutX="489.0" layoutY="486.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="39.0" prefWidth="104.0" text="Login" textFill="#03abff" />
+        <Button layoutX="364.0" layoutY="644.0" mnemonicParsing="false" onMouseClicked="#signUpMenu" prefHeight="32.0" prefWidth="82.0" text="Sign up" textFill="#03abff" />
+    </children>
 </AnchorPane>

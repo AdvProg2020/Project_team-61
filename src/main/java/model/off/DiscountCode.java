@@ -162,8 +162,8 @@ public class DiscountCode {
         return price;
     }
 
-    public static void deleteDiscount(String id) {
-        allDiscountCodes.remove(getDiscountWithId(id));
+    public static void deleteDiscount(DiscountCode id) {
+        allDiscountCodes.remove(id);
     }
 
 //    public static void writeInJ() throws IOException {

@@ -9,6 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 //import javafx.scene.media.Media;
 //import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.accounts.Account;
 import model.accounts.Customer;
@@ -219,11 +221,11 @@ public class Main extends Application {
             Comment.allComments.addAll(product.proComments);
         }
 
-        if(Manager.getAllManagers().size() != 0){
-            if (Customer.getAllCustomers().size() != 0) {
-                randomDiscount();
-            }
-        }
+//        if(Manager.getAllManagers().size() != 0){
+//            if (Customer.getAllCustomers().size() != 0) {
+//                randomDiscount();
+//            }
+//        }
         Application.launch(args);
 
     }

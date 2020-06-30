@@ -107,6 +107,7 @@ public class PayLogFx {
         ProductMenu.setSelectedProduct(null);
         ProductMenu.setProductId(null);
         ProductMenu.setBuyLog(null);
+        CustomerMenu.setPrizeDiscountCode(null);
     }
 
     public void alertMessage() {

@@ -65,7 +65,7 @@
                 </LinearGradient>
             </fill>
         </Text>
-        <TableView fx:id="saleLogsTableView" layoutX="249.0" layoutY="143.0" prefHeight="554.0" prefWidth="958.0" />
+        <TableView fx:id="saleLogsTableView" onMouseClicked="#clickedColumn" layoutX="249.0"  layoutY="143.0" prefHeight="554.0" prefWidth="958.0" />
       <Button layoutX="1241.0" layoutY="721.0" mnemonicParsing="false" onMouseClicked="#viewSaleLogFromAllSaleLogs" prefHeight="40.0" prefWidth="110.0" text="View">
          <textFill>
             <LinearGradient endX="1.0" endY="1.0">

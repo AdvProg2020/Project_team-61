@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
@@ -18,9 +19,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ProductsPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="883.0" prefWidth="1628.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ProductsMenuFX">
+<AnchorPane fx:id="ProductsPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="826.0" prefWidth="1479.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ProductsMenuFX">
     <children>
-        <SplitPane dividerPositions="0.4924812030075188" layoutX="55.0" layoutY="162.0" orientation="VERTICAL" prefHeight="1035.0" prefWidth="1325.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <SplitPane dividerPositions="0.0037593984962406013" layoutX="55.0" layoutY="162.0" orientation="VERTICAL" prefHeight="1035.0" prefWidth="1325.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <AnchorPane fx:id="topSplitPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                     <children>
@@ -76,7 +77,7 @@
                                 </LinearGradient>
                             </fill>
                         </Rectangle>
-                        <Label layoutX="641.0" fx:id="move" layoutY="129.0" prefHeight="129.0" prefWidth="429.0" text="enjoy shopping with us">
+                        <Label fx:id="move" layoutX="641.0" layoutY="129.0" prefHeight="129.0" prefWidth="429.0" text="enjoy shopping with us">
                             <font>
                                 <Font name="Mongolian Baiti" size="42.0" />
                             </font>
@@ -89,7 +90,7 @@
                             <tabs>
                                 <Tab text="All Products">
                                     <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="495.0" prefWidth="1880.0">
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="865.0" prefWidth="1683.0">
                                             <children>
                                                 <Rectangle arcHeight="5.0" arcWidth="5.0" height="1001.0" layoutX="-6.0" layoutY="-2.0" opacity="0.8" stroke="BLACK" strokeType="INSIDE" width="1957.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="-627.0" AnchorPane.topAnchor="0.0">
                                                     <fill>
@@ -107,7 +108,8 @@
                                                         <Font name="Bookman Old Style" size="19.0" />
                                                     </font>
                                                 </Label>
-                                                <TableView fx:id="tableView" layoutX="246.0" layoutY="81.0" onMouseClicked="#clickedColumn" prefHeight="669.0" prefWidth="790.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="246.0" AnchorPane.rightAnchor="242.0" AnchorPane.topAnchor="80.0">
+                                    <Pagination fx:id="pagination" layoutX="246.0" layoutY="50.0" pageCount="20" prefHeight="733.0" prefWidth="1046.0" />
+                                                <TableView fx:id="tableView" layoutX="246.0" layoutY="55.0" onMouseClicked="#clickedColumn" prefHeight="670.0" prefWidth="985.0" tableMenuButtonVisible="true" AnchorPane.leftAnchor="246.0" AnchorPane.rightAnchor="247.0" AnchorPane.topAnchor="55.0">
                                                     <columns>
                                                         <!--                                                        <TableColumn fx:id="firstColumn" prefWidth="113.59999996423721" text="id" />-->
                                                         <!--                                                        <TableColumn fx:id="secondColumn" prefWidth="252.00009155273438" text="proImage" />-->
@@ -140,11 +142,9 @@
                                                     <content>
                                                         <AnchorPane prefHeight="226.0" prefWidth="266.0">
                                                             <children>
-                                                                <CheckBox layoutX="14.0" layoutY="31.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="136.0" text="number of view" />
+                                                                <CheckBox fx:id="numberOfViewSortCheck" layoutX="14.0" layoutY="31.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="136.0" text="number of product" />
                                                                 <CheckBox layoutX="14.0" layoutY="56.0" mnemonicParsing="false" text="score" />
-                                                                <CheckBox layoutX="14.0" layoutY="84.0" mnemonicParsing="false" text="CheckBox" />
-                                                                <CheckBox layoutX="14.0" layoutY="108.0" mnemonicParsing="false" text="CheckBox" />
-                                                                <CheckBox layoutX="14.0" layoutY="138.0" mnemonicParsing="false" text="CheckBox" />
+                                                                <CheckBox layoutX="14.0" layoutY="84.0" mnemonicParsing="false" text="price" />
                                                                 <Label layoutX="14.0" layoutY="5.0" prefHeight="18.0" prefWidth="72.0" text="Sort" />
                                                             </children>
                                                         </AnchorPane>
@@ -206,7 +206,7 @@
                                        <content>
                                           <AnchorPane fx:id="ProductNameFilterPane" prefHeight="94.0" prefWidth="322.0">
                                              <children>
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" height="157.0" stroke="BLACK" strokeType="INSIDE" width="285.0">
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" height="155.0" stroke="BLACK" strokeType="INSIDE" width="285.0">
                                                    <fill>
                                                       <LinearGradient endX="1.0" endY="0.20229000444630632">
                                                          <stops>
@@ -221,6 +221,11 @@
                                           </AnchorPane>
                                        </content>
                                     </ScrollPane>
+                                    <Label fx:id="errorNumberFormat" visible="false" layoutX="803.0" layoutY="13.0" prefHeight="26.0" prefWidth="262.0" text="Please Enter In Number Format (Really???)" textFill="#c2006b">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
                                             </children>
                                         </AnchorPane>
                                     </content>
