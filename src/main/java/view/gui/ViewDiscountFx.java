@@ -17,6 +17,7 @@ import model.accounts.Seller;
 import model.off.DiscountCode;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 
@@ -33,6 +34,7 @@ public class ViewDiscountFx {
     public static ObservableList list = FXCollections.observableArrayList();
     private static Parent root;
     private static Parent priRoot;
+    ArrayList<String> arrayList = new ArrayList<>();
 
     public static void setPriRoot(Parent priRoot) {
         ViewDiscountFx.priRoot = priRoot;
@@ -50,9 +52,16 @@ public class ViewDiscountFx {
     private void makeTree() {
         allAccountsInfo.setEditable(true);
         list.clear();
-        list.addAll(curDiscountCode.getAllCustomersWithDiscountCode());
+        mskeList();
+        list.addAll(arrayList);
         allAccountsInfo.getItems().addAll(list);
 
+    }
+
+    private void mskeList() {
+        for (Customer customer : curDiscountCode.getAllCustomersWithDiscountCode()) {
+            arrayList.add(customer.getUsername());
+        }
     }
 
     @FXML

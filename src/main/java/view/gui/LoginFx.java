@@ -10,8 +10,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import view.OutputMassageHandler;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -33,10 +36,10 @@ public class LoginFx {
     }
 
     public static void goToMenu(String role) throws IOException {
-        //     String path = "src/main/java/view/music/shot.mp3";
-//            Media media = new Media(new File(path).toURI().toString());
-//            MediaPlayer mediaPlayer = new MediaPlayer(media);
-//            mediaPlayer.setAutoPlay(true);
+             String path = "src/main/java/view/music/shot.mp3";
+            Media media = new Media(new File(path).toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setAutoPlay(true);
         Parent curRoot = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
         if (role.equalsIgnoreCase("manager")) {
             ManagerMenuFx.setPriRoot(curRoot);
@@ -54,10 +57,10 @@ public class LoginFx {
 
 
     public void login(MouseEvent mouseEvent) throws IOException {
-        //     String path = "src/main/java/view/music/shot.mp3";
-//            Media media = new Media(new File(path).toURI().toString());
-//            MediaPlayer mediaPlayer = new MediaPlayer(media);
-//            mediaPlayer.setAutoPlay(true);
+             String path = "src/main/java/view/music/shot.mp3";
+            Media media = new Media(new File(path).toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setAutoPlay(true);
         int user = LoginMenu.processLogin(userLogin.getText());
         int pass = 0;
         if(LoginMenu.yes) {
@@ -97,6 +100,12 @@ public class LoginFx {
 
 
     public void mainMenu(ActionEvent actionEvent) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        goToPage();
+    }
+
+    public void logout(MouseEvent mouseEvent) throws IOException {
+        LoginMenu.processLogout();
         root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
         goToPage();
     }

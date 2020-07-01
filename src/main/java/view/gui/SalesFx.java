@@ -76,7 +76,7 @@ public class SalesFx {
     }
 
     private void makeTree() {
-        checkIfTimeEnds();
+//        checkIfTimeEnds();
         saleId.setCellValueFactory(new PropertyValueFactory<Sale, String>("offId"));
         saleStart.setCellValueFactory(new PropertyValueFactory<Sale, Date>("startOfSalePeriod"));
         saleEnd.setCellValueFactory(new PropertyValueFactory<Sale, Date>("endOfSalePeriod"));
@@ -92,17 +92,21 @@ public class SalesFx {
         sales.setItems(list);
     }
 
-    private void checkIfTimeEnds() {
-        ArrayList<Sale> sale1 = null;
-        LocalDate localDate = LocalDate.now();
-        for (Sale sale : Sale.getAllSales()) {
-            if (sale.getEndOfSalePeriod().isAfter(localDate)){
-                sale1.add(sale);
-            }
-        }
-        Sale.getAllSales().removeAll(sale1);
-        makeList();
-    }
+//    private void checkIfTimeEnds() {
+//        ArrayList<Sale> sale1 = new ArrayList<>();
+//        LocalDate localDate = LocalDate.now();
+//        if(Sale.getAllSales().size() != 0) {
+//            for (Sale sale : Sale.getAllSales()) {
+//                if (sale.getEndOfSalePeriod() != null){
+//                    if (sale.getEndOfSalePeriod().isAfter(localDate)) {
+//                        sale1.add(sale);
+//                    }
+//                }
+//            }
+//            Sale.getAllSales().removeAll(sale1);
+//        }
+//        makeList();
+//    }
 
 
     public void add(MouseEvent mouseEvent) throws IOException {

@@ -1,165 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="793.0" prefWidth="1348.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.SaleMenuFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.SalesFx">
     <children>
-        <Rectangle fx:id="productsInSaleTable" arcHeight="5.0" arcWidth="5.0" height="799.0" layoutX="-3.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="1354.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="-2.0">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="882.0" layoutX="-200.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" width="1605.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <fill>
-                <LinearGradient endY="1.0" startX="0.7366411631343929">
+                <LinearGradient endX="1.0" endY="1.0" startX="0.15533980582524273" startY="0.0970873786407767">
                     <stops>
-                        <Stop color="#ff7600" />
-                        <Stop color="#00f5c8" offset="1.0" />
+                        <Stop color="#6200ff" />
+                        <Stop color="#00f4ff" offset="0.26811594202898553" />
+                        <Stop color="#ab437c" offset="0.6843563512361467" />
+                        <Stop color="#fcc5e5" offset="1.0" />
                     </stops>
                 </LinearGradient>
             </fill>
         </Rectangle>
-        <MenuBar layoutY="14.0" prefWidth="1364.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1920.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <menus>
-                <Menu mnemonicParsing="false" text="Back">
+                <Menu mnemonicParsing="false" text="User menu">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="back" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Exit">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="exit" />
+                        <MenuItem mnemonicParsing="false" onAction="#userMenu" text="your menu" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Logout">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="logout" />
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="My Account">
+                <Menu mnemonicParsing="false" text="Back">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="account" />
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Login">
+                <Menu mnemonicParsing="false" text="Exit">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#login" text="login" />
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
-        <TableView fx:id="ProductsInOffSearch" layoutX="215.0" layoutY="164.0" onMouseClicked="#clickedColumn" prefHeight="524.0" prefWidth="918.0" />
-        <Label layoutX="503.0" layoutY="48.0" prefHeight="39.0" prefWidth="342.0" text="Products In Off">
+        <Text layoutX="752.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sales">
             <font>
-                <Font name="Britannic Bold" size="39.0" />
+                <Font name="System Bold Italic" size="42.0" />
             </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#ff57bf" />
+                        <Stop color="WHITE" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <TableView fx:id="sales" layoutX="192.0" layoutY="125.0" prefHeight="638.0" prefWidth="1233.0">
+            <columns>
+                <TableColumn fx:id="saleId" prefWidth="177.0" text="ID" />
+                <TableColumn fx:id="saleAmount" prefWidth="180.0" text="Amount" />
+                <TableColumn fx:id="saleStart" prefWidth="195.0" text="Start date" />
+                <TableColumn fx:id="saleEnd" prefWidth="206.0" text="End date" />
+                <TableColumn fx:id="saleSeller" prefWidth="220.0" text="Seller" />
+                <TableColumn fx:id="saleStatus" prefWidth="254.0" text="Status" />
+            </columns>
+        </TableView>
+        <Button layoutX="1127.0" layoutY="781.0" mnemonicParsing="false" onMouseClicked="#add" prefHeight="25.0" prefWidth="81.0" text="Add">
             <textFill>
                 <LinearGradient endX="1.0" endY="1.0">
                     <stops>
-                        <Stop color="#7f3900" />
-                        <Stop color="#027962" offset="1.0" />
+                        <Stop>
+                            <color>
+                                <Color red="0.5736963748931885" green="0.035818714648485184" blue="0.6447368264198303" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.8199999928474426" green="0.147599995136261" blue="0.4336931109428406" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill></Button>
+        <Button layoutX="1344.0" layoutY="781.0" mnemonicParsing="false" onMouseClicked="#edit" prefHeight="25.0" prefWidth="81.0" text="Edit">
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.5125132203102112" green="0.1445000022649765" blue="0.8500000238418579" />
+                            </color>
+                        </Stop>
+                        <Stop offset="0.9988558352402748">
+                            <color>
+                                <Color red="0.8500000238418579" green="0.1445000022649765" blue="0.4446766972541809" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.8728070259094238" green="0.0484892800450325" blue="0.5430799126625061" />
+                            </color>
+                        </Stop>
                     </stops>
                 </LinearGradient>
             </textFill>
-        </Label>
-        <TextField fx:id="searchProInSale" layoutX="287.0" layoutY="114.0" prefHeight="39.0" prefWidth="198.0" />
-        <Label layoutX="212.0" layoutY="117.0" prefHeight="26.0" prefWidth="62.0" text="search" textFill="#0022ff">
+        </Button>
+        <Button layoutX="1234.0" layoutY="781.0" mnemonicParsing="false" onMouseClicked="#viewSale" prefHeight="25.0" prefWidth="81.0" text="View">
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.5125132203102112" green="0.1445000022649765" blue="0.8500000238418579" />
+                            </color>
+                        </Stop>
+                        <Stop offset="0.9988558352402748">
+                            <color>
+                                <Color red="0.8500000238418579" green="0.1445000022649765" blue="0.4446766972541809" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.8728070259094238" green="0.0484892800450325" blue="0.5430799126625061" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill>
+        </Button>
+        <Label fx:id="salesMs" layoutX="192.0" layoutY="773.0" prefHeight="21.0" prefWidth="707.0" textFill="#ff0051">
             <font>
-                <Font size="22.0" />
+                <Font size="32.0" />
             </font>
         </Label>
-        <ScrollPane layoutX="14.0" layoutY="164.0" prefHeight="122.0" prefWidth="198.0">
-            <content>
-                <AnchorPane fx:id="CategoryFilterPane" minHeight="0.0" minWidth="0.0" prefHeight="147.0" prefWidth="199.0">
-                    <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="151.0" layoutX="-6.0" stroke="BLACK" strokeType="INSIDE" width="206.0" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <fill>
-                                <LinearGradient endX="1.0" endY="1.0">
-                                    <stops>
-                                        <Stop color="#6dffcc" />
-                                        <Stop color="#01775f" offset="1.0" />
-                                    </stops>
-                                </LinearGradient>
-                            </fill>
-                        </Rectangle>
-                        <Label layoutX="14.0" layoutY="5.0" text="Category" />
-                    </children>
-                </AnchorPane>
-            </content>
-        </ScrollPane>
-        <ScrollPane layoutX="14.0" layoutY="320.0" prefHeight="122.0" prefWidth="198.0">
-            <content>
-                <AnchorPane fx:id="CompnyNameFilterPane" minHeight="0.0" minWidth="0.0" prefHeight="153.0" prefWidth="200.0">
-                    <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="154.0" layoutX="2.0" layoutY="5.0" stroke="BLACK" strokeType="INSIDE" width="198.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <fill>
-                                <LinearGradient endX="1.0" endY="1.0">
-                                    <stops>
-                                        <Stop color="#379c8d" />
-                                        <Stop color="#24ffaf" offset="1.0" />
-                                    </stops>
-                                </LinearGradient>
-                            </fill>
-                        </Rectangle>
-                        <Label layoutX="14.0" layoutY="5.0" text="Compny Nemr" />
-                    </children>
-                </AnchorPane>
-            </content>
-        </ScrollPane>
-        <ScrollPane layoutX="14.0" layoutY="479.0" prefHeight="122.0" prefWidth="198.0">
-            <content>
-                <AnchorPane fx:id="SellerNameFilterPane" minHeight="0.0" minWidth="0.0" prefHeight="168.0" prefWidth="196.0">
-                    <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="156.0" layoutX="-14.0" stroke="BLACK" strokeType="INSIDE" width="214.0" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="-14.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <fill>
-                                <LinearGradient endX="1.0" endY="1.0">
-                                    <stops>
-                                        <Stop color="#379c8d" />
-                                        <Stop color="#24ffaf" offset="1.0" />
-                                    </stops>
-                                </LinearGradient>
-                            </fill>
-                        </Rectangle>
-                        <Label layoutX="14.0" layoutY="5.0" text="Seller" />
-                    </children>
-                </AnchorPane>
-            </content>
-        </ScrollPane>
-        <TextField layoutX="599.0" layoutY="114.0" prefHeight="40.0" prefWidth="149.0" />
-        <TextField layoutX="864.0" layoutY="114.0" prefHeight="40.0" prefWidth="149.0" />
-        <Label layoutX="520.0" layoutY="120.0" text="Max Price" textFill="#2d00ff">
-            <font>
-                <Font size="17.0" />
-            </font>
-        </Label>
-        <Label layoutX="785.0" layoutY="120.0" text="Min Price" textFill="#3300ff">
-            <font>
-                <Font size="17.0" />
-            </font>
-        </Label>
-        <CheckBox fx:id="IsAvailableChoiceBox" layoutX="26.0" layoutY="679.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="173.0" text="Is Available" textFill="#157443">
-            <font>
-                <Font name="Bookman Old Style" size="15.0" />
-            </font>
-        </CheckBox>
-        <ScrollPane layoutX="1141.0" layoutY="164.0" prefHeight="122.0" prefWidth="198.0">
-            <content>
-                <AnchorPane fx:id="ProductNameFilterPane" minHeight="0.0" minWidth="0.0" prefHeight="170.0" prefWidth="234.0">
-                    <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="169.0" stroke="BLACK" strokeType="INSIDE" width="233.0" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <fill>
-                                <LinearGradient endX="1.0" endY="1.0">
-                                    <stops>
-                                        <Stop color="#6dffcc" />
-                                        <Stop color="#01775f" offset="1.0" />
-                                    </stops>
-                                </LinearGradient>
-                            </fill>
-                        </Rectangle>
-                        <Label layoutX="14.0" layoutY="5.0" text="Product Name" />
-                    </children>
-                </AnchorPane>
-            </content>
-        </ScrollPane>
     </children>
 </AnchorPane>

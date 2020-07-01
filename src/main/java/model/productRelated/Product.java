@@ -283,6 +283,11 @@ public class Product {
         setInSale(true);
     }
 
+
+    public void getSaleP(String sale) {
+        this.sale = sale;
+        setInSale(false);
+    }
     public void setTotalNumberOfBuyers(int totalNumberOfBuyers) {
         this.totalNumberOfBuyers = totalNumberOfBuyers;
     }
@@ -460,4 +465,5 @@ public class Product {
                 ", sale=" + sale +
                 '}';
     }
+
 }

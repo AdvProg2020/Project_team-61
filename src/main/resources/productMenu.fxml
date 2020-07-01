@@ -52,7 +52,7 @@
             </Menu>
             </menus>
         </MenuBar>
-        <ImageView fx:id="productPic" fitHeight="181.0" fitWidth="244.0" layoutX="503.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="productPic" fitHeight="240.0" fitWidth="283.0" layoutX="481.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" />
         <Label fx:id="productNameLabel" layoutX="525.0" layoutY="39.0" prefHeight="51.0" prefWidth="200.0" text="Product Name" textAlignment="JUSTIFY">
             <font>
                 <Font name="Baskerville Old Face" size="28.0" />

@@ -152,6 +152,7 @@ public class AddProductMenuFX {
                 if (SellerMenu.getCreate() == 1) {
                     if (SellerMenu.getDetailMenu() == 1) {
                         ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(productNameTextField.getText(), 1, null));
+                        Product.getProductById(idTextField.getText()).setProductVideoId(videoId);
                         Seller.writeInJ();
                     }
                     if (SellerMenu.getDetailMenu() == 2) {
@@ -168,6 +169,7 @@ public class AddProductMenuFX {
                     }
                     if (SellerMenu.getDetailMenu() == 5) {
                         ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(numberOfProductTextField.getText(), 5, null));
+
                         // addImageView();
                         //  addCategoryTrait();
                         Seller.writeInJ();

@@ -14,6 +14,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.accounts.Customer;
 import model.accounts.Manager;
@@ -22,6 +24,7 @@ import model.productRelated.Product;
 import model.sort.Sort;
 import view.OutputMassageHandler;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -77,11 +80,11 @@ public class ProductsFx {
 
     private void makeTree() {
         productId.setCellValueFactory(new PropertyValueFactory<Product, String>("productId"));
-        productAdditional.setCellValueFactory(new PropertyValueFactory<Product, String>("additionalDetail"));
-        productScore.setCellValueFactory(new PropertyValueFactory<Product, Double>("averageScore"));
+        productAdditional.setCellValueFactory(new PropertyValueFactory<Product, String>("productStatus"));
+//        productScore.setCellValueFactory(new PropertyValueFactory<Product, Double>("averageScore"));
         productName.setCellValueFactory(new PropertyValueFactory<Product, String>("productName"));
         productNumber.setCellValueFactory(new PropertyValueFactory<Product, Double>("numberOfProducts"));
-        productNumberView.setCellValueFactory(new PropertyValueFactory<Product, String>("numberOfViews"));
+        //  productNumberView.setCellValueFactory(new PropertyValueFactory<Product, String>("numberOfViews"));
         productPrice.setCellValueFactory(new PropertyValueFactory<Product, Number>("price"));
 
 
@@ -111,8 +114,8 @@ public class ProductsFx {
 
     public void productsEdit(MouseEvent mouseEvent) throws IOException {
         if (LoginMenu.getLoginAccount() instanceof Seller) {
-                root = FXMLLoader.load(Objects.requireNonNull(AddProductMenuFX.class.getClassLoader().getResource("addProduct.fxml")));
-                goToPage();
+            root = FXMLLoader.load(Objects.requireNonNull(AddProductMenuFX.class.getClassLoader().getResource("addProduct.fxml")));
+            goToPage();
         }
     }
 
@@ -135,7 +138,7 @@ public class ProductsFx {
         if (LoginMenu.getLoginAccount() instanceof Seller) {
             if (products.getSelectionModel().getSelectedItem() != null) {
                 Product product = products.getSelectionModel().getSelectedItem();
-                Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
+                Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ProductsFx.class.getClassLoader().getResource("productsFx.fxml")));
                 ProductMenuFX.setProductInPage(product);
                 ProductMenuFX.setPriRoot(curRoot);
                 root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
@@ -159,6 +162,7 @@ public class ProductsFx {
     }
 
     public void productsSortView(MouseEvent mouseEvent) {
+
         if (LoginMenu.getLoginAccount() instanceof Seller) {
             Seller seller = (Seller) LoginMenu.getLoginAccount();
             Sort.setNewArrayOfProductSort(seller.getAllProduct());
@@ -203,6 +207,10 @@ public class ProductsFx {
     }
 
     public void back(ActionEvent actionEvent) {
+        String path = "src/main/java/view/music/drop.mp3";
+        Media media = new Media(new File(path).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         root = priRoot;
         goToPage();
     }

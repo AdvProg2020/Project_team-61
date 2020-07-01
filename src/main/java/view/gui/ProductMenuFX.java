@@ -138,6 +138,11 @@ public class ProductMenuFX {
     }
 
     public void makeUpPage() throws IOException {
+
+        String path = "src/main/java/view/music/background.mp3";
+        Media media1 = new Media(new File(path).toURI().toString());
+        MediaPlayer mediaPlayer1 = new MediaPlayer(media1);
+        mediaPlayer1.setAutoPlay(true);
         productInPage.setNumberOfViews(productInPage.getNumberOfView() + 1);
         for (ProductInMenusShow productInMenusShow : ProductInMenusShow.list) {
             if (productInMenusShow.getId().equals(productInPage.getId())){
@@ -151,8 +156,12 @@ public class ProductMenuFX {
             mediaPlayer.setAutoPlay(true);
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
             MediaView mediaView = new MediaView(mediaPlayer);
-            mediaView.setLayoutY(200);
-            mediaView.setLayoutX(200);
+            mediaView.setLayoutY(580);
+            mediaView.setLayoutX(180);
+            mediaView.setFitWidth(300);
+            mediaView.setFitHeight(400);
+            mediaView.setVisible(true);
+            mediaPlayer.play();
             productPagePane.getChildren().add(mediaView);
         }
 
@@ -220,7 +229,7 @@ public class ProductMenuFX {
         if (productInPage.getInSale()){
             for (Sale sale : Sale.getAllSales()) {
                 for (Product product : sale.getAllSaleProducts()) {
-                    if (product.equals(productInPage)){
+                    if (product.getId().equals(productInPage.getId())){
                         TextArea textArea = new TextArea();
                         textArea.setText("Sale ID : " + productInPage.getSale()+ "\n" +
                                 "Sale Amount : " + sale.getSaleAmount());
@@ -377,6 +386,8 @@ public class ProductMenuFX {
     }
 
     public void initializeSimilar() throws FileNotFoundException {
+        SimilarShow.list.clear();
+        similarShows.clear();
         for (Product product : Product.getProductList()) {
             if (product.getProductName().equals(productInPage.getProductName()) && !product.getId().equals(productInPage.getId())){
                 SimilarShow show = new SimilarShow();
@@ -403,16 +414,14 @@ public class ProductMenuFX {
     @FXML
     public void initialize() throws IOException {
 
-        ini();
-
-        proName.setCellValueFactory(new PropertyValueFactory<SimilarShow,String>("name"));
-        proPrice.setCellValueFactory(new PropertyValueFactory<SimilarShow,Double>("price"));
-        proImage.setCellValueFactory(new PropertyValueFactory<SimilarShow,ImageView>("productImage"));
-
-        similarProductsTableView.getColumns().addAll(proName,proPrice,proImage);
-        similarProductsTableView.setItems(similarShows);
-
         if(request == null) {
+            ini();
+            proName.setCellValueFactory(new PropertyValueFactory<SimilarShow,String>("name"));
+            proPrice.setCellValueFactory(new PropertyValueFactory<SimilarShow,Double>("price"));
+            proImage.setCellValueFactory(new PropertyValueFactory<SimilarShow,ImageView>("productImage"));
+
+            similarProductsTableView.getColumns().addAll(proName,proPrice,proImage);
+            similarProductsTableView.setItems(similarShows);
             titleColumn.setCellValueFactory(new PropertyValueFactory<Comment, String>("title"));
             contentColumn.setCellValueFactory(new PropertyValueFactory<Comment, String>("content"));
             personWhoCommented.setCellValueFactory(new PropertyValueFactory<Comment,String>("personName"));

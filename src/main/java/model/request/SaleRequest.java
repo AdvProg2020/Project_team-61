@@ -2,6 +2,7 @@ package model.request;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import controller.menus.SellerMenu;
 import model.accounts.Account;
 import model.accounts.Seller;
 import model.off.Sale;
@@ -40,14 +41,20 @@ public class SaleRequest extends Request {
 
     @Override
     public void declineRequest() throws IOException {
-        getAllRequests().remove(this);
-        allSaleRequests.remove(this);
-        //  getAllRequests().remove(this);
-        if (Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
-            Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
-            // seller.getAllProductRequests().remove(this);
-            seller.removeSaleRequest(this);
-            seller.getAllSales().remove(Sale.getSaleWithId(offId));
+        if(!SellerMenu.doEdit) {
+            getAllRequests().remove(this);
+            allSaleRequests.remove(this);
+            //  getAllRequests().remove(this);
+            if (Account.getAccountWithUsername(this.getSeller()) instanceof Seller) {
+                Seller seller = (Seller) Account.getAccountWithUsername(this.getSeller());
+                // seller.getAllProductRequests().remove(this);
+                seller.removeSaleRequest(this);
+                for (Product allSaleProduct : allSaleProducts) {
+                    allSaleProduct.getSaleP(null);
+                    //  allSaleProduct.setInSale(true);
+                }
+                seller.getAllSales().remove(Sale.getSaleWithId(offId));
+            }
         }
         writeInJ();
     }
@@ -56,9 +63,22 @@ public class SaleRequest extends Request {
     public void acceptRequest() throws IOException {
         sale = Sale.getSaleWithId(offId);
         sale.setSaleDetails(SaleStatus.CONFIRMED, startOfSalePeriod, endOfSalePeriod, saleAmount,this.getSeller());
-        sale.setAllSaleProducts(allSaleProducts);
-//        Sale.allProInSale.addAll(sale.getAllSaleProducts());
+        //   if(sale.getAllSaleProducts().size() == 0){
+        sale.getAllSaleProducts().addAll(allSaleProducts);
+        //  }
+//        else {
+//            for (Product allSaleProduct : sale.getAllSaleProducts()) {
+//                for (Product saleProduct : allSaleProducts) {
+//                    if (!(allSaleProduct.getId() == saleProduct.getId())) {
+//                        sale.getAllSaleProducts().add(saleProduct);
+//                    }
+//                }
+//            }
+//        }
+
+        //       Sale.allProInSale.addAll(sale.getAllSaleProducts());
         sale.setSaleStatus(SaleStatus.CONFIRMED);
+        ArrayList<String> arrayList = new ArrayList<>();
         for (Product allSaleProduct : allSaleProducts) {
             allSaleProduct.setSale(sale.getOffId());
             //  allSaleProduct.setInSale(true);

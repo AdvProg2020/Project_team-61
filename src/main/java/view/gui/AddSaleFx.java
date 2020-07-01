@@ -17,12 +17,15 @@ import model.accounts.Manager;
 import model.accounts.Seller;
 import model.off.Sale;
 import model.productRelated.Product;
+import model.productRelated.ProductStatus;
 import view.OutputMassageHandler;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Objects;
+
+import static model.off.SaleStatus.CONFIRMED;
 
 public class AddSaleFx {
 
@@ -53,6 +56,7 @@ public class AddSaleFx {
     ArrayList<String> productsId = new ArrayList<>();
     private static Parent priRoot;
     private static Parent root;
+    static ArrayList<Product> addAll = new ArrayList<>();
 
 
     public static void setPriRoot(Parent priRoot) {
@@ -66,16 +70,26 @@ public class AddSaleFx {
 
     public void makeTree() {
         addSaleProduct.setCellValueFactory(new PropertyValueFactory<Product, String>("productId"));
+        list.clear();
+        list();
+        list.addAll(addAll);
+        addSaleProducts.setEditable(true);
+        addSaleProducts.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        addSaleProducts.getSelectionModel().setCellSelectionEnabled(true);
+        addSaleProducts.setItems(list);
+
+
+
+    }
+
+    private  static void list(){
         if (LoginMenu.getLoginAccount() instanceof Seller) {
             Seller seller = (Seller) LoginMenu.getLoginAccount();
-            list.clear();
-            list.addAll(seller.getAllProduct());
-            addSaleProducts.setEditable(true);
-            addSaleProducts.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-            addSaleProducts.getSelectionModel().setCellSelectionEnabled(true);
-            addSaleProducts.setItems(list);
-
-
+            for (Product product : seller.getAllProduct()) {
+                if(product.getProductStatus()== ProductStatus.CONFIRMED){
+                    addAll.add(product);
+                }
+            }
         }
     }
 

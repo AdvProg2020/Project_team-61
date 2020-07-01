@@ -47,10 +47,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-//            String path = "src/main/java/view/music/background.mp3";
-//            Media media = new Media(new File(path).toURI().toString());
-//            MediaPlayer mediaPlayer = new MediaPlayer(media);
-//            mediaPlayer.setAutoPlay(true);
+            String path = "src/main/java/view/music/background.mp3";
+            Media media = new Media(new File(path).toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setAutoPlay(true);
 
 
         if (Manager.getAllManagers().size() == 0) {
@@ -203,15 +203,25 @@ public class Main extends Application {
             DiscountCode.getAllDiscountCodes().addAll(manager.getAllDiscountCodes());
         }
 
+        for (Seller seller : Seller.getAllSellers()) {
+            if (seller.getAllSales().size() != 0){
+                for (Sale allSale : seller.getAllSales()) {
+                    Sale.getAllSales().add(allSale);
+                }
+            }
+        }
+        for (Sale allSale : Sale.getAllSales()) {
+            System.out.println(allSale);
+        }
 
-        BuyLog buyLog = new BuyLog("firstBuyLog");
-        buyLog.holePrice = 10;
-        buyLog.price = 20;
-        buyLog.getChosenProduct().put(Product.getProductById("haha"), 3);
-        BuyLog buyLog1 = new BuyLog("secondBuyLog");
-        buyLog1.holePrice = 40;
-        buyLog1.price = 30;
-        buyLog1.getChosenProduct().put(Product.getProductById("third"), 8);
+//        BuyLog buyLog = new BuyLog("firstBuyLog");
+//        buyLog.holePrice = 10;
+//        buyLog.price = 20;
+//        buyLog.getChosenProduct().put(Product.getProductById("haha"), 3);
+//        BuyLog buyLog1 = new BuyLog("secondBuyLog");
+//        buyLog1.holePrice = 40;
+//        buyLog1.price = 30;
+//        buyLog1.getChosenProduct().put(Product.getProductById("third"), 8);
 
         for (Product product : Product.getAllProduct()) {
             for (Comment proComment : product.proComments) {
@@ -221,11 +231,11 @@ public class Main extends Application {
             Comment.allComments.addAll(product.proComments);
         }
 
-//        if(Manager.getAllManagers().size() != 0){
-//            if (Customer.getAllCustomers().size() != 0) {
+        if(Manager.getAllManagers().size() != 0){
+            if (Customer.getAllCustomers().size() >= 2) {
 //                randomDiscount();
-//            }
-//        }
+            }
+        }
         Application.launch(args);
 
     }
@@ -242,7 +252,7 @@ public class Main extends Application {
         UUID id = UUID.randomUUID();
         DiscountCode prizeDiscountCode = new DiscountCode(id.toString());
         prizeDiscountCode.setTotalTimesOfUse(1);
-        prizeDiscountCode.setDiscountAmount(10);
+        prizeDiscountCode.setDiscountAmount(11);
         prizeDiscountCode.setMaxDiscountAmount(100000);
         prizeDiscountCode.getAllCustomersWithDiscountCode().addAll(randomElement);
         prizeDiscountCode.setStartOfDiscountPeriod(today);

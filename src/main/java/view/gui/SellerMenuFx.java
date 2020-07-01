@@ -11,11 +11,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -29,6 +32,10 @@ public class SellerMenuFx {
     }
 
     public void viewPersonalInfo(MouseEvent mouseEvent) throws IOException {
+        String path = "src/main/java/view/music/shot.mp3";
+        Media media = new Media(new File(path).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
         ViewAccountFx.setPriRoot(curRoot);
         ViewAccountFx.setAccount(LoginMenu.getLoginAccount());
@@ -37,6 +44,10 @@ public class SellerMenuFx {
     }
 
     public void viewCompanyInfo(MouseEvent mouseEvent) throws IOException {
+        String path = "src/main/java/view/music/shot.mp3";
+        Media media = new Media(new File(path).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
         ViewFirmFx.setPriRoot(curRoot);
         ViewFirmFx.setAccount(LoginMenu.getLoginAccount());
@@ -45,6 +56,10 @@ public class SellerMenuFx {
     }
 
     public void viewSalesHistory(MouseEvent mouseEvent) throws IOException {
+        String path = "src/main/java/view/music/drop.mp3";
+        Media media = new Media(new File(path).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         if (LoginMenu.getLoginAccount() instanceof Seller) {
             Seller seller = (Seller) LoginMenu.getLoginAccount();
             Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
@@ -57,6 +72,10 @@ public class SellerMenuFx {
     }
 
     public void addProduct(MouseEvent mouseEvent) throws IOException {
+        String path = "src/main/java/view/music/drop.mp3";
+        Media media = new Media(new File(path).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
         AddProductMenuFX.setPriRoot(curRoot);
         root = FXMLLoader.load(Objects.requireNonNull(AddProductMenuFX.class.getClassLoader().getResource("addProduct.fxml")));

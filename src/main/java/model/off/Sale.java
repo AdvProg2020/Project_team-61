@@ -100,7 +100,13 @@ public class Sale {
     }
 
     public static boolean isThereSaleWithId(String id) {
-        return allSales.contains(getSaleWithId(id));
+        for (Sale sale : allSales) {
+            System.out.println(sale + "*");
+            if (sale.getOffId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Sale getSaleWithSeller(Seller seller) {
