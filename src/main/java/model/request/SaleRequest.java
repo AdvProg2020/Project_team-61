@@ -63,8 +63,20 @@ public class SaleRequest extends Request {
     public void acceptRequest() throws IOException {
         sale = Sale.getSaleWithId(offId);
         sale.setSaleDetails(SaleStatus.CONFIRMED, startOfSalePeriod, endOfSalePeriod, saleAmount,this.getSeller());
-        sale.getAllSaleProducts().addAll(allSaleProducts);
-//        Sale.allProInSale.addAll(sale.getAllSaleProducts());
+     //   if(sale.getAllSaleProducts().size() == 0){
+            sale.getAllSaleProducts().addAll(allSaleProducts);
+      //  }
+//        else {
+//            for (Product allSaleProduct : sale.getAllSaleProducts()) {
+//                for (Product saleProduct : allSaleProducts) {
+//                    if (!(allSaleProduct.getId() == saleProduct.getId())) {
+//                        sale.getAllSaleProducts().add(saleProduct);
+//                    }
+//                }
+//            }
+//        }
+
+ //       Sale.allProInSale.addAll(sale.getAllSaleProducts());
         sale.setSaleStatus(SaleStatus.CONFIRMED);
         ArrayList<String> arrayList = new ArrayList<>();
         for (Product allSaleProduct : allSaleProducts) {

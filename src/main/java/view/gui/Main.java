@@ -180,6 +180,11 @@ public class Main extends Application {
 
         }
 
+        for (Seller allSeller : Seller.getAllSellers()) {
+            SaleRequest.getAllSaleRequests().addAll(allSeller.getAllSaleRequests());
+            Sale.getAllSales().addAll(allSeller.getAllSales());
+        }
+
         for (Sale sale : Sale.getAllSales()) {
             Sale.allProSale.addAll(sale.getAllSaleProducts());
             try {

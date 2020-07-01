@@ -33,12 +33,13 @@ public class Product {
     private int numberOfProducts;
     private boolean isInSale;
     private String additionalDetail;
-    private int numberOfViews;
+    private int  numberOfViews = 0;
     private int totalNumberOfBuyers;
     private boolean isBought;
     String productImageId;
+    String productVideoId;
     private String categoryName;
-   // private String sellerName;
+    // private String sellerName;
 
     //sample.lists
 //    private  ArrayList<Account> listOfSellers = new ArrayList<Account>();
@@ -53,10 +54,10 @@ public class Product {
 
     //objectsAdded
     private Comment comment;
-    public int score =0;
+    public double score =0;
     public int scorePeople =0;
-  //  private Log log;
- //   private Account account;
+    //  private Log log;
+    //   private Account account;
     private String sale;
     private Firm firm;
 
@@ -70,6 +71,13 @@ public class Product {
         //writeInJ();
     }
 
+    public String getProductVideoId() {
+        return productVideoId;
+    }
+
+    public void setProductVideoId(String productVideoId) {
+        this.productVideoId = productVideoId;
+    }
 
     public static HashMap<String, String> getCategorySpecifications() {
         return categorySpecifications;
@@ -176,7 +184,7 @@ public class Product {
 
     public void setScore(int score) {
         this.score = score;
-       // proScores.add(score);
+        // proScores.add(score);
     }
 
     public void setComment(Comment comment) {
@@ -208,11 +216,11 @@ public class Product {
         return numberOfViews;
     }
 
-    public void setNumberOfViews() {
-        this.numberOfViews = numberOfViews + 1;
+    public void setNumberOfViews(int numberOfViews) {
+        this.numberOfViews = numberOfViews;
     }
 
-//    public double getAverageScore() {
+    //    public double getAverageScore() {
 //        for (Product product : allProduct) {
 //            if (product.getId().equals(productId)) {
 //                return product.score.getAverageScore();
@@ -262,7 +270,7 @@ public class Product {
         return productName;
     }
 
-    public int getScore() {
+    public double getScore() {
         return score;
     }
 
@@ -274,6 +282,7 @@ public class Product {
         this.sale = sale;
         setInSale(true);
     }
+
 
     public void getSaleP(String sale) {
         this.sale = sale;
@@ -451,9 +460,10 @@ public class Product {
                 ", info=" + info +
                 ", comment=" + comment +
                 ", score=" + score +
-              //  ", log=" + log +
-               // ", account=" + account +
+                //  ", log=" + log +
+                // ", account=" + account +
                 ", sale=" + sale +
                 '}';
     }
+
 }

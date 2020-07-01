@@ -103,6 +103,7 @@ public class Category{
 
     public static void deleteCategory(String name){
         allCategories.remove(getCategoryWithName(name));
+
     }
 
 

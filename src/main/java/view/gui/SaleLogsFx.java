@@ -104,14 +104,14 @@ public class SaleLogsFx {
 
 
 
-    public void logout(MouseEvent mouseEvent) throws IOException {
+    public void logout(ActionEvent actionEvent) throws IOException {
         LoginMenu.processLogout();
         root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
         goToPage();
     }
 
 
-    public void userMenu(MouseEvent mouseEvent) throws IOException {
+    public void userMenu(ActionEvent actionEvent) throws IOException {
         Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
         if (LoginMenu.getLoginAccount() instanceof Seller) {
             SellerMenuFx.setPriRoot(curRoot);
@@ -130,12 +130,12 @@ public class SaleLogsFx {
         SaleLogsFx.priRoot = priRoot;
     }
 
-    public void back(MouseEvent mouseEvent) {
+    public void back(ActionEvent actionEvent) {
         root=priRoot;
         goToPage();
     }
 
-    public void exit(MouseEvent mouseEvent) {
+    public void exit(ActionEvent actionEvent) {
         System.exit(0);
     }
 

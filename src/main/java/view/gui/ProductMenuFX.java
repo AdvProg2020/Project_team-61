@@ -201,46 +201,49 @@ public class ProductMenuFX {
 //
 //        }
 
-        if ( productInPage.getScore() >=0 && productInPage.getScore()<2){
-            scoreImageView.setVisible(true);
-            scoreImageView.setImage(new Image("icons/1.png"));
-        }
-        else if (productInPage.getScore() >= 2 && productInPage.getScore()<3){
-            scoreImageView.setVisible(true);
-            scoreImageView.setImage(new Image("icons/2.png"));
-        }
-        else if (productInPage.getScore() >= 3 && productInPage.getScore()<4){
-            scoreImageView.setVisible(true);
-            scoreImageView.setImage(new Image("icons/3.png"));
-        }
-        else if (productInPage.getScore() >= 4 && productInPage.getScore()<5){
-            scoreImageView.setVisible(true);
-            scoreImageView.setImage(new Image("icons/4.png"));
-        }
-        else if (productInPage.getScore() == 5){
-            scoreImageView.setVisible(true);
-            scoreImageView.setImage(new Image("icons/5.png"));
-        }
+
+        if(request == null) {
+            /*
+            if ( productInPage.getScore() >=0 && productInPage.getScore()<2){
+                scoreImageView.setVisible(true);
+                scoreImageView.setImage(new Image("icons/1.png"));
+            }
+            else if (productInPage.getScore() >= 2 && productInPage.getScore()<3){
+                scoreImageView.setVisible(true);
+                scoreImageView.setImage(new Image("icons/2.png"));
+            }
+            else if (productInPage.getScore() >= 3 && productInPage.getScore()<4){
+                scoreImageView.setVisible(true);
+                scoreImageView.setImage(new Image("icons/3.png"));
+            }
+            else if (productInPage.getScore() >= 4 && productInPage.getScore()<5){
+                scoreImageView.setVisible(true);
+                scoreImageView.setImage(new Image("icons/4.png"));
+            }
+            else if (productInPage.getScore() == 5){
+                scoreImageView.setVisible(true);
+                scoreImageView.setImage(new Image("icons/5.png"));
+            }
 
 
-        if (productInPage.getInSale()){
-            for (Sale sale : Sale.getAllSales()) {
-                for (Product product : sale.getAllSaleProducts()) {
-                    if (product.equals(productInPage)){
-                        TextArea textArea = new TextArea();
-                        textArea.setText("Sale ID : " + productInPage.getSale()+ "\n" +
-                                "Sale Amount : " + sale.getSaleAmount());
-                        textArea.setEditable(false);
-                        textArea.setLayoutX(200);
-                        textArea.setLayoutY(100);
-                        textArea.setPrefSize(200,300);
-                        productPagePane.getChildren().add(textArea);
+            if (productInPage.getInSale()){
+                for (Sale sale : Sale.getAllSales()) {
+                    for (Product product : sale.getAllSaleProducts()) {
+                        if (product.equals(productInPage)){
+                            TextArea textArea = new TextArea();
+                            textArea.setText("Sale ID : " + productInPage.getSale()+ "\n" +
+                                    "Sale Amount : " + sale.getSaleAmount());
+                            textArea.setEditable(false);
+                            textArea.setLayoutX(200);
+                            textArea.setLayoutY(100);
+                            textArea.setPrefSize(200,300);
+                            productPagePane.getChildren().add(textArea);
+                        }
                     }
                 }
             }
-        }
 
-        if(request == null) {
+             */
             productNameLabel.setText(productInPage.getProductName());
             File file = new File(productInPage.getProductImage());
             Image image = new Image(new FileInputStream(file));
@@ -279,9 +282,9 @@ public class ProductMenuFX {
         if(request instanceof ProductRequest) {
             ProductRequest productRequest = (ProductRequest) request;
             productNameLabel.setText(productRequest.getProductName());
-            File file = new File(productRequest.getImg());
-            Image image = new Image(new FileInputStream(file));
-            productPic.setImage(image);
+        //    File file = new File(productRequest.getImg());
+         //   Image image = new Image(new FileInputStream(file));
+       //     productPic.setImage(image);
             productDetail.setText("Id : " + productRequest.getProductId() + "\n" +
                     "Name : " + productRequest.getProductName() + "\n" +
                     "Price : " + productRequest.getPrice() + "\n" +
@@ -410,16 +413,19 @@ public class ProductMenuFX {
     @FXML
     public void initialize() throws IOException {
 
-        ini();
-
-        proName.setCellValueFactory(new PropertyValueFactory<SimilarShow,String>("name"));
-        proPrice.setCellValueFactory(new PropertyValueFactory<SimilarShow,Double>("price"));
-        proImage.setCellValueFactory(new PropertyValueFactory<SimilarShow,ImageView>("productImage"));
-
-        similarProductsTableView.getColumns().addAll(proName,proPrice,proImage);
-        similarProductsTableView.setItems(similarShows);
 
         if(request == null) {
+            ini();
+
+
+
+            proName.setCellValueFactory(new PropertyValueFactory<SimilarShow,String>("name"));
+            proPrice.setCellValueFactory(new PropertyValueFactory<SimilarShow,Double>("price"));
+            proImage.setCellValueFactory(new PropertyValueFactory<SimilarShow,ImageView>("productImage"));
+
+            similarProductsTableView.getColumns().addAll(proName,proPrice,proImage);
+            similarProductsTableView.setItems(similarShows);
+
             titleColumn.setCellValueFactory(new PropertyValueFactory<Comment, String>("title"));
             contentColumn.setCellValueFactory(new PropertyValueFactory<Comment, String>("content"));
             personWhoCommented.setCellValueFactory(new PropertyValueFactory<Comment,String>("personName"));

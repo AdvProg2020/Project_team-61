@@ -74,7 +74,7 @@ public class UsersFx {
         userLast.setCellValueFactory(new PropertyValueFactory<Account, String>("lastname"));
         userBirth.setCellValueFactory(new PropertyValueFactory<Account, Date>("birthdayDate"));
         userPhoneNo.setCellValueFactory(new PropertyValueFactory<Account, Double>("phoneNo"));
-        userEmail.setCellValueFactory(new PropertyValueFactory<Account, String>("email"));
+       // userEmail.setCellValueFactory(new PropertyValueFactory<Account, String>("email"));
 
         makeList();
         usersList.setEditable(true);
@@ -87,8 +87,8 @@ public class UsersFx {
 
     public void viewUser(MouseEvent mouseEvent) throws IOException {
         if (usersList.getSelectionModel().getSelectedItem() != null) {
-            Parent curRoot = FXMLLoader.load(Objects.requireNonNull(UsersFx.class.getClassLoader().getResource("usersFx.fxml")));
             Account a = usersList.getSelectionModel().getSelectedItem();
+            Parent curRoot = FXMLLoader.load(Objects.requireNonNull(UsersFx.class.getClassLoader().getResource("usersFx.fxml")));
             ViewAccountFx.setPriRoot(curRoot);
             ViewAccountFx.setAccount(a);
             root = FXMLLoader.load(Objects.requireNonNull(ViewAccountFx.class.getClassLoader().getResource("viewAccountFx.fxml")));
@@ -105,8 +105,8 @@ public class UsersFx {
     }
 
     public void AddManager(MouseEvent mouseEvent) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("signUpFx.fxml")));
         SignUpFx.setRole("manager");
+        root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("signUpFx.fxml")));
         goToPage();
     }
 

@@ -210,11 +210,17 @@ public class SellerMenu {
 
     }
 
-    public static int processRemoveProduct(String productID) {
+    public static int processRemoveProduct(String productID) throws IOException {
         if (checkProduct(productID)) {
-            if (Product.getProductById(productID).getSeller() == LoginMenu.getLoginAccount().getUsername()) {
-                Product.deleteProduct(productID);
-                outputNo = 18;
+            if (Product.getProductById(productID).getSeller().equalsIgnoreCase( LoginMenu.getLoginAccount().getUsername())) {
+                if(LoginMenu.getLoginAccount() instanceof  Seller) {
+                    Seller seller = (Seller) LoginMenu.getLoginAccount();
+                    Product p = Product.getProductById(productID);
+                    seller.getAllProduct().remove(p);
+                    Product.deleteProduct(productID);
+                    outputNo = 18;
+                    Seller.writeInJ();
+                }
             }
         }
         return outputNo;
