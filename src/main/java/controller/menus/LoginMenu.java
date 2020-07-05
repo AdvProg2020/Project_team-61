@@ -151,19 +151,19 @@ public class LoginMenu {
     }
 
     public static void firmName(String name) throws IOException {
-       // if (name.matches(".+")) {
-          //  if (Firm.isThereFirmWithID(name)) {
-                firmName = name;
-                String id = loginAccount.getUsername() + " wants edit firm";
-                accountRequest = new AccountRequest(id);
-                accountRequest.setFirmType(loginAccount.getFirm().getType());
-                accountRequest.setFirmName(firmName);
-             //   outputNo = 0;
-                //   CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMFIELD);
-                //  outputNo = 5;
-          //  } else outputNo = 12;
-      //  } else outputNo = 3;
-      //  return outputNo;
+        // if (name.matches(".+")) {
+        //  if (Firm.isThereFirmWithID(name)) {
+        firmName = name;
+        String id = loginAccount.getUsername() + " wants edit firm";
+        accountRequest = new AccountRequest(id);
+        accountRequest.setFirmType(loginAccount.getFirm().getType());
+        accountRequest.setFirmName(firmName);
+        //   outputNo = 0;
+        //   CommandProcessor.setSubMenuStatus(SubMenuStatus.FIRMFIELD);
+        //  outputNo = 5;
+        //  } else outputNo = 12;
+        //  } else outputNo = 3;
+        //  return outputNo;
         // OutputMassageHandler.showFirmOutput(outputNo);
     }
 

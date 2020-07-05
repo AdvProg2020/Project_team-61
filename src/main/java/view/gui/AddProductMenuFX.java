@@ -17,9 +17,9 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
-//import javafx.scene.media.Media;
-//import javafx.scene.media.MediaPlayer;
-//import javafx.scene.media.MediaView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -93,7 +93,7 @@ public class AddProductMenuFX {
     public AnchorPane pane;
     public ArrayList<TextField> traitsTextFields = new ArrayList<>();
     public ArrayList<String> traits = new ArrayList<>();
-   // public javafx.scene.media.MediaView MediaView;
+    public javafx.scene.media.MediaView MediaView;
     String imageId;
     String videoId;
     List<File> files;
@@ -152,7 +152,7 @@ public class AddProductMenuFX {
                 if (SellerMenu.getCreate() == 1) {
                     if (SellerMenu.getDetailMenu() == 1) {
                         ms = OutputMassageHandler.showSellerOutput(SellerMenu.addProduct(productNameTextField.getText(), 1, null));
-                        //Product.getProductById(idTextField.getText()).setProductVideoId(videoId);
+                        Product.getProductById(idTextField.getText()).setProductVideoId(videoId);
                         Seller.writeInJ();
                     }
                     if (SellerMenu.getDetailMenu() == 2) {
@@ -421,7 +421,7 @@ public class AddProductMenuFX {
 
     }
 
-/*    public void handleDropMedia(DragEvent dragEvent) throws FileNotFoundException {
+    public void handleDropMedia(DragEvent dragEvent) throws FileNotFoundException {
         files = dragEvent.getDragboard().getFiles();
         videoId = files.get(0).getPath();
         File file = new File(videoId);
@@ -436,8 +436,6 @@ public class AddProductMenuFX {
         MediaView.setLayoutY(450);
         pane.getChildren().add(MediaView);
     }
-
- */
 
     public void handleDragOverMedia(DragEvent dragEvent) {
         if (dragEvent.getDragboard().hasFiles()) {

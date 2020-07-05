@@ -56,6 +56,7 @@ public class CommentRequest extends Request {
             comment.setDetail(title, content, customer);
             comment.setCommentStatus(CommentStatus.CONFIRMED);
             Product.getProductById(product).setComment(comment);
+//            Product.getProductById(product).proComments.add(comment);
             for (Comment proComment : Product.getProductById(product).proComments) {
                 if (proComment.getId().equals(comment.getId())){
                     proComment = comment;

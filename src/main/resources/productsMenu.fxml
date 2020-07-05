@@ -1,33 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ProductsPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="826.0" prefWidth="1479.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ProductsMenuFX">
+<AnchorPane fx:id="ProductsPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="826.0" prefWidth="1479.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ProductsMenuFX">
     <children>
         <SplitPane dividerPositions="0.0037593984962406013" layoutX="55.0" layoutY="162.0" orientation="VERTICAL" prefHeight="1035.0" prefWidth="1325.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <AnchorPane fx:id="topSplitPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="1112.0" layoutY="-38.0" stroke="BLACK" strokeType="INSIDE" width="1973.0" AnchorPane.bottomAnchor="-583.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-55.0" AnchorPane.topAnchor="-38.0">
-                            <fill>
-                                <LinearGradient endX="1.0" endY="0.5725190912494222">
-                                    <stops>
-                                        <Stop color="#dcccfd" />
-                                        <Stop color="#a2a2ea" offset="0.2623287671232876" />
-                                        <Stop color="#dca4ff" offset="0.42123287671232873" />
-                                        <Stop color="#ffe1c6" offset="0.7171232876712328" />
-                                        <Stop color="#c7e8ff" offset="0.7582191780821916" />
-                                        <Stop color="#9a9bf2" offset="0.993835616438356" />
-                                        <Stop color="WHITE" offset="1.0" />
-                                    </stops>
-                                </LinearGradient>
-                            </fill>
-                        </Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="1112.0" layoutY="-38.0" stroke="BLACK" strokeType="INSIDE" width="1973.0" AnchorPane.bottomAnchor="-583.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-55.0" AnchorPane.topAnchor="-38.0">
+                     <fill>
+                        <LinearGradient endX="1.0" endY="0.5725190912494222">
+                           <stops>
+                              <Stop color="#dcccfd" />
+                              <Stop color="#a2a2ea" offset="0.2623287671232876" />
+                              <Stop color="#dca4ff" offset="0.42123287671232873" />
+                              <Stop color="#ffe1c6" offset="0.7171232876712328" />
+                              <Stop color="#c7e8ff" offset="0.7582191780821916" />
+                              <Stop color="#9a9bf2" offset="0.993835616438356" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </Rectangle>
                         <MenuBar layoutY="2.0" prefWidth="935.0" style="-fx-background-color: #5f76ff;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <menus>
                                 <Menu mnemonicParsing="false" text="File">
@@ -96,7 +108,7 @@
                                                         <Font name="Bookman Old Style" size="19.0" />
                                                     </font>
                                                 </Label>
-                                                <Pagination fx:id="pagination" layoutX="246.0" layoutY="50.0" pageCount="20" prefHeight="733.0" prefWidth="1046.0" />
+                                    <Pagination fx:id="pagination" layoutX="246.0" layoutY="50.0" pageCount="20" prefHeight="733.0" prefWidth="1046.0" />
                                                 <TableView fx:id="tableView" layoutX="246.0" layoutY="55.0" onMouseClicked="#clickedColumn" prefHeight="670.0" prefWidth="985.0" tableMenuButtonVisible="true" AnchorPane.leftAnchor="246.0" AnchorPane.rightAnchor="247.0" AnchorPane.topAnchor="55.0">
                                                     <columns>
                                                         <!--                                                        <TableColumn fx:id="firstColumn" prefWidth="113.59999996423721" text="id" />-->
@@ -131,8 +143,8 @@
                                                         <AnchorPane prefHeight="226.0" prefWidth="266.0">
                                                             <children>
                                                                 <CheckBox fx:id="numberOfViewSortCheck" layoutX="14.0" layoutY="31.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="136.0" text="number of product" />
-                                                                <CheckBox layoutX="14.0" layoutY="56.0" mnemonicParsing="false" text="score" />
-                                                                <CheckBox layoutX="14.0" layoutY="84.0" mnemonicParsing="false" text="price" />
+                                                                <CheckBox fx:id="scoreSortCheck" layoutX="14.0" layoutY="56.0" mnemonicParsing="false" text="score" />
+                                                                <CheckBox fx:id="priceSort" layoutX="14.0" layoutY="84.0" mnemonicParsing="false" text="price" />
                                                                 <Label layoutX="14.0" layoutY="5.0" prefHeight="18.0" prefWidth="72.0" text="Sort" />
                                                             </children>
                                                         </AnchorPane>
@@ -159,61 +171,61 @@
                                                 </ScrollPane>
                                                 <CheckBox fx:id="filterIsAvailable" layoutX="21.0" layoutY="527.0" mnemonicParsing="false" text="Is Availabla" />
                                                 <CheckBox fx:id="filterAscending" layoutX="21.0" layoutY="554.0" mnemonicParsing="false" text="Ascending Order" />
-                                                <TextField fx:id="maxPriceTextField" layoutX="357.0" layoutY="18.0" />
-                                                <TextField fx:id="minPriceTextField" layoutX="593.0" layoutY="18.0" />
-                                                <Label layoutX="285.0" layoutY="17.0" prefHeight="26.0" prefWidth="60.0" text="Max Price">
-                                                    <font>
-                                                        <Font name="Bookman Old Style" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label layoutX="528.0" layoutY="22.0" text="Min Price">
-                                                    <font>
-                                                        <Font name="Bookman Old Style" size="13.0" />
-                                                    </font>
-                                                </Label>
-                                                <ScrollPane layoutX="-2.0" layoutY="385.0" prefHeight="130.0" prefWidth="249.0">
-                                                    <content>
-                                                        <AnchorPane fx:id="SellerNameFilterPane" prefHeight="174.0" prefWidth="274.0">
-                                                            <children>
-                                                                <Rectangle arcHeight="5.0" arcWidth="5.0" height="166.0" stroke="BLACK" strokeType="INSIDE" width="274.0">
-                                                                    <fill>
-                                                                        <LinearGradient endX="1.0" endY="0.20229000444630632">
-                                                                            <stops>
-                                                                                <Stop color="#fff2aa" />
-                                                                                <Stop color="#83c0f2" offset="1.0" />
-                                                                            </stops>
-                                                                        </LinearGradient>
-                                                                    </fill>
-                                                                </Rectangle>
-                                                                <Label layoutX="12.0" layoutY="5.0" prefHeight="19.0" prefWidth="124.0" text="Sellers" />
-                                                            </children>
-                                                        </AnchorPane>
-                                                    </content>
-                                                </ScrollPane>
-                                                <ScrollPane layoutX="1032.0" layoutY="80.0" prefHeight="122.0" prefWidth="245.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
-                                                    <content>
-                                                        <AnchorPane fx:id="ProductNameFilterPane" prefHeight="94.0" prefWidth="322.0">
-                                                            <children>
-                                                                <Rectangle arcHeight="5.0" arcWidth="5.0" height="155.0" stroke="BLACK" strokeType="INSIDE" width="285.0">
-                                                                    <fill>
-                                                                        <LinearGradient endX="1.0" endY="0.20229000444630632">
-                                                                            <stops>
-                                                                                <Stop color="#ffe785" />
-                                                                                <Stop color="#8ac0ed" offset="1.0" />
-                                                                            </stops>
-                                                                        </LinearGradient>
-                                                                    </fill>
-                                                                </Rectangle>
-                                                                <Label layoutX="12.0" layoutY="5.0" prefHeight="18.0" prefWidth="78.0" text="Product Name" />
-                                                            </children>
-                                                        </AnchorPane>
-                                                    </content>
-                                                </ScrollPane>
-                                                <Label fx:id="errorNumberFormat" layoutX="803.0" layoutY="13.0" prefHeight="26.0" prefWidth="262.0" text="Please Enter In Number Format (Really???)" textFill="#c2006b" visible="false">
-                                                    <font>
-                                                        <Font size="14.0" />
-                                                    </font>
-                                                </Label>
+                                    <TextField fx:id="maxPriceTextField" layoutX="357.0" layoutY="18.0" />
+                                    <TextField fx:id="minPriceTextField" layoutX="593.0" layoutY="18.0" />
+                                    <Label layoutX="285.0" layoutY="17.0" prefHeight="26.0" prefWidth="60.0" text="Max Price">
+                                       <font>
+                                          <Font name="Bookman Old Style" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="528.0" layoutY="22.0" text="Min Price">
+                                       <font>
+                                          <Font name="Bookman Old Style" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <ScrollPane layoutX="-2.0" layoutY="385.0" prefHeight="130.0" prefWidth="249.0">
+                                       <content>
+                                          <AnchorPane fx:id="SellerNameFilterPane" prefHeight="174.0" prefWidth="274.0">
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" height="166.0" stroke="BLACK" strokeType="INSIDE" width="274.0">
+                                                   <fill>
+                                                      <LinearGradient endX="1.0" endY="0.20229000444630632">
+                                                         <stops>
+                                                            <Stop color="#fff2aa" />
+                                                            <Stop color="#83c0f2" offset="1.0" />
+                                                         </stops>
+                                                      </LinearGradient>
+                                                   </fill>
+                                                </Rectangle>
+                                                <Label layoutX="12.0" layoutY="5.0" prefHeight="19.0" prefWidth="124.0" text="Sellers" />
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </ScrollPane>
+                                    <ScrollPane layoutX="1032.0" layoutY="80.0" prefHeight="122.0" prefWidth="245.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+                                       <content>
+                                          <AnchorPane fx:id="ProductNameFilterPane" prefHeight="94.0" prefWidth="322.0">
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" height="155.0" stroke="BLACK" strokeType="INSIDE" width="285.0">
+                                                   <fill>
+                                                      <LinearGradient endX="1.0" endY="0.20229000444630632">
+                                                         <stops>
+                                                            <Stop color="#ffe785" />
+                                                            <Stop color="#8ac0ed" offset="1.0" />
+                                                         </stops>
+                                                      </LinearGradient>
+                                                   </fill>
+                                                </Rectangle>
+                                                <Label layoutX="12.0" layoutY="5.0" prefHeight="18.0" prefWidth="78.0" text="Product Name" />
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </ScrollPane>
+                                    <Label fx:id="errorNumberFormat" layoutX="803.0" layoutY="13.0" prefHeight="26.0" prefWidth="262.0" text="Please Enter In Number Format (Really???)" textFill="#c2006b" visible="false">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
                                             </children>
                                         </AnchorPane>
                                     </content>
@@ -247,31 +259,31 @@
                                                     </textFill>
                                                 </Label>
                                                 <TableView fx:id="categoriesListView" layoutX="236.0" layoutY="97.0" prefHeight="517.0" prefWidth="885.0" />
-                                                <ScrollPane layoutX="8.0" layoutY="96.0" prefHeight="152.0" prefWidth="211.0">
-                                                    <content>
-                                                        <AnchorPane fx:id="TraitFilterPane" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
-                                                            <children>
-                                                                <Rectangle arcHeight="5.0" arcWidth="5.0" height="200.0" stroke="BLACK" strokeType="INSIDE" width="222.0">
-                                                                    <fill>
-                                                                        <LinearGradient endX="1.0" endY="1.0">
-                                                                            <stops>
-                                                                                <Stop color="#847866" />
-                                                                                <Stop color="#718769" offset="1.0" />
-                                                                            </stops>
-                                                                        </LinearGradient>
-                                                                    </fill>
-                                                                </Rectangle>
-                                                                <Label layoutX="14.0" layoutY="6.0" prefHeight="26.0" prefWidth="55.0" text="Traits" textFill="#ffee00" />
-                                                            </children>
-                                                        </AnchorPane>
-                                                    </content>
-                                                </ScrollPane>
-                                                <TextField fx:id="searchCategoryTraitsField" layoutX="287.0" layoutY="33.0" />
-                                                <Label layoutX="199.0" layoutY="32.0" prefHeight="26.0" prefWidth="73.0" text="search" textFill="#d98d23">
-                                                    <font>
-                                                        <Font name="Bookman Old Style" size="20.0" />
-                                                    </font>
-                                                </Label>
+                                    <ScrollPane layoutX="8.0" layoutY="96.0" prefHeight="152.0" prefWidth="211.0">
+                                      <content>
+                                        <AnchorPane fx:id="TraitFilterPane" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" height="200.0" stroke="BLACK" strokeType="INSIDE" width="222.0">
+                                                   <fill>
+                                                      <LinearGradient endX="1.0" endY="1.0">
+                                                         <stops>
+                                                            <Stop color="#847866" />
+                                                            <Stop color="#718769" offset="1.0" />
+                                                         </stops>
+                                                      </LinearGradient>
+                                                   </fill>
+                                                </Rectangle>
+                                                <Label layoutX="14.0" layoutY="6.0" prefHeight="26.0" prefWidth="55.0" text="Traits" textFill="#ffee00" />
+                                             </children>
+                                          </AnchorPane>
+                                      </content>
+                                    </ScrollPane>
+                                    <TextField fx:id="searchCategoryTraitsField" layoutX="287.0" layoutY="33.0" />
+                                    <Label layoutX="199.0" layoutY="32.0" prefHeight="26.0" prefWidth="73.0" text="search" textFill="#d98d23">
+                                       <font>
+                                          <Font name="Bookman Old Style" size="20.0" />
+                                       </font>
+                                    </Label>
                                             </children></AnchorPane>
                                     </content>
                                 </Tab>

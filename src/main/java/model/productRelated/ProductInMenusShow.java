@@ -3,10 +3,12 @@ package model.productRelated;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 
 public class ProductInMenusShow {
@@ -15,6 +17,7 @@ public class ProductInMenusShow {
     public String name;
     public double  price;
     public ImageView productImage;
+    public MediaView mediaView;
     public String productImageId;
     public String id;
     public String category;
@@ -23,6 +26,7 @@ public class ProductInMenusShow {
     public String additionalDetail;
     public int numberOfProduct;
     public double score = 50;
+    public int numberOfViews = 0;
     public String firm;
     public static ArrayList<ProductInMenusShow> list = new ArrayList<>();
     public StackPane stackPane = new StackPane();
@@ -46,6 +50,14 @@ public class ProductInMenusShow {
 
     public String getName() {
         return name;
+    }
+
+    public MediaView getMediaView() {
+        return mediaView;
+    }
+
+    public void setMediaView(MediaView mediaView) {
+        this.mediaView = mediaView;
     }
 
     public ImageView getProductImage() {
@@ -148,6 +160,14 @@ public class ProductInMenusShow {
         this.seller = seller;
     }
 
+    public int getNumberOfViews() {
+        return numberOfViews;
+    }
+
+    public void setNumberOfViews(int numberOfViews) {
+        this.numberOfViews = numberOfViews;
+    }
+
     public static String getIdWithImage(ImageView imageView){
         for (ProductInMenusShow show : list) {
             if (show.productImage.equals(imageView)){
@@ -156,4 +176,15 @@ public class ProductInMenusShow {
         }
         return null;
     }
+
+    public static Comparator<ProductInMenusShow> productComparatorForView = new Comparator<ProductInMenusShow>() {
+
+        public int compare(ProductInMenusShow s1, ProductInMenusShow s2) {
+
+            int productView1 = s1.numberOfProduct;
+            int productView2 = s2.numberOfProduct;
+            return productView1 - productView2;
+
+        }
+    };
 }

@@ -99,8 +99,8 @@ public abstract class Sort {
 
     public static ArrayList<Product> scoreSort() {
 //        Collections.sort(newArrayOfProductSort,Product.productComparatorForScore);
-//        listOfProSorts.add(newArrayOfProductSort);
-//        availableSorts.remove(1);
+        listOfProSorts.add(newArrayOfProductSort);
+        availableSorts.remove(1);
         return newArrayOfProductSort;
     }
 

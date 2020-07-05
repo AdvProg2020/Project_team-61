@@ -9,7 +9,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
@@ -23,10 +23,10 @@
                     <stops>
                         <Stop color="#fdb372" />
                         <Stop color="#ffe0be" offset="0.3061643835616438" />
-                        <Stop color="#f3bcff" offset="0.47054794520547943" />
-                        <Stop color="#bfb7f5" offset="0.8541095890410958" />
-                        <Stop color="#ffadf0" offset="0.9961832061068702" />
-                        <Stop color="#c79fff" offset="1.0" />
+                  <Stop color="#f3bcff" offset="0.47054794520547943" />
+                  <Stop color="#bfb7f5" offset="0.8541095890410958" />
+                  <Stop color="#ffadf0" offset="0.9961832061068702" />
+                  <Stop color="#c79fff" offset="1.0" />
                     </stops>
                 </LinearGradient>
             </fill>
@@ -59,14 +59,14 @@
             <font>
                 <Font size="35.0" />
             </font>
-            <textFill>
-                <LinearGradient endX="1.0" endY="1.0">
-                    <stops>
-                        <Stop color="#6556c5" />
-                        <Stop color="#d980e5" offset="1.0" />
-                    </stops>
-                </LinearGradient>
-            </textFill>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#6556c5" />
+                  <Stop color="#d980e5" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
         </Label>
         <TextField fx:id="idTextField" layoutX="583.0" layoutY="168.0" prefHeight="35.0" prefWidth="287.0" style="-fx-background-color: #ffffff;" />
         <TextField fx:id="priceTextField" layoutX="583.0" layoutY="288.0" prefHeight="35.0" prefWidth="287.0" style="-fx-background-color: #ffffff;" />
@@ -85,12 +85,12 @@
         <TextField fx:id="categoryNameTextField" layoutX="585.0" layoutY="359.0" prefHeight="35.0" prefWidth="287.0" />
         <Label layoutX="517.0" layoutY="368.0" text="category" />
         <Button layoutX="898.0" layoutY="364.0" mnemonicParsing="false" onAction="#addTraitsButton" text="add Traits" />
-        <Button fx:id="edit" layoutX="784.0" layoutY="711.0" mnemonicParsing="false" onMouseClicked="#editProduct" prefHeight="43.0" prefWidth="156.0" text="Edit" />
-        <Label fx:id="error" layoutX="508.0" layoutY="779.0" prefHeight="31.0" prefWidth="430.0" textFill="#c764e2">
-            <font>
-                <Font size="21.0" />
-            </font></Label>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7fbff" height="246.0" layoutX="125.0" layoutY="332.0" stroke="BLACK" strokeType="INSIDE" width="287.0" />
-
+      <Button fx:id="edit" layoutX="784.0" layoutY="711.0" mnemonicParsing="false" onMouseClicked="#editProduct" prefHeight="43.0" prefWidth="156.0" text="Edit" />
+      <Label fx:id="error" layoutX="508.0" layoutY="779.0" prefHeight="31.0" prefWidth="430.0" textFill="#c764e2">
+         <font>
+            <Font size="21.0" />
+         </font></Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7fbff" height="246.0" layoutX="125.0" layoutY="332.0" stroke="BLACK" strokeType="INSIDE" width="287.0" />
+      <MediaView fx:id="MediaView" fitHeight="200.0" fitWidth="200.0" layoutX="131.0" layoutY="332.0" onDragDropped="#handleDropMedia" onDragOver="#handleDragOverMedia" />
     </children>
 </AnchorPane>
