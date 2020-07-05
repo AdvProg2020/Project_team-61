@@ -79,11 +79,19 @@ public class ProductMenuFX {
     public TextArea productDetail;
     public TableView commentTableView = new TableView();
 
+    public ObservableList<ProductInMenusShow> data1 = FXCollections.observableArrayList();
+
     public Button scoreButton;
 
     public ImageView scoreImageView = new ImageView();
 
     public TableView similarProductsTableView = new TableView();
+    
+    public TableView<ProductInMenusShow> comparisonTableView = new TableView();
+
+    public AnchorPane ComparisonPane;
+    public ImageView compareImage = new ImageView();
+    public TextArea comparetextField ;
     @FXML
     private Label productNameLabel;
     @FXML
@@ -93,10 +101,21 @@ public class ProductMenuFX {
     @FXML
     private Label didntBuyToScoreOrProductIsFinish;
     @FXML
-    public TableColumn<Comment, String> titleColumn = new TableColumn<>("title");
+    public TableColumn<ProComments, String> titleColumn = new TableColumn<>("title");
     @FXML
-    public TableColumn<Comment, String> contentColumn = new TableColumn<>("content");
+    public TableColumn<ProComments, String> contentColumn = new TableColumn<>("content");
+    @FXML
+    public TableColumn<ProductInMenusShow, ImageView> thirdCo = new TableColumn<>("productImage");
 
+    @FXML
+    public TableColumn<ProductInMenusShow, String> secondCo = new TableColumn<>("name");
+
+
+    @FXML
+    public TableColumn<ProductInMenusShow, String> forth = new TableColumn<>("id");
+
+    @FXML
+    public TableColumn<ProductInMenusShow, Double> firstCo = new TableColumn<>("price");
     @FXML
     public TableColumn<SimilarShow, String> proName = new TableColumn<>("name");
 
@@ -107,10 +126,10 @@ public class ProductMenuFX {
     public TableColumn<SimilarShow, ImageView> proImage = new TableColumn<>("productImage");
 
     @FXML
-    public TableColumn<Comment, String> personWhoCommented = new TableColumn<>("person commented on this");
+    public TableColumn<ProComments, String> personWhoCommented = new TableColumn<>("person commented on this");
 
     @FXML
-    public static ObservableList<Comment> data = FXCollections.observableArrayList();
+    public static ObservableList<ProComments> data = FXCollections.observableArrayList();
 
     @FXML
     public static ObservableList<SimilarShow> similarShows = FXCollections.observableArrayList();
@@ -230,6 +249,7 @@ public class ProductMenuFX {
             for (Sale sale : Sale.getAllSales()) {
                 for (Product product : sale.getAllSaleProducts()) {
                     if (product.getId().equals(productInPage.getId())){
+                        productInPage.setProductImage("C:\\Users\\ASA\\IdeaProjects\\backUp3\\src\\main\\resources\\images\\PngItem_147577.png");
                         TextArea textArea = new TextArea();
                         textArea.setText("Sale ID : " + productInPage.getSale()+ "\n" +
                                 "Sale Amount : " + sale.getSaleAmount());
@@ -248,6 +268,14 @@ public class ProductMenuFX {
             File file = new File(productInPage.getProductImage());
             Image image = new Image(new FileInputStream(file));
             productPic.setImage(image);
+            if (productInPage.getInSale()){
+                productPic.setImage(new Image("images/PngItem_147577.png"));
+                productInPage.setProductImage("C:\\Users\\ASA\\IdeaProjects\\backUp3\\src\\main\\resources\\images\\");
+            }
+            if (productInPage.getNumberOfProducts() == 0){
+                productPic.setImage(new Image("images/productIsFinish.png"));
+                productInPage.setProductImage("C:\\Users\\ASA\\IdeaProjects\\backUp3\\src\\main\\resources\\images\\productIsFinish.png");
+            }
             productDetail.setText("Id : " + productInPage.getId() + "\n" +
                     "Name : " + productInPage.getProductName() + "\n" +
                     "Price : " + productInPage.getPrice() + "\n" +
@@ -410,33 +438,70 @@ public class ProductMenuFX {
         }
     }
 
+    public void inCom(){
+        data1.clear();
+        for (ProductInMenusShow productInMenusShow : ProductInMenusShow.list) {
+            data1.add(productInMenusShow);
+        }
+    }
 
     @FXML
     public void initialize() throws IOException {
 
         if(request == null) {
             ini();
+            inCom();
             proName.setCellValueFactory(new PropertyValueFactory<SimilarShow,String>("name"));
             proPrice.setCellValueFactory(new PropertyValueFactory<SimilarShow,Double>("price"));
             proImage.setCellValueFactory(new PropertyValueFactory<SimilarShow,ImageView>("productImage"));
 
+            firstCo.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow,Double>("price"));
+            secondCo.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow,String>("name"));
+            thirdCo.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow,ImageView>("productImage"));
+            forth.setCellValueFactory(new PropertyValueFactory<ProductInMenusShow,String>("id"));
+
+            comparisonTableView.getColumns().addAll(forth,thirdCo,secondCo,firstCo);
+            comparisonTableView.setItems(data1);
+
             similarProductsTableView.getColumns().addAll(proName,proPrice,proImage);
             similarProductsTableView.setItems(similarShows);
-            titleColumn.setCellValueFactory(new PropertyValueFactory<Comment, String>("title"));
-            contentColumn.setCellValueFactory(new PropertyValueFactory<Comment, String>("content"));
-            personWhoCommented.setCellValueFactory(new PropertyValueFactory<Comment,String>("personName"));
 
-            for (Comment comment : Comment.getCommentsOfPro(productInPage.getId())) {
-                if (!data.contains(comment)) {
-                    data.add(comment);
+            initiaComment();
+            titleColumn.setCellValueFactory(new PropertyValueFactory<ProComments, String>("title"));
+            contentColumn.setCellValueFactory(new PropertyValueFactory<ProComments, String>("content"));
+            personWhoCommented.setCellValueFactory(new PropertyValueFactory<ProComments,String>("personName"));
+            for (Comment proComment : productInPage.proComments) {
+                System.out.println(proComment);
+            }
+            for (ProComments datum : data) {
+                System.out.println(datum+"@");
+            }
+
+            commentTableView.getColumns().addAll(titleColumn, contentColumn,personWhoCommented);
+            commentTableView.setItems(data);
+
+        }
+    }
+
+    private void initiaComment() {
+        iniComment();
+        for (ProComments proComments : ProComments.list) {
+            data.add(proComments);
+        }
+    }
+
+    private void iniComment() {
+        ProComments.list.clear();
+        data.clear();
+        for (Product product : Product.getAllProduct()) {
+            if (product.getId().equals(productInPage.getId())){
+                for (Comment proComment : product.proComments) {
+                    ProComments proComments = new ProComments();
+                    proComments.title = proComment.getTitle();
+                    proComments.content = proComment.getContent();
+                    proComments.person=proComment.getPersonName();
                 }
             }
-            commentTableView.getColumns().addAll(titleColumn, contentColumn);
-            commentTableView.setItems(data);
-            for (Comment comment : Comment.getCommentsOfPro(productInPage.getId())) {
-                System.out.println(comment.getTitle());
-            }
-            data.clear();
         }
     }
 
@@ -527,5 +592,31 @@ public class ProductMenuFX {
             root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         }
         goToPage();
+    }
+
+    public void doComparison(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("comparisonPro.fxml")));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
+    public void clickedColumn(MouseEvent mouseEvent) {
+        TablePosition tablePosition = comparisonTableView.getSelectionModel().getSelectedCells().get(0);
+        int row = tablePosition.getRow();
+        ProductInMenusShow item = comparisonTableView.getItems().get(row);
+        TableColumn tableColumn = tablePosition.getTableColumn();
+
+        try {
+
+            String im = (String) tableColumn.getCellObservableValue(item).getValue();
+            comparetextField.setText(im);
+
+
+        } catch (NullPointerException e) {
+            System.out.println("you cant press here");
+        }
     }
 }

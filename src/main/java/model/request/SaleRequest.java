@@ -63,8 +63,10 @@ public class SaleRequest extends Request {
     public void acceptRequest() throws IOException {
         sale = Sale.getSaleWithId(offId);
         sale.setSaleDetails(SaleStatus.CONFIRMED, startOfSalePeriod, endOfSalePeriod, saleAmount,this.getSeller());
+
         //   if(sale.getAllSaleProducts().size() == 0){
         sale.getAllSaleProducts().addAll(allSaleProducts);
+
         //  }
 //        else {
 //            for (Product allSaleProduct : sale.getAllSaleProducts()) {
@@ -90,6 +92,7 @@ public class SaleRequest extends Request {
             seller.removeSaleRequest(this);
             //  seller.addSale(sale);
         }
+        Seller.writeInJ();
         writeInJ();
     }
 

@@ -47,10 +47,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-            String path = "src/main/java/view/music/background.mp3";
-            Media media = new Media(new File(path).toURI().toString());
-            MediaPlayer mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.setAutoPlay(true);
+//            String path = "src/main/java/view/music/background.mp3";
+//            Media media = new Media(new File(path).toURI().toString());
+//            MediaPlayer mediaPlayer = new MediaPlayer(media);
+//            mediaPlayer.setAutoPlay(true);
 
 
         if (Manager.getAllManagers().size() == 0) {
@@ -233,7 +233,7 @@ public class Main extends Application {
 
         if(Manager.getAllManagers().size() != 0){
             if (Customer.getAllCustomers().size() >= 2) {
-//                randomDiscount();
+                randomDiscount();
             }
         }
         Application.launch(args);

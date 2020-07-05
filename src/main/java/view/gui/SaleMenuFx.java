@@ -102,29 +102,30 @@ public class SaleMenuFx {
 
 
     public static void listIni() throws FileNotFoundException {
-
-        for (Product product : Sale.allProSale) {
-            ProductInSaleShow show = new ProductInSaleShow(product.getId());
-            show.name = product.getProductName();
-            show.additionalDetail = product.getAdditionalDetail();
-            show.category = product.getCategory().getName();
-            show.id = product.getId();
-            show.price = product.getPrice();
-            show.comment = product.getComment();
-            show.seller = product.getSeller();
-            show.firm = product.getFirm().getName();
-            File file = new File(product.getProductImage());
-            Image image = new Image(new FileInputStream(file));
-            show.productImage = new ImageView();
-            show.productImage.setFitWidth(100);
-            show.productImage.setFitHeight(100);
-            show.productImage.setImage(image);
-            for (Seller seller : Seller.getAllSellers()) {
-                for (Sale sale : seller.getAllSales()) {
-                    if (sale.getAllSaleProducts().contains(product)){
-                        show.saleAmount = sale.getSaleAmount();
-                        show.startOfSalePeriod=sale.getStartOfSalePeriod();
-                        show.endOfSalePeriod = sale.getEndOfSalePeriod();
+        for (Product product : Product.getAllProduct()) {
+            if (product.getInSale()){
+                ProductInSaleShow show = new ProductInSaleShow(product.getId());
+                show.name = product.getProductName();
+                show.additionalDetail = product.getAdditionalDetail();
+                show.category = product.getCategory().getName();
+                show.id = product.getId();
+                show.price = product.getPrice();
+                show.comment = product.getComment();
+                show.seller = product.getSeller();
+                show.firm = product.getFirm().getName();
+                File file = new File(product.getProductImage());
+                Image image = new Image(new FileInputStream(file));
+                show.productImage = new ImageView();
+                show.productImage.setFitWidth(100);
+                show.productImage.setFitHeight(100);
+                show.productImage.setImage(image);
+                for (Seller seller : Seller.getAllSellers()) {
+                    for (Sale sale : seller.getAllSales()) {
+                        if (sale.getAllSaleProducts().contains(product)){
+                            show.saleAmount = sale.getSaleAmount();
+                            show.startOfSalePeriod=sale.getStartOfSalePeriod();
+                            show.endOfSalePeriod = sale.getEndOfSalePeriod();
+                        }
                     }
                 }
             }

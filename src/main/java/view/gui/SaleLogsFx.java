@@ -8,16 +8,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
 import model.log.*;
+import model.productRelated.Product;
+import model.productRelated.ProductInMenusShow;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -56,7 +59,6 @@ public class SaleLogsFx {
     public  static ObservableList<SaleLogShow> data = FXCollections.observableArrayList();
     @FXML
     private TableColumn<SaleLogShow, LocalDateTime> date = new TableColumn<>();
-    boolean first = true;
 
 
 
@@ -90,14 +92,8 @@ public class SaleLogsFx {
         saleLogsId.setCellValueFactory(new PropertyValueFactory<SaleLogShow, String>("saleLogId"));
         //  saleLogsDate.setCellValueFactory(new PropertyValueFactory<SaleLogShow, Date>("localDateTime"));
         saleLogsDate.setCellValueFactory(new PropertyValueFactory<SaleLogShow, Date>("localDateTime"));
-        saleLogsTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        saleLogsTableView.getSelectionModel().setCellSelectionEnabled(true);
         initializeObserverList();
-        if(first ) {
-            saleLogsTableView.getColumns().addAll(saleLogsId, saleLogsDate);
-        }first = false;
-        //  saleLogsTableView.setEditable(true);
-
+        saleLogsTableView.getColumns().addAll(saleLogsId,saleLogsDate);
         saleLogsTableView.setItems(data);
 
     }
@@ -112,15 +108,11 @@ public class SaleLogsFx {
 
 
     public void userMenu(ActionEvent actionEvent) throws IOException {
-        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
-        if (LoginMenu.getLoginAccount() instanceof Seller) {
-            SellerMenuFx.setPriRoot(curRoot);
+        if(LoginMenu.getLoginAccount() instanceof Seller){
             root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
-        } else if (LoginMenu.getLoginAccount() instanceof Manager) {
-            ManagerMenuFx.setPriRoot(curRoot);
+        } else if(LoginMenu.getLoginAccount() instanceof Manager){
             root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
-        } else if (LoginMenu.getLoginAccount() instanceof Customer) {
-            CustomerMenuFx.setPriRoot(curRoot);
+        }else if(LoginMenu.getLoginAccount() instanceof Customer){
             root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         }
         goToPage();
@@ -145,19 +137,34 @@ public class SaleLogsFx {
         Main.primStage.setScene(pageTwoScene);
         Main.primStage.show();
     }
-    public void viewSaleLogFromAllSaleLogs(MouseEvent mouseEvent) throws IOException {
-        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
-        if(saleLogsTableView.getSelectionModel().getSelectedItem() != null) {
-            SaleLogShow saleLog = saleLogsTableView.getSelectionModel().getSelectedItem();
-            if(Log.getLogWithId(saleLog.saleLogId) instanceof  SaleLog) {
-                SaleLog saleLog1 = (SaleLog) Log.getLogWithId(saleLog.saleLogId);
-                SaleLogFx.setPriRoot(curRoot);
-                SaleLogFx.setCurSaleLog(saleLog1);
-                root = FXMLLoader.load(Objects.requireNonNull(SalesFx.class.getClassLoader().getResource("saleLogFx.fxml")));
-                goToPage();
-            }
-        }
 
+    public void viewSaleLogFromAllSaleLogs(MouseEvent mouseEvent) throws IOException {
+        SaleLogFx.setPriRoot(root);
+//        SaleLogFx.setCurSaleLog(saleLogsTableView.getSelectionModel().getSelectedItem());
+        root= FXMLLoader.load(Objects.requireNonNull(SalesFx.class.getClassLoader().getResource("saleLogFx.fxml")));;
+        goToPage();
+
+    }
+
+    public void clickedColumn(MouseEvent mouseEvent) throws IOException {
+        TablePosition tablePosition = saleLogsTableView.getSelectionModel().getSelectedCells().get(0);
+        int row = tablePosition.getRow();
+        SaleLogShow item = saleLogsTableView.getItems().get(row);
+        TableColumn tableColumn = tablePosition.getTableColumn();
+
+        try {
+            Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
+            String im = (String) tableColumn.getCellObservableValue(item).getValue();
+            SaleLog saleLog = (SaleLog) Log.getLogWithId(im);
+            System.out.println(saleLog.localDateTimeForLog);
+            SaleLogFx.setPriRoot(curRoot);
+            SaleLogFx.setCurSaleLog(saleLog);
+            root = FXMLLoader.load(Objects.requireNonNull(SalesFx.class.getClassLoader().getResource("saleLogFx.fxml")));
+            goToPage();
+
+        } catch (NullPointerException e) {
+            System.out.println("you cant press here");
+        }
     }
 
 }

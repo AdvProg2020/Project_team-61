@@ -85,6 +85,9 @@ public class BuyLogFx {
 
     public void initializeObserverList() throws FileNotFoundException {
         listIni();
+        if( BuyLogShoo.list.size() ==0){
+            data.clear();
+        }
         for (BuyLogShoo buyLogShow : BuyLogShoo.list) {
             data.clear();
             if (!data.contains(buyLogShow)) {
@@ -154,6 +157,8 @@ public class BuyLogFx {
             product = Product.getProductById(a.productName);
             if (product != null) {
                 ProductMenu.getBuyLog().addProductToBuyLog(product.getId(), 1);
+                BuyLogShoo buyLogShoo= BuyLogShoo.getProduct(product.getId());
+                BuyLogShoo.list.remove(buyLogShoo);
                 initialize();
             }
         }
@@ -165,6 +170,10 @@ public class BuyLogFx {
             BuyLogShoo a = buyLogTable.getSelectionModel().getSelectedItem();
             product = Product.getProductById(a.productName);
             ProductMenu.getBuyLog().reduceNumberOfProduct(product.getId(), 1);
+            //  if(!ProductMenu.getBuyLog().getChosenProduct().containsKey(product) ){
+            BuyLogShoo buyLogShoo= BuyLogShoo.getProduct(product.getId());
+            BuyLogShoo.list.remove(buyLogShoo);
+            //  }
             initialize();
         }
 

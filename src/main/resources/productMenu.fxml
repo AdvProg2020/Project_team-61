@@ -38,6 +38,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#back" text="BACK" />
                         <MenuItem mnemonicParsing="false" onAction="#exit" text="EXIT" />
                         <MenuItem mnemonicParsing="false" onAction="#userMenu" text="ACCOUNT" />
+                  <MenuItem mnemonicParsing="false" onAction="#doComparison" text="Comparison" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Login">
@@ -146,5 +147,8 @@
       <ScrollPane fx:id="scrollPane" layoutX="487.0" layoutY="90.0" prefHeight="230.0" prefWidth="274.0" />
       <TableView fx:id="similarProductsTableView" layoutX="482.0" layoutY="637.0" prefHeight="162.0" prefWidth="787.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="275.0" layoutX="126.0" layoutY="524.0" stroke="BLACK" strokeType="INSIDE" width="346.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="200.0" layoutX="1318.0" layoutY="113.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <ImageView fx:id="compareImage" fitHeight="185.0" fitWidth="200.0" layoutX="1318.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true" />
+      <TextArea fx:id="comparetextField" layoutX="1318.0" layoutY="313.0" prefHeight="336.0" prefWidth="200.0" />
     </children>
 </AnchorPane>
