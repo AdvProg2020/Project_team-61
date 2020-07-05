@@ -111,9 +111,11 @@ public class ViewFirmFx {
     }
 
     public void editFirm(MouseEvent mouseEvent) throws IOException {
-        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ViewFirmFx.class.getClassLoader().getResource("viewFirmFx.fxml")));
-        EditFirmFx.setPriRoot(curRoot);
-        root = FXMLLoader.load(Objects.requireNonNull(EditFirmFx.class.getClassLoader().getResource("editFirmFx.fxml")));
-        goToPage();
+        if(LoginMenu.getLoginAccount() instanceof Seller) {
+            Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ViewFirmFx.class.getClassLoader().getResource("viewFirmFx.fxml")));
+            EditFirmFx.setPriRoot(curRoot);
+            root = FXMLLoader.load(Objects.requireNonNull(EditFirmFx.class.getClassLoader().getResource("editFirmFx.fxml")));
+            goToPage();
+        }
     }
 }
