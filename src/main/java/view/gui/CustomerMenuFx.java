@@ -1,6 +1,6 @@
 package view.gui;
 
-import controller.ProductMenu;
+import controller.menus.ProductMenu;
 import controller.menus.LoginMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -155,4 +155,17 @@ public class CustomerMenuFx {
     }
 
 
+    public void mainMenu(ActionEvent actionEvent) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        goToPage();
+    }
+
+    public void exchange(MouseEvent mouseEvent) {
+    }
+
+    public void auctions(MouseEvent mouseEvent) {
+    }
+
+    public void supporters(MouseEvent mouseEvent) {
+    }
 }

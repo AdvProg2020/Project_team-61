@@ -32,26 +32,53 @@ import java.util.Objects;
 public class SignUpFx {
 
     public ImageView userImage = new ImageView();
-    @FXML private TextField phoneNoSign;
-    @FXML private TextField userSign;
-    @FXML private TextField lastNameSign;
-    @FXML private PasswordField passSign;
-    @FXML private TextField emailSign;
-    @FXML private TextField nameSign;
-    @FXML private TextField birthdaySign;
-    @FXML private Label emailLoginMs;
-    @FXML private Label userLoginMs;
-    @FXML private Label birthLoginMs;
-    @FXML private Label nameLoginMs;
-    @FXML private Label phoneLoginMs;
-    @FXML private Label passLoginMs;
-    @FXML private Label lastNameLoginMs;
+    @FXML
+    public TextField wage;
+    @FXML
+    public Label wageMs;
+    @FXML
+    private TextField phoneNoSign;
+    @FXML
+    private TextField userSign;
+    @FXML
+    private TextField lastNameSign;
+    @FXML
+    private PasswordField passSign;
+    @FXML
+    private TextField emailSign;
+    @FXML
+    private TextField nameSign;
+    @FXML
+    private TextField birthdaySign;
+    @FXML
+    private Label emailLoginMs;
+    @FXML
+    private Label userLoginMs;
+    @FXML
+    private Label birthLoginMs;
+    @FXML
+    private Label nameLoginMs;
+    @FXML
+    private Label phoneLoginMs;
+    @FXML
+    private Label passLoginMs;
+    @FXML
+    private Label lastNameLoginMs;
 
     private static String role;
     private static Parent root;
     private static Parent priRoot;
+    private static boolean support = false;
     List<File> files;
     String imageId;
+
+    public boolean isSupport() {
+        return support;
+    }
+
+    public static void setSupport(boolean support) {
+        SignUpFx.support = support;
+    }
 
     public static void setPriRoot(Parent priRoot) {
         SignUpFx.priRoot = priRoot;
@@ -62,9 +89,15 @@ public class SignUpFx {
     }
 
 
-
+    @FXML
+    public void initialize()  {
+        if(support){
+            wage.setDisable(true);
+            wageMs.setDisable(true);
+        }
+    }
     public void signUp(MouseEvent mouseEvent) throws IOException, ParseException {
-        if(imageId != null) {
+        if (imageId != null) {
             if (role != null) {
                 if (RegisterMenu.getSignUpNo() == 0) {
                     userLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.processRegister(role, userSign.getText(), imageId)));
@@ -86,6 +119,9 @@ public class SignUpFx {
                     if (RegisterMenu.getDetailMenu() == 5) {
                         birthLoginMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.completeRegisterProcess(birthdaySign.getText(), 5)));
                     }
+                    if (role == "manager") {
+                        wageMs.setText(OutputMassageHandler.showAccountOutput(RegisterMenu.wage(wage.getText())));
+                    }
                 }
                 if (role != null && RegisterMenu.getSignUpNo() == 6) {
                     RegisterMenu.setSignUpNo(0);
@@ -93,22 +129,21 @@ public class SignUpFx {
                     goToMenu();
                 } else RegisterMenu.setSignUpNo(1);
             } else userLoginMs.setText("you have to select your role first");
-        }else userLoginMs.setText("drag image first");
+        } else userLoginMs.setText("drag image first");
     }
 
     private void goToMenu() throws IOException {
-       Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("signUpFx.fxml")));
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("signUpFx.fxml")));
         if (role == "seller") {
             FirmFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(FirmFx.class.getClassLoader().getResource("firmFx.fxml")));
-           // root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+            // root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
 
-        } else
-         if (role.equalsIgnoreCase("manager") && !RegisterMenu.isHeadManager()) {
+        } else if (role.equalsIgnoreCase("manager") && !RegisterMenu.isHeadManager()) {
 
             root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
         } else {
-             LoginFx.setPriRoot(curRoot);
+            LoginFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(LoginFx.class.getClassLoader().getResource("loginFx.fxml")));
         }
         Scene pageTwoScene = new Scene(root);
@@ -139,13 +174,13 @@ public class SignUpFx {
 
 
     public void sellerRole(MouseEvent mouseEvent) {
-        if(!LoginMenu.isLogin()) {
+        if (!LoginMenu.isLogin()) {
             role = "seller";
         }
     }
 
     public void customerRole(MouseEvent mouseEvent) {
-        if(!LoginMenu.isLogin()) {
+        if (!LoginMenu.isLogin()) {
             role = "customer";
         }
     }
@@ -160,13 +195,13 @@ public class SignUpFx {
 
     public void userMenu(ActionEvent actionEvent) throws IOException {
         Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("signUpFx.fxml")));
-        if(LoginMenu.getLoginAccount() instanceof Seller){
+        if (LoginMenu.getLoginAccount() instanceof Seller) {
             SellerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(SellerMenuFx.class.getClassLoader().getResource("sellerMenuFx.fxml")));
-        } else if(LoginMenu.getLoginAccount() instanceof Manager){
+        } else if (LoginMenu.getLoginAccount() instanceof Manager) {
             ManagerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(ManagerMenuFx.class.getClassLoader().getResource("managerMenuFx.fxml")));
-        }else if(LoginMenu.getLoginAccount() instanceof Customer){
+        } else if (LoginMenu.getLoginAccount() instanceof Customer) {
             CustomerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
         }

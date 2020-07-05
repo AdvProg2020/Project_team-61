@@ -106,10 +106,16 @@ public class UsersFx {
 
     public void AddManager(MouseEvent mouseEvent) throws IOException {
         SignUpFx.setRole("manager");
-        root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("signUpFx.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("managerSignFx.fxml")));
         goToPage();
     }
 
+    public void AddSupporter(MouseEvent mouseEvent) throws IOException {
+        SignUpFx.setRole("supporter");
+        SignUpFx.setSupport(true);
+        root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("managerSignFx.fxml")));
+        goToPage();
+    }
 
     public void sortUser(MouseEvent mouseEvent) throws FileNotFoundException {
         UserId.setCellValueFactory(new PropertyValueFactory<Account, String>("username"));
@@ -167,5 +173,6 @@ public class UsersFx {
         root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
         goToPage();
     }
+
 
 }

@@ -10,11 +10,13 @@ module Project.team {
 
 
 
+
     opens view.gui to javafx.fxml,javafx.controls,javafx.graphics,javafx.base;
     opens model.accounts to javafx.base;
     opens model.off to javafx.base;
     opens model.request to javafx.base;
     opens model.productRelated to javafx.base;
     opens model.log to javafx.base;
+    opens controller.menus to java.base;
 
 }

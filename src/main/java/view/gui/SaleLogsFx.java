@@ -27,21 +27,21 @@ import java.util.Date;
 import java.util.Objects;
 
 public class SaleLogsFx {
-
+    public static ArrayList<SaleLog> allSaleLogs = new ArrayList<>();
     //@FXML
     //  private TableColumn<SaleLog, DeliveryStatus> saleLogsDeliveryStatus;
 
     @FXML
-    private TableColumn<SaleLogShow, Date> saleLogsDate = new TableColumn<>("Date");
+    private TableColumn<SaleLog, Date> saleLogsDate = new TableColumn<SaleLog, Date>("Date");
 
     @FXML
-    private TableView<SaleLogShow> saleLogsTableView = new TableView<>();
+    private TableView<SaleLog> saleLogsTableView = new TableView<>();
 
     @FXML
-    private TableColumn<SaleLogShow, String> saleLogsId = new TableColumn<SaleLogShow, String>("SaleLog ID");
+    private TableColumn<SaleLog, String> saleLogsId = new TableColumn<SaleLog, String>("SaleLog ID");
     private static Parent root;
     private static Parent priRoot;
-    private static ArrayList<SaleLog> allSaleLogs = new ArrayList<>();
+
 
     public static ArrayList<SaleLog> getAllSaleLogs() {
         return allSaleLogs;
@@ -53,7 +53,7 @@ public class SaleLogsFx {
 
     @FXML
     private TableColumn<SaleLogShow, String> getSaleLogsId = new TableColumn<>();
-    public  static ObservableList<SaleLogShow> data = FXCollections.observableArrayList();
+    public  static ObservableList<SaleLog> data = FXCollections.observableArrayList();
     @FXML
     private TableColumn<SaleLogShow, LocalDateTime> date = new TableColumn<>();
     boolean first = true;
@@ -64,15 +64,17 @@ public class SaleLogsFx {
     column2.setCellValueFactory(new PropertyValueFactory<>("lastName"));*/
 
 
-    public static void initializeObserverList() throws FileNotFoundException {
-        listIni();
-        for (SaleLogShow buyLogShow : SaleLogShow.list) {
-            data.clear();
-            if (!data.contains(buyLogShow)) {
-                data.add(buyLogShow);
-            }
-        }
-    }
+//    public static void initializeObserverList() throws FileNotFoundException {
+//       // listIni();
+//
+//        allSale
+//        for (SaleLogShow buyLogShow : SaleLogShow.list) {
+//            data.clear();
+//            if (!data.contains(buyLogShow)) {
+//                data.add(buyLogShow);
+//            }
+//        }
+//    }
 
     public static void listIni() throws FileNotFoundException {
         for (SaleLog saleLog : allSaleLogs) {
@@ -87,12 +89,17 @@ public class SaleLogsFx {
 
     @FXML
     public void initialize() throws IOException {
-        saleLogsId.setCellValueFactory(new PropertyValueFactory<SaleLogShow, String>("saleLogId"));
+        saleLogsId.setCellValueFactory(new PropertyValueFactory<SaleLog, String>("saleLogId"));
         //  saleLogsDate.setCellValueFactory(new PropertyValueFactory<SaleLogShow, Date>("localDateTime"));
-        saleLogsDate.setCellValueFactory(new PropertyValueFactory<SaleLogShow, Date>("localDateTime"));
+        saleLogsDate.setCellValueFactory(new PropertyValueFactory<SaleLog, Date>("localDateTime"));
+            data.clear();
+            data.addAll(allSaleLogs);
+
+
+
+        saleLogsTableView.setEditable(true);
         saleLogsTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         saleLogsTableView.getSelectionModel().setCellSelectionEnabled(true);
-        initializeObserverList();
         if(first ) {
             saleLogsTableView.getColumns().addAll(saleLogsId, saleLogsDate);
         }first = false;
@@ -146,16 +153,17 @@ public class SaleLogsFx {
         Main.primStage.show();
     }
     public void viewSaleLogFromAllSaleLogs(MouseEvent mouseEvent) throws IOException {
-        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
         if(saleLogsTableView.getSelectionModel().getSelectedItem() != null) {
-            SaleLogShow saleLog = saleLogsTableView.getSelectionModel().getSelectedItem();
-            if(Log.getLogWithId(saleLog.saleLogId) instanceof  SaleLog) {
-                SaleLog saleLog1 = (SaleLog) Log.getLogWithId(saleLog.saleLogId);
-                SaleLogFx.setPriRoot(curRoot);
-                SaleLogFx.setCurSaleLog(saleLog1);
-                root = FXMLLoader.load(Objects.requireNonNull(SalesFx.class.getClassLoader().getResource("saleLogFx.fxml")));
+            SaleLog saleLog = saleLogsTableView.getSelectionModel().getSelectedItem();
+           // if(Log.getLogWithId(saleLog.saleLogId) instanceof  SaleLog) {
+                //SaleLog saleLog1 = (SaleLog) Log.getLogWithId(saleLog.saleLogId);
+            Parent curRoot = FXMLLoader.load(Objects.requireNonNull(SaleLogsFx.class.getClassLoader().getResource("saleLogsFx.fxml")));
+
+            SaleLogFx.setPriRoot(curRoot);
+                SaleLogFx.setCurSaleLog(saleLog);
+                root = FXMLLoader.load(Objects.requireNonNull(SaleLogFx.class.getClassLoader().getResource("saleLogFx.fxml")));
                 goToPage();
-            }
+           // }
         }
 
     }

@@ -1,21 +1,15 @@
 package controller.menus;
 
-import controller.ProductMenu;
 import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
 import model.log.BuyLog;
-import model.log.Log;
 import model.log.SaleLog;
 import model.off.DiscountCode;
 import model.off.Sale;
 import model.productRelated.Product;
-import model.productRelated.Score;
-import model.sort.Sort;
-import view.*;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Random;
@@ -48,40 +42,8 @@ public class CustomerMenu {
         return hasDiscount;
     }
 
-    private static boolean isThereBuyLog() {
-        if (ProductMenu.getBuyLog() != null) {
-            return true;
-        }
-        outputNo = 12;
-        return false;
-    }
-
-    public static void setOutputNo(int outputNo) {
-        CustomerMenu.outputNo = outputNo;
-    }
-
-    public static String getProductID() {
-        return productID;
-    }
-
-    public static void setProductID(String productID) {
-        CustomerMenu.productID = productID;
-    }
-
-    public static void setHasDiscount(boolean hasDiscount) {
-        CustomerMenu.hasDiscount = hasDiscount;
-    }
-
     public static void setDiscountID(String discountID) {
         CustomerMenu.discountID = discountID;
-    }
-
-    public static SaleLog getSaleLog() {
-        return saleLog;
-    }
-
-    public static void setSaleLog(SaleLog saleLog) {
-        CustomerMenu.saleLog = saleLog;
     }
 
     //product.......................................................................................
@@ -94,59 +56,8 @@ public class CustomerMenu {
         return false;
     }
 
-    public static int getOutputNo() {
-        return outputNo;
-    }
-
-
-    public static void increaseLogProduct(String number) {
-        // if (number.matches("\\d+")) {
-        //  Product product = Product.getProductById(productID);
-        ProductMenu.getBuyLog().addProductToBuyLog(productID, Integer.parseInt(number));
-        //   outputNo = 10;
-        // } else outputNo = 4;
-        // OutputMassageHandler.showCustomerOutput(outputNo);
-    }
-
-    public static void decreaseLogProduct(String number) {
-        //  if (number.matches("\\d+")) {
-        ProductMenu.getBuyLog().reduceNumberOfProduct(productID, Integer.parseInt(number));
-        //     outputNo = 15;
-        // } else outputNo = 4;
-        // OutputMassageHandler.showCustomerOutput(outputNo);
-    }
-
-
     //purches............................................................................
-
-
-    public static boolean checkDiscountCode(String discountCodeID) {
-        //if (discountCodeID.matches("")) {
-        if (DiscountCode.isThereDiscountWithId(discountCodeID)) {
-            return true;
-        } else outputNo = 7;
-        // } else outputNo = ;
-        return false;
-    }
-
-    public static int haveDiscount(String have) {
-        if (have.matches("(?i)(?:yes|no)")) {
-            if (have.equalsIgnoreCase("yes")) {
-                hasDiscount = true;
-                //  CommandProcessor.setSubMenuStatus(SubMenuStatus.CHECKDISCOUNTCODE);
-                outputNo = 1;
-            } else {
-                hasDiscount = false;
-                //  CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
-                outputNo = 3;
-            }
-        } else outputNo = 2;
-        return outputNo;
-        // OutputMassageHandler.showPurchaseOutput(outputNo);
-    }
-
-
-    public static int discountCodeValidation(String discountCodeId) {
+ public static int discountCodeValidation(String discountCodeId) {
         Account loginAccount = LoginMenu.getLoginAccount();
         DiscountCode discountCode = DiscountCode.getDiscountWithId(discountCodeId);
         if (DiscountCode.isThereDiscountWithId(discountCodeId)) {
@@ -160,15 +71,15 @@ public class CustomerMenu {
                     } else outputNo = 5;
                 } else outputNo = 4;
             } else outputNo = 3;
-        } else outputNo = 7;
+        } else outputNo = 1;
         return outputNo;
 
-        //OutputMassageHandler.showPurchaseOutput(outputNo);
+      // OutputMassageHandler.showPurchaseOutput(outputNo);
     }
 
 
     public static int payment() throws IOException {
-        if (ProductMenu.getBuyLog().holePrice <= LoginMenu.getLoginAccount().getCredit()) {
+        if (ProductMenu.getBuyLog().calculateHolePrice() <= LoginMenu.getLoginAccount().getCredit()) {
             finishingPayment();
             ok = true;
             outputNo = 10;
@@ -283,6 +194,40 @@ public class CustomerMenu {
         OutputHandler.showBalance(LoginMenu.getLoginAccount().getUsername());
     }
 
+        private static boolean isThereBuyLog() {
+        if (ProductMenu.getBuyLog() != null) {
+            return true;
+        }
+        outputNo = 12;
+        return false;
+    }
+   public static boolean checkDiscountCode(String discountCodeID) {
+        //if (discountCodeID.matches("")) {
+        if (DiscountCode.isThereDiscountWithId(discountCodeID)) {
+            return true;
+        } else outputNo = 7;
+        // } else outputNo = ;
+        return false;
+    }
+
+    public static int haveDiscount(String have) {
+        if (have.matches("(?i)(?:yes|no)")) {
+            if (have.equalsIgnoreCase("yes")) {
+                hasDiscount = true;
+                //  CommandProcessor.setSubMenuStatus(SubMenuStatus.CHECKDISCOUNTCODE);
+                outputNo = 1;
+            } else {
+                hasDiscount = false;
+                //  CommandProcessor.setSubMenuStatus(SubMenuStatus.PAYMENT);
+                outputNo = 3;
+            }
+        } else outputNo = 2;
+        return outputNo;
+        // OutputMassageHandler.showPurchaseOutput(outputNo);
+    }
+
+
+    pu
     //GSON
     public static void processViewDiscountCodes() throws FileNotFoundException {
         OutputHandler.showDiscountCodes();
@@ -398,6 +343,30 @@ public class CustomerMenu {
 
         }
     }
+
+
+    public static int getOutputNo() {
+        return outputNo;
+    }
+
+
+    public static void increaseLogProduct(String number) {
+        // if (number.matches("\\d+")) {
+        //  Product product = Product.getProductById(productID);
+        ProductMenu.getBuyLog().addProductToBuyLog(productID, Integer.parseInt(number));
+        //   outputNo = 10;
+        // } else outputNo = 4;
+        // OutputMassageHandler.showCustomerOutput(outputNo);
+    }
+
+    public static void decreaseLogProduct(String number) {
+        //  if (number.matches("\\d+")) {
+        ProductMenu.getBuyLog().reduceNumberOfProduct(productID, Integer.parseInt(number));
+        //     outputNo = 15;
+        // } else outputNo = 4;
+        // OutputMassageHandler.showCustomerOutput(outputNo);
+    }
+
  */
 
 

@@ -150,19 +150,6 @@ public class LoginMenu {
         //OutputMassageHandler.showAccountOutput(outputNo);
     }
 
-    public static boolean checkFirm() {
-        if (loginAccount instanceof Seller) {
-            if (loginAccount instanceof Seller) {
-                Seller seller = (Seller) loginAccount;
-                if (seller.getFirm().getName().equalsIgnoreCase(firmName)) {
-                    firm = seller.getFirm();
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     public static void firmName(String name) throws IOException {
        // if (name.matches(".+")) {
           //  if (Firm.isThereFirmWithID(name)) {
@@ -277,6 +264,18 @@ public class LoginMenu {
         OutputMassageHandler.showFirmOutput(outputNo);
     }
 
+    public static boolean checkFirm() {
+        if (loginAccount instanceof Seller) {
+            if (loginAccount instanceof Seller) {
+                Seller seller = (Seller) loginAccount;
+                if (seller.getFirm().getName().equalsIgnoreCase(firmName)) {
+                    firm = seller.getFirm();
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
   */
 
 }

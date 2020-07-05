@@ -1,23 +1,18 @@
 package view.gui;
 
-import controller.ProductMenu;
-import controller.ProductsMenu;
+import controller.menus.ProductMenu;
 import controller.menus.CustomerMenu;
 import controller.menus.LoginMenu;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.CacheHint;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -30,19 +25,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.AnchorPane;
 //import javafx.scene.media.Media;
 //import javafx.scene.media.MediaPlayer;
 //import javafx.scene.media.MediaView;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
-import model.log.BuyLog;
-import model.log.SaleLogShow;
-import model.off.Sale;
 import model.productRelated.*;
 import model.request.ProductRequest;
 import model.request.Request;
@@ -55,7 +45,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import java.util.Date;
 import java.util.Objects;
 
 public class ProductMenuFX {
@@ -337,7 +326,8 @@ public class ProductMenuFX {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        BuyLogFx.setPriRoot(productPagePane);
+        Parent curRoot = FXMLLoader.load(Objects.requireNonNull(ProductMenuFX.class.getClassLoader().getResource("productMenu.fxml")));
+        BuyLogFx.setPriRoot(curRoot);
         BuyLogFx.setCurBuylog(ProductMenu.getBuyLog());
 
         //  BuyLogFx.getCurBuyLog().setBuyLogCustomer(LoginMenu.getLoginAccount());

@@ -75,9 +75,9 @@ public class DiscountCode {
         if(startOfDiscountPeriod != null && endOfDiscountPeriod != null) {
             LocalDate localDate = LocalDate.now();
             if (startOfDiscountPeriod.isAfter(localDate) || startOfDiscountPeriod.isEqual(localDate)) {
-                if (endOfDiscountPeriod.isBefore(localDate) || endOfDiscountPeriod.isEqual(localDate)) {
+                //if (endOfDiscountPeriod.isBefore(localDate) || endOfDiscountPeriod.isEqual(localDate)) {
                     return true;
-                }
+               // }
             }
         }
         return false;
@@ -155,7 +155,7 @@ public class DiscountCode {
     }
 
     public double calculate(double price) {
-        if (price < maxDiscountAmount) {
+        if (price <= maxDiscountAmount) {
             price = price - ((price * discountAmount) / 100);
         } else if (price > maxDiscountAmount) {
             double amountCant = price - maxDiscountAmount;

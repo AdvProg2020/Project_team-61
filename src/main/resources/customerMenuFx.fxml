@@ -23,23 +23,28 @@
          </fill>
       </Rectangle>
       <MenuBar prefHeight="32.0" prefWidth="1627.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="Back">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Logout">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
-            </items>
-          </Menu>
-            <Menu mnemonicParsing="false" text="Exit">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
-              </items>
+         <menus>
+            <Menu mnemonicParsing="false" text="Main">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#mainMenu" text="menu" />
+               </items>
             </Menu>
-        </menus>
+            <Menu mnemonicParsing="false" text="Back">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Logout">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Exit">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
+               </items>
+            </Menu>
+         </menus>
       </MenuBar>
       <Button layoutX="621.0" layoutY="126.0" mnemonicParsing="false" onMouseClicked="#viewPersonalInfo" prefHeight="48.0" prefWidth="271.0" text="view personal info">
          <textFill>
@@ -110,6 +115,57 @@
          </textFill>
       </Button>
       <Button layoutX="203.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#viewCustomerDiscount" prefHeight="48.0" prefWidth="271.0" text="view discount codes">
+         <font>
+            <Font size="22.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#3c3ce1" />
+                  <Stop color="#7711fa" offset="0.2647058823529412" />
+                  <Stop color="#ff9d00" offset="0.477124183006536" />
+                  <Stop color="#fc111d" offset="0.65359477124183" />
+                  <Stop color="#780206" offset="0.9420289855072463" />
+                  <Stop color="#780206" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="621.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#exchange" prefHeight="48.0" prefWidth="271.0" text="exchange">
+         <font>
+            <Font size="22.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#3c3ce1" />
+                  <Stop color="#7711fa" offset="0.2647058823529412" />
+                  <Stop color="#ff9d00" offset="0.477124183006536" />
+                  <Stop color="#fc111d" offset="0.65359477124183" />
+                  <Stop color="#780206" offset="0.9420289855072463" />
+                  <Stop color="#780206" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="621.0" layoutY="225.0" mnemonicParsing="false" onMouseClicked="#auctions" prefHeight="48.0" prefWidth="271.0" text="auctions">
+         <font>
+            <Font size="22.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#3c3ce1" />
+                  <Stop color="#7711fa" offset="0.2647058823529412" />
+                  <Stop color="#ff9d00" offset="0.477124183006536" />
+                  <Stop color="#fc111d" offset="0.65359477124183" />
+                  <Stop color="#780206" offset="0.9420289855072463" />
+                  <Stop color="#780206" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="621.0" layoutY="453.0" mnemonicParsing="false" onMouseClicked="#supporters" prefHeight="48.0" prefWidth="271.0" text="supporters">
          <font>
             <Font size="22.0" />
          </font>

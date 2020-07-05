@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.UsersFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="882.0" prefWidth="1605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.UsersFx">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="849.0" layoutX="1.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="1605.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
             <fill>
@@ -58,16 +59,16 @@
                 </LinearGradient>
             </fill>
         </Text>
-        <TableView fx:id="usersList" layoutX="304.0" layoutY="125.0" prefHeight="603.0" prefWidth="997.0">
+        <TableView fx:id="usersList" layoutX="261.0" layoutY="125.0" prefHeight="603.0" prefWidth="1053.0">
             <columns>
-                <TableColumn fx:id="UserId" prefWidth="155.0" text="Username" />
-                <TableColumn fx:id="userName" prefWidth="196.0" text="Name" />
-                <TableColumn fx:id="userLast" prefWidth="203.0" text="Last name" />
-                <TableColumn fx:id="userBirth" prefWidth="189.0" text="Birthday date" />
-                <TableColumn fx:id="userPhoneNo" prefWidth="251.0" text="Phone number" />
+                <TableColumn fx:id="UserId" prefWidth="178.0" text="Username" />
+                <TableColumn fx:id="userName" prefWidth="191.0" text="Name" />
+                <TableColumn fx:id="userLast" prefWidth="209.0" text="Last name" />
+                <TableColumn fx:id="userBirth" prefWidth="194.0" text="Birthday date" />
+                <TableColumn fx:id="userPhoneNo" prefWidth="280.0" text="Phone number" />
             </columns>
         </TableView>
-      <Button layoutX="922.0" layoutY="773.0" mnemonicParsing="false" onMouseClicked="#viewUser" prefHeight="39.0" prefWidth="90.0" text="View">
+      <Button layoutX="1118.0" layoutY="747.0" mnemonicParsing="false" onMouseClicked="#viewUser" prefHeight="39.0" prefWidth="90.0" text="View">
          <textFill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -77,7 +78,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button layoutX="1168.0" layoutY="773.0" mnemonicParsing="false" onMouseClicked="#deleteUser" prefHeight="39.0" prefWidth="90.0" text="Delete">
+      <Button layoutX="1219.0" layoutY="747.0" mnemonicParsing="false" onMouseClicked="#deleteUser" prefHeight="39.0" prefWidth="90.0" text="Delete">
          <textFill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -87,7 +88,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button layoutX="1037.0" layoutY="773.0" mnemonicParsing="false" onMouseClicked="#AddManager" prefHeight="39.0" prefWidth="115.0" text="Add manager">
+      <Button layoutX="993.0" layoutY="747.0" mnemonicParsing="false" onMouseClicked="#AddManager" prefHeight="39.0" prefWidth="115.0" text="Add manager">
          <textFill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -97,10 +98,20 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Label fx:id="usersMs" layoutX="121.0" layoutY="766.0" prefHeight="53.0" prefWidth="735.0" textFill="WHITE">
+      <Label fx:id="usersMs" layoutX="266.0" layoutY="747.0" prefHeight="53.0" prefWidth="581.0" textFill="WHITE">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
+      <Button layoutX="857.0" layoutY="747.0" mnemonicParsing="false" onMouseClicked="#AddSupporter" prefHeight="39.0" prefWidth="128.0" text="Add supporter">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#6a00ff" />
+                  <Stop color="RED" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
     </children>
 </AnchorPane>

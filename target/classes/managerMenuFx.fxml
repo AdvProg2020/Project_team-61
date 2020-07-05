@@ -46,6 +46,11 @@
                 <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
               </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Main">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#mainMenu" text="menu" />
+              </items>
+            </Menu>
         </menus>
       </MenuBar>
       <Button layoutX="676.0" layoutY="126.0" mnemonicParsing="false" onMouseClicked="#viewPersonalInfo" prefHeight="43.0" prefWidth="249.0" text="view personal info">
@@ -127,6 +132,19 @@
          </textFill>
       </Button>
       <Button layoutX="1101.0" layoutY="351.0" mnemonicParsing="false" onMouseClicked="#manageCategories" prefHeight="43.0" prefWidth="249.0" text="manage categories">
+         <textFill>
+            <LinearGradient endX="1.0" endY="0.8203883495145631" startX="0.3106796116504854">
+               <stops>
+                  <Stop color="#2b00ff" />
+                  <Stop color="#93c0ee" offset="0.3662262006251776" />
+                  <Stop color="#36d377" offset="0.5947712418300654" />
+                  <Stop color="#006f27" offset="0.9239130434782609" />
+                  <Stop color="#006f27" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="675.0" layoutY="461.0" mnemonicParsing="false" onMouseClicked="#viewLogs" prefHeight="43.0" prefWidth="249.0" text="view logs">
          <textFill>
             <LinearGradient endX="1.0" endY="0.8203883495145631" startX="0.3106796116504854">
                <stops>

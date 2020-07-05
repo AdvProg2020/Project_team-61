@@ -2,7 +2,6 @@ package view.gui;
 
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import controller.ProductMenu;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +15,6 @@ import model.accounts.Manager;
 import model.accounts.Seller;
 import model.firms.Firm;
 import model.log.BuyLog;
-import model.log.SaleLog;
 import model.off.DiscountCode;
 import model.off.Sale;
 import model.productRelated.Category;
@@ -25,7 +23,6 @@ import model.productRelated.Product;
 import model.request.*;
 import view.FileHandling;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -53,7 +50,7 @@ public class Main extends Application {
 
         if (Manager.getAllManagers().size() == 0) {
             SignUpFx.setRole("manager");
-            root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("signUpFx.fxml")));
+            root = FXMLLoader.load(Objects.requireNonNull(SignUpFx.class.getClassLoader().getResource("managerSignFx.fxml")));
         } else {
             root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
         }
@@ -65,6 +62,19 @@ public class Main extends Application {
 
 
     public static void main(String[] args) throws IOException, ParseException {
+
+        gson();
+
+        if(Manager.getAllManagers().size() != 0){
+            if (Customer.getAllCustomers().size() >= 2) {
+                randomDiscount();
+            }
+        }
+        Application.launch(args);
+
+    }
+
+    private static void gson() throws IOException {
 
         for (DiscountCode allDiscountCode : DiscountCode.getAllDiscountCodes()) {
             System.out.println(allDiscountCode.getDiscountId());
@@ -228,39 +238,36 @@ public class Main extends Application {
             Comment.allComments.addAll(product.proComments);
         }
 
-        if(Manager.getAllManagers().size() != 0){
-            if (Customer.getAllCustomers().size() >= 2) {
-                randomDiscount();
-            }
-        }
-        Application.launch(args);
-
     }
 
     private static void randomDiscount() throws IOException {
-        ArrayList<Customer> randomElement = new ArrayList<>();
-        int size = Customer.getAllCustomers().size();
-        for (int i = 0; i < (size)/2; i++) {
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+        if (day == 5) {
+            ArrayList<Customer> randomElement = new ArrayList<>();
+            int size = Customer.getAllCustomers().size();
+            for (int i = 0; i < (size) / 2; i++) {
+                Random rand = new Random();
+                int randomIndex = rand.nextInt(size);
+                randomElement.add(Customer.getAllCustomers().get(randomIndex));
+            }
+            LocalDate today = LocalDate.now();
+            UUID id = UUID.randomUUID();
+            DiscountCode prizeDiscountCode = new DiscountCode(id.toString());
+            prizeDiscountCode.setTotalTimesOfUse(1);
+            prizeDiscountCode.setDiscountAmount(11);
+            prizeDiscountCode.setMaxDiscountAmount(100000);
+            prizeDiscountCode.getAllCustomersWithDiscountCode().addAll(randomElement);
+            prizeDiscountCode.setStartOfDiscountPeriod(today);
+            DiscountCode.setEndOfDiscountPeriod(today.plusDays(10));
             Random rand = new Random();
-            int randomIndex = rand.nextInt(size);
-            randomElement.add(Customer.getAllCustomers().get(randomIndex));
+
+            int randomIndex = rand.nextInt(Manager.getAllManagers().size());
+            Manager.getAllManagers().get(randomIndex).addDiscount(prizeDiscountCode);
+            Manager.writeInJ();
+
+
         }
-        LocalDate today = LocalDate.now();
-        UUID id = UUID.randomUUID();
-        DiscountCode prizeDiscountCode = new DiscountCode(id.toString());
-        prizeDiscountCode.setTotalTimesOfUse(1);
-        prizeDiscountCode.setDiscountAmount(11);
-        prizeDiscountCode.setMaxDiscountAmount(100000);
-        prizeDiscountCode.getAllCustomersWithDiscountCode().addAll(randomElement);
-        prizeDiscountCode.setStartOfDiscountPeriod(today);
-        DiscountCode.setEndOfDiscountPeriod(today.plusDays(10));
-        Random rand = new Random();
-
-        int randomIndex = rand.nextInt(Manager.getAllManagers().size());
-        Manager.getAllManagers().get(randomIndex).addDiscount(prizeDiscountCode);
-        Manager.writeInJ();
-
-
     }
 
 

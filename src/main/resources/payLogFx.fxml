@@ -38,7 +38,7 @@
                 <Font size="62.0" />
             </font>
         </Label>
-        <Label fx:id="alertMessage" layoutX="670.0" layoutY="222.0" prefHeight="249.0" prefWidth="354.0" textFill="#e80303" />
+        <Label fx:id="alertMessage" layoutX="676.0" layoutY="229.0" prefHeight="249.0" prefWidth="354.0" textFill="#e80303" />
       <Label fx:id="DiscountPayLogLabel1" layoutX="290.0" layoutY="579.0" text="fast delivery?" />
       <Button layoutX="435.0" layoutY="574.0" mnemonicParsing="false" onMouseClicked="#yes" text="yes" />
       <Button layoutX="503.0" layoutY="574.0" mnemonicParsing="false" onMouseClicked="#no" text="no" />

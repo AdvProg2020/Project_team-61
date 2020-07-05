@@ -1,6 +1,6 @@
 package view.gui;
 
-import controller.ProductMenu;
+import controller.menus.ProductMenu;
 import controller.menus.CustomerMenu;
 import controller.menus.LoginMenu;
 import controller.menus.RegisterMenu;
@@ -20,7 +20,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.log.BuyLog;
-import model.productRelated.Product;
 import view.OutputMassageHandler;
 
 
@@ -63,7 +62,7 @@ public class PayLogFx {
         if(has) {
             if (fast != null) {
                 if (discountPayLogTextField.getText() != null) {
-                    CustomerMenu.discountCodeValidation(discountPayLogTextField.getText());
+                    show(OutputMassageHandler.showPurchaseOutput(CustomerMenu.discountCodeValidation(discountPayLogTextField.getText())));
                 }
                 ///  if(CustomerMenu.getDiscountID() != null) {
                 alertMessage.setText(OutputMassageHandler.showReceiverInfo(RegisterMenu.receiverInformation(PhoneNumberTextFieldPayLog.getText(), 0)));
@@ -76,7 +75,7 @@ public class PayLogFx {
                 if (RegisterMenu.ok) {
                     // alertMessage.setText(OutputMassageHandler.showReceiverInfo(CustomerMenu.payment()));
                     // if(CustomerMenu.ok) {
-                    alertMessage.setText(OutputMassageHandler.showReceiverInfo(CustomerMenu.payment()) + "\n" +
+                    alertMessage.setText(OutputMassageHandler.showPurchaseOutput(CustomerMenu.payment()) + "\n" +
                             "your credit: " + LoginMenu.getLoginAccount().getCredit());
                     //}
                     if (CustomerMenu.getPrizeDiscountCode() != null){

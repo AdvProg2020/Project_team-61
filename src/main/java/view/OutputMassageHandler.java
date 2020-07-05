@@ -245,15 +245,15 @@ public class OutputMassageHandler {
         if (output == 0) {
             text = ("please enter discount id");
         } else if (output == 1) {
-            text = ("answer must be (yes|no)");
+            text = ("there is no discount code wiyh yhis id");
         } else if (output == 2) {
-            text = ("enter payment to finish buying process");
+            text = ("discount ok");
         } else if (output == 3) {
             text = ("you dont have this discount id");
         } else if (output == 4) {
             text = ("date is invalid");
         } else if (output == 5) {
-            text = ("you can't use iy anymore");
+            text = ("you can't use it anymore");
         } else if (output == 6) {
             text = ("you have to login first");
         } else if (output == 7) {
@@ -365,6 +365,8 @@ public class OutputMassageHandler {
             return ("");
         } else if (output == 1) {
             text = ("a user exists with this username");
+        } else if (output == 2) {
+            text = ("wage format is invalid");
         } else if (output == 3) {
             text = ("password format is invalid");
         } else if (output == 5) {

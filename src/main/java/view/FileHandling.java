@@ -14,8 +14,6 @@ public class FileHandling {
     public static Gson gson = new GsonBuilder().create();
 
 
-
-
     private static ArrayList<String> fileNames = new ArrayList<>();
 
     public static ArrayList<String> getFileNames() {
@@ -46,7 +44,6 @@ public class FileHandling {
             //writer.close();
         }
     }
-
 
 
     public static void setGson(Gson gson) {

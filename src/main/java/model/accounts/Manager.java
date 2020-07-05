@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 public class Manager extends Account {
 
+    private int wage =0;
+
     private static ArrayList<Manager> allManagers = new ArrayList<>();
     public ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
     public static Type ManagerType = new TypeToken<ArrayList<Manager>>() {
@@ -24,6 +26,14 @@ public class Manager extends Account {
         role = "manager";
         allManagers.add(this);
         writeInJ();
+    }
+
+    public int getWage() {
+        return wage;
+    }
+
+    public void setWage(int wage) {
+        this.wage = wage;
     }
 
     public void addDiscount(DiscountCode discountCode) throws IOException {

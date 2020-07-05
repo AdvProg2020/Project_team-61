@@ -1,6 +1,6 @@
 package view.gui;
 
-import controller.ProductMenu;
+import controller.menus.ProductMenu;
 import controller.menus.LoginMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,14 +14,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import model.accounts.Account;
 import model.accounts.Customer;
 import model.accounts.Manager;
 import model.accounts.Seller;
 import model.log.BuyLog;
 import model.log.BuyLogShoo;
 import model.productRelated.Product;
-import model.productRelated.ProductInMenusShow;
 
 
 import java.io.File;
@@ -218,6 +216,8 @@ public class BuyLogFx {
         } else if (LoginMenu.getLoginAccount() instanceof Customer) {
             CustomerMenuFx.setPriRoot(curRoot);
             root = FXMLLoader.load(Objects.requireNonNull(CustomerMenuFx.class.getClassLoader().getResource("customerMenuFx.fxml")));
+        }else {
+            root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
         }
         goToPage();
     }

@@ -1,7 +1,6 @@
 package view.gui;
 
 
-import controller.ProductMenu;
 import controller.menus.LoginMenu;
 import javafx.animation.*;
 import javafx.beans.value.ChangeListener;
@@ -13,7 +12,6 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -41,8 +39,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Objects;
 
 

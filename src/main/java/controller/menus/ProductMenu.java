@@ -1,6 +1,5 @@
-package controller;
+package controller.menus;
 
-import controller.menus.LoginMenu;
 import model.accounts.Customer;
 import model.accounts.Seller;
 import model.request.CommentRequest;
@@ -9,15 +8,11 @@ import model.log.BuyLog;
 import model.productRelated.Comment;
 import model.productRelated.CommentStatus;
 import model.productRelated.Product;
-import view.*;
-import view.justConsole.OutputHandler;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.UUID;
 
 public class ProductMenu {
-
     private static int outputNo = 0;
     private static Product selectedProduct;
     private static BuyLog buyLog;
@@ -57,8 +52,6 @@ public class ProductMenu {
         buyLog.addProductToBuyLog(productId, 1);
     }
 
-
-
     public static int addComments() throws IOException {
         String commentId = LoginMenu.getLoginAccount().getUsername() + " comment on " + selectedProduct.getId();
         if (!Comment.isThereCommentWithId(commentId)) {
@@ -88,7 +81,6 @@ public class ProductMenu {
         // OutputMassageHandler.showProductOutput(outputNo);
     }
 
-
     public static int titleOfComment(String title) throws IOException {
         if (title.matches("(\\s*\\S+\\s*)+")) {
             //  CommandProcessor.setSubMenuStatus(SubMenuStatus.COMMENTSCONTENT);
@@ -97,7 +89,6 @@ public class ProductMenu {
         } else outputNo = 2;
         return outputNo;
     }
-
 
     public static int contentOfComment(String content) throws IOException {
         if (content.matches("(\\s*\\S+\\s*)+")) {

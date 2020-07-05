@@ -22,30 +22,30 @@
          </fill>
       </Rectangle>
       <MenuBar prefHeight="32.0" prefWidth="1627.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="User menu">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#UserMenu" text="your menu" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Logout">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Back">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
-            </items>
-          </Menu>
-            <Menu mnemonicParsing="false" text="Exit">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
-              </items>
+         <menus>
+            <Menu mnemonicParsing="false" text="Main">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#mainMenu" text="menu" />
+               </items>
             </Menu>
-        </menus>
+            <Menu mnemonicParsing="false" text="Logout">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#logout" text="logout" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Back">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#back" text="back" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Exit">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#exit" text="exit" />
+               </items>
+            </Menu>
+         </menus>
       </MenuBar>
-      <Button layoutX="625.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#viewPersonalInfo" prefHeight="54.0" prefWidth="328.0" text="view personal info">
+      <Button layoutX="631.0" layoutY="356.0" mnemonicParsing="false" onMouseClicked="#viewPersonalInfo" prefHeight="54.0" prefWidth="328.0" text="view personal info">
          <textFill>
             <LinearGradient endX="1.0" endY="1.0" startX="0.05339805825242718">
                <stops>
@@ -60,7 +60,7 @@
             <Font size="25.0" />
          </font>
       </Button>
-      <Button layoutX="921.0" layoutY="246.0" mnemonicParsing="false" onMouseClicked="#viewCompanyInfo" prefHeight="54.0" prefWidth="328.0" text="view company information">
+      <Button layoutX="807.0" layoutY="169.0" mnemonicParsing="false" onMouseClicked="#viewCompanyInfo" prefHeight="54.0" prefWidth="328.0" text="view company information">
          <font>
             <Font size="25.0" />
          </font>
@@ -75,7 +75,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button layoutX="624.0" layoutY="356.0" mnemonicParsing="false" onMouseClicked="#viewSalesHistory" prefHeight="54.0" prefWidth="328.0" text="view sales history">
+      <Button layoutX="446.0" layoutY="169.0" mnemonicParsing="false" onMouseClicked="#viewSalesHistory" prefHeight="54.0" prefWidth="328.0" text="view sales history">
          <font>
             <Font size="25.0" />
          </font>
@@ -90,7 +90,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button layoutX="405.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#manageProducts" prefHeight="54.0" prefWidth="328.0" text="manage products">
+      <Button layoutX="364.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#manageProducts" prefHeight="54.0" prefWidth="328.0" text="manage products">
          <font>
             <Font size="25.0" />
          </font>
@@ -120,7 +120,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button layoutX="1012.0" layoutY="356.0" mnemonicParsing="false" onMouseClicked="#showCategories" prefHeight="54.0" prefWidth="328.0" text="show categories">
+      <Button layoutX="978.0" layoutY="262.0" mnemonicParsing="false" onMouseClicked="#showCategories" prefHeight="54.0" prefWidth="328.0" text="view categories">
          <font>
             <Font size="25.0" />
          </font>
@@ -150,7 +150,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button layoutX="347.0" layoutY="246.0" mnemonicParsing="false" onMouseClicked="#viewBalance" prefHeight="54.0" prefWidth="328.0" text="view balance">
+      <Button layoutX="303.0" layoutY="254.0" mnemonicParsing="false" onMouseClicked="#viewBalance" prefHeight="54.0" prefWidth="328.0" text="view balance">
          <font>
             <Font size="25.0" />
          </font>
@@ -180,5 +180,50 @@
             </LinearGradient>
          </fill>
       </Text>
+      <Button layoutX="461.0" layoutY="577.0" mnemonicParsing="false" onMouseClicked="#exchange" prefHeight="54.0" prefWidth="328.0" text="exchange">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.05339805825242718">
+               <stops>
+                  <Stop color="#ff8500" />
+                  <Stop color="#00afff" offset="0.28104575163398693" />
+                  <Stop color="#1850d9" offset="0.48366013071895425" />
+                  <Stop color="#c016da" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="814.0" layoutY="577.0" mnemonicParsing="false" onMouseClicked="#auction" prefHeight="54.0" prefWidth="328.0" text="auction">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.05339805825242718">
+               <stops>
+                  <Stop color="#ff8500" />
+                  <Stop color="#00afff" offset="0.28104575163398693" />
+                  <Stop color="#1850d9" offset="0.48366013071895425" />
+                  <Stop color="#c016da" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button layoutX="1052.0" layoutY="356.0" mnemonicParsing="false" onMouseClicked="#addFile" prefHeight="54.0" prefWidth="328.0" text="add File">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.05339805825242718">
+               <stops>
+                  <Stop color="#ff8500" />
+                  <Stop color="#00afff" offset="0.28104575163398693" />
+                  <Stop color="#1850d9" offset="0.48366013071895425" />
+                  <Stop color="#c016da" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
    </children>
 </AnchorPane>

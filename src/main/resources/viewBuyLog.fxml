@@ -1,27 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="848.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ViewBuyLogFx">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="848.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.ViewBuyLogFx">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="848.0" stroke="BLACK" strokeType="INSIDE" width="1600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <fill>
@@ -81,12 +66,12 @@
                     <stops>
                         <Stop>
                             <color>
-                                <Color blue="0.1944444477558136" green="0.1944444477558136" red="1.0" />
+                                <Color red="1.0" green="0.1944444477558136" blue="0.1944444477558136" />
                             </color>
                         </Stop>
                         <Stop offset="1.0">
                             <color>
-                                <Color blue="0.6922153830528259" green="0.12448559701442719" red="0.9166666865348816" />
+                                <Color red="0.9166666865348816" green="0.12448559701442719" blue="0.6922153830528259" />
                             </color>
                         </Stop>
                     </stops>
@@ -99,12 +84,12 @@
                     <stops>
                         <Stop>
                             <color>
-                                <Color blue="0.1944444477558136" green="0.1944444477558136" red="1.0" />
+                                <Color red="1.0" green="0.1944444477558136" blue="0.1944444477558136" />
                             </color>
                         </Stop>
                         <Stop offset="1.0">
                             <color>
-                                <Color blue="0.05880441889166832" green="0.46308478713035583" red="0.7938596606254578" />
+                                <Color red="0.7938596606254578" green="0.46308478713035583" blue="0.05880441889166832" />
                             </color>
                         </Stop>
                     </stops>
@@ -116,15 +101,5 @@
         <Label fx:id="totalPriceLabel" layoutX="287.0" layoutY="626.0" prefHeight="21.0" prefWidth="234.0" />
         <Label fx:id="buyLogIdLabel" layoutX="351.0" layoutY="58.0" prefHeight="56.0" prefWidth="219.0" />
         <Label fx:id="buyLogDate" layoutX="1046.0" layoutY="95.0" prefHeight="21.0" prefWidth="234.0" />
-      <Button layoutX="953.0" layoutY="638.0" mnemonicParsing="false" onAction="#handleScore" prefHeight="26.0" prefWidth="66.0" text="Score">
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="#ff1010" />
-                  <Stop color="#af7200" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Button>
     </children>
 </AnchorPane>

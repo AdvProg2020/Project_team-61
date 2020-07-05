@@ -99,4 +99,11 @@ public class ManagerMenuFx {
         goToPage();
     }
 
+    public void mainMenu(ActionEvent actionEvent) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(MainMenuFx.class.getClassLoader().getResource("mainMenuFx.fxml")));
+        goToPage();
+    }
+
+    public void viewLogs(MouseEvent mouseEvent) {
+    }
 }

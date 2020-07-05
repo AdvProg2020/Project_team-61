@@ -1,6 +1,6 @@
 package view.gui;
 
-import controller.ProductMenu;
+import controller.menus.ProductMenu;
 import controller.menus.LoginMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
